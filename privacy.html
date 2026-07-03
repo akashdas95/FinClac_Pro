@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Privacy Policy — FinCalc</title>
 <meta name="description" content="How FinCalc collects, uses, and protects information, including cookies, analytics, and advertising.">
-<link rel="canonical" href="https://yourdomain.com/privacy.html">
+<link rel="canonical" href="https://finclac-pro.pages.dev/privacy.html">
 <meta name="robots" content="index, follow">
 <style>*{box-sizing:border-box;margin:0;padding:0}
 :root{--bg:#0B0E11;--s:#141920;--s2:#1C2430;--bd:#232D3A;--t:#E8EDF2;--m:#6B7A8D;--tb:#A3B2C4;--a:#F0B90B;--g:#0ECB81;--r:#F6465D;--b:#1890FF;--p:#9B59B6;--fn:'DM Sans',sans-serif;--mo:'DM Mono',monospace}
@@ -203,6 +203,10 @@ body{background:var(--bg);color:var(--t);font-family:var(--fn);font-size:14px;li
      Scientific use a plain unclassed wrapper div) */
   .panel.on>.card,.panel.on>.g3{display:block!important;page-break-inside:avoid}
   #currency.panel.on>div:not(.print-header),#scientific.panel.on>div:not(.print-header){display:block!important}
+  /* Explicit hide, regardless of nesting depth — needed because DCF (and
+     potentially others) nest their guide/FAQ inside the same .card as
+     their actual results, so the blanket ">*" rule above can't catch it */
+  .panel.on .calc-guide,.panel.on .faq-section,.panel.on .calc-disclaimer{display:none!important}
   .print-header.show{display:block!important;margin-bottom:1rem;color:#000}
   .print-header.show .ph-name{font-size:20px;font-weight:700;margin-bottom:2px;color:#000}
   .print-header.show .ph-date{font-size:11px;color:#555}
@@ -325,7 +329,7 @@ body{background:var(--bg);color:var(--t);font-family:var(--fn);font-size:14px;li
     <div class="logo-mark" style="width:22px;height:22px;background:var(--a);border-radius:5px;display:flex;align-items:center;justify-content:center;color:#000;font-size:11px;font-weight:700">FC</div>
     FinCalc
   </div>
-  <div class="footer-copy">© 2025 FinCalc · Free Financial Calculators · <a href="privacy.html" style="color:inherit">Privacy Policy</a></div>
+  <div class="footer-copy">© 2025 FinCalc · Free Financial Calculators · <a href="about.html" style="color:inherit">About</a> · <a href="privacy.html" style="color:inherit">Privacy Policy</a> · <a href="terms.html" style="color:inherit">Terms</a></div>
 </div>
 <script src="app.js"></script>
 <script>initPage('privacy');</script>

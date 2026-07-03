@@ -102,9 +102,6 @@ body{background:var(--bg);color:var(--t);font-family:var(--fn);font-size:14px;li
 .footer-brand{font-size:14px;font-weight:600;color:var(--t);display:flex;align-items:center;gap:8px}
 .footer-brand .logo-mark{width:22px;height:22px;font-size:11px}
 .footer-copy{font-size:11px;color:var(--m)}
-.footer-links{font-size:12px;color:var(--m)}
-.footer-links a{color:var(--tb);text-decoration:none}
-.footer-links a:hover{color:var(--a)}
 
 
 /* Calculator Guide Articles */
@@ -197,6 +194,10 @@ body{background:var(--bg);color:var(--t);font-family:var(--fn);font-size:14px;li
      Scientific use a plain unclassed wrapper div) */
   .panel.on>.card,.panel.on>.g3{display:block!important;page-break-inside:avoid}
   #currency.panel.on>div:not(.print-header),#scientific.panel.on>div:not(.print-header){display:block!important}
+  /* Explicit hide, regardless of nesting depth — needed because DCF (and
+     potentially others) nest their guide/FAQ inside the same .card as
+     their actual results, so the blanket ">*" rule above can't catch it */
+  .panel.on .calc-guide,.panel.on .faq-section,.panel.on .calc-disclaimer{display:none!important}
   .print-header.show{display:block!important;margin-bottom:1rem;color:#000}
   .print-header.show .ph-name{font-size:20px;font-weight:700;margin-bottom:2px;color:#000}
   .print-header.show .ph-date{font-size:11px;color:#555}
