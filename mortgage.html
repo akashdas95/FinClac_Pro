@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mortgage Calculator | FinCalc Pro</title>
+<meta name="description" content="Calculate your monthly mortgage payment, total interest, and amortization schedule. Free mortgage calculator with PMI support.">
+<link rel="canonical" href="https://yourdomain.com/mortgage.html">
+<meta name="robots" content="index, follow">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Mortgage Calculator | FinCalc Pro">
+<meta property="og:description" content="Calculate your monthly mortgage payment, total interest, and amortization schedule. Free mortgage calculator with PMI support.">
+<meta property="og:url" content="https://yourdomain.com/mortgage.html">
+<meta property="og:site_name" content="FinCalc Pro">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Mortgage Calculator | FinCalc Pro">
+<meta name="twitter:description" content="Calculate your monthly mortgage payment, total interest, and amortization schedule. Free mortgage calculator with PMI support.">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<div class="topbar">
+  <a class="logo" href="index.html"><div class="logo-mark">FC</div>FinCalc</a>
+  <div class="searchbox">
+    <svg width="14" height="14" fill="none" stroke="#6B7A8D" stroke-width="2" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+    <input id="srch" placeholder="Search 40 calculators..." oninput="doSearch()" onkeydown="if(event.key==='Enter')goSearch()">
+  </div>
+</div>
+<div class="nav">
+  <button class="ntab on" onclick="go('home',this)">🏠 Home</button>
+  <button class="ntab" onclick="go('cagr',this)">📐 CAGR</button>
+  <button class="ntab" onclick="go('xirr',this)">📅 XIRR</button>
+  <button class="ntab" onclick="go('drip',this)">💧 DRIP</button>
+  <button class="ntab" onclick="go('etf',this)">🗂️ ETF Growth</button>
+  <button class="ntab" onclick="go('dcf',this)">🏦 DCF Valuation</button>
+  <button class="ntab" onclick="go('debtcomp',this)">❄️ Snowball vs Avalanche</button>
+  <button class="ntab" onclick="go('rentalprop',this)">🏡 Rental Property</button>
+  <button class="ntab" onclick="go('burnrate',this)">🔥 Burn Rate</button>
+  <button class="ntab" onclick="go('pricing',this)">🏷️ Pricing</button>
+  <button class="ntab" onclick="go('equity',this)">📐 Equity Dilution</button>
+  <button class="ntab" onclick="go('revenue',this)">📊 Revenue Forecast</button>
+  <button class="ntab" onclick="go('loan',this)">🏦 Loan/EMI</button>
+  <button class="ntab" onclick="go('invest',this)">📈 SIP/Investment</button>
+  <button class="ntab" onclick="go('tax',this)">🧾 Tax</button>
+  <button class="ntab" onclick="go('mortgage',this)">🏠 Mortgage</button>
+  <button class="ntab" onclick="go('mortcomp',this)">⚖️ Mtg Compare</button>
+  <button class="ntab" onclick="go('savings',this)">🏛️ Savings</button>
+  <button class="ntab" onclick="go('stock',this)">📉 Stock P&amp;L</button>
+  <button class="ntab" onclick="go('retirement',this)">👴 Retirement</button>
+  <button class="ntab" onclick="go('debt',this)">💳 Debt Payoff</button>
+  <button class="ntab" onclick="go('rental',this)">🏘️ Rental Yield</button>
+  <button class="ntab" onclick="go('cashflow',this)">💵 Cash Flow</button>
+  <button class="ntab" onclick="go('breakeven',this)">📊 Break-even</button>
+  <button class="ntab" onclick="go('savingsgoal',this)">🎯 Savings Goal</button>
+  <button class="ntab" onclick="go('emergencyfund',this)">🛡️ Emergency Fund</button>
+  <button class="ntab" onclick="go('healthscore',this)">💯 Health Score</button>
+  <button class="ntab" onclick="go('currency',this)">💱 Currency</button>
+  <button class="ntab" onclick="go('scientific',this)">🔬 Scientific</button>
+</div>
+<div class="content">
+<div id="mortgage" class="panel on">
+<button class="back-btn" onclick="go('home',null)">← Back to Home</button>
+<div class="calc-links"><span class="calc-links-label">🔗 Related</span><button class="calc-link-btn" onclick="go('rentvsbuy',null)">🏘️ Rent vs Buy</button><button class="calc-link-btn" onclick="go('mortcomp',null)">⚖️ Mtg Compare</button><button class="calc-link-btn" onclick="go('rentalprop',null)">🏡 Rental Property</button><button class="calc-link-btn" onclick="go('loan',null)">🏦 Loan/EMI</button></div>
+
+
+<div class="two">
+  <div class="card">
+    <div class="card-title">Mortgage Calculator</div>
+    <div class="g2">
+      <div class="field"><label>Home Price ($)</label><div class="ip"><span class="pfx">$</span><input type="number" id="m-price" value="500000" oninput="cMortgage()"></div></div>
+      <div class="field"><label>Down Payment (%)</label><input type="number" id="m-down" value="20" oninput="cMortgage()"></div>
+      <div class="field"><label>Interest Rate (% p.a.)</label><input type="number" id="m-rate" value="7" step="0.1" oninput="cMortgage()"></div>
+      <div class="field"><label>Loan Tenure (years)</label><input type="number" id="m-years" value="30" oninput="cMortgage()"></div>
+      <div class="field"><label>Annual Property Tax ($)</label><div class="ip"><span class="pfx">$</span><input type="number" id="m-tax" value="5000" oninput="cMortgage()"></div></div>
+      <div class="field"><label>Annual Insurance ($)</label><div class="ip"><span class="pfx">$</span><input type="number" id="m-ins" value="1500" oninput="cMortgage()"></div></div>
+    </div>
+    <div class="sgrid">
+      <div class="sbox"><div class="lbl">Total Monthly Payment</div><div class="val" style="color:var(--a)" id="m-pay">$0</div></div>
+      <div class="sbox"><div class="lbl">Loan Amount</div><div class="val" id="m-loan">$0</div></div>
+      <div class="sbox"><div class="lbl">Total Interest</div><div class="val" style="color:var(--r)" id="m-int">$0</div></div>
+      <div class="sbox"><div class="lbl">Total Cost</div><div class="val" id="m-total">$0</div></div>
+    </div>
+  </div>
+  <div class="card">
+    <div class="card-title">Payment Breakdown</div>
+    <div class="donut-wrap"><canvas id="m-donut" width="110" height="110"></canvas>
+      <div><div class="leg-i"><div class="leg-dot" style="background:var(--a)"></div>Principal</div><div class="leg-i"><div class="leg-dot" style="background:var(--r)"></div>Interest</div><div class="leg-i"><div class="leg-dot" style="background:var(--b)"></div>Tax+Ins</div></div>
+    </div>
+    <div class="rrow"><span class="rk">Down payment</span><span class="rv" style="color:var(--a)" id="m-dp">$0</span></div>
+    <div class="rrow"><span class="rk">Monthly tax + insurance</span><span class="rv" id="m-ti">$0</span></div>
+    <div class="rrow"><span class="rk">Affordability ratio</span><span class="rv" id="m-aff">0%</span></div>
+    <div class="insight-box" id="m-insights"></div>
+  </div>
+</div>
+
+<div class="calc-guide">
+  <div class="guide-toggle">
+    <div class="guide-toggle-title">📖 Mortgage — What Your Monthly Payment Really Covers</div>
+  </div>
+  <div class="guide-body">
+<div class="guide-p">A mortgage payment is rarely just "the loan payment" — for most homeowners, it bundles together several distinct components that each behave differently over the life of the loan. Understanding what you're actually paying for each month reveals where your money goes, why your payment might be higher than the loan math alone suggests, and what levers you have to reduce it.</div>
+
+<div class="guide-h3">Breaking Down a Mortgage Payment: PITI</div>
+<div class="guide-p">Many mortgage payments are structured as PITI — Principal, Interest, Taxes, and Insurance — all bundled into one monthly payment, even though only Principal and Interest relate directly to the loan itself.</div>
+<table class="guide-table"><thead><tr><th>Component</th><th>What It Covers</th><th>Changes Over Time?</th></tr></thead><tbody>
+<tr><td>Principal</td><td>Paying down your actual loan balance</td><td>Grows as a share of payment over time</td></tr>
+<tr><td>Interest</td><td>The cost of borrowing, on your outstanding balance</td><td>Shrinks as a share of payment over time</td></tr>
+<tr><td>Property Tax</td><td>Local government tax on your home's assessed value</td><td>Can rise as assessed value or tax rates change</td></tr>
+<tr><td>Insurance</td><td>Homeowners insurance, sometimes PMI</td><td>Can change with policy renewals</td></tr>
+</tbody></table>
+
+<div class="guide-h3">Worked Example: A $350,000 Mortgage</div>
+<div class="guide-p">A $350,000 loan at 6.75% over 30 years has a Principal + Interest payment of approximately $2,271/month. Adding estimated property tax ($400/month) and insurance ($150/month) brings the total monthly payment to roughly $2,821 — about 24% higher than the loan payment alone, a gap many first-time buyers underestimate when budgeting based on mortgage calculators that show P&I only.</div>
+
+<div class="guide-h3">PMI: The Cost of a Smaller Down Payment</div>
+<div class="guide-p">Private Mortgage Insurance is required whenever your down payment is below 20% of the purchase price, and it protects the <em>lender</em> — not you — in case of default. PMI typically costs 0.5-1.5% of the loan amount annually, and is automatically removable once your equity reaches 20% (either through paydown, appreciation, or both), though you may need to formally request its removal.</div>
+<table class="guide-table"><thead><tr><th>Down Payment</th><th>PMI Required?</th><th>Estimated Annual PMI Cost (on $300k loan)</th></tr></thead><tbody>
+<tr><td>10%</td><td>Yes</td><td>~$2,400/year (0.8%)</td></tr>
+<tr><td>15%</td><td>Yes</td><td>~$1,500/year (0.5%)</td></tr>
+<tr><td>20%+</td><td>No</td><td>$0</td></tr>
+</tbody></table>
+
+<div class="guide-h3">Interest Rate vs APR: Reading the Fine Print</div>
+<div class="guide-p">The advertised interest rate reflects only the basic cost of borrowing. APR (Annual Percentage Rate) folds in additional costs — origination fees, discount points, and certain closing costs — converting them into an equivalent annualized rate, giving a more complete (and usually slightly higher) picture of the loan's true cost. When comparing offers from different lenders, always compare APR, not just the headline interest rate, since a lower rate with high fees can sometimes cost more overall than a slightly higher rate with minimal fees.</div>
+
+<div class="guide-h3">15-Year vs 30-Year: The Real Trade-off</div>
+<div class="guide-p">A $350,000 mortgage at 6.5% costs roughly $2,212/month over 15 years versus $2,212... actually the numbers diverge meaningfully: a 15-year term at a typically lower rate (say 6.0%) runs about $2,954/month, while a 30-year term at 6.5% runs about $2,212/month — a difference of roughly $742/month. But total interest paid tells the more dramatic story.</div>
+<table class="guide-table"><thead><tr><th>Term</th><th>Monthly Payment</th><th>Total Interest Over Life of Loan</th></tr></thead><tbody>
+<tr><td>15-year @ 6.0%</td><td>$2,954</td><td>~$181,720</td></tr>
+<tr><td>30-year @ 6.5%</td><td>$2,212</td><td>~$446,320</td></tr>
+</tbody></table>
+<div class="guide-p">The 15-year mortgage costs nearly $265,000 less in total interest, despite a higher monthly payment — the trade-off is whether your budget can comfortably absorb the higher required payment in exchange for that long-term savings.</div>
+<div class="guide-tip">💡 If you can't fully commit to a 15-year mortgage's higher required payment, consider taking a 30-year mortgage but voluntarily paying extra each month, as if it were a 15-year loan. This preserves flexibility (you can revert to the lower required payment in a tough month) while still capturing most of the interest savings — see our Loan Prepayment calculator for the exact math.</div>
+
+  </div>
+</div>
+
+<div class="faq-section">
+<div class="faq-section-title">❓ Frequently Asked Questions</div>
+<div class="faq-item">
+  <div class="faq-q" onclick="toggleFAQ(this)">
+    <span>What is a mortgage?</span>
+    <span class="faq-icon">+</span>
+  </div>
+  <div class="faq-a">A mortgage is a loan used to <strong>purchase real estate</strong>, where the property itself serves as collateral. You repay it in fixed monthly payments (principal + interest) over a set term, typically 15 or 30 years.</div>
+</div>
+<div class="faq-item">
+  <div class="faq-q" onclick="toggleFAQ(this)">
+    <span>What is the difference between principal and interest in a mortgage?</span>
+    <span class="faq-icon">+</span>
+  </div>
+  <div class="faq-a">Each monthly payment has two parts: <strong>Principal</strong> reduces your loan balance. <strong>Interest</strong> is the cost of borrowing. In early years, most of your payment is interest. As years pass, more goes to principal. This is called amortization.</div>
+</div>
+<div class="faq-item">
+  <div class="faq-q" onclick="toggleFAQ(this)">
+    <span>What is PMI (Private Mortgage Insurance)?</span>
+    <span class="faq-icon">+</span>
+  </div>
+  <div class="faq-a">PMI is required when your down payment is <strong>less than 20%</strong> of the home’s price. It protects the lender if you default. PMI typically costs 0.5–1.5% of the loan per year and is canceled once you reach 20% equity.</div>
+</div>
+<div class="faq-item">
+  <div class="faq-q" onclick="toggleFAQ(this)">
+    <span>What is APR vs interest rate on a mortgage?</span>
+    <span class="faq-icon">+</span>
+  </div>
+  <div class="faq-a">The <strong>interest rate</strong> is the basic cost of borrowing. The <strong>APR</strong> includes the interest rate plus other costs like points and origination fees. APR gives a more complete picture of the true cost of the loan.</div>
+</div>
+<div class="faq-item">
+  <div class="faq-q" onclick="toggleFAQ(this)">
+    <span>Should I choose a 15-year or 30-year mortgage?</span>
+    <span class="faq-icon">+</span>
+  </div>
+  <div class="faq-a">A <strong>15-year mortgage</strong> has higher monthly payments but a lower rate and you pay far less total interest. A <strong>30-year mortgage</strong> has lower payments but you pay significantly more interest overall. Use the mortgage comparison calculator to see exact numbers.</div>
+</div>
+<div class="faq-item">
+  <div class="faq-q" onclick="toggleFAQ(this)">
+    <span>What is refinancing?</span>
+    <span class="faq-icon">+</span>
+  </div>
+  <div class="faq-a">Refinancing replaces your existing mortgage with a new one — typically to get a <strong>lower interest rate</strong> or shorter term. It generally makes sense when rates have dropped at least 0.5–1% below your current rate.</div>
+</div>
+</div>
+
+
+</div>
+</div><!-- content -->
+<div class="site-footer">
+  <div class="footer-brand">
+    <div class="logo-mark" style="width:22px;height:22px;background:var(--a);border-radius:5px;display:flex;align-items:center;justify-content:center;color:#000;font-size:11px;font-weight:700">FC</div>
+    FinCalc
+  </div>
+  <div class="footer-links"><a href="index.html">All Calculators</a> · <a href="about.html">About</a> · <a href="contact.html">Contact</a> · <a href="privacy.html">Privacy</a> · <a href="terms.html">Terms</a></div>
+  <div class="footer-copy">© 2025 FinCalc · Free Financial Calculators</div>
+</div>
+<script src="app.js"></script>
+<script>initPage('mortgage');</script>
+</body>
+</html>

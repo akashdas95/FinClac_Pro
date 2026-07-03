@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Dividend Reinvestment (DRIP) Calculator | FinCalc Pro</title>
+<meta name="description" content="Project long-term portfolio growth with dividend reinvestment. Free DRIP calculator with dividend growth and compounding chart.">
+<link rel="canonical" href="https://yourdomain.com/drip.html">
+<meta name="robots" content="index, follow">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Dividend Reinvestment (DRIP) Calculator | FinCalc Pro">
+<meta property="og:description" content="Project long-term portfolio growth with dividend reinvestment. Free DRIP calculator with dividend growth and compounding chart.">
+<meta property="og:url" content="https://yourdomain.com/drip.html">
+<meta property="og:site_name" content="FinCalc Pro">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Dividend Reinvestment (DRIP) Calculator | FinCalc Pro">
+<meta name="twitter:description" content="Project long-term portfolio growth with dividend reinvestment. Free DRIP calculator with dividend growth and compounding chart.">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<div class="topbar">
+  <a class="logo" href="index.html"><div class="logo-mark">FC</div>FinCalc</a>
+  <div class="searchbox">
+    <svg width="14" height="14" fill="none" stroke="#6B7A8D" stroke-width="2" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+    <input id="srch" placeholder="Search 40 calculators..." oninput="doSearch()" onkeydown="if(event.key==='Enter')goSearch()">
+  </div>
+</div>
+<div class="nav">
+  <button class="ntab on" onclick="go('home',this)">🏠 Home</button>
+  <button class="ntab" onclick="go('cagr',this)">📐 CAGR</button>
+  <button class="ntab" onclick="go('xirr',this)">📅 XIRR</button>
+  <button class="ntab" onclick="go('drip',this)">💧 DRIP</button>
+  <button class="ntab" onclick="go('etf',this)">🗂️ ETF Growth</button>
+  <button class="ntab" onclick="go('dcf',this)">🏦 DCF Valuation</button>
+  <button class="ntab" onclick="go('debtcomp',this)">❄️ Snowball vs Avalanche</button>
+  <button class="ntab" onclick="go('rentalprop',this)">🏡 Rental Property</button>
+  <button class="ntab" onclick="go('burnrate',this)">🔥 Burn Rate</button>
+  <button class="ntab" onclick="go('pricing',this)">🏷️ Pricing</button>
+  <button class="ntab" onclick="go('equity',this)">📐 Equity Dilution</button>
+  <button class="ntab" onclick="go('revenue',this)">📊 Revenue Forecast</button>
+  <button class="ntab" onclick="go('loan',this)">🏦 Loan/EMI</button>
+  <button class="ntab" onclick="go('invest',this)">📈 SIP/Investment</button>
+  <button class="ntab" onclick="go('tax',this)">🧾 Tax</button>
+  <button class="ntab" onclick="go('mortgage',this)">🏠 Mortgage</button>
+  <button class="ntab" onclick="go('mortcomp',this)">⚖️ Mtg Compare</button>
+  <button class="ntab" onclick="go('savings',this)">🏛️ Savings</button>
+  <button class="ntab" onclick="go('stock',this)">📉 Stock P&amp;L</button>
+  <button class="ntab" onclick="go('retirement',this)">👴 Retirement</button>
+  <button class="ntab" onclick="go('debt',this)">💳 Debt Payoff</button>
+  <button class="ntab" onclick="go('rental',this)">🏘️ Rental Yield</button>
+  <button class="ntab" onclick="go('cashflow',this)">💵 Cash Flow</button>
+  <button class="ntab" onclick="go('breakeven',this)">📊 Break-even</button>
+  <button class="ntab" onclick="go('savingsgoal',this)">🎯 Savings Goal</button>
+  <button class="ntab" onclick="go('emergencyfund',this)">🛡️ Emergency Fund</button>
+  <button class="ntab" onclick="go('healthscore',this)">💯 Health Score</button>
+  <button class="ntab" onclick="go('currency',this)">💱 Currency</button>
+  <button class="ntab" onclick="go('scientific',this)">🔬 Scientific</button>
+</div>
+<div class="content">
+<div id="drip" class="panel on">
+<button class="back-btn" onclick="go('home',null)">← Back to Home</button>
+<div class="calc-links"><span class="calc-links-label">🔗 Related</span><button class="calc-link-btn" onclick="go('divgrowth',null)">📈 Dividend Growth</button><button class="calc-link-btn" onclick="go('invest',null)">📈 Investment</button><button class="calc-link-btn" onclick="go('cagr',null)">📐 CAGR</button><button class="calc-link-btn" onclick="go('xirr',null)">📅 XIRR</button><button class="calc-link-btn" onclick="go('etf',null)">🗂️ ETF Growth</button></div>
+
+
+<div class="two">
+  <div class="card">
+    <div class="card-title">Dividend Reinvestment (DRIP)</div>
+    <div class="g2">
+      <div class="field"><label>Initial Shares</label><input type="number" id="dr-shares" value="100" oninput="calcDRIP()"></div>
+      <div class="field"><label>Current Price ($)</label><div class="ip"><span class="pfx">$</span><input type="number" id="dr-price" value="150" oninput="calcDRIP()"></div></div>
+      <div class="field"><label>Dividend Yield (% p.a.)</label><input type="number" id="dr-yield" value="3" step="0.1" oninput="calcDRIP()"></div>
+      <div class="field"><label>Dividend Growth (%)</label><input type="number" id="dr-divgrow" value="6" step="0.1" oninput="calcDRIP()"></div>
+      <div class="field"><label>Stock Price Growth (%)</label><input type="number" id="dr-grow" value="5" step="0.1" oninput="calcDRIP()"></div>
+      <div class="field"><label>Monthly Investment ($)</label><div class="ip"><span class="pfx">$</span><input type="number" id="dr-monthly" value="500" oninput="calcDRIP()"></div></div>
+    </div>
+    <div class="field"><label>Investment Period (years)</label><input type="number" id="dr-years" value="20" oninput="calcDRIP()"></div>
+    <div class="sgrid">
+      <div class="sbox"><div class="lbl">Final Portfolio</div><div class="val" style="color:var(--a)" id="dr-final">$0</div></div>
+      <div class="sbox"><div class="lbl">Annual Dividend Income</div><div class="val" style="color:var(--g)" id="dr-anndiv">$0</div></div>
+      <div class="sbox"><div class="lbl">Total Shares</div><div class="val" style="color:var(--b)" id="dr-shares2">0</div></div>
+      <div class="sbox"><div class="lbl">Total Dividends Rcvd</div><div class="val" style="color:var(--p)" id="dr-totdiv">$0</div></div>
+    </div>
+    <div class="rrow" style="margin-top:.5rem"><span class="rk">Total Invested</span><span class="rv" id="dr-invested">$0</span></div>
+    <div class="rrow"><span class="rk">Total Gain</span><span class="rv" style="color:var(--g)" id="dr-gain">$0</span></div>
+    <div class="insight-box" id="dr-insights"></div>
+  </div>
+  <div class="card">
+    <div class="card-title">DRIP Growth Over Time</div>
+    <canvas id="dr-chart" width="300" height="190" style="width:100%;margin:.5rem 0"></canvas>
+    <div style="display:flex;gap:12px;font-size:11px;color:var(--m);margin:.5rem 0 1rem">
+      <span style="color:var(--a)">━ Portfolio Value</span><span style="color:var(--g)">╌ Annual Dividends ×10</span>
+    </div>
+    
+  </div>
+</div>
+
+<div class="calc-guide">
+  <div class="guide-toggle">
+    <div class="guide-toggle-title">📖 Dividend Reinvestment (DRIP) — How It Works</div>
+  </div>
+  <div class="guide-body">
+<div class="guide-p">Dividend Reinvestment Plans (DRIPs) are one of the quietest, least flashy wealth-building mechanisms in investing — and also one of the most powerful over long time horizons. Instead of a company's dividend payment landing in your brokerage account as cash you might spend or let sit idle, a DRIP automatically uses that cash to buy more shares (or fractional shares) of the same stock or fund, immediately and usually without any extra brokerage commission.</div>
+
+<div class="guide-h3">The Mechanics: What Actually Happens on Dividend Day</div>
+<div class="guide-p">When a company declares a dividend — say $1.20 per share annually, paid quarterly at $0.30 — and you own 100 shares, you'd normally receive $30 in cash each quarter. With DRIP enabled, that $30 is instead used to purchase additional shares (or a fraction of a share) at the prevailing market price on the payment date. If the stock is trading at $60, you'd receive 0.5 new shares. Over time, you own slightly more shares each quarter, which means your next dividend payment is calculated on a slightly larger share count — and the cycle compounds.</div>
+
+<div class="guide-h3">Worked Example: 20 Years of Reinvestment</div>
+<div class="guide-p">Consider an investor who buys $20,000 of a dividend-paying stock yielding 3% annually, with the stock price and dividend both growing 5% per year on average, and total price appreciation (capital gains) separately averaging 7% annually.</div>
+<table class="guide-table"><thead><tr><th>Scenario</th><th>Value After 20 Years</th></tr></thead><tbody>
+<tr><td>Taking dividends as cash (spent, not reinvested)</td><td>~$77,400 (price appreciation only)</td></tr>
+<tr><td>Reinvesting all dividends (DRIP)</td><td>~$108,600</td></tr>
+</tbody></table>
+<div class="guide-p">The roughly $31,000 difference is the pure compounding effect of dividend reinvestment — money that came from dividends buying more shares, which then themselves paid dividends, which bought even more shares. Over multi-decade horizons, academic studies of the S&amp;P 500 have repeatedly shown that <strong>the majority of the index's total historical return came from reinvested dividends</strong>, not from price appreciation alone — a fact that surprises most casual investors who focus only on the headline index price.</div>
+
+<div class="guide-h3">Dividend Yield vs Dividend Growth</div>
+<div class="guide-formula">Dividend Yield = Annual Dividend Per Share / Current Share Price × 100%</div>
+<div class="guide-p">A high current yield isn't automatically better than a lower one. A 7% yielding stock with a stagnant or shrinking dividend can be a value trap — often a sign the market expects trouble and has pushed the share price down, mechanically inflating the yield. A 2% yielding stock that grows its dividend 10% every year for two decades can dramatically outpace it. This is the "dividend growth investing" philosophy: prioritize the trajectory, not the snapshot.</div>
+
+<div class="guide-h3">DRIP and Dollar-Cost Averaging</div>
+<div class="guide-p">Because DRIP purchases happen automatically every dividend cycle regardless of whether the stock is up or down that day, it functions as a built-in, hands-off form of dollar-cost averaging. You buy more shares when the price is temporarily low (your fixed dividend dollar amount buys more shares) and fewer when the price is high — without ever having to think about market timing.</div>
+
+<div class="guide-h3">Should You Always Reinvest?</div>
+<div class="guide-steps">
+<div class="guide-step"><div class="guide-step-num">1</div><div>If you're in the accumulation phase (working, saving, decades from retirement) and don't need the cash, reinvesting is almost always the better default — it maximizes long-term compounding.</div></div>
+<div class="guide-step"><div class="guide-step-num">2</div><div>If you're retired and rely on dividend income to cover living expenses, taking dividends as cash makes more practical sense, even though it sacrifices some long-term growth.</div></div>
+<div class="guide-step"><div class="guide-step-num">3</div><div>If you already hold a very large position in one stock, reinvesting dividends into that same stock increases concentration risk — consider redirecting dividends into a different holding instead.</div></div>
+</div>
+
+<div class="guide-h3">The Tax Reality of Reinvested Dividends</div>
+<div class="guide-p">A surprising number of new investors assume reinvested dividends are tax-free since the cash never technically reaches their bank account. This is incorrect in most countries — the IRS, and most other tax authorities, treat reinvested dividends as taxable income in the year received, exactly the same as if you'd taken the cash and bought shares manually yourself. The only common exception is inside tax-advantaged accounts like a Roth IRA, 401(k), or equivalent retirement wrapper in other countries, where reinvested dividends grow completely tax-free (or tax-deferred).</div>
+<div class="guide-warn">⚠ Track your DRIP purchases carefully for tax purposes — every reinvested dividend slightly raises your cost basis in the stock. Forgetting this when you eventually sell can lead to overstating your capital gain and overpaying tax.</div>
+
+  </div>
+</div>
+
+<div class="faq-section">
+<div class="faq-section-title">❓ Frequently Asked Questions</div>
+<div class="faq-item">
+  <div class="faq-q" onclick="toggleFAQ(this)">
+    <span>What is a DRIP?</span>
+    <span class="faq-icon">+</span>
+  </div>
+  <div class="faq-a">DRIP stands for <strong>Dividend Reinvestment Plan</strong>. Instead of receiving dividends as cash, they’re automatically used to purchase more shares. This creates powerful compounding over time.</div>
+</div>
+<div class="faq-item">
+  <div class="faq-q" onclick="toggleFAQ(this)">
+    <span>How does dividend reinvestment increase returns?</span>
+    <span class="faq-icon">+</span>
+  </div>
+  <div class="faq-a">By reinvesting dividends, you buy more shares. Those new shares earn their own dividends, which buy even more shares. Over decades, <strong>the majority of your total return can come from reinvested dividends</strong>, not stock price growth.</div>
+</div>
+<div class="faq-item">
+  <div class="faq-q" onclick="toggleFAQ(this)">
+    <span>What is dividend yield?</span>
+    <span class="faq-icon">+</span>
+  </div>
+  <div class="faq-a"><span class="faq-formula">Dividend Yield = Annual Dividend Per Share / Current Share Price × 100%</span>A stock priced at $100 paying $3/year has a 3% dividend yield. Higher yield isn’t always better — a very high yield can signal the stock price has fallen sharply.</div>
+</div>
+<div class="faq-item">
+  <div class="faq-q" onclick="toggleFAQ(this)">
+    <span>Should I reinvest dividends or take them as cash?</span>
+    <span class="faq-icon">+</span>
+  </div>
+  <div class="faq-a">If you don’t need the income now, reinvesting almost always leads to a larger portfolio long-term due to compounding. If you’re retired and living off investments, taking dividends as cash income makes more sense.</div>
+</div>
+<div class="faq-item">
+  <div class="faq-q" onclick="toggleFAQ(this)">
+    <span>Are DRIP dividends taxable?</span>
+    <span class="faq-icon">+</span>
+  </div>
+  <div class="faq-a">In most countries, <strong>yes</strong> — dividends are taxable even when reinvested, because you still technically received them. In tax-advantaged accounts like a Roth IRA or ISA, reinvested dividends grow tax-free.</div>
+</div>
+</div>
+
+
+</div>
+</div><!-- content -->
+<div class="site-footer">
+  <div class="footer-brand">
+    <div class="logo-mark" style="width:22px;height:22px;background:var(--a);border-radius:5px;display:flex;align-items:center;justify-content:center;color:#000;font-size:11px;font-weight:700">FC</div>
+    FinCalc
+  </div>
+  <div class="footer-links"><a href="index.html">All Calculators</a> · <a href="about.html">About</a> · <a href="contact.html">Contact</a> · <a href="privacy.html">Privacy</a> · <a href="terms.html">Terms</a></div>
+  <div class="footer-copy">© 2025 FinCalc · Free Financial Calculators</div>
+</div>
+<script src="app.js"></script>
+<script>initPage('drip');</script>
+</body>
+</html>

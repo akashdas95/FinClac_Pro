@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Emergency Fund Calculator | FinCalc Pro</title>
+<meta name="description" content="Calculate how much you need in your emergency fund based on monthly expenses. Free emergency fund calculator.">
+<link rel="canonical" href="https://yourdomain.com/emergencyfund.html">
+<meta name="robots" content="index, follow">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Emergency Fund Calculator | FinCalc Pro">
+<meta property="og:description" content="Calculate how much you need in your emergency fund based on monthly expenses. Free emergency fund calculator.">
+<meta property="og:url" content="https://yourdomain.com/emergencyfund.html">
+<meta property="og:site_name" content="FinCalc Pro">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Emergency Fund Calculator | FinCalc Pro">
+<meta name="twitter:description" content="Calculate how much you need in your emergency fund based on monthly expenses. Free emergency fund calculator.">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<div class="topbar">
+  <a class="logo" href="index.html"><div class="logo-mark">FC</div>FinCalc</a>
+  <div class="searchbox">
+    <svg width="14" height="14" fill="none" stroke="#6B7A8D" stroke-width="2" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+    <input id="srch" placeholder="Search 40 calculators..." oninput="doSearch()" onkeydown="if(event.key==='Enter')goSearch()">
+  </div>
+</div>
+<div class="nav">
+  <button class="ntab on" onclick="go('home',this)">🏠 Home</button>
+  <button class="ntab" onclick="go('cagr',this)">📐 CAGR</button>
+  <button class="ntab" onclick="go('xirr',this)">📅 XIRR</button>
+  <button class="ntab" onclick="go('drip',this)">💧 DRIP</button>
+  <button class="ntab" onclick="go('etf',this)">🗂️ ETF Growth</button>
+  <button class="ntab" onclick="go('dcf',this)">🏦 DCF Valuation</button>
+  <button class="ntab" onclick="go('debtcomp',this)">❄️ Snowball vs Avalanche</button>
+  <button class="ntab" onclick="go('rentalprop',this)">🏡 Rental Property</button>
+  <button class="ntab" onclick="go('burnrate',this)">🔥 Burn Rate</button>
+  <button class="ntab" onclick="go('pricing',this)">🏷️ Pricing</button>
+  <button class="ntab" onclick="go('equity',this)">📐 Equity Dilution</button>
+  <button class="ntab" onclick="go('revenue',this)">📊 Revenue Forecast</button>
+  <button class="ntab" onclick="go('loan',this)">🏦 Loan/EMI</button>
+  <button class="ntab" onclick="go('invest',this)">📈 SIP/Investment</button>
+  <button class="ntab" onclick="go('tax',this)">🧾 Tax</button>
+  <button class="ntab" onclick="go('mortgage',this)">🏠 Mortgage</button>
+  <button class="ntab" onclick="go('mortcomp',this)">⚖️ Mtg Compare</button>
+  <button class="ntab" onclick="go('savings',this)">🏛️ Savings</button>
+  <button class="ntab" onclick="go('stock',this)">📉 Stock P&amp;L</button>
+  <button class="ntab" onclick="go('retirement',this)">👴 Retirement</button>
+  <button class="ntab" onclick="go('debt',this)">💳 Debt Payoff</button>
+  <button class="ntab" onclick="go('rental',this)">🏘️ Rental Yield</button>
+  <button class="ntab" onclick="go('cashflow',this)">💵 Cash Flow</button>
+  <button class="ntab" onclick="go('breakeven',this)">📊 Break-even</button>
+  <button class="ntab" onclick="go('savingsgoal',this)">🎯 Savings Goal</button>
+  <button class="ntab" onclick="go('emergencyfund',this)">🛡️ Emergency Fund</button>
+  <button class="ntab" onclick="go('healthscore',this)">💯 Health Score</button>
+  <button class="ntab" onclick="go('currency',this)">💱 Currency</button>
+  <button class="ntab" onclick="go('scientific',this)">🔬 Scientific</button>
+</div>
+<div class="content">
+<div id="emergencyfund" class="panel on">
+<button class="back-btn" onclick="go('home',null)">← Back to Home</button>
+<div class="calc-links"><span class="calc-links-label">🔗 Related</span><button class="calc-link-btn" onclick="go('savingsgoal',null)">🎯 Savings Goal</button><button class="calc-link-btn" onclick="go('savings',null)">🏛️ Savings</button><button class="calc-link-btn" onclick="go('cashflow',null)">💵 Cash Flow</button><button class="calc-link-btn" onclick="go('healthscore',null)">💯 Health Score</button></div>
+
+
+<div class="two">
+  <div class="card">
+    <div class="card-title">Emergency Fund Calculator</div>
+    <div class="g2">
+      <div class="field"><label>Monthly Essential Expenses ($)</label><div class="ip"><span class="pfx">$</span><input type="number" id="ef-expenses" value="4000" oninput="cEmergency()"></div></div>
+      <div class="field"><label>Months of Coverage</label>
+        <select id="ef-months" onchange="cEmergency()">
+          <option value="3">3 months (minimum)</option>
+          <option value="6" selected>6 months (recommended)</option>
+          <option value="9">9 months (conservative)</option>
+          <option value="12">12 months (ultra-safe)</option>
+        </select>
+      </div>
+      <div class="field"><label>Current Emergency Savings ($)</label><div class="ip"><span class="pfx">$</span><input type="number" id="ef-current" value="5000" oninput="cEmergency()"></div></div>
+      <div class="field"><label>Monthly Amount You Can Save ($)</label><div class="ip"><span class="pfx">$</span><input type="number" id="ef-saverate" value="500" oninput="cEmergency()"></div></div>
+    </div>
+    <div class="field"><label>Savings Account Interest Rate (%)</label><input type="number" id="ef-rate" value="4.5" step="0.1" oninput="cEmergency()"></div>
+    <div style="margin-top:1rem;padding:1rem;background:var(--s2);border-radius:8px;border-left:3px solid var(--g)">
+      <div style="font-size:10px;color:var(--m);text-transform:uppercase;letter-spacing:.5px;margin-bottom:8px">Essential Expenses Checklist</div>
+      <div class="g2" style="gap:6px">
+        <label style="display:flex;align-items:center;gap:6px;font-size:12px;cursor:pointer"><input type="checkbox" id="ef-rent" onchange="cEmergency()" style="accent-color:var(--g)"> Rent / Mortgage</label>
+        <label style="display:flex;align-items:center;gap:6px;font-size:12px;cursor:pointer"><input type="checkbox" id="ef-food" onchange="cEmergency()" style="accent-color:var(--g)"> Food & Groceries</label>
+        <label style="display:flex;align-items:center;gap:6px;font-size:12px;cursor:pointer"><input type="checkbox" id="ef-utils" onchange="cEmergency()" style="accent-color:var(--g)"> Utilities & Bills</label>
+        <label style="display:flex;align-items:center;gap:6px;font-size:12px;cursor:pointer"><input type="checkbox" id="ef-transport" onchange="cEmergency()" style="accent-color:var(--g)"> Transportation</label>
+        <label style="display:flex;align-items:center;gap:6px;font-size:12px;cursor:pointer"><input type="checkbox" id="ef-insurance" onchange="cEmergency()" style="accent-color:var(--g)"> Insurance</label>
+        <label style="display:flex;align-items:center;gap:6px;font-size:12px;cursor:pointer"><input type="checkbox" id="ef-debt" onchange="cEmergency()" style="accent-color:var(--g)"> Debt Payments</label>
+      </div>
+    </div>
+  </div>
+  <div class="card">
+    <div class="card-title">Emergency Fund Status</div>
+    <div class="sgrid" style="margin-top:0;margin-bottom:1rem">
+      <div class="sbox"><div class="lbl">Fund Target</div><div class="val" style="color:var(--a)" id="ef-target">$0</div></div>
+      <div class="sbox"><div class="lbl">Still Needed</div><div class="val" style="color:var(--r)" id="ef-gap">$0</div></div>
+      <div class="sbox"><div class="lbl">Months to Goal</div><div class="val" style="color:var(--g)" id="ef-time">0 mo</div></div>
+      <div class="sbox"><div class="lbl">Goal Date</div><div class="val" id="ef-date">—</div></div>
+    </div>
+
+    <!-- Progress -->
+    <div style="margin-bottom:1.25rem">
+      <div style="display:flex;justify-content:space-between;font-size:12px;color:var(--m);margin-bottom:6px">
+        <span>Progress</span><span id="ef-pct-lbl">0%</span>
+      </div>
+      <div style="background:var(--bd);border-radius:6px;height:14px;overflow:hidden">
+        <div id="ef-bar" style="height:100%;border-radius:6px;background:linear-gradient(90deg,var(--g),var(--a));transition:width .5s;width:0%"></div>
+      </div>
+    </div>
+
+    <canvas id="ef-chart" width="280" height="170" style="width:100%;margin-bottom:1rem"></canvas>
+    <div style="display:flex;gap:12px;font-size:11px;color:var(--m);margin-bottom:1rem">
+      <span style="color:var(--g)">━ Savings balance</span>
+      <span style="color:var(--a)">╌ Target</span>
+    </div>
+
+    <div class="insight-box" id="ef-insights"></div>
+  </div>
+</div>
+
+<div class="calc-guide">
+  <div class="guide-toggle">
+    <div class="guide-toggle-title">📖 Emergency Fund — Your Financial Safety Net</div>
+  </div>
+  <div class="guide-body">
+<div class="guide-p">An emergency fund is the single most underrated financial tool for protecting every other financial goal you have. Without one, a single unexpected expense — a job loss, a medical bill, a major car repair — forces a choice between high-interest debt and liquidating long-term investments at potentially the worst possible time, derailing years of careful planning in one unlucky month.</div>
+
+<div class="guide-h3">Sizing Your Emergency Fund: Beyond the Generic "3-6 Months" Advice</div>
+<table class="guide-table"><thead><tr><th>Situation</th><th>Recommended Target</th><th>Reasoning</th></tr></thead><tbody>
+<tr><td>Dual-income household, stable jobs, no dependents</td><td>3 months of expenses</td><td>Lower risk profile — a second income provides a built-in backstop</td></tr>
+<tr><td>Single income, stable employment</td><td>6 months of expenses</td><td>Standard recommendation for most working individuals</td></tr>
+<tr><td>Variable/commission income, or dependents to support</td><td>6-9 months of expenses</td><td>Income volatility and/or higher fixed obligations require a larger buffer</td></tr>
+<tr><td>Self-employed, freelancer, or highly specialized career</td><td>9-12 months of expenses</td><td>Job search timelines in specialized fields tend to run longer; income is inherently less predictable</td></tr>
+</tbody></table>
+
+<div class="guide-h3">Worked Example: Calculating Your Specific Target</div>
+<div class="guide-p">A household with $4,200/month in essential expenses (rent, utilities, groceries, insurance, minimum debt payments — deliberately excluding discretionary spending like dining out or entertainment, since those could be cut during an actual emergency) targeting a 6-month buffer needs $4,200 × 6 = $25,200. If they currently have $6,000 saved and can contribute $600/month, reaching the full target takes ($25,200 − $6,000) / $600 ≈ 32 months, just under 3 years.</div>
+
+<div class="guide-h3">Building the Fund in Stages</div>
+<div class="guide-steps">
+<div class="guide-step"><div class="guide-step-num">1</div><div><strong>Starter fund: $1,000-2,000</strong> — covers the most common small emergencies (car repair, minor medical bill) and should be the very first savings priority, even before aggressively paying down non-urgent debt.</div></div>
+<div class="guide-step"><div class="guide-step-num">2</div><div><strong>1 month of expenses</strong> — provides basic breathing room for minor income disruptions.</div></div>
+<div class="guide-step"><div class="guide-step-num">3</div><div><strong>3-6 months (or more, per the table above)</strong> — the full target that genuinely protects against job loss or major life disruption without forcing debt or investment liquidation.</div></div>
+</div>
+
+<div class="guide-h3">Where to Actually Keep This Money</div>
+<div class="guide-p">An emergency fund needs three properties simultaneously: safety (no risk of loss), liquidity (accessible within days, not weeks), and at least some yield (so inflation doesn't silently erode it while it sits idle).</div>
+<table class="guide-table"><thead><tr><th>Account Type</th><th>Safety</th><th>Liquidity</th><th>Typical Yield</th></tr></thead><tbody>
+<tr><td>High-Yield Savings Account</td><td>Excellent (FDIC insured)</td><td>Excellent (1-2 day transfer)</td><td>4-5% (varies with rates)</td></tr>
+<tr><td>Money Market Account</td><td>Excellent</td><td>Good</td><td>Similar to HYSA</td></tr>
+<tr><td>Stock Market Investments</td><td>Poor for short-term needs</td><td>Good, but value can drop sharply</td><td>Higher long-term average, but irrelevant if you need cash during a downturn</td></tr>
+</tbody></table>
+<div class="guide-warn">⚠ Never invest your emergency fund in stocks or volatile assets, even if the expected long-term return looks more attractive. Markets historically tend to fall during exactly the kind of broad economic stress (recessions, layoffs) that triggers emergency fund usage in the first place — meaning you'd likely be forced to sell at a loss precisely when you need the money most.</div>
+
+<div class="guide-h3">The Credit Card Trap</div>
+<div class="guide-p">Relying on a credit card as a substitute emergency fund is a common but risky shortcut. Credit cards typically charge 20%+ APR, and a genuine emergency (extended job loss, for example) can leave you unable to pay down the balance quickly — turning a temporary crisis into years of compounding high-interest debt. A cash emergency fund, while it earns far less than the stock market, is the only tool that reliably protects you without adding new financial risk on top of whatever emergency already occurred.</div>
+
+  </div>
+</div>
+
+<div class="faq-section">
+<div class="faq-section-title">❓ Frequently Asked Questions</div>
+<div class="faq-item">
+  <div class="faq-q" onclick="toggleFAQ(this)">
+    <span>What is an emergency fund?</span>
+    <span class="faq-icon">+</span>
+  </div>
+  <div class="faq-a">An emergency fund is money set aside for <strong>unexpected expenses</strong> — job loss, medical bills, major repairs. It prevents you from going into debt when life surprises you. The standard recommendation is 3–6 months of living expenses in a liquid account.</div>
+</div>
+<div class="faq-item">
+  <div class="faq-q" onclick="toggleFAQ(this)">
+    <span>How much should my emergency fund be?</span>
+    <span class="faq-icon">+</span>
+  </div>
+  <div class="faq-a"><strong>3 months</strong>: dual income household, stable job, no dependents. <strong>6 months</strong>: single income, variable income, or with dependents. <strong>9–12 months</strong>: self-employed, freelancers, or specialized careers where finding new work takes longer.</div>
+</div>
+<div class="faq-item">
+  <div class="faq-q" onclick="toggleFAQ(this)">
+    <span>Where should I keep my emergency fund?</span>
+    <span class="faq-icon">+</span>
+  </div>
+  <div class="faq-a">Your emergency fund needs to be <strong>safe, accessible, and earning some interest</strong>. Best options: high-yield savings accounts (HYSA), money market accounts, or short-term CDs. Avoid investing it in stocks — markets can drop 30–50% exactly when you might need the money most.</div>
+</div>
+<div class="faq-item">
+  <div class="faq-q" onclick="toggleFAQ(this)">
+    <span>Should I invest or build an emergency fund first?</span>
+    <span class="faq-icon">+</span>
+  </div>
+  <div class="faq-a">Build the emergency fund first — at least 1 month’s expenses as a starter. Without it, one unexpected bill forces you to sell investments at a loss or take on high-interest debt. Once you have 3+ months saved, then invest aggressively.</div>
+</div>
+<div class="faq-item">
+  <div class="faq-q" onclick="toggleFAQ(this)">
+    <span>Is it okay to use a credit card as an emergency fund?</span>
+    <span class="faq-icon">+</span>
+  </div>
+  <div class="faq-a">No. Credit card debt carries 20%+ interest. A true emergency (like job loss) may mean you can’t pay the card off quickly, turning a temporary crisis into months of expensive debt. A cash emergency fund is the only reliable safety net.</div>
+</div>
+</div>
+
+
+</div>
+</div><!-- content -->
+<div class="site-footer">
+  <div class="footer-brand">
+    <div class="logo-mark" style="width:22px;height:22px;background:var(--a);border-radius:5px;display:flex;align-items:center;justify-content:center;color:#000;font-size:11px;font-weight:700">FC</div>
+    FinCalc
+  </div>
+  <div class="footer-links"><a href="index.html">All Calculators</a> · <a href="about.html">About</a> · <a href="contact.html">Contact</a> · <a href="privacy.html">Privacy</a> · <a href="terms.html">Terms</a></div>
+  <div class="footer-copy">© 2025 FinCalc · Free Financial Calculators</div>
+</div>
+<script src="app.js"></script>
+<script>initPage('emergencyfund');</script>
+</body>
+</html>

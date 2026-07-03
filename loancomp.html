@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Loan Comparison Calculator | FinCalc Pro</title>
+<meta name="description" content="Compare up to 3 loan offers side by side — EMI, total interest, fees, and total cost. Free loan comparison calculator.">
+<link rel="canonical" href="https://yourdomain.com/loancomp.html">
+<meta name="robots" content="index, follow">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Loan Comparison Calculator | FinCalc Pro">
+<meta property="og:description" content="Compare up to 3 loan offers side by side — EMI, total interest, fees, and total cost. Free loan comparison calculator.">
+<meta property="og:url" content="https://yourdomain.com/loancomp.html">
+<meta property="og:site_name" content="FinCalc Pro">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Loan Comparison Calculator | FinCalc Pro">
+<meta name="twitter:description" content="Compare up to 3 loan offers side by side — EMI, total interest, fees, and total cost. Free loan comparison calculator.">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<div class="topbar">
+  <a class="logo" href="index.html"><div class="logo-mark">FC</div>FinCalc</a>
+  <div class="searchbox">
+    <svg width="14" height="14" fill="none" stroke="#6B7A8D" stroke-width="2" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+    <input id="srch" placeholder="Search 40 calculators..." oninput="doSearch()" onkeydown="if(event.key==='Enter')goSearch()">
+  </div>
+</div>
+<div class="nav">
+  <button class="ntab on" onclick="go('home',this)">🏠 Home</button>
+  <button class="ntab" onclick="go('cagr',this)">📐 CAGR</button>
+  <button class="ntab" onclick="go('xirr',this)">📅 XIRR</button>
+  <button class="ntab" onclick="go('drip',this)">💧 DRIP</button>
+  <button class="ntab" onclick="go('etf',this)">🗂️ ETF Growth</button>
+  <button class="ntab" onclick="go('dcf',this)">🏦 DCF Valuation</button>
+  <button class="ntab" onclick="go('debtcomp',this)">❄️ Snowball vs Avalanche</button>
+  <button class="ntab" onclick="go('rentalprop',this)">🏡 Rental Property</button>
+  <button class="ntab" onclick="go('burnrate',this)">🔥 Burn Rate</button>
+  <button class="ntab" onclick="go('pricing',this)">🏷️ Pricing</button>
+  <button class="ntab" onclick="go('equity',this)">📐 Equity Dilution</button>
+  <button class="ntab" onclick="go('revenue',this)">📊 Revenue Forecast</button>
+  <button class="ntab" onclick="go('loan',this)">🏦 Loan/EMI</button>
+  <button class="ntab" onclick="go('invest',this)">📈 SIP/Investment</button>
+  <button class="ntab" onclick="go('tax',this)">🧾 Tax</button>
+  <button class="ntab" onclick="go('mortgage',this)">🏠 Mortgage</button>
+  <button class="ntab" onclick="go('mortcomp',this)">⚖️ Mtg Compare</button>
+  <button class="ntab" onclick="go('savings',this)">🏛️ Savings</button>
+  <button class="ntab" onclick="go('stock',this)">📉 Stock P&amp;L</button>
+  <button class="ntab" onclick="go('retirement',this)">👴 Retirement</button>
+  <button class="ntab" onclick="go('debt',this)">💳 Debt Payoff</button>
+  <button class="ntab" onclick="go('rental',this)">🏘️ Rental Yield</button>
+  <button class="ntab" onclick="go('cashflow',this)">💵 Cash Flow</button>
+  <button class="ntab" onclick="go('breakeven',this)">📊 Break-even</button>
+  <button class="ntab" onclick="go('savingsgoal',this)">🎯 Savings Goal</button>
+  <button class="ntab" onclick="go('emergencyfund',this)">🛡️ Emergency Fund</button>
+  <button class="ntab" onclick="go('healthscore',this)">💯 Health Score</button>
+  <button class="ntab" onclick="go('currency',this)">💱 Currency</button>
+  <button class="ntab" onclick="go('scientific',this)">🔬 Scientific</button>
+</div>
+<div class="content">
+<div id="loancomp" class="panel on">
+<button class="back-btn" onclick="go('home',null)">← Back to Home</button>
+<div class="calc-links"><span class="calc-links-label">🔗 Related</span><button class="calc-link-btn" onclick="go('loan',null)">🏦 Loan/EMI</button><button class="calc-link-btn" onclick="go('prepay',null)">⏩ Loan Prepayment</button><button class="calc-link-btn" onclick="go('debtcomp',null)">❄️ Snowball vs Avalanche</button><button class="calc-link-btn" onclick="go('mortcomp',null)">⚖️ Mortgage Comparison</button></div>
+
+
+<div class="g3 mb16" id="lc-cols"></div>
+<div class="card"><div class="card-title">Side-by-Side Comparison</div><div style="overflow-x:auto"><table class="tbl" id="lc-table" style="width:100%"></table></div><canvas id="lc-chart" width="900" height="140" style="width:100%;margin-top:1rem"></canvas><div class="insight-box" id="lc-insights"></div></div>
+
+<div class="calc-guide">
+  <div class="guide-toggle">
+    <div class="guide-toggle-title">📖 Loan Comparison — Choosing the Right Offer</div>
+  </div>
+  <div class="guide-body">
+<div class="guide-p">Comparing loan offers side by side reveals something the headline interest rate alone never tells you: the lowest rate isn't always the cheapest loan, and the lowest monthly payment isn't always the best deal. Amount borrowed, interest rate, tenure, and processing fees all interact, and the only reliable way to see which offer actually costs less is to run the full numbers on each one rather than comparing rates in isolation.</div>
+
+<div class="guide-h3">Why Tenure Changes the Comparison So Much</div>
+<div class="guide-p">A shorter tenure raises your monthly payment but shrinks the total interest paid, since the principal is exposed to interest charges for fewer months. A longer tenure does the opposite — smaller monthly payment, but more total interest over the life of the loan. This trade-off means a loan offer with a <em>higher</em> rate but a <em>shorter</em> term can sometimes cost less overall than a lower-rate offer stretched over more years.</div>
+<div class="guide-formula">EMI = P × r × (1 + r)ⁿ / ((1 + r)ⁿ − 1)</div>
+
+<div class="guide-h3">Worked Example: Three Offers for the Same Purchase</div>
+<div class="guide-p">Consider three competing offers on a roughly $25,000 loan:</div>
+<table class="guide-table"><thead><tr><th>Offer</th><th>Amount</th><th>Rate</th><th>Term</th><th>Monthly EMI</th><th>Total Cost</th></tr></thead><tbody>
+<tr><td>A</td><td>$25,000</td><td>6.5%</td><td>5 years</td><td>$489</td><td>$29,599</td></tr>
+<tr><td>B</td><td>$25,000</td><td>7.2%</td><td>4 years</td><td>$601</td><td>$28,847</td></tr>
+<tr><td>C</td><td>$24,000</td><td>5.9%</td><td>6 years</td><td>$397</td><td>$29,036</td></tr>
+</tbody></table>
+<div class="guide-p">Offer B carries the <em>highest</em> stated interest rate of the three, yet it's the <strong>cheapest overall</strong> once the shorter term is factored in — its higher monthly payment buys a faster payoff and less total interest. Offer A has a lower rate than B but loses to it on total cost simply because it runs an extra year. This is exactly why total cost, not headline rate, should be the deciding number whenever you can comfortably afford the higher payment.</div>
+
+<div class="guide-h3">Processing Fees: The Cost Hiding Outside the Interest Rate</div>
+<div class="guide-p">Many lenders charge an upfront processing or origination fee — commonly 0.5% to 3% of the loan amount — that doesn't show up in the advertised interest rate at all. A loan with a slightly higher rate but no fee can easily beat a lower-rate loan that charges 2-3% upfront, especially on shorter-term loans where the fee makes up a larger share of the total cost relative to the interest accrued.</div>
+<table class="guide-table"><thead><tr><th>Processing Fee</th><th>Cost on a $25,000 Loan</th></tr></thead><tbody>
+<tr><td>0%</td><td>$0</td></tr>
+<tr><td>1%</td><td>$250</td></tr>
+<tr><td>2.5%</td><td>$625</td></tr>
+</tbody></table>
+
+<div class="guide-h3">Monthly Payment vs Total Cost: Two Different Questions</div>
+<div class="guide-p">These two numbers answer different questions, and conflating them is one of the most common loan-shopping mistakes. Monthly payment answers "can I afford this each month, given my current budget?" Total cost answers "how much will I actually pay the lender over the life of this loan?" A borrower with tight monthly cash flow may reasonably prioritize the lowest payment even if it isn't the cheapest option overall — but that should be a deliberate trade-off, not an accident of only looking at one number.</div>
+
+<div class="guide-h3">Beyond the Numbers: Reading the Fine Print</div>
+<div class="guide-steps">
+<div class="guide-step"><div class="guide-step-num">1</div><div><strong>Prepayment penalties</strong> — some loans charge a fee (often 1-3% of the remaining balance) if you pay off the loan early, which matters if you might want to refinance or pay it down faster later.</div></div>
+<div class="guide-step"><div class="guide-step-num">2</div><div><strong>Rate type</strong> — confirm whether the quoted rate is flat or reducing-balance; a flat-rate loan can cost nearly double a reducing-balance loan at the same headline rate (see our Loan/EMI calculator for the full breakdown).</div></div>
+<div class="guide-step"><div class="guide-step-num">3</div><div><strong>Variable vs fixed rate</strong> — a lower introductory variable rate carries the risk of rising later; a fixed rate locks in certainty for the full term.</div></div>
+</div>
+<div class="guide-tip">💡 Always ask each lender for their official Loan Estimate or equivalent disclosure document — comparing standardized figures across lenders is far more reliable than comparing verbal quotes or marketing materials, which can present the same loan very differently.</div>
+
+  </div>
+</div>
+
+<div class="faq-section">
+<div class="faq-section-title">❓ Frequently Asked Questions</div>
+<div class="faq-item">
+  <div class="faq-q" onclick="toggleFAQ(this)">
+    <span>Why isn't the lowest interest rate always the cheapest loan?</span>
+    <span class="faq-icon">+</span>
+  </div>
+  <div class="faq-a">Total cost depends on the interest rate, the loan amount, the tenure, and any processing fees together — not the rate alone. A higher-rate loan with a shorter term, or no processing fee, can easily cost less overall than a lower-rate loan stretched over more years or carrying a large upfront fee.</div>
+</div>
+<div class="faq-item">
+  <div class="faq-q" onclick="toggleFAQ(this)">
+    <span>Should I pick the loan with the lowest monthly payment?</span>
+    <span class="faq-icon">+</span>
+  </div>
+  <div class="faq-a">Only if monthly affordability is your main constraint. The lowest monthly payment usually comes from the longest tenure, which typically means paying more in total interest over the life of the loan. If you can comfortably afford a higher payment, the lowest <strong>total cost</strong> option is usually the better financial choice.</div>
+</div>
+<div class="faq-item">
+  <div class="faq-q" onclick="toggleFAQ(this)">
+    <span>How much do processing fees actually matter?</span>
+    <span class="faq-icon">+</span>
+  </div>
+  <div class="faq-a">More than most borrowers expect. A 2-3% processing fee on a $25,000 loan is $500-750 paid upfront, on top of all the interest — enough to flip which of two closely-priced offers is actually cheaper. Always include fees when comparing total cost, not just the interest rate.</div>
+</div>
+<div class="faq-item">
+  <div class="faq-q" onclick="toggleFAQ(this)">
+    <span>What's the difference between APR and the interest rate?</span>
+    <span class="faq-icon">+</span>
+  </div>
+  <div class="faq-a">The interest rate reflects only the cost of borrowing. APR folds in certain additional costs — like processing fees — into a single annualized rate, giving a more complete picture of what the loan actually costs. When available, compare APR rather than the headline interest rate alone.</div>
+</div>
+<div class="faq-item">
+  <div class="faq-q" onclick="toggleFAQ(this)">
+    <span>Does a shorter loan term always cost less?</span>
+    <span class="faq-icon">+</span>
+  </div>
+  <div class="faq-a">Usually, but not always — it depends on the rate too. A short-term loan at a much higher rate can sometimes cost more than a longer-term loan at a meaningfully lower rate. This is exactly why comparing total cost across real offers, rather than assuming based on term length alone, matters.</div>
+</div>
+</div>
+
+
+</div>
+</div><!-- content -->
+<div class="site-footer">
+  <div class="footer-brand">
+    <div class="logo-mark" style="width:22px;height:22px;background:var(--a);border-radius:5px;display:flex;align-items:center;justify-content:center;color:#000;font-size:11px;font-weight:700">FC</div>
+    FinCalc
+  </div>
+  <div class="footer-links"><a href="index.html">All Calculators</a> · <a href="about.html">About</a> · <a href="contact.html">Contact</a> · <a href="privacy.html">Privacy</a> · <a href="terms.html">Terms</a></div>
+  <div class="footer-copy">© 2025 FinCalc · Free Financial Calculators</div>
+</div>
+<script src="app.js"></script>
+<script>initPage('loancomp');</script>
+</body>
+</html>

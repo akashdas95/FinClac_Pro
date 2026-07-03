@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Savings Goal Calculator | FinCalc Pro</title>
+<meta name="description" content="Calculate how much to save monthly to reach any financial goal by your target date. Free savings goal calculator.">
+<link rel="canonical" href="https://yourdomain.com/savingsgoal.html">
+<meta name="robots" content="index, follow">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Savings Goal Calculator | FinCalc Pro">
+<meta property="og:description" content="Calculate how much to save monthly to reach any financial goal by your target date. Free savings goal calculator.">
+<meta property="og:url" content="https://yourdomain.com/savingsgoal.html">
+<meta property="og:site_name" content="FinCalc Pro">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Savings Goal Calculator | FinCalc Pro">
+<meta name="twitter:description" content="Calculate how much to save monthly to reach any financial goal by your target date. Free savings goal calculator.">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<div class="topbar">
+  <a class="logo" href="index.html"><div class="logo-mark">FC</div>FinCalc</a>
+  <div class="searchbox">
+    <svg width="14" height="14" fill="none" stroke="#6B7A8D" stroke-width="2" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+    <input id="srch" placeholder="Search 40 calculators..." oninput="doSearch()" onkeydown="if(event.key==='Enter')goSearch()">
+  </div>
+</div>
+<div class="nav">
+  <button class="ntab on" onclick="go('home',this)">🏠 Home</button>
+  <button class="ntab" onclick="go('cagr',this)">📐 CAGR</button>
+  <button class="ntab" onclick="go('xirr',this)">📅 XIRR</button>
+  <button class="ntab" onclick="go('drip',this)">💧 DRIP</button>
+  <button class="ntab" onclick="go('etf',this)">🗂️ ETF Growth</button>
+  <button class="ntab" onclick="go('dcf',this)">🏦 DCF Valuation</button>
+  <button class="ntab" onclick="go('debtcomp',this)">❄️ Snowball vs Avalanche</button>
+  <button class="ntab" onclick="go('rentalprop',this)">🏡 Rental Property</button>
+  <button class="ntab" onclick="go('burnrate',this)">🔥 Burn Rate</button>
+  <button class="ntab" onclick="go('pricing',this)">🏷️ Pricing</button>
+  <button class="ntab" onclick="go('equity',this)">📐 Equity Dilution</button>
+  <button class="ntab" onclick="go('revenue',this)">📊 Revenue Forecast</button>
+  <button class="ntab" onclick="go('loan',this)">🏦 Loan/EMI</button>
+  <button class="ntab" onclick="go('invest',this)">📈 SIP/Investment</button>
+  <button class="ntab" onclick="go('tax',this)">🧾 Tax</button>
+  <button class="ntab" onclick="go('mortgage',this)">🏠 Mortgage</button>
+  <button class="ntab" onclick="go('mortcomp',this)">⚖️ Mtg Compare</button>
+  <button class="ntab" onclick="go('savings',this)">🏛️ Savings</button>
+  <button class="ntab" onclick="go('stock',this)">📉 Stock P&amp;L</button>
+  <button class="ntab" onclick="go('retirement',this)">👴 Retirement</button>
+  <button class="ntab" onclick="go('debt',this)">💳 Debt Payoff</button>
+  <button class="ntab" onclick="go('rental',this)">🏘️ Rental Yield</button>
+  <button class="ntab" onclick="go('cashflow',this)">💵 Cash Flow</button>
+  <button class="ntab" onclick="go('breakeven',this)">📊 Break-even</button>
+  <button class="ntab" onclick="go('savingsgoal',this)">🎯 Savings Goal</button>
+  <button class="ntab" onclick="go('emergencyfund',this)">🛡️ Emergency Fund</button>
+  <button class="ntab" onclick="go('healthscore',this)">💯 Health Score</button>
+  <button class="ntab" onclick="go('currency',this)">💱 Currency</button>
+  <button class="ntab" onclick="go('scientific',this)">🔬 Scientific</button>
+</div>
+<div class="content">
+<div id="savingsgoal" class="panel on">
+<button class="back-btn" onclick="go('home',null)">← Back to Home</button>
+<div class="calc-links"><span class="calc-links-label">🔗 Related</span><button class="calc-link-btn" onclick="go('emergencyfund',null)">🛡️ Emergency Fund</button><button class="calc-link-btn" onclick="go('savings',null)">🏛️ Savings</button><button class="calc-link-btn" onclick="go('healthscore',null)">💯 Health Score</button><button class="calc-link-btn" onclick="go('cashflow',null)">💵 Cash Flow</button></div>
+
+
+<div class="two">
+  <div class="card">
+    <div class="card-title">Savings Goal Calculator</div>
+    <div class="g2">
+      <div class="field"><label>Savings Goal ($)</label><div class="ip"><span class="pfx">$</span><input type="number" id="sg-goal" value="50000" oninput="cSavingsGoal()"></div></div>
+      <div class="field"><label>Current Savings ($)</label><div class="ip"><span class="pfx">$</span><input type="number" id="sg-current" value="5000" oninput="cSavingsGoal()"></div></div>
+      <div class="field"><label>Annual Interest Rate (%)</label><input type="number" id="sg-rate" value="6" step="0.1" oninput="cSavingsGoal()"></div>
+      <div class="field"><label>Target Timeframe (months)</label><input type="number" id="sg-months" value="36" oninput="cSavingsGoal()"></div>
+    </div>
+    <div class="field"><label>Compounding Frequency</label>
+      <select id="sg-comp" onchange="cSavingsGoal()">
+        <option value="12">Monthly</option>
+        <option value="4">Quarterly</option>
+        <option value="2">Semi-annually</option>
+        <option value="1">Annually</option>
+      </select>
+    </div>
+    <div class="sgrid">
+      <div class="sbox"><div class="lbl">Monthly Savings Needed</div><div class="val" style="color:var(--a)" id="sg-monthly">$0</div></div>
+      <div class="sbox"><div class="lbl">Total Contributions</div><div class="val" id="sg-contrib">$0</div></div>
+      <div class="sbox"><div class="lbl">Interest Earned</div><div class="val" style="color:var(--g)" id="sg-interest">$0</div></div>
+      <div class="sbox"><div class="lbl">Goal Achievable?</div><div class="val" id="sg-status">—</div></div>
+    </div>
+    <div style="margin-top:1rem">
+      <div class="rrow"><span class="rk">Amount still needed</span><span class="rv" id="sg-gap">$0</span></div>
+      <div class="rrow"><span class="rk">% of goal already saved</span><span class="rv" style="color:var(--g)" id="sg-pct">0%</span></div>
+      <div class="rrow"><span class="rk">Weekly savings needed</span><span class="rv" style="color:var(--a)" id="sg-weekly">$0</span></div>
+      <div class="rrow"><span class="rk">Daily savings needed</span><span class="rv" id="sg-daily">$0</span></div>
+    </div>
+  </div>
+  <div class="card">
+    <div class="card-title">Progress to Goal</div>
+    <div style="margin:1rem 0">
+      <div style="display:flex;justify-content:space-between;font-size:12px;color:var(--m);margin-bottom:6px">
+        <span>Current</span><span id="sg-prog-label">0%</span><span>Goal</span>
+      </div>
+      <div style="background:var(--bd);border-radius:6px;height:14px;overflow:hidden;margin-bottom:1.25rem">
+        <div id="sg-progress-bar" style="height:100%;border-radius:6px;background:linear-gradient(90deg,var(--g),var(--a));transition:width .5s;width:0%"></div>
+      </div>
+    </div>
+    <canvas id="sg-chart" width="280" height="190" style="width:100%;margin-bottom:1rem"></canvas>
+    <div style="display:flex;gap:12px;font-size:11px;color:var(--m)">
+      <span style="color:var(--g)">━ Savings balance</span>
+      <span style="color:var(--a)">╌ Goal line</span>
+    </div>
+    <div class="insight-box" id="sg-insights"></div>
+  </div>
+</div>
+
+<div class="calc-guide">
+  <div class="guide-toggle">
+    <div class="guide-toggle-title">📖 Savings Goal Calculator — Plan Your Way There</div>
+  </div>
+  <div class="guide-body">
+<div class="guide-p">A vague savings ambition like "I want to save more for a house" rarely succeeds, while a specific, calculated target like "I need to save $850/month for 36 months to reach a $30,000 down payment" creates an actionable plan you can actually track progress against. The math behind converting a goal into a monthly number is straightforward once the variables are laid out clearly.</div>
+
+<div class="guide-h3">The Core Calculation</div>
+<div class="guide-p">Reaching a future savings goal while earning interest along the way involves solving for the monthly contribution that, combined with compound growth, lands exactly at your target by your deadline. This is mathematically the reverse of a standard compound interest calculation — instead of solving for the ending value given a contribution, you're solving for the contribution given a desired ending value.</div>
+
+<div class="guide-h3">Worked Example: Saving for a Home Down Payment</div>
+<div class="guide-p">A goal of $40,000 in 4 years (48 months), starting from $0, with funds held in a high-yield savings account earning 4.5% annually:</div>
+<table class="guide-table"><thead><tr><th>Interest Rate Assumed</th><th>Required Monthly Savings</th><th>Total Contributed</th><th>Interest Earned</th></tr></thead><tbody>
+<tr><td>0% (cash under the mattress)</td><td>$833.33</td><td>$40,000</td><td>$0</td></tr>
+<tr><td>4.5% (realistic HYSA)</td><td>$758.20</td><td>$36,394</td><td>$3,606</td></tr>
+</tbody></table>
+<div class="guide-p">Earning even a modest 4.5% reduces the required monthly contribution by about $75 — not dramatic over a short 4-year goal, but the gap widens substantially for longer-term goals, where compounding has more time to work.</div>
+
+<div class="guide-h3">How Timeline Flexibility Changes the Required Monthly Amount</div>
+<table class="guide-table"><thead><tr><th>Timeline</th><th>Required Monthly Savings (4.5% return)</th></tr></thead><tbody>
+<tr><td>2 years</td><td>$1,565</td></tr>
+<tr><td>4 years</td><td>$758</td></tr>
+<tr><td>6 years</td><td>$489</td></tr>
+<tr><td>10 years</td><td>$268</td></tr>
+</tbody></table>
+<div class="guide-p">Extending your timeline from 4 to 10 years cuts the required monthly amount by nearly two-thirds — a useful lever when a goal feels financially out of reach at your current timeline, since adjusting the deadline is often more realistic than dramatically cutting other spending.</div>
+
+<div class="guide-h3">The SMART Framework for Setting the Goal Itself</div>
+<div class="guide-steps">
+<div class="guide-step"><div class="guide-step-num">1</div><div><strong>Specific</strong> — "$40,000 for a home down payment," not "save more money."</div></div>
+<div class="guide-step"><div class="guide-step-num">2</div><div><strong>Measurable</strong> — a clear dollar figure you can track monthly progress against.</div></div>
+<div class="guide-step"><div class="guide-step-num">3</div><div><strong>Achievable</strong> — checked against your actual current income and existing expenses, not aspirational guesswork.</div></div>
+<div class="guide-step"><div class="guide-step-num">4</div><div><strong>Relevant</strong> — tied to something that genuinely matters to you, which sustains motivation through the inevitable months where saving feels like a sacrifice.</div></div>
+<div class="guide-step"><div class="guide-step-num">5</div><div><strong>Time-bound</strong> — a specific deadline, which is exactly what converts an abstract wish into a calculable monthly target.</div></div>
+</div>
+
+<div class="guide-h3">Choosing Where to Hold Goal-Specific Savings</div>
+<table class="guide-table"><thead><tr><th>Goal Timeline</th><th>Recommended Account Type</th><th>Reasoning</th></tr></thead><tbody>
+<tr><td>Under 2 years</td><td>High-yield savings account</td><td>Capital preservation matters more than maximizing return; you can't afford a market downturn right before you need the money</td></tr>
+<tr><td>2-5 years</td><td>HYSA or short-term CDs/bonds</td><td>Slight yield improvement while still prioritizing safety</td></tr>
+<tr><td>5+ years</td><td>Consider a diversified investment portfolio</td><td>Longer horizon allows time to recover from short-term market volatility</td></tr>
+</tbody></table>
+<div class="guide-tip">💡 If your calculated required monthly savings amount feels unrealistic given your current budget, you have three levers to adjust: reduce the target amount, extend the timeline, or increase your expected return by choosing a different savings vehicle — adjusting any combination of the three until the resulting monthly figure becomes genuinely achievable.</div>
+
+  </div>
+</div>
+
+<div class="faq-section">
+<div class="faq-section-title">❓ Frequently Asked Questions</div>
+<div class="faq-item">
+  <div class="faq-q" onclick="toggleFAQ(this)">
+    <span>What is a savings goal calculator?</span>
+    <span class="faq-icon">+</span>
+  </div>
+  <div class="faq-a">A savings goal calculator determines how much you need to save regularly to reach a specific financial goal by a target date, accounting for interest earned along the way. It turns a big number into a manageable monthly action.</div>
+</div>
+<div class="faq-item">
+  <div class="faq-q" onclick="toggleFAQ(this)">
+    <span>How do I set a realistic savings goal?</span>
+    <span class="faq-icon">+</span>
+  </div>
+  <div class="faq-a">Make your goal <strong>SMART</strong>: Specific (exact amount), Measurable, Achievable (given your income), Relevant (meaningful), and Time-bound (clear deadline). Work backward to find the required monthly savings, then adjust until the number is feasible.</div>
+</div>
+<div class="faq-item">
+  <div class="faq-q" onclick="toggleFAQ(this)">
+    <span>How does interest rate affect my savings goal?</span>
+    <span class="faq-icon">+</span>
+  </div>
+  <div class="faq-a">Higher returns mean you need to save less each month. Saving $10,000 in 3 years at 0% requires $278/month. At 5% APY, only $258/month — interest does some of the work. For goals 10+ years away, the impact is dramatic.</div>
+</div>
+<div class="faq-item">
+  <div class="faq-q" onclick="toggleFAQ(this)">
+    <span>Should I use a regular or high-yield account for savings goals?</span>
+    <span class="faq-icon">+</span>
+  </div>
+  <div class="faq-a">For goals <strong>within 1–2 years</strong>, a high-yield savings account is ideal — safe and accessible. For goals <strong>3+ years away</strong>, consider index funds for higher potential returns, accepting some short-term volatility for greater long-term growth.</div>
+</div>
+<div class="faq-item">
+  <div class="faq-q" onclick="toggleFAQ(this)">
+    <span>What if I can’t meet my monthly savings goal amount?</span>
+    <span class="faq-icon">+</span>
+  </div>
+  <div class="faq-a">You have three levers: <strong>1)</strong> Reduce the target amount. <strong>2)</strong> Extend the timeline. <strong>3)</strong> Choose a higher-return investment account. Often, small adjustments across all three makes a goal achievable.</div>
+</div>
+</div>
+
+
+</div>
+</div><!-- content -->
+<div class="site-footer">
+  <div class="footer-brand">
+    <div class="logo-mark" style="width:22px;height:22px;background:var(--a);border-radius:5px;display:flex;align-items:center;justify-content:center;color:#000;font-size:11px;font-weight:700">FC</div>
+    FinCalc
+  </div>
+  <div class="footer-links"><a href="index.html">All Calculators</a> · <a href="about.html">About</a> · <a href="contact.html">Contact</a> · <a href="privacy.html">Privacy</a> · <a href="terms.html">Terms</a></div>
+  <div class="footer-copy">© 2025 FinCalc · Free Financial Calculators</div>
+</div>
+<script src="app.js"></script>
+<script>initPage('savingsgoal');</script>
+</body>
+</html>

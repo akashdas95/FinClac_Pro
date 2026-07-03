@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Stock Profit & Loss Calculator | FinCalc Pro</title>
+<meta name="description" content="Calculate stock trading profit and loss including brokerage fees and break-even price. Free stock P&L calculator.">
+<link rel="canonical" href="https://yourdomain.com/stock.html">
+<meta name="robots" content="index, follow">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Stock Profit & Loss Calculator | FinCalc Pro">
+<meta property="og:description" content="Calculate stock trading profit and loss including brokerage fees and break-even price. Free stock P&L calculator.">
+<meta property="og:url" content="https://yourdomain.com/stock.html">
+<meta property="og:site_name" content="FinCalc Pro">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Stock Profit & Loss Calculator | FinCalc Pro">
+<meta name="twitter:description" content="Calculate stock trading profit and loss including brokerage fees and break-even price. Free stock P&L calculator.">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<div class="topbar">
+  <a class="logo" href="index.html"><div class="logo-mark">FC</div>FinCalc</a>
+  <div class="searchbox">
+    <svg width="14" height="14" fill="none" stroke="#6B7A8D" stroke-width="2" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+    <input id="srch" placeholder="Search 40 calculators..." oninput="doSearch()" onkeydown="if(event.key==='Enter')goSearch()">
+  </div>
+</div>
+<div class="nav">
+  <button class="ntab on" onclick="go('home',this)">🏠 Home</button>
+  <button class="ntab" onclick="go('cagr',this)">📐 CAGR</button>
+  <button class="ntab" onclick="go('xirr',this)">📅 XIRR</button>
+  <button class="ntab" onclick="go('drip',this)">💧 DRIP</button>
+  <button class="ntab" onclick="go('etf',this)">🗂️ ETF Growth</button>
+  <button class="ntab" onclick="go('dcf',this)">🏦 DCF Valuation</button>
+  <button class="ntab" onclick="go('debtcomp',this)">❄️ Snowball vs Avalanche</button>
+  <button class="ntab" onclick="go('rentalprop',this)">🏡 Rental Property</button>
+  <button class="ntab" onclick="go('burnrate',this)">🔥 Burn Rate</button>
+  <button class="ntab" onclick="go('pricing',this)">🏷️ Pricing</button>
+  <button class="ntab" onclick="go('equity',this)">📐 Equity Dilution</button>
+  <button class="ntab" onclick="go('revenue',this)">📊 Revenue Forecast</button>
+  <button class="ntab" onclick="go('loan',this)">🏦 Loan/EMI</button>
+  <button class="ntab" onclick="go('invest',this)">📈 SIP/Investment</button>
+  <button class="ntab" onclick="go('tax',this)">🧾 Tax</button>
+  <button class="ntab" onclick="go('mortgage',this)">🏠 Mortgage</button>
+  <button class="ntab" onclick="go('mortcomp',this)">⚖️ Mtg Compare</button>
+  <button class="ntab" onclick="go('savings',this)">🏛️ Savings</button>
+  <button class="ntab" onclick="go('stock',this)">📉 Stock P&amp;L</button>
+  <button class="ntab" onclick="go('retirement',this)">👴 Retirement</button>
+  <button class="ntab" onclick="go('debt',this)">💳 Debt Payoff</button>
+  <button class="ntab" onclick="go('rental',this)">🏘️ Rental Yield</button>
+  <button class="ntab" onclick="go('cashflow',this)">💵 Cash Flow</button>
+  <button class="ntab" onclick="go('breakeven',this)">📊 Break-even</button>
+  <button class="ntab" onclick="go('savingsgoal',this)">🎯 Savings Goal</button>
+  <button class="ntab" onclick="go('emergencyfund',this)">🛡️ Emergency Fund</button>
+  <button class="ntab" onclick="go('healthscore',this)">💯 Health Score</button>
+  <button class="ntab" onclick="go('currency',this)">💱 Currency</button>
+  <button class="ntab" onclick="go('scientific',this)">🔬 Scientific</button>
+</div>
+<div class="content">
+<div id="stock" class="panel on">
+<button class="back-btn" onclick="go('home',null)">← Back to Home</button>
+<div class="calc-links"><span class="calc-links-label">🔗 Related</span><button class="calc-link-btn" onclick="go('dcf',null)">🏦 Stock DCF</button><button class="calc-link-btn" onclick="go('cagr',null)">📐 CAGR</button><button class="calc-link-btn" onclick="go('xirr',null)">📅 XIRR</button><button class="calc-link-btn" onclick="go('drip',null)">💧 DRIP</button></div>
+
+
+<div class="two">
+  <div class="card">
+    <div class="card-title">Stock P&L Calculator</div>
+    <div class="g2">
+      <div class="field"><label>Number of Shares</label><input type="number" id="sk-sh" value="100" oninput="cStock()"></div>
+      <div class="field"><label>Buy Price ($)</label><div class="ip"><span class="pfx">$</span><input type="number" id="sk-buy" value="150" step="0.01" oninput="cStock()"></div></div>
+      <div class="field"><label>Sell Price ($)</label><div class="ip"><span class="pfx">$</span><input type="number" id="sk-sell" value="200" step="0.01" oninput="cStock()"></div></div>
+      <div class="field"><label>Buy Commission (%)</label><input type="number" id="sk-bc" value="0.1" step="0.01" oninput="cStock()"></div>
+      <div class="field"><label>Sell Commission (%)</label><input type="number" id="sk-sc" value="0.1" step="0.01" oninput="cStock()"></div>
+      <div class="field"><label>Holding Period (days)</label><input type="number" id="sk-days" value="365" oninput="cStock()"></div>
+    </div>
+    <div class="sgrid">
+      <div class="sbox"><div class="lbl">Net P&amp;L</div><div class="val" id="sk-pnl">$0</div></div>
+      <div class="sbox"><div class="lbl">Return %</div><div class="val" id="sk-ret">0%</div></div>
+      <div class="sbox"><div class="lbl">Annualised Return</div><div class="val" id="sk-ann">0%</div></div>
+      <div class="sbox"><div class="lbl">Total Commission</div><div class="val" style="color:var(--r)" id="sk-comm">$0</div></div>
+    </div>
+  </div>
+  <div class="card">
+    <div class="card-title">Trade Summary</div>
+    <div class="rrow"><span class="rk">Total buy cost</span><span class="rv" id="sk-bt">$0</span></div>
+    <div class="rrow"><span class="rk">Total sell proceeds</span><span class="rv" id="sk-st">$0</span></div>
+    <div class="rrow"><span class="rk">Break-even sell price</span><span class="rv" style="color:var(--a)" id="sk-bep">$0</span></div>
+    <div class="insight-box" id="sk-insights"></div>
+  </div>
+</div>
+
+<div class="calc-guide">
+  <div class="guide-toggle">
+    <div class="guide-toggle-title">📖 Stock P&amp;L — Understanding Your Trade Returns</div>
+  </div>
+  <div class="guide-body">
+<div class="guide-p">Calculating whether a stock trade actually made you money sounds simple — sell price minus buy price — but brokerage fees, position sizing, and the asymmetric mathematics of losses versus gains all complicate the picture in ways that matter for real trading decisions.</div>
+
+<div class="guide-h3">The Full P&amp;L Formula</div>
+<div class="guide-formula">P&amp;L = (Selling Price − Buying Price) × Quantity − Total Brokerage Fees</div>
+<div class="guide-p">Many new traders forget to subtract brokerage fees from both the buy and sell sides, overstating their actual profit. A trade that looks like a $200 gain on paper might only be a $160 gain after accounting for round-trip commission costs, especially on smaller position sizes where fixed-fee brokerages disproportionately eat into returns.</div>
+
+<div class="guide-h3">Worked Example: Brokerage Drag on Small Trades</div>
+<div class="guide-p">Buying 50 shares at $40 ($2,000 total) and selling at $44 ($2,200 total) produces a gross profit of $200 — a 10% gain. If your brokerage charges a flat $15 commission per trade (buy and sell), that's $30 in total fees, reducing your net profit to $170, or an effective 8.5% return rather than the headline 10%. On a $200,000 position with the same percentage move, that same $30 in fixed fees becomes utterly negligible — illustrating why brokerage drag disproportionately punishes smaller, more frequent trades.</div>
+
+<div class="guide-h3">The Asymmetry of Losses: Why a 50% Loss Needs a 100% Gain</div>
+<div class="guide-formula">Return Needed to Break Even = Loss% / (1 − Loss%)</div>
+<table class="guide-table"><thead><tr><th>Loss Suffered</th><th>Gain Needed to Recover</th></tr></thead><tbody>
+<tr><td>10%</td><td>11.1%</td></tr>
+<tr><td>25%</td><td>33.3%</td></tr>
+<tr><td>50%</td><td>100%</td></tr>
+<tr><td>75%</td><td>300%</td></tr>
+<tr><td>90%</td><td>900%</td></tr>
+</tbody></table>
+<div class="guide-p">This asymmetry is one of the most important — and most frequently ignored — concepts in trading. A position that drops 50% requires a full 100% gain just to return to your original investment value, because the recovery gain is calculated on a smaller remaining base. This mathematical reality is precisely why professional traders prioritize avoiding large losses over chasing large gains: protecting capital from severe drawdowns matters more to long-term compounding than any single winning trade.</div>
+
+<div class="guide-h3">Stop Losses: Removing Emotion From the Equation</div>
+<div class="guide-p">A stop loss is a pre-set order to automatically sell if a position falls to a specified price, capping your maximum possible loss on that trade before emotion (hope, denial, "it'll bounce back") can interfere with the decision. Buying at $100 with a stop loss set at $90 mathematically caps your loss at 10%, regardless of how far the stock might fall afterward if you hadn't set that order.</div>
+
+<div class="guide-h3">Realized vs Unrealized P&L</div>
+<table class="guide-table"><thead><tr><th>Type</th><th>Definition</th><th>Tax Implication</th></tr></thead><tbody>
+<tr><td>Unrealized</td><td>Paper gain/loss on a position you still hold</td><td>Not taxed until the position is actually sold</td></tr>
+<tr><td>Realized</td><td>Actual gain/loss locked in after selling</td><td>Taxable in the year the sale occurs</td></tr>
+</tbody></table>
+<div class="guide-p">A position showing a large unrealized gain can vanish entirely (or turn into a loss) before you sell — which is why portfolio "value" displayed in your brokerage app is always somewhat theoretical until you actually close the position.</div>
+
+<div class="guide-h3">Short-Term vs Long-Term Capital Gains Tax</div>
+<div class="guide-p">In the US, positions held for less than one year are taxed as short-term capital gains at your ordinary income tax rate (up to 37% for high earners). Positions held longer than one year qualify for long-term capital gains rates — 0%, 15%, or 20% depending on income — a substantial difference that makes holding period a real factor in after-tax trading strategy, not just a technicality.</div>
+<div class="guide-warn">⚠ Be aware of "wash sale" rules — selling a security at a loss and then repurchasing a substantially identical security within 30 days disallows the tax loss deduction for that period, a rule many active traders inadvertently trigger without realizing it.</div>
+
+  </div>
+</div>
+
+<div class="faq-section">
+<div class="faq-section-title">❓ Frequently Asked Questions</div>
+<div class="faq-item">
+  <div class="faq-q" onclick="toggleFAQ(this)">
+    <span>What is P&amp;L in stock trading?</span>
+    <span class="faq-icon">+</span>
+  </div>
+  <div class="faq-a"><span class="faq-formula">P&amp;L = (Selling Price − Buying Price) × Quantity − Brokerage Fees</span>P&amp;L shows how much you made or lost on a trade. <strong>Realized P&amp;L</strong> is from closed positions. <strong>Unrealized P&amp;L</strong> is from positions you still hold.</div>
+</div>
+<div class="faq-item">
+  <div class="faq-q" onclick="toggleFAQ(this)">
+    <span>What is brokerage and how does it affect returns?</span>
+    <span class="faq-icon">+</span>
+  </div>
+  <div class="faq-a">Brokerage is the commission paid per trade. On small investments, brokerage can significantly eat into returns. A 2% round-trip brokerage means the stock needs to gain at least 4% just to break even on that trade.</div>
+</div>
+<div class="faq-item">
+  <div class="faq-q" onclick="toggleFAQ(this)">
+    <span>What is the difference between short-term and long-term capital gains?</span>
+    <span class="faq-icon">+</span>
+  </div>
+  <div class="faq-a">In the US, stocks held <strong>less than 1 year</strong> are taxed as ordinary income (up to 37%). Stocks held <strong>more than 1 year</strong> are taxed at long-term capital gains rates (0%, 15%, or 20%). Holding longer is almost always more tax-efficient.</div>
+</div>
+<div class="faq-item">
+  <div class="faq-q" onclick="toggleFAQ(this)">
+    <span>What is a stop loss?</span>
+    <span class="faq-icon">+</span>
+  </div>
+  <div class="faq-a">A stop loss is an order to automatically sell a stock if it falls to a certain price, limiting your maximum loss. Buying at $100 with a stop loss at $90 caps your loss at 10%. It removes emotion from loss-cutting decisions.</div>
+</div>
+<div class="faq-item">
+  <div class="faq-q" onclick="toggleFAQ(this)">
+    <span>What is the break-even price after a loss?</span>
+    <span class="faq-icon">+</span>
+  </div>
+  <div class="faq-a"><span class="faq-formula">Break-even Return Needed = Loss% / (1 − Loss%)</span>If a stock drops 50%, you need a 100% gain just to get back to even. A 20% loss needs a 25% gain. This asymmetry is why limiting losses is more important than chasing gains.</div>
+</div>
+</div>
+
+
+</div>
+</div><!-- content -->
+<div class="site-footer">
+  <div class="footer-brand">
+    <div class="logo-mark" style="width:22px;height:22px;background:var(--a);border-radius:5px;display:flex;align-items:center;justify-content:center;color:#000;font-size:11px;font-weight:700">FC</div>
+    FinCalc
+  </div>
+  <div class="footer-links"><a href="index.html">All Calculators</a> · <a href="about.html">About</a> · <a href="contact.html">Contact</a> · <a href="privacy.html">Privacy</a> · <a href="terms.html">Terms</a></div>
+  <div class="footer-copy">© 2025 FinCalc · Free Financial Calculators</div>
+</div>
+<script src="app.js"></script>
+<script>initPage('stock');</script>
+</body>
+</html>

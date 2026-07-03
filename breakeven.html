@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Break-even Point Calculator | FinCalc Pro</title>
+<meta name="description" content="Calculate your business break-even point in units and revenue. Free break-even analysis calculator with contribution margin.">
+<link rel="canonical" href="https://yourdomain.com/breakeven.html">
+<meta name="robots" content="index, follow">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Break-even Point Calculator | FinCalc Pro">
+<meta property="og:description" content="Calculate your business break-even point in units and revenue. Free break-even analysis calculator with contribution margin.">
+<meta property="og:url" content="https://yourdomain.com/breakeven.html">
+<meta property="og:site_name" content="FinCalc Pro">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Break-even Point Calculator | FinCalc Pro">
+<meta name="twitter:description" content="Calculate your business break-even point in units and revenue. Free break-even analysis calculator with contribution margin.">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<div class="topbar">
+  <a class="logo" href="index.html"><div class="logo-mark">FC</div>FinCalc</a>
+  <div class="searchbox">
+    <svg width="14" height="14" fill="none" stroke="#6B7A8D" stroke-width="2" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+    <input id="srch" placeholder="Search 40 calculators..." oninput="doSearch()" onkeydown="if(event.key==='Enter')goSearch()">
+  </div>
+</div>
+<div class="nav">
+  <button class="ntab on" onclick="go('home',this)">🏠 Home</button>
+  <button class="ntab" onclick="go('cagr',this)">📐 CAGR</button>
+  <button class="ntab" onclick="go('xirr',this)">📅 XIRR</button>
+  <button class="ntab" onclick="go('drip',this)">💧 DRIP</button>
+  <button class="ntab" onclick="go('etf',this)">🗂️ ETF Growth</button>
+  <button class="ntab" onclick="go('dcf',this)">🏦 DCF Valuation</button>
+  <button class="ntab" onclick="go('debtcomp',this)">❄️ Snowball vs Avalanche</button>
+  <button class="ntab" onclick="go('rentalprop',this)">🏡 Rental Property</button>
+  <button class="ntab" onclick="go('burnrate',this)">🔥 Burn Rate</button>
+  <button class="ntab" onclick="go('pricing',this)">🏷️ Pricing</button>
+  <button class="ntab" onclick="go('equity',this)">📐 Equity Dilution</button>
+  <button class="ntab" onclick="go('revenue',this)">📊 Revenue Forecast</button>
+  <button class="ntab" onclick="go('loan',this)">🏦 Loan/EMI</button>
+  <button class="ntab" onclick="go('invest',this)">📈 SIP/Investment</button>
+  <button class="ntab" onclick="go('tax',this)">🧾 Tax</button>
+  <button class="ntab" onclick="go('mortgage',this)">🏠 Mortgage</button>
+  <button class="ntab" onclick="go('mortcomp',this)">⚖️ Mtg Compare</button>
+  <button class="ntab" onclick="go('savings',this)">🏛️ Savings</button>
+  <button class="ntab" onclick="go('stock',this)">📉 Stock P&amp;L</button>
+  <button class="ntab" onclick="go('retirement',this)">👴 Retirement</button>
+  <button class="ntab" onclick="go('debt',this)">💳 Debt Payoff</button>
+  <button class="ntab" onclick="go('rental',this)">🏘️ Rental Yield</button>
+  <button class="ntab" onclick="go('cashflow',this)">💵 Cash Flow</button>
+  <button class="ntab" onclick="go('breakeven',this)">📊 Break-even</button>
+  <button class="ntab" onclick="go('savingsgoal',this)">🎯 Savings Goal</button>
+  <button class="ntab" onclick="go('emergencyfund',this)">🛡️ Emergency Fund</button>
+  <button class="ntab" onclick="go('healthscore',this)">💯 Health Score</button>
+  <button class="ntab" onclick="go('currency',this)">💱 Currency</button>
+  <button class="ntab" onclick="go('scientific',this)">🔬 Scientific</button>
+</div>
+<div class="content">
+<div id="breakeven" class="panel on">
+<button class="back-btn" onclick="go('home',null)">← Back to Home</button>
+<div class="calc-links"><span class="calc-links-label">🔗 Related</span><button class="calc-link-btn" onclick="go('pricing',null)">🏷️ Pricing</button><button class="calc-link-btn" onclick="go('burnrate',null)">🔥 Burn Rate</button><button class="calc-link-btn" onclick="go('revenue',null)">📊 Revenue Forecast</button><button class="calc-link-btn" onclick="go('cashflow',null)">💵 Cash Flow</button></div>
+
+
+<div class="two">
+  <div class="card">
+    <div class="card-title">Break-even Analysis</div>
+    <div class="g2">
+      <div class="field"><label>Fixed Costs / Month ($)</label><div class="ip"><span class="pfx">$</span><input type="number" id="be-fc" value="20000" oninput="cBE()"></div></div>
+      <div class="field"><label>Selling Price / Unit ($)</label><div class="ip"><span class="pfx">$</span><input type="number" id="be-sp" value="100" oninput="cBE()"></div></div>
+      <div class="field"><label>Variable Cost / Unit ($)</label><div class="ip"><span class="pfx">$</span><input type="number" id="be-vc" value="40" oninput="cBE()"></div></div>
+      <div class="field"><label>Expected Units / Month</label><input type="number" id="be-eu" value="500" oninput="cBE()"></div>
+    </div>
+    <div class="sgrid">
+      <div class="sbox"><div class="lbl">Break-even Units</div><div class="val" style="color:var(--a)" id="be-beu">0</div></div>
+      <div class="sbox"><div class="lbl">Break-even Revenue</div><div class="val" id="be-ber">$0</div></div>
+      <div class="sbox"><div class="lbl">Monthly Profit</div><div class="val" style="color:var(--g)" id="be-prof">$0</div></div>
+      <div class="sbox"><div class="lbl">Margin of Safety</div><div class="val" id="be-mos">0%</div></div>
+    </div>
+  </div>
+  <div class="card">
+    <canvas id="be-chart" width="300" height="175" style="width:100%;margin:1rem 0"></canvas>
+    <div style="display:flex;gap:12px;font-size:11px;color:var(--m);margin-bottom:1rem"><span style="color:var(--g)">━ Revenue</span><span style="color:var(--r)">━ Fixed Costs</span></div>
+    <div class="rrow"><span class="rk">Contribution margin</span><span class="rv" style="color:var(--a)" id="be-cm">$0</span></div>
+    <div class="rrow"><span class="rk">Gross margin %</span><span class="rv" style="color:var(--g)" id="be-gm">0%</span></div>
+    <div class="rrow"><span class="rk">Operating leverage</span><span class="rv" id="be-ol">0x</span></div>
+    <div class="insight-box" id="be-insights"></div>
+  </div>
+</div>
+
+<div class="calc-guide">
+  <div class="guide-toggle">
+    <div class="guide-toggle-title">📖 Break-even Analysis — When Does Your Business Profit?</div>
+  </div>
+  <div class="guide-body">
+<div class="guide-p">Break-even analysis answers a deceptively simple but critically important question for any business: how many units do I need to sell — or how much revenue do I need to generate — before I stop losing money and start making it? Understanding this number transforms pricing and cost decisions from guesswork into deliberate strategy.</div>
+
+<div class="guide-h3">The Core Formula</div>
+<div class="guide-formula">Break-even Units = Fixed Costs / (Selling Price − Variable Cost Per Unit)</div>
+<div class="guide-p">The denominator here — selling price minus variable cost — is called the contribution margin per unit, representing how much each individual sale contributes toward covering your fixed costs before any profit begins.</div>
+
+<div class="guide-h3">Worked Example: A Small Manufacturing Business</div>
+<div class="guide-p">A business makes a product with the following economics: fixed costs (rent, salaries, insurance) of $18,000/month, a selling price of $45 per unit, and variable cost (materials, packaging, direct labor) of $27 per unit.</div>
+<div class="guide-formula">Contribution Margin = $45 − $27 = $18 per unit<br>Break-even Units = $18,000 / $18 = 1,000 units/month<br>Break-even Revenue = 1,000 × $45 = $45,000/month</div>
+<div class="guide-p">This business needs to sell exactly 1,000 units monthly just to cover its costs — every unit sold below that number contributes to the loss, and every unit sold above it (since fixed costs are already covered) flows almost entirely to profit, since only the $27 variable cost applies to each additional unit beyond break-even.</div>
+
+<div class="guide-h3">How Pricing Changes Reshape Break-even</div>
+<table class="guide-table"><thead><tr><th>Selling Price</th><th>Contribution Margin</th><th>Break-even Units</th><th>Change vs Base Case</th></tr></thead><tbody>
+<tr><td>$40 (lower price)</td><td>$13</td><td>1,385 units</td><td>+38.5% more units needed</td></tr>
+<tr><td>$45 (base case)</td><td>$18</td><td>1,000 units</td><td>—</td></tr>
+<tr><td>$50 (higher price)</td><td>$23</td><td>783 units</td><td>−21.7% fewer units needed</td></tr>
+</tbody></table>
+<div class="guide-p">A seemingly modest $5 price change in either direction shifts break-even volume by a disproportionately large percentage, because the entire change flows directly through the thin contribution margin — this sensitivity is exactly why pricing decisions deserve far more analytical rigor than they typically receive in many small businesses.</div>
+
+<div class="guide-h3">Fixed vs Variable Costs: Getting the Classification Right</div>
+<table class="guide-table"><thead><tr><th>Cost Type</th><th>Definition</th><th>Examples</th></tr></thead><tbody>
+<tr><td>Fixed</td><td>Doesn't change with production/sales volume</td><td>Rent, salaried staff, insurance, loan payments, software subscriptions</td></tr>
+<tr><td>Variable</td><td>Scales directly with each unit produced or sold</td><td>Raw materials, packaging, sales commissions, payment processing fees</td></tr>
+<tr><td>Semi-Variable</td><td>Has both fixed and variable components</td><td>Utilities (base charge + usage), hourly staff with guaranteed minimum hours</td></tr>
+</tbody></table>
+<div class="guide-p">Misclassifying a cost (treating a semi-variable cost as purely fixed, for example) can meaningfully distort your break-even calculation, particularly for businesses where utilities or hourly labor represent a significant cost category.</div>
+
+<div class="guide-h3">Using Break-even for Strategic Decisions</div>
+<div class="guide-p">Break-even analysis becomes genuinely powerful when used to stress-test decisions before committing resources — modeling how break-even shifts if you hire an additional salaried employee (raising fixed costs), switch suppliers (changing variable costs), or run a promotional discount (changing price), all before the decision is actually made.</div>
+<div class="guide-tip">💡 Calculate break-even in both units and revenue dollars — unit break-even is more intuitive for production planning, while revenue break-even is more directly comparable to your accounting statements and useful for cash flow forecasting.</div>
+
+  </div>
+</div>
+
+<div class="faq-section">
+<div class="faq-section-title">❓ Frequently Asked Questions</div>
+<div class="faq-item">
+  <div class="faq-q" onclick="toggleFAQ(this)">
+    <span>What is break-even analysis?</span>
+    <span class="faq-icon">+</span>
+  </div>
+  <div class="faq-a">Break-even analysis finds the point where <strong>total revenue equals total costs</strong> — you’re making neither a profit nor a loss. Sales above break-even generate profit; below it, you’re losing money. It’s essential for pricing and business planning.</div>
+</div>
+<div class="faq-item">
+  <div class="faq-q" onclick="toggleFAQ(this)">
+    <span>What is the break-even formula?</span>
+    <span class="faq-icon">+</span>
+  </div>
+  <div class="faq-a"><span class="faq-formula">Break-even Units = Fixed Costs / (Selling Price − Variable Cost Per Unit)</span>If fixed costs are $10,000/month, you sell at $50, and variable cost is $20, your break-even is 10,000 / (50−20) = <strong>334 units/month</strong>.</div>
+</div>
+<div class="faq-item">
+  <div class="faq-q" onclick="toggleFAQ(this)">
+    <span>What is contribution margin?</span>
+    <span class="faq-icon">+</span>
+  </div>
+  <div class="faq-a"><span class="faq-formula">Contribution Margin = Selling Price − Variable Costs Per Unit</span>Contribution margin is the portion of each sale that covers fixed costs and then generates profit. The higher your contribution margin, the fewer units you need to break even.</div>
+</div>
+<div class="faq-item">
+  <div class="faq-q" onclick="toggleFAQ(this)">
+    <span>What are fixed vs variable costs?</span>
+    <span class="faq-icon">+</span>
+  </div>
+  <div class="faq-a"><strong>Fixed costs</strong> stay the same regardless of production volume (rent, salaries, insurance). <strong>Variable costs</strong> change with volume (materials, packaging, commissions). Understanding this distinction is the foundation of break-even analysis.</div>
+</div>
+<div class="faq-item">
+  <div class="faq-q" onclick="toggleFAQ(this)">
+    <span>How does break-even help with pricing decisions?</span>
+    <span class="faq-icon">+</span>
+  </div>
+  <div class="faq-a">By modeling different price points, break-even analysis shows the sales volume required to be profitable at each price. Raising prices reduces your break-even point. It quantifies the risk of pricing decisions before you make them.</div>
+</div>
+</div>
+
+
+</div>
+</div><!-- content -->
+<div class="site-footer">
+  <div class="footer-brand">
+    <div class="logo-mark" style="width:22px;height:22px;background:var(--a);border-radius:5px;display:flex;align-items:center;justify-content:center;color:#000;font-size:11px;font-weight:700">FC</div>
+    FinCalc
+  </div>
+  <div class="footer-links"><a href="index.html">All Calculators</a> · <a href="about.html">About</a> · <a href="contact.html">Contact</a> · <a href="privacy.html">Privacy</a> · <a href="terms.html">Terms</a></div>
+  <div class="footer-copy">© 2025 FinCalc · Free Financial Calculators</div>
+</div>
+<script src="app.js"></script>
+<script>initPage('breakeven');</script>
+</body>
+</html>

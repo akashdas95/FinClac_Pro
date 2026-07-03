@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ETF Growth Calculator | FinCalc Pro</title>
+<meta name="description" content="Estimate long-term ETF portfolio growth with monthly contributions, expense ratio, and compounding. Free ETF growth calculator.">
+<link rel="canonical" href="https://yourdomain.com/etf.html">
+<meta name="robots" content="index, follow">
+<meta property="og:type" content="website">
+<meta property="og:title" content="ETF Growth Calculator | FinCalc Pro">
+<meta property="og:description" content="Estimate long-term ETF portfolio growth with monthly contributions, expense ratio, and compounding. Free ETF growth calculator.">
+<meta property="og:url" content="https://yourdomain.com/etf.html">
+<meta property="og:site_name" content="FinCalc Pro">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="ETF Growth Calculator | FinCalc Pro">
+<meta name="twitter:description" content="Estimate long-term ETF portfolio growth with monthly contributions, expense ratio, and compounding. Free ETF growth calculator.">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<div class="topbar">
+  <a class="logo" href="index.html"><div class="logo-mark">FC</div>FinCalc</a>
+  <div class="searchbox">
+    <svg width="14" height="14" fill="none" stroke="#6B7A8D" stroke-width="2" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+    <input id="srch" placeholder="Search 40 calculators..." oninput="doSearch()" onkeydown="if(event.key==='Enter')goSearch()">
+  </div>
+</div>
+<div class="nav">
+  <button class="ntab on" onclick="go('home',this)">🏠 Home</button>
+  <button class="ntab" onclick="go('cagr',this)">📐 CAGR</button>
+  <button class="ntab" onclick="go('xirr',this)">📅 XIRR</button>
+  <button class="ntab" onclick="go('drip',this)">💧 DRIP</button>
+  <button class="ntab" onclick="go('etf',this)">🗂️ ETF Growth</button>
+  <button class="ntab" onclick="go('dcf',this)">🏦 DCF Valuation</button>
+  <button class="ntab" onclick="go('debtcomp',this)">❄️ Snowball vs Avalanche</button>
+  <button class="ntab" onclick="go('rentalprop',this)">🏡 Rental Property</button>
+  <button class="ntab" onclick="go('burnrate',this)">🔥 Burn Rate</button>
+  <button class="ntab" onclick="go('pricing',this)">🏷️ Pricing</button>
+  <button class="ntab" onclick="go('equity',this)">📐 Equity Dilution</button>
+  <button class="ntab" onclick="go('revenue',this)">📊 Revenue Forecast</button>
+  <button class="ntab" onclick="go('loan',this)">🏦 Loan/EMI</button>
+  <button class="ntab" onclick="go('invest',this)">📈 SIP/Investment</button>
+  <button class="ntab" onclick="go('tax',this)">🧾 Tax</button>
+  <button class="ntab" onclick="go('mortgage',this)">🏠 Mortgage</button>
+  <button class="ntab" onclick="go('mortcomp',this)">⚖️ Mtg Compare</button>
+  <button class="ntab" onclick="go('savings',this)">🏛️ Savings</button>
+  <button class="ntab" onclick="go('stock',this)">📉 Stock P&amp;L</button>
+  <button class="ntab" onclick="go('retirement',this)">👴 Retirement</button>
+  <button class="ntab" onclick="go('debt',this)">💳 Debt Payoff</button>
+  <button class="ntab" onclick="go('rental',this)">🏘️ Rental Yield</button>
+  <button class="ntab" onclick="go('cashflow',this)">💵 Cash Flow</button>
+  <button class="ntab" onclick="go('breakeven',this)">📊 Break-even</button>
+  <button class="ntab" onclick="go('savingsgoal',this)">🎯 Savings Goal</button>
+  <button class="ntab" onclick="go('emergencyfund',this)">🛡️ Emergency Fund</button>
+  <button class="ntab" onclick="go('healthscore',this)">💯 Health Score</button>
+  <button class="ntab" onclick="go('currency',this)">💱 Currency</button>
+  <button class="ntab" onclick="go('scientific',this)">🔬 Scientific</button>
+</div>
+<div class="content">
+<div id="etf" class="panel on">
+<button class="back-btn" onclick="go('home',null)">← Back to Home</button>
+<div class="calc-links"><span class="calc-links-label">🔗 Related</span><button class="calc-link-btn" onclick="go('cagr',null)">📐 CAGR</button><button class="calc-link-btn" onclick="go('invest',null)">📈 Investment</button><button class="calc-link-btn" onclick="go('drip',null)">💧 DRIP</button><button class="calc-link-btn" onclick="go('allocation',null)">🥧 Asset Allocation</button><button class="calc-link-btn" onclick="go('dcf',null)">🏦 Stock DCF</button></div>
+
+
+<div class="two">
+  <div class="card">
+    <div class="card-title">ETF Growth Calculator</div>
+    <div class="g2">
+      <div class="field"><label>Initial Investment ($)</label><div class="ip"><span class="pfx">$</span><input type="number" id="et-init" value="10000" oninput="calcETF()"></div></div>
+      <div class="field"><label>Monthly Contribution ($)</label><div class="ip"><span class="pfx">$</span><input type="number" id="et-monthly" value="500" oninput="calcETF()"></div></div>
+      <div class="field"><label>Investment Period (years)</label><input type="number" id="et-years" value="20" oninput="calcETF()"></div>
+      <div class="field"><label>Expense Ratio (%)</label><input type="number" id="et-exp" value="0.03" step="0.01" oninput="calcETF()"></div>
+    </div>
+    <div id="et-results" style="margin-top:1rem"></div>
+    <div class="rrow" style="margin-top:.5rem"><span class="rk">Total contributed</span><span class="rv" id="et-invested">$0</span></div>
+    <div class="rrow"><span class="rk">Expense drag (vs 0% fee)</span><span class="rv" style="color:var(--r)" id="et-drag">$0</span></div>
+  </div>
+  <div class="card">
+    <div class="card-title">ETF Comparison Chart</div>
+    <canvas id="et-chart" width="300" height="200" style="width:100%;margin:.5rem 0"></canvas>
+    <div id="et-legend" style="display:flex;flex-wrap:wrap;gap:6px 14px;margin-top:8px;font-size:11px"></div>
+    <div class="insight-box" id="et-insights"></div>
+  </div>
+</div>
+
+<div class="calc-guide">
+  <div class="guide-toggle">
+    <div class="guide-toggle-title">📖 ETF Growth Calculator — Understanding ETFs</div>
+  </div>
+  <div class="guide-body">
+<div class="guide-p">An ETF (Exchange-Traded Fund) bundles dozens, hundreds, or sometimes thousands of individual stocks or bonds into a single security that trades on an exchange exactly like an individual share. For most long-term investors, ETFs have become the default building block of a portfolio — not because they're exciting, but because they solve diversification and cost problems that plagued investors for decades before ETFs existed.</div>
+
+<div class="guide-h3">Why Diversification Matters: The Math of Risk Reduction</div>
+<div class="guide-p">Owning a single stock means your entire outcome depends on one company's fortunes — a single bad earnings report, lawsuit, or product failure can crater your position overnight. Owning a broad ETF spreads that risk across hundreds of companies, so a problem at any single company barely moves the needle. This doesn't eliminate market risk (if the entire market falls, your ETF falls too) but it eliminates company-specific risk almost entirely, which historically accounts for a large share of the total risk an individual stock-picker is exposed to.</div>
+
+<div class="guide-h3">The Expense Ratio: A Small Number With a Huge Long-Term Impact</div>
+<div class="guide-formula">Annual Fee Cost = Investment Value × Expense Ratio%</div>
+<div class="guide-p">An expense ratio of 0.03% (typical of a broad index ETF like VTI) on a $100,000 portfolio costs just $30 per year. An actively managed mutual fund charging 1.0% on the same $100,000 costs $1,000 per year — and that gap compounds devastatingly over time because the fee is deducted before your money has a chance to grow.</div>
+<div class="guide-h3">Worked Example: 0.03% vs 1.0% Over 30 Years</div>
+<table class="guide-table"><thead><tr><th>Scenario</th><th>Ending Value After 30 Years</th></tr></thead><tbody>
+<tr><td>$100,000 at 10% gross return, 0.03% fee</td><td>~$1,712,000</td></tr>
+<tr><td>$100,000 at 10% gross return, 1.0% fee</td><td>~$1,326,000</td></tr>
+</tbody></table>
+<div class="guide-p">That single percentage point of annual fee costs nearly $386,000 in lost wealth over three decades on this example — not because the fee itself is large each year, but because it permanently reduces the base amount that gets to compound every single year going forward.</div>
+
+<div class="guide-h3">Popular ETFs and What They Actually Track</div>
+<table class="guide-table"><thead><tr><th>Ticker</th><th>Tracks</th><th>Character</th></tr></thead><tbody>
+<tr><td>SPY / VOO</td><td>S&amp;P 500 (500 largest US companies)</td><td>Large-cap, broad US exposure</td></tr>
+<tr><td>VTI</td><td>Total US stock market (3,000+ companies)</td><td>Includes small &amp; mid-cap, most diversified US option</td></tr>
+<tr><td>QQQ</td><td>NASDAQ-100</td><td>Heavily weighted toward technology, higher volatility</td></tr>
+<tr><td>VXUS</td><td>International stocks ex-US</td><td>Geographic diversification outside the US</td></tr>
+<tr><td>BND / AGG</td><td>US investment-grade bonds</td><td>Lower volatility, income-focused, portfolio ballast</td></tr>
+</tbody></table>
+
+<div class="guide-h3">Lump Sum vs Monthly Contributions: What the Data Shows</div>
+<div class="guide-p">A frequently debated question is whether to invest a large sum all at once or spread it out monthly (dollar-cost averaging). Historical backtests on the S&amp;P 500 consistently show that investing a lump sum immediately outperforms spreading it out gradually roughly two-thirds of the time, simply because markets trend upward more often than they fall — time in the market beats timing the market. That said, dollar-cost averaging via monthly contributions remains the practical, psychologically easier approach for almost everyone, since most people are investing out of regular salary income rather than sitting on a windfall.</div>
+
+<div class="guide-h3">Compounding in Action: A Realistic Savings Plan</div>
+<div class="guide-p">Investing $500 per month into a broad market ETF averaging 10% annual return for 30 years results in total contributions of $180,000 — but an ending balance of over $1,000,000. The roughly $820,000 difference is pure compound growth, the majority of which accumulates in the final decade as the snowball effect accelerates.</div>
+<div class="guide-tip">💡 Reinvesting dividends automatically (most brokerages offer this as a free toggle) is essential to capturing an ETF's full historical return — the commonly cited "S&amp;P 500 averages 10%" figure assumes dividends were reinvested, not taken as cash.</div>
+
+  </div>
+</div>
+
+<div class="faq-section">
+<div class="faq-section-title">❓ Frequently Asked Questions</div>
+<div class="faq-item">
+  <div class="faq-q" onclick="toggleFAQ(this)">
+    <span>What is an ETF?</span>
+    <span class="faq-icon">+</span>
+  </div>
+  <div class="faq-a">An ETF (Exchange-Traded Fund) is a basket of securities that trades on an exchange just like a single share. It offers instant diversification at very low cost, making it ideal for most long-term investors.</div>
+</div>
+<div class="faq-item">
+  <div class="faq-q" onclick="toggleFAQ(this)">
+    <span>What is an expense ratio?</span>
+    <span class="faq-icon">+</span>
+  </div>
+  <div class="faq-a"><span class="faq-formula">Annual Cost = Investment × Expense Ratio%</span>A $100,000 investment in an ETF with a 0.03% expense ratio costs just $30/year. Over 30 years at 10% returns, the difference between a 0.03% and 1% fee is over <strong>$400,000</strong> in lost wealth.</div>
+</div>
+<div class="faq-item">
+  <div class="faq-q" onclick="toggleFAQ(this)">
+    <span>What is the difference between SPY, VTI, and QQQ?</span>
+    <span class="faq-icon">+</span>
+  </div>
+  <div class="faq-a"><strong>SPY</strong> tracks the S&amp;P 500 (500 large US companies). <strong>VTI</strong> tracks the entire US stock market. <strong>QQQ</strong> tracks the NASDAQ-100, heavily weighted toward tech. VTI offers the broadest diversification; QQQ has higher potential but more volatility.</div>
+</div>
+<div class="faq-item">
+  <div class="faq-q" onclick="toggleFAQ(this)">
+    <span>Is it better to invest a lump sum or monthly in ETFs?</span>
+    <span class="faq-icon">+</span>
+  </div>
+  <div class="faq-a">Research shows lump-sum investing beats dollar-cost averaging about 2/3 of the time because markets trend upward. However, monthly investing is practical for salaried investors and removes the emotional burden of timing the market.</div>
+</div>
+<div class="faq-item">
+  <div class="faq-q" onclick="toggleFAQ(this)">
+    <span>How does ETF compounding work?</span>
+    <span class="faq-icon">+</span>
+  </div>
+  <div class="faq-a">Your returns are earned on the growing balance, not just the original amount. $500/month into an ETF returning 10% for 30 years turns $180,000 of contributions into over <strong>$1 million</strong>, with $820,000 coming purely from compound growth.</div>
+</div>
+</div>
+
+
+</div>
+</div><!-- content -->
+<div class="site-footer">
+  <div class="footer-brand">
+    <div class="logo-mark" style="width:22px;height:22px;background:var(--a);border-radius:5px;display:flex;align-items:center;justify-content:center;color:#000;font-size:11px;font-weight:700">FC</div>
+    FinCalc
+  </div>
+  <div class="footer-links"><a href="index.html">All Calculators</a> · <a href="about.html">About</a> · <a href="contact.html">Contact</a> · <a href="privacy.html">Privacy</a> · <a href="terms.html">Terms</a></div>
+  <div class="footer-copy">© 2025 FinCalc · Free Financial Calculators</div>
+</div>
+<script src="app.js"></script>
+<script>initPage('etf');</script>
+</body>
+</html>

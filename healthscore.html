@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Financial Health Score Calculator | FinCalc Pro</title>
+<meta name="description" content="Get a 0-100 financial health score based on savings rate, debt-to-income, and emergency fund coverage. Free financial health check.">
+<link rel="canonical" href="https://yourdomain.com/healthscore.html">
+<meta name="robots" content="index, follow">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Financial Health Score Calculator | FinCalc Pro">
+<meta property="og:description" content="Get a 0-100 financial health score based on savings rate, debt-to-income, and emergency fund coverage. Free financial health check.">
+<meta property="og:url" content="https://yourdomain.com/healthscore.html">
+<meta property="og:site_name" content="FinCalc Pro">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Financial Health Score Calculator | FinCalc Pro">
+<meta name="twitter:description" content="Get a 0-100 financial health score based on savings rate, debt-to-income, and emergency fund coverage. Free financial health check.">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<div class="topbar">
+  <a class="logo" href="index.html"><div class="logo-mark">FC</div>FinCalc</a>
+  <div class="searchbox">
+    <svg width="14" height="14" fill="none" stroke="#6B7A8D" stroke-width="2" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+    <input id="srch" placeholder="Search 40 calculators..." oninput="doSearch()" onkeydown="if(event.key==='Enter')goSearch()">
+  </div>
+</div>
+<div class="nav">
+  <button class="ntab on" onclick="go('home',this)">🏠 Home</button>
+  <button class="ntab" onclick="go('cagr',this)">📐 CAGR</button>
+  <button class="ntab" onclick="go('xirr',this)">📅 XIRR</button>
+  <button class="ntab" onclick="go('drip',this)">💧 DRIP</button>
+  <button class="ntab" onclick="go('etf',this)">🗂️ ETF Growth</button>
+  <button class="ntab" onclick="go('dcf',this)">🏦 DCF Valuation</button>
+  <button class="ntab" onclick="go('debtcomp',this)">❄️ Snowball vs Avalanche</button>
+  <button class="ntab" onclick="go('rentalprop',this)">🏡 Rental Property</button>
+  <button class="ntab" onclick="go('burnrate',this)">🔥 Burn Rate</button>
+  <button class="ntab" onclick="go('pricing',this)">🏷️ Pricing</button>
+  <button class="ntab" onclick="go('equity',this)">📐 Equity Dilution</button>
+  <button class="ntab" onclick="go('revenue',this)">📊 Revenue Forecast</button>
+  <button class="ntab" onclick="go('loan',this)">🏦 Loan/EMI</button>
+  <button class="ntab" onclick="go('invest',this)">📈 SIP/Investment</button>
+  <button class="ntab" onclick="go('tax',this)">🧾 Tax</button>
+  <button class="ntab" onclick="go('mortgage',this)">🏠 Mortgage</button>
+  <button class="ntab" onclick="go('mortcomp',this)">⚖️ Mtg Compare</button>
+  <button class="ntab" onclick="go('savings',this)">🏛️ Savings</button>
+  <button class="ntab" onclick="go('stock',this)">📉 Stock P&amp;L</button>
+  <button class="ntab" onclick="go('retirement',this)">👴 Retirement</button>
+  <button class="ntab" onclick="go('debt',this)">💳 Debt Payoff</button>
+  <button class="ntab" onclick="go('rental',this)">🏘️ Rental Yield</button>
+  <button class="ntab" onclick="go('cashflow',this)">💵 Cash Flow</button>
+  <button class="ntab" onclick="go('breakeven',this)">📊 Break-even</button>
+  <button class="ntab" onclick="go('savingsgoal',this)">🎯 Savings Goal</button>
+  <button class="ntab" onclick="go('emergencyfund',this)">🛡️ Emergency Fund</button>
+  <button class="ntab" onclick="go('healthscore',this)">💯 Health Score</button>
+  <button class="ntab" onclick="go('currency',this)">💱 Currency</button>
+  <button class="ntab" onclick="go('scientific',this)">🔬 Scientific</button>
+</div>
+<div class="content">
+<div id="healthscore" class="panel on">
+<button class="back-btn" onclick="go('home',null)">← Back to Home</button>
+<div class="calc-links"><span class="calc-links-label">🔗 Related</span><button class="calc-link-btn" onclick="go('cashflow',null)">💵 Cash Flow</button><button class="calc-link-btn" onclick="go('emergencyfund',null)">🛡️ Emergency Fund</button><button class="calc-link-btn" onclick="go('debt',null)">💳 Debt Payoff</button><button class="calc-link-btn" onclick="go('retirement',null)">👴 Retirement</button><button class="calc-link-btn" onclick="go('savingsgoal',null)">🎯 Savings Goal</button></div>
+
+
+<div style="margin-bottom:1rem"><div style="font-size:16px;font-weight:500;margin-bottom:4px">Financial Health Score</div><div style="font-size:12px;color:var(--m)">Answer 8 key questions to get your personal finance score out of 100</div></div>
+<div class="two-eq" style="margin-bottom:16px">
+  <div class="card">
+    <div class="card-title">Income & Expenses</div>
+    <div class="field"><label>Monthly Gross Income ($)</label><div class="ip"><span class="pfx">$</span><input type="number" id="hs-income" value="6000" oninput="cHealthScore()"></div></div>
+    <div class="field"><label>Monthly Total Expenses ($)</label><div class="ip"><span class="pfx">$</span><input type="number" id="hs-expenses" value="4200" oninput="cHealthScore()"></div></div>
+    <div class="field"><label>Monthly Debt Payments ($)</label><div class="ip"><span class="pfx">$</span><input type="number" id="hs-debt-pay" value="600" oninput="cHealthScore()"></div></div>
+    <div class="field"><label>Emergency Fund (months of expenses)</label>
+      <select id="hs-ef" onchange="cHealthScore()">
+        <option value="0">None</option>
+        <option value="1">Less than 1 month</option>
+        <option value="2">1–2 months</option>
+        <option value="3" selected>3 months</option>
+        <option value="6">4–6 months</option>
+        <option value="9">7–12 months</option>
+        <option value="12">More than 12 months</option>
+      </select>
+    </div>
+  </div>
+  <div class="card">
+    <div class="card-title">Savings & Debt</div>
+    <div class="field"><label>Monthly Retirement Savings ($)</label><div class="ip"><span class="pfx">$</span><input type="number" id="hs-retire-save" value="400" oninput="cHealthScore()"></div></div>
+    <div class="field"><label>Total Outstanding Debt ($)</label><div class="ip"><span class="pfx">$</span><input type="number" id="hs-total-debt" value="25000" oninput="cHealthScore()"></div></div>
+    <div class="field"><label>Total Net Worth / Assets ($)</label><div class="ip"><span class="pfx">$</span><input type="number" id="hs-networth" value="40000" oninput="cHealthScore()"></div></div>
+    <div class="field"><label>Do you have life/health insurance?</label>
+      <select id="hs-insurance" onchange="cHealthScore()">
+        <option value="0">No insurance</option>
+        <option value="1">Health only</option>
+        <option value="2" selected>Health + Life</option>
+        <option value="3">Full coverage</option>
+      </select>
+    </div>
+  </div>
+</div>
+<div class="two-eq">
+  <div class="card">
+    <div class="card-title">Your Financial Health Score</div>
+    <!-- Big score circle -->
+    <div style="display:flex;flex-direction:column;align-items:center;padding:1.5rem 0 1rem">
+      <div style="position:relative;width:160px;height:160px">
+        <canvas id="hs-gauge" width="160" height="160"></canvas>
+        <div style="position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center">
+          <div style="font-size:40px;font-family:var(--mo);font-weight:700" id="hs-score-num">0</div>
+          <div style="font-size:11px;color:var(--m)">out of 100</div>
+        </div>
+      </div>
+      <div style="font-size:18px;font-weight:600;margin-top:.75rem" id="hs-grade">—</div>
+      <div style="font-size:12px;color:var(--m);margin-top:4px" id="hs-grade-desc">—</div>
+    </div>
+    <!-- Score breakdown bars -->
+    <div id="hs-breakdown"></div>
+  </div>
+  <div class="card">
+    <div class="card-title">Key Ratios & Recommendations</div>
+    <div id="hs-ratios" style="margin-bottom:1rem"></div>
+    <div class="insight-box" id="hs-tips"></div>
+  </div>
+</div>
+
+<div class="calc-guide">
+  <div class="guide-toggle">
+    <div class="guide-toggle-title">📖 Financial Health Score — What It Measures</div>
+  </div>
+  <div class="guide-body">
+<div class="guide-p">Just as a credit score condenses your borrowing history into a single comparable number, a financial health score condenses your overall financial position — savings behavior, debt burden, safety net, and progress toward long-term goals — into one number that's easy to track over time and compare against general benchmarks.</div>
+
+<div class="guide-h3">The Components Behind the Score</div>
+<table class="guide-table"><thead><tr><th>Component</th><th>What It Measures</th><th>Why It Matters</th></tr></thead><tbody>
+<tr><td>Savings Rate</td><td>Percentage of gross income saved/invested</td><td>The single strongest predictor of long-term wealth accumulation — more impactful than investment returns for most people in the accumulation phase</td></tr>
+<tr><td>Debt-to-Income Ratio</td><td>Monthly debt payments relative to monthly income</td><td>High ratios limit financial flexibility and borrowing capacity for major life goals (homes, business)</td></tr>
+<tr><td>Emergency Fund Coverage</td><td>Months of expenses held in liquid savings</td><td>Determines resilience against income disruption without resorting to debt</td></tr>
+<tr><td>Net Worth Trajectory</td><td>Assets minus liabilities, tracked over time</td><td>The ultimate scorecard — are you actually getting wealthier year over year</td></tr>
+</tbody></table>
+
+<div class="guide-h3">Benchmarking Your Savings Rate</div>
+<div class="guide-formula">Savings Rate = (Retirement Contributions + Other Savings) / Gross Income × 100%</div>
+<table class="guide-table"><thead><tr><th>Savings Rate</th><th>General Assessment</th></tr></thead><tbody>
+<tr><td>Below 10%</td><td>Below typical recommendations — likely to fall short of standard retirement targets</td></tr>
+<tr><td>15-20%</td><td>Solid, broadly recommended baseline for most income levels</td></tr>
+<tr><td>25-40%</td><td>Strong — common among those pursuing earlier retirement or aggressive wealth-building goals</td></tr>
+<tr><td>40%+</td><td>Exceptional — typical of FIRE (Financial Independence, Retire Early) movement adherents</td></tr>
+</tbody></table>
+
+<div class="guide-h3">Benchmarking Debt-to-Income Ratio</div>
+<div class="guide-formula">Debt-to-Income Ratio = Total Monthly Debt Payments / Gross Monthly Income × 100%</div>
+<table class="guide-table"><thead><tr><th>DTI Ratio</th><th>Assessment</th><th>Lending Implication</th></tr></thead><tbody>
+<tr><td>Below 20%</td><td>Excellent</td><td>Strong qualifying position for most loans</td></tr>
+<tr><td>20-36%</td><td>Healthy</td><td>Generally within standard mortgage lending guidelines</td></tr>
+<tr><td>36-43%</td><td>Elevated</td><td>May limit borrowing options or require compensating factors</td></tr>
+<tr><td>Above 43%</td><td>Concerning</td><td>Many conventional lenders consider this a red flag for new credit</td></tr>
+</tbody></table>
+
+<div class="guide-h3">Worked Example: Composite Scoring</div>
+<div class="guide-p">Consider someone earning $80,000/year (≈$6,667/month gross), saving 18% of income, carrying $1,400/month in total debt payments, and holding 4 months of expenses in an emergency fund.</div>
+<table class="guide-table"><thead><tr><th>Component</th><th>Their Number</th><th>Assessment</th></tr></thead><tbody>
+<tr><td>Savings Rate</td><td>18%</td><td>Solid, slightly above the common 15-20% baseline recommendation</td></tr>
+<tr><td>Debt-to-Income</td><td>21%</td><td>Healthy, well within typical lending comfort zones</td></tr>
+<tr><td>Emergency Fund</td><td>4 months</td><td>Approaching but not yet at the standard 6-month target</td></tr>
+</tbody></table>
+<div class="guide-p">This person is in fundamentally solid shape across the board, with the clearest remaining improvement area being to extend their emergency fund from 4 to 6 months — a specific, achievable next step rather than a vague "do better everywhere" conclusion.</div>
+
+<div class="guide-h3">Why a Single Score Beats Tracking Metrics in Isolation</div>
+<div class="guide-p">Looking at any one of these metrics alone can be misleading — someone with an excellent savings rate but no emergency fund is one unexpected expense away from going into debt despite their strong savings discipline. A composite score forces a more holistic view, surfacing the specific weak link that, once addressed, improves overall financial resilience the most.</div>
+<div class="guide-tip">💡 Recalculate your financial health score quarterly rather than constantly — financial habits and their effects play out over months, not days, and frequent recalculation mostly just introduces noise rather than meaningful signal about genuine progress.</div>
+
+  </div>
+</div>
+
+<div class="faq-section">
+<div class="faq-section-title">❓ Frequently Asked Questions</div>
+<div class="faq-item">
+  <div class="faq-q" onclick="toggleFAQ(this)">
+    <span>What is a financial health score?</span>
+    <span class="faq-icon">+</span>
+  </div>
+  <div class="faq-a">A financial health score is a single number (0–100) measuring the overall strength of your finances across multiple dimensions — savings rate, debt load, emergency fund, retirement readiness, net worth, and insurance coverage.</div>
+</div>
+<div class="faq-item">
+  <div class="faq-q" onclick="toggleFAQ(this)">
+    <span>What is a good savings rate?</span>
+    <span class="faq-icon">+</span>
+  </div>
+  <div class="faq-a">Financial guidelines recommend saving at least <strong>20% of your gross income</strong>. This includes retirement contributions, emergency fund additions, and other savings. Those pursuing FIRE (Financial Independence) often aim for 40–60%.</div>
+</div>
+<div class="faq-item">
+  <div class="faq-q" onclick="toggleFAQ(this)">
+    <span>What is a healthy debt-to-income ratio?</span>
+    <span class="faq-icon">+</span>
+  </div>
+  <div class="faq-a"><span class="faq-formula">Debt-to-Income Ratio = Monthly Debt Payments / Gross Monthly Income × 100%</span>Lenders consider <strong>below 36%</strong> healthy. <strong>Below 20%</strong> is excellent. <strong>Above 50%</strong> indicates financial stress and affects your ability to qualify for loans.</div>
+</div>
+<div class="faq-item">
+  <div class="faq-q" onclick="toggleFAQ(this)">
+    <span>Why is emergency fund coverage important for health score?</span>
+    <span class="faq-icon">+</span>
+  </div>
+  <div class="faq-a">An emergency fund is your financial immune system. Without it, any unexpected expense forces you into debt or liquidating investments. Covering 3–6 months of expenses protects all your other financial goals from being derailed.</div>
+</div>
+<div class="faq-item">
+  <div class="faq-q" onclick="toggleFAQ(this)">
+    <span>How can I quickly improve my financial health score?</span>
+    <span class="faq-icon">+</span>
+  </div>
+  <div class="faq-a">Focus on the highest-weight areas: <strong>Savings rate (25%)</strong> — automate transfers on payday. <strong>Debt-to-income (20%)</strong> — pay down high-rate debt aggressively. <strong>Emergency fund (20%)</strong> — open a HYSA and build to 3 months. Small improvements across these three move your score significantly.</div>
+</div>
+</div>
+
+
+</div>
+</div><!-- content -->
+<div class="site-footer">
+  <div class="footer-brand">
+    <div class="logo-mark" style="width:22px;height:22px;background:var(--a);border-radius:5px;display:flex;align-items:center;justify-content:center;color:#000;font-size:11px;font-weight:700">FC</div>
+    FinCalc
+  </div>
+  <div class="footer-links"><a href="index.html">All Calculators</a> · <a href="about.html">About</a> · <a href="contact.html">Contact</a> · <a href="privacy.html">Privacy</a> · <a href="terms.html">Terms</a></div>
+  <div class="footer-copy">© 2025 FinCalc · Free Financial Calculators</div>
+</div>
+<script src="app.js"></script>
+<script>initPage('healthscore');</script>
+</body>
+</html>

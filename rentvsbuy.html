@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Rent vs Buy Calculator | FinCalc Pro</title>
+<meta name="description" content="Compare your projected net worth if you rent vs buy a home, including opportunity cost, appreciation, and the breakeven year. Free rent vs buy calculator.">
+<link rel="canonical" href="https://yourdomain.com/rentvsbuy.html">
+<meta name="robots" content="index, follow">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Rent vs Buy Calculator | FinCalc Pro">
+<meta property="og:description" content="Compare your projected net worth if you rent vs buy a home, including opportunity cost, appreciation, and the breakeven year. Free rent vs buy calculator.">
+<meta property="og:url" content="https://yourdomain.com/rentvsbuy.html">
+<meta property="og:site_name" content="FinCalc Pro">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Rent vs Buy Calculator | FinCalc Pro">
+<meta name="twitter:description" content="Compare your projected net worth if you rent vs buy a home, including opportunity cost, appreciation, and the breakeven year. Free rent vs buy calculator.">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<div class="topbar">
+  <a class="logo" href="index.html"><div class="logo-mark">FC</div>FinCalc</a>
+  <div class="searchbox">
+    <svg width="14" height="14" fill="none" stroke="#6B7A8D" stroke-width="2" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+    <input id="srch" placeholder="Search 40 calculators..." oninput="doSearch()" onkeydown="if(event.key==='Enter')goSearch()">
+  </div>
+</div>
+<div class="nav">
+  <button class="ntab on" onclick="go('home',this)">🏠 Home</button>
+  <button class="ntab" onclick="go('cagr',this)">📐 CAGR</button>
+  <button class="ntab" onclick="go('xirr',this)">📅 XIRR</button>
+  <button class="ntab" onclick="go('drip',this)">💧 DRIP</button>
+  <button class="ntab" onclick="go('etf',this)">🗂️ ETF Growth</button>
+  <button class="ntab" onclick="go('dcf',this)">🏦 DCF Valuation</button>
+  <button class="ntab" onclick="go('debtcomp',this)">❄️ Snowball vs Avalanche</button>
+  <button class="ntab" onclick="go('rentalprop',this)">🏡 Rental Property</button>
+  <button class="ntab" onclick="go('burnrate',this)">🔥 Burn Rate</button>
+  <button class="ntab" onclick="go('pricing',this)">🏷️ Pricing</button>
+  <button class="ntab" onclick="go('equity',this)">📐 Equity Dilution</button>
+  <button class="ntab" onclick="go('revenue',this)">📊 Revenue Forecast</button>
+  <button class="ntab" onclick="go('loan',this)">🏦 Loan/EMI</button>
+  <button class="ntab" onclick="go('invest',this)">📈 SIP/Investment</button>
+  <button class="ntab" onclick="go('tax',this)">🧾 Tax</button>
+  <button class="ntab" onclick="go('mortgage',this)">🏠 Mortgage</button>
+  <button class="ntab" onclick="go('mortcomp',this)">⚖️ Mtg Compare</button>
+  <button class="ntab" onclick="go('savings',this)">🏛️ Savings</button>
+  <button class="ntab" onclick="go('stock',this)">📉 Stock P&amp;L</button>
+  <button class="ntab" onclick="go('retirement',this)">👴 Retirement</button>
+  <button class="ntab" onclick="go('debt',this)">💳 Debt Payoff</button>
+  <button class="ntab" onclick="go('rental',this)">🏘️ Rental Yield</button>
+  <button class="ntab" onclick="go('cashflow',this)">💵 Cash Flow</button>
+  <button class="ntab" onclick="go('breakeven',this)">📊 Break-even</button>
+  <button class="ntab" onclick="go('savingsgoal',this)">🎯 Savings Goal</button>
+  <button class="ntab" onclick="go('emergencyfund',this)">🛡️ Emergency Fund</button>
+  <button class="ntab" onclick="go('healthscore',this)">💯 Health Score</button>
+  <button class="ntab" onclick="go('currency',this)">💱 Currency</button>
+  <button class="ntab" onclick="go('scientific',this)">🔬 Scientific</button>
+</div>
+<div class="content">
+<div id="rentvsbuy" class="panel on">
+<button class="back-btn" onclick="go('home',null)">← Back to Home</button>
+<div class="calc-links"><span class="calc-links-label">🔗 Related</span><button class="calc-link-btn" onclick="go('mortgage',null)">🏠 Mortgage</button><button class="calc-link-btn" onclick="go('mortcomp',null)">⚖️ Mortgage Comparison</button><button class="calc-link-btn" onclick="go('rental',null)">🏘️ Rental Yield</button><button class="calc-link-btn" onclick="go('allocation',null)">🥧 Asset Allocation</button></div>
+
+
+<div class="two">
+  <div class="card">
+    <div class="card-title">Rent vs Buy Calculator</div>
+    <div class="g2">
+      <div class="field"><label>Home Price ($)</label><div class="ip"><span class="pfx">$</span><input type="number" id="rb-price" value="400000" oninput="cRentVsBuy()"></div></div>
+      <div class="field"><label>Down Payment (%)</label><input type="number" id="rb-down" value="20" oninput="cRentVsBuy()"></div>
+      <div class="field"><label>Mortgage Rate (%)</label><input type="number" id="rb-rate" value="6.5" step="0.1" oninput="cRentVsBuy()"></div>
+      <div class="field"><label>Mortgage Term (years)</label><input type="number" id="rb-term" value="30" oninput="cRentVsBuy()"></div>
+      <div class="field"><label>Monthly Rent ($)</label><div class="ip"><span class="pfx">$</span><input type="number" id="rb-rent" value="2200" oninput="cRentVsBuy()"></div></div>
+      <div class="field"><label>Years to Compare</label><input type="number" id="rb-years" value="15" oninput="cRentVsBuy()"></div>
+    </div>
+    <div class="g2">
+      <div class="field"><label>Home Appreciation (%/yr)</label><input type="number" id="rb-apprec" value="4" step="0.5" oninput="cRentVsBuy()"></div>
+      <div class="field"><label>Rent Growth (%/yr)</label><input type="number" id="rb-rentgrowth" value="3" step="0.5" oninput="cRentVsBuy()"></div>
+      <div class="field"><label>Investment Return (%/yr)</label><input type="number" id="rb-invest" value="7" step="0.5" oninput="cRentVsBuy()"></div>
+      <div class="field"><label>Property Tax (%/yr)</label><input type="number" id="rb-tax" value="1.2" step="0.1" oninput="cRentVsBuy()"></div>
+      <div class="field"><label>Maintenance (%/yr)</label><input type="number" id="rb-maint" value="1" step="0.1" oninput="cRentVsBuy()"></div>
+      <div class="field"><label>Annual Insurance ($)</label><div class="ip"><span class="pfx">$</span><input type="number" id="rb-ins" value="1500" oninput="cRentVsBuy()"></div></div>
+      <div class="field"><label>Closing Costs (%)</label><input type="number" id="rb-closing" value="3" step="0.5" oninput="cRentVsBuy()"></div>
+      <div class="field"><label>Selling Costs (%)</label><input type="number" id="rb-selling" value="6" step="0.5" oninput="cRentVsBuy()"></div>
+    </div>
+    <div class="sgrid">
+      <div class="sbox"><div class="lbl">Monthly Mortgage P&amp;I</div><div class="val" style="color:var(--a)" id="rb-emi">$0</div></div>
+      <div class="sbox"><div class="lbl">Total Monthly Buy Cost</div><div class="val" style="color:var(--r)" id="rb-buycost">$0</div></div>
+      <div class="sbox"><div class="lbl">Net Worth if Buy</div><div class="val" style="color:var(--g)" id="rb-buynw">$0</div></div>
+      <div class="sbox"><div class="lbl">Net Worth if Rent</div><div class="val" style="color:var(--b)" id="rb-rentnw">$0</div></div>
+    </div>
+    <div class="insight-box" id="rb-insights"></div>
+  </div>
+  <div class="card">
+    <div class="card-title">Net Worth Over Time</div>
+    <canvas id="rb-chart" width="300" height="170" style="width:100%;margin:1rem 0"></canvas>
+    <div style="display:flex;gap:12px;font-size:11px;color:var(--m);margin-bottom:1rem"><span style="color:var(--g)">━ Buy</span><span style="color:var(--b)">━ Rent</span></div>
+    <div class="rrow"><span class="rk">Breakeven year (buying overtakes renting)</span><span class="rv" style="color:var(--a)" id="rb-breakeven">—</span></div>
+    <div class="rrow"><span class="rk">Verdict at year <span id="rb-vyear">15</span></span><span class="rv" id="rb-verdict">—</span></div>
+  </div>
+</div>
+
+<div class="calc-guide">
+  <div class="guide-toggle">
+    <div class="guide-toggle-title">📖 Rent vs Buy — Making the Real Comparison</div>
+  </div>
+  <div class="guide-body">
+<div class="guide-p">"Should I rent or buy?" is one of the most consequential financial decisions most people ever make, and also one of the most commonly miscalculated. The instinctive comparison — rent payment vs mortgage payment — misses most of what actually matters: the opportunity cost of the down payment, ongoing costs unique to ownership, the cost of eventually selling, and what a renter could do with the money they're not tying up in a house. A proper comparison tracks net worth under each scenario over time, not just monthly cash outflow.</div>
+
+<div class="guide-h3">Why "Rent Money Is Wasted, Mortgage Builds Equity" Is Incomplete</div>
+<div class="guide-p">This is the most common argument for buying, and it's only half true. A portion of every mortgage payment does build equity — but a large portion, especially in the early years, is interest, which is just as "wasted" as rent in the sense that it never comes back to you. On top of that, owning carries costs a renter never pays directly: property tax, maintenance, homeowners insurance, and the eventual cost of selling (commonly 6-8% of sale price in agent commissions and closing costs). None of these build equity either.</div>
+
+<div class="guide-h3">The Opportunity Cost of the Down Payment</div>
+<div class="guide-p">A 20% down payment on a $400,000 home is $80,000 that a renter never has to set aside — they can invest it instead. This calculator assumes the renter invests an amount equal to the buyer's down payment and closing costs at the start, then continues investing the monthly difference whenever renting costs less than the buyer's mortgage-plus-ownership-costs that month. Over a 15-20 year horizon, this invested capital compounding in the market is often a bigger factor in the comparison than people expect.</div>
+<div class="guide-formula">Renter's Portfolio = (Down Payment + Closing Costs) compounded at investment return<br>+ monthly savings (when renting costs less than owning) compounded the same way</div>
+
+<div class="guide-h3">Worked Example: Net Worth After 15 Years</div>
+<div class="guide-p">A $400,000 home, 20% down, 6.5% mortgage rate over 30 years, against $2,200/month rent, with 4% home appreciation, 3% rent growth, and a 7% investment return for the renter's portfolio:</div>
+<table class="guide-table"><thead><tr><th>Year</th><th>Net Worth if Buy</th><th>Net Worth if Rent</th></tr></thead><tbody>
+<tr><td>5</td><td>~$180,000</td><td>~$187,000</td></tr>
+<tr><td>10</td><td>~$341,000</td><td>~$282,000</td></tr>
+<tr><td>15</td><td>~$549,000</td><td>~$367,000</td></tr>
+</tbody></table>
+<div class="guide-p">In this example, renting is narrowly ahead at year 5, but buying overtakes it by year 10 and pulls further ahead by year 15 — the breakeven point lands somewhere in between, once home appreciation and forced equity paydown have had enough time to compound. Change the appreciation or rent growth assumptions even slightly, and this breakeven point can shift by years in either direction, which is exactly why this is a calculation worth running with your own numbers rather than trusting a generic rule of thumb.</div>
+
+<div class="guide-h3">What Actually Drives the Verdict</div>
+<table class="guide-table"><thead><tr><th>Factor</th><th>Favors Buying</th><th>Favors Renting</th></tr></thead><tbody>
+<tr><td>Home appreciation</td><td>Higher than historical average</td><td>Flat or declining local market</td></tr>
+<tr><td>Rent growth</td><td>Rising quickly year over year</td><td>Stable or slow-growing rents</td></tr>
+<tr><td>Time horizon</td><td>Staying 7+ years (amortizes closing/selling costs)</td><td>Likely to move within a few years</td></tr>
+<tr><td>Investment return available</td><td>Lower expected market returns</td><td>Strong expected market returns on invested down payment</td></tr>
+<tr><td>Mortgage rate</td><td>Lower rate environment</td><td>High rate environment</td></tr>
+</tbody></table>
+
+<div class="guide-h3">The 5% Rule: A Quick Mental Shortcut</div>
+<div class="guide-p">A commonly cited heuristic from financial writer Ben Felix and others: multiply the home price by roughly 5% (covering a blend of property tax, maintenance, and the opportunity cost of capital tied up in the home) and divide by 12 to get a rough "breakeven monthly rent." If you can rent a comparable home for less than that figure, renting is likely the better deal on pure financial terms; if comparable rent is higher, buying likely wins. This shortcut ignores appreciation entirely, so it works best as a quick sanity check, not a substitute for the full year-by-year comparison.</div>
+<div class="guide-formula">Breakeven Monthly Rent ≈ Home Price × 5% / 12</div>
+
+<div class="guide-h3">Why the Breakeven Year Matters More Than the Snapshot</div>
+<div class="guide-p">Buying almost always loses in the first few years, because closing costs and the early-mortgage interest-heavy payments front-load the cost of ownership before appreciation and equity paydown have time to compound. The real question isn't "who wins today" but "how many years do I need to stay for buying to catch up and overtake renting" — if you're confident you'll stay well past that breakeven point, buying's long-run advantage typically holds; if you might move sooner, renting's flexibility carries real financial value too.</div>
+<div class="guide-warn">⚠ This calculator assumes a consistent appreciation rate, rent growth rate, and investment return for the entire comparison period — real markets are far less smooth. Treat the output as a structured way to compare assumptions, not a forecast of what will actually happen to any specific property or portfolio.</div>
+
+<div class="guide-h3">Non-Financial Factors This Calculator Can't Capture</div>
+<div class="guide-p">Owning provides stability, the freedom to renovate, and protection from a landlord raising rent or declining to renew a lease — renting provides flexibility to relocate, no responsibility for repairs, and no exposure to a declining local housing market. These factors are genuinely important to most people's decisions and have no dollar value to plug into a spreadsheet, but they're worth weighing alongside whatever this calculator's numbers say.</div>
+<div class="guide-tip">💡 Run this calculator with a range of appreciation and rent-growth assumptions (a pessimistic case and an optimistic case) rather than just one guess — if buying wins under both, that's a much stronger signal than a verdict that depends entirely on getting one uncertain assumption exactly right.</div>
+
+  </div>
+</div>
+
+<div class="faq-section">
+<div class="faq-section-title">❓ Frequently Asked Questions</div>
+<div class="faq-item">
+  <div class="faq-q" onclick="toggleFAQ(this)">
+    <span>What does "breakeven year" mean in this calculator?</span>
+    <span class="faq-icon">+</span>
+  </div>
+  <div class="faq-a">The breakeven year is the first year in the simulation where the buyer's projected net worth (home equity plus appreciation, minus the remaining loan and selling costs) overtakes the renter's projected net worth (their invested down payment and ongoing savings). Buying before this year typically leaves you behind financially; staying past it typically puts buying ahead.</div>
+</div>
+<div class="faq-item">
+  <div class="faq-q" onclick="toggleFAQ(this)">
+    <span>Why does the renter's net worth include an investment portfolio?</span>
+    <span class="faq-icon">+</span>
+  </div>
+  <div class="faq-a">Because a fair comparison requires giving the renter's unused down payment somewhere to go. A renter doesn't tie up tens of thousands of dollars in a down payment, so this calculator assumes they invest that amount instead, plus any month where renting costs less than the buyer's mortgage and ownership costs combined.</div>
+</div>
+<div class="faq-item">
+  <div class="faq-q" onclick="toggleFAQ(this)">
+    <span>Why does buying often look worse in the early years?</span>
+    <span class="faq-icon">+</span>
+  </div>
+  <div class="faq-a">Closing costs are paid upfront, and early mortgage payments are mostly interest rather than principal, so very little equity builds in the first few years. Appreciation and growing principal paydown take time to compound — which is why buying frequently needs several years to catch up to renting, even in scenarios where it eventually wins decisively.</div>
+</div>
+<div class="faq-item">
+  <div class="faq-q" onclick="toggleFAQ(this)">
+    <span>What is the 5% rule?</span>
+    <span class="faq-icon">+</span>
+  </div>
+  <div class="faq-a">A quick mental shortcut: multiply the home price by about 5% and divide by 12 to estimate a rough breakeven monthly rent. <span class="faq-formula">Breakeven Rent ≈ Home Price × 5% / 12</span> If comparable rent is below that figure, renting is often the better financial deal; if it's above, buying often wins. It ignores appreciation, so treat it as a sanity check rather than a full answer.</div>
+</div>
+<div class="faq-item">
+  <div class="faq-q" onclick="toggleFAQ(this)">
+    <span>How much do closing and selling costs really matter?</span>
+    <span class="faq-icon">+</span>
+  </div>
+  <div class="faq-a">Significantly, especially for shorter time horizons. Closing costs (often 2-5% of the home price) are paid upfront, and selling costs (often 6-8%, mostly real estate agent commissions) are paid when you eventually sell. Together they can easily total $30,000-50,000 on a $400,000 home — costs a renter never has to pay at all.</div>
+</div>
+<div class="faq-item">
+  <div class="faq-q" onclick="toggleFAQ(this)">
+    <span>Does this account for tax deductions on mortgage interest?</span>
+    <span class="faq-icon">+</span>
+  </div>
+  <div class="faq-a">No — this calculator models the raw cash flows and net worth comparison without factoring in mortgage interest deductions, which vary by country, by whether you itemize deductions, and by your specific tax situation. If significant in your case, factor it in separately as an additional benefit on the buying side.</div>
+</div>
+</div>
+
+
+</div>
+</div><!-- content -->
+<div class="site-footer">
+  <div class="footer-brand">
+    <div class="logo-mark" style="width:22px;height:22px;background:var(--a);border-radius:5px;display:flex;align-items:center;justify-content:center;color:#000;font-size:11px;font-weight:700">FC</div>
+    FinCalc
+  </div>
+  <div class="footer-links"><a href="index.html">All Calculators</a> · <a href="about.html">About</a> · <a href="contact.html">Contact</a> · <a href="privacy.html">Privacy</a> · <a href="terms.html">Terms</a></div>
+  <div class="footer-copy">© 2025 FinCalc · Free Financial Calculators</div>
+</div>
+<script src="app.js"></script>
+<script>initPage('rentvsbuy');</script>
+</body>
+</html>

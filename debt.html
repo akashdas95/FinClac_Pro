@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Debt Payoff Calculator | FinCalc Pro</title>
+<meta name="description" content="Calculate how long it will take to pay off your debts and compare snowball vs avalanche strategies. Free debt payoff planner.">
+<link rel="canonical" href="https://yourdomain.com/debt.html">
+<meta name="robots" content="index, follow">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Debt Payoff Calculator | FinCalc Pro">
+<meta property="og:description" content="Calculate how long it will take to pay off your debts and compare snowball vs avalanche strategies. Free debt payoff planner.">
+<meta property="og:url" content="https://yourdomain.com/debt.html">
+<meta property="og:site_name" content="FinCalc Pro">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Debt Payoff Calculator | FinCalc Pro">
+<meta name="twitter:description" content="Calculate how long it will take to pay off your debts and compare snowball vs avalanche strategies. Free debt payoff planner.">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<div class="topbar">
+  <a class="logo" href="index.html"><div class="logo-mark">FC</div>FinCalc</a>
+  <div class="searchbox">
+    <svg width="14" height="14" fill="none" stroke="#6B7A8D" stroke-width="2" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+    <input id="srch" placeholder="Search 40 calculators..." oninput="doSearch()" onkeydown="if(event.key==='Enter')goSearch()">
+  </div>
+</div>
+<div class="nav">
+  <button class="ntab on" onclick="go('home',this)">🏠 Home</button>
+  <button class="ntab" onclick="go('cagr',this)">📐 CAGR</button>
+  <button class="ntab" onclick="go('xirr',this)">📅 XIRR</button>
+  <button class="ntab" onclick="go('drip',this)">💧 DRIP</button>
+  <button class="ntab" onclick="go('etf',this)">🗂️ ETF Growth</button>
+  <button class="ntab" onclick="go('dcf',this)">🏦 DCF Valuation</button>
+  <button class="ntab" onclick="go('debtcomp',this)">❄️ Snowball vs Avalanche</button>
+  <button class="ntab" onclick="go('rentalprop',this)">🏡 Rental Property</button>
+  <button class="ntab" onclick="go('burnrate',this)">🔥 Burn Rate</button>
+  <button class="ntab" onclick="go('pricing',this)">🏷️ Pricing</button>
+  <button class="ntab" onclick="go('equity',this)">📐 Equity Dilution</button>
+  <button class="ntab" onclick="go('revenue',this)">📊 Revenue Forecast</button>
+  <button class="ntab" onclick="go('loan',this)">🏦 Loan/EMI</button>
+  <button class="ntab" onclick="go('invest',this)">📈 SIP/Investment</button>
+  <button class="ntab" onclick="go('tax',this)">🧾 Tax</button>
+  <button class="ntab" onclick="go('mortgage',this)">🏠 Mortgage</button>
+  <button class="ntab" onclick="go('mortcomp',this)">⚖️ Mtg Compare</button>
+  <button class="ntab" onclick="go('savings',this)">🏛️ Savings</button>
+  <button class="ntab" onclick="go('stock',this)">📉 Stock P&amp;L</button>
+  <button class="ntab" onclick="go('retirement',this)">👴 Retirement</button>
+  <button class="ntab" onclick="go('debt',this)">💳 Debt Payoff</button>
+  <button class="ntab" onclick="go('rental',this)">🏘️ Rental Yield</button>
+  <button class="ntab" onclick="go('cashflow',this)">💵 Cash Flow</button>
+  <button class="ntab" onclick="go('breakeven',this)">📊 Break-even</button>
+  <button class="ntab" onclick="go('savingsgoal',this)">🎯 Savings Goal</button>
+  <button class="ntab" onclick="go('emergencyfund',this)">🛡️ Emergency Fund</button>
+  <button class="ntab" onclick="go('healthscore',this)">💯 Health Score</button>
+  <button class="ntab" onclick="go('currency',this)">💱 Currency</button>
+  <button class="ntab" onclick="go('scientific',this)">🔬 Scientific</button>
+</div>
+<div class="content">
+<div id="debt" class="panel on">
+<button class="back-btn" onclick="go('home',null)">← Back to Home</button>
+<div class="calc-links"><span class="calc-links-label">🔗 Related</span><button class="calc-link-btn" onclick="go('debtcomp',null)">❄️ Snowball vs Avalanche</button><button class="calc-link-btn" onclick="go('cashflow',null)">💵 Cash Flow</button><button class="calc-link-btn" onclick="go('loan',null)">🏦 Loan/EMI</button><button class="calc-link-btn" onclick="go('healthscore',null)">💯 Health Score</button></div>
+
+
+<div class="card mb16">
+  <div class="card-title">Debt Payoff Planner</div>
+  <div style="display:grid;grid-template-columns:1.5fr 1fr 1fr 1fr 36px;gap:8px;margin-bottom:6px">
+    <span style="font-size:10px;color:var(--m);text-transform:uppercase">Debt</span>
+    <span style="font-size:10px;color:var(--m);text-transform:uppercase">Balance ($)</span>
+    <span style="font-size:10px;color:var(--m);text-transform:uppercase">Rate %</span>
+    <span style="font-size:10px;color:var(--m);text-transform:uppercase">Min Pay ($)</span>
+    <span></span>
+  </div>
+  <div id="debt-rows"></div>
+  <div style="display:flex;gap:10px;margin-top:10px;align-items:flex-end;flex-wrap:wrap">
+    <button class="btn-sm btn-add" onclick="addDebt()">+ Add Debt</button>
+    <div style="flex:1;min-width:120px"><label style="display:block;font-size:12px;color:var(--m);margin-bottom:5px">Extra Payment ($)</label><div class="ip"><span class="pfx">$</span><input type="number" id="dp-extra" value="500" oninput="cDebt()"></div></div>
+    <div style="flex:1;min-width:120px"><label style="display:block;font-size:12px;color:var(--m);margin-bottom:5px">Strategy</label><select id="dp-strat" onchange="cDebt()" style="width:100%;background:var(--bg);border:1px solid var(--bd);border-radius:6px;padding:8px;color:var(--t);font-family:var(--fn);font-size:13px;outline:none"><option value="avalanche">Avalanche</option><option value="snowball">Snowball</option></select></div>
+  </div>
+</div>
+<div class="two-eq">
+  <div class="card">
+    <div class="sgrid" style="margin-top:0;margin-bottom:1rem">
+      <div class="sbox"><div class="lbl">Total Debt</div><div class="val" style="color:var(--r)" id="dp-total">$0</div></div>
+      <div class="sbox"><div class="lbl">Payoff Time</div><div class="val" style="color:var(--a)" id="dp-months">0 mo</div></div>
+      <div class="sbox"><div class="lbl">Total Interest Paid</div><div class="val" style="color:var(--r)" id="dp-int">$0</div></div>
+      <div class="sbox"><div class="lbl">Interest Saved vs Min-only</div><div class="val" style="color:var(--g)" id="dp-saved">$0</div></div>
+    </div>
+    <canvas id="dp-chart" width="500" height="140" style="width:100%"></canvas>
+  </div>
+  <div class="card">
+    <div class="card-title">Payoff Timeline</div>
+    <div id="dp-timeline" class="tline" style="margin-top:.5rem"></div>
+    <div class="insight-box" id="dp-insights"></div>
+  </div>
+</div>
+
+<div class="calc-guide">
+  <div class="guide-toggle">
+    <div class="guide-toggle-title">📖 Debt Payoff — Your Step-by-Step Plan</div>
+  </div>
+  <div class="guide-body">
+<div class="guide-p">Carrying multiple debts simultaneously is stressful partly because it's genuinely hard to know which one deserves your attention first, and partly because the psychological weight of debt often outpaces the actual mathematical urgency. Building a clear, calculated payoff plan converts that vague anxiety into a concrete, trackable timeline.</div>
+
+<div class="guide-h3">The Payoff Time Formula</div>
+<div class="guide-formula">Months to Payoff = −log(1 − (r × Balance / Payment)) / log(1 + r)</div>
+<div class="guide-p">Where r is your monthly interest rate. This formula reveals an important and often surprising truth: if your monthly payment is too close to your minimum required interest charge, the denominator inside the logarithm approaches a value that makes payoff time stretch toward infinity — meaning a debt with a payment barely above the interest accruing each month can take an extraordinarily long time to clear, even if the stated balance seems manageable.</div>
+
+<div class="guide-h3">Worked Example: The Cost of Minimum Payments</div>
+<div class="guide-p">A $5,000 credit card balance at 22% APR, paying only the typical 2% minimum payment (starting around $100/month, decreasing as the balance shrinks):</div>
+<table class="guide-table"><thead><tr><th>Payment Strategy</th><th>Time to Pay Off</th><th>Total Interest Paid</th></tr></thead><tbody>
+<tr><td>Minimum payments only (~2% of balance)</td><td>~25+ years</td><td>~$8,400+</td></tr>
+<tr><td>Fixed $200/month</td><td>~30 months (2.5 years)</td><td>~$1,180</td></tr>
+<tr><td>Fixed $400/month</td><td>~13 months</td><td>~$480</td></tr>
+</tbody></table>
+<div class="guide-p">The minimum-payment scenario results in paying nearly 70% more in interest than the original principal itself, over a timeline stretching beyond two decades — illustrating exactly why credit card minimum payments are structured the way they are, and why even modest fixed extra payments dramatically compress both time and total cost.</div>
+
+<div class="guide-h3">Snowball vs Avalanche: A Quick Recap</div>
+<div class="guide-p">When juggling multiple debts, the Avalanche method (highest interest rate first) minimizes total interest paid mathematically, while the Snowball method (smallest balance first) tends to sustain motivation better for many people due to early psychological wins. See our dedicated Snowball vs Avalanche calculator for a detailed side-by-side comparison using your actual debt list.</div>
+
+<div class="guide-h3">Should You Invest or Pay Off Debt First?</div>
+<div class="guide-p">This decision hinges almost entirely on comparing your debt's interest rate against your realistic, achievable investment return.</div>
+<table class="guide-table"><thead><tr><th>Debt Interest Rate</th><th>Generally Recommended Priority</th><th>Reasoning</th></tr></thead><tbody>
+<tr><td>Above 8-10% (most credit cards)</td><td>Pay off debt first</td><td>Guaranteed "return" from eliminating interest usually beats realistic investment expectations</td></tr>
+<tr><td>4-7% (many mortgages, auto loans)</td><td>Often a toss-up; consider both</td><td>Close enough to typical market returns that either choice is defensible</td></tr>
+<tr><td>Below 4% (some subsidized loans)</td><td>Often favor investing, especially with employer 401(k) match available</td><td>Investment returns likely to exceed the cost of carrying this debt</td></tr>
+</tbody></table>
+<div class="guide-p">An important exception overrides this entire framework: always capture a full employer 401(k) match before extra debt payments, regardless of debt interest rate, since a typical match represents an immediate, guaranteed 50-100% return that no debt payoff or investment can realistically match.</div>
+
+<div class="guide-h3">Debt Consolidation: A Tool, Not a Cure</div>
+<div class="guide-p">Consolidating multiple high-interest debts into a single lower-rate loan (personal loan, balance transfer card, or home equity line) can genuinely reduce interest costs and simplify payment tracking. However, consolidation only helps if the underlying spending behavior that created the debt changes — without that, it's common for people to pay off the consolidated loan while simultaneously running up new balances on the now-empty credit cards, ending up in a worse position than before.</div>
+<div class="guide-tip">💡 Before consolidating, calculate the total cost (interest + any origination fees) of the new loan against simply continuing your current accelerated payoff plan — consolidation isn't automatically cheaper, especially if it comes with upfront fees or resets your payoff clock with a longer term.</div>
+
+  </div>
+</div>
+
+<div class="faq-section">
+<div class="faq-section-title">❓ Frequently Asked Questions</div>
+<div class="faq-item">
+  <div class="faq-q" onclick="toggleFAQ(this)">
+    <span>What is the Debt Snowball method?</span>
+    <span class="faq-icon">+</span>
+  </div>
+  <div class="faq-a">Pay off your <strong>smallest balance first</strong> while making minimum payments on all others. Once paid, roll the freed-up payment into the next smallest. This builds momentum and psychological wins to keep you on track.</div>
+</div>
+<div class="faq-item">
+  <div class="faq-q" onclick="toggleFAQ(this)">
+    <span>What is the Debt Avalanche method?</span>
+    <span class="faq-icon">+</span>
+  </div>
+  <div class="faq-a">Pay off your <strong>highest interest rate debt first</strong> while making minimums on others. Mathematically optimal and saves the most in interest, but may take longer before you see your first debt fully eliminated.</div>
+</div>
+<div class="faq-item">
+  <div class="faq-q" onclick="toggleFAQ(this)">
+    <span>How do I calculate payoff time?</span>
+    <span class="faq-icon">+</span>
+  </div>
+  <div class="faq-a"><span class="faq-formula">Months = −log(1 − (r × Balance / Payment)) / log(1 + r)</span>Where r = monthly interest rate. This calculator does that math for all your debts simultaneously, comparing both strategies side by side.</div>
+</div>
+<div class="faq-item">
+  <div class="faq-q" onclick="toggleFAQ(this)">
+    <span>Should I invest or pay off debt first?</span>
+    <span class="faq-icon">+</span>
+  </div>
+  <div class="faq-a">If your debt’s interest rate is <strong>higher than expected investment returns</strong> (~7–10%), pay off the debt first. If lower, consider investing — especially with employer 401(k) matching. High-interest credit card debt (20%+) should almost always be paid first.</div>
+</div>
+<div class="faq-item">
+  <div class="faq-q" onclick="toggleFAQ(this)">
+    <span>What is debt consolidation?</span>
+    <span class="faq-icon">+</span>
+  </div>
+  <div class="faq-a">Debt consolidation combines multiple debts into a single loan, ideally at a lower interest rate. It simplifies payments and can save on interest — but only helps if you don’t accumulate new debt afterward.</div>
+</div>
+</div>
+
+
+</div>
+</div><!-- content -->
+<div class="site-footer">
+  <div class="footer-brand">
+    <div class="logo-mark" style="width:22px;height:22px;background:var(--a);border-radius:5px;display:flex;align-items:center;justify-content:center;color:#000;font-size:11px;font-weight:700">FC</div>
+    FinCalc
+  </div>
+  <div class="footer-links"><a href="index.html">All Calculators</a> · <a href="about.html">About</a> · <a href="contact.html">Contact</a> · <a href="privacy.html">Privacy</a> · <a href="terms.html">Terms</a></div>
+  <div class="footer-copy">© 2025 FinCalc · Free Financial Calculators</div>
+</div>
+<script src="app.js"></script>
+<script>initPage('debt');</script>
+</body>
+</html>

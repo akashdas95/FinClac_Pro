@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Startup Burn Rate & Runway Calculator | FinCalc Pro</title>
+<meta name="description" content="Calculate your startup\u2019s monthly burn rate and cash runway. Free burn rate calculator for founders and finance teams.">
+<link rel="canonical" href="https://yourdomain.com/burnrate.html">
+<meta name="robots" content="index, follow">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Startup Burn Rate & Runway Calculator | FinCalc Pro">
+<meta property="og:description" content="Calculate your startup\u2019s monthly burn rate and cash runway. Free burn rate calculator for founders and finance teams.">
+<meta property="og:url" content="https://yourdomain.com/burnrate.html">
+<meta property="og:site_name" content="FinCalc Pro">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Startup Burn Rate & Runway Calculator | FinCalc Pro">
+<meta name="twitter:description" content="Calculate your startup\u2019s monthly burn rate and cash runway. Free burn rate calculator for founders and finance teams.">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<div class="topbar">
+  <a class="logo" href="index.html"><div class="logo-mark">FC</div>FinCalc</a>
+  <div class="searchbox">
+    <svg width="14" height="14" fill="none" stroke="#6B7A8D" stroke-width="2" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+    <input id="srch" placeholder="Search 40 calculators..." oninput="doSearch()" onkeydown="if(event.key==='Enter')goSearch()">
+  </div>
+</div>
+<div class="nav">
+  <button class="ntab on" onclick="go('home',this)">🏠 Home</button>
+  <button class="ntab" onclick="go('cagr',this)">📐 CAGR</button>
+  <button class="ntab" onclick="go('xirr',this)">📅 XIRR</button>
+  <button class="ntab" onclick="go('drip',this)">💧 DRIP</button>
+  <button class="ntab" onclick="go('etf',this)">🗂️ ETF Growth</button>
+  <button class="ntab" onclick="go('dcf',this)">🏦 DCF Valuation</button>
+  <button class="ntab" onclick="go('debtcomp',this)">❄️ Snowball vs Avalanche</button>
+  <button class="ntab" onclick="go('rentalprop',this)">🏡 Rental Property</button>
+  <button class="ntab" onclick="go('burnrate',this)">🔥 Burn Rate</button>
+  <button class="ntab" onclick="go('pricing',this)">🏷️ Pricing</button>
+  <button class="ntab" onclick="go('equity',this)">📐 Equity Dilution</button>
+  <button class="ntab" onclick="go('revenue',this)">📊 Revenue Forecast</button>
+  <button class="ntab" onclick="go('loan',this)">🏦 Loan/EMI</button>
+  <button class="ntab" onclick="go('invest',this)">📈 SIP/Investment</button>
+  <button class="ntab" onclick="go('tax',this)">🧾 Tax</button>
+  <button class="ntab" onclick="go('mortgage',this)">🏠 Mortgage</button>
+  <button class="ntab" onclick="go('mortcomp',this)">⚖️ Mtg Compare</button>
+  <button class="ntab" onclick="go('savings',this)">🏛️ Savings</button>
+  <button class="ntab" onclick="go('stock',this)">📉 Stock P&amp;L</button>
+  <button class="ntab" onclick="go('retirement',this)">👴 Retirement</button>
+  <button class="ntab" onclick="go('debt',this)">💳 Debt Payoff</button>
+  <button class="ntab" onclick="go('rental',this)">🏘️ Rental Yield</button>
+  <button class="ntab" onclick="go('cashflow',this)">💵 Cash Flow</button>
+  <button class="ntab" onclick="go('breakeven',this)">📊 Break-even</button>
+  <button class="ntab" onclick="go('savingsgoal',this)">🎯 Savings Goal</button>
+  <button class="ntab" onclick="go('emergencyfund',this)">🛡️ Emergency Fund</button>
+  <button class="ntab" onclick="go('healthscore',this)">💯 Health Score</button>
+  <button class="ntab" onclick="go('currency',this)">💱 Currency</button>
+  <button class="ntab" onclick="go('scientific',this)">🔬 Scientific</button>
+</div>
+<div class="content">
+<div id="burnrate" class="panel on">
+<button class="back-btn" onclick="go('home',null)">← Back to Home</button>
+<div class="calc-links"><span class="calc-links-label">🔗 Related</span><button class="calc-link-btn" onclick="go('revenue',null)">📊 Revenue Forecast</button><button class="calc-link-btn" onclick="go('breakeven',null)">📈 Break-even</button><button class="calc-link-btn" onclick="go('cashflow',null)">💵 Cash Flow</button><button class="calc-link-btn" onclick="go('pricing',null)">🏷️ Pricing</button></div>
+
+
+<div class="two">
+  <div class="card">
+    <div class="card-title">Burn Rate Calculator</div>
+    <div class="g2">
+      <div class="field"><label>Current Cash ($)</label><div class="ip"><span class="pfx">$</span><input type="number" id="br-cash" value="5000000" oninput="cBurn()"></div></div>
+      <div class="field"><label>Monthly Revenue (MRR) ($)</label><div class="ip"><span class="pfx">$</span><input type="number" id="br-mrr" value="500000" oninput="cBurn()"></div></div>
+      <div class="field"><label>MRR Growth Rate (%/mo)</label><input type="number" id="br-growth" value="5" step="0.5" oninput="cBurn()"></div>
+    </div>
+    <div style="font-size:11px;color:var(--m);font-weight:600;text-transform:uppercase;letter-spacing:.5px;margin-bottom:.75rem;margin-top:.5rem">Monthly Expenses</div>
+    <div class="g2">
+      <div class="field"><label>Salaries ($)</label><div class="ip"><span class="pfx">$</span><input type="number" id="br-sal" value="500000" oninput="cBurn()"></div></div>
+      <div class="field"><label>Office &amp; Infra ($)</label><div class="ip"><span class="pfx">$</span><input type="number" id="br-off" value="100000" oninput="cBurn()"></div></div>
+      <div class="field"><label>Marketing ($)</label><div class="ip"><span class="pfx">$</span><input type="number" id="br-mkt" value="80000" oninput="cBurn()"></div></div>
+      <div class="field"><label>Software &amp; Tools ($)</label><div class="ip"><span class="pfx">$</span><input type="number" id="br-sw" value="30000" oninput="cBurn()"></div></div>
+    </div>
+    <div class="sgrid">
+      <div class="sbox"><div class="lbl">Gross Burn/mo</div><div class="val" style="color:var(--r)" id="br-gross">$0</div></div>
+      <div class="sbox"><div class="lbl">Net Burn/mo</div><div class="val" style="color:var(--a)" id="br-net">$0</div></div>
+      <div class="sbox"><div class="lbl">Runway</div><div class="val" style="color:var(--g)" id="br-runway">0 mo</div></div>
+      <div class="sbox"><div class="lbl">Default Date</div><div class="val" id="br-date">—</div></div>
+    </div>
+  </div>
+  <div class="card">
+    <div class="card-title">Cash Balance Projection</div>
+    <canvas id="br-chart" width="300" height="170" style="width:100%;margin:1rem 0"></canvas>
+    <div class="rrow"><span class="rk">Break-even revenue</span><span class="rv" style="color:var(--g)" id="br-berev">$0</span></div>
+    <div class="rrow"><span class="rk">Months to break-even</span><span class="rv" id="br-bemo">—</span></div>
+    <div class="insight-box" id="br-insights"></div>
+  </div>
+</div>
+
+<div class="calc-guide">
+  <div class="guide-toggle">
+    <div class="guide-toggle-title">📖 Startup Burn Rate — Know Your Runway</div>
+  </div>
+  <div class="guide-body">
+<div class="guide-p">For a startup, cash is oxygen — profitability is often years away, but running out of cash is immediate and fatal. Burn rate and runway are the two metrics every founder should know cold, the same way a pilot knows fuel remaining and consumption rate. Getting this calculation slightly wrong, or simply not tracking it closely enough, is one of the most common (and avoidable) reasons startups fail even when their underlying product or market is sound.</div>
+
+<div class="guide-h3">Gross Burn vs Net Burn: An Important Distinction</div>
+<div class="guide-formula">Gross Burn = Total Monthly Operating Expenses<br>Net Burn = Total Monthly Expenses − Monthly Revenue</div>
+<div class="guide-p">Gross burn tells you how expensive your operation is to run, full stop. Net burn tells you the actual rate your bank balance is shrinking, accounting for whatever revenue is coming in. A startup with $200,000/month in expenses and $150,000/month in revenue has a gross burn of $200,000 but a net burn of only $50,000 — a much healthier picture, and the number that actually determines how long your cash will last.</div>
+
+<div class="guide-h3">Worked Example: Calculating Runway</div>
+<div class="guide-formula">Runway (months) = Cash in Bank / Monthly Net Burn</div>
+<div class="guide-p">A startup with $900,000 in the bank and a net burn of $60,000/month has a runway of $900,000 / $60,000 = 15 months. This is the single most important number a founder reports to their board and uses to time fundraising — most experienced investors recommend starting a fundraise when you have at least 6 months of runway remaining, since raises commonly take 3-6 months from first pitch to wired funds, and you don't want to be negotiating from a position of desperation with weeks left on the clock.</div>
+
+<div class="guide-h3">Burn Multiple: Are You Spending Efficiently?</div>
+<div class="guide-formula">Burn Multiple = Net Burn / Net New ARR (Annual Recurring Revenue added this period)</div>
+<table class="guide-table"><thead><tr><th>Burn Multiple</th><th>Interpretation</th></tr></thead><tbody>
+<tr><td>Below 1x</td><td>Excellent — efficient growth, spending less than $1 to generate $1 of new ARR</td></tr>
+<tr><td>1x – 2x</td><td>Good, healthy efficiency for most growth-stage startups</td></tr>
+<tr><td>2x – 4x</td><td>Concerning — investors will scrutinize this closely</td></tr>
+<tr><td>Above 4x</td><td>Generally unsustainable without a clear path to improving efficiency</td></tr>
+</tbody></table>
+<div class="guide-p">A startup spending $400,000 net per month while adding $200,000 in net new ARR has a burn multiple of 2x — for every dollar of new annual recurring revenue generated, it's spending two dollars. This single metric has become one of the most-watched efficiency indicators among venture investors since the funding environment tightened in 2022-2023, replacing pure growth-at-all-costs thinking from the prior decade.</div>
+
+<div class="guide-h3">Practical Levers to Reduce Burn</div>
+<div class="guide-steps">
+<div class="guide-step"><div class="guide-step-num">1</div><div><strong>Headcount</strong> — typically 60-70% of early-stage startup costs. Pausing non-critical hires has the single largest immediate impact on burn.</div></div>
+<div class="guide-step"><div class="guide-step-num">2</div><div><strong>SaaS and tooling subscriptions</strong> — audit quarterly; unused or duplicate software subscriptions accumulate quietly and rarely get cut without a deliberate review.</div></div>
+<div class="guide-step"><div class="guide-step-num">3</div><div><strong>Vendor and contractor renegotiation</strong> — many vendors will offer discounts to retain a customer rather than lose one entirely, especially during a renewal conversation.</div></div>
+<div class="guide-step"><div class="guide-step-num">4</div><div><strong>Office and real estate</strong> — remote or hybrid arrangements can eliminate one of the largest fixed monthly costs for many early-stage companies.</div></div>
+</div>
+
+<div class="guide-h3">When Is a High Burn Rate Actually Fine?</div>
+<div class="guide-p">There's no universal "good" burn rate — context matters enormously. A well-funded Series B company intentionally burning $1M/month to capture a land-grab market opportunity, backed by strong unit economics and a clear path to profitability, is in a completely different situation than a seed-stage startup burning the same amount with no clear product-market fit. The right question isn't "is my burn rate high" but "is my burn rate buying me proportionate, durable progress."</div>
+<div class="guide-tip">💡 Build a 13-week (rolling quarterly) cash flow forecast in addition to your monthly runway calculation — burn rate often isn't perfectly smooth, and a single large expense (annual insurance renewal, a big vendor payment) can create a cash crunch even when your average monthly burn looks sustainable.</div>
+
+  </div>
+</div>
+
+<div class="faq-section">
+<div class="faq-section-title">❓ Frequently Asked Questions</div>
+<div class="faq-item">
+  <div class="faq-q" onclick="toggleFAQ(this)">
+    <span>What is burn rate?</span>
+    <span class="faq-icon">+</span>
+  </div>
+  <div class="faq-a">Burn rate is how much cash a startup <strong>spends per month</strong>. <strong>Gross burn</strong> is total monthly spending. <strong>Net burn</strong> is monthly spending minus revenue. It tells you how fast you’re consuming your cash reserves.</div>
+</div>
+<div class="faq-item">
+  <div class="faq-q" onclick="toggleFAQ(this)">
+    <span>What is runway?</span>
+    <span class="faq-icon">+</span>
+  </div>
+  <div class="faq-a"><span class="faq-formula">Runway (months) = Cash in Bank / Monthly Net Burn</span>Runway is how many months your startup can operate before running out of money. Most investors recommend maintaining 12–18 months of runway, and fundraising when you have 6+ months left.</div>
+</div>
+<div class="faq-item">
+  <div class="faq-q" onclick="toggleFAQ(this)">
+    <span>What is a good burn rate for a startup?</span>
+    <span class="faq-icon">+</span>
+  </div>
+  <div class="faq-a">There’s no universal number — it depends on stage and team size. The key question is whether you’re growing revenue faster than you’re increasing burn. A rising revenue-to-burn ratio signals a healthy trajectory.</div>
+</div>
+<div class="faq-item">
+  <div class="faq-q" onclick="toggleFAQ(this)">
+    <span>How do I reduce burn rate?</span>
+    <span class="faq-icon">+</span>
+  </div>
+  <div class="faq-a">Common levers: reduce or defer hires, cut non-essential SaaS subscriptions, renegotiate vendor contracts, move to remote work to cut office costs, or pivot to higher-margin revenue. Every $10K saved extends your runway.</div>
+</div>
+<div class="faq-item">
+  <div class="faq-q" onclick="toggleFAQ(this)">
+    <span>What is burn multiple?</span>
+    <span class="faq-icon">+</span>
+  </div>
+  <div class="faq-a"><span class="faq-formula">Burn Multiple = Net Burn / Net New ARR</span>It measures how much you’re spending to generate each new dollar of recurring revenue. Below 1x is excellent. Above 2x is a warning sign. Above 4x is unsustainable for most startups.</div>
+</div>
+</div>
+
+
+</div>
+</div><!-- content -->
+<div class="site-footer">
+  <div class="footer-brand">
+    <div class="logo-mark" style="width:22px;height:22px;background:var(--a);border-radius:5px;display:flex;align-items:center;justify-content:center;color:#000;font-size:11px;font-weight:700">FC</div>
+    FinCalc
+  </div>
+  <div class="footer-links"><a href="index.html">All Calculators</a> · <a href="about.html">About</a> · <a href="contact.html">Contact</a> · <a href="privacy.html">Privacy</a> · <a href="terms.html">Terms</a></div>
+  <div class="footer-copy">© 2025 FinCalc · Free Financial Calculators</div>
+</div>
+<script src="app.js"></script>
+<script>initPage('burnrate');</script>
+</body>
+</html>

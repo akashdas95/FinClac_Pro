@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Dividend Growth Calculator | FinCalc Pro</title>
+<meta name="description" content="Project your future dividend income, yield on cost, and compare dividend growth profiles. Free dividend growth calculator.">
+<link rel="canonical" href="https://yourdomain.com/divgrowth.html">
+<meta name="robots" content="index, follow">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Dividend Growth Calculator | FinCalc Pro">
+<meta property="og:description" content="Project your future dividend income, yield on cost, and compare dividend growth profiles. Free dividend growth calculator.">
+<meta property="og:url" content="https://yourdomain.com/divgrowth.html">
+<meta property="og:site_name" content="FinCalc Pro">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Dividend Growth Calculator | FinCalc Pro">
+<meta name="twitter:description" content="Project your future dividend income, yield on cost, and compare dividend growth profiles. Free dividend growth calculator.">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<div class="topbar">
+  <a class="logo" href="index.html"><div class="logo-mark">FC</div>FinCalc</a>
+  <div class="searchbox">
+    <svg width="14" height="14" fill="none" stroke="#6B7A8D" stroke-width="2" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+    <input id="srch" placeholder="Search 40 calculators..." oninput="doSearch()" onkeydown="if(event.key==='Enter')goSearch()">
+  </div>
+</div>
+<div class="nav">
+  <button class="ntab on" onclick="go('home',this)">🏠 Home</button>
+  <button class="ntab" onclick="go('cagr',this)">📐 CAGR</button>
+  <button class="ntab" onclick="go('xirr',this)">📅 XIRR</button>
+  <button class="ntab" onclick="go('drip',this)">💧 DRIP</button>
+  <button class="ntab" onclick="go('etf',this)">🗂️ ETF Growth</button>
+  <button class="ntab" onclick="go('dcf',this)">🏦 DCF Valuation</button>
+  <button class="ntab" onclick="go('debtcomp',this)">❄️ Snowball vs Avalanche</button>
+  <button class="ntab" onclick="go('rentalprop',this)">🏡 Rental Property</button>
+  <button class="ntab" onclick="go('burnrate',this)">🔥 Burn Rate</button>
+  <button class="ntab" onclick="go('pricing',this)">🏷️ Pricing</button>
+  <button class="ntab" onclick="go('equity',this)">📐 Equity Dilution</button>
+  <button class="ntab" onclick="go('revenue',this)">📊 Revenue Forecast</button>
+  <button class="ntab" onclick="go('loan',this)">🏦 Loan/EMI</button>
+  <button class="ntab" onclick="go('invest',this)">📈 SIP/Investment</button>
+  <button class="ntab" onclick="go('tax',this)">🧾 Tax</button>
+  <button class="ntab" onclick="go('mortgage',this)">🏠 Mortgage</button>
+  <button class="ntab" onclick="go('mortcomp',this)">⚖️ Mtg Compare</button>
+  <button class="ntab" onclick="go('savings',this)">🏛️ Savings</button>
+  <button class="ntab" onclick="go('stock',this)">📉 Stock P&amp;L</button>
+  <button class="ntab" onclick="go('retirement',this)">👴 Retirement</button>
+  <button class="ntab" onclick="go('debt',this)">💳 Debt Payoff</button>
+  <button class="ntab" onclick="go('rental',this)">🏘️ Rental Yield</button>
+  <button class="ntab" onclick="go('cashflow',this)">💵 Cash Flow</button>
+  <button class="ntab" onclick="go('breakeven',this)">📊 Break-even</button>
+  <button class="ntab" onclick="go('savingsgoal',this)">🎯 Savings Goal</button>
+  <button class="ntab" onclick="go('emergencyfund',this)">🛡️ Emergency Fund</button>
+  <button class="ntab" onclick="go('healthscore',this)">💯 Health Score</button>
+  <button class="ntab" onclick="go('currency',this)">💱 Currency</button>
+  <button class="ntab" onclick="go('scientific',this)">🔬 Scientific</button>
+</div>
+<div class="content">
+<div id="divgrowth" class="panel on">
+<button class="back-btn" onclick="go('home',null)">← Back to Home</button>
+<div class="calc-links"><span class="calc-links-label">🔗 Related</span><button class="calc-link-btn" onclick="go('drip',null)">💧 DRIP</button><button class="calc-link-btn" onclick="go('cagr',null)">📐 CAGR</button><button class="calc-link-btn" onclick="go('retirement',null)">👴 Retirement</button><button class="calc-link-btn" onclick="go('fire',null)">🔥 FIRE Calculator</button></div>
+
+
+<div class="two">
+  <div class="card">
+    <div class="card-title">Dividend Growth Calculator</div>
+    <div class="g2">
+      <div class="field"><label>Investment Amount ($)</label><div class="ip"><span class="pfx">$</span><input type="number" id="dg-amount-a" value="15000" oninput="cDivGrowth()"></div></div>
+      <div class="field"><label>Current Dividend Yield (%/yr)</label><input type="number" id="dg-yield-a" value="3" step="0.1" oninput="cDivGrowth()"></div>
+      <div class="field"><label>Annual Dividend Growth (%)</label><input type="number" id="dg-growth-a" value="8" step="0.5" oninput="cDivGrowth()"></div>
+      <div class="field"><label>Years to Project</label><input type="number" id="dg-years" value="20" oninput="cDivGrowth()"></div>
+    </div>
+    <label style="display:flex;align-items:center;gap:8px;cursor:pointer;margin-bottom:.9rem"><input type="checkbox" id="dg-reinvest" onchange="cDivGrowth()" style="accent-color:var(--g)"> Reinvest dividends to buy more shares</label>
+    <div class="field" id="dg-priceGrowthField" style="display:none"><label>Stock Price Growth (%/yr, for reinvestment)</label><input type="number" id="dg-pricegrowth" value="6" step="0.5" oninput="cDivGrowth()"></div>
+
+    <div style="margin-top:1rem;padding-top:1rem;border-top:1px solid var(--bd)">
+      <label style="display:flex;align-items:center;gap:8px;font-size:13px;color:var(--t);cursor:pointer"><input type="checkbox" id="dg-compare" onchange="cDivGrowth()" style="accent-color:var(--g)"> Compare against a second dividend profile</label>
+      <div id="dg-compareFields" style="display:none;margin-top:.75rem">
+        <div class="g2">
+          <div class="field"><label>Profile B: Dividend Yield (%/yr)</label><input type="number" id="dg-yield-b" value="1.5" step="0.1" oninput="cDivGrowth()"></div>
+          <div class="field"><label>Profile B: Annual Dividend Growth (%)</label><input type="number" id="dg-growth-b" value="12" step="0.5" oninput="cDivGrowth()"></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="sgrid">
+      <div class="sbox"><div class="lbl">Year 1 Annual Income</div><div class="val" style="color:var(--a)" id="dg-income1">$0</div></div>
+      <div class="sbox"><div class="lbl">Final Year Annual Income</div><div class="val" style="color:var(--g)" id="dg-incomeN">$0</div></div>
+      <div class="sbox"><div class="lbl">Yield on Cost (final year)</div><div class="val" style="color:var(--b)" id="dg-yoc">0%</div></div>
+      <div class="sbox"><div class="lbl">Years for Income to Double</div><div class="val" id="dg-double">0 yrs</div></div>
+    </div>
+    <div class="insight-box" id="dg-insights"></div>
+  </div>
+  <div class="card">
+    <div class="card-title">Annual Dividend Income Over Time</div>
+    <canvas id="dg-chart" width="300" height="170" style="width:100%;margin:1rem 0"></canvas>
+    <div id="dg-legend" style="display:flex;gap:12px;font-size:11px;color:var(--m);margin-bottom:1rem"><span style="color:var(--g)">━ Profile A</span></div>
+    <div style="overflow-x:auto"><table class="tbl" id="dg-table"></table></div>
+  </div>
+</div>
+
+<div class="calc-guide">
+  <div class="guide-toggle">
+    <div class="guide-toggle-title">📖 Dividend Growth Investing — Building Rising Income</div>
+  </div>
+  <div class="guide-body">
+<div class="guide-p">Dividend growth investing focuses on a different question than most return-chasing strategies: not "how much will my portfolio be worth," but "how much income will this investment pay me, and how fast will that income grow." A stock that raises its dividend payout consistently year after year can turn a modest starting yield into a remarkably large income stream over a long enough holding period — even without ever selling a single share or reinvesting a cent.</div>
+
+<div class="guide-h3">The Core Mechanism: Compounding Income, Not Just Price</div>
+<div class="guide-formula">Annual Income (Year n) = Shares Held × Dividend Per Share × (1 + Growth Rate)ⁿ⁻¹</div>
+<div class="guide-p">Unlike price appreciation, which depends entirely on what other investors are willing to pay for the stock in the future, dividend growth is driven by the company's own decision to pay out more per share — typically because earnings are growing and management chooses to share more of that growth with shareholders. This makes dividend income a more directly observable, less speculative kind of compounding than price-based returns alone.</div>
+
+<div class="guide-h3">Worked Example: From 3% Yield to a Much Higher Yield on Cost</div>
+<div class="guide-p">Investing $15,000 in a stock yielding 3% today, with dividends growing 8% annually, held for 20 years <em>without</em> reinvesting any dividends or buying additional shares:</div>
+<table class="guide-table"><thead><tr><th>Year</th><th>Annual Dividend Income</th></tr></thead><tbody>
+<tr><td>1</td><td>$450</td></tr>
+<tr><td>10</td><td>$900</td></tr>
+<tr><td>20</td><td>$1,942</td></tr>
+</tbody></table>
+<div class="guide-p">The original $15,000 investment now generates roughly $1,942 per year in dividend income alone — a <strong>yield on cost</strong> of about 12.95%, even though the stock's <em>current</em> yield to a new buyer might still look like a modest 3-4%. Yield on cost measures your income relative to what you originally paid, not the stock's current price, and it's the number that captures the real payoff of dividend growth investing held over a long horizon.</div>
+
+<div class="guide-h3">Yield on Cost vs Current Yield: Why the Distinction Matters</div>
+<div class="guide-formula">Yield on Cost = Current Annual Dividend Income ÷ Original Investment Amount × 100%</div>
+<div class="guide-p">A new investor buying the same stock today would only earn whatever the current yield happens to be — they don't benefit from years of past dividend increases the way an existing long-term holder does. Yield on cost is a backward-looking, holder-specific number; it's a great way to evaluate how a past decision has paid off, but it's not a metric you can use to evaluate whether to buy a stock today.</div>
+
+<div class="guide-h3">High Yield, Low Growth vs Low Yield, High Growth</div>
+<div class="guide-p">Two very different dividend profiles can produce dramatically different income trajectories over time, even starting from the same initial investment:</div>
+<table class="guide-table"><thead><tr><th>Profile</th><th>Starting Yield</th><th>Dividend Growth</th><th>Year 1 Income (on $15,000)</th><th>Year 20 Income</th></tr></thead><tbody>
+<tr><td>High Yield, Low Growth</td><td>5%</td><td>3%/yr</td><td>$750</td><td>$1,315</td></tr>
+<tr><td>Low Yield, High Growth</td><td>1.5%</td><td>12%/yr</td><td>$225</td><td>$1,938</td></tr>
+</tbody></table>
+<div class="guide-p">The high-yield stock starts well ahead — more than 3x the income in year one — but the faster-growing dividend overtakes it by around year 16, and pulls further ahead every year after that. Which profile "wins" depends entirely on your time horizon: someone needing income soon may reasonably prefer the higher starting yield, while someone with a longer runway before they need the income may come out ahead with the faster-growing, lower-starting payout.</div>
+
+<div class="guide-h3">Reinvesting vs Taking the Income</div>
+<div class="guide-p">This calculator lets you toggle whether dividends are reinvested into more shares (compounding both the share count and the per-share payout) or simply paid out and left as cash income. Reinvesting accelerates income growth substantially, since each year's dividends buy more shares, which then themselves pay (and grow) dividends — but it only makes sense if you don't actually need the cash income yet. Many investors reinvest during their working years and switch to taking dividends as cash once they need the income, typically in retirement.</div>
+
+<div class="guide-h3">Years for Income to Double: A Quick Mental Benchmark</div>
+<div class="guide-formula">Years to Double ≈ 72 ÷ Dividend Growth Rate (Rule of 72, applied to dividend growth instead of price growth)</div>
+<div class="guide-p">The same Rule of 72 used for price compounding works just as well for dividend income growth. A dividend growing 8% annually doubles roughly every 9 years; one growing 12% annually doubles roughly every 6 years. This is a useful quick gut-check for comparing dividend growth rates without running the full calculation.</div>
+<div class="guide-warn">⚠ Dividend growth is never perfectly steady in the real world — companies can freeze, cut, or even eliminate dividends during downturns, and growth rates fluctuate year to year. This calculator assumes one constant growth rate for the entire period for simplicity; treat the output as a planning illustration, not a guarantee of how any specific company's dividend will actually behave.</div>
+<div class="guide-tip">💡 When comparing dividend stocks, look at a company's dividend growth track record (how many consecutive years it has raised its payout, and by how much on average) alongside its payout ratio (what share of earnings the dividend consumes) — a high payout ratio leaves less room for future increases, while a low one suggests more room to keep growing the dividend.</div>
+
+  </div>
+</div>
+
+<div class="faq-section">
+<div class="faq-section-title">❓ Frequently Asked Questions</div>
+<div class="faq-item">
+  <div class="faq-q" onclick="toggleFAQ(this)">
+    <span>What is dividend growth investing?</span>
+    <span class="faq-icon">+</span>
+  </div>
+  <div class="faq-a">Dividend growth investing focuses on owning stocks that consistently increase their dividend payout over time, prioritizing rising income over time rather than just current yield or price appreciation. The goal is for your annual income from a fixed investment to grow substantially over a long holding period.</div>
+</div>
+<div class="faq-item">
+  <div class="faq-q" onclick="toggleFAQ(this)">
+    <span>What is yield on cost?</span>
+    <span class="faq-icon">+</span>
+  </div>
+  <div class="faq-a">Yield on cost is your current annual dividend income divided by what you originally paid for the investment, not its current market price. <span class="faq-formula">Yield on Cost = Current Annual Income ÷ Original Investment × 100%</span> It captures how much your income has grown relative to your original cost basis, but it's not useful for deciding whether to buy a stock today.</div>
+</div>
+<div class="faq-item">
+  <div class="faq-q" onclick="toggleFAQ(this)">
+    <span>Should I choose a high-yield or high-dividend-growth stock?</span>
+    <span class="faq-icon">+</span>
+  </div>
+  <div class="faq-a">It depends on your time horizon. A high-yield, low-growth stock provides more income sooner; a low-yield, high-growth stock provides less income at first but can overtake the higher-yield option after enough years, since the faster-growing payout compounds for longer. Compare both profiles directly with this calculator using your own numbers.</div>
+</div>
+<div class="faq-item">
+  <div class="faq-q" onclick="toggleFAQ(this)">
+    <span>Should I reinvest dividends or take them as income?</span>
+    <span class="faq-icon">+</span>
+  </div>
+  <div class="faq-a">If you don't need the cash yet, reinvesting accelerates your income growth substantially, since reinvested dividends buy more shares that then pay their own growing dividends. If you need the income now — common in retirement — taking dividends as cash makes more practical sense, even though it grows more slowly than reinvesting would.</div>
+</div>
+<div class="faq-item">
+  <div class="faq-q" onclick="toggleFAQ(this)">
+    <span>How many years does it take for dividend income to double?</span>
+    <span class="faq-icon">+</span>
+  </div>
+  <div class="faq-a">Using the Rule of 72: divide 72 by the annual dividend growth rate. A dividend growing 8% per year doubles in roughly 9 years; one growing 12% per year doubles in roughly 6 years. This calculator computes the precise figure automatically based on your inputs.</div>
+</div>
+<div class="faq-item">
+  <div class="faq-q" onclick="toggleFAQ(this)">
+    <span>What's the difference between this and the DRIP calculator?</span>
+    <span class="faq-icon">+</span>
+  </div>
+  <div class="faq-a">The DRIP calculator focuses on total portfolio value when dividends are automatically reinvested, including ongoing new contributions. This calculator focuses specifically on annual dividend <strong>income</strong> — how much cash income a holding generates each year and how that income grows — and lets you compare two different yield/growth profiles side by side.</div>
+</div>
+</div>
+
+
+</div>
+</div><!-- content -->
+<div class="site-footer">
+  <div class="footer-brand">
+    <div class="logo-mark" style="width:22px;height:22px;background:var(--a);border-radius:5px;display:flex;align-items:center;justify-content:center;color:#000;font-size:11px;font-weight:700">FC</div>
+    FinCalc
+  </div>
+  <div class="footer-links"><a href="index.html">All Calculators</a> · <a href="about.html">About</a> · <a href="contact.html">Contact</a> · <a href="privacy.html">Privacy</a> · <a href="terms.html">Terms</a></div>
+  <div class="footer-copy">© 2025 FinCalc · Free Financial Calculators</div>
+</div>
+<script src="app.js"></script>
+<script>initPage('divgrowth');</script>
+</body>
+</html>

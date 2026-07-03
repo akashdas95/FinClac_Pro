@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Equity Dilution Calculator | FinCalc Pro</title>
+<meta name="description" content="Model startup equity dilution across funding rounds. Free cap table and dilution calculator for founders and investors.">
+<link rel="canonical" href="https://yourdomain.com/equity.html">
+<meta name="robots" content="index, follow">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Equity Dilution Calculator | FinCalc Pro">
+<meta property="og:description" content="Model startup equity dilution across funding rounds. Free cap table and dilution calculator for founders and investors.">
+<meta property="og:url" content="https://yourdomain.com/equity.html">
+<meta property="og:site_name" content="FinCalc Pro">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Equity Dilution Calculator | FinCalc Pro">
+<meta name="twitter:description" content="Model startup equity dilution across funding rounds. Free cap table and dilution calculator for founders and investors.">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<div class="topbar">
+  <a class="logo" href="index.html"><div class="logo-mark">FC</div>FinCalc</a>
+  <div class="searchbox">
+    <svg width="14" height="14" fill="none" stroke="#6B7A8D" stroke-width="2" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+    <input id="srch" placeholder="Search 40 calculators..." oninput="doSearch()" onkeydown="if(event.key==='Enter')goSearch()">
+  </div>
+</div>
+<div class="nav">
+  <button class="ntab on" onclick="go('home',this)">🏠 Home</button>
+  <button class="ntab" onclick="go('cagr',this)">📐 CAGR</button>
+  <button class="ntab" onclick="go('xirr',this)">📅 XIRR</button>
+  <button class="ntab" onclick="go('drip',this)">💧 DRIP</button>
+  <button class="ntab" onclick="go('etf',this)">🗂️ ETF Growth</button>
+  <button class="ntab" onclick="go('dcf',this)">🏦 DCF Valuation</button>
+  <button class="ntab" onclick="go('debtcomp',this)">❄️ Snowball vs Avalanche</button>
+  <button class="ntab" onclick="go('rentalprop',this)">🏡 Rental Property</button>
+  <button class="ntab" onclick="go('burnrate',this)">🔥 Burn Rate</button>
+  <button class="ntab" onclick="go('pricing',this)">🏷️ Pricing</button>
+  <button class="ntab" onclick="go('equity',this)">📐 Equity Dilution</button>
+  <button class="ntab" onclick="go('revenue',this)">📊 Revenue Forecast</button>
+  <button class="ntab" onclick="go('loan',this)">🏦 Loan/EMI</button>
+  <button class="ntab" onclick="go('invest',this)">📈 SIP/Investment</button>
+  <button class="ntab" onclick="go('tax',this)">🧾 Tax</button>
+  <button class="ntab" onclick="go('mortgage',this)">🏠 Mortgage</button>
+  <button class="ntab" onclick="go('mortcomp',this)">⚖️ Mtg Compare</button>
+  <button class="ntab" onclick="go('savings',this)">🏛️ Savings</button>
+  <button class="ntab" onclick="go('stock',this)">📉 Stock P&amp;L</button>
+  <button class="ntab" onclick="go('retirement',this)">👴 Retirement</button>
+  <button class="ntab" onclick="go('debt',this)">💳 Debt Payoff</button>
+  <button class="ntab" onclick="go('rental',this)">🏘️ Rental Yield</button>
+  <button class="ntab" onclick="go('cashflow',this)">💵 Cash Flow</button>
+  <button class="ntab" onclick="go('breakeven',this)">📊 Break-even</button>
+  <button class="ntab" onclick="go('savingsgoal',this)">🎯 Savings Goal</button>
+  <button class="ntab" onclick="go('emergencyfund',this)">🛡️ Emergency Fund</button>
+  <button class="ntab" onclick="go('healthscore',this)">💯 Health Score</button>
+  <button class="ntab" onclick="go('currency',this)">💱 Currency</button>
+  <button class="ntab" onclick="go('scientific',this)">🔬 Scientific</button>
+</div>
+<div class="content">
+<div id="equity" class="panel on">
+<button class="back-btn" onclick="go('home',null)">← Back to Home</button>
+<div class="calc-links"><span class="calc-links-label">🔗 Related</span><button class="calc-link-btn" onclick="go('dilutionimpact',null)">📉 Stock Dilution Impact</button><button class="calc-link-btn" onclick="go('burnrate',null)">🔥 Burn Rate</button><button class="calc-link-btn" onclick="go('revenue',null)">📊 Revenue Forecast</button><button class="calc-link-btn" onclick="go('cagr',null)">📐 CAGR</button></div>
+
+
+<div class="two-eq mb16">
+  <div class="card">
+    <div class="card-title">Founding Team</div>
+    <div id="eq-founders"></div>
+    <button class="btn-sm btn-add" style="margin-top:8px" onclick="addFounder()">+ Add Founder</button>
+    <div style="margin-top:1rem;padding-top:1rem;border-top:1px solid var(--bd)"><div class="field"><label>Initial Option Pool (%)</label><input type="number" id="eq-pool" value="10" step="0.5" oninput="calcEquity()"></div></div>
+  </div>
+  <div class="card"><div class="card-title">Funding Rounds</div><div id="eq-rounds"></div><button class="btn-sm btn-add" style="margin-top:8px" onclick="addRound()">+ Add Round</button></div>
+</div>
+<div class="two-eq">
+  <div class="card"><div class="card-title">Cap Table</div><div style="overflow-x:auto"><table class="tbl" id="eq-table"></table></div></div>
+  <div class="card">
+    <div class="card-title">Ownership Breakdown</div>
+    <div class="donut-wrap"><canvas id="eq-chart" width="130" height="130"></canvas><div id="eq-legend"></div></div>
+    <div class="rrow"><span class="rk">Current valuation</span><span class="rv" style="color:var(--a)" id="eq-val">$0</span></div>
+    <div class="rrow"><span class="rk">Founder dilution</span><span class="rv" style="color:var(--r)" id="eq-dil">0%</span></div>
+    <div class="rrow"><span class="rk">Founder stake value</span><span class="rv" style="color:var(--g)" id="eq-fval">$0</span></div>
+    <div class="insight-box" id="eq-insights"></div>
+  </div>
+</div>
+
+<div class="calc-guide">
+  <div class="guide-toggle">
+    <div class="guide-toggle-title">📖 Founder Equity Dilution — Protecting Your Stake</div>
+  </div>
+  <div class="guide-body">
+<div class="guide-p">Every time a startup raises a funding round or grants employee stock options, existing shareholders own a smaller slice of a (hopefully) bigger pie. Understanding dilution mathematically — not just intuitively — is essential for founders negotiating term sheets and for early employees evaluating whether their equity grant is actually meaningful.</div>
+
+<div class="guide-h3">Pre-Money vs Post-Money Valuation</div>
+<div class="guide-formula">Post-Money Valuation = Pre-Money Valuation + New Investment Amount</div>
+<div class="guide-p">Pre-money valuation is what the company is worth immediately before new money comes in. Post-money is the valuation immediately after. If a company is valued at $8 million pre-money and raises $2 million, the post-money valuation is $10 million, and the new investor owns 2/10 = 20% of the company going forward.</div>
+
+<div class="guide-h3">Worked Example: Tracking Dilution Across Two Rounds</div>
+<div class="guide-p">A founder starts with 100% ownership (1,000,000 shares) of their company.</div>
+<table class="guide-table"><thead><tr><th>Event</th><th>New Shares Issued</th><th>Total Shares</th><th>Founder Ownership</th></tr></thead><tbody>
+<tr><td>Founding</td><td>—</td><td>1,000,000</td><td>100%</td></tr>
+<tr><td>Seed Round ($2M at $8M pre-money)</td><td>250,000</td><td>1,250,000</td><td>80%</td></tr>
+<tr><td>Employee Option Pool (10% top-up)</td><td>139,000</td><td>1,389,000</td><td>72%</td></tr>
+<tr><td>Series A ($5M at $20M pre-money)</td><td>347,250</td><td>1,736,250</td><td>57.6%</td></tr>
+</tbody></table>
+<div class="guide-p">By the end of two funding rounds plus an option pool expansion, the founder's percentage ownership has dropped from 100% to roughly 57.6% — but critically, their absolute stake is now worth far more than 100% of the original, much smaller company was worth, assuming the company's valuation genuinely increased through these rounds. This is the central trade-off of dilution: smaller slice, hopefully much bigger pie.</div>
+
+<div class="guide-h3">Does Dilution Always Mean You're Worse Off?</div>
+<div class="guide-p">Not necessarily — what matters is whether your absolute dollar value increased, not just your percentage. Going from 100% of a $1 million company ($1,000,000 in value) to 57.6% of a $25 million company (worth roughly $14.4 million on paper) is a dramatically better outcome despite the dilution, assuming that valuation increase reflects real, defensible business progress and not just inflated paper valuations that later get marked down.</div>
+
+<div class="guide-h3">Cap Tables: Tracking Everyone's Stake</div>
+<div class="guide-p">A capitalization table (cap table) is the master ledger tracking every shareholder, how many shares (or options) they hold, and their resulting ownership percentage. As a company raises successive rounds, issues option grants, and potentially converts notes or SAFEs into equity, the cap table becomes increasingly complex — many seed-stage founders underestimate how much dilution accumulates from seemingly small option pool top-ups requested by each new investor.</div>
+
+<div class="guide-h3">Pro-Rata Rights: Protecting Early Investors</div>
+<div class="guide-p">A pro-rata right gives an existing investor the contractual option (not obligation) to invest additional money in future rounds, specifically to maintain their current ownership percentage rather than being passively diluted by new investors. Sophisticated angel and seed investors frequently negotiate for pro-rata rights as standard deal terms, since maintaining ownership in a company's later, larger rounds (once risk has been substantially de-risked) is often where the bulk of return is generated.</div>
+
+<div class="guide-h3">The Option Pool Shuffle</div>
+<div class="guide-p">A subtle but important dynamic: new investors typically require the company to expand its employee option pool <em>before</em> their investment closes, which means the dilution from that pool expansion is effectively borne entirely by existing shareholders (founders and earlier investors), not by the new investor. This is a common, often underappreciated negotiation point — founders should always clarify whether a quoted valuation is "pre" or "post" option pool expansion, since the difference can meaningfully change effective dilution.</div>
+<div class="guide-warn">⚠ Always model dilution across multiple expected future rounds, not just the round you're currently negotiating. A seemingly generous offer today can look very different once you project two or three more rounds of reasonable dilution forward.</div>
+
+  </div>
+</div>
+
+<div class="faq-section">
+<div class="faq-section-title">❓ Frequently Asked Questions</div>
+<div class="faq-item">
+  <div class="faq-q" onclick="toggleFAQ(this)">
+    <span>What is equity dilution?</span>
+    <span class="faq-icon">+</span>
+  </div>
+  <div class="faq-a">Equity dilution happens when a company issues new shares — during fundraising or employee option grants. Your ownership <strong>percentage decreases</strong> even though you still hold the same number of shares.</div>
+</div>
+<div class="faq-item">
+  <div class="faq-q" onclick="toggleFAQ(this)">
+    <span>Does dilution mean I lose money?</span>
+    <span class="faq-icon">+</span>
+  </div>
+  <div class="faq-a">Not necessarily. If the new funding increases the company’s total value, your smaller percentage can be worth more in absolute dollars. The key question is whether the new capital creates enough value to offset the dilution.</div>
+</div>
+<div class="faq-item">
+  <div class="faq-q" onclick="toggleFAQ(this)">
+    <span>What is pre-money vs post-money valuation?</span>
+    <span class="faq-icon">+</span>
+  </div>
+  <div class="faq-a"><span class="faq-formula">Post-Money Valuation = Pre-Money Valuation + Investment Amount</span><strong>Pre-money</strong> is the company’s value before new investment. <strong>Post-money</strong> is after. If a company is valued at $4M pre-money and raises $1M, the post-money is $5M, and the investor owns 20%.</div>
+</div>
+<div class="faq-item">
+  <div class="faq-q" onclick="toggleFAQ(this)">
+    <span>What is a cap table?</span>
+    <span class="faq-icon">+</span>
+  </div>
+  <div class="faq-a">A capitalization table (cap table) lists all shareholders, how many shares each holds, and their ownership percentage. It tracks how dilution changes with each funding round, option grant, or convertible note conversion.</div>
+</div>
+<div class="faq-item">
+  <div class="faq-q" onclick="toggleFAQ(this)">
+    <span>What is a pro-rata right?</span>
+    <span class="faq-icon">+</span>
+  </div>
+  <div class="faq-a">A pro-rata right gives existing investors the option to <strong>maintain their ownership percentage</strong> in future funding rounds by investing their proportional share. It protects early investors from being diluted by later rounds.</div>
+</div>
+</div>
+
+
+</div>
+</div><!-- content -->
+<div class="site-footer">
+  <div class="footer-brand">
+    <div class="logo-mark" style="width:22px;height:22px;background:var(--a);border-radius:5px;display:flex;align-items:center;justify-content:center;color:#000;font-size:11px;font-weight:700">FC</div>
+    FinCalc
+  </div>
+  <div class="footer-links"><a href="index.html">All Calculators</a> · <a href="about.html">About</a> · <a href="contact.html">Contact</a> · <a href="privacy.html">Privacy</a> · <a href="terms.html">Terms</a></div>
+  <div class="footer-copy">© 2025 FinCalc · Free Financial Calculators</div>
+</div>
+<script src="app.js"></script>
+<script>initPage('equity');</script>
+</body>
+</html>

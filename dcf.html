@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>DCF Stock Valuation Calculator | FinCalc Pro</title>
+<meta name="description" content="Calculate intrinsic stock value with our free Discounted Cash Flow calculator. Includes WACC, terminal value, and bear/bull scenarios.">
+<link rel="canonical" href="https://yourdomain.com/dcf.html">
+<meta name="robots" content="index, follow">
+<meta property="og:type" content="website">
+<meta property="og:title" content="DCF Stock Valuation Calculator | FinCalc Pro">
+<meta property="og:description" content="Calculate intrinsic stock value with our free Discounted Cash Flow calculator. Includes WACC, terminal value, and bear/bull scenarios.">
+<meta property="og:url" content="https://yourdomain.com/dcf.html">
+<meta property="og:site_name" content="FinCalc Pro">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="DCF Stock Valuation Calculator | FinCalc Pro">
+<meta name="twitter:description" content="Calculate intrinsic stock value with our free Discounted Cash Flow calculator. Includes WACC, terminal value, and bear/bull scenarios.">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<div class="topbar">
+  <a class="logo" href="index.html"><div class="logo-mark">FC</div>FinCalc</a>
+  <div class="searchbox">
+    <svg width="14" height="14" fill="none" stroke="#6B7A8D" stroke-width="2" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+    <input id="srch" placeholder="Search 40 calculators..." oninput="doSearch()" onkeydown="if(event.key==='Enter')goSearch()">
+  </div>
+</div>
+<div class="nav">
+  <button class="ntab on" onclick="go('home',this)">🏠 Home</button>
+  <button class="ntab" onclick="go('cagr',this)">📐 CAGR</button>
+  <button class="ntab" onclick="go('xirr',this)">📅 XIRR</button>
+  <button class="ntab" onclick="go('drip',this)">💧 DRIP</button>
+  <button class="ntab" onclick="go('etf',this)">🗂️ ETF Growth</button>
+  <button class="ntab" onclick="go('dcf',this)">🏦 DCF Valuation</button>
+  <button class="ntab" onclick="go('debtcomp',this)">❄️ Snowball vs Avalanche</button>
+  <button class="ntab" onclick="go('rentalprop',this)">🏡 Rental Property</button>
+  <button class="ntab" onclick="go('burnrate',this)">🔥 Burn Rate</button>
+  <button class="ntab" onclick="go('pricing',this)">🏷️ Pricing</button>
+  <button class="ntab" onclick="go('equity',this)">📐 Equity Dilution</button>
+  <button class="ntab" onclick="go('revenue',this)">📊 Revenue Forecast</button>
+  <button class="ntab" onclick="go('loan',this)">🏦 Loan/EMI</button>
+  <button class="ntab" onclick="go('invest',this)">📈 SIP/Investment</button>
+  <button class="ntab" onclick="go('tax',this)">🧾 Tax</button>
+  <button class="ntab" onclick="go('mortgage',this)">🏠 Mortgage</button>
+  <button class="ntab" onclick="go('mortcomp',this)">⚖️ Mtg Compare</button>
+  <button class="ntab" onclick="go('savings',this)">🏛️ Savings</button>
+  <button class="ntab" onclick="go('stock',this)">📉 Stock P&amp;L</button>
+  <button class="ntab" onclick="go('retirement',this)">👴 Retirement</button>
+  <button class="ntab" onclick="go('debt',this)">💳 Debt Payoff</button>
+  <button class="ntab" onclick="go('rental',this)">🏘️ Rental Yield</button>
+  <button class="ntab" onclick="go('cashflow',this)">💵 Cash Flow</button>
+  <button class="ntab" onclick="go('breakeven',this)">📊 Break-even</button>
+  <button class="ntab" onclick="go('savingsgoal',this)">🎯 Savings Goal</button>
+  <button class="ntab" onclick="go('emergencyfund',this)">🛡️ Emergency Fund</button>
+  <button class="ntab" onclick="go('healthscore',this)">💯 Health Score</button>
+  <button class="ntab" onclick="go('currency',this)">💱 Currency</button>
+  <button class="ntab" onclick="go('scientific',this)">🔬 Scientific</button>
+</div>
+<div class="content">
+<div id="dcf" class="panel on">
+<button class="back-btn" onclick="go('home',null)">← Back to Home</button>
+<div class="calc-links"><span class="calc-links-label">🔗 Related</span><button class="calc-link-btn" onclick="go('peg',null)">📏 PEG Ratio</button><button class="calc-link-btn" onclick="go('cagr',null)">📐 CAGR</button><button class="calc-link-btn" onclick="go('stock',null)">📉 Stock P&amp;L</button><button class="calc-link-btn" onclick="go('etf',null)">🗂️ ETF Growth</button><button class="calc-link-btn" onclick="go('invest',null)">📈 Investment</button></div>
+
+
+<div class="two-eq mb16">
+  <div class="card">
+    <div class="card-title">DCF Inputs</div>
+    <div class="g2">
+      <div class="field"><label>Ticker / Name</label><input type="text" id="dc-ticker" value="AAPL" oninput="calcDCF()"></div>
+      <div class="field"><label>Current Price ($)</label><div class="ip"><span class="pfx">$</span><input type="number" id="dc-price" value="185" step="0.01" oninput="calcDCF()"></div></div>
+      <div class="field"><label>Current EPS ($)</label><div class="ip"><span class="pfx">$</span><input type="number" id="dc-eps" value="6.5" step="0.1" oninput="calcDCF()"></div></div>
+      <div class="field"><label>Shares Outstanding (B)</label><input type="number" id="dc-shares" value="15.4" step="0.1" oninput="calcDCF()"></div>
+      <div class="field"><label>EPS Growth Rate (%)</label><input type="number" id="dc-grow" value="12" step="0.5" oninput="calcDCF()"></div>
+      <div class="field"><label>Terminal Growth Rate (%)</label><input type="number" id="dc-tgrow" value="3" step="0.1" oninput="calcDCF()"></div>
+      <div class="field"><label>Discount Rate / WACC (%)</label><input type="number" id="dc-disc" value="10" step="0.5" oninput="calcDCF()"></div>
+      <div class="field"><label>Projection Period (years)</label><input type="number" id="dc-yrs" value="10" min="3" max="20" oninput="calcDCF()"></div>
+    </div>
+  </div>
+  <div class="card">
+    <div class="card-title">DCF Valuation — <span id="dc-ticker-lbl">AAPL</span></div>
+    <div style="text-align:center;padding:1rem 0;border-bottom:1px solid var(--bd);margin-bottom:1rem">
+      <div style="font-size:11px;color:var(--m);margin-bottom:4px">Intrinsic Fair Value</div>
+      <div style="font-size:38px;font-family:var(--mo);font-weight:600" id="dc-fair">$0</div>
+      <div style="font-size:13px;color:var(--m);margin-top:4px">Current: <span style="color:var(--t)" id="dc-cur">$185</span></div>
+    </div>
+    <div class="sgrid" style="margin-top:0;margin-bottom:1rem">
+      <div class="sbox"><div class="lbl">Upside / Downside</div><div class="val" id="dc-upside">0%</div></div>
+      <div class="sbox"><div class="lbl">Margin of Safety</div><div class="val" id="dc-mos">0%</div></div>
+      <div class="sbox"><div class="lbl">Market Cap</div><div class="val" id="dc-mktcap">$0</div></div>
+      <div class="sbox"><div class="lbl">Terminal Value PV</div><div class="val" style="color:var(--p)" id="dc-tvpv">$0</div></div>
+    </div>
+    <div style="background:var(--s2);border-radius:8px;padding:10px 12px;margin-bottom:10px">
+      <div style="font-size:10px;color:var(--m);margin-bottom:8px;text-transform:uppercase;letter-spacing:.5px">Scenario Analysis</div>
+      <div class="rrow"><span class="rk">Bear (×0.7)</span><span class="rv" id="dc-bear">$0</span></div>
+      <div class="rrow"><span class="rk">Base case</span><span class="rv" style="color:var(--a)" id="dc-base">$0</span></div>
+      <div class="rrow" style="border:none"><span class="rk">Bull (×1.3)</span><span class="rv" id="dc-bull">$0</span></div>
+    </div>
+    <div style="font-size:11px;color:var(--r);background:rgba(246,70,93,.08);border-radius:6px;padding:8px;margin-bottom:8px">⚠ DCF is highly sensitive to inputs. Always combine with qualitative research.</div>
+    <div class="insight-box" id="dc-insights"></div>
+  </div>
+</div>
+<div class="card">
+  <div class="card-title">EPS Projection &amp; Present Value Breakdown</div>
+  <div style="overflow-x:auto"><table class="tbl" id="dc-table"></table></div>
+  <canvas id="dc-chart" width="900" height="130" style="width:100%;margin-top:1rem"></canvas>
+  <div style="display:flex;gap:16px;margin-top:8px;font-size:11px;color:var(--m)">
+    <span style="color:var(--a)">━ Projected EPS</span><span style="color:var(--g)">╌ Present Value</span>
+  </div>
+<div class="calc-guide">
+  <div class="guide-toggle">
+    <div class="guide-toggle-title">📖 Stock DCF Valuation — Finding Intrinsic Value</div>
+  </div>
+  <div class="guide-body">
+<div class="guide-p">Discounted Cash Flow (DCF) analysis is the foundational method professional analysts use to answer the question "what is this stock actually worth?" — independent of whatever the market happens to be pricing it at today. The core insight behind DCF is simple even though the math can get involved: a business is worth the sum of all the cash it will generate for its owners in the future, with that future cash adjusted downward (discounted) to reflect the fact that money received later is worth less than money received today.</div>
+
+<div class="guide-h3">Why Discount Future Cash at All?</div>
+<div class="guide-p">A dollar promised to you in 10 years is worth less than a dollar in your hand today, for two reasons: you could invest today's dollar and grow it, and there's inherent uncertainty about whether that future dollar will actually arrive. The discount rate (often called WACC — Weighted Average Cost of Capital, or simply your required rate of return) captures both effects in a single number.</div>
+
+<div class="guide-h3">The Three Building Blocks of a DCF</div>
+<div class="guide-steps">
+<div class="guide-step"><div class="guide-step-num">1</div><div><strong>Projected Free Cash Flows</strong> — estimate the company's cash generation for the next 5-10 years based on historical growth rates, adjusted for expected changes in the business or industry.</div></div>
+<div class="guide-step"><div class="guide-step-num">2</div><div><strong>Discount Rate (WACC)</strong> — the annual rate used to convert each future year's cash flow back into today's dollars, reflecting risk and opportunity cost.</div></div>
+<div class="guide-step"><div class="guide-step-num">3</div><div><strong>Terminal Value</strong> — since companies (ideally) operate forever, not just for your 5-10 year projection window, terminal value estimates the value of all cash flows beyond that window, assuming a stable long-term growth rate.</div></div>
+</div>
+
+<div class="guide-h3">Worked Example: A Simplified DCF</div>
+<div class="guide-p">Imagine a company currently generating $10 million in free cash flow, expected to grow that cash flow 8% annually for the next 5 years, after which growth settles to a stable 2.5% forever (matching long-term GDP growth). Using a 9% discount rate:</div>
+<table class="guide-table"><thead><tr><th>Year</th><th>Projected FCF</th><th>Discounted Value</th></tr></thead><tbody>
+<tr><td>1</td><td>$10.8M</td><td>$9.9M</td></tr>
+<tr><td>2</td><td>$11.7M</td><td>$9.8M</td></tr>
+<tr><td>3</td><td>$12.6M</td><td>$9.7M</td></tr>
+<tr><td>4</td><td>$13.6M</td><td>$9.6M</td></tr>
+<tr><td>5</td><td>$14.7M</td><td>$9.6M</td></tr>
+</tbody></table>
+<div class="guide-p">Summing the discounted values of years 1-5 gives roughly $48.6M. The terminal value (cash flows beyond year 5, discounted back to today) typically dwarfs this — in this example it would add approximately $185M, illustrating a key truth about DCF: terminal value commonly represents 60-80% of total estimated company value, which means a huge portion of any DCF valuation hinges on an assumption about growth decades into the future that nobody can know with certainty.</div>
+
+<div class="guide-h3">Margin of Safety: Buffering for Your Own Uncertainty</div>
+<div class="guide-formula">Margin of Safety = (Intrinsic Value − Current Market Price) / Intrinsic Value × 100%</div>
+<div class="guide-p">Warren Buffett and his mentor Benjamin Graham popularized the practice of only buying when a stock trades at a significant discount (commonly 20-30%) to your calculated intrinsic value. This buffer protects you if your growth assumptions turn out to be too optimistic — you still come out reasonably well even if reality undershoots your projections.</div>
+
+<div class="guide-h3">Why DCF Is So Sensitive to Small Input Changes</div>
+<div class="guide-p">Because cash flows are projected years into the future and then compounded/discounted repeatedly, even small changes in assumptions create dramatically different valuations. Moving your discount rate from 8% to 9% — a change that might feel trivial — can shift the calculated intrinsic value by 15-25% or more. This sensitivity is precisely why professional analysts never rely on a single DCF output; they run scenario analysis instead.</div>
+<table class="guide-table"><thead><tr><th>Scenario</th><th>Typical Adjustment</th></tr></thead><tbody>
+<tr><td>Bear case</td><td>Lower growth rate, higher discount rate</td></tr>
+<tr><td>Base case</td><td>Most likely/consensus assumptions</td></tr>
+<tr><td>Bull case</td><td>Higher growth rate, lower discount rate</td></tr>
+</tbody></table>
+<div class="guide-warn">⚠ DCF is only as good as its inputs — "garbage in, garbage out" applies more to DCF than almost any other financial model. Always sanity-check your terminal growth rate against realistic long-term GDP growth (typically 2-3%), since assuming a company grows faster than the entire economy forever is mathematically impossible over a long enough horizon.</div>
+
+  </div>
+</div>
+
+<div class="faq-section">
+<div class="faq-section-title">❓ Frequently Asked Questions</div>
+<div class="faq-item">
+  <div class="faq-q" onclick="toggleFAQ(this)">
+    <span>What is DCF valuation?</span>
+    <span class="faq-icon">+</span>
+  </div>
+  <div class="faq-a">DCF (Discounted Cash Flow) estimates a stock’s <strong>intrinsic value</strong> by projecting future earnings and discounting them to today’s money. If intrinsic value is higher than the current price, the stock may be undervalued.</div>
+</div>
+<div class="faq-item">
+  <div class="faq-q" onclick="toggleFAQ(this)">
+    <span>What is a discount rate (WACC)?</span>
+    <span class="faq-icon">+</span>
+  </div>
+  <div class="faq-a">The discount rate represents your <strong>required rate of return</strong> — the minimum you expect to justify the risk. For stocks, most investors use 8–12%. A higher discount rate gives a lower, more conservative intrinsic value.</div>
+</div>
+<div class="faq-item">
+  <div class="faq-q" onclick="toggleFAQ(this)">
+    <span>What is terminal value in DCF?</span>
+    <span class="faq-icon">+</span>
+  </div>
+  <div class="faq-a">Terminal value captures all earnings <strong>beyond the projection period</strong>, assuming the company grows at a stable rate forever (usually 2–3%, matching long-term GDP growth). It often makes up 60–80% of the total DCF value.</div>
+</div>
+<div class="faq-item">
+  <div class="faq-q" onclick="toggleFAQ(this)">
+    <span>What is margin of safety?</span>
+    <span class="faq-icon">+</span>
+  </div>
+  <div class="faq-a"><span class="faq-formula">Margin of Safety = (Intrinsic Value − Current Price) / Intrinsic Value × 100%</span>Warren Buffett popularized buying stocks with a 20–30% margin of safety — so even if your projections are off, you still make money.</div>
+</div>
+<div class="faq-item">
+  <div class="faq-q" onclick="toggleFAQ(this)">
+    <span>Why is DCF so sensitive to inputs?</span>
+    <span class="faq-icon">+</span>
+  </div>
+  <div class="faq-a">Small changes in growth rate or discount rate create large swings because of compounding over many years. A 1% change in the discount rate can shift valuation by 20–30%. Always run bear and bull scenarios, never rely on a single estimate.</div>
+</div>
+</div>
+
+</div>
+</div>
+</div><!-- content -->
+<div class="site-footer">
+  <div class="footer-brand">
+    <div class="logo-mark" style="width:22px;height:22px;background:var(--a);border-radius:5px;display:flex;align-items:center;justify-content:center;color:#000;font-size:11px;font-weight:700">FC</div>
+    FinCalc
+  </div>
+  <div class="footer-links"><a href="index.html">All Calculators</a> · <a href="about.html">About</a> · <a href="contact.html">Contact</a> · <a href="privacy.html">Privacy</a> · <a href="terms.html">Terms</a></div>
+  <div class="footer-copy">© 2025 FinCalc · Free Financial Calculators</div>
+</div>
+<script src="app.js"></script>
+<script>initPage('dcf');</script>
+</body>
+</html>

@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Scientific Calculator | FinCalc Pro</title>
+<meta name="description" content="Free online scientific calculator with trigonometric, logarithmic, and exponential functions for financial math.">
+<link rel="canonical" href="https://yourdomain.com/scientific.html">
+<meta name="robots" content="index, follow">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Scientific Calculator | FinCalc Pro">
+<meta property="og:description" content="Free online scientific calculator with trigonometric, logarithmic, and exponential functions for financial math.">
+<meta property="og:url" content="https://yourdomain.com/scientific.html">
+<meta property="og:site_name" content="FinCalc Pro">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Scientific Calculator | FinCalc Pro">
+<meta name="twitter:description" content="Free online scientific calculator with trigonometric, logarithmic, and exponential functions for financial math.">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<div class="topbar">
+  <a class="logo" href="index.html"><div class="logo-mark">FC</div>FinCalc</a>
+  <div class="searchbox">
+    <svg width="14" height="14" fill="none" stroke="#6B7A8D" stroke-width="2" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+    <input id="srch" placeholder="Search 40 calculators..." oninput="doSearch()" onkeydown="if(event.key==='Enter')goSearch()">
+  </div>
+</div>
+<div class="nav">
+  <button class="ntab on" onclick="go('home',this)">🏠 Home</button>
+  <button class="ntab" onclick="go('cagr',this)">📐 CAGR</button>
+  <button class="ntab" onclick="go('xirr',this)">📅 XIRR</button>
+  <button class="ntab" onclick="go('drip',this)">💧 DRIP</button>
+  <button class="ntab" onclick="go('etf',this)">🗂️ ETF Growth</button>
+  <button class="ntab" onclick="go('dcf',this)">🏦 DCF Valuation</button>
+  <button class="ntab" onclick="go('debtcomp',this)">❄️ Snowball vs Avalanche</button>
+  <button class="ntab" onclick="go('rentalprop',this)">🏡 Rental Property</button>
+  <button class="ntab" onclick="go('burnrate',this)">🔥 Burn Rate</button>
+  <button class="ntab" onclick="go('pricing',this)">🏷️ Pricing</button>
+  <button class="ntab" onclick="go('equity',this)">📐 Equity Dilution</button>
+  <button class="ntab" onclick="go('revenue',this)">📊 Revenue Forecast</button>
+  <button class="ntab" onclick="go('loan',this)">🏦 Loan/EMI</button>
+  <button class="ntab" onclick="go('invest',this)">📈 SIP/Investment</button>
+  <button class="ntab" onclick="go('tax',this)">🧾 Tax</button>
+  <button class="ntab" onclick="go('mortgage',this)">🏠 Mortgage</button>
+  <button class="ntab" onclick="go('mortcomp',this)">⚖️ Mtg Compare</button>
+  <button class="ntab" onclick="go('savings',this)">🏛️ Savings</button>
+  <button class="ntab" onclick="go('stock',this)">📉 Stock P&amp;L</button>
+  <button class="ntab" onclick="go('retirement',this)">👴 Retirement</button>
+  <button class="ntab" onclick="go('debt',this)">💳 Debt Payoff</button>
+  <button class="ntab" onclick="go('rental',this)">🏘️ Rental Yield</button>
+  <button class="ntab" onclick="go('cashflow',this)">💵 Cash Flow</button>
+  <button class="ntab" onclick="go('breakeven',this)">📊 Break-even</button>
+  <button class="ntab" onclick="go('savingsgoal',this)">🎯 Savings Goal</button>
+  <button class="ntab" onclick="go('emergencyfund',this)">🛡️ Emergency Fund</button>
+  <button class="ntab" onclick="go('healthscore',this)">💯 Health Score</button>
+  <button class="ntab" onclick="go('currency',this)">💱 Currency</button>
+  <button class="ntab" onclick="go('scientific',this)">🔬 Scientific</button>
+</div>
+<div class="content">
+<div id="scientific" class="panel on">
+<button class="back-btn" onclick="go('home',null)">← Back to Home</button>
+<div style="max-width:420px">
+  <div class="card">
+    <div class="card-title">Scientific Calculator</div>
+
+
+    <div class="sci-disp"><div class="sci-expr" id="sc-expr"></div><div class="sci-num" id="sc-disp">0</div></div>
+    <div class="sci-grid" id="sc-grid"></div>
+  </div>
+<div class="calc-guide">
+  <div class="guide-toggle">
+    <div class="guide-toggle-title">📖 Scientific Calculator — Function Reference</div>
+  </div>
+  <div class="guide-body">
+<div class="guide-p">Beyond basic arithmetic, several financial calculations genuinely require functions you won't find on a simple four-function calculator — particularly anything involving compounding, doubling time, or solving for an unknown number of periods. Understanding when and why these functions apply turns this calculator into more than just a generic utility.</div>
+
+<div class="guide-h3">Order of Operations: The Foundation</div>
+<div class="guide-p">Every calculation, however complex, follows PEMDAS/BODMAS: Parentheses/Brackets first, then Exponents/Orders, then Multiplication and Division (evaluated left to right), then Addition and Subtraction (also left to right). When in doubt about how an expression will be evaluated, adding explicit parentheses removes any ambiguity — this is especially important for compound interest formulas where the placement of parentheses around the exponent term changes the entire result.</div>
+
+<div class="guide-h3">Compound Interest: Where Exponents Become Essential</div>
+<div class="guide-formula">A = P × (1 + r/n)^(n×t)</div>
+<div class="guide-p">Worked example: $10,000 invested at 8% annual interest, compounded monthly, for 10 years.</div>
+<div class="guide-formula">A = 10,000 × (1 + 0.08/12)^(12×10)<br>= 10,000 × (1.006667)^120<br>= 10,000 × 2.2196<br>= $22,196</div>
+<div class="guide-p">Without exponent functionality, computing (1.006667)^120 by hand would require multiplying the number by itself 120 times — clearly impractical, which is exactly why this calculation depends on a proper exponent (power) function rather than basic multiplication alone.</div>
+
+<div class="guide-h3">Logarithms: Solving for Time or Rate</div>
+<div class="guide-p">Logarithms become necessary whenever you need to solve for an exponent itself — for example, "how many years until my investment doubles" rather than "what will my investment be worth after a fixed number of years."</div>
+<div class="guide-formula">n = log(Future Value / Present Value) / log(1 + r)</div>
+<div class="guide-p">Worked example: how many years to grow $10,000 into $25,000 at a 9% annual return?</div>
+<div class="guide-formula">n = log(25,000/10,000) / log(1.09)<br>= log(2.5) / log(1.09)<br>= 0.39794 / 0.03743<br>≈ 10.63 years</div>
+
+<div class="guide-h3">Natural Log (ln) and Continuous Compounding</div>
+<div class="guide-formula">Continuous Compounding: A = P × e^(rt)<br>Doubling Time (continuous): t = ln(2) / r ≈ 0.693/r</div>
+<div class="guide-p">Continuous compounding represents the theoretical limit of compounding frequency — interest compounding constantly rather than monthly, daily, or even hourly. While few real-world accounts actually compound continuously, the formula appears throughout advanced finance, including in option pricing models like Black-Scholes, where continuous compounding assumptions simplify the underlying mathematics considerably.</div>
+
+<div class="guide-h3">The Rule of 72 as a Logarithm Shortcut</div>
+<div class="guide-p">The famous Rule of 72 (Doubling Time ≈ 72/rate%) is actually a simplified approximation of the more precise logarithmic formula above, calibrated to be most accurate in the 6-10% interest rate range commonly encountered in real investing scenarios. At very high or very low rates, the approximation drifts further from the precise logarithmic answer, which is when a full scientific calculation becomes genuinely more accurate than the mental-math shortcut.</div>
+<table class="guide-table"><thead><tr><th>Interest Rate</th><th>Rule of 72 Estimate</th><th>Precise Logarithmic Answer</th></tr></thead><tbody>
+<tr><td>4%</td><td>18.0 years</td><td>17.67 years</td></tr>
+<tr><td>8%</td><td>9.0 years</td><td>9.01 years</td></tr>
+<tr><td>20%</td><td>3.6 years</td><td>3.80 years</td></tr>
+</tbody></table>
+<div class="guide-tip">💡 When working through any multi-step financial formula by hand, calculate and double-check intermediate results (like the exponent term alone) before combining them into the final answer — isolating each step makes it far easier to spot an error than debugging a single large expression all at once.</div>
+
+  </div>
+</div>
+
+<div class="faq-section">
+<div class="faq-section-title">❓ Frequently Asked Questions</div>
+<div class="faq-item">
+  <div class="faq-q" onclick="toggleFAQ(this)">
+    <span>When would I use a scientific calculator for finance?</span>
+    <span class="faq-icon">+</span>
+  </div>
+  <div class="faq-a">Scientific calculators are useful for: <strong>compound interest</strong> (uses exponents), <strong>logarithms</strong> for calculating time periods (how long to double?), <strong>present/future value</strong> formulas, and bond pricing calculations. The ln and log functions are especially common in finance.</div>
+</div>
+<div class="faq-item">
+  <div class="faq-q" onclick="toggleFAQ(this)">
+    <span>What is the order of operations?</span>
+    <span class="faq-icon">+</span>
+  </div>
+  <div class="faq-a">Calculators follow PEMDAS/BODMAS: <strong>P</strong>arentheses first, then <strong>E</strong>xponents, then <strong>M</strong>ultiplication and <strong>D</strong>ivision (left to right), then <strong>A</strong>ddition and <strong>S</strong>ubtraction. Always use parentheses when in doubt.</div>
+</div>
+<div class="faq-item">
+  <div class="faq-q" onclick="toggleFAQ(this)">
+    <span>How do I calculate compound interest manually?</span>
+    <span class="faq-icon">+</span>
+  </div>
+  <div class="faq-a"><span class="faq-formula">A = P × (1 + r/n)^(n×t)</span>Where P = principal, r = annual rate, n = compounds per year, t = years. Example: $10,000 at 8% compounded monthly for 10 years = 10,000 × (1 + 0.08/12)^120 = <strong>$22,196</strong>.</div>
+</div>
+<div class="faq-item">
+  <div class="faq-q" onclick="toggleFAQ(this)">
+    <span>What is ln (natural logarithm) used for in finance?</span>
+    <span class="faq-icon">+</span>
+  </div>
+  <div class="faq-a">In finance, ln is used in <strong>continuous compounding</strong> (A = Pe^(rt)), <strong>Black-Scholes option pricing</strong>, and calculating growth rates. How long to double at rate r with continuous compounding: t = ln(2)/r ≈ 0.693/r.</div>
+</div>
+<div class="faq-item">
+  <div class="faq-q" onclick="toggleFAQ(this)">
+    <span>How do I calculate the number of periods to reach a goal?</span>
+    <span class="faq-icon">+</span>
+  </div>
+  <div class="faq-a"><span class="faq-formula">n = log(FV/PV) / log(1 + r)</span>To find years to grow $10,000 to $20,000 at 7%: n = log(2) / log(1.07) = 10.24 years. This is the math behind the Rule of 72 approximation.</div>
+</div>
+</div>
+
+</div>
+</div>
+</div><!-- content -->
+<div class="site-footer">
+  <div class="footer-brand">
+    <div class="logo-mark" style="width:22px;height:22px;background:var(--a);border-radius:5px;display:flex;align-items:center;justify-content:center;color:#000;font-size:11px;font-weight:700">FC</div>
+    FinCalc
+  </div>
+  <div class="footer-links"><a href="index.html">All Calculators</a> · <a href="about.html">About</a> · <a href="contact.html">Contact</a> · <a href="privacy.html">Privacy</a> · <a href="terms.html">Terms</a></div>
+  <div class="footer-copy">© 2025 FinCalc · Free Financial Calculators</div>
+</div>
+<script src="app.js"></script>
+<script>initPage('scientific');</script>
+</body>
+</html>

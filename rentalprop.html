@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Rental Property Calculator — Cap Rate & Cash-on-Cash Return | FinCalc Pro</title>
+<meta name="description" content="Analyze rental property returns with cap rate, cash-on-cash return, and NOI. Free rental property investment calculator.">
+<link rel="canonical" href="https://yourdomain.com/rentalprop.html">
+<meta name="robots" content="index, follow">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Rental Property Calculator — Cap Rate & Cash-on-Cash Return | FinCalc Pro">
+<meta property="og:description" content="Analyze rental property returns with cap rate, cash-on-cash return, and NOI. Free rental property investment calculator.">
+<meta property="og:url" content="https://yourdomain.com/rentalprop.html">
+<meta property="og:site_name" content="FinCalc Pro">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Rental Property Calculator — Cap Rate & Cash-on-Cash Return | FinCalc Pro">
+<meta name="twitter:description" content="Analyze rental property returns with cap rate, cash-on-cash return, and NOI. Free rental property investment calculator.">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<div class="topbar">
+  <a class="logo" href="index.html"><div class="logo-mark">FC</div>FinCalc</a>
+  <div class="searchbox">
+    <svg width="14" height="14" fill="none" stroke="#6B7A8D" stroke-width="2" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+    <input id="srch" placeholder="Search 40 calculators..." oninput="doSearch()" onkeydown="if(event.key==='Enter')goSearch()">
+  </div>
+</div>
+<div class="nav">
+  <button class="ntab on" onclick="go('home',this)">🏠 Home</button>
+  <button class="ntab" onclick="go('cagr',this)">📐 CAGR</button>
+  <button class="ntab" onclick="go('xirr',this)">📅 XIRR</button>
+  <button class="ntab" onclick="go('drip',this)">💧 DRIP</button>
+  <button class="ntab" onclick="go('etf',this)">🗂️ ETF Growth</button>
+  <button class="ntab" onclick="go('dcf',this)">🏦 DCF Valuation</button>
+  <button class="ntab" onclick="go('debtcomp',this)">❄️ Snowball vs Avalanche</button>
+  <button class="ntab" onclick="go('rentalprop',this)">🏡 Rental Property</button>
+  <button class="ntab" onclick="go('burnrate',this)">🔥 Burn Rate</button>
+  <button class="ntab" onclick="go('pricing',this)">🏷️ Pricing</button>
+  <button class="ntab" onclick="go('equity',this)">📐 Equity Dilution</button>
+  <button class="ntab" onclick="go('revenue',this)">📊 Revenue Forecast</button>
+  <button class="ntab" onclick="go('loan',this)">🏦 Loan/EMI</button>
+  <button class="ntab" onclick="go('invest',this)">📈 SIP/Investment</button>
+  <button class="ntab" onclick="go('tax',this)">🧾 Tax</button>
+  <button class="ntab" onclick="go('mortgage',this)">🏠 Mortgage</button>
+  <button class="ntab" onclick="go('mortcomp',this)">⚖️ Mtg Compare</button>
+  <button class="ntab" onclick="go('savings',this)">🏛️ Savings</button>
+  <button class="ntab" onclick="go('stock',this)">📉 Stock P&amp;L</button>
+  <button class="ntab" onclick="go('retirement',this)">👴 Retirement</button>
+  <button class="ntab" onclick="go('debt',this)">💳 Debt Payoff</button>
+  <button class="ntab" onclick="go('rental',this)">🏘️ Rental Yield</button>
+  <button class="ntab" onclick="go('cashflow',this)">💵 Cash Flow</button>
+  <button class="ntab" onclick="go('breakeven',this)">📊 Break-even</button>
+  <button class="ntab" onclick="go('savingsgoal',this)">🎯 Savings Goal</button>
+  <button class="ntab" onclick="go('emergencyfund',this)">🛡️ Emergency Fund</button>
+  <button class="ntab" onclick="go('healthscore',this)">💯 Health Score</button>
+  <button class="ntab" onclick="go('currency',this)">💱 Currency</button>
+  <button class="ntab" onclick="go('scientific',this)">🔬 Scientific</button>
+</div>
+<div class="content">
+<div id="rentalprop" class="panel on">
+<button class="back-btn" onclick="go('home',null)">← Back to Home</button>
+<div class="calc-links"><span class="calc-links-label">🔗 Related</span><button class="calc-link-btn" onclick="go('rental',null)">🏘️ Rental Yield</button><button class="calc-link-btn" onclick="go('mortgage',null)">🏠 Mortgage</button><button class="calc-link-btn" onclick="go('cagr',null)">📐 CAGR</button><button class="calc-link-btn" onclick="go('cashflow',null)">💵 Cash Flow</button></div>
+
+
+<div class="two-eq mb16">
+  <div class="card">
+    <div class="card-title">Property & Financing</div>
+    <div class="g2">
+      <div class="field"><label>Purchase Price ($)</label><div class="ip"><span class="pfx">$</span><input type="number" id="rp-price" value="350000" oninput="calcRP()"></div></div>
+      <div class="field"><label>Down Payment (%)</label><input type="number" id="rp-down" value="25" oninput="calcRP()"></div>
+      <div class="field"><label>Mortgage Rate (% p.a.)</label><input type="number" id="rp-rate" value="7" step="0.1" oninput="calcRP()"></div>
+      <div class="field"><label>Loan Tenure (years)</label><input type="number" id="rp-tenure" value="30" oninput="calcRP()"></div>
+      <div class="field"><label>Monthly Rent ($)</label><div class="ip"><span class="pfx">$</span><input type="number" id="rp-rent" value="2500" oninput="calcRP()"></div></div>
+      <div class="field"><label>Vacancy Rate (%)</label><input type="number" id="rp-vac" value="5" oninput="calcRP()"></div>
+      <div class="field"><label>Annual Appreciation (%)</label><input type="number" id="rp-appr" value="4" step="0.5" oninput="calcRP()"></div>
+    </div>
+  </div>
+  <div class="card">
+    <div class="card-title">Operating Costs</div>
+    <div class="g2">
+      <div class="field"><label>Property Tax (annual $)</label><div class="ip"><span class="pfx">$</span><input type="number" id="rp-ptax" value="4200" oninput="calcRP()"></div></div>
+      <div class="field"><label>Insurance (annual $)</label><div class="ip"><span class="pfx">$</span><input type="number" id="rp-ins" value="1500" oninput="calcRP()"></div></div>
+      <div class="field"><label>Maintenance (monthly $)</label><div class="ip"><span class="pfx">$</span><input type="number" id="rp-maint" value="200" oninput="calcRP()"></div></div>
+      <div class="field"><label>Property Mgmt (%)</label><input type="number" id="rp-mgmt" value="8" oninput="calcRP()"></div>
+      <div class="field"><label>Buying/Closing Costs (%)</label><input type="number" id="rp-buycost" value="3" step="0.5" oninput="calcRP()"></div>
+    </div>
+  </div>
+</div>
+<div class="three">
+  <div class="card">
+    <div class="card-title">Return Metrics</div>
+    <div class="sgrid" style="margin-top:0">
+      <div class="sbox"><div class="lbl">Gross Yield</div><div class="val" style="color:var(--a)" id="rp-gross">0%</div></div>
+      <div class="sbox"><div class="lbl">Cap Rate</div><div class="val" style="color:var(--b)" id="rp-cap">0%</div></div>
+      <div class="sbox"><div class="lbl">Cash-on-Cash Return</div><div class="val" id="rp-coc">0%</div></div>
+      <div class="sbox"><div class="lbl">Annual NOI</div><div class="val" id="rp-noi">$0</div></div>
+    </div>
+    <div class="rrow" style="margin-top:.5rem"><span class="rk">Monthly mortgage</span><span class="rv" id="rp-mort">$0</span></div>
+    <div class="rrow"><span class="rk">Effective monthly rent</span><span class="rv" id="rp-effrent">$0</span></div>
+    <div class="rrow"><span class="rk">Monthly cash flow</span><span class="rv" id="rp-cf">$0</span></div>
+    <div class="rrow"><span class="rk">Total invested (incl. costs)</span><span class="rv" id="rp-totalinv">$0</span></div>
+  </div>
+  <div class="card">
+    <div class="card-title">10-Year Projection</div>
+    <canvas id="rp-chart" width="280" height="155" style="width:100%;margin-bottom:1rem"></canvas>
+    <div style="display:flex;gap:10px;font-size:11px;color:var(--m);margin-bottom:.75rem"><span style="color:var(--a)">━ Property value</span><span style="color:var(--g)">━ Cumul. rent</span></div>
+    <div class="rrow"><span class="rk">Property value (10 yr)</span><span class="rv" style="color:var(--a)" id="rp-10v">$0</span></div>
+    <div class="rrow"><span class="rk">Total rental income</span><span class="rv" style="color:var(--g)" id="rp-10r">$0</span></div>
+    <div class="rrow"><span class="rk">10-yr total return</span><span class="rv" id="rp-10ret">0%</span></div>
+  </div>
+  <div class="card">
+    <div class="card-title">Investment Verdict</div>
+    <div id="rp-verdict" style="margin-bottom:1rem"></div>
+    <div class="donut-wrap"><canvas id="rp-donut" width="110" height="110"></canvas>
+      <div><div class="leg-i"><div class="leg-dot" style="background:var(--g)"></div>Net income</div><div class="leg-i"><div class="leg-dot" style="background:var(--r)"></div>Mortgage</div><div class="leg-i"><div class="leg-dot" style="background:var(--m)"></div>Costs</div></div>
+    </div>
+    <div class="insight-box" id="rp-insights"></div>
+  </div>
+</div>
+
+<div class="calc-guide">
+  <div class="guide-toggle">
+    <div class="guide-toggle-title">📖 Rental Property Investment — Full Analysis Guide</div>
+  </div>
+  <div class="guide-body">
+<div class="guide-p">Real estate investing is often pitched as a single number — "this property will rent for $X" — but professional real estate investors evaluate a property across four distinct return streams that compound together: rental income (cash flow), forced or natural appreciation (the property's value rising over time), mortgage paydown (tenants effectively paying down your loan for you), and tax benefits (depreciation and deductions). Looking at only one of these in isolation is how new investors end up disappointed by a property that "looked great on paper."</div>
+
+<div class="guide-h3">The 1% Rule: A Quick First Filter</div>
+<div class="guide-p">Before running detailed numbers on a property, experienced investors use a quick screening heuristic: monthly rent should equal at least 1% of the purchase price. A $300,000 property should rent for roughly $3,000/month or more to be worth a closer look. This rule isn't a guarantee of profitability — it's a filter to avoid wasting time running full numbers on properties that are obviously priced too high relative to achievable rent.</div>
+
+<div class="guide-h3">Net Operating Income: The Foundation Metric</div>
+<div class="guide-formula">NOI = Gross Rental Income − Operating Expenses (excludes mortgage payments)</div>
+<div class="guide-p">NOI deliberately excludes your mortgage payment because it's meant to measure the property's pure operating performance, independent of how you happened to finance it. This makes NOI the right metric for comparing two different properties, even if one is financed with cash and another with a mortgage.</div>
+
+<div class="guide-h3">Worked Example: Full Property Analysis</div>
+<div class="guide-p">Consider a $350,000 rental property with a 25% down payment ($87,500), financed at 7% over 30 years, renting for $2,500/month.</div>
+<table class="guide-table"><thead><tr><th>Item</th><th>Annual Amount</th></tr></thead><tbody>
+<tr><td>Gross Rental Income (12 × $2,500)</td><td>$30,000</td></tr>
+<tr><td>Less: Vacancy (5%)</td><td>−$1,500</td></tr>
+<tr><td>Less: Property Tax</td><td>−$4,200</td></tr>
+<tr><td>Less: Insurance</td><td>−$1,500</td></tr>
+<tr><td>Less: Maintenance (~1% of value)</td><td>−$3,500</td></tr>
+<tr><td>Less: Property Management (8%)</td><td>−$2,280</td></tr>
+<tr><td><strong>Net Operating Income (NOI)</strong></td><td><strong>$17,020</strong></td></tr>
+</tbody></table>
+<div class="guide-formula">Cap Rate = NOI / Property Value = $17,020 / $350,000 = 4.86%</div>
+<div class="guide-p">The mortgage on $262,500 at 7% over 30 years runs roughly $1,746/month, or $20,952/year. Subtracting this from NOI gives an annual cash flow of −$3,932 — meaning this particular property is actually <strong>cash flow negative</strong> at these assumptions, despite a respectable cap rate. This is a common and important discovery: a property can look attractive on a cap-rate basis while still draining cash from your pocket every month once financing is factored in, which is exactly why both metrics need to be checked together.</div>
+
+<div class="guide-h3">Cash-on-Cash Return: The Investor's Real Yardstick</div>
+<div class="guide-formula">Cash-on-Cash Return = Annual Pre-Tax Cash Flow / Total Cash Invested × 100%</div>
+<div class="guide-p">Total cash invested includes your down payment plus closing costs (typically 2-5% of purchase price). This metric tells you the return on the actual cash you put at risk, which is often far more meaningful to an investor using leverage than cap rate alone. A property with a modest cap rate can still deliver an excellent cash-on-cash return if financed favorably — and vice versa.</div>
+
+<div class="guide-h3">The Hidden Costs New Investors Routinely Miss</div>
+<table class="guide-table"><thead><tr><th>Cost Category</th><th>Typical Range</th><th>Why It's Often Missed</th></tr></thead><tbody>
+<tr><td>Vacancy</td><td>5-10% of annual rent</td><td>New investors assume 100% occupancy year-round</td></tr>
+<tr><td>CapEx Reserve</td><td>$1,000-3,000/year</td><td>Roof, HVAC, water heater replacement — infrequent but expensive</td></tr>
+<tr><td>Property Management</td><td>8-12% of collected rent</td><td>Often skipped in self-management estimates, even when investors later hire help</td></tr>
+<tr><td>Tenant turnover costs</td><td>1 month's rent equivalent</td><td>Cleaning, repairs, marketing between tenants</td></tr>
+</tbody></table>
+
+<div class="guide-h3">Target Benchmarks Most Investors Use</div>
+<div class="guide-p">As a rough guide, many real estate investors look for a cap rate above 5%, a cash-on-cash return above 8%, and positive monthly cash flow after every single realistic expense category above — not just the obvious ones like mortgage and tax.</div>
+<div class="guide-warn">⚠ Never evaluate a rental property using gross rental yield alone (rent ÷ price). It's the most commonly cited number in real estate listings precisely because it's the most flattering — and the least informative about whether you'll actually make money.</div>
+
+  </div>
+</div>
+
+<div class="faq-section">
+<div class="faq-section-title">❓ Frequently Asked Questions</div>
+<div class="faq-item">
+  <div class="faq-q" onclick="toggleFAQ(this)">
+    <span>What is cash-on-cash return?</span>
+    <span class="faq-icon">+</span>
+  </div>
+  <div class="faq-a"><span class="faq-formula">Cash-on-Cash Return = Annual Pre-Tax Cash Flow / Total Cash Invested × 100%</span>This measures how much cash you earn relative to the cash you put in (down payment + closing costs). A CoC of 8–12% is generally considered strong for rental properties.</div>
+</div>
+<div class="faq-item">
+  <div class="faq-q" onclick="toggleFAQ(this)">
+    <span>What is cap rate?</span>
+    <span class="faq-icon">+</span>
+  </div>
+  <div class="faq-a"><span class="faq-formula">Cap Rate = Net Operating Income / Property Value × 100%</span>Cap rate tells you the return a property would generate if bought with all cash. A higher cap rate means higher return but often higher risk or location risk.</div>
+</div>
+<div class="faq-item">
+  <div class="faq-q" onclick="toggleFAQ(this)">
+    <span>What is NOI (Net Operating Income)?</span>
+    <span class="faq-icon">+</span>
+  </div>
+  <div class="faq-a">NOI = Gross Rental Income − Operating Expenses (taxes, insurance, maintenance, management). It <strong>excludes mortgage payments</strong>. NOI is used to calculate cap rate and is the key metric for evaluating rental property income.</div>
+</div>
+<div class="faq-item">
+  <div class="faq-q" onclick="toggleFAQ(this)">
+    <span>What is vacancy rate and why does it matter?</span>
+    <span class="faq-icon">+</span>
+  </div>
+  <div class="faq-a">Vacancy rate is the percentage of time your property sits empty. A 5% vacancy rate means ~18 days of lost income per year. Always include a realistic vacancy buffer (5–10%) in projections rather than assuming 100% occupancy.</div>
+</div>
+<div class="faq-item">
+  <div class="faq-q" onclick="toggleFAQ(this)">
+    <span>What is the 1% rule in real estate?</span>
+    <span class="faq-icon">+</span>
+  </div>
+  <div class="faq-a">The 1% rule says monthly rent should be at least <strong>1% of the purchase price</strong>. A $200,000 property should rent for $2,000/month. It’s a quick screening filter — always run full numbers including taxes, maintenance, and financing costs.</div>
+</div>
+</div>
+
+
+</div>
+</div><!-- content -->
+<div class="site-footer">
+  <div class="footer-brand">
+    <div class="logo-mark" style="width:22px;height:22px;background:var(--a);border-radius:5px;display:flex;align-items:center;justify-content:center;color:#000;font-size:11px;font-weight:700">FC</div>
+    FinCalc
+  </div>
+  <div class="footer-links"><a href="index.html">All Calculators</a> · <a href="about.html">About</a> · <a href="contact.html">Contact</a> · <a href="privacy.html">Privacy</a> · <a href="terms.html">Terms</a></div>
+  <div class="footer-copy">© 2025 FinCalc · Free Financial Calculators</div>
+</div>
+<script src="app.js"></script>
+<script>initPage('rentalprop');</script>
+</body>
+</html>

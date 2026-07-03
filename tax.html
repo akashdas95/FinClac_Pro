@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>US Federal Tax Estimator | FinCalc Pro</title>
+<meta name="description" content="Estimate your US federal income tax with marginal and effective tax rates. Free tax calculator (US federal only).">
+<link rel="canonical" href="https://yourdomain.com/tax.html">
+<meta name="robots" content="index, follow">
+<meta property="og:type" content="website">
+<meta property="og:title" content="US Federal Tax Estimator | FinCalc Pro">
+<meta property="og:description" content="Estimate your US federal income tax with marginal and effective tax rates. Free tax calculator (US federal only).">
+<meta property="og:url" content="https://yourdomain.com/tax.html">
+<meta property="og:site_name" content="FinCalc Pro">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="US Federal Tax Estimator | FinCalc Pro">
+<meta name="twitter:description" content="Estimate your US federal income tax with marginal and effective tax rates. Free tax calculator (US federal only).">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<div class="topbar">
+  <a class="logo" href="index.html"><div class="logo-mark">FC</div>FinCalc</a>
+  <div class="searchbox">
+    <svg width="14" height="14" fill="none" stroke="#6B7A8D" stroke-width="2" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+    <input id="srch" placeholder="Search 40 calculators..." oninput="doSearch()" onkeydown="if(event.key==='Enter')goSearch()">
+  </div>
+</div>
+<div class="nav">
+  <button class="ntab on" onclick="go('home',this)">🏠 Home</button>
+  <button class="ntab" onclick="go('cagr',this)">📐 CAGR</button>
+  <button class="ntab" onclick="go('xirr',this)">📅 XIRR</button>
+  <button class="ntab" onclick="go('drip',this)">💧 DRIP</button>
+  <button class="ntab" onclick="go('etf',this)">🗂️ ETF Growth</button>
+  <button class="ntab" onclick="go('dcf',this)">🏦 DCF Valuation</button>
+  <button class="ntab" onclick="go('debtcomp',this)">❄️ Snowball vs Avalanche</button>
+  <button class="ntab" onclick="go('rentalprop',this)">🏡 Rental Property</button>
+  <button class="ntab" onclick="go('burnrate',this)">🔥 Burn Rate</button>
+  <button class="ntab" onclick="go('pricing',this)">🏷️ Pricing</button>
+  <button class="ntab" onclick="go('equity',this)">📐 Equity Dilution</button>
+  <button class="ntab" onclick="go('revenue',this)">📊 Revenue Forecast</button>
+  <button class="ntab" onclick="go('loan',this)">🏦 Loan/EMI</button>
+  <button class="ntab" onclick="go('invest',this)">📈 SIP/Investment</button>
+  <button class="ntab" onclick="go('tax',this)">🧾 Tax</button>
+  <button class="ntab" onclick="go('mortgage',this)">🏠 Mortgage</button>
+  <button class="ntab" onclick="go('mortcomp',this)">⚖️ Mtg Compare</button>
+  <button class="ntab" onclick="go('savings',this)">🏛️ Savings</button>
+  <button class="ntab" onclick="go('stock',this)">📉 Stock P&amp;L</button>
+  <button class="ntab" onclick="go('retirement',this)">👴 Retirement</button>
+  <button class="ntab" onclick="go('debt',this)">💳 Debt Payoff</button>
+  <button class="ntab" onclick="go('rental',this)">🏘️ Rental Yield</button>
+  <button class="ntab" onclick="go('cashflow',this)">💵 Cash Flow</button>
+  <button class="ntab" onclick="go('breakeven',this)">📊 Break-even</button>
+  <button class="ntab" onclick="go('savingsgoal',this)">🎯 Savings Goal</button>
+  <button class="ntab" onclick="go('emergencyfund',this)">🛡️ Emergency Fund</button>
+  <button class="ntab" onclick="go('healthscore',this)">💯 Health Score</button>
+  <button class="ntab" onclick="go('currency',this)">💱 Currency</button>
+  <button class="ntab" onclick="go('scientific',this)">🔬 Scientific</button>
+</div>
+<div class="content">
+<div id="tax" class="panel on">
+<button class="back-btn" onclick="go('home',null)">← Back to Home</button>
+<div class="calc-links"><span class="calc-links-label">🔗 Related</span><button class="calc-link-btn" onclick="go('savings',null)">🏛️ Savings</button><button class="calc-link-btn" onclick="go('retirement',null)">👴 Retirement</button><button class="calc-link-btn" onclick="go('cashflow',null)">💵 Cash Flow</button><button class="calc-link-btn" onclick="go('healthscore',null)">💯 Health Score</button></div>
+
+
+<div class="two">
+  <div class="card">
+    <div class="card-title">US Federal Income Tax Estimator</div>
+    <div class="g2">
+      <div class="field"><label>Annual Gross Income ($)</label><div class="ip"><span class="pfx">$</span><input type="number" id="t-inc" value="120000" oninput="cTax()"></div></div>
+      <div class="field"><label>Filing Status</label><select id="t-status" onchange="cTax()"><option value="single">Single</option><option value="married">Married Filing Jointly</option><option value="hoh">Head of Household</option></select></div>
+      <div class="field"><label>Pre-tax Deductions (401k etc) ($)</label><div class="ip"><span class="pfx">$</span><input type="number" id="t-pre" value="23000" oninput="cTax()"></div></div>
+      <div class="field"><label>Other Income ($)</label><div class="ip"><span class="pfx">$</span><input type="number" id="t-oth" value="0" oninput="cTax()"></div></div>
+    </div>
+    <div class="sgrid">
+      <div class="sbox"><div class="lbl">Federal Tax</div><div class="val" style="color:var(--r)" id="t-tax">$0</div></div>
+      <div class="sbox"><div class="lbl">Effective Rate</div><div class="val" id="t-eff">0%</div></div>
+      <div class="sbox"><div class="lbl">Monthly Take-home</div><div class="val" style="color:var(--g)" id="t-home">$0</div></div>
+      <div class="sbox"><div class="lbl">Taxable Income</div><div class="val" id="t-taxinc">$0</div></div>
+    </div>
+  </div>
+  <div class="card"><div class="card-title">Tax Bracket Breakdown (2024)</div><table class="slab-tbl" id="t-slabs"></table><div class="insight-box" id="t-insights"></div></div>
+</div>
+
+<div class="calc-guide">
+  <div class="guide-toggle">
+    <div class="guide-toggle-title">📖 US Federal Income Tax — How Brackets Work</div>
+  </div>
+  <div class="guide-body">
+<div class="guide-p">The US federal income tax system is widely misunderstood, even by people who've paid taxes for decades. The most common misconception — that moving into a higher tax bracket means your <em>entire</em> income gets taxed at that higher rate — is simply false, and understanding why reveals how the progressive bracket system actually protects taxpayers from disproportionate jumps in tax liability.</div>
+
+<div class="guide-h3">How Progressive Brackets Actually Work</div>
+<div class="guide-p">The US uses marginal tax brackets, meaning only the portion of your income that falls <em>within</em> each bracket is taxed at that bracket's rate — not your entire income. Using illustrative 2024 single-filer brackets:</div>
+<table class="guide-table"><thead><tr><th>Income Range</th><th>Marginal Rate</th></tr></thead><tbody>
+<tr><td>$0 – $11,600</td><td>10%</td></tr>
+<tr><td>$11,600 – $47,150</td><td>12%</td></tr>
+<tr><td>$47,150 – $100,525</td><td>22%</td></tr>
+<tr><td>$100,525 – $191,950</td><td>24%</td></tr>
+</tbody></table>
+<div class="guide-p">Someone earning $60,000 doesn't pay 22% on the full $60,000. Instead: the first $11,600 is taxed at 10% ($1,160), the next portion up to $47,150 is taxed at 12% ($4,266), and only the remaining amount above $47,150 (i.e., $12,850) is taxed at 22% ($2,827). Total tax: $8,253 — far less than the naive (and incorrect) $60,000 × 22% = $13,200 someone might assume.</div>
+
+<div class="guide-h3">Marginal Rate vs Effective Rate</div>
+<div class="guide-formula">Effective Tax Rate = Total Tax Paid / Total Income × 100%</div>
+<div class="guide-p">In the example above, the taxpayer's marginal rate (the rate on their last dollar earned) is 22%, but their effective rate (actual average tax burden across all income) is only $8,253 / $60,000 = 13.75%. This gap between marginal and effective rate grows larger the higher your income climbs into additional brackets, since only the topmost slice is ever taxed at your highest marginal rate.</div>
+
+<div class="guide-h3">The Standard Deduction: Reducing Taxable Income Before Brackets Apply</div>
+<div class="guide-p">Before any bracket math happens, your taxable income is reduced by the standard deduction (or your itemized deductions, if higher) — $14,600 for single filers and $29,200 for married filing jointly in 2024. This means someone earning $50,000 with no other adjustments has taxable income of only $35,400 after the standard deduction, not the full $50,000.</div>
+
+<div class="guide-h3">AGI: The Number That Gates Other Benefits</div>
+<div class="guide-p">Adjusted Gross Income (AGI) is your total income minus specific "above-the-line" deductions — student loan interest, traditional IRA contributions, self-employment tax adjustments, among others. AGI matters beyond just calculating tax owed: many tax credits and deduction eligibility thresholds (Roth IRA contribution limits, certain education credits, etc.) phase out based on AGI, making it a gatekeeper number throughout the tax code.</div>
+
+<div class="guide-h3">FICA: The Tax Most People Forget About</div>
+<div class="guide-formula">Social Security: 6.2% (up to the annual wage base limit)<br>Medicare: 1.45% (no income limit, plus an additional 0.9% above high thresholds)</div>
+<div class="guide-p">FICA taxes are withheld separately from your federal income tax bracket calculation entirely, totaling 7.65% for most W-2 employees (with your employer matching the same amount on your behalf). Self-employed individuals pay both halves themselves — 15.3% total — as "self-employment tax," a frequently underestimated cost for freelancers and small business owners transitioning from traditional employment.</div>
+<table class="guide-table"><thead><tr><th>Employment Type</th><th>FICA-Equivalent Tax Rate</th></tr></thead><tbody>
+<tr><td>W-2 Employee</td><td>7.65% (employer matches the other 7.65%)</td></tr>
+<tr><td>Self-Employed / 1099</td><td>15.3% (pays both halves)</td></tr>
+</tbody></table>
+<div class="guide-warn">⚠ This calculator estimates US federal tax only. State income tax (which varies from 0% in states like Texas and Florida to over 13% in California) is calculated entirely separately and is not included here — always factor in your specific state's tax rules for a complete picture.</div>
+
+  </div>
+</div>
+
+<div class="faq-section">
+<div class="faq-section-title">❓ Frequently Asked Questions</div>
+<div class="faq-item">
+  <div class="faq-q" onclick="toggleFAQ(this)">
+    <span>How does the US federal income tax work?</span>
+    <span class="faq-icon">+</span>
+  </div>
+  <div class="faq-a">The US uses a <strong>progressive tax system</strong> with brackets. You pay different rates on different portions of income — not a single flat rate on everything. Only the income within each bracket is taxed at that bracket’s rate.</div>
+</div>
+<div class="faq-item">
+  <div class="faq-q" onclick="toggleFAQ(this)">
+    <span>What is the difference between marginal and effective tax rate?</span>
+    <span class="faq-icon">+</span>
+  </div>
+  <div class="faq-a">Your <strong>marginal rate</strong> is the tax rate on your last dollar of income (your top bracket). Your <strong>effective rate</strong> is the actual average you pay on all income. Most people’s effective rate is significantly lower than their marginal rate.</div>
+</div>
+<div class="faq-item">
+  <div class="faq-q" onclick="toggleFAQ(this)">
+    <span>What is the standard deduction?</span>
+    <span class="faq-icon">+</span>
+  </div>
+  <div class="faq-a">The standard deduction reduces your taxable income without itemizing. For 2024, it’s <strong>$14,600 for single filers</strong> and <strong>$29,200 for married filing jointly</strong>. Most people take the standard deduction unless itemized deductions exceed it.</div>
+</div>
+<div class="faq-item">
+  <div class="faq-q" onclick="toggleFAQ(this)">
+    <span>What is AGI (Adjusted Gross Income)?</span>
+    <span class="faq-icon">+</span>
+  </div>
+  <div class="faq-a">AGI is your total income minus certain above-the-line deductions like student loan interest, IRA contributions, and self-employment taxes. AGI matters because many tax credits and deductions phase out at higher AGI levels.</div>
+</div>
+<div class="faq-item">
+  <div class="faq-q" onclick="toggleFAQ(this)">
+    <span>What is FICA tax?</span>
+    <span class="faq-icon">+</span>
+  </div>
+  <div class="faq-a">FICA taxes fund <strong>Social Security (6.2%)</strong> and <strong>Medicare (1.45%)</strong>, totaling 7.65% of wages up to the SS wage base. Your employer matches this. Self-employed individuals pay the full 15.3% as self-employment tax.</div>
+</div>
+</div>
+
+
+</div>
+</div><!-- content -->
+<div class="site-footer">
+  <div class="footer-brand">
+    <div class="logo-mark" style="width:22px;height:22px;background:var(--a);border-radius:5px;display:flex;align-items:center;justify-content:center;color:#000;font-size:11px;font-weight:700">FC</div>
+    FinCalc
+  </div>
+  <div class="footer-links"><a href="index.html">All Calculators</a> · <a href="about.html">About</a> · <a href="contact.html">Contact</a> · <a href="privacy.html">Privacy</a> · <a href="terms.html">Terms</a></div>
+  <div class="footer-copy">© 2025 FinCalc · Free Financial Calculators</div>
+</div>
+<script src="app.js"></script>
+<script>initPage('tax');</script>
+</body>
+</html>

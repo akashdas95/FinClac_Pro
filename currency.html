@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Currency Converter | FinCalc Pro</title>
+<meta name="description" content="Convert between major world currencies with up-to-date exchange rates. Free currency converter tool.">
+<link rel="canonical" href="https://yourdomain.com/currency.html">
+<meta name="robots" content="index, follow">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Currency Converter | FinCalc Pro">
+<meta property="og:description" content="Convert between major world currencies with up-to-date exchange rates. Free currency converter tool.">
+<meta property="og:url" content="https://yourdomain.com/currency.html">
+<meta property="og:site_name" content="FinCalc Pro">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Currency Converter | FinCalc Pro">
+<meta name="twitter:description" content="Convert between major world currencies with up-to-date exchange rates. Free currency converter tool.">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<div class="topbar">
+  <a class="logo" href="index.html"><div class="logo-mark">FC</div>FinCalc</a>
+  <div class="searchbox">
+    <svg width="14" height="14" fill="none" stroke="#6B7A8D" stroke-width="2" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+    <input id="srch" placeholder="Search 40 calculators..." oninput="doSearch()" onkeydown="if(event.key==='Enter')goSearch()">
+  </div>
+</div>
+<div class="nav">
+  <button class="ntab on" onclick="go('home',this)">🏠 Home</button>
+  <button class="ntab" onclick="go('cagr',this)">📐 CAGR</button>
+  <button class="ntab" onclick="go('xirr',this)">📅 XIRR</button>
+  <button class="ntab" onclick="go('drip',this)">💧 DRIP</button>
+  <button class="ntab" onclick="go('etf',this)">🗂️ ETF Growth</button>
+  <button class="ntab" onclick="go('dcf',this)">🏦 DCF Valuation</button>
+  <button class="ntab" onclick="go('debtcomp',this)">❄️ Snowball vs Avalanche</button>
+  <button class="ntab" onclick="go('rentalprop',this)">🏡 Rental Property</button>
+  <button class="ntab" onclick="go('burnrate',this)">🔥 Burn Rate</button>
+  <button class="ntab" onclick="go('pricing',this)">🏷️ Pricing</button>
+  <button class="ntab" onclick="go('equity',this)">📐 Equity Dilution</button>
+  <button class="ntab" onclick="go('revenue',this)">📊 Revenue Forecast</button>
+  <button class="ntab" onclick="go('loan',this)">🏦 Loan/EMI</button>
+  <button class="ntab" onclick="go('invest',this)">📈 SIP/Investment</button>
+  <button class="ntab" onclick="go('tax',this)">🧾 Tax</button>
+  <button class="ntab" onclick="go('mortgage',this)">🏠 Mortgage</button>
+  <button class="ntab" onclick="go('mortcomp',this)">⚖️ Mtg Compare</button>
+  <button class="ntab" onclick="go('savings',this)">🏛️ Savings</button>
+  <button class="ntab" onclick="go('stock',this)">📉 Stock P&amp;L</button>
+  <button class="ntab" onclick="go('retirement',this)">👴 Retirement</button>
+  <button class="ntab" onclick="go('debt',this)">💳 Debt Payoff</button>
+  <button class="ntab" onclick="go('rental',this)">🏘️ Rental Yield</button>
+  <button class="ntab" onclick="go('cashflow',this)">💵 Cash Flow</button>
+  <button class="ntab" onclick="go('breakeven',this)">📊 Break-even</button>
+  <button class="ntab" onclick="go('savingsgoal',this)">🎯 Savings Goal</button>
+  <button class="ntab" onclick="go('emergencyfund',this)">🛡️ Emergency Fund</button>
+  <button class="ntab" onclick="go('healthscore',this)">💯 Health Score</button>
+  <button class="ntab" onclick="go('currency',this)">💱 Currency</button>
+  <button class="ntab" onclick="go('scientific',this)">🔬 Scientific</button>
+</div>
+<div class="content">
+<div id="currency" class="panel on">
+<button class="back-btn" onclick="go('home',null)">← Back to Home</button>
+<div style="max-width:540px">
+  <div class="card">
+    <div class="card-title">Currency Converter</div>
+
+
+    <div class="g2" style="margin-bottom:1rem">
+      <div class="field"><label>Amount</label><input type="number" id="cu-amt" value="1000" oninput="cCurrency()"></div>
+      <div></div>
+      <div class="field"><label>From</label><select id="cu-from" onchange="cCurrency()"></select></div>
+      <div class="field"><label>To</label><select id="cu-to" onchange="cCurrency()"></select></div>
+    </div>
+    <div style="background:var(--s2);border-radius:8px;padding:1.25rem;text-align:center;margin-bottom:1rem">
+      <div style="font-size:12px;color:var(--m);margin-bottom:6px" id="cu-lbl">—</div>
+      <div style="font-size:30px;font-family:var(--mo);font-weight:600;color:var(--a)" id="cu-res">—</div>
+    </div>
+    <div id="cu-grid" style="display:grid;grid-template-columns:1fr 1fr;gap:8px"></div>
+    <p style="font-size:11px;color:var(--m);margin-top:1rem">⚠ Rates are approximate — verify with your bank or broker.</p>
+  </div>
+<div class="calc-guide">
+  <div class="guide-toggle">
+    <div class="guide-toggle-title">📖 Currency Converter — Getting the Best Rate</div>
+  </div>
+  <div class="guide-body">
+<div class="guide-p">Currency exchange seems straightforward on the surface — look up a rate, convert your money — but the actual rate you receive when exchanging currency in practice is almost never the "real" rate quoted by financial news, and understanding why reveals where money quietly leaks away during international transactions, travel, and cross-border business.</div>
+
+<div class="guide-h3">The Mid-Market Rate vs What You Actually Get</div>
+<div class="guide-p">The mid-market rate (also called the interbank rate) is the midpoint between the buy and sell prices banks use when trading currencies among themselves — it's the rate you'll see quoted on Google, XE.com, or financial news. However, banks, currency exchange kiosks, and many payment services add a markup (spread) on top of this rate when serving retail customers, and that markup is effectively a hidden fee, since it's built into the exchange rate itself rather than disclosed as a separate line-item charge.</div>
+
+<div class="guide-h3">Worked Example: The Hidden Cost of Airport Currency Exchange</div>
+<table class="guide-table"><thead><tr><th>Exchange Method</th><th>Rate Offered (illustrative, USD/EUR)</th><th>Effective Markup vs Mid-Market</th><th>Cost on $1,000 Exchanged</th></tr></thead><tbody>
+<tr><td>True mid-market rate</td><td>0.930</td><td>0%</td><td>$0 (baseline)</td></tr>
+<tr><td>Typical bank exchange</td><td>0.911</td><td>~2%</td><td>~$20 lost to spread</td></tr>
+<tr><td>Airport currency kiosk</td><td>0.865</td><td>~7%</td><td>~$70 lost to spread</td></tr>
+</tbody></table>
+<div class="guide-p">This illustrates why airport currency exchange counters — despite their convenience — are consistently among the worst places to exchange money, often charging spreads several multiples wider than a standard bank or modern fintech transfer service.</div>
+
+<div class="guide-h3">Why Exchange Rates Fluctuate</div>
+<table class="guide-table"><thead><tr><th>Driver</th><th>Effect on Currency Value</th></tr></thead><tbody>
+<tr><td>Higher domestic interest rates</td><td>Tends to strengthen the currency (attracts foreign capital seeking yield)</td></tr>
+<tr><td>Higher inflation</td><td>Tends to weaken the currency over time (purchasing power erosion)</td></tr>
+<tr><td>Trade surplus (exports &gt; imports)</td><td>Tends to strengthen the currency (more foreign demand for it)</td></tr>
+<tr><td>Political or economic instability</td><td>Tends to weaken the currency (capital flight, reduced confidence)</td></tr>
+</tbody></table>
+
+<div class="guide-h3">Strong vs Weak Currency: It Depends Who You Ask</div>
+<div class="guide-p">A "strong" currency (one that buys more of a foreign currency than before) benefits travelers and importers — your dollars stretch further abroad, and imported goods become cheaper domestically. A "weak" currency benefits exporters, since their goods become cheaper and more competitive in foreign markets, and it can also benefit a country's tourism industry, since foreign visitors find their money goes further. Neither direction is universally "good" or "bad" for an economy — the effects depend heavily on whether that economy is more export-driven or import-driven.</div>
+
+<div class="guide-h3">Currency Hedging for Businesses</div>
+<div class="guide-p">Businesses that import or export internationally face real exposure to exchange rate fluctuations between the time a deal is signed and when payment actually settles, sometimes months later. Hedging instruments like forward contracts (locking in a specific exchange rate today for a transaction that settles in the future) allow businesses to plan with cost certainty, trading away potential upside (if the rate moves favorably) in exchange for protection against downside risk.</div>
+<div class="guide-tip">💡 For personal international transfers, modern fintech services (which typically use the mid-market rate plus a small, transparent, disclosed fee) almost always offer better value than traditional banks or airport kiosks, which bury their markup invisibly inside a worse exchange rate rather than charging a separate visible fee.</div>
+
+  </div>
+</div>
+
+<div class="faq-section">
+<div class="faq-section-title">❓ Frequently Asked Questions</div>
+<div class="faq-item">
+  <div class="faq-q" onclick="toggleFAQ(this)">
+    <span>Why do exchange rates change?</span>
+    <span class="faq-icon">+</span>
+  </div>
+  <div class="faq-a">Exchange rates fluctuate based on <strong>supply and demand</strong> for currencies, driven by: interest rate differences between countries, inflation rates, trade balances, political stability, and market speculation. Rates can change daily or swing dramatically during economic crises.</div>
+</div>
+<div class="faq-item">
+  <div class="faq-q" onclick="toggleFAQ(this)">
+    <span>What is the mid-market rate?</span>
+    <span class="faq-icon">+</span>
+  </div>
+  <div class="faq-a">The mid-market rate is the <strong>midpoint between buy and sell prices</strong> for a currency pair. It’s the ‘true’ exchange rate. Banks and money changers add a markup (spread) to this rate when exchanging money — that spread is their profit.</div>
+</div>
+<div class="faq-item">
+  <div class="faq-q" onclick="toggleFAQ(this)">
+    <span>How do banks make money on currency conversion?</span>
+    <span class="faq-icon">+</span>
+  </div>
+  <div class="faq-a">They charge a spread — the difference between the rate they buy currency at and the rate they sell to you. A tourist exchange booth might offer USD/EUR at 0.90 when the real rate is 0.93, pocketing the 3% difference. Online services like Wise use mid-market rates with transparent small fees.</div>
+</div>
+<div class="faq-item">
+  <div class="faq-q" onclick="toggleFAQ(this)">
+    <span>What is currency hedging?</span>
+    <span class="faq-icon">+</span>
+  </div>
+  <div class="faq-a">Currency hedging uses financial instruments (like forward contracts) to <strong>lock in an exchange rate</strong> for a future transaction. Businesses importing/exporting use hedging to protect against rate fluctuations that could make costs unpredictable.</div>
+</div>
+<div class="faq-item">
+  <div class="faq-q" onclick="toggleFAQ(this)">
+    <span>What does it mean when a currency is strong or weak?</span>
+    <span class="faq-icon">+</span>
+  </div>
+  <div class="faq-a">A <strong>strong currency</strong> buys more foreign goods and services (good for importers and travelers). A <strong>weak currency</strong> makes exports cheaper for foreign buyers (good for exporters). Both have advantages and disadvantages for an economy.</div>
+</div>
+</div>
+
+</div>
+</div>
+</div><!-- content -->
+<div class="site-footer">
+  <div class="footer-brand">
+    <div class="logo-mark" style="width:22px;height:22px;background:var(--a);border-radius:5px;display:flex;align-items:center;justify-content:center;color:#000;font-size:11px;font-weight:700">FC</div>
+    FinCalc
+  </div>
+  <div class="footer-links"><a href="index.html">All Calculators</a> · <a href="about.html">About</a> · <a href="contact.html">Contact</a> · <a href="privacy.html">Privacy</a> · <a href="terms.html">Terms</a></div>
+  <div class="footer-copy">© 2025 FinCalc · Free Financial Calculators</div>
+</div>
+<script src="app.js"></script>
+<script>initPage('currency');</script>
+</body>
+</html>

@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Loan Prepayment Calculator | FinCalc Pro</title>
+<meta name="description" content="See how much time and interest you save by prepaying your loan with extra monthly payments or a lump sum. Free loan prepayment calculator.">
+<link rel="canonical" href="https://yourdomain.com/prepay.html">
+<meta name="robots" content="index, follow">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Loan Prepayment Calculator | FinCalc Pro">
+<meta property="og:description" content="See how much time and interest you save by prepaying your loan with extra monthly payments or a lump sum. Free loan prepayment calculator.">
+<meta property="og:url" content="https://yourdomain.com/prepay.html">
+<meta property="og:site_name" content="FinCalc Pro">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Loan Prepayment Calculator | FinCalc Pro">
+<meta name="twitter:description" content="See how much time and interest you save by prepaying your loan with extra monthly payments or a lump sum. Free loan prepayment calculator.">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<div class="topbar">
+  <a class="logo" href="index.html"><div class="logo-mark">FC</div>FinCalc</a>
+  <div class="searchbox">
+    <svg width="14" height="14" fill="none" stroke="#6B7A8D" stroke-width="2" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+    <input id="srch" placeholder="Search 40 calculators..." oninput="doSearch()" onkeydown="if(event.key==='Enter')goSearch()">
+  </div>
+</div>
+<div class="nav">
+  <button class="ntab on" onclick="go('home',this)">🏠 Home</button>
+  <button class="ntab" onclick="go('cagr',this)">📐 CAGR</button>
+  <button class="ntab" onclick="go('xirr',this)">📅 XIRR</button>
+  <button class="ntab" onclick="go('drip',this)">💧 DRIP</button>
+  <button class="ntab" onclick="go('etf',this)">🗂️ ETF Growth</button>
+  <button class="ntab" onclick="go('dcf',this)">🏦 DCF Valuation</button>
+  <button class="ntab" onclick="go('debtcomp',this)">❄️ Snowball vs Avalanche</button>
+  <button class="ntab" onclick="go('rentalprop',this)">🏡 Rental Property</button>
+  <button class="ntab" onclick="go('burnrate',this)">🔥 Burn Rate</button>
+  <button class="ntab" onclick="go('pricing',this)">🏷️ Pricing</button>
+  <button class="ntab" onclick="go('equity',this)">📐 Equity Dilution</button>
+  <button class="ntab" onclick="go('revenue',this)">📊 Revenue Forecast</button>
+  <button class="ntab" onclick="go('loan',this)">🏦 Loan/EMI</button>
+  <button class="ntab" onclick="go('invest',this)">📈 SIP/Investment</button>
+  <button class="ntab" onclick="go('tax',this)">🧾 Tax</button>
+  <button class="ntab" onclick="go('mortgage',this)">🏠 Mortgage</button>
+  <button class="ntab" onclick="go('mortcomp',this)">⚖️ Mtg Compare</button>
+  <button class="ntab" onclick="go('savings',this)">🏛️ Savings</button>
+  <button class="ntab" onclick="go('stock',this)">📉 Stock P&amp;L</button>
+  <button class="ntab" onclick="go('retirement',this)">👴 Retirement</button>
+  <button class="ntab" onclick="go('debt',this)">💳 Debt Payoff</button>
+  <button class="ntab" onclick="go('rental',this)">🏘️ Rental Yield</button>
+  <button class="ntab" onclick="go('cashflow',this)">💵 Cash Flow</button>
+  <button class="ntab" onclick="go('breakeven',this)">📊 Break-even</button>
+  <button class="ntab" onclick="go('savingsgoal',this)">🎯 Savings Goal</button>
+  <button class="ntab" onclick="go('emergencyfund',this)">🛡️ Emergency Fund</button>
+  <button class="ntab" onclick="go('healthscore',this)">💯 Health Score</button>
+  <button class="ntab" onclick="go('currency',this)">💱 Currency</button>
+  <button class="ntab" onclick="go('scientific',this)">🔬 Scientific</button>
+</div>
+<div class="content">
+<div id="prepay" class="panel on">
+<button class="back-btn" onclick="go('home',null)">← Back to Home</button>
+<div class="calc-links"><span class="calc-links-label">🔗 Related</span><button class="calc-link-btn" onclick="go('loan',null)">🏦 Loan/EMI</button><button class="calc-link-btn" onclick="go('mortgage',null)">🏠 Mortgage</button><button class="calc-link-btn" onclick="go('debt',null)">💳 Debt Payoff</button><button class="calc-link-btn" onclick="go('debtcomp',null)">❄️ Snowball vs Avalanche</button></div>
+
+
+<div class="two">
+  <div class="card">
+    <div class="card-title">Loan Prepayment Calculator</div>
+    <div class="g2">
+      <div class="field"><label>Loan Amount ($)</label><div class="ip"><span class="pfx">$</span><input type="number" id="pp-amt" value="500000" oninput="cPrepay()"></div></div>
+      <div class="field"><label>Interest Rate (% p.a.)</label><input type="number" id="pp-rate" value="7" step="0.1" oninput="cPrepay()"></div>
+      <div class="field"><label>Original Tenure (months)</label><input type="number" id="pp-n" value="240" oninput="cPrepay()"></div>
+      <div class="field"><label>Extra Monthly Payment ($)</label><div class="ip"><span class="pfx">$</span><input type="number" id="pp-extra" value="200" oninput="cPrepay()"></div></div>
+      <div class="field"><label>One-Time Lump Sum ($)</label><div class="ip"><span class="pfx">$</span><input type="number" id="pp-lump" value="10000" oninput="cPrepay()"></div></div>
+      <div class="field"><label>Lump Sum Applied At (month #)</label><input type="number" id="pp-lumpmo" value="12" oninput="cPrepay()"></div>
+    </div>
+    <div class="sgrid">
+      <div class="sbox"><div class="lbl">New Payoff Time</div><div class="val" style="color:var(--g)" id="pp-newterm">0 mo</div></div>
+      <div class="sbox"><div class="lbl">Time Saved</div><div class="val" style="color:var(--g)" id="pp-timesaved">0 mo</div></div>
+      <div class="sbox"><div class="lbl">Interest Saved</div><div class="val" style="color:var(--g)" id="pp-intsaved">$0</div></div>
+      <div class="sbox"><div class="lbl">New Total Interest</div><div class="val" style="color:var(--r)" id="pp-newint">$0</div></div>
+    </div>
+  </div>
+  <div class="card">
+    <div class="card-title">Original vs With Prepayment</div>
+    <canvas id="pp-chart" width="420" height="175" style="width:100%"></canvas>
+    <div class="rrow"><span class="rk">Original EMI</span><span class="rv" id="pp-emi">$0</span></div>
+    <div class="rrow"><span class="rk">Original tenure</span><span class="rv" id="pp-oldterm">0 mo</span></div>
+    <div class="rrow"><span class="rk">Original total interest</span><span class="rv" style="color:var(--r)" id="pp-oldint">$0</span></div>
+    <div class="rrow"><span class="rk">Interest saved %</span><span class="rv" style="color:var(--g)" id="pp-savedpct">0%</span></div>
+  </div>
+
+<div class="card" style="grid-column:1/-1">
+  <div class="card-title">Year-by-Year Comparison</div>
+  <div style="overflow-x:auto"><table class="tbl" id="pp-table"></table></div>
+</div>
+
+</div>
+
+<div class="calc-guide">
+  <div class="guide-toggle">
+    <div class="guide-toggle-title">📖 Loan Prepayment — How It Works</div>
+  </div>
+  <div class="guide-body">
+<div class="guide-p">Prepaying a loan — paying more than your scheduled EMI — is one of the few genuinely "free lunch" financial moves available to borrowers, because the savings are guaranteed and risk-free, unlike investment returns which fluctuate. Every extra dollar you pay above your scheduled EMI goes 100% toward reducing your principal, which permanently lowers all future interest calculated on that smaller remaining balance.</div>
+
+<div class="guide-h3">The Mechanism: Why Timing Matters So Much</div>
+<div class="guide-p">Because interest each month is calculated on your outstanding balance, and that balance is highest at the very start of a loan, prepaying early in the loan term saves dramatically more interest than prepaying the same dollar amount later. A $5,000 prepayment in month 3 removes that $5,000 from accruing interest for nearly the entire remaining loan term — potentially 20+ years on a mortgage. The same $5,000 prepayment in year 25 of a 30-year mortgage only removes interest accrual for the remaining 5 years, a far smaller cumulative benefit.</div>
+
+<div class="guide-h3">Worked Example: Extra Monthly Payments</div>
+<div class="guide-p">Consider a $300,000 mortgage at 6.5% over 30 years (360 months). The standard EMI is approximately $1,896/month, and total interest paid over the full term (with no prepayment) is roughly $382,560.</div>
+<table class="guide-table"><thead><tr><th>Extra Monthly Payment</th><th>New Payoff Time</th><th>Total Interest</th><th>Interest Saved</th></tr></thead><tbody>
+<tr><td>$0 (baseline)</td><td>360 months (30 yrs)</td><td>$382,560</td><td>—</td></tr>
+<tr><td>$100/month</td><td>~322 months (26.8 yrs)</td><td>$324,100</td><td>~$58,460</td></tr>
+<tr><td>$300/month</td><td>~265 months (22.1 yrs)</td><td>$252,300</td><td>~$130,260</td></tr>
+<tr><td>$500/month</td><td>~234 months (19.5 yrs)</td><td>$214,800</td><td>~$167,760</td></tr>
+</tbody></table>
+<div class="guide-p">Notice the diminishing but still substantial returns: doubling your extra payment from $100 to $300 doesn't simply double your interest savings — it more than doubles it in this case, because larger early prepayments compound their balance-reducing effect over more remaining months.</div>
+
+<div class="guide-h3">Lump Sum vs Recurring: Which Saves More?</div>
+<div class="guide-p">A single lump sum prepayment delivers its entire balance-reducing effect at once, on the date it's applied — meaning a lump sum applied very early in the loan can be even more powerful than the same total amount spread out as smaller monthly extra payments over a longer period, simply because the money is removed from interest-accrual sooner. That said, recurring extra payments have a practical advantage: they don't require having a large sum of cash available at once, making them realistic for ordinary monthly budgets.</div>
+
+<div class="guide-h3">EMI-Fixed vs Tenure-Fixed Prepayment</div>
+<div class="guide-p">When you prepay, most lenders give you a choice (or default to a specific policy) on how the benefit is applied:</div>
+<table class="guide-table"><thead><tr><th>Approach</th><th>What Happens</th><th>Best For</th></tr></thead><tbody>
+<tr><td>Reduce Tenure</td><td>EMI stays the same, loan finishes earlier</td><td>Saves the most total interest — recommended if cash flow allows</td></tr>
+<tr><td>Reduce EMI</td><td>Tenure stays the same, monthly payment drops</td><td>Improves monthly cash flow, but saves less total interest</td></tr>
+</tbody></table>
+
+<div class="guide-h3">Should You Prepay or Invest the Extra Money Instead?</div>
+<div class="guide-p">This is the single most important strategic question around prepayment. Compare your loan's interest rate to your realistic, after-tax expected investment return. If your mortgage carries a 7% rate and you could realistically expect, say, 8-9% average annual returns investing in a diversified portfolio over the same horizon, investing may build more wealth — though prepaying carries zero risk and a guaranteed return, while investing carries market risk. Many financial planners suggest a middle path: prepay aggressively on any debt above 7-8% interest (where the guaranteed "return" from prepaying is hard to beat risk-free), while investing extra cash if your debt rate is meaningfully below typical long-term market returns.</div>
+<div class="guide-warn">⚠ Check your loan agreement for prepayment penalties before making extra payments — some fixed-rate loans, particularly certain mortgages, charge 1-3% on prepaid amounts. Calculate whether your interest savings still outweigh that penalty cost before proceeding.</div>
+
+  </div>
+</div>
+
+<div class="faq-section">
+<div class="faq-section-title">❓ Frequently Asked Questions</div>
+<div class="faq-item">
+  <div class="faq-q" onclick="toggleFAQ(this)">
+    <span>What is loan prepayment?</span>
+    <span class="faq-icon">+</span>
+  </div>
+  <div class="faq-a">Loan prepayment means paying more than your scheduled EMI, either as a recurring extra amount each month or as a one-time lump sum. The extra payment goes <strong>entirely toward reducing your principal</strong>, which lowers all future interest charges and shortens your loan term.</div>
+</div>
+<div class="faq-item">
+  <div class="faq-q" onclick="toggleFAQ(this)">
+    <span>Does prepaying reduce my EMI or my tenure?</span>
+    <span class="faq-icon">+</span>
+  </div>
+  <div class="faq-a">It depends on what you choose with your lender. Most lenders keep the <strong>EMI fixed and shorten the tenure</strong> — this calculator uses that approach since it saves the most total interest. Some lenders instead keep the tenure the same and lower your EMI, which saves less interest overall but improves monthly cash flow.</div>
+</div>
+<div class="faq-item">
+  <div class="faq-q" onclick="toggleFAQ(this)">
+    <span>Is it better to prepay early or later in the loan?</span>
+    <span class="faq-icon">+</span>
+  </div>
+  <div class="faq-a">Always prepay as early as possible. In the early years of a loan, your outstanding balance is at its highest, so reducing it sooner removes interest that would otherwise compound over the most remaining months. A $10,000 prepayment in year 1 saves significantly more interest than the same amount in year 10.</div>
+</div>
+<div class="faq-item">
+  <div class="faq-q" onclick="toggleFAQ(this)">
+    <span>Are there penalties for prepaying a loan?</span>
+    <span class="faq-icon">+</span>
+  </div>
+  <div class="faq-a">Some loans, especially fixed-rate mortgages, charge a <strong>prepayment penalty</strong> of 1–3% of the prepaid amount. Variable-rate loans and most personal loans typically don't. Always check your loan agreement and compare the penalty cost against the interest you'd save before prepaying.</div>
+</div>
+<div class="faq-item">
+  <div class="faq-q" onclick="toggleFAQ(this)">
+    <span>Should I prepay my loan or invest the extra money instead?</span>
+    <span class="faq-icon">+</span>
+  </div>
+  <div class="faq-a">Compare your loan's interest rate to your expected investment return. If your loan rate is <strong>higher</strong> than what you'd realistically earn investing (after tax), prepaying is the better guaranteed return. If your loan rate is low (e.g. a sub-5% mortgage) and you can invest at a higher expected return, investing the extra money may build more wealth long-term — though prepaying carries zero risk.</div>
+</div>
+<div class="faq-item">
+  <div class="faq-q" onclick="toggleFAQ(this)">
+    <span>What's the difference between a lump sum and extra monthly payments?</span>
+    <span class="faq-icon">+</span>
+  </div>
+  <div class="faq-a">A <strong>lump sum</strong> is a single large payment (bonus, inheritance, matured FD) applied once at a specific month. <strong>Extra monthly payments</strong> are smaller recurring amounts added to every EMI. Both reduce principal faster — a lump sum gives one big interest-saving jolt early on, while recurring extra payments compound their effect every single month for the life of the loan.</div>
+</div>
+</div>
+
+
+</div>
+</div><!-- content -->
+<div class="site-footer">
+  <div class="footer-brand">
+    <div class="logo-mark" style="width:22px;height:22px;background:var(--a);border-radius:5px;display:flex;align-items:center;justify-content:center;color:#000;font-size:11px;font-weight:700">FC</div>
+    FinCalc
+  </div>
+  <div class="footer-links"><a href="index.html">All Calculators</a> · <a href="about.html">About</a> · <a href="contact.html">Contact</a> · <a href="privacy.html">Privacy</a> · <a href="terms.html">Terms</a></div>
+  <div class="footer-copy">© 2025 FinCalc · Free Financial Calculators</div>
+</div>
+<script src="app.js"></script>
+<script>initPage('prepay');</script>
+</body>
+</html>

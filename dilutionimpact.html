@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Stock Dilution Impact Calculator | FinCalc Pro</title>
+<meta name="description" content="See how a secondary offering, option exercise, or convertible note conversion affects EPS and your share value. Free stock dilution calculator.">
+<link rel="canonical" href="https://yourdomain.com/dilutionimpact.html">
+<meta name="robots" content="index, follow">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Stock Dilution Impact Calculator | FinCalc Pro">
+<meta property="og:description" content="See how a secondary offering, option exercise, or convertible note conversion affects EPS and your share value. Free stock dilution calculator.">
+<meta property="og:url" content="https://yourdomain.com/dilutionimpact.html">
+<meta property="og:site_name" content="FinCalc Pro">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Stock Dilution Impact Calculator | FinCalc Pro">
+<meta name="twitter:description" content="See how a secondary offering, option exercise, or convertible note conversion affects EPS and your share value. Free stock dilution calculator.">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<div class="topbar">
+  <a class="logo" href="index.html"><div class="logo-mark">FC</div>FinCalc</a>
+  <div class="searchbox">
+    <svg width="14" height="14" fill="none" stroke="#6B7A8D" stroke-width="2" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+    <input id="srch" placeholder="Search 40 calculators..." oninput="doSearch()" onkeydown="if(event.key==='Enter')goSearch()">
+  </div>
+</div>
+<div class="nav">
+  <button class="ntab on" onclick="go('home',this)">🏠 Home</button>
+  <button class="ntab" onclick="go('cagr',this)">📐 CAGR</button>
+  <button class="ntab" onclick="go('xirr',this)">📅 XIRR</button>
+  <button class="ntab" onclick="go('drip',this)">💧 DRIP</button>
+  <button class="ntab" onclick="go('etf',this)">🗂️ ETF Growth</button>
+  <button class="ntab" onclick="go('dcf',this)">🏦 DCF Valuation</button>
+  <button class="ntab" onclick="go('debtcomp',this)">❄️ Snowball vs Avalanche</button>
+  <button class="ntab" onclick="go('rentalprop',this)">🏡 Rental Property</button>
+  <button class="ntab" onclick="go('burnrate',this)">🔥 Burn Rate</button>
+  <button class="ntab" onclick="go('pricing',this)">🏷️ Pricing</button>
+  <button class="ntab" onclick="go('equity',this)">📐 Equity Dilution</button>
+  <button class="ntab" onclick="go('revenue',this)">📊 Revenue Forecast</button>
+  <button class="ntab" onclick="go('loan',this)">🏦 Loan/EMI</button>
+  <button class="ntab" onclick="go('invest',this)">📈 SIP/Investment</button>
+  <button class="ntab" onclick="go('tax',this)">🧾 Tax</button>
+  <button class="ntab" onclick="go('mortgage',this)">🏠 Mortgage</button>
+  <button class="ntab" onclick="go('mortcomp',this)">⚖️ Mtg Compare</button>
+  <button class="ntab" onclick="go('savings',this)">🏛️ Savings</button>
+  <button class="ntab" onclick="go('stock',this)">📉 Stock P&amp;L</button>
+  <button class="ntab" onclick="go('retirement',this)">👴 Retirement</button>
+  <button class="ntab" onclick="go('debt',this)">💳 Debt Payoff</button>
+  <button class="ntab" onclick="go('rental',this)">🏘️ Rental Yield</button>
+  <button class="ntab" onclick="go('cashflow',this)">💵 Cash Flow</button>
+  <button class="ntab" onclick="go('breakeven',this)">📊 Break-even</button>
+  <button class="ntab" onclick="go('savingsgoal',this)">🎯 Savings Goal</button>
+  <button class="ntab" onclick="go('emergencyfund',this)">🛡️ Emergency Fund</button>
+  <button class="ntab" onclick="go('healthscore',this)">💯 Health Score</button>
+  <button class="ntab" onclick="go('currency',this)">💱 Currency</button>
+  <button class="ntab" onclick="go('scientific',this)">🔬 Scientific</button>
+</div>
+<div class="content">
+<div id="dilutionimpact" class="panel on">
+<button class="back-btn" onclick="go('home',null)">← Back to Home</button>
+<div class="calc-links"><span class="calc-links-label">🔗 Related</span><button class="calc-link-btn" onclick="go('equity',null)">📐 Equity Dilution</button><button class="calc-link-btn" onclick="go('peg',null)">📏 PEG Ratio</button><button class="calc-link-btn" onclick="go('dcf',null)">🏦 Stock DCF</button><button class="calc-link-btn" onclick="go('stock',null)">📉 Stock P&amp;L</button></div>
+
+
+<div class="two">
+  <div class="card">
+    <div class="card-title">Stock Dilution Impact Calculator</div>
+    <div class="g2">
+      <div class="field"><label>Shares Outstanding (before)</label><input type="number" id="di-shares" value="100000000" oninput="cDilutionImpact()"></div>
+      <div class="field"><label>Current Stock Price ($)</label><div class="ip"><span class="pfx">$</span><input type="number" id="di-price" value="50" step="0.01" oninput="cDilutionImpact()"></div></div>
+      <div class="field"><label>Annual Net Income ($)</label><div class="ip"><span class="pfx">$</span><input type="number" id="di-income" value="200000000" oninput="cDilutionImpact()"></div></div>
+      <div class="field"><label>Dilution Source</label><select id="di-source" onchange="cDilutionImpact()"><option value="secondary">Secondary Stock Offering</option><option value="options">Option / RSU Exercise</option><option value="convert">Convertible Note Conversion</option></select></div>
+      <div class="field"><label>New Shares Being Issued</label><input type="number" id="di-newshares" value="10000000" oninput="cDilutionImpact()"></div>
+      <div class="field"><label>Your Shares Held</label><input type="number" id="di-yourshares" value="5000" oninput="cDilutionImpact()"></div>
+    </div>
+    <div class="sgrid">
+      <div class="sbox"><div class="lbl">EPS Before → After</div><div class="val" style="color:var(--a)" id="di-eps">$0 → $0</div></div>
+      <div class="sbox"><div class="lbl">EPS Dilution</div><div class="val" style="color:var(--r)" id="di-dilpct">0%</div></div>
+      <div class="sbox"><div class="lbl">Implied Price (P/E held flat)</div><div class="val" style="color:var(--g)" id="di-impliedprice">$0</div></div>
+      <div class="sbox"><div class="lbl">Net Income Growth to Offset</div><div class="val" style="color:var(--b)" id="di-offset">0%</div></div>
+    </div>
+    <div class="insight-box" id="di-insights"></div>
+  </div>
+  <div class="card">
+    <div class="card-title">Your Position, Before vs After</div>
+    <canvas id="di-chart" width="300" height="150" style="width:100%;margin:1rem 0"></canvas>
+    <div style="display:flex;gap:12px;font-size:11px;color:var(--m);margin-bottom:1rem"><span style="color:var(--g)">━ Your Value</span></div>
+    <div class="rrow"><span class="rk">Your ownership % (before)</span><span class="rv" id="di-pctbefore">0%</span></div>
+    <div class="rrow"><span class="rk">Your ownership % (after)</span><span class="rv" style="color:var(--r)" id="di-pctafter">0%</span></div>
+    <div class="rrow"><span class="rk">Your stake value (before)</span><span class="rv" id="di-valbefore">$0</span></div>
+    <div class="rrow"><span class="rk">Your stake value (after)</span><span class="rv" style="color:var(--r)" id="di-valafter">$0</span></div>
+  </div>
+</div>
+
+<div class="calc-guide">
+  <div class="guide-toggle">
+    <div class="guide-toggle-title">📖 Stock Dilution Impact — What New Shares Cost Existing Holders</div>
+  </div>
+  <div class="guide-body">
+<div class="guide-p">When a public company issues new shares — through a secondary stock offering, employees exercising options and RSUs, or a convertible note converting into equity — every existing shareholder's percentage ownership shrinks, even though they didn't sell a single share. This calculator models exactly what that dilution does to your ownership percentage, the company's earnings per share, and the value of your specific position, assuming the market's price-to-earnings multiple stays roughly constant around the event.</div>
+
+<div class="guide-h3">Why EPS Falls Even Though Net Income Doesn't Change</div>
+<div class="guide-formula">EPS = Net Income ÷ Shares Outstanding</div>
+<div class="guide-p">Issuing new shares doesn't directly change how much money the company makes — it changes the denominator in the EPS calculation. The exact same net income is now divided among more shares, so each individual share's claim on that income shrinks proportionally. A company issuing 10% more shares dilutes EPS by roughly 9.1% (not exactly 10%, since the dilution percentage is new shares divided by the <em>new, larger</em> total, not the original count).</div>
+
+<div class="guide-h3">Worked Example: A Secondary Offering</div>
+<div class="guide-p">A company with 100 million shares outstanding, trading at $50 with $200 million in annual net income, has an EPS of $2.00 and an implied P/E of 25. It then issues 10 million new shares (a 10% increase) in a secondary offering:</div>
+<table class="guide-table"><thead><tr><th>Metric</th><th>Before</th><th>After</th></tr></thead><tbody>
+<tr><td>Shares Outstanding</td><td>100,000,000</td><td>110,000,000</td></tr>
+<tr><td>EPS</td><td>$2.00</td><td>$1.82</td></tr>
+<tr><td>Implied Price (P/E held at 25)</td><td>$50.00</td><td>$45.45</td></tr>
+</tbody></table>
+<div class="guide-p">If the market keeps valuing the company at the same 25x earnings multiple, the diluted EPS alone implies a price drop to roughly $45.45 — a 9.1% decline purely from the share count increase, with no change in the underlying business. A shareholder holding 5,000 shares would see their position drop from $250,000 to roughly $227,273 in implied value, despite never selling anything.</div>
+
+<div class="guide-h3">The Three Common Sources of Dilution</div>
+<table class="guide-table"><thead><tr><th>Source</th><th>What Happens</th><th>Typical Context</th></tr></thead><tbody>
+<tr><td>Secondary Offering</td><td>Company sells new shares directly to investors, often to raise capital</td><td>Funding growth, paying down debt, or shoring up the balance sheet</td></tr>
+<tr><td>Option / RSU Exercise</td><td>Employees convert vested stock options or restricted stock units into actual shares</td><td>Ongoing, gradual dilution baked into most public companies' compensation structure</td></tr>
+<tr><td>Convertible Note Conversion</td><td>Debt that converts into equity at a predetermined price or ratio, often triggered by a specific event or date</td><td>Common in growth-stage companies that raised capital via convertible debt rather than a priced equity round</td></tr>
+</tbody></table>
+<div class="guide-p">The dilution math is identical regardless of source — what changes is the context and whether the company received anything of value in exchange. A secondary offering brings in cash the company can deploy; an option exercise typically brings in a smaller exercise price payment; a convertible note conversion extinguishes existing debt rather than raising new cash.</div>
+
+<div class="guide-h3">Can the Company Offset Dilution?</div>
+<div class="guide-p">Dilution isn't automatically bad for shareholders if the company puts the new capital (or the debt relief, in a conversion) to good use. If net income grows by roughly the same percentage as the share count increased, EPS — and by extension, the P/E-implied share price — returns to where it would have been without the dilution. This calculator shows exactly what percentage net income growth would be needed to fully offset a given dilution event, which is a useful benchmark for judging whether a company's stated use of proceeds is plausible.</div>
+<div class="guide-formula">Required Net Income Growth ≈ New Shares ÷ Original Shares Outstanding × 100%</div>
+
+<div class="guide-h3">Why the "P/E Held Constant" Assumption Matters — and Where It Breaks Down</div>
+<div class="guide-p">This calculator's implied price assumes investors keep valuing the company at the same earnings multiple after the dilution event as before. In reality, the market's reaction depends heavily on <em>why</em> the dilution happened. A well-telegraphed offering to fund a clearly value-creating acquisition might see the P/E multiple expand, partially or fully absorbing the EPS hit. An unexpected, poorly explained offering — especially one signaling the company needed emergency cash — often sees the multiple compress further, making the price impact worse than the EPS math alone would suggest.</div>
+<div class="guide-warn">⚠ Real-world market reactions to dilution events are rarely as clean as a constant P/E multiple. Announcement timing, the stated use of proceeds, and overall market sentiment all influence how much (or little) the stock price actually moves — treat this calculator's implied price as a structured starting estimate, not a prediction of the actual market reaction.</div>
+<div class="guide-tip">💡 When a company you hold announces a dilutive event, check the stated use of proceeds before assuming the worst. Dilution that funds a clear, credible path to proportionally higher future earnings is a very different situation from dilution used simply to cover ongoing cash shortfalls.</div>
+
+  </div>
+</div>
+
+<div class="faq-section">
+<div class="faq-section-title">❓ Frequently Asked Questions</div>
+<div class="faq-item">
+  <div class="faq-q" onclick="toggleFAQ(this)">
+    <span>What is stock dilution?</span>
+    <span class="faq-icon">+</span>
+  </div>
+  <div class="faq-a">Stock dilution happens when a company issues new shares, which reduces each existing shareholder's percentage ownership of the company even though they haven't sold anything. It can come from a secondary stock offering, employees exercising options or RSUs, or convertible debt converting into equity.</div>
+</div>
+<div class="faq-item">
+  <div class="faq-q" onclick="toggleFAQ(this)">
+    <span>How does dilution affect EPS?</span>
+    <span class="faq-icon">+</span>
+  </div>
+  <div class="faq-a">EPS (earnings per share) is net income divided by shares outstanding. When new shares are issued without a proportional increase in net income, the same earnings get divided among more shares, so EPS falls. <span class="faq-formula">EPS = Net Income ÷ Shares Outstanding</span></div>
+</div>
+<div class="faq-item">
+  <div class="faq-q" onclick="toggleFAQ(this)">
+    <span>Will the stock price definitely fall after dilution?</span>
+    <span class="faq-icon">+</span>
+  </div>
+  <div class="faq-a">Not necessarily, though it often does, at least initially. If the market keeps valuing the company at the same P/E multiple, lower EPS implies a lower price. But if the new capital is used productively and increases future earnings enough, or if the market's confidence in the company actually improves, the price impact can be smaller than the raw EPS dilution suggests — or even reverse over time.</div>
+</div>
+<div class="faq-item">
+  <div class="faq-q" onclick="toggleFAQ(this)">
+    <span>How much would net income need to grow to offset dilution?</span>
+    <span class="faq-icon">+</span>
+  </div>
+  <div class="faq-a">Roughly the same percentage as the increase in share count. Issuing 10% more shares requires about 10% more net income to keep EPS unchanged. This calculator shows this figure directly so you can judge whether a company's plans for the new capital are realistic.</div>
+</div>
+<div class="faq-item">
+  <div class="faq-q" onclick="toggleFAQ(this)">
+    <span>Does it matter why the company is issuing new shares?</span>
+    <span class="faq-icon">+</span>
+  </div>
+  <div class="faq-a">Yes, significantly, for how the market is likely to react — even though the raw EPS math is identical regardless of cause. A well-explained offering funding clear growth tends to be received differently than an offering that signals the company is short on cash. Always check the stated use of proceeds.</div>
+</div>
+<div class="faq-item">
+  <div class="faq-q" onclick="toggleFAQ(this)">
+    <span>Is option and RSU dilution different from a secondary offering?</span>
+    <span class="faq-icon">+</span>
+  </div>
+  <div class="faq-a">The dilution math is the same — more shares outstanding, same net income, lower EPS. The difference is mainly that option and RSU dilution tends to happen gradually and continuously as part of normal employee compensation, while a secondary offering is typically a single, larger, more visible event with an explicit capital-raising purpose.</div>
+</div>
+</div>
+
+
+</div>
+</div><!-- content -->
+<div class="site-footer">
+  <div class="footer-brand">
+    <div class="logo-mark" style="width:22px;height:22px;background:var(--a);border-radius:5px;display:flex;align-items:center;justify-content:center;color:#000;font-size:11px;font-weight:700">FC</div>
+    FinCalc
+  </div>
+  <div class="footer-links"><a href="index.html">All Calculators</a> · <a href="about.html">About</a> · <a href="contact.html">Contact</a> · <a href="privacy.html">Privacy</a> · <a href="terms.html">Terms</a></div>
+  <div class="footer-copy">© 2025 FinCalc · Free Financial Calculators</div>
+</div>
+<script src="app.js"></script>
+<script>initPage('dilutionimpact');</script>
+</body>
+</html>

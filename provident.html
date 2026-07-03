@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Provident Fund (PF) Calculator | FinCalc Pro</title>
+<meta name="description" content="Calculate your provident fund maturity value, interest earned, and year-by-year balance growth. Free PF calculator with step-up contributions.">
+<link rel="canonical" href="https://yourdomain.com/provident.html">
+<meta name="robots" content="index, follow">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Provident Fund (PF) Calculator | FinCalc Pro">
+<meta property="og:description" content="Calculate your provident fund maturity value, interest earned, and year-by-year balance growth. Free PF calculator with step-up contributions.">
+<meta property="og:url" content="https://yourdomain.com/provident.html">
+<meta property="og:site_name" content="FinCalc Pro">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Provident Fund (PF) Calculator | FinCalc Pro">
+<meta name="twitter:description" content="Calculate your provident fund maturity value, interest earned, and year-by-year balance growth. Free PF calculator with step-up contributions.">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<div class="topbar">
+  <a class="logo" href="index.html"><div class="logo-mark">FC</div>FinCalc</a>
+  <div class="searchbox">
+    <svg width="14" height="14" fill="none" stroke="#6B7A8D" stroke-width="2" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+    <input id="srch" placeholder="Search 40 calculators..." oninput="doSearch()" onkeydown="if(event.key==='Enter')goSearch()">
+  </div>
+</div>
+<div class="nav">
+  <button class="ntab on" onclick="go('home',this)">🏠 Home</button>
+  <button class="ntab" onclick="go('cagr',this)">📐 CAGR</button>
+  <button class="ntab" onclick="go('xirr',this)">📅 XIRR</button>
+  <button class="ntab" onclick="go('drip',this)">💧 DRIP</button>
+  <button class="ntab" onclick="go('etf',this)">🗂️ ETF Growth</button>
+  <button class="ntab" onclick="go('dcf',this)">🏦 DCF Valuation</button>
+  <button class="ntab" onclick="go('debtcomp',this)">❄️ Snowball vs Avalanche</button>
+  <button class="ntab" onclick="go('rentalprop',this)">🏡 Rental Property</button>
+  <button class="ntab" onclick="go('burnrate',this)">🔥 Burn Rate</button>
+  <button class="ntab" onclick="go('pricing',this)">🏷️ Pricing</button>
+  <button class="ntab" onclick="go('equity',this)">📐 Equity Dilution</button>
+  <button class="ntab" onclick="go('revenue',this)">📊 Revenue Forecast</button>
+  <button class="ntab" onclick="go('loan',this)">🏦 Loan/EMI</button>
+  <button class="ntab" onclick="go('invest',this)">📈 SIP/Investment</button>
+  <button class="ntab" onclick="go('tax',this)">🧾 Tax</button>
+  <button class="ntab" onclick="go('mortgage',this)">🏠 Mortgage</button>
+  <button class="ntab" onclick="go('mortcomp',this)">⚖️ Mtg Compare</button>
+  <button class="ntab" onclick="go('savings',this)">🏛️ Savings</button>
+  <button class="ntab" onclick="go('stock',this)">📉 Stock P&amp;L</button>
+  <button class="ntab" onclick="go('retirement',this)">👴 Retirement</button>
+  <button class="ntab" onclick="go('debt',this)">💳 Debt Payoff</button>
+  <button class="ntab" onclick="go('rental',this)">🏘️ Rental Yield</button>
+  <button class="ntab" onclick="go('cashflow',this)">💵 Cash Flow</button>
+  <button class="ntab" onclick="go('breakeven',this)">📊 Break-even</button>
+  <button class="ntab" onclick="go('savingsgoal',this)">🎯 Savings Goal</button>
+  <button class="ntab" onclick="go('emergencyfund',this)">🛡️ Emergency Fund</button>
+  <button class="ntab" onclick="go('healthscore',this)">💯 Health Score</button>
+  <button class="ntab" onclick="go('currency',this)">💱 Currency</button>
+  <button class="ntab" onclick="go('scientific',this)">🔬 Scientific</button>
+</div>
+<div class="content">
+<div id="provident" class="panel on">
+<button class="back-btn" onclick="go('home',null)">← Back to Home</button>
+<div class="calc-links"><span class="calc-links-label">🔗 Related</span><button class="calc-link-btn" onclick="go('savings',null)">🏛️ Savings Estimator</button><button class="calc-link-btn" onclick="go('retirement',null)">👴 Retirement</button><button class="calc-link-btn" onclick="go('invest',null)">📈 SIP / Investment</button><button class="calc-link-btn" onclick="go('savingsgoal',null)">🎯 Savings Goal</button></div>
+
+
+<div class="two">
+  <div class="card">
+    <div class="card-title">Provident Fund Calculator</div>
+    <div class="g2">
+      <div class="field"><label>Current PF Balance ($)</label><div class="ip"><span class="pfx">$</span><input type="number" id="pf-open" value="5000" oninput="cProvident()"></div></div>
+      <div class="field"><label>Monthly Contribution ($)</label><div class="ip"><span class="pfx">$</span><input type="number" id="pf-mo" value="400" oninput="cProvident()"></div></div>
+      <div class="field"><label>Annual Interest Rate (%)</label><input type="number" id="pf-rate" value="8.25" step="0.05" oninput="cProvident()"></div>
+      <div class="field"><label>Years to Contribute</label><input type="number" id="pf-years" value="25" oninput="cProvident()"></div>
+    </div>
+    <div class="field"><label>Annual Contribution Step-up (%)</label><input type="number" id="pf-step" value="0" step="0.5" oninput="cProvident()"></div>
+    <div class="sgrid">
+      <div class="sbox"><div class="lbl">Maturity Value</div><div class="val" style="color:var(--a)" id="pf-mat">$0</div></div>
+      <div class="sbox"><div class="lbl">Interest Earned</div><div class="val" style="color:var(--g)" id="pf-int">$0</div></div>
+      <div class="sbox"><div class="lbl">Total Contributed</div><div class="val" id="pf-contrib">$0</div></div>
+      <div class="sbox"><div class="lbl">Interest / Contribution Ratio</div><div class="val" style="color:var(--g)" id="pf-ratio">0%</div></div>
+    </div>
+  </div>
+  <div class="card">
+    <div class="card-title">Balance Growth</div>
+    <canvas id="pf-chart" width="300" height="175" style="width:100%;margin:1rem 0"></canvas>
+    <div style="display:flex;gap:12px;font-size:11px;color:var(--m);margin-bottom:.5rem"><span style="color:var(--g)">━ Contributed</span><span style="color:var(--a)">━ Balance with Interest</span></div>
+    <div class="rrow"><span class="rk">Effective annualized growth</span><span class="rv" style="color:var(--g)" id="pf-cagr">0%</span></div>
+    <div class="insight-box" id="pf-insights"></div>
+  </div>
+
+<div class="card" style="grid-column:1/-1">
+  <div class="card-title">Year-by-Year Balance</div>
+  <div style="overflow-x:auto"><table class="tbl" id="pf-table"></table></div>
+</div>
+
+</div>
+
+<div class="calc-guide">
+  <div class="guide-toggle">
+    <div class="guide-toggle-title">📖 Provident Fund — How It Works</div>
+  </div>
+  <div class="guide-body">
+<div class="guide-p">A provident fund is a long-term, employer-linked savings scheme found in many forms around the world — EPF in India, the CPF in Singapore, and similar mandatory or voluntary retirement savings vehicles elsewhere. The core idea is the same everywhere: a portion of your salary (often matched in part or in full by your employer) is set aside every month, earns a relatively stable rate of interest declared annually, and compounds over your working life into a substantial retirement corpus you generally can't touch until retirement, resignation, or a qualifying event.</div>
+
+<div class="guide-h3">How the Math Works</div>
+<div class="guide-p">Every month, your contribution (and your employer's matching contribution, where applicable) is added to your running balance. Interest accrues on that balance at the scheme's declared annual rate, typically compounded monthly and credited at year-end, similar in mechanism to a high-yield savings account but usually with a meaningfully higher, often government-backed rate.</div>
+<div class="guide-formula">Maturity Value = Σ [Monthly Contribution × (1 + monthly rate)^remaining months]<br>+ Opening Balance × (1 + annual rate)^years</div>
+
+<div class="guide-h3">Worked Example: 25 Years of Steady Contributions</div>
+<div class="guide-p">Starting with a $5,000 opening balance and contributing $400/month for 25 years at an 8.25% annual rate, with no step-up:</div>
+<table class="guide-table"><thead><tr><th>Metric</th><th>Amount</th></tr></thead><tbody>
+<tr><td>Total Contributed (incl. opening balance)</td><td>$125,000</td></tr>
+<tr><td>Maturity Value</td><td>$438,011</td></tr>
+<tr><td>Interest Earned</td><td>$313,011</td></tr>
+</tbody></table>
+<div class="guide-p">Just as with any long-horizon compounding vehicle, the interest earned dwarfs the actual contributed amount once enough decades pass — the bulk of that $313,011 in interest accumulates disproportionately in the final third of the period, since the balance is largest precisely when it has the least time left to keep compounding before withdrawal.</div>
+
+<div class="guide-h3">Employer Matching: An Immediate, Guaranteed Return</div>
+<div class="guide-p">Where an employer match exists (commonly structured as the employer contributing an amount equal to your own contribution, often up to a salary-based cap), it functions as an instant, risk-free return on your own contribution before any interest is even applied. A dollar-for-dollar match effectively doubles your monthly contribution rate for free — which is why financial advisors near-universally recommend contributing at least enough to capture the full match before directing extra savings elsewhere.</div>
+<table class="guide-table"><thead><tr><th>Scenario</th><th>Effective Monthly Contribution</th></tr></thead><tbody>
+<tr><td>Employee only, no match</td><td>$400</td></tr>
+<tr><td>Employee + 100% employer match</td><td>$800</td></tr>
+<tr><td>Employee + 50% employer match</td><td>$600</td></tr>
+</tbody></table>
+
+<div class="guide-h3">Why the Step-Up Feature Matters</div>
+<div class="guide-p">Most people's salaries — and therefore their PF contributions, which are often a fixed percentage of salary — rise over a career, not stay flat. Modeling a modest annual step-up (3-7%, roughly tracking typical wage growth) gives a far more realistic maturity projection than assuming today's contribution amount stays constant for 20-30 years.</div>
+<table class="guide-table"><thead><tr><th>Step-up Assumption</th><th>Total Contributed (25 yrs)</th><th>Maturity Value (8.25%)</th></tr></thead><tbody>
+<tr><td>Flat $400/month, no step-up</td><td>$125,000</td><td>$438,011</td></tr>
+<tr><td>$400/month, stepped up 5% annually</td><td>$234,090</td><td>$661,266</td></tr>
+</tbody></table>
+
+<div class="guide-h3">Why PF Rates Tend to Be More Stable Than Market Returns</div>
+<div class="guide-p">Unlike equity-linked investments such as a SIP or ETF, most provident fund schemes are backed by a mix of government bonds and other fixed-income instruments, and many are government-administered or government-guaranteed in some form. This makes the declared annual rate far less volatile year to year than equity market returns, trading away some long-run upside for significantly lower risk and predictability — a sensible trade-off for a retirement vehicle people are often legally restricted from withdrawing early, since you don't want a forced long-term holding to also carry high volatility.</div>
+
+<div class="guide-h3">Early Withdrawal: Usually Restricted, Sometimes Penalized</div>
+<div class="guide-p">Most provident fund schemes restrict withdrawals before retirement age except for specific qualifying events (home purchase, medical emergency, extended unemployment, or full separation from the workforce), and early withdrawals frequently forfeit a portion of the employer's matching contribution or accrued interest, or trigger tax consequences that wouldn't apply to a withdrawal taken at the normal retirement age.</div>
+<div class="guide-warn">⚠ This calculator assumes uninterrupted monthly contributions for the full period with no withdrawals along the way. Any withdrawal, contribution gap (e.g. between jobs), or change in your contribution rate will change your actual maturity value — treat this as a planning estimate, not a guarantee.</div>
+
+<div class="guide-h3">Provident Fund vs Other Retirement Vehicles</div>
+<table class="guide-table"><thead><tr><th>Feature</th><th>Provident Fund</th><th>Equity SIP / 401(k) (stock-based)</th></tr></thead><tbody>
+<tr><td>Typical Return</td><td>Moderate, stable (often government-set)</td><td>Higher long-term average, but volatile</td></tr>
+<tr><td>Risk</td><td>Low — often government-backed</td><td>Higher — subject to market swings</td></tr>
+<tr><td>Liquidity</td><td>Low — restricted withdrawal rules</td><td>Varies — often similarly restricted if tax-advantaged</td></tr>
+<tr><td>Employer Match</td><td>Common, often mandatory</td><td>Common in employer-sponsored plans (e.g. 401(k))</td></tr>
+</tbody></table>
+<div class="guide-p">Many retirement strategies deliberately use both: a provident fund (or similar fixed-income retirement vehicle) as a stable, low-risk foundation, layered with equity-based investing for higher long-term growth potential — see our Retirement Planner and SIP / Investment calculators to model that combined approach.</div>
+<div class="guide-tip">💡 If your provident fund scheme allows voluntary contributions above the mandatory minimum, increasing your contribution rate is one of the simplest ways to boost your maturity value, since voluntary contributions typically still earn the same stable declared rate as mandatory ones, without taking on additional market risk.</div>
+
+  </div>
+</div>
+
+<div class="faq-section">
+<div class="faq-section-title">❓ Frequently Asked Questions</div>
+<div class="faq-item">
+  <div class="faq-q" onclick="toggleFAQ(this)">
+    <span>What is a provident fund?</span>
+    <span class="faq-icon">+</span>
+  </div>
+  <div class="faq-a">A provident fund is a long-term savings scheme, often linked to employment, where a portion of your salary (sometimes matched by your employer) is contributed monthly and earns a relatively stable, often government-declared interest rate until retirement or another qualifying withdrawal event.</div>
+</div>
+<div class="faq-item">
+  <div class="faq-q" onclick="toggleFAQ(this)">
+    <span>How is provident fund interest calculated?</span>
+    <span class="faq-icon">+</span>
+  </div>
+  <div class="faq-a">Interest is typically calculated monthly on your running balance (opening balance plus contributions made so far) at the scheme's declared annual rate, then credited to your account — most commonly at year-end. <span class="faq-formula">Maturity ≈ Opening Balance × (1+r)^years + Σ Monthly Contributions compounded monthly</span></div>
+</div>
+<div class="faq-item">
+  <div class="faq-q" onclick="toggleFAQ(this)">
+    <span>What's a good provident fund interest rate?</span>
+    <span class="faq-icon">+</span>
+  </div>
+  <div class="faq-a">Provident fund rates vary by country and scheme, but commonly fall between <strong>6% and 9%</strong> annually, since most are backed by a conservative mix of government bonds and fixed-income instruments. This calculator defaults to 8.25% but you can adjust it to match your specific scheme's declared rate.</div>
+</div>
+<div class="faq-item">
+  <div class="faq-q" onclick="toggleFAQ(this)">
+    <span>Should I contribute more than the mandatory minimum?</span>
+    <span class="faq-icon">+</span>
+  </div>
+  <div class="faq-a">If your scheme allows voluntary contributions above the minimum and you have surplus income, doing so can be attractive since voluntary amounts usually earn the same stable rate as mandatory contributions — though always weigh this against the fund's liquidity restrictions before committing money you might need access to sooner.</div>
+</div>
+<div class="faq-item">
+  <div class="faq-q" onclick="toggleFAQ(this)">
+    <span>Does employer matching affect my maturity value?</span>
+    <span class="faq-icon">+</span>
+  </div>
+  <div class="faq-a">Significantly. An employer match effectively increases your monthly contribution amount for free — a dollar-for-dollar match on $400/month means $800/month is actually being invested. Enter your <strong>combined</strong> employee + employer monthly contribution into this calculator to see the full maturity value.</div>
+</div>
+<div class="faq-item">
+  <div class="faq-q" onclick="toggleFAQ(this)">
+    <span>What happens if I withdraw early?</span>
+    <span class="faq-icon">+</span>
+  </div>
+  <div class="faq-a">Most provident fund schemes restrict early withdrawal to specific qualifying events and may reduce employer-matched amounts or accrued interest, or trigger additional tax, if withdrawn before the normal retirement age. Check your specific scheme's rules before assuming early access is straightforward.</div>
+</div>
+</div>
+
+
+</div>
+</div><!-- content -->
+<div class="site-footer">
+  <div class="footer-brand">
+    <div class="logo-mark" style="width:22px;height:22px;background:var(--a);border-radius:5px;display:flex;align-items:center;justify-content:center;color:#000;font-size:11px;font-weight:700">FC</div>
+    FinCalc
+  </div>
+  <div class="footer-links"><a href="index.html">All Calculators</a> · <a href="about.html">About</a> · <a href="contact.html">Contact</a> · <a href="privacy.html">Privacy</a> · <a href="terms.html">Terms</a></div>
+  <div class="footer-copy">© 2025 FinCalc · Free Financial Calculators</div>
+</div>
+<script src="app.js"></script>
+<script>initPage('provident');</script>
+</body>
+</html>

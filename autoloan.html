@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Auto Loan Calculator | FinCalc Pro</title>
+<meta name="description" content="Calculate your car payment with down payment, trade-in, and sales tax. Compare new vs used car loan rates. Free auto loan calculator.">
+<link rel="canonical" href="https://yourdomain.com/autoloan.html">
+<meta name="robots" content="index, follow">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Auto Loan Calculator | FinCalc Pro">
+<meta property="og:description" content="Calculate your car payment with down payment, trade-in, and sales tax. Compare new vs used car loan rates. Free auto loan calculator.">
+<meta property="og:url" content="https://yourdomain.com/autoloan.html">
+<meta property="og:site_name" content="FinCalc Pro">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Auto Loan Calculator | FinCalc Pro">
+<meta name="twitter:description" content="Calculate your car payment with down payment, trade-in, and sales tax. Compare new vs used car loan rates. Free auto loan calculator.">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<div class="topbar">
+  <a class="logo" href="index.html"><div class="logo-mark">FC</div>FinCalc</a>
+  <div class="searchbox">
+    <svg width="14" height="14" fill="none" stroke="#6B7A8D" stroke-width="2" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+    <input id="srch" placeholder="Search 40 calculators..." oninput="doSearch()" onkeydown="if(event.key==='Enter')goSearch()">
+  </div>
+</div>
+<div class="nav">
+  <button class="ntab on" onclick="go('home',this)">🏠 Home</button>
+  <button class="ntab" onclick="go('cagr',this)">📐 CAGR</button>
+  <button class="ntab" onclick="go('xirr',this)">📅 XIRR</button>
+  <button class="ntab" onclick="go('drip',this)">💧 DRIP</button>
+  <button class="ntab" onclick="go('etf',this)">🗂️ ETF Growth</button>
+  <button class="ntab" onclick="go('dcf',this)">🏦 DCF Valuation</button>
+  <button class="ntab" onclick="go('debtcomp',this)">❄️ Snowball vs Avalanche</button>
+  <button class="ntab" onclick="go('rentalprop',this)">🏡 Rental Property</button>
+  <button class="ntab" onclick="go('burnrate',this)">🔥 Burn Rate</button>
+  <button class="ntab" onclick="go('pricing',this)">🏷️ Pricing</button>
+  <button class="ntab" onclick="go('equity',this)">📐 Equity Dilution</button>
+  <button class="ntab" onclick="go('revenue',this)">📊 Revenue Forecast</button>
+  <button class="ntab" onclick="go('loan',this)">🏦 Loan/EMI</button>
+  <button class="ntab" onclick="go('invest',this)">📈 SIP/Investment</button>
+  <button class="ntab" onclick="go('tax',this)">🧾 Tax</button>
+  <button class="ntab" onclick="go('mortgage',this)">🏠 Mortgage</button>
+  <button class="ntab" onclick="go('mortcomp',this)">⚖️ Mtg Compare</button>
+  <button class="ntab" onclick="go('savings',this)">🏛️ Savings</button>
+  <button class="ntab" onclick="go('stock',this)">📉 Stock P&amp;L</button>
+  <button class="ntab" onclick="go('retirement',this)">👴 Retirement</button>
+  <button class="ntab" onclick="go('debt',this)">💳 Debt Payoff</button>
+  <button class="ntab" onclick="go('rental',this)">🏘️ Rental Yield</button>
+  <button class="ntab" onclick="go('cashflow',this)">💵 Cash Flow</button>
+  <button class="ntab" onclick="go('breakeven',this)">📊 Break-even</button>
+  <button class="ntab" onclick="go('savingsgoal',this)">🎯 Savings Goal</button>
+  <button class="ntab" onclick="go('emergencyfund',this)">🛡️ Emergency Fund</button>
+  <button class="ntab" onclick="go('healthscore',this)">💯 Health Score</button>
+  <button class="ntab" onclick="go('currency',this)">💱 Currency</button>
+  <button class="ntab" onclick="go('scientific',this)">🔬 Scientific</button>
+</div>
+<div class="content">
+<div id="autoloan" class="panel on">
+<button class="back-btn" onclick="go('home',null)">← Back to Home</button>
+<div class="calc-links"><span class="calc-links-label">🔗 Related</span><button class="calc-link-btn" onclick="go('loan',null)">🏦 Loan/EMI</button><button class="calc-link-btn" onclick="go('loancomp',null)">📋 Loan Comparison</button><button class="calc-link-btn" onclick="go('prepay',null)">⏩ Loan Prepayment</button><button class="calc-link-btn" onclick="go('debt',null)">💳 Debt Payoff</button></div>
+
+
+<div class="two">
+  <div class="card">
+    <div class="card-title">Auto Loan Calculator</div>
+    <div class="g2">
+      <div class="field"><label>Vehicle Price ($)</label><div class="ip"><span class="pfx">$</span><input type="number" id="al-price" value="35000" oninput="cAutoLoan()"></div></div>
+      <div class="field"><label>Down Payment ($)</label><div class="ip"><span class="pfx">$</span><input type="number" id="al-down" value="5000" oninput="cAutoLoan()"></div></div>
+      <div class="field"><label>Trade-In Value ($)</label><div class="ip"><span class="pfx">$</span><input type="number" id="al-tradein" value="3000" oninput="cAutoLoan()"></div></div>
+      <div class="field"><label>Sales Tax Rate (%)</label><input type="number" id="al-tax" value="7" step="0.1" oninput="cAutoLoan()"></div>
+      <div class="field"><label>Loan Term (months)</label><input type="number" id="al-term" value="60" oninput="cAutoLoan()"></div>
+      <div class="field"><label>Vehicle Condition</label><select id="al-condition" onchange="cAutoLoan()"><option value="new">New</option><option value="used">Used</option></select></div>
+    </div>
+    <div class="g2">
+      <div class="field"><label>New Car Loan Rate (%/yr)</label><input type="number" id="al-rate-new" value="6.5" step="0.1" oninput="cAutoLoan()"></div>
+      <div class="field"><label>Used Car Loan Rate (%/yr)</label><input type="number" id="al-rate-used" value="9.5" step="0.1" oninput="cAutoLoan()"></div>
+    </div>
+    <div class="sgrid">
+      <div class="sbox"><div class="lbl">Amount Financed</div><div class="val" style="color:var(--a)" id="al-financed">$0</div></div>
+      <div class="sbox"><div class="lbl">Monthly Payment</div><div class="val" style="color:var(--g)" id="al-payment">$0</div></div>
+      <div class="sbox"><div class="lbl">Total Interest</div><div class="val" style="color:var(--r)" id="al-interest">$0</div></div>
+      <div class="sbox"><div class="lbl">Total Cost (incl. tax)</div><div class="val" id="al-total">$0</div></div>
+    </div>
+    <div class="insight-box" id="al-insights"></div>
+  </div>
+  <div class="card">
+    <div class="card-title">Amount Financed Breakdown</div>
+    <div class="donut-wrap"><canvas id="al-donut" width="110" height="110"></canvas>
+      <div><div class="leg-i"><div class="leg-dot" style="background:var(--a)"></div>Principal</div><div class="leg-i"><div class="leg-dot" style="background:var(--r)"></div>Interest</div><div class="leg-i"><div class="leg-dot" style="background:var(--b)"></div>Sales Tax</div></div>
+    </div>
+    <div class="rrow"><span class="rk">Sales tax owed</span><span class="rv" style="color:var(--b)" id="al-salestax">$0</span></div>
+    <div class="rrow"><span class="rk">New car payment (for comparison)</span><span class="rv" style="color:var(--g)" id="al-paymentnew">$0</span></div>
+    <div class="rrow"><span class="rk">Used car payment (for comparison)</span><span class="rv" style="color:var(--r)" id="al-paymentused">$0</span></div>
+  </div>
+</div>
+
+<div class="calc-guide">
+  <div class="guide-toggle">
+    <div class="guide-toggle-title">📖 Auto Loans — What Actually Gets Financed</div>
+  </div>
+  <div class="guide-body">
+<div class="guide-p">An auto loan's monthly payment depends on more than just the sticker price and the interest rate. Down payment, trade-in value, and sales tax all change the actual amount you're financing — and because that amount compounds with interest over the loan term, getting these pieces right matters more than most car buyers realize when comparing what looks like a simple monthly payment.</div>
+
+<div class="guide-h3">Building the Amount Financed</div>
+<div class="guide-formula">Amount Financed = Vehicle Price − Down Payment − Trade-In Value + Sales Tax</div>
+<div class="guide-p">Sales tax is commonly calculated on the vehicle price <em>after</em> subtracting the trade-in value (this is the rule in most, though not all, US states — a few states tax the full price regardless of trade-in, so it's worth confirming your local rule). Critically, many buyers finance the sales tax along with the vehicle itself rather than paying it upfront, which means that tax amount also accrues interest over the life of the loan, just like the rest of the principal.</div>
+
+<div class="guide-h3">Worked Example: From Sticker Price to Monthly Payment</div>
+<div class="guide-p">A $35,000 vehicle, with a $5,000 down payment, a $3,000 trade-in, 7% sales tax, financed over 60 months at 6.5%:</div>
+<table class="guide-table"><thead><tr><th>Step</th><th>Amount</th></tr></thead><tbody>
+<tr><td>Vehicle Price</td><td>$35,000</td></tr>
+<tr><td>Less: Down Payment</td><td>−$5,000</td></tr>
+<tr><td>Less: Trade-In Value</td><td>−$3,000</td></tr>
+<tr><td>Plus: Sales Tax (7% on $32,000 taxable amount)</td><td>+$2,240</td></tr>
+<tr><td><strong>Amount Financed</strong></td><td><strong>$29,240</strong></td></tr>
+</tbody></table>
+<div class="guide-p">That $29,240 financed at 6.5% over 60 months produces a monthly payment of roughly $572, with about $5,087 in total interest paid over the life of the loan. Notice the sticker price ($35,000) and the amount actually financed ($29,240) differ by nearly $5,800 — entirely from the combined effect of the down payment, trade-in, and tax.</div>
+
+<div class="guide-h3">Why New and Used Car Loan Rates Differ So Much</div>
+<div class="guide-p">Lenders consistently charge higher interest rates on used car loans than new car loans, even for borrowers with identical credit profiles. A used vehicle depreciates faster in percentage terms, carries more uncertainty about mechanical condition and remaining lifespan, and is harder for a lender to repossess and resell at a predictable value if the loan defaults — all of which the lender prices in as additional risk.</div>
+<table class="guide-table"><thead><tr><th>Scenario</th><th>Rate</th><th>Monthly Payment</th><th>Total Interest</th></tr></thead><tbody>
+<tr><td>New car loan</td><td>6.5%</td><td>$572</td><td>$5,087</td></tr>
+<tr><td>Used car loan (same amount financed)</td><td>9.5%</td><td>$614</td><td>$7,606</td></tr>
+</tbody></table>
+<div class="guide-p">On the exact same $29,240 amount financed over the same 60-month term, the typically higher used-car rate costs roughly $2,519 more in total interest — a meaningful gap that comes purely from the rate difference, not from anything about the specific vehicle or buyer.</div>
+
+<div class="guide-h3">The Trade-In Trap: Don't Let It Disguise the Real Price</div>
+<div class="guide-p">Dealers sometimes offer an attractive-looking trade-in value while simultaneously offering less room to negotiate the vehicle's price — effectively moving the discount from one line item to another without actually changing your total cost. Always negotiate the vehicle's price and the trade-in value as two separate numbers, and check the total amount financed at the end, rather than judging the deal by how generous the trade-in offer looks in isolation.</div>
+
+<div class="guide-h3">Term Length: The Same Trade-off as Any Loan</div>
+<div class="guide-p">Stretching an auto loan to 72 or 84 months (increasingly common) lowers the monthly payment but meaningfully increases total interest paid, and carries an additional specific risk for vehicles: it raises the chance of being "underwater" (owing more than the car is worth) for a longer stretch of the loan, since vehicles typically depreciate faster than a long loan amortizes. A shorter term — 48 to 60 months is a common sweet spot — usually costs less in total interest and reduces this underwater risk window.</div>
+<div class="guide-warn">⚠ Avoid financing add-ons (extended warranties, GAP insurance, paint protection, and similar dealer products) into the loan amount unless you've deliberately decided you want them — rolling their cost into the loan means you pay interest on those add-ons for the entire loan term, on top of their sticker cost.</div>
+<div class="guide-tip">💡 Getting pre-approved for an auto loan from a bank or credit union before visiting the dealership gives you a real rate to compare against, and shifts the negotiation to the vehicle's price alone rather than letting the dealer control both the price and the financing terms simultaneously.</div>
+
+  </div>
+</div>
+
+<div class="faq-section">
+<div class="faq-section-title">❓ Frequently Asked Questions</div>
+<div class="faq-item">
+  <div class="faq-q" onclick="toggleFAQ(this)">
+    <span>How is the amount financed on an auto loan calculated?</span>
+    <span class="faq-icon">+</span>
+  </div>
+  <div class="faq-a">It's the vehicle price minus your down payment and trade-in value, plus sales tax. <span class="faq-formula">Amount Financed = Price − Down Payment − Trade-In + Sales Tax</span> Sales tax is commonly calculated on the price after subtracting the trade-in, though this varies by state.</div>
+</div>
+<div class="faq-item">
+  <div class="faq-q" onclick="toggleFAQ(this)">
+    <span>Why are used car loan rates higher than new car loan rates?</span>
+    <span class="faq-icon">+</span>
+  </div>
+  <div class="faq-a">Used vehicles depreciate faster in percentage terms, carry more uncertainty about mechanical condition, and are generally riskier collateral for a lender to repossess and resell at a predictable value. Lenders price all of this into a higher rate, even for borrowers with the exact same credit profile.</div>
+</div>
+<div class="faq-item">
+  <div class="faq-q" onclick="toggleFAQ(this)">
+    <span>Should I finance sales tax into my auto loan?</span>
+    <span class="faq-icon">+</span>
+  </div>
+  <div class="faq-a">If you finance it rather than paying it upfront, you'll pay interest on the tax amount for the entire loan term, slightly increasing your total cost. If you have the cash available, paying sales tax upfront avoids this extra interest — though many buyers reasonably choose to finance it rather than tie up additional cash at purchase.</div>
+</div>
+<div class="faq-item">
+  <div class="faq-q" onclick="toggleFAQ(this)">
+    <span>Is a longer loan term ever a good idea?</span>
+    <span class="faq-icon">+</span>
+  </div>
+  <div class="faq-a">A longer term lowers your monthly payment but increases total interest paid and extends the period where you could owe more than the car is worth, since vehicles typically depreciate faster than a long loan amortizes. It can make sense if it's the only way to fit the payment into your budget, but a shorter term (48-60 months) is usually the better deal if you can afford the higher payment.</div>
+</div>
+<div class="faq-item">
+  <div class="faq-q" onclick="toggleFAQ(this)">
+    <span>Does my trade-in value actually reduce what I pay?</span>
+    <span class="faq-icon">+</span>
+  </div>
+  <div class="faq-a">Yes, it directly reduces the amount you finance — but dealers sometimes offset a generous-looking trade-in offer with less flexibility on the vehicle's price. Always check the total amount financed at the end of the negotiation, not just how attractive the trade-in number looks by itself.</div>
+</div>
+<div class="faq-item">
+  <div class="faq-q" onclick="toggleFAQ(this)">
+    <span>What's the difference between this and the general Loan/EMI calculator?</span>
+    <span class="faq-icon">+</span>
+  </div>
+  <div class="faq-a">The Loan/EMI calculator handles any general loan with a flat amount, rate, and term. This calculator is built specifically for auto purchases — it accounts for down payment, trade-in value, and sales tax to arrive at the actual amount financed, and compares typical new vs used car loan rates side by side.</div>
+</div>
+</div>
+
+
+</div>
+</div><!-- content -->
+<div class="site-footer">
+  <div class="footer-brand">
+    <div class="logo-mark" style="width:22px;height:22px;background:var(--a);border-radius:5px;display:flex;align-items:center;justify-content:center;color:#000;font-size:11px;font-weight:700">FC</div>
+    FinCalc
+  </div>
+  <div class="footer-links"><a href="index.html">All Calculators</a> · <a href="about.html">About</a> · <a href="contact.html">Contact</a> · <a href="privacy.html">Privacy</a> · <a href="terms.html">Terms</a></div>
+  <div class="footer-copy">© 2025 FinCalc · Free Financial Calculators</div>
+</div>
+<script src="app.js"></script>
+<script>initPage('autoloan');</script>
+</body>
+</html>

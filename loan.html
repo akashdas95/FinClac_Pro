@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Loan & EMI Calculator | FinCalc Pro</title>
+<meta name="description" content="Calculate your loan EMI instantly with full amortization schedule. Free EMI calculator for personal, auto, and business loans.">
+<link rel="canonical" href="https://yourdomain.com/loan.html">
+<meta name="robots" content="index, follow">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Loan & EMI Calculator | FinCalc Pro">
+<meta property="og:description" content="Calculate your loan EMI instantly with full amortization schedule. Free EMI calculator for personal, auto, and business loans.">
+<meta property="og:url" content="https://yourdomain.com/loan.html">
+<meta property="og:site_name" content="FinCalc Pro">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Loan & EMI Calculator | FinCalc Pro">
+<meta name="twitter:description" content="Calculate your loan EMI instantly with full amortization schedule. Free EMI calculator for personal, auto, and business loans.">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<div class="topbar">
+  <a class="logo" href="index.html"><div class="logo-mark">FC</div>FinCalc</a>
+  <div class="searchbox">
+    <svg width="14" height="14" fill="none" stroke="#6B7A8D" stroke-width="2" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+    <input id="srch" placeholder="Search 40 calculators..." oninput="doSearch()" onkeydown="if(event.key==='Enter')goSearch()">
+  </div>
+</div>
+<div class="nav">
+  <button class="ntab on" onclick="go('home',this)">🏠 Home</button>
+  <button class="ntab" onclick="go('cagr',this)">📐 CAGR</button>
+  <button class="ntab" onclick="go('xirr',this)">📅 XIRR</button>
+  <button class="ntab" onclick="go('drip',this)">💧 DRIP</button>
+  <button class="ntab" onclick="go('etf',this)">🗂️ ETF Growth</button>
+  <button class="ntab" onclick="go('dcf',this)">🏦 DCF Valuation</button>
+  <button class="ntab" onclick="go('debtcomp',this)">❄️ Snowball vs Avalanche</button>
+  <button class="ntab" onclick="go('rentalprop',this)">🏡 Rental Property</button>
+  <button class="ntab" onclick="go('burnrate',this)">🔥 Burn Rate</button>
+  <button class="ntab" onclick="go('pricing',this)">🏷️ Pricing</button>
+  <button class="ntab" onclick="go('equity',this)">📐 Equity Dilution</button>
+  <button class="ntab" onclick="go('revenue',this)">📊 Revenue Forecast</button>
+  <button class="ntab" onclick="go('loan',this)">🏦 Loan/EMI</button>
+  <button class="ntab" onclick="go('invest',this)">📈 SIP/Investment</button>
+  <button class="ntab" onclick="go('tax',this)">🧾 Tax</button>
+  <button class="ntab" onclick="go('mortgage',this)">🏠 Mortgage</button>
+  <button class="ntab" onclick="go('mortcomp',this)">⚖️ Mtg Compare</button>
+  <button class="ntab" onclick="go('savings',this)">🏛️ Savings</button>
+  <button class="ntab" onclick="go('stock',this)">📉 Stock P&amp;L</button>
+  <button class="ntab" onclick="go('retirement',this)">👴 Retirement</button>
+  <button class="ntab" onclick="go('debt',this)">💳 Debt Payoff</button>
+  <button class="ntab" onclick="go('rental',this)">🏘️ Rental Yield</button>
+  <button class="ntab" onclick="go('cashflow',this)">💵 Cash Flow</button>
+  <button class="ntab" onclick="go('breakeven',this)">📊 Break-even</button>
+  <button class="ntab" onclick="go('savingsgoal',this)">🎯 Savings Goal</button>
+  <button class="ntab" onclick="go('emergencyfund',this)">🛡️ Emergency Fund</button>
+  <button class="ntab" onclick="go('healthscore',this)">💯 Health Score</button>
+  <button class="ntab" onclick="go('currency',this)">💱 Currency</button>
+  <button class="ntab" onclick="go('scientific',this)">🔬 Scientific</button>
+</div>
+<div class="content">
+<div id="loan" class="panel on">
+<button class="back-btn" onclick="go('home',null)">← Back to Home</button>
+<div class="calc-links"><span class="calc-links-label">🔗 Related</span><button class="calc-link-btn" onclick="go('autoloan',null)">🚗 Auto Loan</button><button class="calc-link-btn" onclick="go('prepay',null)">⏩ Prepayment</button><button class="calc-link-btn" onclick="go('loancomp',null)">📋 Loan Comparison</button><button class="calc-link-btn" onclick="go('debt',null)">💳 Debt Payoff</button><button class="calc-link-btn" onclick="go('mortcomp',null)">⚖️ Mortgage Compare</button></div>
+
+
+<div class="two">
+  <div class="card">
+    <div class="card-title">Loan / EMI Calculator</div>
+    <div class="g2">
+      <div class="field"><label>Loan Amount ($)</label><div class="ip"><span class="pfx">$</span><input type="number" id="l-amt" value="500000" oninput="cLoan()"></div></div>
+      <div class="field"><label>Interest Rate (% p.a.)</label><input type="number" id="l-rate" value="7" step="0.1" oninput="cLoan()"></div>
+      <div class="field"><label>Tenure (months)</label><input type="number" id="l-n" value="60" oninput="cLoan()"></div>
+      <div class="field"><label>Processing Fee (%)</label><input type="number" id="l-fee" value="1" step="0.1" oninput="cLoan()"></div>
+    </div>
+    <div class="field"><label>Loan Type</label><select id="l-type" onchange="cLoan()"><option value="emi">Reducing balance (EMI)</option><option value="flat">Flat rate</option></select></div>
+    <div class="sgrid">
+      <div class="sbox"><div class="lbl">Monthly EMI</div><div class="val" style="color:var(--a)" id="l-emi">$0</div></div>
+      <div class="sbox"><div class="lbl">Total Interest</div><div class="val" style="color:var(--r)" id="l-int">$0</div></div>
+      <div class="sbox"><div class="lbl">Total Payable</div><div class="val" id="l-tot">$0</div></div>
+      <div class="sbox"><div class="lbl">Processing Fee</div><div class="val" id="l-pf">$0</div></div>
+    </div>
+  </div>
+  <div class="card">
+    <div class="card-title">Payment Breakdown</div>
+    <div class="donut-wrap"><canvas id="l-donut" width="110" height="110"></canvas>
+      <div><div class="leg-i"><div class="leg-dot" style="background:var(--a)"></div>Principal</div><div class="leg-i"><div class="leg-dot" style="background:var(--r)"></div>Interest</div><div class="leg-i"><div class="leg-dot" style="background:var(--m)"></div>Fees</div></div>
+    </div>
+    <div class="rrow"><span class="rk">Principal %</span><span class="rv" id="l-pp">0%</span></div>
+    <div class="rrow"><span class="rk">Interest %</span><span class="rv" style="color:var(--r)" id="l-ip">0%</span></div>
+    <div class="rrow"><span class="rk">Cost of credit</span><span class="rv" style="color:var(--a)" id="l-coc">0%</span></div>
+    <div class="insight-box" id="l-insights"></div>
+  </div>
+</div>
+
+<div class="calc-guide">
+  <div class="guide-toggle">
+    <div class="guide-toggle-title">📖 Loan & EMI — How It Works</div>
+  </div>
+  <div class="guide-body">
+<div class="guide-p">Every loan you'll ever take out — a car loan, a personal loan, a business loan — is built around the same core mechanism: EMI (Equated Monthly Installment). Understanding exactly how that single fixed number is calculated, and what happens to it behind the scenes month after month, demystifies one of the most common financial products people use without ever fully understanding.</div>
+
+<div class="guide-h3">The EMI Formula, Unpacked</div>
+<div class="guide-formula">EMI = P × r × (1 + r)ⁿ / ((1 + r)ⁿ − 1)</div>
+<div class="guide-p">Here, P is your principal (loan amount), r is the monthly interest rate (your annual rate divided by 12), and n is the total number of monthly payments. This formula is specifically designed so that paying the exact same EMI every month, for n months, fully repays both principal and all accrued interest — landing at exactly zero balance on the final payment.</div>
+
+<div class="guide-h3">Worked Example: A $25,000 Auto Loan</div>
+<div class="guide-p">Borrowing $25,000 at 6.5% annual interest over 5 years (60 months):</div>
+<div class="guide-formula">r = 6.5% / 12 = 0.5417% monthly<br>EMI = 25,000 × 0.005417 × (1.005417)^60 / ((1.005417)^60 − 1)<br>EMI ≈ $489.42/month</div>
+<div class="guide-p">Over 60 months, total payments equal $489.42 × 60 = $29,365.20 — meaning $4,365.20 of that is pure interest, the cost of borrowing the money.</div>
+
+<div class="guide-h3">Why Interest Dominates Early Payments</div>
+<div class="guide-p">A common misconception is that each EMI pays down principal evenly across the loan term. In reality, interest is calculated on the <em>remaining outstanding balance</em> each month, which is highest at the very start of the loan. This means your earliest payments are weighted heavily toward interest, with the principal portion growing larger every month as the balance shrinks.</div>
+<table class="guide-table"><thead><tr><th>Month</th><th>Interest Portion</th><th>Principal Portion</th></tr></thead><tbody>
+<tr><td>1</td><td>$135.42</td><td>$354.00</td></tr>
+<tr><td>30 (halfway)</td><td>$70.18</td><td>$419.24</td></tr>
+<tr><td>60 (final)</td><td>$2.65</td><td>$486.77</td></tr>
+</tbody></table>
+<div class="guide-p">By the final month, almost the entire EMI goes toward principal because the outstanding balance — and therefore the interest charged on it — has shrunk to nearly nothing.</div>
+
+<div class="guide-h3">Flat Rate vs Reducing Balance: A Critical Difference</div>
+<div class="guide-p">Some lenders (particularly for certain personal loans and in specific countries) advertise a "flat rate" instead of reducing balance. Under flat rate, interest is calculated on the <em>original</em> principal for the entire loan term, never decreasing — making the effective interest rate dramatically higher than the advertised rate suggests.</div>
+<table class="guide-table"><thead><tr><th>Method</th><th>Stated Rate</th><th>Actual Effective Rate (Approx.)</th></tr></thead><tbody>
+<tr><td>Reducing Balance</td><td>10%</td><td>~10% (true cost)</td></tr>
+<tr><td>Flat Rate</td><td>10%</td><td>~18-19% (nearly double)</td></tr>
+</tbody></table>
+<div class="guide-warn">⚠ Always confirm whether a quoted loan rate is "flat" or "reducing balance" before comparing offers — a 10% flat rate loan can cost nearly as much as an 18-19% reducing balance loan, despite the headline number looking far more attractive.</div>
+
+<div class="guide-h3">Three Ways to Reduce Your Total Interest Cost</div>
+<div class="guide-steps">
+<div class="guide-step"><div class="guide-step-num">1</div><div><strong>Shorter tenure</strong> — a higher monthly EMI but dramatically less total interest, since the principal is exposed to interest charges for fewer months overall.</div></div>
+<div class="guide-step"><div class="guide-step-num">2</div><div><strong>Larger down payment</strong> — reduces the principal you're borrowing in the first place, which reduces both the EMI and the total interest proportionally.</div></div>
+<div class="guide-step"><div class="guide-step-num">3</div><div><strong>Rate negotiation or refinancing</strong> — even a 1 percentage point reduction in rate, on a large enough loan over a long enough term, can save thousands of dollars — see our dedicated Loan Prepayment calculator for the exact mechanics.</div></div>
+</div>
+<div class="guide-tip">💡 Always check for a prepayment penalty clause before signing — some fixed-rate loans (especially mortgages) charge a fee of 1-3% on amounts paid off early, which can offset some or all of the interest savings from prepaying.</div>
+
+  </div>
+</div>
+
+<div class="faq-section">
+<div class="faq-section-title">❓ Frequently Asked Questions</div>
+<div class="faq-item">
+  <div class="faq-q" onclick="toggleFAQ(this)">
+    <span>What is EMI?</span>
+    <span class="faq-icon">+</span>
+  </div>
+  <div class="faq-a">EMI (Equated Monthly Installment) is the <strong>fixed monthly payment</strong> you make to repay a loan. It includes both a principal component (reducing your debt) and an interest component. Over time, the interest portion shrinks and the principal portion grows.</div>
+</div>
+<div class="faq-item">
+  <div class="faq-q" onclick="toggleFAQ(this)">
+    <span>What is the EMI formula?</span>
+    <span class="faq-icon">+</span>
+  </div>
+  <div class="faq-a"><span class="faq-formula">EMI = P × r × (1 + r)ⁿ / ((1 + r)ⁿ − 1)</span>Where <strong>P</strong> = Principal, <strong>r</strong> = monthly interest rate (annual rate ÷ 12), <strong>n</strong> = loan tenure in months.</div>
+</div>
+<div class="faq-item">
+  <div class="faq-q" onclick="toggleFAQ(this)">
+    <span>How can I reduce my EMI?</span>
+    <span class="faq-icon">+</span>
+  </div>
+  <div class="faq-a">You have three options: <strong>1)</strong> Increase your loan tenure (lower EMI but more total interest). <strong>2)</strong> Make a larger down payment to reduce the principal. <strong>3)</strong> Negotiate a lower interest rate or refinance when rates drop.</div>
+</div>
+<div class="faq-item">
+  <div class="faq-q" onclick="toggleFAQ(this)">
+    <span>What is an amortization schedule?</span>
+    <span class="faq-icon">+</span>
+  </div>
+  <div class="faq-a">An amortization schedule shows the breakdown of each EMI payment across the loan term — how much goes to interest and how much reduces principal. In early months, most of your EMI is interest. Toward the end, most goes to principal.</div>
+</div>
+<div class="faq-item">
+  <div class="faq-q" onclick="toggleFAQ(this)">
+    <span>What is the difference between flat rate and reducing balance interest?</span>
+    <span class="faq-icon">+</span>
+  </div>
+  <div class="faq-a">In a <strong>flat rate</strong> loan, interest is calculated on the original loan amount throughout the tenure. In a <strong>reducing balance</strong> loan, interest is calculated only on the outstanding principal — making it significantly cheaper overall.</div>
+</div>
+<div class="faq-item">
+  <div class="faq-q" onclick="toggleFAQ(this)">
+    <span>Does prepaying a loan save money?</span>
+    <span class="faq-icon">+</span>
+  </div>
+  <div class="faq-a">Yes, significantly. Every extra payment above your EMI goes directly to reduce the principal, which reduces all future interest. A single large prepayment in the early years can shave years off your loan tenure.</div>
+</div>
+</div>
+
+
+</div>
+</div><!-- content -->
+<div class="site-footer">
+  <div class="footer-brand">
+    <div class="logo-mark" style="width:22px;height:22px;background:var(--a);border-radius:5px;display:flex;align-items:center;justify-content:center;color:#000;font-size:11px;font-weight:700">FC</div>
+    FinCalc
+  </div>
+  <div class="footer-links"><a href="index.html">All Calculators</a> · <a href="about.html">About</a> · <a href="contact.html">Contact</a> · <a href="privacy.html">Privacy</a> · <a href="terms.html">Terms</a></div>
+  <div class="footer-copy">© 2025 FinCalc · Free Financial Calculators</div>
+</div>
+<script src="app.js"></script>
+<script>initPage('loan');</script>
+</body>
+</html>

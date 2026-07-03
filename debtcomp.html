@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Debt Snowball vs Avalanche Calculator | FinCalc Pro</title>
+<meta name="description" content="Compare Debt Snowball and Debt Avalanche payoff strategies side by side. Free calculator shows total interest and payoff timeline for both.">
+<link rel="canonical" href="https://yourdomain.com/debtcomp.html">
+<meta name="robots" content="index, follow">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Debt Snowball vs Avalanche Calculator | FinCalc Pro">
+<meta property="og:description" content="Compare Debt Snowball and Debt Avalanche payoff strategies side by side. Free calculator shows total interest and payoff timeline for both.">
+<meta property="og:url" content="https://yourdomain.com/debtcomp.html">
+<meta property="og:site_name" content="FinCalc Pro">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Debt Snowball vs Avalanche Calculator | FinCalc Pro">
+<meta name="twitter:description" content="Compare Debt Snowball and Debt Avalanche payoff strategies side by side. Free calculator shows total interest and payoff timeline for both.">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<div class="topbar">
+  <a class="logo" href="index.html"><div class="logo-mark">FC</div>FinCalc</a>
+  <div class="searchbox">
+    <svg width="14" height="14" fill="none" stroke="#6B7A8D" stroke-width="2" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+    <input id="srch" placeholder="Search 40 calculators..." oninput="doSearch()" onkeydown="if(event.key==='Enter')goSearch()">
+  </div>
+</div>
+<div class="nav">
+  <button class="ntab on" onclick="go('home',this)">🏠 Home</button>
+  <button class="ntab" onclick="go('cagr',this)">📐 CAGR</button>
+  <button class="ntab" onclick="go('xirr',this)">📅 XIRR</button>
+  <button class="ntab" onclick="go('drip',this)">💧 DRIP</button>
+  <button class="ntab" onclick="go('etf',this)">🗂️ ETF Growth</button>
+  <button class="ntab" onclick="go('dcf',this)">🏦 DCF Valuation</button>
+  <button class="ntab" onclick="go('debtcomp',this)">❄️ Snowball vs Avalanche</button>
+  <button class="ntab" onclick="go('rentalprop',this)">🏡 Rental Property</button>
+  <button class="ntab" onclick="go('burnrate',this)">🔥 Burn Rate</button>
+  <button class="ntab" onclick="go('pricing',this)">🏷️ Pricing</button>
+  <button class="ntab" onclick="go('equity',this)">📐 Equity Dilution</button>
+  <button class="ntab" onclick="go('revenue',this)">📊 Revenue Forecast</button>
+  <button class="ntab" onclick="go('loan',this)">🏦 Loan/EMI</button>
+  <button class="ntab" onclick="go('invest',this)">📈 SIP/Investment</button>
+  <button class="ntab" onclick="go('tax',this)">🧾 Tax</button>
+  <button class="ntab" onclick="go('mortgage',this)">🏠 Mortgage</button>
+  <button class="ntab" onclick="go('mortcomp',this)">⚖️ Mtg Compare</button>
+  <button class="ntab" onclick="go('savings',this)">🏛️ Savings</button>
+  <button class="ntab" onclick="go('stock',this)">📉 Stock P&amp;L</button>
+  <button class="ntab" onclick="go('retirement',this)">👴 Retirement</button>
+  <button class="ntab" onclick="go('debt',this)">💳 Debt Payoff</button>
+  <button class="ntab" onclick="go('rental',this)">🏘️ Rental Yield</button>
+  <button class="ntab" onclick="go('cashflow',this)">💵 Cash Flow</button>
+  <button class="ntab" onclick="go('breakeven',this)">📊 Break-even</button>
+  <button class="ntab" onclick="go('savingsgoal',this)">🎯 Savings Goal</button>
+  <button class="ntab" onclick="go('emergencyfund',this)">🛡️ Emergency Fund</button>
+  <button class="ntab" onclick="go('healthscore',this)">💯 Health Score</button>
+  <button class="ntab" onclick="go('currency',this)">💱 Currency</button>
+  <button class="ntab" onclick="go('scientific',this)">🔬 Scientific</button>
+</div>
+<div class="content">
+<div id="debtcomp" class="panel on">
+<button class="back-btn" onclick="go('home',null)">← Back to Home</button>
+<div class="calc-links"><span class="calc-links-label">🔗 Related</span><button class="calc-link-btn" onclick="go('debt',null)">💳 Debt Payoff</button><button class="calc-link-btn" onclick="go('cashflow',null)">💵 Cash Flow</button><button class="calc-link-btn" onclick="go('loan',null)">🏦 Loan/EMI</button></div>
+
+
+<div style="margin-bottom:1rem"><div style="font-size:16px;font-weight:500;margin-bottom:4px">Debt Snowball vs Avalanche</div><div style="font-size:12px;color:var(--m)">Side-by-side comparison — see which method wins for your situation</div></div>
+<div class="card mb16">
+  <div class="card-title">Your Debts</div>
+  <div style="display:grid;grid-template-columns:1.5fr 1fr 1fr 1fr 36px;gap:8px;margin-bottom:6px">
+    <span style="font-size:10px;color:var(--m);text-transform:uppercase">Debt Name</span>
+    <span style="font-size:10px;color:var(--m);text-transform:uppercase">Balance ($)</span>
+    <span style="font-size:10px;color:var(--m);text-transform:uppercase">Rate %</span>
+    <span style="font-size:10px;color:var(--m);text-transform:uppercase">Min Pay ($)</span>
+    <span></span>
+  </div>
+  <div id="dc2-rows"></div>
+  <div style="display:flex;gap:10px;margin-top:10px;align-items:flex-end;flex-wrap:wrap">
+    <button class="btn-sm btn-add" onclick="addDC2()">+ Add Debt</button>
+    <div style="flex:1;min-width:140px"><label style="display:block;font-size:12px;color:var(--m);margin-bottom:5px">Extra Monthly Payment ($)</label><div class="ip"><span class="pfx">$</span><input type="number" id="dc2-extra" value="500" oninput="calcDC2()"></div></div>
+  </div>
+</div>
+<div class="two-eq mb16">
+  <div class="card" style="border-left:3px solid var(--b)">
+    <div style="font-size:14px;font-weight:600;color:var(--b);margin-bottom:4px">❄️ Avalanche — Highest Rate First</div>
+    <div style="font-size:11px;color:var(--m);margin-bottom:1rem">Mathematically optimal — saves the most money</div>
+    <div class="sgrid" style="margin-top:0;margin-bottom:1rem">
+      <div class="sbox"><div class="lbl">Payoff Time</div><div class="val" style="color:var(--b)" id="av-months">0 mo</div></div>
+      <div class="sbox"><div class="lbl">Total Interest</div><div class="val" style="color:var(--r)" id="av-int">$0</div></div>
+    </div>
+    <div style="font-size:11px;color:var(--m);font-weight:600;text-transform:uppercase;letter-spacing:.5px;margin-bottom:.75rem">Payoff Order</div>
+    <div id="av-order"></div>
+  </div>
+  <div class="card" style="border-left:3px solid var(--g)">
+    <div style="font-size:14px;font-weight:600;color:var(--g);margin-bottom:4px">☃️ Snowball — Smallest Balance First</div>
+    <div style="font-size:11px;color:var(--m);margin-bottom:1rem">Best for motivation and momentum</div>
+    <div class="sgrid" style="margin-top:0;margin-bottom:1rem">
+      <div class="sbox"><div class="lbl">Payoff Time</div><div class="val" style="color:var(--g)" id="sn-months">0 mo</div></div>
+      <div class="sbox"><div class="lbl">Total Interest</div><div class="val" style="color:var(--r)" id="sn-int">$0</div></div>
+    </div>
+    <div style="font-size:11px;color:var(--m);font-weight:600;text-transform:uppercase;letter-spacing:.5px;margin-bottom:.75rem">Payoff Order</div>
+    <div id="sn-order"></div>
+  </div>
+</div>
+<div class="card">
+  <div class="card-title">Strategy Comparison</div>
+  <div class="g3">
+    <div class="sbox"><div class="lbl">Total Debt</div><div class="val" id="dc2-total">$0</div></div>
+    <div class="sbox"><div class="lbl">Interest Saved (Avalanche)</div><div class="val" style="color:var(--g)" id="dc2-saved">$0</div></div>
+    <div class="sbox"><div class="lbl">Months Faster (Avalanche)</div><div class="val" style="color:var(--a)" id="dc2-faster">0 mo</div></div>
+  </div>
+  <canvas id="dc2-chart" width="900" height="140" style="width:100%;margin-top:1rem"></canvas>
+  <div style="display:flex;gap:16px;margin-top:8px;font-size:11px;color:var(--m)">
+    <span style="color:var(--b)">━ Avalanche balance</span><span style="color:var(--g)">━ Snowball balance</span>
+  </div>
+  <div class="insight-box" id="dc2-insights"></div>
+<div class="calc-guide">
+  <div class="guide-toggle">
+    <div class="guide-toggle-title">📖 Snowball vs Avalanche — Which Is Right for You?</div>
+  </div>
+  <div class="guide-body">
+<div class="guide-p">When you're juggling multiple debts — credit cards, a car loan, maybe a personal loan — the order in which you attack them matters more than most people realize. Two competing strategies dominate the personal finance world: the Debt Snowball and the Debt Avalanche. Both get you to the same destination (debt-free), but they take meaningfully different paths, and the "best" one depends as much on psychology as on math.</div>
+
+<div class="guide-h3">Debt Snowball: Smallest Balance First</div>
+<div class="guide-p">The Snowball method, popularized by financial personality Dave Ramsey, has you list every debt from smallest balance to largest, completely ignoring interest rates. You pay minimums on everything except the smallest debt, which you attack with every extra dollar you can find. Once it's paid off, you roll its entire former payment (minimum + extra) into the next-smallest debt, creating a "snowball" that grows larger with each debt eliminated.</div>
+
+<div class="guide-h3">Debt Avalanche: Highest Interest Rate First</div>
+<div class="guide-p">The Avalanche method instead orders debts from highest interest rate to lowest, completely ignoring balance size. You throw every extra dollar at the debt charging you the most in interest, regardless of how large or small that balance is. Mathematically, this guarantees the lowest total interest paid and the fastest overall payoff time of any ordering strategy.</div>
+
+<div class="guide-h3">Worked Example: Comparing Both Methods Side by Side</div>
+<div class="guide-p">Consider someone with three debts and $300/month available beyond minimum payments:</div>
+<table class="guide-table"><thead><tr><th>Debt</th><th>Balance</th><th>Interest Rate</th><th>Minimum Payment</th></tr></thead><tbody>
+<tr><td>Credit Card A</td><td>$1,200</td><td>24%</td><td>$40</td></tr>
+<tr><td>Personal Loan</td><td>$6,000</td><td>11%</td><td>$150</td></tr>
+<tr><td>Credit Card B</td><td>$3,500</td><td>22%</td><td>$90</td></tr>
+</tbody></table>
+<div class="guide-p"><strong>Snowball order:</strong> Credit Card A ($1,200) → Credit Card B ($3,500) → Personal Loan ($6,000). You'd eliminate Credit Card A within roughly 4 months given the extra $300, providing an early psychological win, then roll that freed-up payment into Card B.</div>
+<div class="guide-p"><strong>Avalanche order:</strong> Credit Card A ($1,200, 24%) → Credit Card B ($3,500, 22%) → Personal Loan ($6,000, 11%). In this particular case, the smallest-balance debt and the highest-rate debt happen to be the same one, so both methods start identically — but they'd diverge if the rates were arranged differently, with Avalanche typically saving an additional few hundred dollars in interest by the time all debts are cleared, in exchange for sometimes taking longer to see the very first debt fully eliminated.</div>
+
+<div class="guide-h3">Which One Should You Actually Choose?</div>
+<table class="guide-table"><thead><tr><th>Factor</th><th>Favors Snowball</th><th>Favors Avalanche</th></tr></thead><tbody>
+<tr><td>Motivation / history of giving up on plans</td><td>✓ Quick wins keep you engaged</td><td></td></tr>
+<tr><td>Pure interest cost minimization</td><td></td><td>✓ Mathematically optimal</td></tr>
+<tr><td>Large gap between highest and lowest rate debts</td><td></td><td>✓ Bigger savings from prioritizing rate</td></tr>
+<tr><td>Debts are similar in both balance and rate</td><td>✓ Either method performs similarly</td><td></td></tr>
+</tbody></table>
+<div class="guide-p">Behavioral finance research (notably a widely cited study from Kellogg School of Management) found that people using the Snowball method were statistically more likely to actually become debt-free compared to those using the mathematically superior Avalanche method — because the early wins sustained motivation through what is otherwise a long, often discouraging process. The "best" method, in other words, is frequently the one you'll actually stick with to completion.</div>
+
+<div class="guide-h3">A Hybrid Approach</div>
+<div class="guide-p">Many financial planners now recommend a middle path: use Avalanche ordering, but if two debts have similar interest rates (within 2-3 percentage points of each other), break the tie by paying off the smaller balance first to bank an early motivational win without sacrificing meaningful interest savings.</div>
+<div class="guide-tip">💡 Regardless of which method you choose, always continue making at least the minimum payment on every other debt while focusing extra payments on your target debt — missing minimums on "lower priority" debts can trigger penalty rates and damage your credit score, undoing much of your progress.</div>
+
+  </div>
+</div>
+
+<div class="faq-section">
+<div class="faq-section-title">❓ Frequently Asked Questions</div>
+<div class="faq-item">
+  <div class="faq-q" onclick="toggleFAQ(this)">
+    <span>What is the Debt Snowball method?</span>
+    <span class="faq-icon">+</span>
+  </div>
+  <div class="faq-a">Pay off your <strong>smallest debt first</strong>, regardless of interest rate. Once it’s paid, roll that payment into the next smallest. It creates quick psychological wins that build motivation to keep going.</div>
+</div>
+<div class="faq-item">
+  <div class="faq-q" onclick="toggleFAQ(this)">
+    <span>What is the Debt Avalanche method?</span>
+    <span class="faq-icon">+</span>
+  </div>
+  <div class="faq-a">Pay off your <strong>highest interest rate debt first</strong>. This saves the most money in interest over time and is mathematically optimal, though it may take longer before you see your first debt fully paid off.</div>
+</div>
+<div class="faq-item">
+  <div class="faq-q" onclick="toggleFAQ(this)">
+    <span>Which is better — Snowball or Avalanche?</span>
+    <span class="faq-icon">+</span>
+  </div>
+  <div class="faq-a">Avalanche <strong>saves more money</strong>. Snowball provides <strong>faster psychological wins</strong>. Research shows many people succeed more with Snowball because motivation matters. The best method is the one you will actually stick to.</div>
+</div>
+<div class="faq-item">
+  <div class="faq-q" onclick="toggleFAQ(this)">
+    <span>What is a debt-to-income ratio?</span>
+    <span class="faq-icon">+</span>
+  </div>
+  <div class="faq-a"><span class="faq-formula">Debt-to-Income Ratio = Monthly Debt Payments / Gross Monthly Income × 100%</span>Lenders prefer this below 36%. Above 50% indicates financial stress. This calculator shows how fast each strategy gets you to a healthier ratio.</div>
+</div>
+<div class="faq-item">
+  <div class="faq-q" onclick="toggleFAQ(this)">
+    <span>How much extra should I pay toward debt?</span>
+    <span class="faq-icon">+</span>
+  </div>
+  <div class="faq-a">First, cover minimum payments on all debts. Then direct all extra money toward your target debt. Even an extra $100–200/month can shave years off your timeline and save thousands in interest charges.</div>
+</div>
+</div>
+
+</div>
+</div>
+</div><!-- content -->
+<div class="site-footer">
+  <div class="footer-brand">
+    <div class="logo-mark" style="width:22px;height:22px;background:var(--a);border-radius:5px;display:flex;align-items:center;justify-content:center;color:#000;font-size:11px;font-weight:700">FC</div>
+    FinCalc
+  </div>
+  <div class="footer-links"><a href="index.html">All Calculators</a> · <a href="about.html">About</a> · <a href="contact.html">Contact</a> · <a href="privacy.html">Privacy</a> · <a href="terms.html">Terms</a></div>
+  <div class="footer-copy">© 2025 FinCalc · Free Financial Calculators</div>
+</div>
+<script src="app.js"></script>
+<script>initPage('debtcomp');</script>
+</body>
+</html>

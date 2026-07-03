@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CAGR Calculator — Compound Annual Growth Rate | FinCalc Pro</title>
+<meta name="description" content="Calculate CAGR instantly with our free Compound Annual Growth Rate calculator. Includes Rule of 72 doubling time and historical benchmark comparisons.">
+<link rel="canonical" href="https://yourdomain.com/cagr.html">
+<meta name="robots" content="index, follow">
+<meta property="og:type" content="website">
+<meta property="og:title" content="CAGR Calculator — Compound Annual Growth Rate | FinCalc Pro">
+<meta property="og:description" content="Calculate CAGR instantly with our free Compound Annual Growth Rate calculator. Includes Rule of 72 doubling time and historical benchmark comparisons.">
+<meta property="og:url" content="https://yourdomain.com/cagr.html">
+<meta property="og:site_name" content="FinCalc Pro">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="CAGR Calculator — Compound Annual Growth Rate | FinCalc Pro">
+<meta name="twitter:description" content="Calculate CAGR instantly with our free Compound Annual Growth Rate calculator. Includes Rule of 72 doubling time and historical benchmark comparisons.">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<div class="topbar">
+  <a class="logo" href="index.html"><div class="logo-mark">FC</div>FinCalc</a>
+  <div class="searchbox">
+    <svg width="14" height="14" fill="none" stroke="#6B7A8D" stroke-width="2" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+    <input id="srch" placeholder="Search 40 calculators..." oninput="doSearch()" onkeydown="if(event.key==='Enter')goSearch()">
+  </div>
+</div>
+<div class="nav">
+  <button class="ntab on" onclick="go('home',this)">🏠 Home</button>
+  <button class="ntab" onclick="go('cagr',this)">📐 CAGR</button>
+  <button class="ntab" onclick="go('xirr',this)">📅 XIRR</button>
+  <button class="ntab" onclick="go('drip',this)">💧 DRIP</button>
+  <button class="ntab" onclick="go('etf',this)">🗂️ ETF Growth</button>
+  <button class="ntab" onclick="go('dcf',this)">🏦 DCF Valuation</button>
+  <button class="ntab" onclick="go('debtcomp',this)">❄️ Snowball vs Avalanche</button>
+  <button class="ntab" onclick="go('rentalprop',this)">🏡 Rental Property</button>
+  <button class="ntab" onclick="go('burnrate',this)">🔥 Burn Rate</button>
+  <button class="ntab" onclick="go('pricing',this)">🏷️ Pricing</button>
+  <button class="ntab" onclick="go('equity',this)">📐 Equity Dilution</button>
+  <button class="ntab" onclick="go('revenue',this)">📊 Revenue Forecast</button>
+  <button class="ntab" onclick="go('loan',this)">🏦 Loan/EMI</button>
+  <button class="ntab" onclick="go('invest',this)">📈 SIP/Investment</button>
+  <button class="ntab" onclick="go('tax',this)">🧾 Tax</button>
+  <button class="ntab" onclick="go('mortgage',this)">🏠 Mortgage</button>
+  <button class="ntab" onclick="go('mortcomp',this)">⚖️ Mtg Compare</button>
+  <button class="ntab" onclick="go('savings',this)">🏛️ Savings</button>
+  <button class="ntab" onclick="go('stock',this)">📉 Stock P&amp;L</button>
+  <button class="ntab" onclick="go('retirement',this)">👴 Retirement</button>
+  <button class="ntab" onclick="go('debt',this)">💳 Debt Payoff</button>
+  <button class="ntab" onclick="go('rental',this)">🏘️ Rental Yield</button>
+  <button class="ntab" onclick="go('cashflow',this)">💵 Cash Flow</button>
+  <button class="ntab" onclick="go('breakeven',this)">📊 Break-even</button>
+  <button class="ntab" onclick="go('savingsgoal',this)">🎯 Savings Goal</button>
+  <button class="ntab" onclick="go('emergencyfund',this)">🛡️ Emergency Fund</button>
+  <button class="ntab" onclick="go('healthscore',this)">💯 Health Score</button>
+  <button class="ntab" onclick="go('currency',this)">💱 Currency</button>
+  <button class="ntab" onclick="go('scientific',this)">🔬 Scientific</button>
+</div>
+<div class="content">
+<div id="cagr" class="panel on">
+<button class="back-btn" onclick="go('home',null)">← Back to Home</button>
+<div class="calc-links"><span class="calc-links-label">🔗 Related</span><button class="calc-link-btn" onclick="go('xirr',null)">📅 XIRR</button><button class="calc-link-btn" onclick="go('invest',null)">📈 Investment</button><button class="calc-link-btn" onclick="go('etf',null)">🗂️ ETF Growth</button><button class="calc-link-btn" onclick="go('dcf',null)">🏦 Stock DCF</button></div>
+
+
+<div class="two">
+  <div class="card">
+    <div class="card-title">CAGR Calculator</div>
+    <div class="g2">
+      <div class="field"><label>Beginning Value ($)</label><div class="ip"><span class="pfx">$</span><input type="number" id="cg-begin" value="10000" oninput="calcCAGR()"></div></div>
+      <div class="field"><label>Ending Value ($)</label><div class="ip"><span class="pfx">$</span><input type="number" id="cg-end" value="25000" oninput="calcCAGR()"></div></div>
+      <div class="field"><label>Number of Years</label><input type="number" id="cg-years" value="5" oninput="calcCAGR()"></div>
+    </div>
+    <div class="sgrid" style="margin-top:0">
+      <div class="sbox"><div class="lbl">CAGR</div><div class="val" style="color:var(--a)" id="cg-rate">0%</div></div>
+      <div class="sbox"><div class="lbl">Total Return</div><div class="val" style="color:var(--g)" id="cg-total">0%</div></div>
+      <div class="sbox"><div class="lbl">Absolute Gain</div><div class="val" id="cg-gain">$0</div></div>
+      <div class="sbox"><div class="lbl">Multiplier</div><div class="val" style="color:var(--b)" id="cg-mult">0x</div></div>
+    </div>
+    <div style="margin-top:1rem" id="cg-proj"></div>
+    <div style="margin-top:1rem;background:var(--s2);border-radius:8px;padding:10px;font-size:12px;color:var(--m);line-height:1.7" id="cg-rule"></div>
+    <div class="insight-box" id="cg-insights"></div>
+  </div>
+  <div class="card">
+    <div class="card-title">Growth Projection</div>
+    <canvas id="cg-chart" width="300" height="200" style="width:100%;margin:1rem 0"></canvas>
+  </div>
+</div>
+
+<div class="calc-guide">
+  <div class="guide-toggle">
+    <div class="guide-toggle-title">📖 CAGR — Compound Annual Growth Rate</div>
+  </div>
+  <div class="guide-body">
+<div class="guide-p">When someone asks "how did your investment perform," the honest answer is rarely a straight line. Markets zig-zag — up 18% one year, down 9% the next, flat the year after. CAGR (Compound Annual Growth Rate) cuts through that noise and answers a simpler question: if this investment had grown at one steady rate every single year, what would that rate have to be to get from where you started to where you ended up? It's a smoothing tool, not a description of what actually happened year by year — and understanding that distinction is the key to using it correctly.</div>
+
+<div class="guide-h3">The Formula, Broken Down</div>
+<div class="guide-formula">CAGR = (Ending Value / Beginning Value) ^ (1 / Number of Years) − 1</div>
+<div class="guide-p">Each piece of this formula has a job. The ratio (Ending Value / Beginning Value) tells you the total multiple your money grew by — ignore the time it took, for now. Raising that ratio to the power of (1 / Years) is the mathematical trick that "spreads" the total growth evenly across every year, similar to how you'd find the average speed of a trip if you only knew the total distance and total time, not the speed at every mile.</div>
+
+<div class="guide-h3">Worked Example: A Real Portfolio</div>
+<div class="guide-p">Say you invested $15,000 in a mutual fund on January 1, 2019, and by January 1, 2026 — seven years later — it's worth $42,000. Your money nearly tripled, but what's the annualized rate?</div>
+<div class="guide-formula">CAGR = (42,000 / 15,000) ^ (1/7) − 1<br>= (2.8) ^ (0.1429) − 1<br>= 1.1614 − 1<br>= 16.14% per year</div>
+<div class="guide-p">That 16.14% is the constant annual growth rate that, compounded for 7 straight years, turns $15,000 into $42,000. It doesn't mean the fund actually returned 16.14% every single year — in reality it might have returned 28% one year and lost 6% another — but for the purpose of comparing this investment against, say, a different fund or an index, CAGR gives you a single clean number to compare.</div>
+
+<div class="guide-h3">Why CAGR Beats a Simple Average</div>
+<div class="guide-p">A common mistake is averaging year-by-year returns directly. Imagine a stock that rises 100% in year one (doubling your money) and then falls 50% in year two. The simple average of +100% and −50% is +25%, which sounds great — but in reality, your money is exactly where it started. $10,000 becomes $20,000 after year one, then drops back to $10,000 after the 50% loss. The CAGR over those two years is correctly 0%, because CAGR accounts for the compounding effect: losses hurt proportionally more on a larger base. This is sometimes called "volatility drag," and it's the reason two investments with the same average annual return can leave you with very different ending balances if one is far more volatile than the other.</div>
+
+<div class="guide-h3">The Rule of 72 — A Mental Shortcut</div>
+<div class="guide-formula">Doubling Time (years) ≈ 72 / CAGR%</div>
+<div class="guide-p">This old trader's trick estimates how long it takes an investment to double at a given CAGR, without needing a calculator. At 8% CAGR, money doubles in about 72/8 = 9 years. At 12%, it's 72/12 = 6 years. At a very modest 3% (typical of a savings account), it takes a sluggish 24 years. The Rule of 72 isn't perfectly precise — it's most accurate in the 6–10% range — but it's an excellent gut-check for retirement and goal planning conversations.</div>
+
+<div class="guide-h3">How CAGR Compares Across Asset Classes</div>
+<table class="guide-table"><thead><tr><th>Investment</th><th>Historical CAGR</th><th>What Drives It</th></tr></thead><tbody>
+<tr><td>S&amp;P 500 Index</td><td>~10–11% long term</td><td>Corporate earnings growth + dividends reinvested</td></tr>
+<tr><td>US Real Estate (national avg)</td><td>~4–6%</td><td>Population growth, inflation, local supply constraints</td></tr>
+<tr><td>Gold</td><td>~7–8%</td><td>Inflation hedge, currency debasement, scarcity</td></tr>
+<tr><td>High-Yield Savings Account</td><td>~3–5%</td><td>Central bank policy rates</td></tr>
+<tr><td>US Treasury Bonds (10-yr)</td><td>~3–4%</td><td>Government borrowing rates, considered "risk-free"</td></tr>
+</tbody></table>
+<div class="guide-p">These benchmarks matter because CAGR is only useful in context. A 9% CAGR on a tech stock over 3 years might look unimpressive next to a 35% CAGR over the same window — but a 9% CAGR sustained for 25 years compounds into something far more powerful than most people intuitively expect, simply because exponential growth feels slow at first and explosive later.</div>
+
+<div class="guide-h3">Where CAGR Gets Misused</div>
+<div class="guide-p">CAGR is frequently cherry-picked in marketing material. A fund that says "look at our amazing 5-year CAGR" may have started measuring from the exact bottom of a market crash, making the recovery look like skill rather than timing. Always check the start and end dates being used, and ideally compare CAGR over multiple overlapping periods (3-year, 5-year, 10-year) rather than trusting a single window.</div>
+<div class="guide-warn">⚠ CAGR assumes a smooth, steady growth path and completely hides volatility. A stock that drops 50% and then rises 100% shows a 0% CAGR on paper — identical to a savings account that never moved — even though one path involved enormous risk and the other involved none. Always look at the maximum drawdown alongside CAGR before deciding an investment was actually "good."</div>
+
+  </div>
+</div>
+
+<div class="faq-section">
+<div class="faq-section-title">❓ Frequently Asked Questions</div>
+<div class="faq-item">
+  <div class="faq-q" onclick="toggleFAQ(this)">
+    <span>What is CAGR?</span>
+    <span class="faq-icon">+</span>
+  </div>
+  <div class="faq-a">CAGR stands for <strong>Compound Annual Growth Rate</strong>. It tells you the steady annual rate at which an investment grew from a starting value to an ending value over a given period, smoothing out any ups and downs along the way.</div>
+</div>
+<div class="faq-item">
+  <div class="faq-q" onclick="toggleFAQ(this)">
+    <span>What is the CAGR formula?</span>
+    <span class="faq-icon">+</span>
+  </div>
+  <div class="faq-a"><span class="faq-formula">CAGR = (Ending Value / Beginning Value) ^ (1 / Years) − 1</span>For example, if you invested $10,000 and it grew to $25,000 in 5 years, your CAGR is (25000/10000)^(1/5) − 1 = <strong>20.1%</strong>.</div>
+</div>
+<div class="faq-item">
+  <div class="faq-q" onclick="toggleFAQ(this)">
+    <span>How is CAGR different from average annual return?</span>
+    <span class="faq-icon">+</span>
+  </div>
+  <div class="faq-a">Average annual return simply averages yearly gains/losses. CAGR shows the actual compounded rate. If a stock drops 50% one year and rises 100% the next, the average return is 25% — but your CAGR is 0% because you’re back where you started.</div>
+</div>
+<div class="faq-item">
+  <div class="faq-q" onclick="toggleFAQ(this)">
+    <span>What is a good CAGR?</span>
+    <span class="faq-icon">+</span>
+  </div>
+  <div class="faq-a">It depends on the asset class. The S&amp;P 500 has historically delivered ~10–11% CAGR. For a business, 15–25% CAGR is considered strong. Anything above 20% over a long period is exceptional and often unsustainable.</div>
+</div>
+<div class="faq-item">
+  <div class="faq-q" onclick="toggleFAQ(this)">
+    <span>What is the Rule of 72?</span>
+    <span class="faq-icon">+</span>
+  </div>
+  <div class="faq-a"><span class="faq-formula">Doubling Time (years) ≈ 72 / CAGR%</span>At a 10% CAGR, your investment doubles every ~7.2 years. At 6%, it doubles every 12 years. It’s a quick mental math shortcut to estimate how fast money grows.</div>
+</div>
+<div class="faq-item">
+  <div class="faq-q" onclick="toggleFAQ(this)">
+    <span>Can CAGR be negative?</span>
+    <span class="faq-icon">+</span>
+  </div>
+  <div class="faq-a">Yes. If your ending value is less than your beginning value, the CAGR will be negative. For example, investing $10,000 and ending with $7,000 after 5 years gives a CAGR of about −6.7% per year.</div>
+</div>
+</div>
+
+
+</div>
+</div><!-- content -->
+<div class="site-footer">
+  <div class="footer-brand">
+    <div class="logo-mark" style="width:22px;height:22px;background:var(--a);border-radius:5px;display:flex;align-items:center;justify-content:center;color:#000;font-size:11px;font-weight:700">FC</div>
+    FinCalc
+  </div>
+  <div class="footer-links"><a href="index.html">All Calculators</a> · <a href="about.html">About</a> · <a href="contact.html">Contact</a> · <a href="privacy.html">Privacy</a> · <a href="terms.html">Terms</a></div>
+  <div class="footer-copy">© 2025 FinCalc · Free Financial Calculators</div>
+</div>
+<script src="app.js"></script>
+<script>initPage('cagr');</script>
+</body>
+</html>

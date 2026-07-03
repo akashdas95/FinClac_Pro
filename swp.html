@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SWP Calculator — Systematic Withdrawal Plan | FinCalc Pro</title>
+<meta name="description" content="Calculate how long your investment corpus will last with regular monthly withdrawals. Free SWP calculator with inflation-adjusted withdrawals.">
+<link rel="canonical" href="https://yourdomain.com/swp.html">
+<meta name="robots" content="index, follow">
+<meta property="og:type" content="website">
+<meta property="og:title" content="SWP Calculator — Systematic Withdrawal Plan | FinCalc Pro">
+<meta property="og:description" content="Calculate how long your investment corpus will last with regular monthly withdrawals. Free SWP calculator with inflation-adjusted withdrawals.">
+<meta property="og:url" content="https://yourdomain.com/swp.html">
+<meta property="og:site_name" content="FinCalc Pro">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="SWP Calculator — Systematic Withdrawal Plan | FinCalc Pro">
+<meta name="twitter:description" content="Calculate how long your investment corpus will last with regular monthly withdrawals. Free SWP calculator with inflation-adjusted withdrawals.">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<div class="topbar">
+  <a class="logo" href="index.html"><div class="logo-mark">FC</div>FinCalc</a>
+  <div class="searchbox">
+    <svg width="14" height="14" fill="none" stroke="#6B7A8D" stroke-width="2" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+    <input id="srch" placeholder="Search 40 calculators..." oninput="doSearch()" onkeydown="if(event.key==='Enter')goSearch()">
+  </div>
+</div>
+<div class="nav">
+  <button class="ntab on" onclick="go('home',this)">🏠 Home</button>
+  <button class="ntab" onclick="go('cagr',this)">📐 CAGR</button>
+  <button class="ntab" onclick="go('xirr',this)">📅 XIRR</button>
+  <button class="ntab" onclick="go('drip',this)">💧 DRIP</button>
+  <button class="ntab" onclick="go('etf',this)">🗂️ ETF Growth</button>
+  <button class="ntab" onclick="go('dcf',this)">🏦 DCF Valuation</button>
+  <button class="ntab" onclick="go('debtcomp',this)">❄️ Snowball vs Avalanche</button>
+  <button class="ntab" onclick="go('rentalprop',this)">🏡 Rental Property</button>
+  <button class="ntab" onclick="go('burnrate',this)">🔥 Burn Rate</button>
+  <button class="ntab" onclick="go('pricing',this)">🏷️ Pricing</button>
+  <button class="ntab" onclick="go('equity',this)">📐 Equity Dilution</button>
+  <button class="ntab" onclick="go('revenue',this)">📊 Revenue Forecast</button>
+  <button class="ntab" onclick="go('loan',this)">🏦 Loan/EMI</button>
+  <button class="ntab" onclick="go('invest',this)">📈 SIP/Investment</button>
+  <button class="ntab" onclick="go('tax',this)">🧾 Tax</button>
+  <button class="ntab" onclick="go('mortgage',this)">🏠 Mortgage</button>
+  <button class="ntab" onclick="go('mortcomp',this)">⚖️ Mtg Compare</button>
+  <button class="ntab" onclick="go('savings',this)">🏛️ Savings</button>
+  <button class="ntab" onclick="go('stock',this)">📉 Stock P&amp;L</button>
+  <button class="ntab" onclick="go('retirement',this)">👴 Retirement</button>
+  <button class="ntab" onclick="go('debt',this)">💳 Debt Payoff</button>
+  <button class="ntab" onclick="go('rental',this)">🏘️ Rental Yield</button>
+  <button class="ntab" onclick="go('cashflow',this)">💵 Cash Flow</button>
+  <button class="ntab" onclick="go('breakeven',this)">📊 Break-even</button>
+  <button class="ntab" onclick="go('savingsgoal',this)">🎯 Savings Goal</button>
+  <button class="ntab" onclick="go('emergencyfund',this)">🛡️ Emergency Fund</button>
+  <button class="ntab" onclick="go('healthscore',this)">💯 Health Score</button>
+  <button class="ntab" onclick="go('currency',this)">💱 Currency</button>
+  <button class="ntab" onclick="go('scientific',this)">🔬 Scientific</button>
+</div>
+<div class="content">
+<div id="swp" class="panel on">
+<button class="back-btn" onclick="go('home',null)">← Back to Home</button>
+<div class="calc-links"><span class="calc-links-label">🔗 Related</span><button class="calc-link-btn" onclick="go('invest',null)">📈 SIP / Investment</button><button class="calc-link-btn" onclick="go('retirement',null)">👴 Retirement</button><button class="calc-link-btn" onclick="go('fire',null)">🔥 FIRE Calculator</button><button class="calc-link-btn" onclick="go('savingsgoal',null)">🎯 Savings Goal</button></div>
+
+
+<div class="two">
+  <div class="card">
+    <div class="card-title">SWP Calculator</div>
+    <div class="g2">
+      <div class="field"><label>Starting Corpus ($)</label><div class="ip"><span class="pfx">$</span><input type="number" id="sw-corpus" value="1000000" oninput="cSWP()"></div></div>
+      <div class="field"><label>Monthly Withdrawal ($)</label><div class="ip"><span class="pfx">$</span><input type="number" id="sw-withdrawal" value="4000" oninput="cSWP()"></div></div>
+      <div class="field"><label>Expected Annual Return (%)</label><input type="number" id="sw-return" value="7" step="0.5" oninput="cSWP()"></div>
+      <div class="field"><label>Annual Withdrawal Increase (%)</label><input type="number" id="sw-inflation" value="3" step="0.5" oninput="cSWP()"></div>
+      <div class="field"><label>Time Horizon (years)</label><input type="number" id="sw-years" value="30" oninput="cSWP()"></div>
+      <div class="field"><label>Initial Withdrawal Rate</label><div class="val" id="sw-iwr" style="font-size:18px;padding-top:6px">0%</div></div>
+    </div>
+    <div class="sgrid">
+      <div class="sbox"><div class="lbl">Corpus Lasts</div><div class="val" style="color:var(--a)" id="sw-lasts">0 yrs</div></div>
+      <div class="sbox"><div class="lbl">Final Balance</div><div class="val" style="color:var(--g)" id="sw-final">$0</div></div>
+      <div class="sbox"><div class="lbl">Total Withdrawn</div><div class="val" id="sw-total">$0</div></div>
+      <div class="sbox"><div class="lbl">Sustainability</div><div class="val" id="sw-status">—</div></div>
+    </div>
+    <div class="insight-box" id="sw-insights"></div>
+  </div>
+  <div class="card">
+    <div class="card-title">Corpus Balance Over Time</div>
+    <canvas id="sw-chart" width="300" height="170" style="width:100%;margin:1rem 0"></canvas>
+    <div style="display:flex;gap:12px;font-size:11px;color:var(--m);margin-bottom:1rem"><span style="color:var(--g)">━ Balance</span><span style="color:var(--r)">╌ Depleted</span></div>
+    <div style="overflow-x:auto"><table class="tbl" id="sw-table"></table></div>
+  </div>
+</div>
+
+<div class="calc-guide">
+  <div class="guide-toggle">
+    <div class="guide-toggle-title">📖 SWP — Systematic Withdrawal Plan</div>
+  </div>
+  <div class="guide-body">
+<div class="guide-p">A Systematic Withdrawal Plan is the mirror image of a SIP: instead of contributing a fixed amount every month into a growing investment, you withdraw a fixed (or inflation-adjusted) amount every month from an existing lump sum, while whatever remains continues to grow or shrink based on market returns. SWP is the structure most people are actually using, whether they call it that or not, the moment they start drawing income from a retirement portfolio, an inheritance, or any other invested lump sum.</div>
+
+<div class="guide-h3">The Core Mechanism</div>
+<div class="guide-p">Each month, a fixed withdrawal amount is removed from the corpus, and the remaining balance earns the stated return for that month. As long as the monthly withdrawal stays smaller than what the corpus earns on average, the balance can theoretically last indefinitely — even grow. Once withdrawals consistently exceed what the corpus earns, the balance shrinks every month and eventually depletes, with the exact timeline depending on how aggressive the withdrawal rate is relative to the return.</div>
+<div class="guide-formula">Initial Withdrawal Rate = (Monthly Withdrawal × 12) ÷ Starting Corpus × 100%</div>
+
+<div class="guide-h3">Worked Example: Will $1 Million Last 30 Years?</div>
+<div class="guide-p">Starting with a $1,000,000 corpus, withdrawing $4,000/month ($48,000/year — a 4.8% initial withdrawal rate), earning 7% annually, with withdrawals increasing 3% each year to keep pace with inflation:</div>
+<table class="guide-table"><thead><tr><th>Year</th><th>Annual Withdrawal</th><th>Year-End Balance</th></tr></thead><tbody>
+<tr><td>1</td><td>$48,000</td><td>$1,022,431</td></tr>
+<tr><td>10</td><td>$62,629</td><td>$1,224,756</td></tr>
+<tr><td>20</td><td>$84,168</td><td>$1,406,497</td></tr>
+<tr><td>30</td><td>$113,115</td><td>$1,408,957</td></tr>
+</tbody></table>
+<div class="guide-p">In this example, the 7% return comfortably outpaces even a steadily rising, inflation-adjusted withdrawal — the corpus actually grows throughout the full 30 years rather than depleting, ending higher than where it started. This is a real possibility whenever the long-term return assumption sits meaningfully above the initial withdrawal rate, and it mirrors the same logic behind the classic 4% retirement withdrawal rule: a moderate withdrawal rate relative to a reasonable long-term return can sustain decades of income while still leaving substantial capital intact.</div>
+
+<div class="guide-h3">Why the Inflation Adjustment Matters</div>
+<div class="guide-p">A withdrawal that stays fixed in dollar terms loses purchasing power every year — $4,000 today buys noticeably less in 20 years even at modest inflation. Increasing the withdrawal amount annually keeps your real (inflation-adjusted) spending power roughly constant over time, which is essential for anyone using SWP to fund actual living expenses rather than just preserve a lump sum. The trade-off is that an inflation-adjusted withdrawal grows the dollar amount taken out every single year, which depletes the corpus measurably faster than a withdrawal that never increases — set the annual increase to 0% to model a flat, never-rising withdrawal instead.</div>
+
+<div class="guide-h3">Initial Withdrawal Rate: The Single Most Important Number</div>
+<table class="guide-table"><thead><tr><th>Initial Withdrawal Rate</th><th>General Sustainability (30+ year horizon)</th></tr></thead><tbody>
+<tr><td>Below 3%</td><td>Very conservative — corpus likely grows even after withdrawals and inflation adjustments</td></tr>
+<tr><td>3% – 4%</td><td>Historically sustainable for most 30-year periods, based on the research behind the 4% rule</td></tr>
+<tr><td>4% – 6%</td><td>Moderate risk — sustainability becomes more sensitive to investment returns and the order markets perform in</td></tr>
+<tr><td>Above 6%</td><td>Aggressive — meaningful risk of depleting the corpus well before a multi-decade horizon ends</td></tr>
+</tbody></table>
+<div class="guide-p">This calculator computes your initial withdrawal rate automatically from your starting corpus and monthly withdrawal, so you can immediately see which zone your plan falls into before running the full year-by-year simulation.</div>
+
+<div class="guide-h3">SWP vs SIP: Two Phases of the Same Journey</div>
+<div class="guide-p">SIP and SWP are commonly thought of as the accumulation and decumulation phases of the same overall financial plan. During your working years, a SIP steadily builds a corpus through regular contributions and compounding. Once that goal is reached — retirement, financial independence, or simply needing income from an existing lump sum — SWP takes over, drawing that corpus down (hopefully slowly) to fund ongoing expenses. Use our SIP / Investment calculator to model the build-up phase, and this calculator to model what happens once you start drawing it down.</div>
+
+<div class="guide-h3">Sequence of Returns Risk</div>
+<div class="guide-p">This calculator assumes a single, constant average annual return for the entire withdrawal period — real markets don't behave this smoothly. A corpus that experiences a sharp market downturn in its first few years of withdrawals is meaningfully more fragile than one that experiences the same downturn after 20 years of growth, because early withdrawals during a depressed market permanently lock in losses that have far less time left to recover. This is called sequence-of-returns risk, and it's one of the most important risks in any SWP or retirement drawdown plan, but a single constant-return model like this one cannot capture it.</div>
+<div class="guide-warn">⚠ A constant average return hides the real risk of market volatility. Two portfolios with the identical average annual return over 30 years can have wildly different outcomes for someone withdrawing from them, depending purely on the order good and bad years occur in. Treat this calculator's output as a useful planning baseline, not a guarantee — many retirees build in a buffer (a lower withdrawal rate, or a cash reserve to avoid withdrawing during a downturn) specifically to protect against this risk.</div>
+<div class="guide-tip">💡 Run this calculator at a few different withdrawal rates and required returns — including a deliberately pessimistic case — rather than relying on a single optimistic scenario. If your plan stays sustainable even under conservative assumptions, that's a far stronger signal than a plan that only works if every assumption holds exactly as expected.</div>
+
+  </div>
+</div>
+
+<div class="faq-section">
+<div class="faq-section-title">❓ Frequently Asked Questions</div>
+<div class="faq-item">
+  <div class="faq-q" onclick="toggleFAQ(this)">
+    <span>What is a Systematic Withdrawal Plan (SWP)?</span>
+    <span class="faq-icon">+</span>
+  </div>
+  <div class="faq-a">A Systematic Withdrawal Plan is a strategy where you withdraw a fixed (or gradually increasing) amount from an investment corpus at regular intervals — typically monthly — while the remaining balance stays invested and continues to grow or shrink based on market returns.</div>
+</div>
+<div class="faq-item">
+  <div class="faq-q" onclick="toggleFAQ(this)">
+    <span>How is the initial withdrawal rate calculated?</span>
+    <span class="faq-icon">+</span>
+  </div>
+  <div class="faq-a">It's your annual withdrawal divided by your starting corpus. <span class="faq-formula">Initial Withdrawal Rate = (Monthly Withdrawal × 12) ÷ Starting Corpus × 100%</span> Withdrawing $4,000/month from a $1,000,000 corpus is a 4.8% initial withdrawal rate.</div>
+</div>
+<div class="faq-item">
+  <div class="faq-q" onclick="toggleFAQ(this)">
+    <span>Should I adjust my withdrawal for inflation?</span>
+    <span class="faq-icon">+</span>
+  </div>
+  <div class="faq-a">If you're relying on SWP for actual living expenses, yes — a withdrawal that never increases loses real purchasing power every year as prices rise. Set the annual increase to your expected inflation rate (commonly 2-3%) to maintain roughly constant real spending power, or to 0% to model a flat withdrawal that never changes.</div>
+</div>
+<div class="faq-item">
+  <div class="faq-q" onclick="toggleFAQ(this)">
+    <span>What withdrawal rate is considered safe?</span>
+    <span class="faq-icon">+</span>
+  </div>
+  <div class="faq-a">An initial withdrawal rate of 3-4% is historically considered sustainable for a 30-year horizon in most market conditions, based on the same research behind the classic 4% retirement rule. Rates above 5-6% carry meaningfully higher risk of depleting the corpus before a multi-decade horizon ends.</div>
+</div>
+<div class="faq-item">
+  <div class="faq-q" onclick="toggleFAQ(this)">
+    <span>What's the difference between SWP and just letting the corpus sit invested?</span>
+    <span class="faq-icon">+</span>
+  </div>
+  <div class="faq-a">If you're not withdrawing anything, the corpus simply compounds — there's no SWP to speak of. SWP specifically models the effect of regularly removing money for income while the rest keeps growing, which is the situation anyone drawing retirement income or any other regular cash flow from an investment portfolio actually faces.</div>
+</div>
+<div class="faq-item">
+  <div class="faq-q" onclick="toggleFAQ(this)">
+    <span>Why might my actual results differ from this calculator?</span>
+    <span class="faq-icon">+</span>
+  </div>
+  <div class="faq-a">This calculator assumes one constant average return for the entire period, but real markets move unevenly year to year. A few bad years early in your withdrawal period (sequence-of-returns risk) can hurt sustainability far more than the same bad years occurring later — something a constant-return model can't capture. Treat the output as a planning baseline, not a guaranteed outcome.</div>
+</div>
+</div>
+
+
+</div>
+</div><!-- content -->
+<div class="site-footer">
+  <div class="footer-brand">
+    <div class="logo-mark" style="width:22px;height:22px;background:var(--a);border-radius:5px;display:flex;align-items:center;justify-content:center;color:#000;font-size:11px;font-weight:700">FC</div>
+    FinCalc
+  </div>
+  <div class="footer-links"><a href="index.html">All Calculators</a> · <a href="about.html">About</a> · <a href="contact.html">Contact</a> · <a href="privacy.html">Privacy</a> · <a href="terms.html">Terms</a></div>
+  <div class="footer-copy">© 2025 FinCalc · Free Financial Calculators</div>
+</div>
+<script src="app.js"></script>
+<script>initPage('swp');</script>
+</body>
+</html>

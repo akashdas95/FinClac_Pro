@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SIP & Investment Calculator | FinCalc Pro</title>
+<meta name="description" content="Calculate SIP returns with monthly contributions and compounding. Free systematic investment plan (SIP) calculator.">
+<link rel="canonical" href="https://yourdomain.com/invest.html">
+<meta name="robots" content="index, follow">
+<meta property="og:type" content="website">
+<meta property="og:title" content="SIP & Investment Calculator | FinCalc Pro">
+<meta property="og:description" content="Calculate SIP returns with monthly contributions and compounding. Free systematic investment plan (SIP) calculator.">
+<meta property="og:url" content="https://yourdomain.com/invest.html">
+<meta property="og:site_name" content="FinCalc Pro">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="SIP & Investment Calculator | FinCalc Pro">
+<meta name="twitter:description" content="Calculate SIP returns with monthly contributions and compounding. Free systematic investment plan (SIP) calculator.">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<div class="topbar">
+  <a class="logo" href="index.html"><div class="logo-mark">FC</div>FinCalc</a>
+  <div class="searchbox">
+    <svg width="14" height="14" fill="none" stroke="#6B7A8D" stroke-width="2" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+    <input id="srch" placeholder="Search 40 calculators..." oninput="doSearch()" onkeydown="if(event.key==='Enter')goSearch()">
+  </div>
+</div>
+<div class="nav">
+  <button class="ntab on" onclick="go('home',this)">🏠 Home</button>
+  <button class="ntab" onclick="go('cagr',this)">📐 CAGR</button>
+  <button class="ntab" onclick="go('xirr',this)">📅 XIRR</button>
+  <button class="ntab" onclick="go('drip',this)">💧 DRIP</button>
+  <button class="ntab" onclick="go('etf',this)">🗂️ ETF Growth</button>
+  <button class="ntab" onclick="go('dcf',this)">🏦 DCF Valuation</button>
+  <button class="ntab" onclick="go('debtcomp',this)">❄️ Snowball vs Avalanche</button>
+  <button class="ntab" onclick="go('rentalprop',this)">🏡 Rental Property</button>
+  <button class="ntab" onclick="go('burnrate',this)">🔥 Burn Rate</button>
+  <button class="ntab" onclick="go('pricing',this)">🏷️ Pricing</button>
+  <button class="ntab" onclick="go('equity',this)">📐 Equity Dilution</button>
+  <button class="ntab" onclick="go('revenue',this)">📊 Revenue Forecast</button>
+  <button class="ntab" onclick="go('loan',this)">🏦 Loan/EMI</button>
+  <button class="ntab" onclick="go('invest',this)">📈 SIP/Investment</button>
+  <button class="ntab" onclick="go('tax',this)">🧾 Tax</button>
+  <button class="ntab" onclick="go('mortgage',this)">🏠 Mortgage</button>
+  <button class="ntab" onclick="go('mortcomp',this)">⚖️ Mtg Compare</button>
+  <button class="ntab" onclick="go('savings',this)">🏛️ Savings</button>
+  <button class="ntab" onclick="go('stock',this)">📉 Stock P&amp;L</button>
+  <button class="ntab" onclick="go('retirement',this)">👴 Retirement</button>
+  <button class="ntab" onclick="go('debt',this)">💳 Debt Payoff</button>
+  <button class="ntab" onclick="go('rental',this)">🏘️ Rental Yield</button>
+  <button class="ntab" onclick="go('cashflow',this)">💵 Cash Flow</button>
+  <button class="ntab" onclick="go('breakeven',this)">📊 Break-even</button>
+  <button class="ntab" onclick="go('savingsgoal',this)">🎯 Savings Goal</button>
+  <button class="ntab" onclick="go('emergencyfund',this)">🛡️ Emergency Fund</button>
+  <button class="ntab" onclick="go('healthscore',this)">💯 Health Score</button>
+  <button class="ntab" onclick="go('currency',this)">💱 Currency</button>
+  <button class="ntab" onclick="go('scientific',this)">🔬 Scientific</button>
+</div>
+<div class="content">
+<div id="invest" class="panel on">
+<button class="back-btn" onclick="go('home',null)">← Back to Home</button>
+<div class="calc-links"><span class="calc-links-label">🔗 Related</span><button class="calc-link-btn" onclick="go('swp',null)">📉 SWP Calculator</button><button class="calc-link-btn" onclick="go('cagr',null)">📐 CAGR</button><button class="calc-link-btn" onclick="go('xirr',null)">📅 XIRR</button><button class="calc-link-btn" onclick="go('drip',null)">💧 DRIP</button><button class="calc-link-btn" onclick="go('etf',null)">🗂️ ETF Growth</button><button class="calc-link-btn" onclick="go('retirement',null)">👴 Retirement</button></div>
+
+
+<div class="two">
+  <div class="card">
+    <div class="card-title">SIP / Investment Calculator</div>
+    <div class="g2">
+      <div class="field"><label>Monthly SIP ($)</label><div class="ip"><span class="pfx">$</span><input type="number" id="i-m" value="500" oninput="cSip()"></div></div>
+      <div class="field"><label>Expected Return (% p.a.)</label><input type="number" id="i-r" value="10" step="0.1" oninput="cSip()"></div>
+      <div class="field"><label>Duration (years)</label><input type="number" id="i-y" value="20" oninput="cSip()"></div>
+      <div class="field"><label>Lump-sum ($)</label><div class="ip"><span class="pfx">$</span><input type="number" id="i-l" value="0" oninput="cSip()"></div></div>
+    </div>
+    <div class="field"><label>Annual Step-up (%)</label><input type="number" id="i-step" value="5" oninput="cSip()"></div>
+    <div class="sgrid">
+      <div class="sbox"><div class="lbl">Final Corpus</div><div class="val" style="color:var(--a)" id="i-corpus">$0</div></div>
+      <div class="sbox"><div class="lbl">Wealth Gained</div><div class="val" style="color:var(--g)" id="i-gain">$0</div></div>
+      <div class="sbox"><div class="lbl">Total Invested</div><div class="val" id="i-inv">$0</div></div>
+      <div class="sbox"><div class="lbl">Abs. Return</div><div class="val" style="color:var(--g)" id="i-abs">0%</div></div>
+    </div>
+  </div>
+  <div class="card">
+    <div class="card-title">Growth Chart</div>
+    <canvas id="i-chart" width="300" height="175" style="width:100%;margin:1rem 0"></canvas>
+    <div style="display:flex;gap:12px;font-size:11px;color:var(--m);margin-bottom:.5rem"><span style="color:var(--g)">━ Invested</span><span style="color:var(--a)">━ Portfolio Value</span></div>
+    <div class="rrow"><span class="rk">CAGR</span><span class="rv" style="color:var(--g)" id="i-cagr">0%</span></div>
+    <div class="insight-box" id="i-insights"></div>
+  </div>
+</div>
+
+<div class="calc-guide">
+  <div class="guide-toggle">
+    <div class="guide-toggle-title">📖 SIP &amp; Investment — How It Works</div>
+  </div>
+  <div class="guide-body">
+<div class="guide-p">A Systematic Investment Plan (SIP) is less an investment product and more a discipline — committing to invest a fixed amount at regular intervals (typically monthly) regardless of what the market is doing that day. This simple structural decision solves two of the biggest behavioral obstacles to successful long-term investing: the temptation to time the market, and the tendency to stop investing during downturns precisely when buying opportunities are best.</div>
+
+<div class="guide-h3">Rupee/Dollar Cost Averaging: The Math Behind SIP</div>
+<div class="guide-p">Because your monthly contribution is a fixed dollar amount, you automatically buy more units when prices are low and fewer units when prices are high — without ever having to make that decision consciously. Over many cycles, this averages your effective purchase price below what a single lump-sum investor who happened to buy at a market peak would have paid, though it can also average above what a lump-sum investor who got lucky with timing would have paid. The real value of cost averaging is behavioral, not purely mathematical: it removes the emotionally difficult decision of "should I buy now or wait."</div>
+
+<div class="guide-h3">Worked Example: 20 Years of Monthly SIP</div>
+<div class="guide-p">Investing $400/month for 20 years (240 months) at an average annual return of 11%:</div>
+<table class="guide-table"><thead><tr><th>Metric</th><th>Amount</th></tr></thead><tbody>
+<tr><td>Total Contributed</td><td>$96,000</td></tr>
+<tr><td>Ending Portfolio Value</td><td>~$345,000</td></tr>
+<tr><td>Growth From Compounding</td><td>~$249,000</td></tr>
+</tbody></table>
+<div class="guide-p">Notice that compounding contributed roughly 2.6 times more to the final balance than the actual money contributed. This ratio grows even more favorable the longer the time horizon — the same $400/month SIP extended to 30 years (at the same 11% return) grows to approximately $1,020,000, despite "only" contributing an additional $48,000 over those extra 10 years. The bulk of long-term wealth from a SIP is built in the final third of the investment horizon, which is why starting early matters disproportionately more than the exact monthly amount.</div>
+
+<div class="guide-h3">Lump Sum vs SIP: Reframing the Debate</div>
+<div class="guide-p">Historical backtesting on broad market indices generally shows that investing a lump sum immediately tends to outperform spreading the same amount via SIP over the following 12 months, roughly two-thirds of the time — simply because markets rise more often than they fall over any given year. However, this comparison only applies if you actually have a lump sum sitting in cash right now. For the much more common situation of investing out of regular monthly income, SIP isn't really competing against a lump sum alternative — it's the only realistic option, and the cost-averaging and behavioral benefits remain valuable regardless.</div>
+
+<div class="guide-h3">Step-Up SIPs: Growing Your Contribution Over Time</div>
+<div class="guide-p">Many investors increase their monthly SIP amount annually in line with salary growth — commonly called a "step-up SIP." Increasing a $400/month SIP by just 5% annually, instead of keeping it flat, can meaningfully accelerate the final corpus, since later (larger) contributions still have years left to compound, even though they join later than the very first contribution.</div>
+<table class="guide-table"><thead><tr><th>Strategy</th><th>Total Contributed (20 yrs)</th><th>Ending Value (11% return)</th></tr></thead><tbody>
+<tr><td>Flat $400/month</td><td>$96,000</td><td>~$345,000</td></tr>
+<tr><td>$400/month, stepped up 5% annually</td><td>~$152,000</td><td>~$485,000</td></tr>
+</tbody></table>
+
+<div class="guide-h3">Measuring Your Actual Returns: Use XIRR, Not Simple Math</div>
+<div class="guide-p">Because each SIP installment is invested at a different time and therefore has a different amount of time to grow, you cannot accurately measure your SIP's performance by simple averaging. XIRR (Extended Internal Rate of Return) correctly weighs each installment by its actual invested duration — see our dedicated XIRR calculator and guide for the full methodology and a worked example.</div>
+<div class="guide-tip">💡 Avoid pausing or stopping your SIP during market downturns — this is precisely when your fixed monthly amount is buying units at their cheapest, and historically the recovery period after a downturn has often delivered some of the strongest forward returns.</div>
+
+  </div>
+</div>
+
+<div class="faq-section">
+<div class="faq-section-title">❓ Frequently Asked Questions</div>
+<div class="faq-item">
+  <div class="faq-q" onclick="toggleFAQ(this)">
+    <span>What is SIP?</span>
+    <span class="faq-icon">+</span>
+  </div>
+  <div class="faq-a">SIP (Systematic Investment Plan) means investing a <strong>fixed amount at regular intervals</strong> in a mutual fund or ETF. It’s a disciplined way to build wealth and reduces the risk of investing at a market peak.</div>
+</div>
+<div class="faq-item">
+  <div class="faq-q" onclick="toggleFAQ(this)">
+    <span>What is rupee/dollar cost averaging in SIP?</span>
+    <span class="faq-icon">+</span>
+  </div>
+  <div class="faq-a">Because you invest a fixed amount regularly, you automatically buy <strong>more units when prices are low</strong> and fewer when prices are high. Over time, this averages out your purchase cost and reduces the impact of market volatility.</div>
+</div>
+<div class="faq-item">
+  <div class="faq-q" onclick="toggleFAQ(this)">
+    <span>How does compounding work in SIP?</span>
+    <span class="faq-icon">+</span>
+  </div>
+  <div class="faq-a">Your returns generate their own returns. Investing $500/month at 12% annual return for 20 years turns $120,000 of contributions into over <strong>$480,000</strong> — with the majority coming purely from compounding, not your contributions.</div>
+</div>
+<div class="faq-item">
+  <div class="faq-q" onclick="toggleFAQ(this)">
+    <span>What is the difference between lump sum and SIP?</span>
+    <span class="faq-icon">+</span>
+  </div>
+  <div class="faq-a">A <strong>lump sum</strong> invests all at once — better if markets are low. A <strong>SIP</strong> spreads investment over time — better for salaried investors and removes the emotional burden of timing the market.</div>
+</div>
+<div class="faq-item">
+  <div class="faq-q" onclick="toggleFAQ(this)">
+    <span>What is XIRR in the SIP context?</span>
+    <span class="faq-icon">+</span>
+  </div>
+  <div class="faq-a">When evaluating SIP returns, use XIRR (not simple returns) because you invested at different times and prices. XIRR gives the true annualized return accounting for the timing and size of each installment. Use the XIRR calculator on this site.</div>
+</div>
+</div>
+
+
+</div>
+</div><!-- content -->
+<div class="site-footer">
+  <div class="footer-brand">
+    <div class="logo-mark" style="width:22px;height:22px;background:var(--a);border-radius:5px;display:flex;align-items:center;justify-content:center;color:#000;font-size:11px;font-weight:700">FC</div>
+    FinCalc
+  </div>
+  <div class="footer-links"><a href="index.html">All Calculators</a> · <a href="about.html">About</a> · <a href="contact.html">Contact</a> · <a href="privacy.html">Privacy</a> · <a href="terms.html">Terms</a></div>
+  <div class="footer-copy">© 2025 FinCalc · Free Financial Calculators</div>
+</div>
+<script src="app.js"></script>
+<script>initPage('invest');</script>
+</body>
+</html>

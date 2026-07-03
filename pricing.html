@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Pricing & Margin Calculator | FinCalc Pro</title>
+<meta name="description" content="Calculate gross margin, markup, and contribution margin for your product pricing. Free pricing calculator for businesses.">
+<link rel="canonical" href="https://yourdomain.com/pricing.html">
+<meta name="robots" content="index, follow">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Pricing & Margin Calculator | FinCalc Pro">
+<meta property="og:description" content="Calculate gross margin, markup, and contribution margin for your product pricing. Free pricing calculator for businesses.">
+<meta property="og:url" content="https://yourdomain.com/pricing.html">
+<meta property="og:site_name" content="FinCalc Pro">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Pricing & Margin Calculator | FinCalc Pro">
+<meta name="twitter:description" content="Calculate gross margin, markup, and contribution margin for your product pricing. Free pricing calculator for businesses.">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<div class="topbar">
+  <a class="logo" href="index.html"><div class="logo-mark">FC</div>FinCalc</a>
+  <div class="searchbox">
+    <svg width="14" height="14" fill="none" stroke="#6B7A8D" stroke-width="2" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+    <input id="srch" placeholder="Search 40 calculators..." oninput="doSearch()" onkeydown="if(event.key==='Enter')goSearch()">
+  </div>
+</div>
+<div class="nav">
+  <button class="ntab on" onclick="go('home',this)">🏠 Home</button>
+  <button class="ntab" onclick="go('cagr',this)">📐 CAGR</button>
+  <button class="ntab" onclick="go('xirr',this)">📅 XIRR</button>
+  <button class="ntab" onclick="go('drip',this)">💧 DRIP</button>
+  <button class="ntab" onclick="go('etf',this)">🗂️ ETF Growth</button>
+  <button class="ntab" onclick="go('dcf',this)">🏦 DCF Valuation</button>
+  <button class="ntab" onclick="go('debtcomp',this)">❄️ Snowball vs Avalanche</button>
+  <button class="ntab" onclick="go('rentalprop',this)">🏡 Rental Property</button>
+  <button class="ntab" onclick="go('burnrate',this)">🔥 Burn Rate</button>
+  <button class="ntab" onclick="go('pricing',this)">🏷️ Pricing</button>
+  <button class="ntab" onclick="go('equity',this)">📐 Equity Dilution</button>
+  <button class="ntab" onclick="go('revenue',this)">📊 Revenue Forecast</button>
+  <button class="ntab" onclick="go('loan',this)">🏦 Loan/EMI</button>
+  <button class="ntab" onclick="go('invest',this)">📈 SIP/Investment</button>
+  <button class="ntab" onclick="go('tax',this)">🧾 Tax</button>
+  <button class="ntab" onclick="go('mortgage',this)">🏠 Mortgage</button>
+  <button class="ntab" onclick="go('mortcomp',this)">⚖️ Mtg Compare</button>
+  <button class="ntab" onclick="go('savings',this)">🏛️ Savings</button>
+  <button class="ntab" onclick="go('stock',this)">📉 Stock P&amp;L</button>
+  <button class="ntab" onclick="go('retirement',this)">👴 Retirement</button>
+  <button class="ntab" onclick="go('debt',this)">💳 Debt Payoff</button>
+  <button class="ntab" onclick="go('rental',this)">🏘️ Rental Yield</button>
+  <button class="ntab" onclick="go('cashflow',this)">💵 Cash Flow</button>
+  <button class="ntab" onclick="go('breakeven',this)">📊 Break-even</button>
+  <button class="ntab" onclick="go('savingsgoal',this)">🎯 Savings Goal</button>
+  <button class="ntab" onclick="go('emergencyfund',this)">🛡️ Emergency Fund</button>
+  <button class="ntab" onclick="go('healthscore',this)">💯 Health Score</button>
+  <button class="ntab" onclick="go('currency',this)">💱 Currency</button>
+  <button class="ntab" onclick="go('scientific',this)">🔬 Scientific</button>
+</div>
+<div class="content">
+<div id="pricing" class="panel on">
+<button class="back-btn" onclick="go('home',null)">← Back to Home</button>
+<div class="calc-links"><span class="calc-links-label">🔗 Related</span><button class="calc-link-btn" onclick="go('breakeven',null)">📊 Break-even</button><button class="calc-link-btn" onclick="go('burnrate',null)">🔥 Burn Rate</button><button class="calc-link-btn" onclick="go('revenue',null)">📊 Revenue Forecast</button></div>
+
+
+<div class="two">
+  <div class="card">
+    <div class="card-title">Pricing Calculator</div>
+    <div class="g2">
+      <div class="field"><label>COGS / unit ($)</label><div class="ip"><span class="pfx">$</span><input type="number" id="pr-cogs" value="150" oninput="cPricing()"></div></div>
+      <div class="field"><label>Monthly Fixed Costs ($)</label><div class="ip"><span class="pfx">$</span><input type="number" id="pr-fixed" value="200000" oninput="cPricing()"></div></div>
+      <div class="field"><label>Expected Units / Month</label><input type="number" id="pr-units" value="500" oninput="cPricing()"></div>
+      <div class="field"><label>Target Profit Margin %</label><input type="number" id="pr-margin" value="40" oninput="cPricing()"></div>
+      <div class="field"><label>Competitor Price Low ($)</label><div class="ip"><span class="pfx">$</span><input type="number" id="pr-clow" value="300" oninput="cPricing()"></div></div>
+      <div class="field"><label>Competitor Price High ($)</label><div class="ip"><span class="pfx">$</span><input type="number" id="pr-chigh" value="600" oninput="cPricing()"></div></div>
+    </div>
+    <div class="field"><label>Perceived Value Score: <span id="pr-vscore" style="color:var(--a);font-weight:600">7</span>/10</label><input type="range" id="pr-value" min="1" max="10" value="7" oninput="cPricing();gel('pr-vscore').textContent=this.value" style="width:100%;accent-color:var(--a)"></div>
+    <div class="sgrid">
+      <div class="sbox"><div class="lbl">Cost-plus Price</div><div class="val" style="color:var(--a)" id="pr-costplus">$0</div></div>
+      <div class="sbox"><div class="lbl">Value-based Price</div><div class="val" style="color:var(--b)" id="pr-valueprice">$0</div></div>
+      <div class="sbox"><div class="lbl">Recommended Price</div><div class="val" style="color:var(--g)" id="pr-rec">$0</div></div>
+      <div class="sbox"><div class="lbl">Monthly Profit</div><div class="val" id="pr-profit">$0</div></div>
+    </div>
+  </div>
+  <div class="card"><div class="card-title">Suggested Pricing Tiers</div><div id="pr-tiers"></div><div class="insight-box" id="pr-insights"></div></div>
+</div>
+
+<div class="calc-guide">
+  <div class="guide-toggle">
+    <div class="guide-toggle-title">📖 Product Pricing — 3 Models to Find Your Price</div>
+  </div>
+  <div class="guide-body">
+<div class="guide-p">Pricing is simultaneously one of the highest-leverage decisions a business makes and one of the most under-analyzed. A 5% price increase, if it doesn't significantly reduce sales volume, can increase profit by a far larger percentage than a 5% increase in sales volume at the same price — because pricing flows almost entirely to the bottom line, while volume growth still carries its associated variable costs.</div>
+
+<div class="guide-h3">Margin vs Markup: The Distinction That Trips Everyone Up</div>
+<div class="guide-formula">Markup = (Price − Cost) / Cost × 100%<br>Margin = (Price − Cost) / Price × 100%</div>
+<div class="guide-p">These two numbers sound similar but diverge significantly, especially at higher percentages. A product costing $50 sold for $100 has a 100% markup (you doubled the cost) but only a 50% margin (half of the revenue is profit). This confusion causes real pricing mistakes — a business owner aiming for a 50% margin who instead applies a 50% markup will actually achieve only a 33% margin, undershooting their target.</div>
+<table class="guide-table"><thead><tr><th>Markup Applied</th><th>Resulting Margin</th></tr></thead><tbody>
+<tr><td>25%</td><td>20%</td></tr>
+<tr><td>50%</td><td>33%</td></tr>
+<tr><td>100%</td><td>50%</td></tr>
+<tr><td>200%</td><td>67%</td></tr>
+</tbody></table>
+
+<div class="guide-h3">Three Pricing Models</div>
+<div class="guide-steps">
+<div class="guide-step"><div class="guide-step-num">1</div><div><strong>Cost-Plus Pricing</strong> — calculate your cost, add a fixed markup percentage. Simple and predictable, but ignores what customers are actually willing to pay, often leaving money on the table for high-value products.</div></div>
+<div class="guide-step"><div class="guide-step-num">2</div><div><strong>Competitive Pricing</strong> — set your price relative to competitors (slightly below, at parity, or as a premium). Works well in commoditized markets but can trigger race-to-the-bottom price wars.</div></div>
+<div class="guide-step"><div class="guide-step-num">3</div><div><strong>Value-Based Pricing</strong> — price according to the value the customer receives, not your cost to produce it. Almost always yields the highest margins, but requires genuinely understanding your customer's alternative options and willingness to pay.</div></div>
+</div>
+
+<div class="guide-h3">Worked Example: Value-Based Pricing in Practice</div>
+<div class="guide-p">A SaaS tool that saves a mid-size company 10 hours of manual work per week, at an average loaded employee cost of $50/hour, is creating roughly $26,000/year of value for that customer (10 hrs × $50 × 52 weeks). Pricing the tool at $5,000/year — far above its likely $200/year hosting and development cost — still represents an enormous bargain to the customer (a 5x return) while delivering far higher margins than a cost-plus approach would have produced.</div>
+
+<div class="guide-h3">Contribution Margin and Break-even Thinking</div>
+<div class="guide-formula">Contribution Margin = Selling Price − Variable Cost Per Unit</div>
+<div class="guide-p">Every unit sold contributes this amount toward covering your fixed costs (rent, salaries, insurance) before any profit begins. Once your cumulative contribution margin across all units sold equals your fixed costs, you've reached break-even — every unit after that is pure profit, which is why even modest sales growth past break-even can disproportionately improve profitability.</div>
+
+<div class="guide-h3">Price Elasticity: Will Customers Actually Notice?</div>
+<div class="guide-p">Price elasticity measures how sensitive demand is to a price change. If a 10% price increase causes a 20% drop in units sold, demand is elastic — and the price increase actually reduced total revenue. If the same 10% increase causes only a 2% drop in sales, demand is inelastic, and the price increase boosted total revenue substantially. Necessities (insulin, basic groceries, utility services) tend toward inelastic demand; discretionary luxuries (premium coffee, name-brand fashion) tend toward elastic demand, since substitutes are easy to find.</div>
+<table class="guide-table"><thead><tr><th>Elasticity Type</th><th>Typical Examples</th><th>Pricing Implication</th></tr></thead><tbody>
+<tr><td>Inelastic</td><td>Insulin, gasoline, basic utilities</td><td>Price increases tend to grow revenue</td></tr>
+<tr><td>Elastic</td><td>Restaurant meals, fashion, electronics</td><td>Price increases can shrink revenue if competitors undercut</td></tr>
+</tbody></table>
+<div class="guide-tip">💡 Test price changes on a small segment before rolling out broadly where possible — A/B testing pricing (where legally and ethically appropriate) reveals real elasticity far more reliably than surveys, since stated willingness to pay and actual purchasing behavior frequently diverge.</div>
+
+  </div>
+</div>
+
+<div class="faq-section">
+<div class="faq-section-title">❓ Frequently Asked Questions</div>
+<div class="faq-item">
+  <div class="faq-q" onclick="toggleFAQ(this)">
+    <span>What is gross margin?</span>
+    <span class="faq-icon">+</span>
+  </div>
+  <div class="faq-a"><span class="faq-formula">Gross Margin = (Revenue − COGS) / Revenue × 100%</span>Gross margin tells you how much profit remains after direct costs. SaaS companies typically target 70–80%+ gross margin. Manufacturing businesses might operate at 30–50%.</div>
+</div>
+<div class="faq-item">
+  <div class="faq-q" onclick="toggleFAQ(this)">
+    <span>What is the difference between markup and margin?</span>
+    <span class="faq-icon">+</span>
+  </div>
+  <div class="faq-a"><strong>Markup</strong> is the percentage added to cost. <strong>Margin</strong> is profit as a percentage of revenue. A 50% markup gives a 33% margin. A 100% markup gives a 50% margin. Margin is the standard business metric.</div>
+</div>
+<div class="faq-item">
+  <div class="faq-q" onclick="toggleFAQ(this)">
+    <span>How do I set the right price?</span>
+    <span class="faq-icon">+</span>
+  </div>
+  <div class="faq-a">Three main approaches: <strong>Cost-plus</strong> (add markup to cost), <strong>Competitive</strong> (price relative to competitors), and <strong>Value-based</strong> (price based on customer willingness to pay). Value-based pricing almost always yields the highest margins.</div>
+</div>
+<div class="faq-item">
+  <div class="faq-q" onclick="toggleFAQ(this)">
+    <span>What is price elasticity?</span>
+    <span class="faq-icon">+</span>
+  </div>
+  <div class="faq-a">Price elasticity measures how much demand changes when price changes. If a 10% price increase causes sales to drop 20%, demand is elastic. Essential products tend to be inelastic; luxury/discretionary items tend to be more elastic.</div>
+</div>
+<div class="faq-item">
+  <div class="faq-q" onclick="toggleFAQ(this)">
+    <span>What is contribution margin?</span>
+    <span class="faq-icon">+</span>
+  </div>
+  <div class="faq-a"><span class="faq-formula">Contribution Margin = Revenue − Variable Costs</span>Contribution margin is what’s left to cover fixed costs and profit after variable costs. Each unit with a positive contribution margin helps pay down your fixed overhead.</div>
+</div>
+</div>
+
+
+</div>
+</div><!-- content -->
+<div class="site-footer">
+  <div class="footer-brand">
+    <div class="logo-mark" style="width:22px;height:22px;background:var(--a);border-radius:5px;display:flex;align-items:center;justify-content:center;color:#000;font-size:11px;font-weight:700">FC</div>
+    FinCalc
+  </div>
+  <div class="footer-links"><a href="index.html">All Calculators</a> · <a href="about.html">About</a> · <a href="contact.html">Contact</a> · <a href="privacy.html">Privacy</a> · <a href="terms.html">Terms</a></div>
+  <div class="footer-copy">© 2025 FinCalc · Free Financial Calculators</div>
+</div>
+<script src="app.js"></script>
+<script>initPage('pricing');</script>
+</body>
+</html>

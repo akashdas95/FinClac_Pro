@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Retirement Calculator — How Much Do You Need to Retire | FinCalc Pro</title>
+<meta name="description" content="Calculate your retirement corpus using the 25x rule and 4% withdrawal rate. Free retirement planning calculator.">
+<link rel="canonical" href="https://yourdomain.com/retirement.html">
+<meta name="robots" content="index, follow">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Retirement Calculator — How Much Do You Need to Retire | FinCalc Pro">
+<meta property="og:description" content="Calculate your retirement corpus using the 25x rule and 4% withdrawal rate. Free retirement planning calculator.">
+<meta property="og:url" content="https://yourdomain.com/retirement.html">
+<meta property="og:site_name" content="FinCalc Pro">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Retirement Calculator — How Much Do You Need to Retire | FinCalc Pro">
+<meta name="twitter:description" content="Calculate your retirement corpus using the 25x rule and 4% withdrawal rate. Free retirement planning calculator.">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<div class="topbar">
+  <a class="logo" href="index.html"><div class="logo-mark">FC</div>FinCalc</a>
+  <div class="searchbox">
+    <svg width="14" height="14" fill="none" stroke="#6B7A8D" stroke-width="2" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+    <input id="srch" placeholder="Search 40 calculators..." oninput="doSearch()" onkeydown="if(event.key==='Enter')goSearch()">
+  </div>
+</div>
+<div class="nav">
+  <button class="ntab on" onclick="go('home',this)">🏠 Home</button>
+  <button class="ntab" onclick="go('cagr',this)">📐 CAGR</button>
+  <button class="ntab" onclick="go('xirr',this)">📅 XIRR</button>
+  <button class="ntab" onclick="go('drip',this)">💧 DRIP</button>
+  <button class="ntab" onclick="go('etf',this)">🗂️ ETF Growth</button>
+  <button class="ntab" onclick="go('dcf',this)">🏦 DCF Valuation</button>
+  <button class="ntab" onclick="go('debtcomp',this)">❄️ Snowball vs Avalanche</button>
+  <button class="ntab" onclick="go('rentalprop',this)">🏡 Rental Property</button>
+  <button class="ntab" onclick="go('burnrate',this)">🔥 Burn Rate</button>
+  <button class="ntab" onclick="go('pricing',this)">🏷️ Pricing</button>
+  <button class="ntab" onclick="go('equity',this)">📐 Equity Dilution</button>
+  <button class="ntab" onclick="go('revenue',this)">📊 Revenue Forecast</button>
+  <button class="ntab" onclick="go('loan',this)">🏦 Loan/EMI</button>
+  <button class="ntab" onclick="go('invest',this)">📈 SIP/Investment</button>
+  <button class="ntab" onclick="go('tax',this)">🧾 Tax</button>
+  <button class="ntab" onclick="go('mortgage',this)">🏠 Mortgage</button>
+  <button class="ntab" onclick="go('mortcomp',this)">⚖️ Mtg Compare</button>
+  <button class="ntab" onclick="go('savings',this)">🏛️ Savings</button>
+  <button class="ntab" onclick="go('stock',this)">📉 Stock P&amp;L</button>
+  <button class="ntab" onclick="go('retirement',this)">👴 Retirement</button>
+  <button class="ntab" onclick="go('debt',this)">💳 Debt Payoff</button>
+  <button class="ntab" onclick="go('rental',this)">🏘️ Rental Yield</button>
+  <button class="ntab" onclick="go('cashflow',this)">💵 Cash Flow</button>
+  <button class="ntab" onclick="go('breakeven',this)">📊 Break-even</button>
+  <button class="ntab" onclick="go('savingsgoal',this)">🎯 Savings Goal</button>
+  <button class="ntab" onclick="go('emergencyfund',this)">🛡️ Emergency Fund</button>
+  <button class="ntab" onclick="go('healthscore',this)">💯 Health Score</button>
+  <button class="ntab" onclick="go('currency',this)">💱 Currency</button>
+  <button class="ntab" onclick="go('scientific',this)">🔬 Scientific</button>
+</div>
+<div class="content">
+<div id="retirement" class="panel on">
+<button class="back-btn" onclick="go('home',null)">← Back to Home</button>
+<div class="calc-links"><span class="calc-links-label">🔗 Related</span><button class="calc-link-btn" onclick="go('fire',null)">🔥 FIRE Calculator</button><button class="calc-link-btn" onclick="go('invest',null)">📈 Investment</button><button class="calc-link-btn" onclick="go('cagr',null)">📐 CAGR</button><button class="calc-link-btn" onclick="go('savings',null)">🏛️ Savings</button><button class="calc-link-btn" onclick="go('healthscore',null)">💯 Health Score</button></div>
+
+
+<div class="two">
+  <div class="card">
+    <div class="card-title">Retirement Calculator</div>
+    <div class="g2">
+      <div class="field"><label>Current Age</label><input type="number" id="rt-age" value="30" oninput="cRetire()"></div>
+      <div class="field"><label>Retirement Age</label><input type="number" id="rt-ret" value="65" oninput="cRetire()"></div>
+      <div class="field"><label>Current Savings ($)</label><div class="ip"><span class="pfx">$</span><input type="number" id="rt-save" value="50000" oninput="cRetire()"></div></div>
+      <div class="field"><label>Monthly Contribution ($)</label><div class="ip"><span class="pfx">$</span><input type="number" id="rt-contrib" value="1500" oninput="cRetire()"></div></div>
+      <div class="field"><label>Expected Return (% p.a.)</label><input type="number" id="rt-rate" value="8" oninput="cRetire()"></div>
+      <div class="field"><label>Inflation Rate (% p.a.)</label><input type="number" id="rt-inf" value="3" oninput="cRetire()"></div>
+      <div class="field"><label>Monthly Expenses Today ($)</label><div class="ip"><span class="pfx">$</span><input type="number" id="rt-exp" value="5000" oninput="cRetire()"></div></div>
+      <div class="field"><label>Life Expectancy (age)</label><input type="number" id="rt-life" value="85" oninput="cRetire()"></div>
+    </div>
+  </div>
+  <div class="card">
+    <div class="card-title">Retirement Projection</div>
+    <div class="sgrid" style="margin-top:0;margin-bottom:1rem">
+      <div class="sbox"><div class="lbl">Corpus at Retirement</div><div class="val" style="color:var(--a)" id="rt-corpus">$0</div></div>
+      <div class="sbox"><div class="lbl">Monthly Need (future)</div><div class="val" style="color:var(--r)" id="rt-need">$0</div></div>
+      <div class="sbox"><div class="lbl">Years of Savings</div><div class="val" id="rt-yrs">0 yrs</div></div>
+      <div class="sbox"><div class="lbl">Surplus / Deficit</div><div class="val" id="rt-surplus">$0</div></div>
+    </div>
+    <canvas id="rt-chart" width="300" height="140" style="width:100%;margin-bottom:1rem"></canvas>
+    <div class="rrow"><span class="rk">Real return (inflation-adjusted)</span><span class="rv" style="color:var(--g)" id="rt-real">0%</span></div>
+    <div class="insight-box" id="rt-insights"></div>
+  </div>
+</div>
+
+<div class="calc-guide">
+  <div class="guide-toggle">
+    <div class="guide-toggle-title">📖 Retirement Planning — How Much Do You Need?</div>
+  </div>
+  <div class="guide-body">
+<div class="guide-p">"How much do I need to retire?" is the single most common — and most anxiety-inducing — question in personal finance, largely because the honest answer involves projecting decades into an uncertain future. Fortunately, several well-researched frameworks turn this overwhelming question into a concrete, calculable target.</div>
+
+<div class="guide-h3">The 25x Rule: A Simple Starting Target</div>
+<div class="guide-formula">Required Retirement Savings = Annual Expenses × 25</div>
+<div class="guide-p">If you spend $60,000 per year, the 25x rule suggests targeting a retirement portfolio of $1.5 million. This figure isn't arbitrary — it's mathematically derived from the 4% withdrawal rule (see below), since withdrawing 4% annually from a $1.5 million portfolio provides exactly $60,000 in the first year.</div>
+
+<div class="guide-h3">The 4% Rule and the Trinity Study</div>
+<div class="guide-p">The 4% rule originates from the 1998 "Trinity Study," which analyzed historical US market returns to determine a withdrawal rate that a retirement portfolio (typically modeled as 50-75% stocks, the remainder bonds) could sustain for 30 years without running out of money, across nearly all historical starting periods examined — even including retirements that began right before major market crashes.</div>
+<table class="guide-table"><thead><tr><th>Withdrawal Rate</th><th>Historical Success Rate (30-yr horizon)</th></tr></thead><tbody>
+<tr><td>3%</td><td>~98-100%</td></tr>
+<tr><td>4%</td><td>~90-96%</td></tr>
+<tr><td>5%</td><td>~70-80%</td></tr>
+<tr><td>6%</td><td>~50-60%</td></tr>
+</tbody></table>
+<div class="guide-p">Critically, the 4% rule prescribes withdrawing 4% of your portfolio's value in year one, then adjusting that <em>dollar amount</em> for inflation each subsequent year — not recalculating 4% of the current (fluctuating) balance every year. This distinction matters for actually implementing the strategy correctly in retirement.</div>
+
+<div class="guide-h3">Worked Example: Building the Target From Scratch</div>
+<div class="guide-p">A 35-year-old wants to retire at 65 with $70,000/year in today's dollars (assuming a paid-off mortgage and modest expenses). Using the 25x rule: $70,000 × 25 = $1,750,000 target portfolio. If they currently have $120,000 saved and can contribute $1,200/month for 30 years, growing at an average 7% annual return:</div>
+<table class="guide-table"><thead><tr><th>Component</th><th>Future Value at Age 65</th></tr></thead><tbody>
+<tr><td>Current $120,000, growing at 7% for 30 years</td><td>~$913,000</td></tr>
+<tr><td>$1,200/month contributions for 30 years at 7%</td><td>~$1,469,000</td></tr>
+<tr><td><strong>Total Projected Portfolio</strong></td><td><strong>~$2,382,000</strong></td></tr>
+</tbody></table>
+<div class="guide-p">This projection comfortably exceeds the $1,750,000 target, suggesting this saver is on track — and even has room to potentially retire earlier, spend more in retirement, or increase their margin of safety against poor early-retirement market sequences.</div>
+
+<div class="guide-h3">Tax-Advantaged Accounts: 401(k) vs Roth IRA</div>
+<table class="guide-table"><thead><tr><th>Account Type</th><th>Contribution Tax Treatment</th><th>Withdrawal Tax Treatment</th><th>Best When</th></tr></thead><tbody>
+<tr><td>Traditional 401(k)/IRA</td><td>Pre-tax (reduces taxable income now)</td><td>Taxed as ordinary income</td><td>You expect a lower tax bracket in retirement than now</td></tr>
+<tr><td>Roth 401(k)/IRA</td><td>After-tax (no deduction now)</td><td>Completely tax-free, including all growth</td><td>You expect a higher tax bracket in retirement, or are early in your career</td></tr>
+</tbody></table>
+<div class="guide-p">Always contribute at least enough to your employer's 401(k) to capture the full employer match before considering other accounts — a typical 50% match on the first 6% of salary is an immediate, guaranteed 50% return that no other investment can reliably replicate.</div>
+<div class="guide-tip">💡 Sequence-of-returns risk — experiencing a major market downturn in the first few years of retirement — is statistically more damaging than the same downturn occurring later, since you're forced to sell depressed assets to fund living expenses. Many retirees address this by holding 1-3 years of expenses in cash or bonds specifically to avoid selling stocks during a downturn.</div>
+
+  </div>
+</div>
+
+<div class="faq-section">
+<div class="faq-section-title">❓ Frequently Asked Questions</div>
+<div class="faq-item">
+  <div class="faq-q" onclick="toggleFAQ(this)">
+    <span>How much do I need to retire?</span>
+    <span class="faq-icon">+</span>
+  </div>
+  <div class="faq-a">The most common rule is the <strong>25x Rule</strong>: save 25 times your annual expenses. This supports a 4% annual withdrawal rate indefinitely based on historical market returns. If you spend $50,000/year, you need ~$1.25 million.</div>
+</div>
+<div class="faq-item">
+  <div class="faq-q" onclick="toggleFAQ(this)">
+    <span>What is the 4% withdrawal rule?</span>
+    <span class="faq-icon">+</span>
+  </div>
+  <div class="faq-a">The 4% rule says you can withdraw 4% of your portfolio in year one, then adjust for inflation each year, and your portfolio has historically lasted 30+ years. It assumes a balanced portfolio of roughly 60% stocks / 40% bonds.</div>
+</div>
+<div class="faq-item">
+  <div class="faq-q" onclick="toggleFAQ(this)">
+    <span>What is a 401(k)?</span>
+    <span class="faq-icon">+</span>
+  </div>
+  <div class="faq-a">A 401(k) is a US employer-sponsored retirement account where contributions are made <strong>pre-tax</strong>, reducing your taxable income now. Money grows tax-deferred until withdrawal. Many employers match contributions — always contribute at least enough to get the full match.</div>
+</div>
+<div class="faq-item">
+  <div class="faq-q" onclick="toggleFAQ(this)">
+    <span>What is the difference between Traditional IRA and Roth IRA?</span>
+    <span class="faq-icon">+</span>
+  </div>
+  <div class="faq-a"><strong>Traditional IRA</strong>: contribute pre-tax, pay tax on withdrawals in retirement. <strong>Roth IRA</strong>: contribute after-tax, all growth and withdrawals are tax-free. Roth is generally better if you expect to be in a higher tax bracket in retirement.</div>
+</div>
+<div class="faq-item">
+  <div class="faq-q" onclick="toggleFAQ(this)">
+    <span>When should I start saving for retirement?</span>
+    <span class="faq-icon">+</span>
+  </div>
+  <div class="faq-a">As early as possible. A 25-year-old investing $200/month at 8% will have far more at 65 than a 35-year-old investing $400/month — even investing less total money. <strong>Time in market is the single biggest factor in retirement wealth.</strong></div>
+</div>
+</div>
+
+
+</div>
+</div><!-- content -->
+<div class="site-footer">
+  <div class="footer-brand">
+    <div class="logo-mark" style="width:22px;height:22px;background:var(--a);border-radius:5px;display:flex;align-items:center;justify-content:center;color:#000;font-size:11px;font-weight:700">FC</div>
+    FinCalc
+  </div>
+  <div class="footer-links"><a href="index.html">All Calculators</a> · <a href="about.html">About</a> · <a href="contact.html">Contact</a> · <a href="privacy.html">Privacy</a> · <a href="terms.html">Terms</a></div>
+  <div class="footer-copy">© 2025 FinCalc · Free Financial Calculators</div>
+</div>
+<script src="app.js"></script>
+<script>initPage('retirement');</script>
+</body>
+</html>

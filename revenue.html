@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Revenue Forecast Calculator | FinCalc Pro</title>
+<meta name="description" content="Forecast SaaS revenue with bear, base, and bull growth scenarios. Free revenue forecasting tool with ARR and LTV metrics.">
+<link rel="canonical" href="https://yourdomain.com/revenue.html">
+<meta name="robots" content="index, follow">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Revenue Forecast Calculator | FinCalc Pro">
+<meta property="og:description" content="Forecast SaaS revenue with bear, base, and bull growth scenarios. Free revenue forecasting tool with ARR and LTV metrics.">
+<meta property="og:url" content="https://yourdomain.com/revenue.html">
+<meta property="og:site_name" content="FinCalc Pro">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Revenue Forecast Calculator | FinCalc Pro">
+<meta name="twitter:description" content="Forecast SaaS revenue with bear, base, and bull growth scenarios. Free revenue forecasting tool with ARR and LTV metrics.">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<div class="topbar">
+  <a class="logo" href="index.html"><div class="logo-mark">FC</div>FinCalc</a>
+  <div class="searchbox">
+    <svg width="14" height="14" fill="none" stroke="#6B7A8D" stroke-width="2" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+    <input id="srch" placeholder="Search 40 calculators..." oninput="doSearch()" onkeydown="if(event.key==='Enter')goSearch()">
+  </div>
+</div>
+<div class="nav">
+  <button class="ntab on" onclick="go('home',this)">🏠 Home</button>
+  <button class="ntab" onclick="go('cagr',this)">📐 CAGR</button>
+  <button class="ntab" onclick="go('xirr',this)">📅 XIRR</button>
+  <button class="ntab" onclick="go('drip',this)">💧 DRIP</button>
+  <button class="ntab" onclick="go('etf',this)">🗂️ ETF Growth</button>
+  <button class="ntab" onclick="go('dcf',this)">🏦 DCF Valuation</button>
+  <button class="ntab" onclick="go('debtcomp',this)">❄️ Snowball vs Avalanche</button>
+  <button class="ntab" onclick="go('rentalprop',this)">🏡 Rental Property</button>
+  <button class="ntab" onclick="go('burnrate',this)">🔥 Burn Rate</button>
+  <button class="ntab" onclick="go('pricing',this)">🏷️ Pricing</button>
+  <button class="ntab" onclick="go('equity',this)">📐 Equity Dilution</button>
+  <button class="ntab" onclick="go('revenue',this)">📊 Revenue Forecast</button>
+  <button class="ntab" onclick="go('loan',this)">🏦 Loan/EMI</button>
+  <button class="ntab" onclick="go('invest',this)">📈 SIP/Investment</button>
+  <button class="ntab" onclick="go('tax',this)">🧾 Tax</button>
+  <button class="ntab" onclick="go('mortgage',this)">🏠 Mortgage</button>
+  <button class="ntab" onclick="go('mortcomp',this)">⚖️ Mtg Compare</button>
+  <button class="ntab" onclick="go('savings',this)">🏛️ Savings</button>
+  <button class="ntab" onclick="go('stock',this)">📉 Stock P&amp;L</button>
+  <button class="ntab" onclick="go('retirement',this)">👴 Retirement</button>
+  <button class="ntab" onclick="go('debt',this)">💳 Debt Payoff</button>
+  <button class="ntab" onclick="go('rental',this)">🏘️ Rental Yield</button>
+  <button class="ntab" onclick="go('cashflow',this)">💵 Cash Flow</button>
+  <button class="ntab" onclick="go('breakeven',this)">📊 Break-even</button>
+  <button class="ntab" onclick="go('savingsgoal',this)">🎯 Savings Goal</button>
+  <button class="ntab" onclick="go('emergencyfund',this)">🛡️ Emergency Fund</button>
+  <button class="ntab" onclick="go('healthscore',this)">💯 Health Score</button>
+  <button class="ntab" onclick="go('currency',this)">💱 Currency</button>
+  <button class="ntab" onclick="go('scientific',this)">🔬 Scientific</button>
+</div>
+<div class="content">
+<div id="revenue" class="panel on">
+<button class="back-btn" onclick="go('home',null)">← Back to Home</button>
+<div class="calc-links"><span class="calc-links-label">🔗 Related</span><button class="calc-link-btn" onclick="go('burnrate',null)">🔥 Burn Rate</button><button class="calc-link-btn" onclick="go('breakeven',null)">📊 Break-even</button><button class="calc-link-btn" onclick="go('cashflow',null)">💵 Cash Flow</button><button class="calc-link-btn" onclick="go('pricing',null)">🏷️ Pricing</button></div>
+
+
+<div class="card mb16">
+  <div class="card-title">Revenue Forecast Assumptions</div>
+  <div class="g3">
+    <div class="field"><label>Current MRR ($)</label><div class="ip"><span class="pfx">$</span><input type="number" id="rf-mrr" value="500000" oninput="calcRevenue()"></div></div>
+    <div class="field"><label>Forecast Period (months)</label><input type="number" id="rf-months" value="12" min="3" max="36" oninput="calcRevenue()"></div>
+    <div class="field"><label>Churn Rate (%/mo)</label><input type="number" id="rf-churn" value="3" step="0.5" oninput="calcRevenue()"></div>
+    <div class="field"><label>🐻 Pessimistic Growth %/mo</label><input type="number" id="rf-pess" value="2" step="0.5" oninput="calcRevenue()"></div>
+    <div class="field"><label>📊 Base Growth %/mo</label><input type="number" id="rf-base" value="8" step="0.5" oninput="calcRevenue()"></div>
+    <div class="field"><label>🚀 Optimistic Growth %/mo</label><input type="number" id="rf-opt" value="15" step="0.5" oninput="calcRevenue()"></div>
+    <div class="field"><label>ARPU / Customer ($)</label><div class="ip"><span class="pfx">$</span><input type="number" id="rf-arpu" value="2500" oninput="calcRevenue()"></div></div>
+    <div class="field"><label>One-time Revenue/mo ($)</label><div class="ip"><span class="pfx">$</span><input type="number" id="rf-onetime" value="50000" oninput="calcRevenue()"></div></div>
+  </div>
+</div>
+<div class="two-eq mb16">
+  <div class="card">
+    <div class="card-title">Scenarios</div>
+    <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px;margin-bottom:1rem">
+      <div class="sbox" style="border-top:3px solid var(--r)"><div class="lbl">🐻 Pessimistic</div><div class="val" style="color:var(--r)" id="rf-p">$0</div><div style="font-size:10px;color:var(--m);margin-top:3px" id="rf-pg"></div></div>
+      <div class="sbox" style="border-top:3px solid var(--b)"><div class="lbl">📊 Base Case</div><div class="val" style="color:var(--b)" id="rf-b">$0</div><div style="font-size:10px;color:var(--m);margin-top:3px" id="rf-bg"></div></div>
+      <div class="sbox" style="border-top:3px solid var(--g)"><div class="lbl">🚀 Optimistic</div><div class="val" style="color:var(--g)" id="rf-o">$0</div><div style="font-size:10px;color:var(--m);margin-top:3px" id="rf-og"></div></div>
+    </div>
+    <canvas id="rf-chart" width="500" height="165" style="width:100%"></canvas>
+  </div>
+  <div class="card">
+    <div class="card-title">KPIs (Base Case)</div>
+    <div class="rrow"><span class="rk">ARR at end of period</span><span class="rv" style="color:var(--b)" id="rf-arr">$0</span></div>
+    <div class="rrow"><span class="rk">Cumulative revenue</span><span class="rv" style="color:var(--b)" id="rf-cum">$0</span></div>
+    <div class="rrow"><span class="rk">Projected customers</span><span class="rv" id="rf-custs">0</span></div>
+    <div class="rrow"><span class="rk">LTV (ARPU ÷ churn)</span><span class="rv" style="color:var(--g)" id="rf-ltv">$0</span></div>
+    <div class="rrow"><span class="rk">Revenue range at end</span><span class="rv" style="color:var(--a)" id="rf-range">—</span></div>
+    <div class="insight-box" id="rf-insights"></div>
+  </div>
+</div>
+<div class="card"><div class="card-title">Monthly Forecast Table (Base Case)</div><div style="overflow-x:auto"><table class="tbl" id="rf-table"></table></div></div>
+
+<div class="calc-guide">
+  <div class="guide-toggle">
+    <div class="guide-toggle-title">📖 Revenue Forecasting — 3-Scenario Planning</div>
+  </div>
+  <div class="guide-body">
+<div class="guide-p">Revenue forecasting for an early-stage business is part science, part informed storytelling. Investors and operators alike know that any single-point forecast ("we'll hit $2M ARR next year") is almost certainly wrong in the specific number — the real value of forecasting comes from understanding the range of plausible outcomes and the key assumptions driving each scenario.</div>
+
+<div class="guide-h3">MRR and ARR: The Core SaaS Metrics</div>
+<div class="guide-formula">ARR = MRR × 12</div>
+<div class="guide-p">Monthly Recurring Revenue (MRR) is the predictable, repeating monthly revenue from active subscriptions — explicitly excluding one-time fees, setup charges, or non-recurring services. Annual Recurring Revenue (ARR) simply annualizes that figure. These metrics matter because they strip out the noise of one-time revenue and reveal the true, compounding growth engine of a subscription business.</div>
+
+<div class="guide-h3">The T2D3 Growth Framework</div>
+<div class="guide-p">Popularized by venture capital firm Bessemer Venture Partners, "T2D3" describes a commonly cited growth trajectory benchmark for top-quartile SaaS companies: Triple, Triple, Double, Double, Double — meaning ARR triples in year one and two of meaningful scale, then doubles for three subsequent years.</div>
+<table class="guide-table"><thead><tr><th>Year</th><th>Growth Multiple</th><th>Example Starting at $1M ARR</th></tr></thead><tbody>
+<tr><td>1</td><td>3x</td><td>$3M</td></tr>
+<tr><td>2</td><td>3x</td><td>$9M</td></tr>
+<tr><td>3</td><td>2x</td><td>$18M</td></tr>
+<tr><td>4</td><td>2x</td><td>$36M</td></tr>
+<tr><td>5</td><td>2x</td><td>$72M</td></tr>
+</tbody></table>
+<div class="guide-p">Very few companies actually achieve this exact trajectory — it represents a benchmark for elite outliers, not a typical or expected outcome — but it's widely referenced by venture investors as a mental model for what "great" looks like at each stage.</div>
+
+<div class="guide-h3">Revenue Churn: The Leak in the Bucket</div>
+<div class="guide-formula">Revenue Churn Rate = Lost MRR in Period / Starting MRR × 100%</div>
+<div class="guide-p">Even a business adding new customers steadily can stagnate or shrink if churn (lost revenue from cancellations and downgrades) outpaces new growth. A SaaS company with $500,000 MRR losing 3% monthly to churn is losing $15,000/month before counting any new sales — meaning it needs to add at least that much in new MRR every single month just to stay flat.</div>
+
+<div class="guide-h3">Negative Net Revenue Churn: The Holy Grail</div>
+<div class="guide-p">The best-performing SaaS companies achieve what's called negative net revenue churn — where expansion revenue from existing customers (upsells, seat additions, plan upgrades) exceeds the revenue lost from cancellations and downgrades, meaning the existing customer base actually grows in revenue even with zero new customer acquisition. This is considered one of the strongest possible signals of product-market fit and pricing power.</div>
+
+<div class="guide-h3">LTV and CAC: Is the Growth Engine Actually Profitable?</div>
+<div class="guide-formula">LTV = Average Revenue Per Customer / Monthly Churn Rate<br>CAC = Total Sales &amp; Marketing Spend / New Customers Acquired</div>
+<div class="guide-p">Worked example: a customer paying $200/month with a 2% monthly churn rate has an expected lifetime value of $200 / 0.02 = $10,000. If acquiring that customer cost $2,500 in sales and marketing spend, the LTV:CAC ratio is 4:1 — generally considered healthy. A widely cited rule of thumb suggests an LTV:CAC ratio of at least 3:1 for a sustainable SaaS business; ratios below 1:1 mean the company is losing money on every customer acquired, before even accounting for fixed operating costs.</div>
+<table class="guide-table"><thead><tr><th>LTV:CAC Ratio</th><th>Interpretation</th></tr></thead><tbody>
+<tr><td>Below 1:1</td><td>Losing money per customer — unsustainable</td></tr>
+<tr><td>1:1 – 3:1</td><td>Marginal, needs improvement in retention or acquisition cost</td></tr>
+<tr><td>3:1 – 5:1</td><td>Healthy, generally considered a strong growth engine</td></tr>
+<tr><td>Above 5:1</td><td>Excellent — though may also signal under-investment in growth</td></tr>
+</tbody></table>
+
+<div class="guide-h3">Building a Three-Scenario Forecast</div>
+<div class="guide-p">Rather than a single forecast number, build bear, base, and bull cases by varying your key assumptions: new customer acquisition rate, churn rate, and average revenue per account. This forces explicit acknowledgment of uncertainty and gives investors (and yourself) a realistic range rather than false precision.</div>
+<div class="guide-tip">💡 Revisit and recalibrate your forecast model monthly against actual results — the value of a forecast isn't really in being "right," it's in the discipline of understanding which assumptions are driving your business, so you can catch problems (like rising churn) early rather than discovering them a quarter later.</div>
+
+  </div>
+</div>
+
+<div class="faq-section">
+<div class="faq-section-title">❓ Frequently Asked Questions</div>
+<div class="faq-item">
+  <div class="faq-q" onclick="toggleFAQ(this)"><span>What is ARR vs MRR?</span><span class="faq-icon">+</span></div>
+  <div class="faq-a"><strong>MRR (Monthly Recurring Revenue)</strong> is predictable monthly subscription revenue. <strong>ARR (Annual Recurring Revenue)</strong> is simply MRR × 12. ARR is the standard metric for SaaS valuations and growth benchmarking.</div>
+</div>
+<div class="faq-item">
+  <div class="faq-q" onclick="toggleFAQ(this)"><span>What is a good revenue growth rate?</span><span class="faq-icon">+</span></div>
+  <div class="faq-a">For early-stage SaaS startups, investors often look for the <strong>T2D3 framework</strong> (triple, triple, double, double, double growth years). For established companies, 20–30% annual growth is considered strong.</div>
+</div>
+<div class="faq-item">
+  <div class="faq-q" onclick="toggleFAQ(this)"><span>What is revenue churn?</span><span class="faq-icon">+</span></div>
+  <div class="faq-a"><span class="faq-formula">Revenue Churn Rate = Lost MRR / Beginning MRR × 100%</span>Churn measures subscription revenue lost monthly from cancellations or downgrades. World-class SaaS achieves <strong>negative churn</strong> — expansion revenue from existing customers exceeds losses.</div>
+</div>
+<div class="faq-item">
+  <div class="faq-q" onclick="toggleFAQ(this)"><span>What is LTV (Lifetime Value)?</span><span class="faq-icon">+</span></div>
+  <div class="faq-a"><span class="faq-formula">LTV = Average Revenue Per Customer / Monthly Churn Rate</span>LTV is the total expected revenue from a customer over their lifetime. A healthy SaaS business has an <strong>LTV:CAC ratio of 3:1 or higher</strong>.</div>
+</div>
+<div class="faq-item">
+  <div class="faq-q" onclick="toggleFAQ(this)"><span>What is CAC (Customer Acquisition Cost)?</span><span class="faq-icon">+</span></div>
+  <div class="faq-a"><span class="faq-formula">CAC = Total Sales &amp; Marketing Spend / New Customers Acquired</span>CAC tells you how much you spend to acquire one customer. Combined with LTV, it tells you whether your business model is profitable at scale.</div>
+</div>
+</div>
+</div>
+</div><!-- content -->
+<div class="site-footer">
+  <div class="footer-brand">
+    <div class="logo-mark" style="width:22px;height:22px;background:var(--a);border-radius:5px;display:flex;align-items:center;justify-content:center;color:#000;font-size:11px;font-weight:700">FC</div>
+    FinCalc
+  </div>
+  <div class="footer-links"><a href="index.html">All Calculators</a> · <a href="about.html">About</a> · <a href="contact.html">Contact</a> · <a href="privacy.html">Privacy</a> · <a href="terms.html">Terms</a></div>
+  <div class="footer-copy">© 2025 FinCalc · Free Financial Calculators</div>
+</div>
+<script src="app.js"></script>
+<script>initPage('revenue');</script>
+</body>
+</html>
