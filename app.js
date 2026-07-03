@@ -1921,7 +1921,7 @@ function injectDisclaimers(){
 // stylesheet — not the nav, guide, FAQ, or any other panel.
 function injectPrintButtons(){
   document.querySelectorAll('.panel').forEach(panel=>{
-    if(panel.id==='home'||panel.id==='privacy')return;
+    if(panel.id==='home'||panel.id==='privacy'||panel.id==='about'||panel.id==='scientific'||panel.id==='currency')return;
     if(panel.querySelector('.print-btn'))return;
     const btn=document.createElement('button');
     btn.className='print-btn';
