@@ -162,7 +162,7 @@ function buildDir(){
   const el=gel('dir-home');el.innerHTML='';
   SECTIONS.forEach(sec=>{
     let html=`<div class="dir-sec"><div class="dir-sec-h">${sec.title}${sec.badge?' <span class="badge-new">New</span>':''}</div><div class="dir-grid">`;
-    sec.items.forEach(it=>{html+=`<div class="dir-card" onclick="location.href='${it.id}.html'"><div class="dir-icon">${it.icon}</div><div class="dir-name">${it.name}</div><div class="dir-desc">${it.desc}</div></div>`;});
+    sec.items.forEach(it=>{html+=`<div class="dir-card" onclick="location.href='/${it.id}'"><div class="dir-icon">${it.icon}</div><div class="dir-name">${it.name}</div><div class="dir-desc">${it.desc}</div></div>`;});
     html+='</div></div>';el.innerHTML+=html;
   });
 }
@@ -1955,11 +1955,11 @@ function toggleFAQ(el){
 
 // ── Multi-page navigation (replaces old SPA go()/doSearch()) ──────
 function go(id, el){
-  location.href = (id === 'home' ? 'index.html' : id + '.html');
+  location.href = (id === 'home' ? '/' : '/' + id);
 }
 function goSearch(){
   const q = gel('srch').value.trim();
-  location.href = 'index.html' + (q ? '?q=' + encodeURIComponent(q) : '');
+  location.href = '/' + (q ? '?q=' + encodeURIComponent(q) : '');
 }
 function doSearch(){
   if(!window.__isHome) return; // live filtering only makes sense on the directory page
