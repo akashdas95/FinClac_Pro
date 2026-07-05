@@ -3,10 +3,15 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>FinCalc Blog — Guides on Investing, Retirement, Loans & More</title>
-<meta name="description" content="Practical guides on CAGR, FIRE, debt payoff, mortgages, and more — the real math behind common financial decisions, from the FinCalc team.">
-<link rel="canonical" href="https://finclac.com/blog">
+<title>PEG Ratio: The Metric That Tells You If a 'Cheap' Stock Is Actually Cheap | FinCalc Blog</title>
+<meta name="description" content="A low P/E can be a value trap — PEG adjusts for growth to give a fairer picture.">
+<link rel="canonical" href="https://finclac.com/blog/peg-ratio-cheap-stock">
 <meta name="robots" content="index, follow">
+<meta property="og:type" content="article">
+<meta property="og:title" content="PEG Ratio: The Metric That Tells You If a 'Cheap' Stock Is Actually Cheap">
+<meta property="og:description" content="A low P/E can be a value trap — PEG adjusts for growth to give a fairer picture.">
+<meta property="og:url" content="https://finclac.com/blog/peg-ratio-cheap-stock">
+<meta property="og:site_name" content="FinCalc Pro">
 <style>*{box-sizing:border-box;margin:0;padding:0}
 :root{--bg:#0B0E11;--s:#141920;--s2:#1C2430;--bd:#232D3A;--t:#E8EDF2;--m:#6B7A8D;--tb:#A3B2C4;--a:#F0B90B;--g:#0ECB81;--r:#F6465D;--b:#1890FF;--p:#9B59B6;--fn:'DM Sans',sans-serif;--mo:'DM Mono',monospace}
 body{background:var(--bg);color:var(--t);font-family:var(--fn);font-size:14px;line-height:1.5;min-height:100vh}
@@ -235,17 +240,6 @@ body{background:var(--bg);color:var(--t);font-family:var(--fn);font-size:14px;li
   .insight-box,.insight-line,.insight-title{display:none!important}
   canvas{display:block!important}
 }
-
-.blog-post-list{display:flex;flex-direction:column;gap:0;max-width:760px;margin:0 auto}
-.blog-post-card{display:block;padding:2rem 0;text-decoration:none;color:inherit;border-bottom:1px solid var(--bd);transition:opacity .15s}
-.blog-post-card:first-child{padding-top:0}
-.blog-post-card:hover{opacity:.85}
-.blog-post-card:hover .blog-post-title{color:var(--a)}
-.blog-post-meta{font-size:12.5px;color:var(--m);text-transform:uppercase;letter-spacing:.6px;font-weight:600;margin-bottom:.6rem}
-.blog-post-title{font-size:24px;font-weight:700;color:var(--t);line-height:1.3;margin:0 0 .7rem;letter-spacing:-.3px;transition:color .15s}
-.blog-post-excerpt{font-size:15px;color:var(--tb);line-height:1.6;margin:0 0 .9rem;max-width:640px}
-.blog-post-cta{font-size:13px;font-weight:600;color:var(--a)}
-@media(max-width:640px){.blog-post-title{font-size:20px}}
 </style>
 </head>
 <body>
@@ -288,172 +282,34 @@ body{background:var(--bg);color:var(--t);font-family:var(--fn);font-size:14px;li
   <button class="ntab" onclick="go('scientific',this)">🔬 Scientific</button>
 </div>
 <div class="content">
-<div class="panel on" id="blog-index">
-<button class="back-btn" onclick="location.href='/'">← Back to Home</button>
-<h1 style="font-size:28px;font-weight:700;margin:1.5rem auto .25rem;max-width:760px">FinCalc Blog</h1>
-<p style="color:var(--m);font-size:14px;margin:0 auto 2rem;max-width:760px">Practical guides on the math behind common financial decisions.</p>
-<div class="blog-post-list">
+<div class="panel on" id="blog-peg-ratio-cheap-stock">
+<button class="back-btn" onclick="location.href='/blog'">← Back to Blog</button>
+<div class="card" style="max-width:760px;margin:0 auto">
+  <div class="card-title">Article</div>
+  <p class="guide-p" style="margin-top:0;color:var(--m);font-size:13px">July 2026</p>
+  
+<h1 class="guide-h2" style="margin-top:0">PEG Ratio: The Metric That Tells You If a 'Cheap' Stock Is Actually Cheap</h1>
+<p class="guide-p">A low P/E ratio is often read as "this stock is cheap," but that can be genuinely misleading without accounting for growth. The PEG ratio fixes this by adjusting P/E for the company's expected earnings growth rate.</p>
 
-  <a href="/blog/fire-number-how-to-calculate" class="blog-post-card">
-    <div class="blog-post-meta">July 2026 · 3 min read</div>
-    <h2 class="blog-post-title">The Real Math Behind FIRE: How to Calculate Your Retirement Number</h2>
-    <p class="blog-post-excerpt">Why the 4% rule is a starting point, not your personal answer — and the actual formula for your FIRE number.</p>
-    <div class="blog-post-cta">Read article →</div>
-  </a>
+<h2 class="guide-h3">Why P/E alone can mislead</h2>
+<p class="guide-p">A stock trading at a P/E of 30 might look "expensive" compared to one at a P/E of 10 — but if the first company is growing earnings 30% per year and the second is growing just 2%, the higher P/E stock may actually represent better relative value once growth is factored in. P/E in isolation ignores this entirely.</p>
 
-  <a href="/blog/cagr-vs-average-return" class="blog-post-card">
-    <div class="blog-post-meta">July 2026 · 3 min read</div>
-    <h2 class="blog-post-title">CAGR vs. Average Return: Why Your Investment App Is Lying to You</h2>
-    <p class="blog-post-excerpt">The two numbers look similar but tell very different stories — here's the actual math and why it matters.</p>
-    <div class="blog-post-cta">Read article →</div>
-  </a>
+<h2 class="guide-h3">The formula</h2>
+<p class="guide-p"><strong>PEG = P/E Ratio ÷ Earnings Growth Rate (%)</strong></p>
+<p class="guide-p">A PEG around 1.0 is traditionally considered fairly valued — the P/E roughly matches the growth rate. A PEG meaningfully below 1.0 suggests the stock may be undervalued relative to its growth, while a PEG well above 1.0 suggests the market may be pricing in more growth than is likely to materialize.</p>
 
-  <a href="/blog/pay-off-debt-or-invest" class="blog-post-card">
-    <div class="blog-post-meta">July 2026 · 3 min read</div>
-    <h2 class="blog-post-title">Should You Pay Off Debt or Invest First? The Actual Math</h2>
-    <p class="blog-post-excerpt">It's not about willpower or feelings — it's a comparison between your debt's interest rate and your expected investment return.</p>
-    <div class="blog-post-cta">Read article →</div>
-  </a>
+<h2 class="guide-h3">A worked comparison</h2>
+<p class="guide-p">Company A: P/E of 25, expected earnings growth of 25% → PEG of 1.0 (fairly valued relative to growth). Company B: P/E of 12, expected earnings growth of 4% → PEG of 3.0 (despite the "cheaper" looking P/E, it's actually more expensive relative to its growth prospects). This is exactly the kind of case where PEG flips the naive "lower P/E is cheaper" intuition.</p>
 
-  <a href="/blog/how-much-house-can-you-afford" class="blog-post-card">
-    <div class="blog-post-meta">July 2026 · 3 min read</div>
-    <h2 class="blog-post-title">How Much House Can You Actually Afford in 2026?</h2>
-    <p class="blog-post-excerpt">The bank's pre-approval number and your real comfortable budget are usually not the same thing.</p>
-    <div class="blog-post-cta">Read article →</div>
-  </a>
+<h2 class="guide-h3">Limitations worth knowing</h2>
+<p class="guide-p">PEG depends entirely on the growth rate estimate used — analyst projections can be wrong, and using historical growth instead of forward estimates can give a misleading picture for a company whose growth is accelerating or decelerating. PEG also doesn't account for differences in risk, debt levels, or capital efficiency between companies — it's a useful first filter, not a complete valuation on its own.</p>
 
-  <a href="/blog/dcf-valuation-explained" class="blog-post-card">
-    <div class="blog-post-meta">July 2026 · 3 min read</div>
-    <h2 class="blog-post-title">DCF Valuation Explained: How to Value a Stock Like an Analyst</h2>
-    <p class="blog-post-excerpt">The core idea behind discounted cash flow analysis, without the spreadsheet overwhelm.</p>
-    <div class="blog-post-cta">Read article →</div>
-  </a>
+<h2 class="guide-h3">Best used alongside other metrics</h2>
+<p class="guide-p">PEG works well as a quick screening tool to flag stocks worth deeper investigation, but pairing it with other approaches — like a full DCF valuation or an EV/EBITDA comparison against direct peers — gives a much more complete picture than any single ratio alone.</p>
 
-  <a href="/blog/sip-vs-lump-sum" class="blog-post-card">
-    <div class="blog-post-meta">July 2026 · 3 min read</div>
-    <h2 class="blog-post-title">SIP vs Lump Sum: Which Investment Strategy Actually Wins?</h2>
-    <p class="blog-post-excerpt">The honest answer depends on market timing luck more than most SIP advocates admit.</p>
-    <div class="blog-post-cta">Read article →</div>
-  </a>
+<h2 class="guide-h3">Calculate it for any stock</h2>
+<p class="guide-p">The free <a href="/peg" style="color:var(--a);text-decoration:underline">PEG Ratio Calculator</a> shows exactly where a stock falls on the valuation scale relative to its growth rate. For a deeper valuation, the <a href="/dcf" style="color:var(--a);text-decoration:underline">DCF Valuation Calculator</a> estimates intrinsic value directly from projected cash flows.</p>
 
-  <a href="/blog/hidden-cost-loan-processing-fees" class="blog-post-card">
-    <div class="blog-post-meta">July 2026 · 3 min read</div>
-    <h2 class="blog-post-title">The Hidden Cost of Loan Processing Fees — A Side-by-Side Comparison</h2>
-    <p class="blog-post-excerpt">The lowest interest rate isn't always the cheapest loan once you account for fees.</p>
-    <div class="blog-post-cta">Read article →</div>
-  </a>
-
-  <a href="/blog/how-big-should-emergency-fund-be" class="blog-post-card">
-    <div class="blog-post-meta">July 2026 · 3 min read</div>
-    <h2 class="blog-post-title">How Big Should Your Emergency Fund Really Be?</h2>
-    <p class="blog-post-excerpt">The generic &quot;3-6 months&quot; rule needs adjusting based on your actual job stability and expenses.</p>
-    <div class="blog-post-cta">Read article →</div>
-  </a>
-
-  <a href="/blog/startup-burn-rate-runway" class="blog-post-card">
-    <div class="blog-post-meta">July 2026 · 3 min read</div>
-    <h2 class="blog-post-title">Startup Burn Rate: How Many Months of Runway Do You Actually Have?</h2>
-    <p class="blog-post-excerpt">The math founders should be checking monthly, not just when a fundraise is approaching.</p>
-    <div class="blog-post-cta">Read article →</div>
-  </a>
-
-  <a href="/blog/rental-property-cap-rate-vs-cash-on-cash" class="blog-post-card">
-    <div class="blog-post-meta">July 2026 · 3 min read</div>
-    <h2 class="blog-post-title">Rental Property Cash Flow: Cap Rate vs Cash-on-Cash Return Explained</h2>
-    <p class="blog-post-excerpt">Two different metrics that answer two different questions about the same property.</p>
-    <div class="blog-post-cta">Read article →</div>
-  </a>
-
-  <a href="/blog/equity-dilution-101" class="blog-post-card">
-    <div class="blog-post-meta">July 2026 · 3 min read</div>
-    <h2 class="blog-post-title">Equity Dilution 101: What Happens to Your Shares After Each Funding Round</h2>
-    <p class="blog-post-excerpt">A smaller slice of a bigger pie can still be worth more — here's the actual math.</p>
-    <div class="blog-post-cta">Read article →</div>
-  </a>
-
-  <a href="/blog/retirement-withdrawal-rate-4-percent-rule" class="blog-post-card">
-    <div class="blog-post-meta">July 2026 · 3 min read</div>
-    <h2 class="blog-post-title">Retirement Withdrawal Rates: Is 4% Still Safe in 2026?</h2>
-    <p class="blog-post-excerpt">The famous rule was built on decades-old data — here's what's changed and what hasn't.</p>
-    <div class="blog-post-cta">Read article →</div>
-  </a>
-
-  <a href="/blog/auto-loan-new-vs-used" class="blog-post-card">
-    <div class="blog-post-meta">July 2026 · 3 min read</div>
-    <h2 class="blog-post-title">New vs Used Car Loans: The Real Cost Difference Beyond the Sticker Price</h2>
-    <p class="blog-post-excerpt">Lower interest rates on new cars don't always beat the math on a used car loan.</p>
-    <div class="blog-post-cta">Read article →</div>
-  </a>
-
-  <a href="/blog/power-of-reinvesting-dividends" class="blog-post-card">
-    <div class="blog-post-meta">July 2026 · 3 min read</div>
-    <h2 class="blog-post-title">The Power of Reinvesting Dividends: A Long-Term Growth Case Study</h2>
-    <p class="blog-post-excerpt">Taking dividends as cash feels good today — reinvesting them can mean a dramatically larger portfolio decades from now.</p>
-    <div class="blog-post-cta">Read article →</div>
-  </a>
-
-  <a href="/blog/etf-vs-individual-stocks" class="blog-post-card">
-    <div class="blog-post-meta">July 2026 · 3 min read</div>
-    <h2 class="blog-post-title">ETFs vs Individual Stocks: Building a Diversified Portfolio</h2>
-    <p class="blog-post-excerpt">The diversification math behind why most long-term investors are better served by funds than stock-picking.</p>
-    <div class="blog-post-cta">Read article →</div>
-  </a>
-
-  <a href="/blog/peg-ratio-cheap-stock" class="blog-post-card">
-    <div class="blog-post-meta">July 2026 · 3 min read</div>
-    <h2 class="blog-post-title">PEG Ratio: The Metric That Tells You If a 'Cheap' Stock Is Actually Cheap</h2>
-    <p class="blog-post-excerpt">A low P/E can be a value trap — PEG adjusts for growth to give a fairer picture.</p>
-    <div class="blog-post-cta">Read article →</div>
-  </a>
-
-  <a href="/blog/ev-ebitda-vs-pe" class="blog-post-card">
-    <div class="blog-post-meta">July 2026 · 3 min read</div>
-    <h2 class="blog-post-title">EV/EBITDA vs P/E: Which Valuation Multiple Should You Trust?</h2>
-    <p class="blog-post-excerpt">Two companies with identical P/E ratios can have very different real valuations once debt is factored in.</p>
-    <div class="blog-post-cta">Read article →</div>
-  </a>
-
-  <a href="/blog/how-to-price-your-product" class="blog-post-card">
-    <div class="blog-post-meta">July 2026 · 3 min read</div>
-    <h2 class="blog-post-title">How to Price Your Product: Margin, Markup, and Break-Even</h2>
-    <p class="blog-post-excerpt">Three numbers every small business owner needs to actually understand before setting a price.</p>
-    <div class="blog-post-cta">Read article →</div>
-  </a>
-
-  <a href="/blog/saas-revenue-forecasting-scenarios" class="blog-post-card">
-    <div class="blog-post-meta">July 2026 · 3 min read</div>
-    <h2 class="blog-post-title">SaaS Revenue Forecasting: Bear, Base, and Bull Scenarios Explained</h2>
-    <p class="blog-post-excerpt">A single revenue projection number is usually a red flag — here's why ranges matter more.</p>
-    <div class="blog-post-cta">Read article →</div>
-  </a>
-
-  <a href="/blog/us-federal-tax-brackets-explained" class="blog-post-card">
-    <div class="blog-post-meta">July 2026 · 3 min read</div>
-    <h2 class="blog-post-title">US Federal Tax Brackets Explained: Why Your Effective Rate Isn't Your Bracket</h2>
-    <p class="blog-post-excerpt">Being in the 24% bracket doesn't mean you pay 24% on all your income — here's how marginal rates actually work.</p>
-    <div class="blog-post-cta">Read article →</div>
-  </a>
-
-  <a href="/blog/15-year-vs-30-year-mortgage" class="blog-post-card">
-    <div class="blog-post-meta">July 2026 · 3 min read</div>
-    <h2 class="blog-post-title">15-Year vs 30-Year Mortgage: The Real Trade-Off</h2>
-    <p class="blog-post-excerpt">Lower total interest vs. lower monthly payment — the right choice depends on what you'd do with the difference.</p>
-    <div class="blog-post-cta">Read article →</div>
-  </a>
-
-  <a href="/blog/power-of-starting-early-compound-interest" class="blog-post-card">
-    <div class="blog-post-meta">July 2026 · 3 min read</div>
-    <h2 class="blog-post-title">The Power of Starting Early: Compound Interest Explained</h2>
-    <p class="blog-post-excerpt">A 25-year-old and a 35-year-old saving the same amount monthly end up in very different places — here's the math.</p>
-    <div class="blog-post-cta">Read article →</div>
-  </a>
-
-  <a href="/blog/financial-health-score-explained" class="blog-post-card">
-    <div class="blog-post-meta">July 2026 · 3 min read</div>
-    <h2 class="blog-post-title">What's Your Financial Health Score? The 5 Numbers That Matter</h2>
-    <p class="blog-post-excerpt">A single score that sums up your overall financial position — here's what actually goes into it.</p>
-    <div class="blog-post-cta">Read article →</div>
-  </a>
 </div>
 </div>
 </div><!-- content -->
@@ -479,6 +335,6 @@ body{background:var(--bg);color:var(--t);font-family:var(--fn);font-size:14px;li
 </a>
 </div>
 <script src="/app.js"></script>
-<script>initPage('blog-index');</script>
+<script>initPage('blog-peg-ratio-cheap-stock');</script>
 </body>
 </html>
