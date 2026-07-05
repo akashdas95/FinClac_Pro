@@ -44,4 +44,8 @@
   <url><loc>https://finclac.com/privacy</loc><priority>0.3</priority></url>
   <url><loc>https://finclac.com/about</loc><priority>0.4</priority></url>
   <url><loc>https://finclac.com/terms</loc><priority>0.3</priority></url>
+  <url><loc>https://finclac.com/blog</loc><priority>0.6</priority></url>
+  <url><loc>https://finclac.com/blog/fire-number-how-to-calculate</loc><priority>0.6</priority></url>
+  <url><loc>https://finclac.com/blog/cagr-vs-average-return</loc><priority>0.6</priority></url>
+  <url><loc>https://finclac.com/blog/pay-off-debt-or-invest</loc><priority>0.6</priority></url>
 </urlset>

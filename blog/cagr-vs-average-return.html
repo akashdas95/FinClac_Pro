@@ -3,18 +3,15 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Loan Comparison Calculator — Compare 3 Offers Side by Side | FinCalc Pro</title>
-<meta name="description" content="Compare up to 3 loan offers side by side on EMI, total interest, fees, and total cost to find the cheapest one. Free loan comparison calculator.">
-<link rel="canonical" href="https://finclac.com/loancomp">
+<title>CAGR vs. Average Return: Why Your Investment App Is Lying to You | FinCalc Blog</title>
+<meta name="description" content="The two numbers look similar but tell very different stories — here's the actual math and why it matters.">
+<link rel="canonical" href="https://finclac.com/blog/cagr-vs-average-return">
 <meta name="robots" content="index, follow">
-<meta property="og:type" content="website">
-<meta property="og:title" content="Loan Comparison Calculator — Compare 3 Offers Side by Side | FinCalc Pro">
-<meta property="og:description" content="Compare up to 3 loan offers side by side on EMI, total interest, fees, and total cost to find the cheapest one. Free loan comparison calculator.">
-<meta property="og:url" content="https://finclac.com/loancomp">
+<meta property="og:type" content="article">
+<meta property="og:title" content="CAGR vs. Average Return: Why Your Investment App Is Lying to You">
+<meta property="og:description" content="The two numbers look similar but tell very different stories — here's the actual math and why it matters.">
+<meta property="og:url" content="https://finclac.com/blog/cagr-vs-average-return">
 <meta property="og:site_name" content="FinCalc Pro">
-<meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Loan Comparison Calculator — Compare 3 Offers Side by Side | FinCalc Pro">
-<meta name="twitter:description" content="Compare up to 3 loan offers side by side on EMI, total interest, fees, and total cost to find the cheapest one. Free loan comparison calculator.">
 <style>*{box-sizing:border-box;margin:0;padding:0}
 :root{--bg:#0B0E11;--s:#141920;--s2:#1C2430;--bd:#232D3A;--t:#E8EDF2;--m:#6B7A8D;--tb:#A3B2C4;--a:#F0B90B;--g:#0ECB81;--r:#F6465D;--b:#1890FF;--p:#9B59B6;--fn:'DM Sans',sans-serif;--mo:'DM Mono',monospace}
 body{background:var(--bg);color:var(--t);font-family:var(--fn);font-size:14px;line-height:1.5;min-height:100vh}
@@ -254,7 +251,7 @@ body{background:var(--bg);color:var(--t);font-family:var(--fn);font-size:14px;li
   </div>
 </div>
 <div class="nav">
-  <button class="ntab on" onclick="go('home',this)">🏠 Home</button><button class="ntab" onclick="location.href='/blog'">📝 Blog</button>
+  <button class="ntab" onclick="go('home',this)">🏠 Home</button><button class="ntab on" onclick="location.href='/blog'">📝 Blog</button>
   <button class="ntab" onclick="go('cagr',this)">📐 CAGR</button>
   <button class="ntab" onclick="go('xirr',this)">📅 XIRR</button>
   <button class="ntab" onclick="go('drip',this)">💧 DRIP</button>
@@ -285,96 +282,35 @@ body{background:var(--bg);color:var(--t);font-family:var(--fn);font-size:14px;li
   <button class="ntab" onclick="go('scientific',this)">🔬 Scientific</button>
 </div>
 <div class="content">
-<div id="loancomp" class="panel on">
-<button class="back-btn" onclick="go('home',null)">← Back to Home</button>
-<div class="calc-links"><span class="calc-links-label">🔗 Related</span><button class="calc-link-btn" onclick="go('loan',null)">🏦 Loan/EMI</button><button class="calc-link-btn" onclick="go('prepay',null)">⏩ Loan Prepayment</button><button class="calc-link-btn" onclick="go('debtcomp',null)">❄️ Snowball vs Avalanche</button><button class="calc-link-btn" onclick="go('mortcomp',null)">⚖️ Mortgage Comparison</button></div>
+<div class="panel on" id="blog-cagr-vs-average-return">
+<button class="back-btn" onclick="location.href='/blog'">← Back to Blog</button>
+<div class="card" style="max-width:760px;margin:0 auto">
+  <div class="card-title">Article</div>
+  <p class="guide-p" style="margin-top:0;color:var(--m);font-size:13px">July 2026</p>
+  
+<h1 class="guide-h2" style="margin-top:0">CAGR vs. Average Return: Why Your Investment App Is Lying to You</h1>
 
+<p class="guide-p">Open almost any investment app and you'll see a headline "average annual return" number. It looks straightforward — but it can meaningfully overstate how your money actually grew, and CAGR (Compound Annual Growth Rate) is usually the number you actually want instead.</p>
 
-<div class="g3 mb16" id="lc-cols"></div>
-<div class="card"><div class="card-title">Side-by-Side Comparison</div><div style="overflow-x:auto"><table class="tbl" id="lc-table" style="width:100%"></table></div><canvas id="lc-chart" width="900" height="140" style="width:100%;margin-top:1rem"></canvas><div class="insight-box" id="lc-insights"></div></div>
+<h2 class="guide-h3">A simple example that breaks the intuition</h2>
+<p class="guide-p">Say a $10,000 investment grows 50% in year one, then falls 50% in year two. A simple average of those two returns is 0% — (50% + -50%) ÷ 2 = 0%. Sounds like you broke even, right?</p>
+<p class="guide-p">Run the actual dollars: $10,000 grows to $15,000 after year one (+50%), then drops to $7,500 after year two (-50% of $15,000). You didn't break even — you lost 25% of your original money. The "0% average return" figure was technically correct but practically misleading.</p>
 
-<div class="calc-guide">
-  <div class="guide-toggle">
-    <div class="guide-toggle-title">📖 Loan Comparison — Choosing the Right Offer</div>
-  </div>
-  <div class="guide-body">
-<div class="guide-p">Comparing loan offers side by side reveals something the headline interest rate alone never tells you: the lowest rate isn't always the cheapest loan, and the lowest monthly payment isn't always the best deal. Amount borrowed, interest rate, tenure, and processing fees all interact, and the only reliable way to see which offer actually costs less is to run the full numbers on each one rather than comparing rates in isolation.</div>
+<h2 class="guide-h3">What CAGR actually measures</h2>
+<p class="guide-p">CAGR answers a different, more useful question: "if this investment had grown at one smooth, constant rate every year, what would that rate have been?" It's calculated directly from your starting value, ending value, and the number of years — not from averaging individual yearly returns.</p>
+<p class="guide-p"><strong>CAGR = (Ending Value ÷ Beginning Value)^(1 ÷ Years) − 1</strong></p>
+<p class="guide-p">In the example above, CAGR would correctly show a negative rate reflecting the real 25% loss — not the misleadingly flat 0% that simple averaging produced.</p>
 
-<div class="guide-h3">Why Tenure Changes the Comparison So Much</div>
-<div class="guide-p">A shorter tenure raises your monthly payment but shrinks the total interest paid, since the principal is exposed to interest charges for fewer months. A longer tenure does the opposite — smaller monthly payment, but more total interest over the life of the loan. This trade-off means a loan offer with a <em>higher</em> rate but a <em>shorter</em> term can sometimes cost less overall than a lower-rate offer stretched over more years.</div>
-<div class="guide-formula">EMI = P × r × (1 + r)ⁿ / ((1 + r)ⁿ − 1)</div>
+<h2 class="guide-h3">When each number is actually useful</h2>
+<p class="guide-p">Simple average return can be useful for understanding year-to-year volatility or comparing single-period performance. But for anything involving compounding over multiple years — comparing mutual funds, evaluating your portfolio's real growth, or projecting future value — CAGR is the number that matches reality. It's also why comparing two investments' CAGR is a fairer comparison than comparing their "average annual returns," especially when volatility differs between them.</p>
 
-<div class="guide-h3">Worked Example: Three Offers for the Same Purchase</div>
-<div class="guide-p">Consider three competing offers on a roughly $25,000 loan:</div>
-<table class="guide-table"><thead><tr><th>Offer</th><th>Amount</th><th>Rate</th><th>Term</th><th>Monthly EMI</th><th>Total Cost</th></tr></thead><tbody>
-<tr><td>A</td><td>$25,000</td><td>6.5%</td><td>5 years</td><td>$489</td><td>$29,599</td></tr>
-<tr><td>B</td><td>$25,000</td><td>7.2%</td><td>4 years</td><td>$601</td><td>$28,847</td></tr>
-<tr><td>C</td><td>$24,000</td><td>5.9%</td><td>6 years</td><td>$397</td><td>$29,036</td></tr>
-</tbody></table>
-<div class="guide-p">Offer B carries the <em>highest</em> stated interest rate of the three, yet it's the <strong>cheapest overall</strong> once the shorter term is factored in — its higher monthly payment buys a faster payoff and less total interest. Offer A has a lower rate than B but loses to it on total cost simply because it runs an extra year. This is exactly why total cost, not headline rate, should be the deciding number whenever you can comfortably afford the higher payment.</div>
+<h2 class="guide-h3">A practical use: comparing two funds</h2>
+<p class="guide-p">Say Fund A returns a smooth 8% every year for 5 years. Fund B swings wildly — some years +25%, some years -10% — but happens to have the same simple average return of 8%. Fund A's CAGR will be close to 8%. Fund B's CAGR will almost always come in lower than 8%, because volatility drags down compounded results even when the simple average looks identical. This is sometimes called "volatility drag," and it's exactly the gap that CAGR reveals and simple averaging hides.</p>
 
-<div class="guide-h3">Processing Fees: The Cost Hiding Outside the Interest Rate</div>
-<div class="guide-p">Many lenders charge an upfront processing or origination fee — commonly 0.5% to 3% of the loan amount — that doesn't show up in the advertised interest rate at all. A loan with a slightly higher rate but no fee can easily beat a lower-rate loan that charges 2-3% upfront, especially on shorter-term loans where the fee makes up a larger share of the total cost relative to the interest accrued.</div>
-<table class="guide-table"><thead><tr><th>Processing Fee</th><th>Cost on a $25,000 Loan</th></tr></thead><tbody>
-<tr><td>0%</td><td>$0</td></tr>
-<tr><td>1%</td><td>$250</td></tr>
-<tr><td>2.5%</td><td>$625</td></tr>
-</tbody></table>
+<h2 class="guide-h3">Calculate it yourself</h2>
+<p class="guide-p">Rather than trusting a headline "average return" figure, plug your actual starting value, ending value, and time period into the free <a href="/cagr" style="color:var(--a);text-decoration:underline">CAGR Calculator</a> to see your investment's real compounded growth rate, along with a Rule of 72 doubling-time estimate. If your cash flows are irregular — like a SIP with varying monthly contributions — the <a href="/xirr" style="color:var(--a);text-decoration:underline">XIRR Calculator</a> handles that case specifically, since standard CAGR assumes a single lump-sum investment.</p>
 
-<div class="guide-h3">Monthly Payment vs Total Cost: Two Different Questions</div>
-<div class="guide-p">These two numbers answer different questions, and conflating them is one of the most common loan-shopping mistakes. Monthly payment answers "can I afford this each month, given my current budget?" Total cost answers "how much will I actually pay the lender over the life of this loan?" A borrower with tight monthly cash flow may reasonably prioritize the lowest payment even if it isn't the cheapest option overall — but that should be a deliberate trade-off, not an accident of only looking at one number.</div>
-
-<div class="guide-h3">Beyond the Numbers: Reading the Fine Print</div>
-<div class="guide-steps">
-<div class="guide-step"><div class="guide-step-num">1</div><div><strong>Prepayment penalties</strong> — some loans charge a fee (often 1-3% of the remaining balance) if you pay off the loan early, which matters if you might want to refinance or pay it down faster later.</div></div>
-<div class="guide-step"><div class="guide-step-num">2</div><div><strong>Rate type</strong> — confirm whether the quoted rate is flat or reducing-balance; a flat-rate loan can cost nearly double a reducing-balance loan at the same headline rate (see our Loan/EMI calculator for the full breakdown).</div></div>
-<div class="guide-step"><div class="guide-step-num">3</div><div><strong>Variable vs fixed rate</strong> — a lower introductory variable rate carries the risk of rising later; a fixed rate locks in certainty for the full term.</div></div>
 </div>
-<div class="guide-tip">💡 Always ask each lender for their official Loan Estimate or equivalent disclosure document — comparing standardized figures across lenders is far more reliable than comparing verbal quotes or marketing materials, which can present the same loan very differently.</div>
-
-  </div>
-</div>
-
-<div class="faq-section">
-<div class="faq-section-title">❓ Frequently Asked Questions</div>
-<div class="faq-item">
-  <div class="faq-q" onclick="toggleFAQ(this)">
-    <span>Why isn't the lowest interest rate always the cheapest loan?</span>
-    <span class="faq-icon">+</span>
-  </div>
-  <div class="faq-a">Total cost depends on the interest rate, the loan amount, the tenure, and any processing fees together — not the rate alone. A higher-rate loan with a shorter term, or no processing fee, can easily cost less overall than a lower-rate loan stretched over more years or carrying a large upfront fee.</div>
-</div>
-<div class="faq-item">
-  <div class="faq-q" onclick="toggleFAQ(this)">
-    <span>Should I pick the loan with the lowest monthly payment?</span>
-    <span class="faq-icon">+</span>
-  </div>
-  <div class="faq-a">Only if monthly affordability is your main constraint. The lowest monthly payment usually comes from the longest tenure, which typically means paying more in total interest over the life of the loan. If you can comfortably afford a higher payment, the lowest <strong>total cost</strong> option is usually the better financial choice.</div>
-</div>
-<div class="faq-item">
-  <div class="faq-q" onclick="toggleFAQ(this)">
-    <span>How much do processing fees actually matter?</span>
-    <span class="faq-icon">+</span>
-  </div>
-  <div class="faq-a">More than most borrowers expect. A 2-3% processing fee on a $25,000 loan is $500-750 paid upfront, on top of all the interest — enough to flip which of two closely-priced offers is actually cheaper. Always include fees when comparing total cost, not just the interest rate.</div>
-</div>
-<div class="faq-item">
-  <div class="faq-q" onclick="toggleFAQ(this)">
-    <span>What's the difference between APR and the interest rate?</span>
-    <span class="faq-icon">+</span>
-  </div>
-  <div class="faq-a">The interest rate reflects only the cost of borrowing. APR folds in certain additional costs — like processing fees — into a single annualized rate, giving a more complete picture of what the loan actually costs. When available, compare APR rather than the headline interest rate alone.</div>
-</div>
-<div class="faq-item">
-  <div class="faq-q" onclick="toggleFAQ(this)">
-    <span>Does a shorter loan term always cost less?</span>
-    <span class="faq-icon">+</span>
-  </div>
-  <div class="faq-a">Usually, but not always — it depends on the rate too. A short-term loan at a much higher rate can sometimes cost more than a longer-term loan at a meaningfully lower rate. This is exactly why comparing total cost across real offers, rather than assuming based on term length alone, matters.</div>
-</div>
-</div>
-
-
 </div>
 </div><!-- content -->
 <div class="site-footer">
@@ -382,15 +318,15 @@ body{background:var(--bg);color:var(--t);font-family:var(--fn);font-size:14px;li
     <div class="logo-mark" style="width:22px;height:22px;background:var(--a);border-radius:5px;display:flex;align-items:center;justify-content:center;color:#000;font-size:11px;font-weight:700">FC</div>
     FinCalc
   </div>
-  <div class="footer-copy">© 2025 FinCalc · Free Financial Calculators · <a href="/blog" style="color:inherit">Blog</a> · <a href="/about" style="color:inherit">About</a> · <a href="/privacy" style="color:inherit">Privacy Policy</a> · <a href="/terms" style="color:inherit">Terms</a></div>
+  <div class="footer-copy">© 2025 FinCalc · Free Financial Calculators · <a href="/about" style="color:inherit">About</a> · <a href="/privacy" style="color:inherit">Privacy Policy</a> · <a href="/terms" style="color:inherit">Terms</a></div>
   <!-- tinystartups · Launched on Tiny Startups -->
 <a href="https://www.tinystartups.com/startup/finclaccom" target="_blank" rel="noopener"
    style="display:inline-flex;align-items:center;gap:10px;padding:8px 14px 8px 10px;border-radius:12px;text-decoration:none;font-family:'Inter',system-ui,sans-serif;background:linear-gradient(#fff,#fff) padding-box,linear-gradient(90deg,#3525E6,#D81FE0,#22B8F0) border-box;border:2px solid transparent;color:#0E0B1F;flex-shrink:0">
   <svg width="34" height="34" viewBox="0 0 100 100">
-    <defs><linearGradient id="tsg" x1=".1" y1="0" x2=".9" y2="1">
+    <defs><linearGradient id="tsg3" x1=".1" y1="0" x2=".9" y2="1">
       <stop offset="0%" stop-color="#3525E6"/><stop offset="55%" stop-color="#D81FE0"/><stop offset="100%" stop-color="#22B8F0"/>
     </linearGradient></defs>
-    <path d="M50 6C52 32 68 48 94 50C68 52 52 68 50 94C48 68 32 52 6 50C32 48 48 32 50 6Z" fill="url(#tsg)"/>
+    <path d="M50 6C52 32 68 48 94 50C68 52 52 68 50 94C48 68 32 52 6 50C32 48 48 32 50 6Z" fill="url(#tsg3)"/>
   </svg>
   <span style="display:flex;flex-direction:column;line-height:1.1">
     <span style="font-family:monospace;font-size:7px;font-weight:600;letter-spacing:0.15em;text-transform:uppercase;color:#6A6585">Launched on</span>
@@ -398,7 +334,7 @@ body{background:var(--bg);color:var(--t);font-family:var(--fn);font-size:14px;li
   </span>
 </a>
 </div>
-<script src="app.js"></script>
-<script>initPage('loancomp');</script>
+<script src="/app.js"></script>
+<script>initPage('blog-cagr-vs-average-return');</script>
 </body>
 </html>
