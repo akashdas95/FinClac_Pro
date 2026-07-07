@@ -247,6 +247,14 @@ body{background:var(--bg);color:var(--t);font-family:var(--fn);font-size:14px;li
 <link rel="icon" href="/favicon.ico" sizes="any">
 <link rel="icon" type="image/svg+xml" href="/favicon.svg">
 <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-61RHHG8E6Q"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-61RHHG8E6Q');
+</script>
 </head>
 <body>
 <div class="topbar">
@@ -318,6 +326,7 @@ body{background:var(--bg);color:var(--t);font-family:var(--fn);font-size:14px;li
     <div class="rrow"><span class="rk">Original tenure</span><span class="rv" id="pp-oldterm">0 mo</span></div>
     <div class="rrow"><span class="rk">Original total interest</span><span class="rv" style="color:var(--r)" id="pp-oldint">$0</span></div>
     <div class="rrow"><span class="rk">Interest saved %</span><span class="rv" style="color:var(--g)" id="pp-savedpct">0%</span></div>
+    <div class="insight-box" id="pp-insights"></div>
   </div>
 
 <div class="card" style="grid-column:1/-1">
