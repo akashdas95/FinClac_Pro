@@ -1960,6 +1960,26 @@ function injectDisclaimers(){
   });
 }
 
+// ── Input hint: tells first-time users the pre-filled numbers are just
+// examples to replace, not their actual answer — added to the first
+// input card of every calculator panel (skips home/legal/blog pages,
+// which have no calculator inputs).
+const NO_HINT_PANELS=new Set(['home','privacy','about','terms','currency','scientific']);
+function injectInputHints(){
+  document.querySelectorAll('.panel').forEach(panel=>{
+    if(NO_HINT_PANELS.has(panel.id)||panel.id.indexOf('blog')===0)return;
+    if(panel.querySelector('.input-hint'))return;
+    const firstCard=[...panel.querySelectorAll('.card')].find(c=>c.querySelector('.card-title'));
+    if(!firstCard)return;
+    const title=firstCard.querySelector('.card-title');
+    if(!title)return;
+    const hint=document.createElement('div');
+    hint.className='input-hint';
+    hint.innerHTML='💡 The numbers below are just examples — replace them with your own to get your personalized result.';
+    title.insertAdjacentElement('afterend',hint);
+  });
+}
+
 // ── Print: a button per calculator that prints just that calculator's
 // inputs + outputs (stat boxes, charts, tables) via a scoped print
 // stylesheet — not the nav, guide, FAQ, or any other panel.
@@ -2027,7 +2047,7 @@ function initPage(id){
     calcCAGR,calcDRIP,cDivGrowth,calcETF,calcDCF,cBurn,cPricing,calcEquity,cDilutionImpact,calcRevenue,
     cLoan,cPrepay,cAutoLoan,cSip,cSWP,cTax,cMortgage,cRentVsBuy,cSavings,cProvident,cAllocRecommend,
     cStock,cPEG,cEVEBITDA,cRetire,cFire,cDebt,cRental,calcRP,cCF,cBE,cSavingsGoal,cEmergency,cHealthScore,
-    cCurrency, injectDisclaimers, injectPrintButtons];
+    cCurrency, injectDisclaimers, injectInputHints, injectPrintButtons];
   calls.forEach(fn=>{ try{ fn(); }catch(e){ /* element not on this page — expected */ } });
   if(window.__isHome){
     const params = new URLSearchParams(location.search);
