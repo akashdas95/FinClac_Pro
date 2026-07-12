@@ -22,7 +22,7 @@ body{background:var(--bg);color:var(--t);font-family:var(--fn);font-size:14px;li
 .searchbox input{background:none;border:none;outline:none;color:var(--t);font-family:var(--fn);font-size:13px;width:100%}
 .nav{display:flex;gap:2px;padding:.75rem 1.25rem 0;border-bottom:1px solid var(--bd);overflow-x:auto;scrollbar-width:none;background:var(--bg);position:sticky;top:52px;z-index:100}
 .nav::-webkit-scrollbar{display:none}
-.ntab{padding:8px 13px;font-size:12px;font-weight:500;color:var(--m);cursor:pointer;border-bottom:2px solid transparent;white-space:nowrap;background:none;border-top:none;border-left:none;border-right:none;transition:all .18s;font-family:var(--fn);text-decoration:none;display:inline-block}
+.ntab{padding:8px 13px;font-size:12px;font-weight:500;color:var(--m);cursor:pointer;border-bottom:2px solid transparent;white-space:nowrap;background:none;border-top:none;border-left:none;border-right:none;transition:all .18s;font-family:var(--fn)}
 .ntab.on{color:var(--a);border-bottom-color:var(--a)}
 .ntab:hover:not(.on){color:var(--t)}
 .content{padding:1.25rem}
@@ -31,7 +31,7 @@ body{background:var(--bg);color:var(--t);font-family:var(--fn);font-size:14px;li
 .dir-sec-h{font-size:11px;font-weight:600;color:var(--m);letter-spacing:.8px;text-transform:uppercase;margin-bottom:.75rem;display:flex;align-items:center;gap:8px}
 .dir-sec-h::after{content:'';flex:1;height:1px;background:var(--bd)}
 .dir-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(178px,1fr));gap:10px}
-.dir-card{background:linear-gradient(135deg,#0d1117 60%,#071510 100%);border:1px solid #0ECB81;border-radius:12px;padding:1.25rem 1.1rem;cursor:pointer;transition:all .2s;box-shadow:0 2px 12px rgba(14,203,129,.1),0 1px 3px rgba(0,0,0,.4);text-decoration:none;display:block;color:inherit}
+.dir-card{background:linear-gradient(135deg,#0d1117 60%,#071510 100%);border:1px solid #0ECB81;border-radius:12px;padding:1.25rem 1.1rem;cursor:pointer;transition:all .2s;box-shadow:0 2px 12px rgba(14,203,129,.1),0 1px 3px rgba(0,0,0,.4)}
 .dir-card:hover{border-color:#ffffff;transform:translateY(-2px);box-shadow:0 6px 28px rgba(255,255,255,.12),0 2px 8px rgba(0,0,0,.5)}
 .dir-icon{font-size:28px;margin-bottom:10px;line-height:1}
 .dir-name{font-size:15px;font-weight:600;margin-bottom:5px;color:var(--t)}
@@ -68,7 +68,7 @@ body{background:var(--bg);color:var(--t);font-family:var(--fn);font-size:14px;li
 .btn-sm{padding:6px 12px;border-radius:6px;font-size:12px;font-weight:500;cursor:pointer;border:none;font-family:var(--fn)}
 .btn-add{background:var(--s2)!important;color:var(--g)!important;border:1px solid var(--g)!important}
 .btn-del{background:transparent;color:var(--r);border:1px solid var(--bd);padding:6px 10px;border-radius:6px;cursor:pointer;font-size:13px}
-.back-btn{background:var(--s2);border:1px solid var(--bd);color:var(--tb);font-size:12.5px;font-weight:500;cursor:pointer;margin-bottom:1rem;display:inline-flex;align-items:center;gap:6px;padding:7px 14px;border-radius:20px;font-family:var(--fn);transition:all .18s;text-decoration:none}
+.back-btn{background:var(--s2);border:1px solid var(--bd);color:var(--tb);font-size:12.5px;font-weight:500;cursor:pointer;margin-bottom:1rem;display:inline-flex;align-items:center;gap:6px;padding:7px 14px;border-radius:20px;font-family:var(--fn);transition:all .18s}
 .back-btn:hover{color:var(--t);border-color:var(--g);background:var(--s)}
 .badge-new{background:rgba(14,203,129,.15);color:var(--g);font-size:10px;font-weight:600;padding:2px 7px;border-radius:4px}
 .pbar-bg{background:var(--bd);border-radius:3px;height:6px;overflow:hidden;margin-top:4px}
@@ -257,7 +257,6 @@ body{background:var(--bg);color:var(--t);font-family:var(--fn);font-size:14px;li
   gtag('config', 'G-61RHHG8E6Q');
 </script>
 <meta name="msvalidate.01" content="175D12831D109E3E7E1A856004E0F393" />
-<script type="application/ld+json">{"@context": "https://schema.org", "@type": "BlogPosting", "headline": "SIP vs Lump Sum: Which Investment Strategy Actually Wins?", "url": "https://finclac.com/blog/sip-vs-lump-sum", "description": "The honest answer depends on market timing luck more than most SIP advocates admit.", "publisher": {"@type": "Organization", "name": "FinCalc"}, "isPartOf": {"@type": "WebSite", "name": "FinCalc", "url": "https://finclac.com/"}}</script>
 </head>
 <body>
 <div class="topbar">
@@ -268,39 +267,39 @@ body{background:var(--bg);color:var(--t);font-family:var(--fn);font-size:14px;li
   </div>
 </div>
 <div class="nav">
-  <a class="ntab" href="/" onclick="go('home',this);return false;">🏠 Home</a><a class="ntab on" href="/blog">📝 Blog</a>
-  <a class="ntab" href="/cagr-calculator" onclick="go('cagr',this);return false;">📐 CAGR</a>
-  <a class="ntab" href="/xirr-calculator" onclick="go('xirr',this);return false;">📅 XIRR</a>
-  <a class="ntab" href="/dividend-reinvestment-calculator" onclick="go('drip',this);return false;">💧 DRIP</a>
-  <a class="ntab" href="/etf-growth-calculator" onclick="go('etf',this);return false;">🗂️ ETF Growth</a>
-  <a class="ntab" href="/dcf-valuation-calculator" onclick="go('dcf',this);return false;">🏦 DCF Valuation</a>
-  <a class="ntab" href="/debt-snowball-vs-avalanche-calculator" onclick="go('debtcomp',this);return false;">❄️ Snowball vs Avalanche</a>
-  <a class="ntab" href="/rental-property-calculator" onclick="go('rentalprop',this);return false;">🏡 Rental Property</a>
-  <a class="ntab" href="/burn-rate-calculator" onclick="go('burnrate',this);return false;">🔥 Burn Rate</a>
-  <a class="ntab" href="/pricing-margin-calculator" onclick="go('pricing',this);return false;">🏷️ Pricing</a>
-  <a class="ntab" href="/equity-dilution-calculator" onclick="go('equity',this);return false;">📐 Equity Dilution</a>
-  <a class="ntab" href="/revenue-forecast-calculator" onclick="go('revenue',this);return false;">📊 Revenue Forecast</a>
-  <a class="ntab" href="/loan-emi-calculator" onclick="go('loan',this);return false;">🏦 Loan/EMI</a>
-  <a class="ntab" href="/sip-calculator" onclick="go('invest',this);return false;">📈 SIP/Investment</a>
-  <a class="ntab" href="/tax-calculator" onclick="go('tax',this);return false;">🧾 Tax</a>
-  <a class="ntab" href="/mortgage-calculator" onclick="go('mortgage',this);return false;">🏠 Mortgage</a>
-  <a class="ntab" href="/mortgage-comparison-calculator" onclick="go('mortcomp',this);return false;">⚖️ Mtg Compare</a>
-  <a class="ntab" href="/compound-interest-calculator" onclick="go('savings',this);return false;">🏛️ Savings</a>
-  <a class="ntab" href="/stock-profit-calculator" onclick="go('stock',this);return false;">📉 Stock P&amp;L</a>
-  <a class="ntab" href="/retirement-calculator" onclick="go('retirement',this);return false;">👴 Retirement</a>
-  <a class="ntab" href="/debt-payoff-calculator" onclick="go('debt',this);return false;">💳 Debt Payoff</a>
-  <a class="ntab" href="/rental-yield-calculator" onclick="go('rental',this);return false;">🏘️ Rental Yield</a>
-  <a class="ntab" href="/cash-flow-calculator" onclick="go('cashflow',this);return false;">💵 Cash Flow</a>
-  <a class="ntab" href="/breakeven-calculator" onclick="go('breakeven',this);return false;">📊 Break-even</a>
-  <a class="ntab" href="/savings-goal-calculator" onclick="go('savingsgoal',this);return false;">🎯 Savings Goal</a>
-  <a class="ntab" href="/emergency-fund-calculator" onclick="go('emergencyfund',this);return false;">🛡️ Emergency Fund</a>
-  <a class="ntab" href="/financial-health-score-calculator" onclick="go('healthscore',this);return false;">💯 Health Score</a>
-  <a class="ntab" href="/currency-converter" onclick="go('currency',this);return false;">💱 Currency</a>
-  <a class="ntab" href="/scientific-calculator" onclick="go('scientific',this);return false;">🔬 Scientific</a>
+  <button class="ntab" onclick="go('home',this)">🏠 Home</button><button class="ntab on" onclick="location.href='/blog'">📝 Blog</button>
+  <button class="ntab" onclick="go('cagr',this)">📐 CAGR</button>
+  <button class="ntab" onclick="go('xirr',this)">📅 XIRR</button>
+  <button class="ntab" onclick="go('drip',this)">💧 DRIP</button>
+  <button class="ntab" onclick="go('etf',this)">🗂️ ETF Growth</button>
+  <button class="ntab" onclick="go('dcf',this)">🏦 DCF Valuation</button>
+  <button class="ntab" onclick="go('debtcomp',this)">❄️ Snowball vs Avalanche</button>
+  <button class="ntab" onclick="go('rentalprop',this)">🏡 Rental Property</button>
+  <button class="ntab" onclick="go('burnrate',this)">🔥 Burn Rate</button>
+  <button class="ntab" onclick="go('pricing',this)">🏷️ Pricing</button>
+  <button class="ntab" onclick="go('equity',this)">📐 Equity Dilution</button>
+  <button class="ntab" onclick="go('revenue',this)">📊 Revenue Forecast</button>
+  <button class="ntab" onclick="go('loan',this)">🏦 Loan/EMI</button>
+  <button class="ntab" onclick="go('invest',this)">📈 SIP/Investment</button>
+  <button class="ntab" onclick="go('tax',this)">🧾 Tax</button>
+  <button class="ntab" onclick="go('mortgage',this)">🏠 Mortgage</button>
+  <button class="ntab" onclick="go('mortcomp',this)">⚖️ Mtg Compare</button>
+  <button class="ntab" onclick="go('savings',this)">🏛️ Savings</button>
+  <button class="ntab" onclick="go('stock',this)">📉 Stock P&amp;L</button>
+  <button class="ntab" onclick="go('retirement',this)">👴 Retirement</button>
+  <button class="ntab" onclick="go('debt',this)">💳 Debt Payoff</button>
+  <button class="ntab" onclick="go('rental',this)">🏘️ Rental Yield</button>
+  <button class="ntab" onclick="go('cashflow',this)">💵 Cash Flow</button>
+  <button class="ntab" onclick="go('breakeven',this)">📊 Break-even</button>
+  <button class="ntab" onclick="go('savingsgoal',this)">🎯 Savings Goal</button>
+  <button class="ntab" onclick="go('emergencyfund',this)">🛡️ Emergency Fund</button>
+  <button class="ntab" onclick="go('healthscore',this)">💯 Health Score</button>
+  <button class="ntab" onclick="go('currency',this)">💱 Currency</button>
+  <button class="ntab" onclick="go('scientific',this)">🔬 Scientific</button>
 </div>
 <div class="content">
 <div class="panel on" id="blog-sip-vs-lump-sum">
-<a class="back-btn" href="/blog">← Back to Blog</a>
+<button class="back-btn" onclick="location.href='/blog'">← Back to Blog</button>
 <div class="card" style="max-width:760px;margin:0 auto">
   <div class="card-title">Article</div>
   <p class="guide-p" style="margin-top:0;color:var(--m);font-size:13px">July 2026</p>
@@ -324,7 +323,7 @@ body{background:var(--bg);color:var(--t);font-family:var(--fn);font-size:14px;li
 <p class="guide-p">Some investors split the difference — investing an unexpected lump sum over 6-12 months instead of either extreme (all at once, or agonizingly slow), capturing most of the expected-return advantage of lump-sum investing while still smoothing out entry-point risk somewhat.</p>
 
 <h2 class="guide-h3">Project either scenario</h2>
-<p class="guide-p">Use the free <a href="/sip-calculator" style="color:var(--a);text-decoration:underline">SIP Calculator</a> to project how monthly contributions compound over time, or the <a href="/cagr-calculator" style="color:var(--a);text-decoration:underline">CAGR Calculator</a> to compare a lump-sum investment's growth rate against alternative scenarios.</p>
+<p class="guide-p">Use the free <a href="/invest" style="color:var(--a);text-decoration:underline">SIP Calculator</a> to project how monthly contributions compound over time, or the <a href="/cagr" style="color:var(--a);text-decoration:underline">CAGR Calculator</a> to compare a lump-sum investment's growth rate against alternative scenarios.</p>
 
 </div>
 </div>
