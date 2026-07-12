@@ -1,0 +1,467 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>DCF Valuation Calculator — How to Calculate Intrinsic Stock Value | FinCalc</title>
+<meta name="description" content="Calculate a stock's intrinsic value using discounted cash flow analysis. Free DCF calculator with WACC, terminal value, and bear/bull scenarios.">
+<link rel="canonical" href="https://finclac.com/dcf-valuation-calculator">
+<meta name="robots" content="index, follow">
+<meta property="og:type" content="website">
+<meta property="og:title" content="DCF Valuation Calculator — How to Calculate Intrinsic Stock Value | FinCalc">
+<meta property="og:description" content="Calculate a stock's intrinsic value using discounted cash flow analysis. Free DCF calculator with WACC, terminal value, and bear/bull scenarios.">
+<meta property="og:url" content="https://finclac.com/dcf-valuation-calculator">
+<meta property="og:site_name" content="FinCalc">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="DCF Valuation Calculator — How to Calculate Intrinsic Stock Value | FinCalc">
+<meta name="twitter:description" content="Calculate a stock's intrinsic value using discounted cash flow analysis. Free DCF calculator with WACC, terminal value, and bear/bull scenarios.">
+<style>*{box-sizing:border-box;margin:0;padding:0}
+:root{--bg:#0B0E11;--s:#141920;--s2:#1C2430;--bd:#232D3A;--t:#E8EDF2;--m:#6B7A8D;--tb:#A3B2C4;--a:#F0B90B;--g:#0ECB81;--r:#F6465D;--b:#1890FF;--p:#9B59B6;--fn:'DM Sans',sans-serif;--mo:'DM Mono',monospace}
+body{background:var(--bg);color:var(--t);font-family:var(--fn);font-size:14px;line-height:1.5;min-height:100vh}
+.topbar{background:var(--s);border-bottom:1px solid var(--bd);padding:0 1.25rem;display:flex;align-items:center;justify-content:space-between;height:52px;position:sticky;top:0;z-index:200}
+.logo{display:flex;align-items:center;gap:8px;font-size:16px;font-weight:600;color:var(--t);text-decoration:none}
+.logo-mark{width:28px;height:28px;background:var(--a);border-radius:6px;display:flex;align-items:center;justify-content:center;color:#000;font-size:13px;font-weight:700}
+.searchbox{display:flex;align-items:center;gap:8px;background:var(--s2);border:1px solid var(--bd);border-radius:7px;padding:6px 12px;width:240px}
+.searchbox input{background:none;border:none;outline:none;color:var(--t);font-family:var(--fn);font-size:13px;width:100%}
+.nav{display:flex;gap:2px;padding:.75rem 1.25rem 0;border-bottom:1px solid var(--bd);overflow-x:auto;scrollbar-width:none;background:var(--bg);position:sticky;top:52px;z-index:100}
+.nav::-webkit-scrollbar{display:none}
+.ntab{padding:8px 13px;font-size:12px;font-weight:500;color:var(--m);cursor:pointer;border-bottom:2px solid transparent;white-space:nowrap;background:none;border-top:none;border-left:none;border-right:none;transition:all .18s;font-family:var(--fn);text-decoration:none;display:inline-block}
+.ntab.on{color:var(--a);border-bottom-color:var(--a)}
+.ntab:hover:not(.on){color:var(--t)}
+.content{padding:1.25rem}
+.panel{display:none}.panel.on{display:block}.panel.on::after{content:'';display:table;clear:both}
+.dir-sec{margin-bottom:1.75rem}
+.dir-sec-h{font-size:11px;font-weight:600;color:var(--m);letter-spacing:.8px;text-transform:uppercase;margin-bottom:.75rem;display:flex;align-items:center;gap:8px}
+.dir-sec-h::after{content:'';flex:1;height:1px;background:var(--bd)}
+.dir-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(178px,1fr));gap:10px}
+.dir-card{background:linear-gradient(135deg,#0d1117 60%,#071510 100%);border:1px solid #0ECB81;border-radius:12px;padding:1.25rem 1.1rem;cursor:pointer;transition:all .2s;box-shadow:0 2px 12px rgba(14,203,129,.1),0 1px 3px rgba(0,0,0,.4);text-decoration:none;display:block;color:inherit}
+.dir-card:hover{border-color:#ffffff;transform:translateY(-2px);box-shadow:0 6px 28px rgba(255,255,255,.12),0 2px 8px rgba(0,0,0,.5)}
+.dir-icon{font-size:28px;margin-bottom:10px;line-height:1}
+.dir-name{font-size:15px;font-weight:600;margin-bottom:5px;color:var(--t)}
+.dir-desc{font-size:12px;color:var(--m);line-height:1.6}
+.two{display:grid;grid-template-columns:1fr 310px;gap:16px;margin-top:.5rem}
+.two-eq{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.three{display:grid;grid-template-columns:1fr 1fr 1fr;gap:16px}
+.g2{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.g3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px}
+.card{background:var(--s);border:1px solid var(--bd);border-radius:10px;padding:1.25rem}
+.mb16{margin-bottom:16px}
+.card-title{font-size:11px;font-weight:600;color:var(--m);letter-spacing:.8px;text-transform:uppercase;margin-bottom:1.25rem}
+.input-hint{font-size:11.5px;color:var(--a);background:rgba(240,185,11,.08);border:1px solid rgba(240,185,11,.25);border-radius:6px;padding:6px 10px;margin:-.75rem 0 1rem;line-height:1.5}
+.chart-tooltip{position:fixed;display:none;background:#1C2430;border:1px solid #232D3A;border-radius:6px;padding:7px 11px;font-size:11.5px;color:#E8EDF2;pointer-events:none;z-index:9999;box-shadow:0 4px 14px rgba(0,0,0,.45);font-family:'DM Sans',sans-serif;line-height:1.5;max-width:200px}
+.chart-tooltip strong{color:#F0B90B}
+.field{margin-bottom:.9rem}
+.field label{display:block;font-size:12px;color:var(--m);margin-bottom:5px}
+.field input,.field select{width:100%;background:var(--bg);border:1px solid var(--bd);border-radius:6px;padding:8px 11px;color:var(--t);font-family:var(--mo);font-size:13px;outline:none;transition:border .15s}
+.field input:focus,.field select:focus{border-color:var(--a)}
+.field select option{background:var(--s2)}
+.ip{position:relative}
+.ip .pfx{position:absolute;left:10px;top:50%;transform:translateY(-50%);color:var(--m);font-size:13px;pointer-events:none;font-family:var(--mo)}
+.ip input{padding-left:22px}
+.sgrid{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:1rem}
+.sbox{background:var(--s2);border-radius:8px;padding:10px}
+.sbox .lbl{font-size:10px;color:var(--m);margin-bottom:3px;font-weight:500;text-transform:uppercase;letter-spacing:.4px}
+.sbox .val{font-size:15px;font-weight:600;font-family:var(--mo)}
+.rrow{display:flex;justify-content:space-between;padding:7px 0;border-bottom:1px solid var(--bd);font-size:13px}
+.rrow:last-child{border:none}
+.rk{color:var(--m);font-size:12px}
+.rv{font-family:var(--mo);font-weight:500}
+.btn{width:100%;padding:10px;background:var(--a);color:#000;border:none;border-radius:7px;font-family:var(--fn);font-size:13px;font-weight:600;cursor:pointer;margin-top:8px;transition:opacity .15s}
+.btn:hover{opacity:.88}
+.btn-sm{padding:6px 12px;border-radius:6px;font-size:12px;font-weight:500;cursor:pointer;border:none;font-family:var(--fn)}
+.btn-add{background:var(--s2)!important;color:var(--g)!important;border:1px solid var(--g)!important}
+.btn-del{background:transparent;color:var(--r);border:1px solid var(--bd);padding:6px 10px;border-radius:6px;cursor:pointer;font-size:13px}
+.back-btn{background:var(--s2);border:1px solid var(--bd);color:var(--tb);font-size:12.5px;font-weight:500;cursor:pointer;margin-bottom:1rem;display:inline-flex;align-items:center;gap:6px;padding:7px 14px;border-radius:20px;font-family:var(--fn);transition:all .18s;text-decoration:none}
+.back-btn:hover{color:var(--t);border-color:var(--g);background:var(--s)}
+.badge-new{background:rgba(14,203,129,.15);color:var(--g);font-size:10px;font-weight:600;padding:2px 7px;border-radius:4px}
+.pbar-bg{background:var(--bd);border-radius:3px;height:6px;overflow:hidden;margin-top:4px}
+.pbar-fill{height:100%;border-radius:3px;transition:width .4s}
+.tbl{width:100%;border-collapse:collapse;font-size:12px}
+.tbl th{color:var(--m);font-size:10px;text-transform:uppercase;padding:6px 8px;border-bottom:1px solid var(--bd);text-align:right;letter-spacing:.4px}
+.tbl th:first-child{text-align:left}
+.tbl td{padding:6px 8px;border-bottom:1px solid var(--bd);font-family:var(--mo);text-align:right}
+.tbl td:first-child{text-align:left;color:var(--m);font-family:var(--fn)}
+.tbl tr:last-child td{border:none}
+.tbl .hl{background:var(--s2)}
+.slab-tbl{width:100%;border-collapse:collapse;font-size:12px}
+.slab-tbl th{color:var(--m);font-size:10px;letter-spacing:.5px;text-transform:uppercase;padding:5px 0;border-bottom:1px solid var(--bd);text-align:left}
+.slab-tbl td{padding:6px 0;border-bottom:1px solid var(--bd);font-family:var(--mo)}
+.slab-tbl tr:last-child td{border:none}
+.slab-on td{color:var(--a)}
+.tline{position:relative;padding-left:20px}
+.tline::before{content:'';position:absolute;left:6px;top:0;bottom:0;width:1px;background:var(--bd)}
+.tl-i{position:relative;margin-bottom:12px;font-size:12px}
+.tl-i::before{content:'';position:absolute;left:-17px;top:4px;width:8px;height:8px;border-radius:50%;background:var(--a);border:2px solid var(--bg)}
+.tl-lbl{color:var(--m);font-size:11px}
+.cmp-col{background:var(--s2);border-radius:10px;padding:1rem;border:1px solid var(--bd)}
+.cmp-col.winner{border-color:var(--g)}
+.donut-wrap{display:flex;justify-content:center;align-items:center;gap:16px;padding:.75rem 0}
+.leg-i{display:flex;align-items:center;gap:6px;font-size:11px;color:var(--m);margin-bottom:5px}
+.leg-dot{width:8px;height:8px;border-radius:50%;flex-shrink:0}
+.sci-disp{background:var(--bg);border:1px solid var(--bd);border-radius:8px;padding:12px 14px;margin-bottom:10px;text-align:right}
+.sci-expr{font-size:12px;color:var(--m);font-family:var(--mo);min-height:18px}
+.sci-num{font-size:28px;font-family:var(--mo);font-weight:500;word-break:break-all}
+.sci-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:5px}
+.sci-btn{padding:10px 4px;border:1px solid var(--bd);border-radius:6px;background:var(--s2);color:var(--t);font-family:var(--mo);font-size:12px;cursor:pointer;text-align:center}
+.sci-btn:hover{background:var(--bd)}
+.sci-btn.op{color:var(--a)}.sci-btn.eq{background:var(--a);color:#000;border-color:var(--a);font-weight:600}.sci-btn.cl{color:var(--r)}.sci-btn.fn{color:var(--b)}
+@media(max-width:700px){.two,.two-eq,.three{grid-template-columns:1fr}.g2,.g3{grid-template-columns:1fr}.sci-grid{grid-template-columns:repeat(4,1fr)}}
+
+}
+
+
+/* Inter-calculator links */
+.calc-links{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 2.5rem;padding:10px 12px;background:var(--s2);border-radius:8px;border-left:3px solid var(--g);align-items:center;clear:both}
+.calc-links-label{font-size:10px;color:var(--m);text-transform:uppercase;letter-spacing:.6px;font-weight:600;margin-right:4px;flex-shrink:0}
+.calc-link-btn{padding:4px 10px;background:var(--bg);border:1px solid var(--g);border-radius:20px;color:var(--g);font-size:11px;cursor:pointer;font-family:var(--fn);transition:all .18s;white-space:nowrap;text-decoration:none}
+.calc-link-btn:hover{background:var(--g);color:#000;border-color:var(--g)}
+
+
+/* Footer */
+.site-footer{background:var(--s);border-top:1px solid var(--bd);padding:1rem 1.25rem;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px;margin-top:1rem}
+.footer-brand{font-size:14px;font-weight:600;color:var(--t);display:flex;align-items:center;gap:8px}
+.footer-brand .logo-mark{width:22px;height:22px;font-size:11px}
+.footer-copy{font-size:11px;color:var(--m)}
+
+
+/* Calculator Guide Articles */
+.calc-guide{margin-top:2.5rem;border-top:1px solid var(--bd);padding-top:1.75rem}
+.guide-toggle{display:flex;align-items:center;justify-content:space-between;padding:10px 14px;background:var(--s2);border:1px solid var(--bd);border-radius:8px;margin-bottom:0}
+.guide-toggle-title{font-size:14px;font-weight:700;color:var(--t);display:flex;align-items:center;gap:8px;letter-spacing:.1px}
+.guide-body{display:block;padding:1.5rem 0 0;max-width:980px}
+.guide-h2{font-size:22px;font-weight:700;color:var(--t);margin:1.75rem 0 .85rem;letter-spacing:-.2px;line-height:1.3}
+.guide-h2:first-child{margin-top:0}
+.guide-h3{font-size:16px;font-weight:700;color:var(--t);margin:2rem 0 .75rem;letter-spacing:-.1px;line-height:1.35;padding-top:.25rem;border-top:1px solid var(--bd)}
+.guide-h3:first-child{margin-top:0;padding-top:0;border-top:none}
+.guide-p{font-size:14.5px;color:var(--tb);line-height:1.75;margin-bottom:1.1rem}
+.guide-p strong{color:var(--t);font-weight:600}
+.guide-formula{background:var(--s2);border-left:3px solid var(--a);border-radius:0 8px 8px 0;padding:14px 16px;font-family:var(--mo);font-size:13.5px;line-height:1.7;color:var(--a);margin:1.1rem 0;overflow-x:auto}
+.guide-tip{background:rgba(14,203,129,.08);border:1px solid rgba(14,203,129,.2);border-radius:8px;padding:13px 16px;font-size:13px;color:var(--g);margin:1.1rem 0;line-height:1.7;font-weight:500}
+.guide-warn{background:rgba(246,70,93,.08);border:1px solid rgba(246,70,93,.2);border-radius:8px;padding:13px 16px;font-size:13px;color:var(--r);margin:1.1rem 0;line-height:1.7;font-weight:500}
+.guide-table{width:100%;border-collapse:collapse;font-size:12.5px;margin:1.25rem 0}
+.guide-table th{background:var(--s2);color:var(--m);padding:9px 12px;text-align:left;font-size:10.5px;font-weight:700;text-transform:uppercase;letter-spacing:.5px;border-bottom:1px solid var(--bd)}
+.guide-table td{padding:9px 12px;border-bottom:1px solid var(--bd);color:var(--t);font-family:var(--mo)}
+.guide-table tr:last-child td{border:none}
+.guide-steps{counter-reset:step;margin:1.25rem 0}
+.guide-step{display:flex;gap:14px;margin-bottom:14px;font-size:14px;color:var(--tb);line-height:1.7}
+.guide-step-num{width:24px;height:24px;border-radius:50%;background:var(--g);color:#000;font-size:12px;font-weight:700;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:1px}
+
+.guide-sub-arrow{display:none}
+
+/* Mobile-only collapsible guide subsections (reduces cognitive load on small screens) */
+@media(max-width:700px){
+  .guide-sub{border-bottom:1px solid var(--bd)}
+  .guide-sub:last-child{border-bottom:none}
+  .guide-sub-head{display:flex;align-items:center;justify-content:space-between;gap:10px;cursor:pointer;user-select:none;padding:.25rem 0;margin:0}
+  .guide-sub-head .guide-h3{margin:1.5rem 0 0;padding-top:.25rem;border-top:1px solid var(--bd);flex:1}
+  .guide-sub:first-child .guide-sub-head .guide-h3{margin-top:0;padding-top:0;border-top:none}
+  .guide-sub-arrow{display:block;font-size:13px;color:var(--m);flex-shrink:0;transition:transform .25s;margin-top:1.4rem}
+  .guide-sub:first-child .guide-sub-arrow{margin-top:0}
+  .guide-sub.open .guide-sub-arrow{transform:rotate(180deg)}
+  .guide-sub-body{display:none;overflow:hidden}
+  .guide-sub.open .guide-sub-body{display:block}
+}
+
+
+/* FAQ Section */
+.faq-section{margin-top:2.5rem;border-top:1px solid var(--bd);padding-top:1.75rem}
+.faq-section-title{font-size:13px;font-weight:700;color:var(--m);text-transform:uppercase;letter-spacing:.8px;margin-bottom:1.1rem;display:flex;align-items:center;gap:8px}
+.faq-section-title::after{content:'';flex:1;height:1px;background:var(--bd)}
+.faq-item{border:1px solid var(--bd);border-radius:8px;margin-bottom:10px;overflow:hidden;transition:border-color .2s}
+.faq-item:hover{border-color:var(--g)}
+.faq-q{display:flex;align-items:center;justify-content:space-between;padding:14px 16px;cursor:pointer;font-size:14px;font-weight:600;color:var(--t);user-select:none;gap:12px;line-height:1.45}
+.faq-q .faq-icon{font-size:16px;color:var(--a);transition:transform .3s;flex-shrink:0}
+.faq-item.open .faq-icon{transform:rotate(45deg)}
+.faq-a{display:none;padding:2px 16px 16px;font-size:13.5px;color:var(--tb);line-height:1.75;border-top:1px solid var(--bd)}
+.faq-item.open .faq-a{display:block;padding-top:12px}
+.faq-a strong{color:var(--t);font-weight:600}
+.faq-a .faq-formula{background:var(--s2);border-left:3px solid var(--a);border-radius:0 6px 6px 0;padding:10px 13px;font-family:var(--mo);font-size:12.5px;color:var(--a);margin:.6rem 0;display:block;line-height:1.6}
+
+/* Disclaimer */
+.calc-disclaimer{margin-top:2rem;padding-top:1.25rem;border-top:1px solid var(--bd);display:flex;gap:10px;align-items:flex-start}
+.calc-disclaimer .dx-icon{font-size:15px;color:var(--m);flex-shrink:0;margin-top:1px}
+.calc-disclaimer .dx-text{font-size:11.5px;color:var(--m);line-height:1.65}
+.calc-disclaimer .dx-text strong{color:var(--tb);font-weight:600}
+
+/* Insights */
+.insight-box{background:var(--s2);border:1px solid var(--bd);border-radius:10px;padding:14px 16px;margin:1rem 0}
+.insight-title{font-size:11px;font-weight:700;color:var(--m);text-transform:uppercase;letter-spacing:.6px;margin-bottom:.65rem;display:flex;align-items:center;gap:6px}
+.insight-line{display:flex;gap:9px;align-items:flex-start;font-size:13px;color:var(--t);line-height:1.55;margin-bottom:8px}
+.insight-line:last-child{margin-bottom:0}
+.insight-line .ic{flex-shrink:0;font-size:13px;font-weight:700;margin-top:1px;width:16px;text-align:center}
+.insight-line.good .ic{color:var(--g)}
+.insight-line.bad .ic{color:var(--r)}
+.insight-line.neutral .ic{color:var(--a)}
+.insight-line strong{font-weight:700}
+
+/* Print button (visual style, hidden in print itself) */
+.download-btn{background:var(--s2);border:1px solid var(--bd);color:var(--tb);font-size:12.5px;font-weight:500;cursor:pointer;display:inline-flex;align-items:center;gap:6px;padding:7px 14px;border-radius:20px;font-family:var(--fn);transition:all .18s;margin-bottom:1rem;float:right}
+.download-btn:disabled{opacity:.6;cursor:wait}
+.download-btn:hover{color:var(--t);border-color:var(--g);background:var(--s)}
+.print-header{display:none}
+
+/* Print stylesheet: show only the active calculator's inputs/outputs, hide everything else */
+@media print{
+  html,body{background:#fff!important;color:#000!important}
+  .topbar,.nav,.site-footer,#srch-results,.search-overlay{display:none!important}
+  .content{padding:0!important}
+  .panel{display:none!important}
+  .panel.on{display:block!important}
+  .panel.on>*{display:none!important}
+  .panel.on .two,.panel.on .two-eq,.panel.on .three{display:grid!important;grid-template-columns:1fr 1fr!important;gap:16px;page-break-inside:avoid}
+  .panel.on .three{grid-template-columns:1fr 1fr 1fr!important}
+  /* Rescue calculators whose content isn't wrapped in .two/.two-eq/.three
+     (Loan/Mortgage Comparison use direct .card/.g3 children; Currency &
+     Scientific use a plain unclassed wrapper div) */
+  .panel.on>.card,.panel.on>.g3{display:block!important;page-break-inside:avoid}
+  #currency.panel.on>div:not(.print-header),#scientific.panel.on>div:not(.print-header){display:block!important}
+  /* Explicit hide, regardless of nesting depth — needed because DCF (and
+     potentially others) nest their guide/FAQ inside the same .card as
+     their actual results, so the blanket ">*" rule above can't catch it */
+  .panel.on .calc-guide,.panel.on .faq-section,.panel.on .calc-disclaimer,.panel.on .input-hint{display:none!important}
+  .print-header.show{display:block!important;margin-bottom:1rem;color:#000}
+  .print-header.show .ph-name{font-size:20px;font-weight:700;margin-bottom:2px;color:#000}
+  .print-header.show .ph-date{font-size:11px;color:#555}
+  .card{background:#fff!important;border:1px solid #ccc!important;color:#000!important;padding:14px!important;box-shadow:none!important;display:block!important}
+  .card *{visibility:visible}
+  .card *[style*="background:var(--s2)"],.card *[style*="background:var(--s)"]{background:#f7f7f7!important}
+  .card *[style*="color:var(--t)"]{color:#000!important}
+  .card *[style*="color:var(--m)"]{color:#666!important}
+  .card *[style*="color:var(--a)"]{color:#946800!important}
+  .card *[style*="color:var(--g)"]{color:#0a7a4d!important}
+  .card *[style*="color:var(--r)"]{color:#c0293f!important}
+  .card *[style*="color:var(--b)"]{color:#0d5fb5!important}
+  .card *[style*="color:var(--p)"]{color:#6e3a8a!important}
+  .card-title{color:#000!important;border-bottom:1px solid #ccc;padding-bottom:6px;margin-bottom:10px}
+  .field label{color:#444!important}
+  .field input,.field select{background:#f7f7f7!important;border:1px solid #ccc!important;color:#000!important}
+  .sgrid,.g2,.g3{display:grid!important}
+  .sbox{background:#f7f7f7!important;border:1px solid #ddd!important;display:block!important}
+  .sbox .lbl{color:#666!important}
+  .sbox .val{color:#000!important}
+  .rrow{color:#000!important;border-bottom:1px solid #eee!important;display:flex!important}
+  .tbl{display:table!important;width:100%}
+  .tbl,.tbl th,.tbl td{color:#000!important;border-color:#ccc!important}
+  .tbl th{background:#eee!important}
+  .donut-wrap,.leg-i{display:flex!important}
+  .insight-box,.insight-line,.insight-title{display:none!important}
+  canvas{display:block!important}
+}
+</style>
+<link rel="icon" href="/favicon.ico" sizes="any">
+<link rel="icon" type="image/svg+xml" href="/favicon.svg">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-61RHHG8E6Q"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-61RHHG8E6Q');
+</script>
+<meta name="msvalidate.01" content="175D12831D109E3E7E1A856004E0F393" />
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "WebApplication", "name": "DCF Valuation Calculator", "url": "https://finclac.com/dcf-valuation-calculator", "description": "Calculate a stock's intrinsic value using discounted cash flow analysis. Free DCF calculator with WACC, terminal value, and bear/bull scenarios.", "applicationCategory": "FinanceApplication", "operatingSystem": "Any (web-based)", "offers": {"@type": "Offer", "price": "0", "priceCurrency": "USD"}, "isPartOf": {"@type": "WebSite", "name": "FinCalc", "url": "https://finclac.com/"}}</script>
+</head>
+<body>
+<div class="topbar">
+  <a class="logo" href="/"><div class="logo-mark">FC</div>FinCalc</a>
+  <div class="searchbox">
+    <svg width="14" height="14" fill="none" stroke="#6B7A8D" stroke-width="2" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+    <input id="srch" placeholder="Search 40 calculators..." oninput="doSearch()" onkeydown="if(event.key==='Enter')goSearch()">
+  </div>
+</div>
+<div class="nav">
+  <a class="ntab on" href="/" onclick="go('home',this);return false;">🏠 Home</a><a class="ntab" href="/blog">📝 Blog</a>
+  <a class="ntab" href="/cagr-calculator" onclick="go('cagr',this);return false;">📐 CAGR</a>
+  <a class="ntab" href="/xirr-calculator" onclick="go('xirr',this);return false;">📅 XIRR</a>
+  <a class="ntab" href="/dividend-reinvestment-calculator" onclick="go('drip',this);return false;">💧 DRIP</a>
+  <a class="ntab" href="/etf-growth-calculator" onclick="go('etf',this);return false;">🗂️ ETF Growth</a>
+  <a class="ntab" href="/dcf-valuation-calculator" onclick="go('dcf',this);return false;">🏦 DCF Valuation</a>
+  <a class="ntab" href="/debt-snowball-vs-avalanche-calculator" onclick="go('debtcomp',this);return false;">❄️ Snowball vs Avalanche</a>
+  <a class="ntab" href="/rental-property-calculator" onclick="go('rentalprop',this);return false;">🏡 Rental Property</a>
+  <a class="ntab" href="/burn-rate-calculator" onclick="go('burnrate',this);return false;">🔥 Burn Rate</a>
+  <a class="ntab" href="/pricing-margin-calculator" onclick="go('pricing',this);return false;">🏷️ Pricing</a>
+  <a class="ntab" href="/equity-dilution-calculator" onclick="go('equity',this);return false;">📐 Equity Dilution</a>
+  <a class="ntab" href="/revenue-forecast-calculator" onclick="go('revenue',this);return false;">📊 Revenue Forecast</a>
+  <a class="ntab" href="/loan-emi-calculator" onclick="go('loan',this);return false;">🏦 Loan/EMI</a>
+  <a class="ntab" href="/sip-calculator" onclick="go('invest',this);return false;">📈 SIP/Investment</a>
+  <a class="ntab" href="/tax-calculator" onclick="go('tax',this);return false;">🧾 Tax</a>
+  <a class="ntab" href="/mortgage-calculator" onclick="go('mortgage',this);return false;">🏠 Mortgage</a>
+  <a class="ntab" href="/mortgage-comparison-calculator" onclick="go('mortcomp',this);return false;">⚖️ Mtg Compare</a>
+  <a class="ntab" href="/compound-interest-calculator" onclick="go('savings',this);return false;">🏛️ Savings</a>
+  <a class="ntab" href="/stock-profit-calculator" onclick="go('stock',this);return false;">📉 Stock P&amp;L</a>
+  <a class="ntab" href="/retirement-calculator" onclick="go('retirement',this);return false;">👴 Retirement</a>
+  <a class="ntab" href="/debt-payoff-calculator" onclick="go('debt',this);return false;">💳 Debt Payoff</a>
+  <a class="ntab" href="/rental-yield-calculator" onclick="go('rental',this);return false;">🏘️ Rental Yield</a>
+  <a class="ntab" href="/cash-flow-calculator" onclick="go('cashflow',this);return false;">💵 Cash Flow</a>
+  <a class="ntab" href="/breakeven-calculator" onclick="go('breakeven',this);return false;">📊 Break-even</a>
+  <a class="ntab" href="/savings-goal-calculator" onclick="go('savingsgoal',this);return false;">🎯 Savings Goal</a>
+  <a class="ntab" href="/emergency-fund-calculator" onclick="go('emergencyfund',this);return false;">🛡️ Emergency Fund</a>
+  <a class="ntab" href="/financial-health-score-calculator" onclick="go('healthscore',this);return false;">💯 Health Score</a>
+  <a class="ntab" href="/currency-converter" onclick="go('currency',this);return false;">💱 Currency</a>
+  <a class="ntab" href="/scientific-calculator" onclick="go('scientific',this);return false;">🔬 Scientific</a>
+</div>
+<div class="content">
+<div id="dcf" class="panel on">
+<a class="back-btn" href="/" onclick="go('home',null);return false;">← Back to Home</a>
+<div class="calc-links"><span class="calc-links-label">🔗 Related</span><a class="calc-link-btn" href="/peg-ratio-calculator" onclick="go('peg',null);return false;">📏 PEG Ratio</a><a class="calc-link-btn" href="/cagr-calculator" onclick="go('cagr',null);return false;">📐 CAGR</a><a class="calc-link-btn" href="/stock-profit-calculator" onclick="go('stock',null);return false;">📉 Stock P&amp;L</a><a class="calc-link-btn" href="/etf-growth-calculator" onclick="go('etf',null);return false;">🗂️ ETF Growth</a><a class="calc-link-btn" href="/sip-calculator" onclick="go('invest',null);return false;">📈 Investment</a></div><div class="calc-links" style="margin-top:8px;background:transparent;border:none;padding:4px 0"><span class="calc-links-label">📖 Related reading</span><div style="margin-top:6px;font-size:12.5px;line-height:1.6"><a href="/blog/dcf-valuation-explained" style="color:var(--a);text-decoration:underline">DCF Valuation Explained: How to Value a Stock Like an Analyst</a><br></div></div>
+
+
+<div class="two-eq mb16">
+  <div class="card">
+    <div class="card-title">DCF Inputs</div>
+    <div class="g2">
+      <div class="field"><label>Ticker / Name</label><input type="text" id="dc-ticker" value="AAPL" oninput="calcDCF()"></div>
+      <div class="field"><label>Current Price ($)</label><div class="ip"><span class="pfx">$</span><input type="number" id="dc-price" value="185" step="0.01" oninput="calcDCF()"></div></div>
+      <div class="field"><label>Current EPS ($)</label><div class="ip"><span class="pfx">$</span><input type="number" id="dc-eps" value="6.5" step="0.1" oninput="calcDCF()"></div></div>
+      <div class="field"><label>Shares Outstanding (B)</label><input type="number" id="dc-shares" value="15.4" step="0.1" oninput="calcDCF()"></div>
+      <div class="field"><label>EPS Growth Rate (%)</label><input type="number" id="dc-grow" value="12" step="0.5" oninput="calcDCF()"></div>
+      <div class="field"><label>Terminal Growth Rate (%)</label><input type="number" id="dc-tgrow" value="3" step="0.1" oninput="calcDCF()"></div>
+      <div class="field"><label>Discount Rate / WACC (%)</label><input type="number" id="dc-disc" value="10" step="0.5" oninput="calcDCF()"></div>
+      <div class="field"><label>Projection Period (years)</label><input type="number" id="dc-yrs" value="10" min="3" max="20" oninput="calcDCF()"></div>
+    </div>
+  </div>
+  <div class="card">
+    <div class="card-title">DCF Valuation — <span id="dc-ticker-lbl">AAPL</span></div>
+    <div style="text-align:center;padding:1rem 0;border-bottom:1px solid var(--bd);margin-bottom:1rem">
+      <div style="font-size:11px;color:var(--m);margin-bottom:4px">Intrinsic Fair Value</div>
+      <div style="font-size:38px;font-family:var(--mo);font-weight:600" id="dc-fair">$0</div>
+      <div style="font-size:13px;color:var(--m);margin-top:4px">Current: <span style="color:var(--t)" id="dc-cur">$185</span></div>
+    </div>
+    <div class="sgrid" style="margin-top:0;margin-bottom:1rem">
+      <div class="sbox"><div class="lbl">Upside / Downside</div><div class="val" id="dc-upside">0%</div></div>
+      <div class="sbox"><div class="lbl">Margin of Safety</div><div class="val" id="dc-mos">0%</div></div>
+      <div class="sbox"><div class="lbl">Market Cap</div><div class="val" id="dc-mktcap">$0</div></div>
+      <div class="sbox"><div class="lbl">Terminal Value PV</div><div class="val" style="color:var(--p)" id="dc-tvpv">$0</div></div>
+    </div>
+    <div style="background:var(--s2);border-radius:8px;padding:10px 12px;margin-bottom:10px">
+      <div style="font-size:10px;color:var(--m);margin-bottom:8px;text-transform:uppercase;letter-spacing:.5px">Scenario Analysis</div>
+      <div class="rrow"><span class="rk">Bear (×0.7)</span><span class="rv" id="dc-bear">$0</span></div>
+      <div class="rrow"><span class="rk">Base case</span><span class="rv" style="color:var(--a)" id="dc-base">$0</span></div>
+      <div class="rrow" style="border:none"><span class="rk">Bull (×1.3)</span><span class="rv" id="dc-bull">$0</span></div>
+    </div>
+    <div style="font-size:11px;color:var(--r);background:rgba(246,70,93,.08);border-radius:6px;padding:8px;margin-bottom:8px">⚠ DCF is highly sensitive to inputs. Always combine with qualitative research.</div>
+    <div class="insight-box" id="dc-insights"></div>
+  </div>
+</div>
+<div class="card">
+  <div class="card-title">EPS Projection &amp; Present Value Breakdown</div>
+  <div style="overflow-x:auto"><table class="tbl" id="dc-table"></table></div>
+  <canvas id="dc-chart" width="900" height="130" style="width:100%;margin-top:1rem"></canvas>
+  <div style="display:flex;gap:16px;margin-top:8px;font-size:11px;color:var(--m)">
+    <span style="color:var(--a)">━ Projected EPS</span><span style="color:var(--g)">╌ Present Value</span>
+  </div>
+<div class="calc-guide">
+  <div class="guide-toggle">
+    <div class="guide-toggle-title">📖 Stock DCF Valuation — Finding Intrinsic Value</div>
+  </div>
+  <div class="guide-body">
+<div class="guide-p">Discounted Cash Flow (DCF) analysis is the foundational method professional analysts use to answer the question "what is this stock actually worth?" — independent of whatever the market happens to be pricing it at today. The core insight behind DCF is simple even though the math can get involved: a business is worth the sum of all the cash it will generate for its owners in the future, with that future cash adjusted downward (discounted) to reflect the fact that money received later is worth less than money received today.</div>
+
+<div class="guide-h3">Why Discount Future Cash at All?</div>
+<div class="guide-p">A dollar promised to you in 10 years is worth less than a dollar in your hand today, for two reasons: you could invest today's dollar and grow it, and there's inherent uncertainty about whether that future dollar will actually arrive. The discount rate (often called WACC — Weighted Average Cost of Capital, or simply your required rate of return) captures both effects in a single number.</div>
+
+<div class="guide-h3">The Three Building Blocks of a DCF</div>
+<div class="guide-steps">
+<div class="guide-step"><div class="guide-step-num">1</div><div><strong>Projected Free Cash Flows</strong> — estimate the company's cash generation for the next 5-10 years based on historical growth rates, adjusted for expected changes in the business or industry.</div></div>
+<div class="guide-step"><div class="guide-step-num">2</div><div><strong>Discount Rate (WACC)</strong> — the annual rate used to convert each future year's cash flow back into today's dollars, reflecting risk and opportunity cost.</div></div>
+<div class="guide-step"><div class="guide-step-num">3</div><div><strong>Terminal Value</strong> — since companies (ideally) operate forever, not just for your 5-10 year projection window, terminal value estimates the value of all cash flows beyond that window, assuming a stable long-term growth rate.</div></div>
+</div>
+
+<div class="guide-h3">Worked Example: A Simplified DCF</div>
+<div class="guide-p">Imagine a company currently generating $10 million in free cash flow, expected to grow that cash flow 8% annually for the next 5 years, after which growth settles to a stable 2.5% forever (matching long-term GDP growth). Using a 9% discount rate:</div>
+<table class="guide-table"><thead><tr><th>Year</th><th>Projected FCF</th><th>Discounted Value</th></tr></thead><tbody>
+<tr><td>1</td><td>$10.8M</td><td>$9.9M</td></tr>
+<tr><td>2</td><td>$11.7M</td><td>$9.8M</td></tr>
+<tr><td>3</td><td>$12.6M</td><td>$9.7M</td></tr>
+<tr><td>4</td><td>$13.6M</td><td>$9.6M</td></tr>
+<tr><td>5</td><td>$14.7M</td><td>$9.6M</td></tr>
+</tbody></table>
+<div class="guide-p">Summing the discounted values of years 1-5 gives roughly $48.6M. The terminal value (cash flows beyond year 5, discounted back to today) typically dwarfs this — in this example it would add approximately $185M, illustrating a key truth about DCF: terminal value commonly represents 60-80% of total estimated company value, which means a huge portion of any DCF valuation hinges on an assumption about growth decades into the future that nobody can know with certainty.</div>
+
+<div class="guide-h3">Margin of Safety: Buffering for Your Own Uncertainty</div>
+<div class="guide-formula">Margin of Safety = (Intrinsic Value − Current Market Price) / Intrinsic Value × 100%</div>
+<div class="guide-p">Warren Buffett and his mentor Benjamin Graham popularized the practice of only buying when a stock trades at a significant discount (commonly 20-30%) to your calculated intrinsic value. This buffer protects you if your growth assumptions turn out to be too optimistic — you still come out reasonably well even if reality undershoots your projections.</div>
+
+<div class="guide-h3">Why DCF Is So Sensitive to Small Input Changes</div>
+<div class="guide-p">Because cash flows are projected years into the future and then compounded/discounted repeatedly, even small changes in assumptions create dramatically different valuations. Moving your discount rate from 8% to 9% — a change that might feel trivial — can shift the calculated intrinsic value by 15-25% or more. This sensitivity is precisely why professional analysts never rely on a single DCF output; they run scenario analysis instead.</div>
+<table class="guide-table"><thead><tr><th>Scenario</th><th>Typical Adjustment</th></tr></thead><tbody>
+<tr><td>Bear case</td><td>Lower growth rate, higher discount rate</td></tr>
+<tr><td>Base case</td><td>Most likely/consensus assumptions</td></tr>
+<tr><td>Bull case</td><td>Higher growth rate, lower discount rate</td></tr>
+</tbody></table>
+<div class="guide-warn">⚠ DCF is only as good as its inputs — "garbage in, garbage out" applies more to DCF than almost any other financial model. Always sanity-check your terminal growth rate against realistic long-term GDP growth (typically 2-3%), since assuming a company grows faster than the entire economy forever is mathematically impossible over a long enough horizon.</div>
+
+  </div>
+</div>
+
+<div class="faq-section">
+<div class="faq-section-title">❓ Frequently Asked Questions</div>
+<div class="faq-item">
+  <div class="faq-q" onclick="toggleFAQ(this)">
+    <span>What is DCF valuation?</span>
+    <span class="faq-icon">+</span>
+  </div>
+  <div class="faq-a">DCF (Discounted Cash Flow) estimates a stock’s <strong>intrinsic value</strong> by projecting future earnings and discounting them to today’s money. If intrinsic value is higher than the current price, the stock may be undervalued.</div>
+</div>
+<div class="faq-item">
+  <div class="faq-q" onclick="toggleFAQ(this)">
+    <span>What is a discount rate (WACC)?</span>
+    <span class="faq-icon">+</span>
+  </div>
+  <div class="faq-a">The discount rate represents your <strong>required rate of return</strong> — the minimum you expect to justify the risk. For stocks, most investors use 8–12%. A higher discount rate gives a lower, more conservative intrinsic value.</div>
+</div>
+<div class="faq-item">
+  <div class="faq-q" onclick="toggleFAQ(this)">
+    <span>What is terminal value in DCF?</span>
+    <span class="faq-icon">+</span>
+  </div>
+  <div class="faq-a">Terminal value captures all earnings <strong>beyond the projection period</strong>, assuming the company grows at a stable rate forever (usually 2–3%, matching long-term GDP growth). It often makes up 60–80% of the total DCF value.</div>
+</div>
+<div class="faq-item">
+  <div class="faq-q" onclick="toggleFAQ(this)">
+    <span>What is margin of safety?</span>
+    <span class="faq-icon">+</span>
+  </div>
+  <div class="faq-a"><span class="faq-formula">Margin of Safety = (Intrinsic Value − Current Price) / Intrinsic Value × 100%</span>Warren Buffett popularized buying stocks with a 20–30% margin of safety — so even if your projections are off, you still make money.</div>
+</div>
+<div class="faq-item">
+  <div class="faq-q" onclick="toggleFAQ(this)">
+    <span>Why is DCF so sensitive to inputs?</span>
+    <span class="faq-icon">+</span>
+  </div>
+  <div class="faq-a">Small changes in growth rate or discount rate create large swings because of compounding over many years. A 1% change in the discount rate can shift valuation by 20–30%. Always run bear and bull scenarios, never rely on a single estimate.</div>
+</div>
+</div>
+
+</div>
+</div>
+</div><!-- content -->
+<div class="site-footer">
+  <div class="footer-brand">
+    <div class="logo-mark" style="width:22px;height:22px;background:var(--a);border-radius:5px;display:flex;align-items:center;justify-content:center;color:#000;font-size:11px;font-weight:700">FC</div>
+    FinCalc
+  </div>
+  <div class="footer-copy">© 2025 FinCalc · Free Financial Calculators · <a href="/blog" style="color:inherit">Blog</a> · <a href="/about" style="color:inherit">About</a> · <a href="/privacy" style="color:inherit">Privacy Policy</a> · <a href="/terms" style="color:inherit">Terms</a></div>
+  <!-- tinystartups · Launched on Tiny Startups -->
+<a href="https://www.tinystartups.com/startup/finclaccom" target="_blank" rel="noopener"
+   style="display:inline-flex;align-items:center;gap:10px;padding:8px 14px 8px 10px;border-radius:12px;text-decoration:none;font-family:'Inter',system-ui,sans-serif;background:linear-gradient(#fff,#fff) padding-box,linear-gradient(90deg,#3525E6,#D81FE0,#22B8F0) border-box;border:2px solid transparent;color:#0E0B1F;flex-shrink:0">
+  <svg width="34" height="34" viewBox="0 0 100 100">
+    <defs><linearGradient id="tsg" x1=".1" y1="0" x2=".9" y2="1">
+      <stop offset="0%" stop-color="#3525E6"/><stop offset="55%" stop-color="#D81FE0"/><stop offset="100%" stop-color="#22B8F0"/>
+    </linearGradient></defs>
+    <path d="M50 6C52 32 68 48 94 50C68 52 52 68 50 94C48 68 32 52 6 50C32 48 48 32 50 6Z" fill="url(#tsg)"/>
+  </svg>
+  <span style="display:flex;flex-direction:column;line-height:1.1">
+    <span style="font-family:monospace;font-size:7px;font-weight:600;letter-spacing:0.15em;text-transform:uppercase;color:#6A6585">Launched on</span>
+    <span style="font-size:14px;font-weight:800;letter-spacing:-0.02em">Tiny Startups</span>
+  </span>
+</a>
+<a href="https://devglobe.app/projects/fincalc?utm_source=badge&utm_medium=embed" target="_blank" rel="noopener">
+  <img src="https://devglobe.app/badges/launched-on-devglobe-dark.svg" alt="Launched on DevGlobe" width="250" height="54" />
+</a>
+</div>
+<script src="app.js"></script>
+<script>initPage('dcf');</script>
+</body>
+</html>

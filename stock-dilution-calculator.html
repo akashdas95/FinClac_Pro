@@ -1,0 +1,456 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Stock Dilution Calculator — How New Shares Affect EPS & Share Value | FinCalc</title>
+<meta name="description" content="See how a secondary offering, option exercise, or convertible note conversion affects EPS and your share value. Free stock dilution impact calculator.">
+<link rel="canonical" href="https://finclac.com/stock-dilution-calculator">
+<meta name="robots" content="index, follow">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Stock Dilution Calculator — How New Shares Affect EPS & Share Value | FinCalc">
+<meta property="og:description" content="See how a secondary offering, option exercise, or convertible note conversion affects EPS and your share value. Free stock dilution impact calculator.">
+<meta property="og:url" content="https://finclac.com/stock-dilution-calculator">
+<meta property="og:site_name" content="FinCalc">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Stock Dilution Calculator — How New Shares Affect EPS & Share Value | FinCalc">
+<meta name="twitter:description" content="See how a secondary offering, option exercise, or convertible note conversion affects EPS and your share value. Free stock dilution impact calculator.">
+<style>*{box-sizing:border-box;margin:0;padding:0}
+:root{--bg:#0B0E11;--s:#141920;--s2:#1C2430;--bd:#232D3A;--t:#E8EDF2;--m:#6B7A8D;--tb:#A3B2C4;--a:#F0B90B;--g:#0ECB81;--r:#F6465D;--b:#1890FF;--p:#9B59B6;--fn:'DM Sans',sans-serif;--mo:'DM Mono',monospace}
+body{background:var(--bg);color:var(--t);font-family:var(--fn);font-size:14px;line-height:1.5;min-height:100vh}
+.topbar{background:var(--s);border-bottom:1px solid var(--bd);padding:0 1.25rem;display:flex;align-items:center;justify-content:space-between;height:52px;position:sticky;top:0;z-index:200}
+.logo{display:flex;align-items:center;gap:8px;font-size:16px;font-weight:600;color:var(--t);text-decoration:none}
+.logo-mark{width:28px;height:28px;background:var(--a);border-radius:6px;display:flex;align-items:center;justify-content:center;color:#000;font-size:13px;font-weight:700}
+.searchbox{display:flex;align-items:center;gap:8px;background:var(--s2);border:1px solid var(--bd);border-radius:7px;padding:6px 12px;width:240px}
+.searchbox input{background:none;border:none;outline:none;color:var(--t);font-family:var(--fn);font-size:13px;width:100%}
+.nav{display:flex;gap:2px;padding:.75rem 1.25rem 0;border-bottom:1px solid var(--bd);overflow-x:auto;scrollbar-width:none;background:var(--bg);position:sticky;top:52px;z-index:100}
+.nav::-webkit-scrollbar{display:none}
+.ntab{padding:8px 13px;font-size:12px;font-weight:500;color:var(--m);cursor:pointer;border-bottom:2px solid transparent;white-space:nowrap;background:none;border-top:none;border-left:none;border-right:none;transition:all .18s;font-family:var(--fn);text-decoration:none;display:inline-block}
+.ntab.on{color:var(--a);border-bottom-color:var(--a)}
+.ntab:hover:not(.on){color:var(--t)}
+.content{padding:1.25rem}
+.panel{display:none}.panel.on{display:block}.panel.on::after{content:'';display:table;clear:both}
+.dir-sec{margin-bottom:1.75rem}
+.dir-sec-h{font-size:11px;font-weight:600;color:var(--m);letter-spacing:.8px;text-transform:uppercase;margin-bottom:.75rem;display:flex;align-items:center;gap:8px}
+.dir-sec-h::after{content:'';flex:1;height:1px;background:var(--bd)}
+.dir-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(178px,1fr));gap:10px}
+.dir-card{background:linear-gradient(135deg,#0d1117 60%,#071510 100%);border:1px solid #0ECB81;border-radius:12px;padding:1.25rem 1.1rem;cursor:pointer;transition:all .2s;box-shadow:0 2px 12px rgba(14,203,129,.1),0 1px 3px rgba(0,0,0,.4);text-decoration:none;display:block;color:inherit}
+.dir-card:hover{border-color:#ffffff;transform:translateY(-2px);box-shadow:0 6px 28px rgba(255,255,255,.12),0 2px 8px rgba(0,0,0,.5)}
+.dir-icon{font-size:28px;margin-bottom:10px;line-height:1}
+.dir-name{font-size:15px;font-weight:600;margin-bottom:5px;color:var(--t)}
+.dir-desc{font-size:12px;color:var(--m);line-height:1.6}
+.two{display:grid;grid-template-columns:1fr 310px;gap:16px;margin-top:.5rem}
+.two-eq{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.three{display:grid;grid-template-columns:1fr 1fr 1fr;gap:16px}
+.g2{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.g3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px}
+.card{background:var(--s);border:1px solid var(--bd);border-radius:10px;padding:1.25rem}
+.mb16{margin-bottom:16px}
+.card-title{font-size:11px;font-weight:600;color:var(--m);letter-spacing:.8px;text-transform:uppercase;margin-bottom:1.25rem}
+.input-hint{font-size:11.5px;color:var(--a);background:rgba(240,185,11,.08);border:1px solid rgba(240,185,11,.25);border-radius:6px;padding:6px 10px;margin:-.75rem 0 1rem;line-height:1.5}
+.chart-tooltip{position:fixed;display:none;background:#1C2430;border:1px solid #232D3A;border-radius:6px;padding:7px 11px;font-size:11.5px;color:#E8EDF2;pointer-events:none;z-index:9999;box-shadow:0 4px 14px rgba(0,0,0,.45);font-family:'DM Sans',sans-serif;line-height:1.5;max-width:200px}
+.chart-tooltip strong{color:#F0B90B}
+.field{margin-bottom:.9rem}
+.field label{display:block;font-size:12px;color:var(--m);margin-bottom:5px}
+.field input,.field select{width:100%;background:var(--bg);border:1px solid var(--bd);border-radius:6px;padding:8px 11px;color:var(--t);font-family:var(--mo);font-size:13px;outline:none;transition:border .15s}
+.field input:focus,.field select:focus{border-color:var(--a)}
+.field select option{background:var(--s2)}
+.ip{position:relative}
+.ip .pfx{position:absolute;left:10px;top:50%;transform:translateY(-50%);color:var(--m);font-size:13px;pointer-events:none;font-family:var(--mo)}
+.ip input{padding-left:22px}
+.sgrid{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:1rem}
+.sbox{background:var(--s2);border-radius:8px;padding:10px}
+.sbox .lbl{font-size:10px;color:var(--m);margin-bottom:3px;font-weight:500;text-transform:uppercase;letter-spacing:.4px}
+.sbox .val{font-size:15px;font-weight:600;font-family:var(--mo)}
+.rrow{display:flex;justify-content:space-between;padding:7px 0;border-bottom:1px solid var(--bd);font-size:13px}
+.rrow:last-child{border:none}
+.rk{color:var(--m);font-size:12px}
+.rv{font-family:var(--mo);font-weight:500}
+.btn{width:100%;padding:10px;background:var(--a);color:#000;border:none;border-radius:7px;font-family:var(--fn);font-size:13px;font-weight:600;cursor:pointer;margin-top:8px;transition:opacity .15s}
+.btn:hover{opacity:.88}
+.btn-sm{padding:6px 12px;border-radius:6px;font-size:12px;font-weight:500;cursor:pointer;border:none;font-family:var(--fn)}
+.btn-add{background:var(--s2)!important;color:var(--g)!important;border:1px solid var(--g)!important}
+.btn-del{background:transparent;color:var(--r);border:1px solid var(--bd);padding:6px 10px;border-radius:6px;cursor:pointer;font-size:13px}
+.back-btn{background:var(--s2);border:1px solid var(--bd);color:var(--tb);font-size:12.5px;font-weight:500;cursor:pointer;margin-bottom:1rem;display:inline-flex;align-items:center;gap:6px;padding:7px 14px;border-radius:20px;font-family:var(--fn);transition:all .18s;text-decoration:none}
+.back-btn:hover{color:var(--t);border-color:var(--g);background:var(--s)}
+.badge-new{background:rgba(14,203,129,.15);color:var(--g);font-size:10px;font-weight:600;padding:2px 7px;border-radius:4px}
+.pbar-bg{background:var(--bd);border-radius:3px;height:6px;overflow:hidden;margin-top:4px}
+.pbar-fill{height:100%;border-radius:3px;transition:width .4s}
+.tbl{width:100%;border-collapse:collapse;font-size:12px}
+.tbl th{color:var(--m);font-size:10px;text-transform:uppercase;padding:6px 8px;border-bottom:1px solid var(--bd);text-align:right;letter-spacing:.4px}
+.tbl th:first-child{text-align:left}
+.tbl td{padding:6px 8px;border-bottom:1px solid var(--bd);font-family:var(--mo);text-align:right}
+.tbl td:first-child{text-align:left;color:var(--m);font-family:var(--fn)}
+.tbl tr:last-child td{border:none}
+.tbl .hl{background:var(--s2)}
+.slab-tbl{width:100%;border-collapse:collapse;font-size:12px}
+.slab-tbl th{color:var(--m);font-size:10px;letter-spacing:.5px;text-transform:uppercase;padding:5px 0;border-bottom:1px solid var(--bd);text-align:left}
+.slab-tbl td{padding:6px 0;border-bottom:1px solid var(--bd);font-family:var(--mo)}
+.slab-tbl tr:last-child td{border:none}
+.slab-on td{color:var(--a)}
+.tline{position:relative;padding-left:20px}
+.tline::before{content:'';position:absolute;left:6px;top:0;bottom:0;width:1px;background:var(--bd)}
+.tl-i{position:relative;margin-bottom:12px;font-size:12px}
+.tl-i::before{content:'';position:absolute;left:-17px;top:4px;width:8px;height:8px;border-radius:50%;background:var(--a);border:2px solid var(--bg)}
+.tl-lbl{color:var(--m);font-size:11px}
+.cmp-col{background:var(--s2);border-radius:10px;padding:1rem;border:1px solid var(--bd)}
+.cmp-col.winner{border-color:var(--g)}
+.donut-wrap{display:flex;justify-content:center;align-items:center;gap:16px;padding:.75rem 0}
+.leg-i{display:flex;align-items:center;gap:6px;font-size:11px;color:var(--m);margin-bottom:5px}
+.leg-dot{width:8px;height:8px;border-radius:50%;flex-shrink:0}
+.sci-disp{background:var(--bg);border:1px solid var(--bd);border-radius:8px;padding:12px 14px;margin-bottom:10px;text-align:right}
+.sci-expr{font-size:12px;color:var(--m);font-family:var(--mo);min-height:18px}
+.sci-num{font-size:28px;font-family:var(--mo);font-weight:500;word-break:break-all}
+.sci-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:5px}
+.sci-btn{padding:10px 4px;border:1px solid var(--bd);border-radius:6px;background:var(--s2);color:var(--t);font-family:var(--mo);font-size:12px;cursor:pointer;text-align:center}
+.sci-btn:hover{background:var(--bd)}
+.sci-btn.op{color:var(--a)}.sci-btn.eq{background:var(--a);color:#000;border-color:var(--a);font-weight:600}.sci-btn.cl{color:var(--r)}.sci-btn.fn{color:var(--b)}
+@media(max-width:700px){.two,.two-eq,.three{grid-template-columns:1fr}.g2,.g3{grid-template-columns:1fr}.sci-grid{grid-template-columns:repeat(4,1fr)}}
+
+}
+
+
+/* Inter-calculator links */
+.calc-links{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 2.5rem;padding:10px 12px;background:var(--s2);border-radius:8px;border-left:3px solid var(--g);align-items:center;clear:both}
+.calc-links-label{font-size:10px;color:var(--m);text-transform:uppercase;letter-spacing:.6px;font-weight:600;margin-right:4px;flex-shrink:0}
+.calc-link-btn{padding:4px 10px;background:var(--bg);border:1px solid var(--g);border-radius:20px;color:var(--g);font-size:11px;cursor:pointer;font-family:var(--fn);transition:all .18s;white-space:nowrap;text-decoration:none}
+.calc-link-btn:hover{background:var(--g);color:#000;border-color:var(--g)}
+
+
+/* Footer */
+.site-footer{background:var(--s);border-top:1px solid var(--bd);padding:1rem 1.25rem;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px;margin-top:1rem}
+.footer-brand{font-size:14px;font-weight:600;color:var(--t);display:flex;align-items:center;gap:8px}
+.footer-brand .logo-mark{width:22px;height:22px;font-size:11px}
+.footer-copy{font-size:11px;color:var(--m)}
+
+
+/* Calculator Guide Articles */
+.calc-guide{margin-top:2.5rem;border-top:1px solid var(--bd);padding-top:1.75rem}
+.guide-toggle{display:flex;align-items:center;justify-content:space-between;padding:10px 14px;background:var(--s2);border:1px solid var(--bd);border-radius:8px;margin-bottom:0}
+.guide-toggle-title{font-size:14px;font-weight:700;color:var(--t);display:flex;align-items:center;gap:8px;letter-spacing:.1px}
+.guide-body{display:block;padding:1.5rem 0 0;max-width:980px}
+.guide-h2{font-size:22px;font-weight:700;color:var(--t);margin:1.75rem 0 .85rem;letter-spacing:-.2px;line-height:1.3}
+.guide-h2:first-child{margin-top:0}
+.guide-h3{font-size:16px;font-weight:700;color:var(--t);margin:2rem 0 .75rem;letter-spacing:-.1px;line-height:1.35;padding-top:.25rem;border-top:1px solid var(--bd)}
+.guide-h3:first-child{margin-top:0;padding-top:0;border-top:none}
+.guide-p{font-size:14.5px;color:var(--tb);line-height:1.75;margin-bottom:1.1rem}
+.guide-p strong{color:var(--t);font-weight:600}
+.guide-formula{background:var(--s2);border-left:3px solid var(--a);border-radius:0 8px 8px 0;padding:14px 16px;font-family:var(--mo);font-size:13.5px;line-height:1.7;color:var(--a);margin:1.1rem 0;overflow-x:auto}
+.guide-tip{background:rgba(14,203,129,.08);border:1px solid rgba(14,203,129,.2);border-radius:8px;padding:13px 16px;font-size:13px;color:var(--g);margin:1.1rem 0;line-height:1.7;font-weight:500}
+.guide-warn{background:rgba(246,70,93,.08);border:1px solid rgba(246,70,93,.2);border-radius:8px;padding:13px 16px;font-size:13px;color:var(--r);margin:1.1rem 0;line-height:1.7;font-weight:500}
+.guide-table{width:100%;border-collapse:collapse;font-size:12.5px;margin:1.25rem 0}
+.guide-table th{background:var(--s2);color:var(--m);padding:9px 12px;text-align:left;font-size:10.5px;font-weight:700;text-transform:uppercase;letter-spacing:.5px;border-bottom:1px solid var(--bd)}
+.guide-table td{padding:9px 12px;border-bottom:1px solid var(--bd);color:var(--t);font-family:var(--mo)}
+.guide-table tr:last-child td{border:none}
+.guide-steps{counter-reset:step;margin:1.25rem 0}
+.guide-step{display:flex;gap:14px;margin-bottom:14px;font-size:14px;color:var(--tb);line-height:1.7}
+.guide-step-num{width:24px;height:24px;border-radius:50%;background:var(--g);color:#000;font-size:12px;font-weight:700;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:1px}
+
+.guide-sub-arrow{display:none}
+
+/* Mobile-only collapsible guide subsections (reduces cognitive load on small screens) */
+@media(max-width:700px){
+  .guide-sub{border-bottom:1px solid var(--bd)}
+  .guide-sub:last-child{border-bottom:none}
+  .guide-sub-head{display:flex;align-items:center;justify-content:space-between;gap:10px;cursor:pointer;user-select:none;padding:.25rem 0;margin:0}
+  .guide-sub-head .guide-h3{margin:1.5rem 0 0;padding-top:.25rem;border-top:1px solid var(--bd);flex:1}
+  .guide-sub:first-child .guide-sub-head .guide-h3{margin-top:0;padding-top:0;border-top:none}
+  .guide-sub-arrow{display:block;font-size:13px;color:var(--m);flex-shrink:0;transition:transform .25s;margin-top:1.4rem}
+  .guide-sub:first-child .guide-sub-arrow{margin-top:0}
+  .guide-sub.open .guide-sub-arrow{transform:rotate(180deg)}
+  .guide-sub-body{display:none;overflow:hidden}
+  .guide-sub.open .guide-sub-body{display:block}
+}
+
+
+/* FAQ Section */
+.faq-section{margin-top:2.5rem;border-top:1px solid var(--bd);padding-top:1.75rem}
+.faq-section-title{font-size:13px;font-weight:700;color:var(--m);text-transform:uppercase;letter-spacing:.8px;margin-bottom:1.1rem;display:flex;align-items:center;gap:8px}
+.faq-section-title::after{content:'';flex:1;height:1px;background:var(--bd)}
+.faq-item{border:1px solid var(--bd);border-radius:8px;margin-bottom:10px;overflow:hidden;transition:border-color .2s}
+.faq-item:hover{border-color:var(--g)}
+.faq-q{display:flex;align-items:center;justify-content:space-between;padding:14px 16px;cursor:pointer;font-size:14px;font-weight:600;color:var(--t);user-select:none;gap:12px;line-height:1.45}
+.faq-q .faq-icon{font-size:16px;color:var(--a);transition:transform .3s;flex-shrink:0}
+.faq-item.open .faq-icon{transform:rotate(45deg)}
+.faq-a{display:none;padding:2px 16px 16px;font-size:13.5px;color:var(--tb);line-height:1.75;border-top:1px solid var(--bd)}
+.faq-item.open .faq-a{display:block;padding-top:12px}
+.faq-a strong{color:var(--t);font-weight:600}
+.faq-a .faq-formula{background:var(--s2);border-left:3px solid var(--a);border-radius:0 6px 6px 0;padding:10px 13px;font-family:var(--mo);font-size:12.5px;color:var(--a);margin:.6rem 0;display:block;line-height:1.6}
+
+/* Disclaimer */
+.calc-disclaimer{margin-top:2rem;padding-top:1.25rem;border-top:1px solid var(--bd);display:flex;gap:10px;align-items:flex-start}
+.calc-disclaimer .dx-icon{font-size:15px;color:var(--m);flex-shrink:0;margin-top:1px}
+.calc-disclaimer .dx-text{font-size:11.5px;color:var(--m);line-height:1.65}
+.calc-disclaimer .dx-text strong{color:var(--tb);font-weight:600}
+
+/* Insights */
+.insight-box{background:var(--s2);border:1px solid var(--bd);border-radius:10px;padding:14px 16px;margin:1rem 0}
+.insight-title{font-size:11px;font-weight:700;color:var(--m);text-transform:uppercase;letter-spacing:.6px;margin-bottom:.65rem;display:flex;align-items:center;gap:6px}
+.insight-line{display:flex;gap:9px;align-items:flex-start;font-size:13px;color:var(--t);line-height:1.55;margin-bottom:8px}
+.insight-line:last-child{margin-bottom:0}
+.insight-line .ic{flex-shrink:0;font-size:13px;font-weight:700;margin-top:1px;width:16px;text-align:center}
+.insight-line.good .ic{color:var(--g)}
+.insight-line.bad .ic{color:var(--r)}
+.insight-line.neutral .ic{color:var(--a)}
+.insight-line strong{font-weight:700}
+
+/* Print button (visual style, hidden in print itself) */
+.download-btn{background:var(--s2);border:1px solid var(--bd);color:var(--tb);font-size:12.5px;font-weight:500;cursor:pointer;display:inline-flex;align-items:center;gap:6px;padding:7px 14px;border-radius:20px;font-family:var(--fn);transition:all .18s;margin-bottom:1rem;float:right}
+.download-btn:disabled{opacity:.6;cursor:wait}
+.download-btn:hover{color:var(--t);border-color:var(--g);background:var(--s)}
+.print-header{display:none}
+
+/* Print stylesheet: show only the active calculator's inputs/outputs, hide everything else */
+@media print{
+  html,body{background:#fff!important;color:#000!important}
+  .topbar,.nav,.site-footer,#srch-results,.search-overlay{display:none!important}
+  .content{padding:0!important}
+  .panel{display:none!important}
+  .panel.on{display:block!important}
+  .panel.on>*{display:none!important}
+  .panel.on .two,.panel.on .two-eq,.panel.on .three{display:grid!important;grid-template-columns:1fr 1fr!important;gap:16px;page-break-inside:avoid}
+  .panel.on .three{grid-template-columns:1fr 1fr 1fr!important}
+  /* Rescue calculators whose content isn't wrapped in .two/.two-eq/.three
+     (Loan/Mortgage Comparison use direct .card/.g3 children; Currency &
+     Scientific use a plain unclassed wrapper div) */
+  .panel.on>.card,.panel.on>.g3{display:block!important;page-break-inside:avoid}
+  #currency.panel.on>div:not(.print-header),#scientific.panel.on>div:not(.print-header){display:block!important}
+  /* Explicit hide, regardless of nesting depth — needed because DCF (and
+     potentially others) nest their guide/FAQ inside the same .card as
+     their actual results, so the blanket ">*" rule above can't catch it */
+  .panel.on .calc-guide,.panel.on .faq-section,.panel.on .calc-disclaimer,.panel.on .input-hint{display:none!important}
+  .print-header.show{display:block!important;margin-bottom:1rem;color:#000}
+  .print-header.show .ph-name{font-size:20px;font-weight:700;margin-bottom:2px;color:#000}
+  .print-header.show .ph-date{font-size:11px;color:#555}
+  .card{background:#fff!important;border:1px solid #ccc!important;color:#000!important;padding:14px!important;box-shadow:none!important;display:block!important}
+  .card *{visibility:visible}
+  .card *[style*="background:var(--s2)"],.card *[style*="background:var(--s)"]{background:#f7f7f7!important}
+  .card *[style*="color:var(--t)"]{color:#000!important}
+  .card *[style*="color:var(--m)"]{color:#666!important}
+  .card *[style*="color:var(--a)"]{color:#946800!important}
+  .card *[style*="color:var(--g)"]{color:#0a7a4d!important}
+  .card *[style*="color:var(--r)"]{color:#c0293f!important}
+  .card *[style*="color:var(--b)"]{color:#0d5fb5!important}
+  .card *[style*="color:var(--p)"]{color:#6e3a8a!important}
+  .card-title{color:#000!important;border-bottom:1px solid #ccc;padding-bottom:6px;margin-bottom:10px}
+  .field label{color:#444!important}
+  .field input,.field select{background:#f7f7f7!important;border:1px solid #ccc!important;color:#000!important}
+  .sgrid,.g2,.g3{display:grid!important}
+  .sbox{background:#f7f7f7!important;border:1px solid #ddd!important;display:block!important}
+  .sbox .lbl{color:#666!important}
+  .sbox .val{color:#000!important}
+  .rrow{color:#000!important;border-bottom:1px solid #eee!important;display:flex!important}
+  .tbl{display:table!important;width:100%}
+  .tbl,.tbl th,.tbl td{color:#000!important;border-color:#ccc!important}
+  .tbl th{background:#eee!important}
+  .donut-wrap,.leg-i{display:flex!important}
+  .insight-box,.insight-line,.insight-title{display:none!important}
+  canvas{display:block!important}
+}
+</style>
+<link rel="icon" href="/favicon.ico" sizes="any">
+<link rel="icon" type="image/svg+xml" href="/favicon.svg">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-61RHHG8E6Q"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-61RHHG8E6Q');
+</script>
+<meta name="msvalidate.01" content="175D12831D109E3E7E1A856004E0F393" />
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "WebApplication", "name": "Stock Dilution Calculator", "url": "https://finclac.com/stock-dilution-calculator", "description": "See how a secondary offering, option exercise, or convertible note conversion affects EPS and your share value. Free stock dilution impact calculator.", "applicationCategory": "FinanceApplication", "operatingSystem": "Any (web-based)", "offers": {"@type": "Offer", "price": "0", "priceCurrency": "USD"}, "isPartOf": {"@type": "WebSite", "name": "FinCalc", "url": "https://finclac.com/"}}</script>
+</head>
+<body>
+<div class="topbar">
+  <a class="logo" href="/"><div class="logo-mark">FC</div>FinCalc</a>
+  <div class="searchbox">
+    <svg width="14" height="14" fill="none" stroke="#6B7A8D" stroke-width="2" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+    <input id="srch" placeholder="Search 40 calculators..." oninput="doSearch()" onkeydown="if(event.key==='Enter')goSearch()">
+  </div>
+</div>
+<div class="nav">
+  <a class="ntab on" href="/" onclick="go('home',this);return false;">🏠 Home</a><a class="ntab" href="/blog">📝 Blog</a>
+  <a class="ntab" href="/cagr-calculator" onclick="go('cagr',this);return false;">📐 CAGR</a>
+  <a class="ntab" href="/xirr-calculator" onclick="go('xirr',this);return false;">📅 XIRR</a>
+  <a class="ntab" href="/dividend-reinvestment-calculator" onclick="go('drip',this);return false;">💧 DRIP</a>
+  <a class="ntab" href="/etf-growth-calculator" onclick="go('etf',this);return false;">🗂️ ETF Growth</a>
+  <a class="ntab" href="/dcf-valuation-calculator" onclick="go('dcf',this);return false;">🏦 DCF Valuation</a>
+  <a class="ntab" href="/debt-snowball-vs-avalanche-calculator" onclick="go('debtcomp',this);return false;">❄️ Snowball vs Avalanche</a>
+  <a class="ntab" href="/rental-property-calculator" onclick="go('rentalprop',this);return false;">🏡 Rental Property</a>
+  <a class="ntab" href="/burn-rate-calculator" onclick="go('burnrate',this);return false;">🔥 Burn Rate</a>
+  <a class="ntab" href="/pricing-margin-calculator" onclick="go('pricing',this);return false;">🏷️ Pricing</a>
+  <a class="ntab" href="/equity-dilution-calculator" onclick="go('equity',this);return false;">📐 Equity Dilution</a>
+  <a class="ntab" href="/revenue-forecast-calculator" onclick="go('revenue',this);return false;">📊 Revenue Forecast</a>
+  <a class="ntab" href="/loan-emi-calculator" onclick="go('loan',this);return false;">🏦 Loan/EMI</a>
+  <a class="ntab" href="/sip-calculator" onclick="go('invest',this);return false;">📈 SIP/Investment</a>
+  <a class="ntab" href="/tax-calculator" onclick="go('tax',this);return false;">🧾 Tax</a>
+  <a class="ntab" href="/mortgage-calculator" onclick="go('mortgage',this);return false;">🏠 Mortgage</a>
+  <a class="ntab" href="/mortgage-comparison-calculator" onclick="go('mortcomp',this);return false;">⚖️ Mtg Compare</a>
+  <a class="ntab" href="/compound-interest-calculator" onclick="go('savings',this);return false;">🏛️ Savings</a>
+  <a class="ntab" href="/stock-profit-calculator" onclick="go('stock',this);return false;">📉 Stock P&amp;L</a>
+  <a class="ntab" href="/retirement-calculator" onclick="go('retirement',this);return false;">👴 Retirement</a>
+  <a class="ntab" href="/debt-payoff-calculator" onclick="go('debt',this);return false;">💳 Debt Payoff</a>
+  <a class="ntab" href="/rental-yield-calculator" onclick="go('rental',this);return false;">🏘️ Rental Yield</a>
+  <a class="ntab" href="/cash-flow-calculator" onclick="go('cashflow',this);return false;">💵 Cash Flow</a>
+  <a class="ntab" href="/breakeven-calculator" onclick="go('breakeven',this);return false;">📊 Break-even</a>
+  <a class="ntab" href="/savings-goal-calculator" onclick="go('savingsgoal',this);return false;">🎯 Savings Goal</a>
+  <a class="ntab" href="/emergency-fund-calculator" onclick="go('emergencyfund',this);return false;">🛡️ Emergency Fund</a>
+  <a class="ntab" href="/financial-health-score-calculator" onclick="go('healthscore',this);return false;">💯 Health Score</a>
+  <a class="ntab" href="/currency-converter" onclick="go('currency',this);return false;">💱 Currency</a>
+  <a class="ntab" href="/scientific-calculator" onclick="go('scientific',this);return false;">🔬 Scientific</a>
+</div>
+<div class="content">
+<div id="dilutionimpact" class="panel on">
+<a class="back-btn" href="/" onclick="go('home',null);return false;">← Back to Home</a>
+<div class="calc-links"><span class="calc-links-label">🔗 Related</span><a class="calc-link-btn" href="/equity-dilution-calculator" onclick="go('equity',null);return false;">📐 Equity Dilution</a><a class="calc-link-btn" href="/peg-ratio-calculator" onclick="go('peg',null);return false;">📏 PEG Ratio</a><a class="calc-link-btn" href="/dcf-valuation-calculator" onclick="go('dcf',null);return false;">🏦 Stock DCF</a><a class="calc-link-btn" href="/stock-profit-calculator" onclick="go('stock',null);return false;">📉 Stock P&amp;L</a></div><div class="calc-links" style="margin-top:8px;background:transparent;border:none;padding:4px 0"><span class="calc-links-label">📖 Related reading</span><div style="margin-top:6px;font-size:12.5px;line-height:1.6"><a href="/blog/equity-dilution-101" style="color:var(--a);text-decoration:underline">Equity Dilution 101: What Happens to Your Shares After Each Funding Round</a><br></div></div>
+
+
+<div class="two">
+  <div class="card">
+    <div class="card-title">Stock Dilution Impact Calculator</div>
+    <div class="g2">
+      <div class="field"><label>Shares Outstanding (before)</label><input type="number" id="di-shares" value="100000000" oninput="cDilutionImpact()"></div>
+      <div class="field"><label>Current Stock Price ($)</label><div class="ip"><span class="pfx">$</span><input type="number" id="di-price" value="50" step="0.01" oninput="cDilutionImpact()"></div></div>
+      <div class="field"><label>Annual Net Income ($)</label><div class="ip"><span class="pfx">$</span><input type="number" id="di-income" value="200000000" oninput="cDilutionImpact()"></div></div>
+      <div class="field"><label>Dilution Source</label><select id="di-source" onchange="cDilutionImpact()"><option value="secondary">Secondary Stock Offering</option><option value="options">Option / RSU Exercise</option><option value="convert">Convertible Note Conversion</option></select></div>
+      <div class="field"><label>New Shares Being Issued</label><input type="number" id="di-newshares" value="10000000" oninput="cDilutionImpact()"></div>
+      <div class="field"><label>Your Shares Held</label><input type="number" id="di-yourshares" value="5000" oninput="cDilutionImpact()"></div>
+    </div>
+    <div class="sgrid">
+      <div class="sbox"><div class="lbl">EPS Before → After</div><div class="val" style="color:var(--a)" id="di-eps">$0 → $0</div></div>
+      <div class="sbox"><div class="lbl">EPS Dilution</div><div class="val" style="color:var(--r)" id="di-dilpct">0%</div></div>
+      <div class="sbox"><div class="lbl">Implied Price (P/E held flat)</div><div class="val" style="color:var(--g)" id="di-impliedprice">$0</div></div>
+      <div class="sbox"><div class="lbl">Net Income Growth to Offset</div><div class="val" style="color:var(--b)" id="di-offset">0%</div></div>
+    </div>
+    <div class="insight-box" id="di-insights"></div>
+  </div>
+  <div class="card">
+    <div class="card-title">Your Position, Before vs After</div>
+    <canvas id="di-chart" width="300" height="150" style="width:100%;margin:1rem 0"></canvas>
+    <div style="display:flex;gap:12px;font-size:11px;color:var(--m);margin-bottom:1rem"><span style="color:var(--g)">━ Your Value</span></div>
+    <div class="rrow"><span class="rk">Your ownership % (before)</span><span class="rv" id="di-pctbefore">0%</span></div>
+    <div class="rrow"><span class="rk">Your ownership % (after)</span><span class="rv" style="color:var(--r)" id="di-pctafter">0%</span></div>
+    <div class="rrow"><span class="rk">Your stake value (before)</span><span class="rv" id="di-valbefore">$0</span></div>
+    <div class="rrow"><span class="rk">Your stake value (after)</span><span class="rv" style="color:var(--r)" id="di-valafter">$0</span></div>
+  </div>
+</div>
+
+<div class="calc-guide">
+  <div class="guide-toggle">
+    <div class="guide-toggle-title">📖 Stock Dilution Impact — What New Shares Cost Existing Holders</div>
+  </div>
+  <div class="guide-body">
+<div class="guide-p">When a public company issues new shares — through a secondary stock offering, employees exercising options and RSUs, or a convertible note converting into equity — every existing shareholder's percentage ownership shrinks, even though they didn't sell a single share. This calculator models exactly what that dilution does to your ownership percentage, the company's earnings per share, and the value of your specific position, assuming the market's price-to-earnings multiple stays roughly constant around the event.</div>
+
+<div class="guide-h3">Why EPS Falls Even Though Net Income Doesn't Change</div>
+<div class="guide-formula">EPS = Net Income ÷ Shares Outstanding</div>
+<div class="guide-p">Issuing new shares doesn't directly change how much money the company makes — it changes the denominator in the EPS calculation. The exact same net income is now divided among more shares, so each individual share's claim on that income shrinks proportionally. A company issuing 10% more shares dilutes EPS by roughly 9.1% (not exactly 10%, since the dilution percentage is new shares divided by the <em>new, larger</em> total, not the original count).</div>
+
+<div class="guide-h3">Worked Example: A Secondary Offering</div>
+<div class="guide-p">A company with 100 million shares outstanding, trading at $50 with $200 million in annual net income, has an EPS of $2.00 and an implied P/E of 25. It then issues 10 million new shares (a 10% increase) in a secondary offering:</div>
+<table class="guide-table"><thead><tr><th>Metric</th><th>Before</th><th>After</th></tr></thead><tbody>
+<tr><td>Shares Outstanding</td><td>100,000,000</td><td>110,000,000</td></tr>
+<tr><td>EPS</td><td>$2.00</td><td>$1.82</td></tr>
+<tr><td>Implied Price (P/E held at 25)</td><td>$50.00</td><td>$45.45</td></tr>
+</tbody></table>
+<div class="guide-p">If the market keeps valuing the company at the same 25x earnings multiple, the diluted EPS alone implies a price drop to roughly $45.45 — a 9.1% decline purely from the share count increase, with no change in the underlying business. A shareholder holding 5,000 shares would see their position drop from $250,000 to roughly $227,273 in implied value, despite never selling anything.</div>
+
+<div class="guide-h3">The Three Common Sources of Dilution</div>
+<table class="guide-table"><thead><tr><th>Source</th><th>What Happens</th><th>Typical Context</th></tr></thead><tbody>
+<tr><td>Secondary Offering</td><td>Company sells new shares directly to investors, often to raise capital</td><td>Funding growth, paying down debt, or shoring up the balance sheet</td></tr>
+<tr><td>Option / RSU Exercise</td><td>Employees convert vested stock options or restricted stock units into actual shares</td><td>Ongoing, gradual dilution baked into most public companies' compensation structure</td></tr>
+<tr><td>Convertible Note Conversion</td><td>Debt that converts into equity at a predetermined price or ratio, often triggered by a specific event or date</td><td>Common in growth-stage companies that raised capital via convertible debt rather than a priced equity round</td></tr>
+</tbody></table>
+<div class="guide-p">The dilution math is identical regardless of source — what changes is the context and whether the company received anything of value in exchange. A secondary offering brings in cash the company can deploy; an option exercise typically brings in a smaller exercise price payment; a convertible note conversion extinguishes existing debt rather than raising new cash.</div>
+
+<div class="guide-h3">Can the Company Offset Dilution?</div>
+<div class="guide-p">Dilution isn't automatically bad for shareholders if the company puts the new capital (or the debt relief, in a conversion) to good use. If net income grows by roughly the same percentage as the share count increased, EPS — and by extension, the P/E-implied share price — returns to where it would have been without the dilution. This calculator shows exactly what percentage net income growth would be needed to fully offset a given dilution event, which is a useful benchmark for judging whether a company's stated use of proceeds is plausible.</div>
+<div class="guide-formula">Required Net Income Growth ≈ New Shares ÷ Original Shares Outstanding × 100%</div>
+
+<div class="guide-h3">Why the "P/E Held Constant" Assumption Matters — and Where It Breaks Down</div>
+<div class="guide-p">This calculator's implied price assumes investors keep valuing the company at the same earnings multiple after the dilution event as before. In reality, the market's reaction depends heavily on <em>why</em> the dilution happened. A well-telegraphed offering to fund a clearly value-creating acquisition might see the P/E multiple expand, partially or fully absorbing the EPS hit. An unexpected, poorly explained offering — especially one signaling the company needed emergency cash — often sees the multiple compress further, making the price impact worse than the EPS math alone would suggest.</div>
+<div class="guide-warn">⚠ Real-world market reactions to dilution events are rarely as clean as a constant P/E multiple. Announcement timing, the stated use of proceeds, and overall market sentiment all influence how much (or little) the stock price actually moves — treat this calculator's implied price as a structured starting estimate, not a prediction of the actual market reaction.</div>
+<div class="guide-tip">💡 When a company you hold announces a dilutive event, check the stated use of proceeds before assuming the worst. Dilution that funds a clear, credible path to proportionally higher future earnings is a very different situation from dilution used simply to cover ongoing cash shortfalls.</div>
+
+  </div>
+</div>
+
+<div class="faq-section">
+<div class="faq-section-title">❓ Frequently Asked Questions</div>
+<div class="faq-item">
+  <div class="faq-q" onclick="toggleFAQ(this)">
+    <span>What is stock dilution?</span>
+    <span class="faq-icon">+</span>
+  </div>
+  <div class="faq-a">Stock dilution happens when a company issues new shares, which reduces each existing shareholder's percentage ownership of the company even though they haven't sold anything. It can come from a secondary stock offering, employees exercising options or RSUs, or convertible debt converting into equity.</div>
+</div>
+<div class="faq-item">
+  <div class="faq-q" onclick="toggleFAQ(this)">
+    <span>How does dilution affect EPS?</span>
+    <span class="faq-icon">+</span>
+  </div>
+  <div class="faq-a">EPS (earnings per share) is net income divided by shares outstanding. When new shares are issued without a proportional increase in net income, the same earnings get divided among more shares, so EPS falls. <span class="faq-formula">EPS = Net Income ÷ Shares Outstanding</span></div>
+</div>
+<div class="faq-item">
+  <div class="faq-q" onclick="toggleFAQ(this)">
+    <span>Will the stock price definitely fall after dilution?</span>
+    <span class="faq-icon">+</span>
+  </div>
+  <div class="faq-a">Not necessarily, though it often does, at least initially. If the market keeps valuing the company at the same P/E multiple, lower EPS implies a lower price. But if the new capital is used productively and increases future earnings enough, or if the market's confidence in the company actually improves, the price impact can be smaller than the raw EPS dilution suggests — or even reverse over time.</div>
+</div>
+<div class="faq-item">
+  <div class="faq-q" onclick="toggleFAQ(this)">
+    <span>How much would net income need to grow to offset dilution?</span>
+    <span class="faq-icon">+</span>
+  </div>
+  <div class="faq-a">Roughly the same percentage as the increase in share count. Issuing 10% more shares requires about 10% more net income to keep EPS unchanged. This calculator shows this figure directly so you can judge whether a company's plans for the new capital are realistic.</div>
+</div>
+<div class="faq-item">
+  <div class="faq-q" onclick="toggleFAQ(this)">
+    <span>Does it matter why the company is issuing new shares?</span>
+    <span class="faq-icon">+</span>
+  </div>
+  <div class="faq-a">Yes, significantly, for how the market is likely to react — even though the raw EPS math is identical regardless of cause. A well-explained offering funding clear growth tends to be received differently than an offering that signals the company is short on cash. Always check the stated use of proceeds.</div>
+</div>
+<div class="faq-item">
+  <div class="faq-q" onclick="toggleFAQ(this)">
+    <span>Is option and RSU dilution different from a secondary offering?</span>
+    <span class="faq-icon">+</span>
+  </div>
+  <div class="faq-a">The dilution math is the same — more shares outstanding, same net income, lower EPS. The difference is mainly that option and RSU dilution tends to happen gradually and continuously as part of normal employee compensation, while a secondary offering is typically a single, larger, more visible event with an explicit capital-raising purpose.</div>
+</div>
+</div>
+
+
+</div>
+</div><!-- content -->
+<div class="site-footer">
+  <div class="footer-brand">
+    <div class="logo-mark" style="width:22px;height:22px;background:var(--a);border-radius:5px;display:flex;align-items:center;justify-content:center;color:#000;font-size:11px;font-weight:700">FC</div>
+    FinCalc
+  </div>
+  <div class="footer-copy">© 2025 FinCalc · Free Financial Calculators · <a href="/blog" style="color:inherit">Blog</a> · <a href="/about" style="color:inherit">About</a> · <a href="/privacy" style="color:inherit">Privacy Policy</a> · <a href="/terms" style="color:inherit">Terms</a></div>
+  <!-- tinystartups · Launched on Tiny Startups -->
+<a href="https://www.tinystartups.com/startup/finclaccom" target="_blank" rel="noopener"
+   style="display:inline-flex;align-items:center;gap:10px;padding:8px 14px 8px 10px;border-radius:12px;text-decoration:none;font-family:'Inter',system-ui,sans-serif;background:linear-gradient(#fff,#fff) padding-box,linear-gradient(90deg,#3525E6,#D81FE0,#22B8F0) border-box;border:2px solid transparent;color:#0E0B1F;flex-shrink:0">
+  <svg width="34" height="34" viewBox="0 0 100 100">
+    <defs><linearGradient id="tsg" x1=".1" y1="0" x2=".9" y2="1">
+      <stop offset="0%" stop-color="#3525E6"/><stop offset="55%" stop-color="#D81FE0"/><stop offset="100%" stop-color="#22B8F0"/>
+    </linearGradient></defs>
+    <path d="M50 6C52 32 68 48 94 50C68 52 52 68 50 94C48 68 32 52 6 50C32 48 48 32 50 6Z" fill="url(#tsg)"/>
+  </svg>
+  <span style="display:flex;flex-direction:column;line-height:1.1">
+    <span style="font-family:monospace;font-size:7px;font-weight:600;letter-spacing:0.15em;text-transform:uppercase;color:#6A6585">Launched on</span>
+    <span style="font-size:14px;font-weight:800;letter-spacing:-0.02em">Tiny Startups</span>
+  </span>
+</a>
+<a href="https://devglobe.app/projects/fincalc?utm_source=badge&utm_medium=embed" target="_blank" rel="noopener">
+  <img src="https://devglobe.app/badges/launched-on-devglobe-dark.svg" alt="Launched on DevGlobe" width="250" height="54" />
+</a>
+</div>
+<script src="app.js"></script>
+<script>initPage('dilutionimpact');</script>
+</body>
+</html>

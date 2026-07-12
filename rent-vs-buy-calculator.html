@@ -1,0 +1,471 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Rent vs Buy Calculator — Find Your Home Breakeven Year | FinCalc</title>
+<meta name="description" content="Compare your projected net worth renting vs buying a home, including opportunity cost, appreciation, and the exact breakeven year. Free rent vs buy calculator.">
+<link rel="canonical" href="https://finclac.com/rent-vs-buy-calculator">
+<meta name="robots" content="index, follow">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Rent vs Buy Calculator — Find Your Home Breakeven Year | FinCalc">
+<meta property="og:description" content="Compare your projected net worth renting vs buying a home, including opportunity cost, appreciation, and the exact breakeven year. Free rent vs buy calculator.">
+<meta property="og:url" content="https://finclac.com/rent-vs-buy-calculator">
+<meta property="og:site_name" content="FinCalc">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Rent vs Buy Calculator — Find Your Home Breakeven Year | FinCalc">
+<meta name="twitter:description" content="Compare your projected net worth renting vs buying a home, including opportunity cost, appreciation, and the exact breakeven year. Free rent vs buy calculator.">
+<style>*{box-sizing:border-box;margin:0;padding:0}
+:root{--bg:#0B0E11;--s:#141920;--s2:#1C2430;--bd:#232D3A;--t:#E8EDF2;--m:#6B7A8D;--tb:#A3B2C4;--a:#F0B90B;--g:#0ECB81;--r:#F6465D;--b:#1890FF;--p:#9B59B6;--fn:'DM Sans',sans-serif;--mo:'DM Mono',monospace}
+body{background:var(--bg);color:var(--t);font-family:var(--fn);font-size:14px;line-height:1.5;min-height:100vh}
+.topbar{background:var(--s);border-bottom:1px solid var(--bd);padding:0 1.25rem;display:flex;align-items:center;justify-content:space-between;height:52px;position:sticky;top:0;z-index:200}
+.logo{display:flex;align-items:center;gap:8px;font-size:16px;font-weight:600;color:var(--t);text-decoration:none}
+.logo-mark{width:28px;height:28px;background:var(--a);border-radius:6px;display:flex;align-items:center;justify-content:center;color:#000;font-size:13px;font-weight:700}
+.searchbox{display:flex;align-items:center;gap:8px;background:var(--s2);border:1px solid var(--bd);border-radius:7px;padding:6px 12px;width:240px}
+.searchbox input{background:none;border:none;outline:none;color:var(--t);font-family:var(--fn);font-size:13px;width:100%}
+.nav{display:flex;gap:2px;padding:.75rem 1.25rem 0;border-bottom:1px solid var(--bd);overflow-x:auto;scrollbar-width:none;background:var(--bg);position:sticky;top:52px;z-index:100}
+.nav::-webkit-scrollbar{display:none}
+.ntab{padding:8px 13px;font-size:12px;font-weight:500;color:var(--m);cursor:pointer;border-bottom:2px solid transparent;white-space:nowrap;background:none;border-top:none;border-left:none;border-right:none;transition:all .18s;font-family:var(--fn);text-decoration:none;display:inline-block}
+.ntab.on{color:var(--a);border-bottom-color:var(--a)}
+.ntab:hover:not(.on){color:var(--t)}
+.content{padding:1.25rem}
+.panel{display:none}.panel.on{display:block}.panel.on::after{content:'';display:table;clear:both}
+.dir-sec{margin-bottom:1.75rem}
+.dir-sec-h{font-size:11px;font-weight:600;color:var(--m);letter-spacing:.8px;text-transform:uppercase;margin-bottom:.75rem;display:flex;align-items:center;gap:8px}
+.dir-sec-h::after{content:'';flex:1;height:1px;background:var(--bd)}
+.dir-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(178px,1fr));gap:10px}
+.dir-card{background:linear-gradient(135deg,#0d1117 60%,#071510 100%);border:1px solid #0ECB81;border-radius:12px;padding:1.25rem 1.1rem;cursor:pointer;transition:all .2s;box-shadow:0 2px 12px rgba(14,203,129,.1),0 1px 3px rgba(0,0,0,.4);text-decoration:none;display:block;color:inherit}
+.dir-card:hover{border-color:#ffffff;transform:translateY(-2px);box-shadow:0 6px 28px rgba(255,255,255,.12),0 2px 8px rgba(0,0,0,.5)}
+.dir-icon{font-size:28px;margin-bottom:10px;line-height:1}
+.dir-name{font-size:15px;font-weight:600;margin-bottom:5px;color:var(--t)}
+.dir-desc{font-size:12px;color:var(--m);line-height:1.6}
+.two{display:grid;grid-template-columns:1fr 310px;gap:16px;margin-top:.5rem}
+.two-eq{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.three{display:grid;grid-template-columns:1fr 1fr 1fr;gap:16px}
+.g2{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.g3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px}
+.card{background:var(--s);border:1px solid var(--bd);border-radius:10px;padding:1.25rem}
+.mb16{margin-bottom:16px}
+.card-title{font-size:11px;font-weight:600;color:var(--m);letter-spacing:.8px;text-transform:uppercase;margin-bottom:1.25rem}
+.input-hint{font-size:11.5px;color:var(--a);background:rgba(240,185,11,.08);border:1px solid rgba(240,185,11,.25);border-radius:6px;padding:6px 10px;margin:-.75rem 0 1rem;line-height:1.5}
+.chart-tooltip{position:fixed;display:none;background:#1C2430;border:1px solid #232D3A;border-radius:6px;padding:7px 11px;font-size:11.5px;color:#E8EDF2;pointer-events:none;z-index:9999;box-shadow:0 4px 14px rgba(0,0,0,.45);font-family:'DM Sans',sans-serif;line-height:1.5;max-width:200px}
+.chart-tooltip strong{color:#F0B90B}
+.field{margin-bottom:.9rem}
+.field label{display:block;font-size:12px;color:var(--m);margin-bottom:5px}
+.field input,.field select{width:100%;background:var(--bg);border:1px solid var(--bd);border-radius:6px;padding:8px 11px;color:var(--t);font-family:var(--mo);font-size:13px;outline:none;transition:border .15s}
+.field input:focus,.field select:focus{border-color:var(--a)}
+.field select option{background:var(--s2)}
+.ip{position:relative}
+.ip .pfx{position:absolute;left:10px;top:50%;transform:translateY(-50%);color:var(--m);font-size:13px;pointer-events:none;font-family:var(--mo)}
+.ip input{padding-left:22px}
+.sgrid{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:1rem}
+.sbox{background:var(--s2);border-radius:8px;padding:10px}
+.sbox .lbl{font-size:10px;color:var(--m);margin-bottom:3px;font-weight:500;text-transform:uppercase;letter-spacing:.4px}
+.sbox .val{font-size:15px;font-weight:600;font-family:var(--mo)}
+.rrow{display:flex;justify-content:space-between;padding:7px 0;border-bottom:1px solid var(--bd);font-size:13px}
+.rrow:last-child{border:none}
+.rk{color:var(--m);font-size:12px}
+.rv{font-family:var(--mo);font-weight:500}
+.btn{width:100%;padding:10px;background:var(--a);color:#000;border:none;border-radius:7px;font-family:var(--fn);font-size:13px;font-weight:600;cursor:pointer;margin-top:8px;transition:opacity .15s}
+.btn:hover{opacity:.88}
+.btn-sm{padding:6px 12px;border-radius:6px;font-size:12px;font-weight:500;cursor:pointer;border:none;font-family:var(--fn)}
+.btn-add{background:var(--s2)!important;color:var(--g)!important;border:1px solid var(--g)!important}
+.btn-del{background:transparent;color:var(--r);border:1px solid var(--bd);padding:6px 10px;border-radius:6px;cursor:pointer;font-size:13px}
+.back-btn{background:var(--s2);border:1px solid var(--bd);color:var(--tb);font-size:12.5px;font-weight:500;cursor:pointer;margin-bottom:1rem;display:inline-flex;align-items:center;gap:6px;padding:7px 14px;border-radius:20px;font-family:var(--fn);transition:all .18s;text-decoration:none}
+.back-btn:hover{color:var(--t);border-color:var(--g);background:var(--s)}
+.badge-new{background:rgba(14,203,129,.15);color:var(--g);font-size:10px;font-weight:600;padding:2px 7px;border-radius:4px}
+.pbar-bg{background:var(--bd);border-radius:3px;height:6px;overflow:hidden;margin-top:4px}
+.pbar-fill{height:100%;border-radius:3px;transition:width .4s}
+.tbl{width:100%;border-collapse:collapse;font-size:12px}
+.tbl th{color:var(--m);font-size:10px;text-transform:uppercase;padding:6px 8px;border-bottom:1px solid var(--bd);text-align:right;letter-spacing:.4px}
+.tbl th:first-child{text-align:left}
+.tbl td{padding:6px 8px;border-bottom:1px solid var(--bd);font-family:var(--mo);text-align:right}
+.tbl td:first-child{text-align:left;color:var(--m);font-family:var(--fn)}
+.tbl tr:last-child td{border:none}
+.tbl .hl{background:var(--s2)}
+.slab-tbl{width:100%;border-collapse:collapse;font-size:12px}
+.slab-tbl th{color:var(--m);font-size:10px;letter-spacing:.5px;text-transform:uppercase;padding:5px 0;border-bottom:1px solid var(--bd);text-align:left}
+.slab-tbl td{padding:6px 0;border-bottom:1px solid var(--bd);font-family:var(--mo)}
+.slab-tbl tr:last-child td{border:none}
+.slab-on td{color:var(--a)}
+.tline{position:relative;padding-left:20px}
+.tline::before{content:'';position:absolute;left:6px;top:0;bottom:0;width:1px;background:var(--bd)}
+.tl-i{position:relative;margin-bottom:12px;font-size:12px}
+.tl-i::before{content:'';position:absolute;left:-17px;top:4px;width:8px;height:8px;border-radius:50%;background:var(--a);border:2px solid var(--bg)}
+.tl-lbl{color:var(--m);font-size:11px}
+.cmp-col{background:var(--s2);border-radius:10px;padding:1rem;border:1px solid var(--bd)}
+.cmp-col.winner{border-color:var(--g)}
+.donut-wrap{display:flex;justify-content:center;align-items:center;gap:16px;padding:.75rem 0}
+.leg-i{display:flex;align-items:center;gap:6px;font-size:11px;color:var(--m);margin-bottom:5px}
+.leg-dot{width:8px;height:8px;border-radius:50%;flex-shrink:0}
+.sci-disp{background:var(--bg);border:1px solid var(--bd);border-radius:8px;padding:12px 14px;margin-bottom:10px;text-align:right}
+.sci-expr{font-size:12px;color:var(--m);font-family:var(--mo);min-height:18px}
+.sci-num{font-size:28px;font-family:var(--mo);font-weight:500;word-break:break-all}
+.sci-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:5px}
+.sci-btn{padding:10px 4px;border:1px solid var(--bd);border-radius:6px;background:var(--s2);color:var(--t);font-family:var(--mo);font-size:12px;cursor:pointer;text-align:center}
+.sci-btn:hover{background:var(--bd)}
+.sci-btn.op{color:var(--a)}.sci-btn.eq{background:var(--a);color:#000;border-color:var(--a);font-weight:600}.sci-btn.cl{color:var(--r)}.sci-btn.fn{color:var(--b)}
+@media(max-width:700px){.two,.two-eq,.three{grid-template-columns:1fr}.g2,.g3{grid-template-columns:1fr}.sci-grid{grid-template-columns:repeat(4,1fr)}}
+
+}
+
+
+/* Inter-calculator links */
+.calc-links{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 2.5rem;padding:10px 12px;background:var(--s2);border-radius:8px;border-left:3px solid var(--g);align-items:center;clear:both}
+.calc-links-label{font-size:10px;color:var(--m);text-transform:uppercase;letter-spacing:.6px;font-weight:600;margin-right:4px;flex-shrink:0}
+.calc-link-btn{padding:4px 10px;background:var(--bg);border:1px solid var(--g);border-radius:20px;color:var(--g);font-size:11px;cursor:pointer;font-family:var(--fn);transition:all .18s;white-space:nowrap;text-decoration:none}
+.calc-link-btn:hover{background:var(--g);color:#000;border-color:var(--g)}
+
+
+/* Footer */
+.site-footer{background:var(--s);border-top:1px solid var(--bd);padding:1rem 1.25rem;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px;margin-top:1rem}
+.footer-brand{font-size:14px;font-weight:600;color:var(--t);display:flex;align-items:center;gap:8px}
+.footer-brand .logo-mark{width:22px;height:22px;font-size:11px}
+.footer-copy{font-size:11px;color:var(--m)}
+
+
+/* Calculator Guide Articles */
+.calc-guide{margin-top:2.5rem;border-top:1px solid var(--bd);padding-top:1.75rem}
+.guide-toggle{display:flex;align-items:center;justify-content:space-between;padding:10px 14px;background:var(--s2);border:1px solid var(--bd);border-radius:8px;margin-bottom:0}
+.guide-toggle-title{font-size:14px;font-weight:700;color:var(--t);display:flex;align-items:center;gap:8px;letter-spacing:.1px}
+.guide-body{display:block;padding:1.5rem 0 0;max-width:980px}
+.guide-h2{font-size:22px;font-weight:700;color:var(--t);margin:1.75rem 0 .85rem;letter-spacing:-.2px;line-height:1.3}
+.guide-h2:first-child{margin-top:0}
+.guide-h3{font-size:16px;font-weight:700;color:var(--t);margin:2rem 0 .75rem;letter-spacing:-.1px;line-height:1.35;padding-top:.25rem;border-top:1px solid var(--bd)}
+.guide-h3:first-child{margin-top:0;padding-top:0;border-top:none}
+.guide-p{font-size:14.5px;color:var(--tb);line-height:1.75;margin-bottom:1.1rem}
+.guide-p strong{color:var(--t);font-weight:600}
+.guide-formula{background:var(--s2);border-left:3px solid var(--a);border-radius:0 8px 8px 0;padding:14px 16px;font-family:var(--mo);font-size:13.5px;line-height:1.7;color:var(--a);margin:1.1rem 0;overflow-x:auto}
+.guide-tip{background:rgba(14,203,129,.08);border:1px solid rgba(14,203,129,.2);border-radius:8px;padding:13px 16px;font-size:13px;color:var(--g);margin:1.1rem 0;line-height:1.7;font-weight:500}
+.guide-warn{background:rgba(246,70,93,.08);border:1px solid rgba(246,70,93,.2);border-radius:8px;padding:13px 16px;font-size:13px;color:var(--r);margin:1.1rem 0;line-height:1.7;font-weight:500}
+.guide-table{width:100%;border-collapse:collapse;font-size:12.5px;margin:1.25rem 0}
+.guide-table th{background:var(--s2);color:var(--m);padding:9px 12px;text-align:left;font-size:10.5px;font-weight:700;text-transform:uppercase;letter-spacing:.5px;border-bottom:1px solid var(--bd)}
+.guide-table td{padding:9px 12px;border-bottom:1px solid var(--bd);color:var(--t);font-family:var(--mo)}
+.guide-table tr:last-child td{border:none}
+.guide-steps{counter-reset:step;margin:1.25rem 0}
+.guide-step{display:flex;gap:14px;margin-bottom:14px;font-size:14px;color:var(--tb);line-height:1.7}
+.guide-step-num{width:24px;height:24px;border-radius:50%;background:var(--g);color:#000;font-size:12px;font-weight:700;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:1px}
+
+.guide-sub-arrow{display:none}
+
+/* Mobile-only collapsible guide subsections (reduces cognitive load on small screens) */
+@media(max-width:700px){
+  .guide-sub{border-bottom:1px solid var(--bd)}
+  .guide-sub:last-child{border-bottom:none}
+  .guide-sub-head{display:flex;align-items:center;justify-content:space-between;gap:10px;cursor:pointer;user-select:none;padding:.25rem 0;margin:0}
+  .guide-sub-head .guide-h3{margin:1.5rem 0 0;padding-top:.25rem;border-top:1px solid var(--bd);flex:1}
+  .guide-sub:first-child .guide-sub-head .guide-h3{margin-top:0;padding-top:0;border-top:none}
+  .guide-sub-arrow{display:block;font-size:13px;color:var(--m);flex-shrink:0;transition:transform .25s;margin-top:1.4rem}
+  .guide-sub:first-child .guide-sub-arrow{margin-top:0}
+  .guide-sub.open .guide-sub-arrow{transform:rotate(180deg)}
+  .guide-sub-body{display:none;overflow:hidden}
+  .guide-sub.open .guide-sub-body{display:block}
+}
+
+
+/* FAQ Section */
+.faq-section{margin-top:2.5rem;border-top:1px solid var(--bd);padding-top:1.75rem}
+.faq-section-title{font-size:13px;font-weight:700;color:var(--m);text-transform:uppercase;letter-spacing:.8px;margin-bottom:1.1rem;display:flex;align-items:center;gap:8px}
+.faq-section-title::after{content:'';flex:1;height:1px;background:var(--bd)}
+.faq-item{border:1px solid var(--bd);border-radius:8px;margin-bottom:10px;overflow:hidden;transition:border-color .2s}
+.faq-item:hover{border-color:var(--g)}
+.faq-q{display:flex;align-items:center;justify-content:space-between;padding:14px 16px;cursor:pointer;font-size:14px;font-weight:600;color:var(--t);user-select:none;gap:12px;line-height:1.45}
+.faq-q .faq-icon{font-size:16px;color:var(--a);transition:transform .3s;flex-shrink:0}
+.faq-item.open .faq-icon{transform:rotate(45deg)}
+.faq-a{display:none;padding:2px 16px 16px;font-size:13.5px;color:var(--tb);line-height:1.75;border-top:1px solid var(--bd)}
+.faq-item.open .faq-a{display:block;padding-top:12px}
+.faq-a strong{color:var(--t);font-weight:600}
+.faq-a .faq-formula{background:var(--s2);border-left:3px solid var(--a);border-radius:0 6px 6px 0;padding:10px 13px;font-family:var(--mo);font-size:12.5px;color:var(--a);margin:.6rem 0;display:block;line-height:1.6}
+
+/* Disclaimer */
+.calc-disclaimer{margin-top:2rem;padding-top:1.25rem;border-top:1px solid var(--bd);display:flex;gap:10px;align-items:flex-start}
+.calc-disclaimer .dx-icon{font-size:15px;color:var(--m);flex-shrink:0;margin-top:1px}
+.calc-disclaimer .dx-text{font-size:11.5px;color:var(--m);line-height:1.65}
+.calc-disclaimer .dx-text strong{color:var(--tb);font-weight:600}
+
+/* Insights */
+.insight-box{background:var(--s2);border:1px solid var(--bd);border-radius:10px;padding:14px 16px;margin:1rem 0}
+.insight-title{font-size:11px;font-weight:700;color:var(--m);text-transform:uppercase;letter-spacing:.6px;margin-bottom:.65rem;display:flex;align-items:center;gap:6px}
+.insight-line{display:flex;gap:9px;align-items:flex-start;font-size:13px;color:var(--t);line-height:1.55;margin-bottom:8px}
+.insight-line:last-child{margin-bottom:0}
+.insight-line .ic{flex-shrink:0;font-size:13px;font-weight:700;margin-top:1px;width:16px;text-align:center}
+.insight-line.good .ic{color:var(--g)}
+.insight-line.bad .ic{color:var(--r)}
+.insight-line.neutral .ic{color:var(--a)}
+.insight-line strong{font-weight:700}
+
+/* Print button (visual style, hidden in print itself) */
+.download-btn{background:var(--s2);border:1px solid var(--bd);color:var(--tb);font-size:12.5px;font-weight:500;cursor:pointer;display:inline-flex;align-items:center;gap:6px;padding:7px 14px;border-radius:20px;font-family:var(--fn);transition:all .18s;margin-bottom:1rem;float:right}
+.download-btn:disabled{opacity:.6;cursor:wait}
+.download-btn:hover{color:var(--t);border-color:var(--g);background:var(--s)}
+.print-header{display:none}
+
+/* Print stylesheet: show only the active calculator's inputs/outputs, hide everything else */
+@media print{
+  html,body{background:#fff!important;color:#000!important}
+  .topbar,.nav,.site-footer,#srch-results,.search-overlay{display:none!important}
+  .content{padding:0!important}
+  .panel{display:none!important}
+  .panel.on{display:block!important}
+  .panel.on>*{display:none!important}
+  .panel.on .two,.panel.on .two-eq,.panel.on .three{display:grid!important;grid-template-columns:1fr 1fr!important;gap:16px;page-break-inside:avoid}
+  .panel.on .three{grid-template-columns:1fr 1fr 1fr!important}
+  /* Rescue calculators whose content isn't wrapped in .two/.two-eq/.three
+     (Loan/Mortgage Comparison use direct .card/.g3 children; Currency &
+     Scientific use a plain unclassed wrapper div) */
+  .panel.on>.card,.panel.on>.g3{display:block!important;page-break-inside:avoid}
+  #currency.panel.on>div:not(.print-header),#scientific.panel.on>div:not(.print-header){display:block!important}
+  /* Explicit hide, regardless of nesting depth — needed because DCF (and
+     potentially others) nest their guide/FAQ inside the same .card as
+     their actual results, so the blanket ">*" rule above can't catch it */
+  .panel.on .calc-guide,.panel.on .faq-section,.panel.on .calc-disclaimer,.panel.on .input-hint{display:none!important}
+  .print-header.show{display:block!important;margin-bottom:1rem;color:#000}
+  .print-header.show .ph-name{font-size:20px;font-weight:700;margin-bottom:2px;color:#000}
+  .print-header.show .ph-date{font-size:11px;color:#555}
+  .card{background:#fff!important;border:1px solid #ccc!important;color:#000!important;padding:14px!important;box-shadow:none!important;display:block!important}
+  .card *{visibility:visible}
+  .card *[style*="background:var(--s2)"],.card *[style*="background:var(--s)"]{background:#f7f7f7!important}
+  .card *[style*="color:var(--t)"]{color:#000!important}
+  .card *[style*="color:var(--m)"]{color:#666!important}
+  .card *[style*="color:var(--a)"]{color:#946800!important}
+  .card *[style*="color:var(--g)"]{color:#0a7a4d!important}
+  .card *[style*="color:var(--r)"]{color:#c0293f!important}
+  .card *[style*="color:var(--b)"]{color:#0d5fb5!important}
+  .card *[style*="color:var(--p)"]{color:#6e3a8a!important}
+  .card-title{color:#000!important;border-bottom:1px solid #ccc;padding-bottom:6px;margin-bottom:10px}
+  .field label{color:#444!important}
+  .field input,.field select{background:#f7f7f7!important;border:1px solid #ccc!important;color:#000!important}
+  .sgrid,.g2,.g3{display:grid!important}
+  .sbox{background:#f7f7f7!important;border:1px solid #ddd!important;display:block!important}
+  .sbox .lbl{color:#666!important}
+  .sbox .val{color:#000!important}
+  .rrow{color:#000!important;border-bottom:1px solid #eee!important;display:flex!important}
+  .tbl{display:table!important;width:100%}
+  .tbl,.tbl th,.tbl td{color:#000!important;border-color:#ccc!important}
+  .tbl th{background:#eee!important}
+  .donut-wrap,.leg-i{display:flex!important}
+  .insight-box,.insight-line,.insight-title{display:none!important}
+  canvas{display:block!important}
+}
+</style>
+<link rel="icon" href="/favicon.ico" sizes="any">
+<link rel="icon" type="image/svg+xml" href="/favicon.svg">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-61RHHG8E6Q"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-61RHHG8E6Q');
+</script>
+<meta name="msvalidate.01" content="175D12831D109E3E7E1A856004E0F393" />
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "WebApplication", "name": "Rent vs Buy Calculator", "url": "https://finclac.com/rent-vs-buy-calculator", "description": "Compare your projected net worth renting vs buying a home, including opportunity cost, appreciation, and the exact breakeven year. Free rent vs buy calculator.", "applicationCategory": "FinanceApplication", "operatingSystem": "Any (web-based)", "offers": {"@type": "Offer", "price": "0", "priceCurrency": "USD"}, "isPartOf": {"@type": "WebSite", "name": "FinCalc", "url": "https://finclac.com/"}}</script>
+</head>
+<body>
+<div class="topbar">
+  <a class="logo" href="/"><div class="logo-mark">FC</div>FinCalc</a>
+  <div class="searchbox">
+    <svg width="14" height="14" fill="none" stroke="#6B7A8D" stroke-width="2" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+    <input id="srch" placeholder="Search 40 calculators..." oninput="doSearch()" onkeydown="if(event.key==='Enter')goSearch()">
+  </div>
+</div>
+<div class="nav">
+  <a class="ntab on" href="/" onclick="go('home',this);return false;">🏠 Home</a><a class="ntab" href="/blog">📝 Blog</a>
+  <a class="ntab" href="/cagr-calculator" onclick="go('cagr',this);return false;">📐 CAGR</a>
+  <a class="ntab" href="/xirr-calculator" onclick="go('xirr',this);return false;">📅 XIRR</a>
+  <a class="ntab" href="/dividend-reinvestment-calculator" onclick="go('drip',this);return false;">💧 DRIP</a>
+  <a class="ntab" href="/etf-growth-calculator" onclick="go('etf',this);return false;">🗂️ ETF Growth</a>
+  <a class="ntab" href="/dcf-valuation-calculator" onclick="go('dcf',this);return false;">🏦 DCF Valuation</a>
+  <a class="ntab" href="/debt-snowball-vs-avalanche-calculator" onclick="go('debtcomp',this);return false;">❄️ Snowball vs Avalanche</a>
+  <a class="ntab" href="/rental-property-calculator" onclick="go('rentalprop',this);return false;">🏡 Rental Property</a>
+  <a class="ntab" href="/burn-rate-calculator" onclick="go('burnrate',this);return false;">🔥 Burn Rate</a>
+  <a class="ntab" href="/pricing-margin-calculator" onclick="go('pricing',this);return false;">🏷️ Pricing</a>
+  <a class="ntab" href="/equity-dilution-calculator" onclick="go('equity',this);return false;">📐 Equity Dilution</a>
+  <a class="ntab" href="/revenue-forecast-calculator" onclick="go('revenue',this);return false;">📊 Revenue Forecast</a>
+  <a class="ntab" href="/loan-emi-calculator" onclick="go('loan',this);return false;">🏦 Loan/EMI</a>
+  <a class="ntab" href="/sip-calculator" onclick="go('invest',this);return false;">📈 SIP/Investment</a>
+  <a class="ntab" href="/tax-calculator" onclick="go('tax',this);return false;">🧾 Tax</a>
+  <a class="ntab" href="/mortgage-calculator" onclick="go('mortgage',this);return false;">🏠 Mortgage</a>
+  <a class="ntab" href="/mortgage-comparison-calculator" onclick="go('mortcomp',this);return false;">⚖️ Mtg Compare</a>
+  <a class="ntab" href="/compound-interest-calculator" onclick="go('savings',this);return false;">🏛️ Savings</a>
+  <a class="ntab" href="/stock-profit-calculator" onclick="go('stock',this);return false;">📉 Stock P&amp;L</a>
+  <a class="ntab" href="/retirement-calculator" onclick="go('retirement',this);return false;">👴 Retirement</a>
+  <a class="ntab" href="/debt-payoff-calculator" onclick="go('debt',this);return false;">💳 Debt Payoff</a>
+  <a class="ntab" href="/rental-yield-calculator" onclick="go('rental',this);return false;">🏘️ Rental Yield</a>
+  <a class="ntab" href="/cash-flow-calculator" onclick="go('cashflow',this);return false;">💵 Cash Flow</a>
+  <a class="ntab" href="/breakeven-calculator" onclick="go('breakeven',this);return false;">📊 Break-even</a>
+  <a class="ntab" href="/savings-goal-calculator" onclick="go('savingsgoal',this);return false;">🎯 Savings Goal</a>
+  <a class="ntab" href="/emergency-fund-calculator" onclick="go('emergencyfund',this);return false;">🛡️ Emergency Fund</a>
+  <a class="ntab" href="/financial-health-score-calculator" onclick="go('healthscore',this);return false;">💯 Health Score</a>
+  <a class="ntab" href="/currency-converter" onclick="go('currency',this);return false;">💱 Currency</a>
+  <a class="ntab" href="/scientific-calculator" onclick="go('scientific',this);return false;">🔬 Scientific</a>
+</div>
+<div class="content">
+<div id="rentvsbuy" class="panel on">
+<a class="back-btn" href="/" onclick="go('home',null);return false;">← Back to Home</a>
+<div class="calc-links"><span class="calc-links-label">🔗 Related</span><a class="calc-link-btn" href="/mortgage-calculator" onclick="go('mortgage',null);return false;">🏠 Mortgage</a><a class="calc-link-btn" href="/mortgage-comparison-calculator" onclick="go('mortcomp',null);return false;">⚖️ Mortgage Comparison</a><a class="calc-link-btn" href="/rental-yield-calculator" onclick="go('rental',null);return false;">🏘️ Rental Yield</a><a class="calc-link-btn" href="/asset-allocation-calculator" onclick="go('allocation',null);return false;">🥧 Asset Allocation</a></div><div class="calc-links" style="margin-top:8px;background:transparent;border:none;padding:4px 0"><span class="calc-links-label">📖 Related reading</span><div style="margin-top:6px;font-size:12.5px;line-height:1.6"><a href="/blog/how-much-house-can-you-afford" style="color:var(--a);text-decoration:underline">How Much House Can You Actually Afford in 2026?</a><br></div></div>
+
+
+<div class="two">
+  <div class="card">
+    <div class="card-title">Rent vs Buy Calculator</div>
+    <div class="g2">
+      <div class="field"><label>Home Price ($)</label><div class="ip"><span class="pfx">$</span><input type="number" id="rb-price" value="400000" oninput="cRentVsBuy()"></div></div>
+      <div class="field"><label>Down Payment (%)</label><input type="number" id="rb-down" value="20" oninput="cRentVsBuy()"></div>
+      <div class="field"><label>Mortgage Rate (%)</label><input type="number" id="rb-rate" value="6.5" step="0.1" oninput="cRentVsBuy()"></div>
+      <div class="field"><label>Mortgage Term (years)</label><input type="number" id="rb-term" value="30" oninput="cRentVsBuy()"></div>
+      <div class="field"><label>Monthly Rent ($)</label><div class="ip"><span class="pfx">$</span><input type="number" id="rb-rent" value="2200" oninput="cRentVsBuy()"></div></div>
+      <div class="field"><label>Years to Compare</label><input type="number" id="rb-years" value="15" oninput="cRentVsBuy()"></div>
+    </div>
+    <div class="g2">
+      <div class="field"><label>Home Appreciation (%/yr)</label><input type="number" id="rb-apprec" value="4" step="0.5" oninput="cRentVsBuy()"></div>
+      <div class="field"><label>Rent Growth (%/yr)</label><input type="number" id="rb-rentgrowth" value="3" step="0.5" oninput="cRentVsBuy()"></div>
+      <div class="field"><label>Investment Return (%/yr)</label><input type="number" id="rb-invest" value="7" step="0.5" oninput="cRentVsBuy()"></div>
+      <div class="field"><label>Property Tax (%/yr)</label><input type="number" id="rb-tax" value="1.2" step="0.1" oninput="cRentVsBuy()"></div>
+      <div class="field"><label>Maintenance (%/yr)</label><input type="number" id="rb-maint" value="1" step="0.1" oninput="cRentVsBuy()"></div>
+      <div class="field"><label>Annual Insurance ($)</label><div class="ip"><span class="pfx">$</span><input type="number" id="rb-ins" value="1500" oninput="cRentVsBuy()"></div></div>
+      <div class="field"><label>Closing Costs (%)</label><input type="number" id="rb-closing" value="3" step="0.5" oninput="cRentVsBuy()"></div>
+      <div class="field"><label>Selling Costs (%)</label><input type="number" id="rb-selling" value="6" step="0.5" oninput="cRentVsBuy()"></div>
+    </div>
+    <div class="sgrid">
+      <div class="sbox"><div class="lbl">Monthly Mortgage P&amp;I</div><div class="val" style="color:var(--a)" id="rb-emi">$0</div></div>
+      <div class="sbox"><div class="lbl">Total Monthly Buy Cost</div><div class="val" style="color:var(--r)" id="rb-buycost">$0</div></div>
+      <div class="sbox"><div class="lbl">Net Worth if Buy</div><div class="val" style="color:var(--g)" id="rb-buynw">$0</div></div>
+      <div class="sbox"><div class="lbl">Net Worth if Rent</div><div class="val" style="color:var(--b)" id="rb-rentnw">$0</div></div>
+    </div>
+    <div class="insight-box" id="rb-insights"></div>
+  </div>
+  <div class="card">
+    <div class="card-title">Net Worth Over Time</div>
+    <canvas id="rb-chart" width="300" height="170" style="width:100%;margin:1rem 0"></canvas>
+    <div style="display:flex;gap:12px;font-size:11px;color:var(--m);margin-bottom:1rem"><span style="color:var(--g)">━ Buy</span><span style="color:var(--b)">━ Rent</span></div>
+    <div class="rrow"><span class="rk">Breakeven year (buying overtakes renting)</span><span class="rv" style="color:var(--a)" id="rb-breakeven">—</span></div>
+    <div class="rrow"><span class="rk">Verdict at year <span id="rb-vyear">15</span></span><span class="rv" id="rb-verdict">—</span></div>
+  </div>
+</div>
+
+<div class="calc-guide">
+  <div class="guide-toggle">
+    <div class="guide-toggle-title">📖 Rent vs Buy — Making the Real Comparison</div>
+  </div>
+  <div class="guide-body">
+<div class="guide-p">"Should I rent or buy?" is one of the most consequential financial decisions most people ever make, and also one of the most commonly miscalculated. The instinctive comparison — rent payment vs mortgage payment — misses most of what actually matters: the opportunity cost of the down payment, ongoing costs unique to ownership, the cost of eventually selling, and what a renter could do with the money they're not tying up in a house. A proper comparison tracks net worth under each scenario over time, not just monthly cash outflow.</div>
+
+<div class="guide-h3">Why "Rent Money Is Wasted, Mortgage Builds Equity" Is Incomplete</div>
+<div class="guide-p">This is the most common argument for buying, and it's only half true. A portion of every mortgage payment does build equity — but a large portion, especially in the early years, is interest, which is just as "wasted" as rent in the sense that it never comes back to you. On top of that, owning carries costs a renter never pays directly: property tax, maintenance, homeowners insurance, and the eventual cost of selling (commonly 6-8% of sale price in agent commissions and closing costs). None of these build equity either.</div>
+
+<div class="guide-h3">The Opportunity Cost of the Down Payment</div>
+<div class="guide-p">A 20% down payment on a $400,000 home is $80,000 that a renter never has to set aside — they can invest it instead. This calculator assumes the renter invests an amount equal to the buyer's down payment and closing costs at the start, then continues investing the monthly difference whenever renting costs less than the buyer's mortgage-plus-ownership-costs that month. Over a 15-20 year horizon, this invested capital compounding in the market is often a bigger factor in the comparison than people expect.</div>
+<div class="guide-formula">Renter's Portfolio = (Down Payment + Closing Costs) compounded at investment return<br>+ monthly savings (when renting costs less than owning) compounded the same way</div>
+
+<div class="guide-h3">Worked Example: Net Worth After 15 Years</div>
+<div class="guide-p">A $400,000 home, 20% down, 6.5% mortgage rate over 30 years, against $2,200/month rent, with 4% home appreciation, 3% rent growth, and a 7% investment return for the renter's portfolio:</div>
+<table class="guide-table"><thead><tr><th>Year</th><th>Net Worth if Buy</th><th>Net Worth if Rent</th></tr></thead><tbody>
+<tr><td>5</td><td>~$180,000</td><td>~$187,000</td></tr>
+<tr><td>10</td><td>~$341,000</td><td>~$282,000</td></tr>
+<tr><td>15</td><td>~$549,000</td><td>~$367,000</td></tr>
+</tbody></table>
+<div class="guide-p">In this example, renting is narrowly ahead at year 5, but buying overtakes it by year 10 and pulls further ahead by year 15 — the breakeven point lands somewhere in between, once home appreciation and forced equity paydown have had enough time to compound. Change the appreciation or rent growth assumptions even slightly, and this breakeven point can shift by years in either direction, which is exactly why this is a calculation worth running with your own numbers rather than trusting a generic rule of thumb.</div>
+
+<div class="guide-h3">What Actually Drives the Verdict</div>
+<table class="guide-table"><thead><tr><th>Factor</th><th>Favors Buying</th><th>Favors Renting</th></tr></thead><tbody>
+<tr><td>Home appreciation</td><td>Higher than historical average</td><td>Flat or declining local market</td></tr>
+<tr><td>Rent growth</td><td>Rising quickly year over year</td><td>Stable or slow-growing rents</td></tr>
+<tr><td>Time horizon</td><td>Staying 7+ years (amortizes closing/selling costs)</td><td>Likely to move within a few years</td></tr>
+<tr><td>Investment return available</td><td>Lower expected market returns</td><td>Strong expected market returns on invested down payment</td></tr>
+<tr><td>Mortgage rate</td><td>Lower rate environment</td><td>High rate environment</td></tr>
+</tbody></table>
+
+<div class="guide-h3">The 5% Rule: A Quick Mental Shortcut</div>
+<div class="guide-p">A commonly cited heuristic from financial writer Ben Felix and others: multiply the home price by roughly 5% (covering a blend of property tax, maintenance, and the opportunity cost of capital tied up in the home) and divide by 12 to get a rough "breakeven monthly rent." If you can rent a comparable home for less than that figure, renting is likely the better deal on pure financial terms; if comparable rent is higher, buying likely wins. This shortcut ignores appreciation entirely, so it works best as a quick sanity check, not a substitute for the full year-by-year comparison.</div>
+<div class="guide-formula">Breakeven Monthly Rent ≈ Home Price × 5% / 12</div>
+
+<div class="guide-h3">Why the Breakeven Year Matters More Than the Snapshot</div>
+<div class="guide-p">Buying almost always loses in the first few years, because closing costs and the early-mortgage interest-heavy payments front-load the cost of ownership before appreciation and equity paydown have time to compound. The real question isn't "who wins today" but "how many years do I need to stay for buying to catch up and overtake renting" — if you're confident you'll stay well past that breakeven point, buying's long-run advantage typically holds; if you might move sooner, renting's flexibility carries real financial value too.</div>
+<div class="guide-warn">⚠ This calculator assumes a consistent appreciation rate, rent growth rate, and investment return for the entire comparison period — real markets are far less smooth. Treat the output as a structured way to compare assumptions, not a forecast of what will actually happen to any specific property or portfolio.</div>
+
+<div class="guide-h3">Non-Financial Factors This Calculator Can't Capture</div>
+<div class="guide-p">Owning provides stability, the freedom to renovate, and protection from a landlord raising rent or declining to renew a lease — renting provides flexibility to relocate, no responsibility for repairs, and no exposure to a declining local housing market. These factors are genuinely important to most people's decisions and have no dollar value to plug into a spreadsheet, but they're worth weighing alongside whatever this calculator's numbers say.</div>
+<div class="guide-tip">💡 Run this calculator with a range of appreciation and rent-growth assumptions (a pessimistic case and an optimistic case) rather than just one guess — if buying wins under both, that's a much stronger signal than a verdict that depends entirely on getting one uncertain assumption exactly right.</div>
+
+  </div>
+</div>
+
+<div class="faq-section">
+<div class="faq-section-title">❓ Frequently Asked Questions</div>
+<div class="faq-item">
+  <div class="faq-q" onclick="toggleFAQ(this)">
+    <span>What does "breakeven year" mean in this calculator?</span>
+    <span class="faq-icon">+</span>
+  </div>
+  <div class="faq-a">The breakeven year is the first year in the simulation where the buyer's projected net worth (home equity plus appreciation, minus the remaining loan and selling costs) overtakes the renter's projected net worth (their invested down payment and ongoing savings). Buying before this year typically leaves you behind financially; staying past it typically puts buying ahead.</div>
+</div>
+<div class="faq-item">
+  <div class="faq-q" onclick="toggleFAQ(this)">
+    <span>Why does the renter's net worth include an investment portfolio?</span>
+    <span class="faq-icon">+</span>
+  </div>
+  <div class="faq-a">Because a fair comparison requires giving the renter's unused down payment somewhere to go. A renter doesn't tie up tens of thousands of dollars in a down payment, so this calculator assumes they invest that amount instead, plus any month where renting costs less than the buyer's mortgage and ownership costs combined.</div>
+</div>
+<div class="faq-item">
+  <div class="faq-q" onclick="toggleFAQ(this)">
+    <span>Why does buying often look worse in the early years?</span>
+    <span class="faq-icon">+</span>
+  </div>
+  <div class="faq-a">Closing costs are paid upfront, and early mortgage payments are mostly interest rather than principal, so very little equity builds in the first few years. Appreciation and growing principal paydown take time to compound — which is why buying frequently needs several years to catch up to renting, even in scenarios where it eventually wins decisively.</div>
+</div>
+<div class="faq-item">
+  <div class="faq-q" onclick="toggleFAQ(this)">
+    <span>What is the 5% rule?</span>
+    <span class="faq-icon">+</span>
+  </div>
+  <div class="faq-a">A quick mental shortcut: multiply the home price by about 5% and divide by 12 to estimate a rough breakeven monthly rent. <span class="faq-formula">Breakeven Rent ≈ Home Price × 5% / 12</span> If comparable rent is below that figure, renting is often the better financial deal; if it's above, buying often wins. It ignores appreciation, so treat it as a sanity check rather than a full answer.</div>
+</div>
+<div class="faq-item">
+  <div class="faq-q" onclick="toggleFAQ(this)">
+    <span>How much do closing and selling costs really matter?</span>
+    <span class="faq-icon">+</span>
+  </div>
+  <div class="faq-a">Significantly, especially for shorter time horizons. Closing costs (often 2-5% of the home price) are paid upfront, and selling costs (often 6-8%, mostly real estate agent commissions) are paid when you eventually sell. Together they can easily total $30,000-50,000 on a $400,000 home — costs a renter never has to pay at all.</div>
+</div>
+<div class="faq-item">
+  <div class="faq-q" onclick="toggleFAQ(this)">
+    <span>Does this account for tax deductions on mortgage interest?</span>
+    <span class="faq-icon">+</span>
+  </div>
+  <div class="faq-a">No — this calculator models the raw cash flows and net worth comparison without factoring in mortgage interest deductions, which vary by country, by whether you itemize deductions, and by your specific tax situation. If significant in your case, factor it in separately as an additional benefit on the buying side.</div>
+</div>
+</div>
+
+
+</div>
+</div><!-- content -->
+<div class="site-footer">
+  <div class="footer-brand">
+    <div class="logo-mark" style="width:22px;height:22px;background:var(--a);border-radius:5px;display:flex;align-items:center;justify-content:center;color:#000;font-size:11px;font-weight:700">FC</div>
+    FinCalc
+  </div>
+  <div class="footer-copy">© 2025 FinCalc · Free Financial Calculators · <a href="/blog" style="color:inherit">Blog</a> · <a href="/about" style="color:inherit">About</a> · <a href="/privacy" style="color:inherit">Privacy Policy</a> · <a href="/terms" style="color:inherit">Terms</a></div>
+  <!-- tinystartups · Launched on Tiny Startups -->
+<a href="https://www.tinystartups.com/startup/finclaccom" target="_blank" rel="noopener"
+   style="display:inline-flex;align-items:center;gap:10px;padding:8px 14px 8px 10px;border-radius:12px;text-decoration:none;font-family:'Inter',system-ui,sans-serif;background:linear-gradient(#fff,#fff) padding-box,linear-gradient(90deg,#3525E6,#D81FE0,#22B8F0) border-box;border:2px solid transparent;color:#0E0B1F;flex-shrink:0">
+  <svg width="34" height="34" viewBox="0 0 100 100">
+    <defs><linearGradient id="tsg" x1=".1" y1="0" x2=".9" y2="1">
+      <stop offset="0%" stop-color="#3525E6"/><stop offset="55%" stop-color="#D81FE0"/><stop offset="100%" stop-color="#22B8F0"/>
+    </linearGradient></defs>
+    <path d="M50 6C52 32 68 48 94 50C68 52 52 68 50 94C48 68 32 52 6 50C32 48 48 32 50 6Z" fill="url(#tsg)"/>
+  </svg>
+  <span style="display:flex;flex-direction:column;line-height:1.1">
+    <span style="font-family:monospace;font-size:7px;font-weight:600;letter-spacing:0.15em;text-transform:uppercase;color:#6A6585">Launched on</span>
+    <span style="font-size:14px;font-weight:800;letter-spacing:-0.02em">Tiny Startups</span>
+  </span>
+</a>
+<a href="https://devglobe.app/projects/fincalc?utm_source=badge&utm_medium=embed" target="_blank" rel="noopener">
+  <img src="https://devglobe.app/badges/launched-on-devglobe-dark.svg" alt="Launched on DevGlobe" width="250" height="54" />
+</a>
+</div>
+<script src="app.js"></script>
+<script>initPage('rentvsbuy');</script>
+</body>
+</html>

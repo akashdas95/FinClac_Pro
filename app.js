@@ -203,7 +203,7 @@ function buildDir(){
   const el=gel('dir-home');el.innerHTML='';
   SECTIONS.forEach(sec=>{
     let html=`<div class="dir-sec"><div class="dir-sec-h">${sec.title}${sec.badge?' <span class="badge-new">New</span>':''}</div><div class="dir-grid">`;
-    sec.items.forEach(it=>{html+=`<div class="dir-card" onclick="location.href='/${it.id}'"><div class="dir-icon">${it.icon}</div><div class="dir-name">${it.name}</div><div class="dir-desc">${it.desc}</div></div>`;});
+    sec.items.forEach(it=>{html+=`<a class="dir-card" href="${urlFor(it.id)}" onclick="go('${it.id}',null);return false;"><div class="dir-icon">${it.icon}</div><div class="dir-name">${it.name}</div><div class="dir-desc">${it.desc}</div></a>`;});
     html+='</div></div>';el.innerHTML+=html;
   });
 }
@@ -2305,8 +2305,31 @@ function toggleFAQ(el){
 
 
 // ── Multi-page navigation (replaces old SPA go()/doSearch()) ──────
+// URL slugs are more descriptive than the internal panel/calculator
+// ids (e.g. /cagr-calculator instead of /cagr) for readability and
+// SEO; this maps id -> slug wherever a URL needs to be built from an
+// id. Ids not listed here (home, blog, about, privacy, terms, and any
+// future addition) just use their id as-is.
+const SLUG_MAP={cagr:'cagr-calculator',xirr:'xirr-calculator',drip:'dividend-reinvestment-calculator',
+  divgrowth:'dividend-growth-calculator',etf:'etf-growth-calculator',allocation:'asset-allocation-calculator',
+  dcf:'dcf-valuation-calculator',peg:'peg-ratio-calculator',evebitda:'ev-ebitda-calculator',
+  invest:'sip-calculator',swp:'swp-calculator',stock:'stock-profit-calculator',
+  burnrate:'burn-rate-calculator',pricing:'pricing-margin-calculator',equity:'equity-dilution-calculator',
+  dilutionimpact:'stock-dilution-calculator',revenue:'revenue-forecast-calculator',breakeven:'breakeven-calculator',
+  cashflow:'cash-flow-calculator',loan:'loan-emi-calculator',prepay:'loan-prepayment-calculator',
+  loancomp:'loan-comparison-calculator',autoloan:'auto-loan-calculator',tax:'tax-calculator',
+  mortgage:'mortgage-calculator',rentvsbuy:'rent-vs-buy-calculator',mortcomp:'mortgage-comparison-calculator',
+  savings:'compound-interest-calculator',provident:'provident-fund-calculator',retirement:'retirement-calculator',
+  fire:'fire-calculator',debtcomp:'debt-snowball-vs-avalanche-calculator',debt:'debt-payoff-calculator',
+  rental:'rental-yield-calculator',rentalprop:'rental-property-calculator',savingsgoal:'savings-goal-calculator',
+  emergencyfund:'emergency-fund-calculator',healthscore:'financial-health-score-calculator',
+  currency:'currency-converter',scientific:'scientific-calculator'};
+function urlFor(id){
+  if(id==='home')return '/';
+  return '/'+(SLUG_MAP[id]||id);
+}
 function go(id, el){
-  location.href = (id === 'home' ? '/' : '/' + id);
+  location.href = urlFor(id);
 }
 function goSearch(){
   const q = gel('srch').value.trim();
