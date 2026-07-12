@@ -202,7 +202,8 @@ const SECTIONS=[
 function buildDir(){
   const el=gel('dir-home');el.innerHTML='';
   SECTIONS.forEach(sec=>{
-    let html=`<div class="dir-sec"><div class="dir-sec-h">${sec.title}${sec.badge?' <span class="badge-new">New</span>':''}</div><div class="dir-grid">`;
+    const slug=sec.title.replace(/[^\w\s-]/g,'').trim().toLowerCase().replace(/\s+/g,'-');
+    let html=`<div class="dir-sec" id="dir-sec-${slug}"><div class="dir-sec-h">${sec.title}${sec.badge?' <span class="badge-new">New</span>':''}</div><div class="dir-grid">`;
     sec.items.forEach(it=>{html+=`<div class="dir-card" onclick="location.href='/${it.id}'"><div class="dir-icon">${it.icon}</div><div class="dir-name">${it.name}</div><div class="dir-desc">${it.desc}</div></div>`;});
     html+='</div></div>';el.innerHTML+=html;
   });
