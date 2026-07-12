@@ -31,6 +31,8 @@ body{background:var(--bg);color:var(--t);font-family:var(--fn);font-size:14px;li
 .mb16{margin-bottom:16px}
 .card-title{font-size:11px;font-weight:600;color:var(--m);letter-spacing:.8px;text-transform:uppercase;margin-bottom:1.25rem}
 .input-hint{font-size:11.5px;color:var(--a);background:rgba(240,185,11,.08);border:1px solid rgba(240,185,11,.25);border-radius:6px;padding:6px 10px;margin:-.75rem 0 1rem;line-height:1.5}
+.chart-tooltip{position:fixed;display:none;background:#1C2430;border:1px solid #232D3A;border-radius:6px;padding:7px 11px;font-size:11.5px;color:#E8EDF2;pointer-events:none;z-index:9999;box-shadow:0 4px 14px rgba(0,0,0,.45);font-family:'DM Sans',sans-serif;line-height:1.5;max-width:200px}
+.chart-tooltip strong{color:#F0B90B}
 .field{margin-bottom:.9rem}
 .field label{display:block;font-size:12px;color:var(--m);margin-bottom:5px}
 .field input,.field select{width:100%;background:var(--bg);border:1px solid var(--bd);border-radius:6px;padding:8px 11px;color:var(--t);font-family:var(--mo);font-size:13px;outline:none;transition:border .15s}
@@ -176,8 +178,9 @@ body{background:var(--bg);color:var(--t);font-family:var(--fn);font-size:14px;li
 .insight-line strong{font-weight:700}
 
 /* Print button (visual style, hidden in print itself) */
-.print-btn{background:var(--s2);border:1px solid var(--bd);color:var(--tb);font-size:12.5px;font-weight:500;cursor:pointer;display:inline-flex;align-items:center;gap:6px;padding:7px 14px;border-radius:20px;font-family:var(--fn);transition:all .18s;margin-bottom:1rem;float:right}
-.print-btn:hover{color:var(--t);border-color:var(--g);background:var(--s)}
+.download-btn{background:var(--s2);border:1px solid var(--bd);color:var(--tb);font-size:12.5px;font-weight:500;cursor:pointer;display:inline-flex;align-items:center;gap:6px;padding:7px 14px;border-radius:20px;font-family:var(--fn);transition:all .18s;margin-bottom:1rem;float:right}
+.download-btn:disabled{opacity:.6;cursor:wait}
+.download-btn:hover{color:var(--t);border-color:var(--g);background:var(--s)}
 .print-header{display:none}
 
 /* Print stylesheet: show only the active calculator's inputs/outputs, hide everything else */

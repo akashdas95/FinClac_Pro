@@ -80,13 +80,52 @@ function drawLine(id,datasets,H_=150){
     ctx.strokeStyle=ds.color;ctx.lineWidth=ds.w||2;ctx.setLineDash(ds.dash||[]);ctx.stroke();ctx.setLineDash([]);
   });
 }
+// ── Shared: renders a year-by-year amortization schedule (principal
+// paid, interest paid, ending balance) into a table, given a loan's
+// principal, monthly rate, and term in months. Used by Loan/EMI,
+// Mortgage, and Auto Loan calculators.
+function renderAmortTable(tableId,P,r,n){
+  const el=gel(tableId);
+  if(!el)return;
+  if(P<=0||n<=0){el.innerHTML='';return;}
+  const emi=r?P*r*Math.pow(1+r,n)/(Math.pow(1+r,n)-1):P/n;
+  let bal=P,yearPrincipal=0,yearInterest=0;
+  const rows=[];
+  for(let m=1;m<=n;m++){
+    const ip=bal*r;
+    let pp=emi-ip;
+    if(pp>bal)pp=bal;
+    bal-=pp;if(bal<0)bal=0;
+    yearPrincipal+=pp;yearInterest+=ip;
+    if(m%12===0||m===n){
+      rows.push({year:Math.ceil(m/12),principal:yearPrincipal,interest:yearInterest,balance:bal});
+      yearPrincipal=0;yearInterest=0;
+    }
+  }
+  let html='<thead><tr><th style="text-align:left;padding:6px 8px;font-size:11px;color:var(--m);border-bottom:1px solid var(--bd)">Year</th><th style="padding:6px 8px;font-size:11px;border-bottom:1px solid var(--bd);color:var(--a)">Principal Paid</th><th style="padding:6px 8px;font-size:11px;border-bottom:1px solid var(--bd);color:var(--r)">Interest Paid</th><th style="padding:6px 8px;font-size:11px;border-bottom:1px solid var(--bd)">Ending Balance</th></tr></thead><tbody>';
+  rows.forEach(r=>{
+    html+=`<tr><td style="text-align:left;font-size:12px;color:var(--m);border-bottom:1px solid var(--bd);padding:7px 8px">Year ${r.year}</td><td style="font-size:12px;font-family:var(--mo);border-bottom:1px solid var(--bd);padding:7px 8px;color:var(--a)">${f$(r.principal)}</td><td style="font-size:12px;font-family:var(--mo);border-bottom:1px solid var(--bd);padding:7px 8px;color:var(--r)">${f$(r.interest)}</td><td style="font-size:12px;font-family:var(--mo);border-bottom:1px solid var(--bd);padding:7px 8px;font-weight:600">${f$(r.balance)}</td></tr>`;
+  });
+  html+='</tbody>';
+  el.innerHTML=html;
+}
+
 function drawDonut(id,data,colors){
   const c=gel(id);if(!c)return;
   const ctx=c.getContext('2d'),W=c.width,H=c.height,cx=W/2,cy=H/2,r=Math.min(W,H)/2-5;
   ctx.clearRect(0,0,W,H);
-  const tot=data.reduce((a,b)=>a+b,0);if(!tot)return;
+  const tot=data.reduce((a,b)=>a+b,0);
+  c._segments=[];c._cx=cx;c._cy=cy;c._r=r;
+  if(!tot)return;
   let s=-Math.PI/2;
-  data.forEach((v,i)=>{if(!v)return;const a=2*Math.PI*v/tot;ctx.beginPath();ctx.moveTo(cx,cy);ctx.arc(cx,cy,r,s,s+a);ctx.closePath();ctx.fillStyle=colors[i];ctx.fill();s+=a;});
+  data.forEach((v,i)=>{
+    if(!v)return;
+    const a=2*Math.PI*v/tot;
+    ctx.beginPath();ctx.moveTo(cx,cy);ctx.arc(cx,cy,r,s,s+a);ctx.closePath();
+    ctx.fillStyle=colors[i];ctx.fill();
+    c._segments.push({start:s,end:s+a,value:v,pct:v/tot*100,index:i});
+    s+=a;
+  });
   ctx.beginPath();ctx.arc(cx,cy,r*.57,0,2*Math.PI);ctx.fillStyle='#141920';ctx.fill();
 }
 function drawBars(id,labels,vals,colors,H_=130){
@@ -94,6 +133,7 @@ function drawBars(id,labels,vals,colors,H_=130){
   const ctx=c.getContext('2d'),W=c.width,H=H_,p=28,n=vals.length;
   ctx.clearRect(0,0,W,H);
   const mx=Math.max(...vals)||1,bw=Math.min(65,(W-p*2)/n-6),gap=(W-p*2-bw*n)/((n-1)||1);
+  c._bars=[];
   vals.forEach((v,i)=>{
     const x=p+i*(bw+gap),bh=(v/mx)*(H-p*2),y=H-p-bh;
     ctx.beginPath();
@@ -104,6 +144,7 @@ function drawBars(id,labels,vals,colors,H_=130){
     ctx.fillText((labels[i]||'').substring(0,9),x+bw/2,H-6);
     ctx.fillStyle='#E8EDF2';ctx.font='500 9px DM Mono';
     ctx.fillText('$'+fk(v),x+bw/2,y-4);
+    c._bars.push({x,y,w:bw,h:bh,label:labels[i]||'',value:v});
   });
 }
 
@@ -796,6 +837,8 @@ function cLoan(){
   gel('l-emi').textContent=f$(emi);gel('l-int').textContent=f$(int);gel('l-tot').textContent=f$(tot+pf);gel('l-pf').textContent=f$(pf);
   gel('l-pp').textContent=Math.round(P/tot*100)+'%';gel('l-ip').textContent=Math.round(int/tot*100)+'%';gel('l-coc').textContent=pct(int/P*100);
   drawDonut('l-donut',[P,int,pf],['#F0B90B','#F6465D','#6B7A8D']);
+  if(type!=='flat')renderAmortTable('l-amort-table',P,r,n);
+  else gel('l-amort-table').innerHTML='<tbody><tr><td style="padding:10px 8px;font-size:12px;color:var(--m)">Amortization breakdown isn\'t applicable to flat-rate loans, since interest is calculated on the original principal for the full term rather than a declining balance.</td></tr></tbody>';
 
   const insights=[];
   const cocPct=P>0?int/P*100:0;
@@ -1113,6 +1156,7 @@ function cMortgage(){
   gel('m-total').textContent=f$(emi*n+ptax*(n/12)+ins*(n/12));gel('m-dp').textContent=f$(price*dp);
   gel('m-ti').textContent=f$(ti);gel('m-aff').textContent=pct(((emi+ti)*12)/price*100);
   drawDonut('m-donut',[loan,interest,(ptax+ins)*(n/12)/12*n],['#F0B90B','#F6465D','#1890FF']);
+  renderAmortTable('m-amort-table',loan,r,n);
 
   const insights=[];
   const dpPct=dp*100;
@@ -1294,6 +1338,7 @@ function cAutoLoan(){
   gel('al-salestax').textContent=f$(salesTax);
 
   drawDonut('al-donut',[financed-salesTax,totalInterest,salesTax],['#F0B90B','#F6465D','#1890FF']);
+  renderAmortTable('al-amort-table',financed,r,n);
 
   // Comparison: same financed amount at both rates, for direct rate comparison regardless of selected condition
   const rNew=rateNew/12/100,rUsed=rateUsed/12/100;
@@ -1945,6 +1990,88 @@ const PANEL_DISCLAIMER={
   currency:'currency'
   // scientific intentionally excluded — pure math tool, no financial disclaimer applies
 };
+// ── Chart tooltips: hover a pie/donut slice or bar to see its exact
+// label, value, and share of the total. Works generically across every
+// chart on the site — no per-calculator wiring needed beyond calling
+// attachChartTooltips() once per page.
+let _chartTip=null;
+function _getChartTip(){
+  if(_chartTip)return _chartTip;
+  _chartTip=document.createElement('div');
+  _chartTip.className='chart-tooltip';
+  document.body.appendChild(_chartTip);
+  return _chartTip;
+}
+function _positionTip(tip,e){
+  const pad=14;
+  let left=e.clientX+pad,top=e.clientY+pad;
+  if(left+210>window.innerWidth)left=e.clientX-210-pad;
+  if(top+60>window.innerHeight)top=e.clientY-60-pad;
+  tip.style.left=left+'px';tip.style.top=top+'px';
+}
+function _donutLabelsFor(canvas){
+  const wrap=canvas.closest('.donut-wrap');
+  if(!wrap)return [];
+  return [...wrap.querySelectorAll('.leg-i')].map(el=>{
+    const clone=el.cloneNode(true);
+    const dot=clone.querySelector('.leg-dot');
+    if(dot)dot.remove();
+    return clone.textContent.trim();
+  });
+}
+function attachDonutTooltip(canvas){
+  if(canvas._tipAttached)return;
+  canvas._tipAttached=true;
+  const tip=_getChartTip();
+  canvas.addEventListener('mousemove',e=>{
+    if(!canvas._segments||!canvas._segments.length){tip.style.display='none';return;}
+    const rect=canvas.getBoundingClientRect();
+    const scaleX=canvas.width/rect.width,scaleY=canvas.height/rect.height;
+    const x=(e.clientX-rect.left)*scaleX,y=(e.clientY-rect.top)*scaleY;
+    const dx=x-canvas._cx,dy=y-canvas._cy,dist=Math.sqrt(dx*dx+dy*dy);
+    if(dist>canvas._r||dist<canvas._r*0.57){tip.style.display='none';return;}
+    let ang=Math.atan2(dy,dx);
+    const seg=canvas._segments.find(s=>{
+      let a=ang,a0=s.start,a1=s.end;
+      while(a<a0-0.001)a+=2*Math.PI;
+      return a>=a0-0.001&&a<=a1+0.001;
+    });
+    if(!seg){tip.style.display='none';return;}
+    const labels=_donutLabelsFor(canvas);
+    const label=labels[seg.index]||('Segment '+(seg.index+1));
+    tip.innerHTML=`<strong>${label}</strong><br>${f$(seg.value)} · ${seg.pct.toFixed(1)}%`;
+    _positionTip(tip,e);
+    tip.style.display='block';
+  });
+  canvas.addEventListener('mouseleave',()=>{tip.style.display='none';});
+}
+function attachBarTooltip(canvas){
+  if(canvas._tipAttached)return;
+  canvas._tipAttached=true;
+  const tip=_getChartTip();
+  canvas.addEventListener('mousemove',e=>{
+    if(!canvas._bars||!canvas._bars.length){tip.style.display='none';return;}
+    const rect=canvas.getBoundingClientRect();
+    const scaleX=canvas.width/rect.width,scaleY=canvas.height/rect.height;
+    const x=(e.clientX-rect.left)*scaleX,y=(e.clientY-rect.top)*scaleY;
+    const bar=canvas._bars.find(b=>x>=b.x&&x<=b.x+b.w&&y>=b.y&&y<=b.y+b.h);
+    if(!bar){tip.style.display='none';return;}
+    tip.innerHTML=`<strong>${bar.label}</strong><br>${f$(bar.value)}`;
+    _positionTip(tip,e);
+    tip.style.display='block';
+  });
+  canvas.addEventListener('mouseleave',()=>{tip.style.display='none';});
+}
+function attachChartTooltips(){
+  document.querySelectorAll('canvas[id$="-donut"]').forEach(attachDonutTooltip);
+  document.querySelectorAll('canvas[id$="-chart"]').forEach(c=>{
+    // only attach bar-tooltip to canvases actually drawn as bar charts
+    // (drawBars populates c._bars — line charts don't, so this is safe
+    // to call broadly and it'll simply no-op for line/area charts)
+    attachBarTooltip(c);
+  });
+}
+
 function injectDisclaimers(){
   document.querySelectorAll('.panel').forEach(panel=>{
     const id=panel.id;
@@ -1983,33 +2110,193 @@ function injectInputHints(){
 // ── Print: a button per calculator that prints just that calculator's
 // inputs + outputs (stat boxes, charts, tables) via a scoped print
 // stylesheet — not the nav, guide, FAQ, or any other panel.
+// ── Download Result: generates a clean PDF report of a calculator's
+// inputs and outputs (labels come straight from the DOM, so this stays
+// in sync automatically as calculators change). jsPDF + autoTable are
+// loaded lazily from CDN on first use, not on every page load.
+let _pdfLibPromise=null;
+function _loadPdfLib(){
+  if(_pdfLibPromise)return _pdfLibPromise;
+  _pdfLibPromise=new Promise((resolve,reject)=>{
+    const s1=document.createElement('script');
+    s1.src='https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js';
+    s1.onload=()=>{
+      const s2=document.createElement('script');
+      s2.src='https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.8.2/jspdf.plugin.autotable.min.js';
+      s2.onload=()=>resolve();
+      s2.onerror=()=>reject(new Error('autotable failed to load'));
+      document.head.appendChild(s2);
+    };
+    s1.onerror=()=>reject(new Error('jsPDF failed to load'));
+    document.head.appendChild(s1);
+  });
+  return _pdfLibPromise;
+}
+
+// Walks a calculator panel and extracts its inputs + outputs as
+// {sectionTitle, rows:[[label,value],...]} blocks, in visual order,
+// skipping nav/guide/FAQ/disclaimer/related-links (same scope as the
+// old print stylesheet used).
+function _extractCalculatorData(panel){
+  const SKIP_CLASSES=['back-btn','print-btn','download-btn','calc-links','calc-guide','faq-section','calc-disclaimer','input-hint'];
+  const blocks=[];
+
+  // Special-cased: calculators whose row entries live in a plain JS array
+  // rather than static DOM fields (debt payoff, debt comparison, cash flow).
+  const DYNAMIC_ROW_SOURCES={
+    debt:()=>({title:'Debts Entered',rows:null,table:{head:['Debt','Balance','Rate %','Min Payment'],
+      body:(typeof debts!=='undefined'?debts:[]).map(d=>[d.name,f$(d.bal),d.rate+'%',f$(d.min)])}}),
+    debtcomp:()=>({title:'Debts Entered',rows:null,table:{head:['Debt','Balance','Rate %','Min Payment'],
+      body:(typeof dc2Debts!=='undefined'?dc2Debts:[]).map(d=>[d.name,f$(d.bal),d.rate+'%',f$(d.min)])}}),
+    cashflow:()=>({title:'Income & Expenses Entered',rows:null,table:{head:['Item','Type','Amount','Frequency'],
+      body:[
+        ...((typeof cfIncome!=='undefined'?cfIncome:[]).map(x=>[x.name,'Income',f$(x.amt),x.freq])),
+        ...((typeof cfExpense!=='undefined'?cfExpense:[]).map(x=>[x.name,'Expense',f$(x.amt),x.freq]))
+      ]}}),
+  };
+  if(DYNAMIC_ROW_SOURCES[panel.id]){
+    try{ blocks.push(DYNAMIC_ROW_SOURCES[panel.id]()); }catch(e){}
+  }
+
+  const cards=panel.querySelectorAll('.card, .g3 > *');
+  const seen=new Set();
+  cards.forEach(card=>{
+    if(seen.has(card))return;
+    if(SKIP_CLASSES.some(c=>card.classList && card.classList.contains(c)))return;
+    const titleEl=card.querySelector(':scope > .card-title');
+    const title=titleEl?titleEl.textContent.trim():null;
+    const rows=[];
+    // standard .field-wrapped input fields
+    const fieldInputs=new Set();
+    card.querySelectorAll(':scope .field').forEach(f=>{
+      const label=f.querySelector('label')?.textContent.trim();
+      const input=f.querySelector('input,select');
+      if(!label||!input)return;
+      fieldInputs.add(input);
+      let val=input.tagName==='SELECT'?input.options[input.selectedIndex]?.textContent.trim():input.value;
+      rows.push([label,String(val)]);
+    });
+    // loose label+input pairs not wrapped in .field (e.g. "Extra Payment", "Strategy")
+    card.querySelectorAll(':scope label').forEach(lbl=>{
+      if(lbl.closest('.field'))return; // already handled above
+      const container=lbl.parentElement;
+      const input=container?container.querySelector('input,select'):null;
+      if(!input||fieldInputs.has(input))return;
+      const label=lbl.textContent.trim();
+      if(!label)return;
+      let val=input.tagName==='SELECT'?input.options[input.selectedIndex]?.textContent.trim():input.value;
+      rows.push([label,String(val)]);
+      fieldInputs.add(input);
+    });
+    // .sbox stat-summary pattern (label + big number, used by dynamic-row calculators)
+    card.querySelectorAll(':scope .sbox, :scope .sgrid .sbox').forEach(box=>{
+      const k=box.querySelector('.lbl')?.textContent.trim();
+      const v=box.querySelector('.val')?.textContent.trim();
+      if(k&&v)rows.push([k,v]);
+    });
+    // standard result rows
+    card.querySelectorAll(':scope .rrow').forEach(r=>{
+      const k=r.querySelector('.rk')?.textContent.trim();
+      const v=r.querySelector('.rv')?.textContent.trim();
+      if(k&&v)rows.push([k,v]);
+    });
+    if(rows.length)blocks.push({title,rows,table:null});
+    // data tables (amortization, comparisons) — skip static guide-table reference tables
+    card.querySelectorAll(':scope table.tbl').forEach(tbl=>{
+      const theadCells=[...tbl.querySelectorAll('thead th')].map(th=>th.textContent.trim());
+      const bodyRows=[...tbl.querySelectorAll('tbody tr')].map(tr=>[...tr.querySelectorAll('td')].map(td=>td.textContent.trim()));
+      if(bodyRows.length)blocks.push({title:title?title+' — Details':'Details',rows:null,table:{head:theadCells,body:bodyRows}});
+    });
+    seen.add(card);
+  });
+  return blocks;
+}
+
+// jsPDF's built-in fonts only reliably support plain ASCII / basic
+// Latin-1 — typographic characters (em/en dashes, curly quotes,
+// ellipsis, emoji) can render as garbled glyphs or, in some cases,
+// throw mid-generation and silently cut off everything after them.
+// Normalize all text to safe ASCII before it reaches jsPDF.
+function _sanitizeForPdf(str){
+  if(str==null)return '';
+  return String(str)
+    .replace(/[\u2013\u2014]/g,'-')      // en dash, em dash
+    .replace(/[\u2018\u2019]/g,"'")      // curly single quotes
+    .replace(/[\u201C\u201D]/g,'"')      // curly double quotes
+    .replace(/\u2026/g,'...')            // ellipsis
+    .replace(/\u00A0/g,' ')              // non-breaking space
+    .replace(/[\u{1F300}-\u{1FAFF}\u{2600}-\u{27BF}\u{2190}-\u{21FF}]/gu,'') // emoji & arrows
+    .replace(/[^\x00-\x7F]/g,'')         // strip any remaining non-ASCII (currency symbols like ₹ etc.)
+    .replace(/\s+/g,' ')
+    .trim();
+}
+
+async function downloadCalculatorPDF(id){
+  const panel=gel(id);if(!panel)return;
+  const btn=panel.querySelector('.download-btn');
+  const origLabel=btn?btn.innerHTML:null;
+  if(btn){btn.innerHTML='⏳ Preparing...';btn.disabled=true;}
+  try{
+    await _loadPdfLib();
+    const {jsPDF}=window.jspdf;
+    const doc=new jsPDF({unit:'pt',format:'a4'});
+    const name=_sanitizeForPdf(panel.querySelector('.card-title')?.textContent||'FinCalc Result');
+    const today=new Date().toLocaleDateString('en-US',{year:'numeric',month:'long',day:'numeric'});
+    doc.setFontSize(16);doc.setTextColor(20,20,20);
+    doc.text('FinCalc',40,40);
+    doc.setFontSize(12);doc.setTextColor(90,90,90);
+    doc.text(name,40,60);
+    doc.setFontSize(9);doc.setTextColor(140,140,140);
+    doc.text(_sanitizeForPdf(`Generated ${today} - finclac.com`),40,75);
+    let y=95;
+    const blocks=_extractCalculatorData(panel);
+    blocks.forEach(block=>{
+      if(y>760){doc.addPage();y=40;}
+      const cleanTitle=block.title?_sanitizeForPdf(block.title):null;
+      if(cleanTitle){
+        doc.setFontSize(11);doc.setTextColor(30,30,30);
+        doc.text(cleanTitle,40,y);
+        y+=8;
+      }
+      if(block.rows){
+        const cleanRows=block.rows.map(r=>r.map(_sanitizeForPdf));
+        doc.autoTable({startY:y,margin:{left:40,right:40},styles:{fontSize:9,cellPadding:5},
+          head:[['Field','Value']],body:cleanRows,
+          headStyles:{fillColor:[240,185,11],textColor:[20,20,20]},
+          theme:'grid'});
+        y=doc.lastAutoTable.finalY+16;
+      }else if(block.table){
+        const cleanHead=block.table.head.map(_sanitizeForPdf);
+        const cleanBody=block.table.body.map(r=>r.map(_sanitizeForPdf));
+        doc.autoTable({startY:y,margin:{left:40,right:40},styles:{fontSize:8,cellPadding:4},
+          head:[cleanHead],body:cleanBody,
+          headStyles:{fillColor:[240,185,11],textColor:[20,20,20]},
+          theme:'grid'});
+        y=doc.lastAutoTable.finalY+16;
+      }
+    });
+    doc.setFontSize(8);doc.setTextColor(160,160,160);
+    doc.text('This is an estimate for informational purposes only, not financial advice.',40,doc.internal.pageSize.height-20);
+    doc.save(`fincalc-${id}-result.pdf`);
+  }catch(e){
+    alert('Sorry, the download couldn\'t be generated. Please check your connection and try again.');
+  }finally{
+    if(btn){btn.innerHTML=origLabel;btn.disabled=false;}
+  }
+}
+
 function injectPrintButtons(){
   document.querySelectorAll('.panel').forEach(panel=>{
     if(panel.id==='home'||panel.id==='privacy'||panel.id==='about'||panel.id==='terms'||panel.id==='scientific'||panel.id==='currency'||panel.id.indexOf('blog')===0)return;
-    if(panel.querySelector('.print-btn'))return;
+    if(panel.querySelector('.download-btn'))return;
     const btn=document.createElement('button');
-    btn.className='print-btn';
-    btn.innerHTML='🖨️ Print Result';
-    btn.onclick=function(){printCalculator(panel.id);};
+    btn.className='download-btn';
+    btn.innerHTML='⬇️ Download Result';
+    btn.onclick=function(){downloadCalculatorPDF(panel.id);};
     const back=panel.querySelector('.back-btn');
     if(back)back.insertAdjacentElement('afterend',btn);
     else panel.insertBefore(btn,panel.firstChild);
   });
-}
-function printCalculator(id){
-  const panel=gel(id);if(!panel)return;
-  let header=panel.querySelector('.print-header');
-  if(!header){
-    header=document.createElement('div');
-    header.className='print-header';
-    panel.insertBefore(header,panel.querySelector('.two,.two-eq,.three')||panel.firstChild);
-  }
-  const name=panel.querySelector('.card-title')?.textContent||'FinCalc Result';
-  const today=new Date().toLocaleDateString('en-US',{year:'numeric',month:'long',day:'numeric'});
-  header.innerHTML=`<div class="ph-name">${name}</div><div class="ph-date">Generated ${today} · fincalc.pro</div>`;
-  header.classList.add('show');
-  window.print();
-  setTimeout(()=>header.classList.remove('show'),500);
 }
 
 function toggleFAQ(el){
@@ -2047,7 +2334,7 @@ function initPage(id){
     calcCAGR,calcDRIP,cDivGrowth,calcETF,calcDCF,cBurn,cPricing,calcEquity,cDilutionImpact,calcRevenue,
     cLoan,cPrepay,cAutoLoan,cSip,cSWP,cTax,cMortgage,cRentVsBuy,cSavings,cProvident,cAllocRecommend,
     cStock,cPEG,cEVEBITDA,cRetire,cFire,cDebt,cRental,calcRP,cCF,cBE,cSavingsGoal,cEmergency,cHealthScore,
-    cCurrency, injectDisclaimers, injectInputHints, injectPrintButtons];
+    cCurrency, injectDisclaimers, injectInputHints, injectPrintButtons, attachChartTooltips];
   calls.forEach(fn=>{ try{ fn(); }catch(e){ /* element not on this page — expected */ } });
   if(window.__isHome){
     const params = new URLSearchParams(location.search);
