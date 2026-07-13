@@ -1125,9 +1125,9 @@ function cSWP(){
 function cTax(){
   const gross=+gel('t-inc').value||0,oth=+gel('t-oth').value||0,pre=+gel('t-pre').value||0,status=gel('t-status').value;
   const taxable=Math.max(0,gross+oth-pre);
-  const std={single:14600,married:29200,hoh:21900}[status]||14600;
+  const std={single:16100,married:32200,hoh:24150}[status]||16100;
   const ti=Math.max(0,taxable-std);
-  const bks={single:[[0,11600,10],[11600,47150,12],[47150,100525,22],[100525,191950,24],[191950,243725,32],[243725,609350,35],[609350,Infinity,37]],married:[[0,23200,10],[23200,94300,12],[94300,201050,22],[201050,383900,24],[383900,487450,32],[487450,731200,35],[731200,Infinity,37]],hoh:[[0,16550,10],[16550,63100,12],[63100,100500,22],[100500,191950,24],[191950,243700,32],[243700,609350,35],[609350,Infinity,37]]};
+  const bks={single:[[0,12400,10],[12400,50400,12],[50400,105700,22],[105700,201775,24],[201775,256225,32],[256225,640600,35],[640600,Infinity,37]],married:[[0,24800,10],[24800,100800,12],[100800,211400,22],[211400,403550,24],[403550,512450,32],[512450,768700,35],[768700,Infinity,37]],hoh:[[0,17700,10],[17700,67450,12],[67450,105700,22],[105700,201775,24],[201775,256200,32],[256200,640600,35],[640600,Infinity,37]]};
   const slabs=bks[status]||bks.single;let tax=0,rows=[];
   slabs.forEach(s=>{if(ti<=s[0]){rows.push({f:s[0],t:s[1],r:s[2],tx:0,act:false});return;}const sl=Math.min(ti,s[1]===Infinity?ti:s[1])-s[0],tx=sl*s[2]/100;tax+=tx;rows.push({f:s[0],t:s[1],r:s[2],tx,act:true});});
   gel('t-tax').textContent=f$(tax);gel('t-eff').textContent=ti?pct(tax/ti*100):'0%';gel('t-home').textContent=f$((gross-tax)/12);gel('t-taxinc').textContent=f$(ti);
