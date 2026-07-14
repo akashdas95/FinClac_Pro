@@ -27,7 +27,7 @@ body{background:var(--bg);color:var(--t);font-family:var(--fn);font-size:14px;li
 .searchbox input::placeholder{color:#6B7A8D;opacity:1}
 .nav{display:flex;gap:2px;padding:.75rem 1.25rem 0;border-bottom:1px solid var(--bd);overflow-x:auto;scrollbar-width:none;background:var(--bg);position:sticky;top:52px;z-index:100}
 .nav::-webkit-scrollbar{display:none}
-.ntab{padding:8px 13px;font-size:12px;font-weight:500;color:#fff;cursor:pointer;border-bottom:2px solid transparent;white-space:nowrap;background:none;border-top:none;border-left:none;border-right:none;transition:all .18s;font-family:var(--fn)}
+.ntab{padding:8px 13px;font-size:12px;font-weight:500;color:#fff;cursor:pointer;border-bottom:2px solid transparent;white-space:nowrap;background:none;border-top:none;border-left:none;border-right:none;transition:all .18s;font-family:var(--fn);text-decoration:none;display:inline-block}
 .ntab.on{color:var(--a);border-bottom-color:var(--a)}
 .ntab:hover:not(.on){color:var(--t)}
 .content{padding:1.25rem}
@@ -36,7 +36,7 @@ body{background:var(--bg);color:var(--t);font-family:var(--fn);font-size:14px;li
 .dir-sec-h{font-size:11px;font-weight:600;color:var(--m);letter-spacing:.8px;text-transform:uppercase;margin-bottom:.75rem;display:flex;align-items:center;gap:8px}
 .dir-sec-h::after{content:'';flex:1;height:1px;background:var(--bd)}
 .dir-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(178px,1fr));gap:10px}
-.dir-card{background:linear-gradient(135deg,#0d1117 60%,#071510 100%);border:1px solid #0ECB81;border-radius:12px;padding:1.25rem 1.1rem;cursor:pointer;transition:all .2s;box-shadow:0 2px 12px rgba(14,203,129,.1),0 1px 3px rgba(0,0,0,.4)}
+.dir-card{background:linear-gradient(135deg,#0d1117 60%,#071510 100%);border:1px solid #0ECB81;border-radius:12px;padding:1.25rem 1.1rem;cursor:pointer;transition:all .2s;box-shadow:0 2px 12px rgba(14,203,129,.1),0 1px 3px rgba(0,0,0,.4);text-decoration:none;display:block;color:inherit}
 .dir-card:hover{border-color:#ffffff;transform:translateY(-2px);box-shadow:0 6px 28px rgba(255,255,255,.12),0 2px 8px rgba(0,0,0,.5)}
 .dir-icon{font-size:28px;margin-bottom:10px;line-height:1}
 .dir-name{font-size:15px;font-weight:600;margin-bottom:5px;color:var(--t)}
@@ -73,7 +73,7 @@ body{background:var(--bg);color:var(--t);font-family:var(--fn);font-size:14px;li
 .btn-sm{padding:6px 12px;border-radius:6px;font-size:12px;font-weight:500;cursor:pointer;border:none;font-family:var(--fn)}
 .btn-add{background:var(--s2)!important;color:var(--g)!important;border:1px solid var(--g)!important}
 .btn-del{background:transparent;color:var(--r);border:1px solid var(--bd);padding:6px 10px;border-radius:6px;cursor:pointer;font-size:13px}
-.back-btn{background:var(--s2);border:1px solid var(--bd);color:var(--tb);font-size:12.5px;font-weight:500;cursor:pointer;margin-bottom:1rem;display:inline-flex;align-items:center;gap:6px;padding:7px 14px;border-radius:20px;font-family:var(--fn);transition:all .18s}
+.back-btn{background:var(--s2);border:1px solid var(--bd);color:var(--tb);font-size:12.5px;font-weight:500;cursor:pointer;margin-bottom:1rem;display:inline-flex;align-items:center;gap:6px;padding:7px 14px;border-radius:20px;font-family:var(--fn);transition:all .18s;text-decoration:none}
 .back-btn:hover{color:var(--t);border-color:var(--g);background:var(--s)}
 .badge-new{background:rgba(14,203,129,.15);color:var(--g);font-size:10px;font-weight:600;padding:2px 7px;border-radius:4px}
 .pbar-bg{background:var(--bd);border-radius:3px;height:6px;overflow:hidden;margin-top:4px}
@@ -274,40 +274,40 @@ body{background:var(--bg);color:var(--t);font-family:var(--fn);font-size:14px;li
   </div>
 </div>
 <div class="nav">
-  <button class="ntab on" onclick="go('home',this)">🏠 Home</button><button class="ntab" onclick="location.href='/blog'">📝 Blog</button>
-  <button class="ntab" onclick="go('cagr',this)">📐 CAGR</button>
-  <button class="ntab" onclick="go('xirr',this)">📅 XIRR</button>
-  <button class="ntab" onclick="go('drip',this)">💧 DRIP</button>
-  <button class="ntab" onclick="go('etf',this)">🗂️ ETF Growth</button>
-  <button class="ntab" onclick="go('dcf',this)">🏦 DCF Valuation</button>
-  <button class="ntab" onclick="go('debtcomp',this)">❄️ Snowball vs Avalanche</button>
-  <button class="ntab" onclick="go('rentalprop',this)">🏡 Rental Property</button>
-  <button class="ntab" onclick="go('burnrate',this)">🔥 Burn Rate</button>
-  <button class="ntab" onclick="go('pricing',this)">🏷️ Pricing</button>
-  <button class="ntab" onclick="go('equity',this)">📐 Equity Dilution</button>
-  <button class="ntab" onclick="go('revenue',this)">📊 Revenue Forecast</button>
-  <button class="ntab" onclick="go('loan',this)">🏦 Loan/EMI</button>
-  <button class="ntab" onclick="go('invest',this)">📈 SIP/Investment</button>
-  <button class="ntab" onclick="go('tax',this)">🧾 Tax</button>
-  <button class="ntab" onclick="go('mortgage',this)">🏠 Mortgage</button>
-  <button class="ntab" onclick="go('mortcomp',this)">⚖️ Mtg Compare</button>
-  <button class="ntab" onclick="go('savings',this)">🏛️ Savings</button>
-  <button class="ntab" onclick="go('stock',this)">📉 Stock P&amp;L</button>
-  <button class="ntab" onclick="go('retirement',this)">👴 Retirement</button>
-  <button class="ntab" onclick="go('debt',this)">💳 Debt Payoff</button>
-  <button class="ntab" onclick="go('rental',this)">🏘️ Rental Yield</button>
-  <button class="ntab" onclick="go('cashflow',this)">💵 Cash Flow</button>
-  <button class="ntab" onclick="go('breakeven',this)">📊 Break-even</button>
-  <button class="ntab" onclick="go('savingsgoal',this)">🎯 Savings Goal</button>
-  <button class="ntab" onclick="go('emergencyfund',this)">🛡️ Emergency Fund</button>
-  <button class="ntab" onclick="go('healthscore',this)">💯 Health Score</button>
-  <button class="ntab" onclick="go('currency',this)">💱 Currency</button>
-  <button class="ntab" onclick="go('scientific',this)">🔬 Scientific</button>
+  <a class="ntab on" href="/" onclick="go('home',this);return false;">🏠 Home</a><a class="ntab" href="/blog">📝 Blog</a>
+  <a class="ntab" href="/cagr" onclick="go('cagr',this);return false;">📐 CAGR</a>
+  <a class="ntab" href="/xirr" onclick="go('xirr',this);return false;">📅 XIRR</a>
+  <a class="ntab" href="/drip" onclick="go('drip',this);return false;">💧 DRIP</a>
+  <a class="ntab" href="/etf" onclick="go('etf',this);return false;">🗂️ ETF Growth</a>
+  <a class="ntab" href="/dcf" onclick="go('dcf',this);return false;">🏦 DCF Valuation</a>
+  <a class="ntab" href="/debtcomp" onclick="go('debtcomp',this);return false;">❄️ Snowball vs Avalanche</a>
+  <a class="ntab" href="/rentalprop" onclick="go('rentalprop',this);return false;">🏡 Rental Property</a>
+  <a class="ntab" href="/burnrate" onclick="go('burnrate',this);return false;">🔥 Burn Rate</a>
+  <a class="ntab" href="/pricing" onclick="go('pricing',this);return false;">🏷️ Pricing</a>
+  <a class="ntab" href="/equity" onclick="go('equity',this);return false;">📐 Equity Dilution</a>
+  <a class="ntab" href="/revenue" onclick="go('revenue',this);return false;">📊 Revenue Forecast</a>
+  <a class="ntab" href="/loan" onclick="go('loan',this);return false;">🏦 Loan/EMI</a>
+  <a class="ntab" href="/invest" onclick="go('invest',this);return false;">📈 SIP/Investment</a>
+  <a class="ntab" href="/tax" onclick="go('tax',this);return false;">🧾 Tax</a>
+  <a class="ntab" href="/mortgage" onclick="go('mortgage',this);return false;">🏠 Mortgage</a>
+  <a class="ntab" href="/mortcomp" onclick="go('mortcomp',this);return false;">⚖️ Mtg Compare</a>
+  <a class="ntab" href="/savings" onclick="go('savings',this);return false;">🏛️ Savings</a>
+  <a class="ntab" href="/stock" onclick="go('stock',this);return false;">📉 Stock P&amp;L</a>
+  <a class="ntab" href="/retirement" onclick="go('retirement',this);return false;">👴 Retirement</a>
+  <a class="ntab" href="/debt" onclick="go('debt',this);return false;">💳 Debt Payoff</a>
+  <a class="ntab" href="/rental" onclick="go('rental',this);return false;">🏘️ Rental Yield</a>
+  <a class="ntab" href="/cashflow" onclick="go('cashflow',this);return false;">💵 Cash Flow</a>
+  <a class="ntab" href="/breakeven" onclick="go('breakeven',this);return false;">📊 Break-even</a>
+  <a class="ntab" href="/savingsgoal" onclick="go('savingsgoal',this);return false;">🎯 Savings Goal</a>
+  <a class="ntab" href="/emergencyfund" onclick="go('emergencyfund',this);return false;">🛡️ Emergency Fund</a>
+  <a class="ntab" href="/healthscore" onclick="go('healthscore',this);return false;">💯 Health Score</a>
+  <a class="ntab" href="/currency" onclick="go('currency',this);return false;">💱 Currency</a>
+  <a class="ntab" href="/scientific" onclick="go('scientific',this);return false;">🔬 Scientific</a>
 </div>
 <div class="content">
 <div id="allocation" class="panel on">
-<button class="back-btn" onclick="go('home',null)">← Back to Home</button>
-<div class="calc-links"><span class="calc-links-label">🔗 Related</span><button class="calc-link-btn" onclick="go('retirement',null)">👴 Retirement</button><button class="calc-link-btn" onclick="go('invest',null)">📈 SIP / Investment</button><button class="calc-link-btn" onclick="go('etf',null)">🗂️ ETF Growth</button><button class="calc-link-btn" onclick="go('healthscore',null)">💯 Financial Health Score</button></div><div class="calc-links" style="margin-top:8px;background:transparent;border:none;padding:4px 0"><span class="calc-links-label">📖 Related reading</span><div style="margin-top:6px;font-size:12.5px;line-height:1.6"><a href="/blog/etf-vs-individual-stocks" style="color:var(--a);text-decoration:underline">ETFs vs Individual Stocks: Building a Diversified Portfolio</a><br></div></div>
+<a class="back-btn" href="/" onclick="go('home',null);return false;">← Back to Home</a>
+<div class="calc-links"><span class="calc-links-label">🔗 Related</span><a class="calc-link-btn" href="/retirement" onclick="go('retirement',null);return false;">👴 Retirement</a><a class="calc-link-btn" href="/invest" onclick="go('invest',null);return false;">📈 SIP / Investment</a><a class="calc-link-btn" href="/etf" onclick="go('etf',null);return false;">🗂️ ETF Growth</a><a class="calc-link-btn" href="/healthscore" onclick="go('healthscore',null);return false;">💯 Financial Health Score</a></div><div class="calc-links" style="margin-top:8px;background:transparent;border:none;padding:4px 0"><span class="calc-links-label">📖 Related reading</span><div style="margin-top:6px;font-size:12.5px;line-height:1.6"><a href="/blog/etf-vs-individual-stocks" style="color:var(--a);text-decoration:underline">ETFs vs Individual Stocks: Building a Diversified Portfolio</a><br></div></div>
 
 
 <div class="two">

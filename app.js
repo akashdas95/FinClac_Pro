@@ -204,7 +204,7 @@ function buildDir(){
   SECTIONS.forEach(sec=>{
     const slug=sec.title.replace(/[^\w\s-]/g,'').trim().toLowerCase().replace(/\s+/g,'-');
     let html=`<div class="dir-sec" id="dir-sec-${slug}"><div class="dir-sec-h">${sec.title}${sec.badge?' <span class="badge-new">New</span>':''}</div><div class="dir-grid">`;
-    sec.items.forEach(it=>{html+=`<div class="dir-card" onclick="location.href='/${it.id}'"><div class="dir-icon">${it.icon}</div><div class="dir-name">${it.name}</div><div class="dir-desc">${it.desc}</div></div>`;});
+    sec.items.forEach(it=>{html+=`<a class="dir-card" href="/${it.id}" onclick="location.href='/${it.id}';return false;"><div class="dir-icon">${it.icon}</div><div class="dir-name">${it.name}</div><div class="dir-desc">${it.desc}</div></a>`;});
     html+='</div></div>';el.innerHTML+=html;
   });
 }
@@ -240,7 +240,7 @@ function calcCAGR(){
     const v10=begin*Math.pow(1+cagr/100,10);
     insights.push({type:'neutral',text:`If this growth rate held steady, <strong>${f$(begin)}</strong> would grow to roughly <strong>${f$(v10)}</strong> after 10 years.`});
   }
-    insights.push({type:'neutral',text:`Want to see this growth with regular monthly contributions added, not just a single lump sum? Try the <a href="javascript:go('invest',null)" style="color:var(--a);text-decoration:underline">SIP</a> calculator, or check the exact annualized return with <a href="javascript:go('xirr',null)" style="color:var(--a);text-decoration:underline">XIRR</a> if your cash flows weren't a single lump sum.`});
+    insights.push({type:'neutral',text:`Want to see this growth with regular monthly contributions added, not just a single lump sum? Try the <a href="/invest" style="color:var(--a);text-decoration:underline">SIP</a> calculator, or check the exact annualized return with <a href="/xirr" style="color:var(--a);text-decoration:underline">XIRR</a> if your cash flows weren't a single lump sum.`});
   renderInsights('cg-insights',insights);
 }
 
@@ -287,7 +287,7 @@ function calcXIRR(){
     insights.push({type:'neutral',text:`Your <strong>${pct(r)}</strong> annualized return is roughly in line with the S&P 500's long-term average.`});
   }
   insights.push({type:net>=0?'good':'bad',text:`You've ${net>=0?'gained':'lost'} <strong>${f$(Math.abs(net))}</strong> in absolute terms, turning every dollar invested into <strong>${inv>0?(rec/inv).toFixed(2):'0'}x</strong>.`});
-    insights.push({type:'neutral',text:`Want a single smooth growth rate instead of one that accounts for timing? Compare it with <a href="javascript:go('cagr',null)" style="color:var(--a);text-decoration:underline">CAGR</a>, or see how reinvesting future payouts could compound further with <a href="javascript:go('drip',null)" style="color:var(--a);text-decoration:underline">DRIP</a>.`});
+    insights.push({type:'neutral',text:`Want a single smooth growth rate instead of one that accounts for timing? Compare it with <a href="/cagr" style="color:var(--a);text-decoration:underline">CAGR</a>, or see how reinvesting future payouts could compound further with <a href="/drip" style="color:var(--a);text-decoration:underline">DRIP</a>.`});
   renderInsights('xirr-insights',insights);
 }
 
@@ -320,7 +320,7 @@ function calcDRIP(){
   const insights=[];
   if(drIpAdvantage>0)insights.push({type:'good',text:`Reinvesting dividends grows your portfolio to <strong>${f$(finalPortfolio)}</strong> — about <strong>${f$(drIpAdvantage)}</strong> more than if you'd taken dividends as cash instead.`});
   insights.push({type:'neutral',text:`Your share count grows from <strong>${shares.toLocaleString()}</strong> to roughly <strong>${Math.round(sh).toLocaleString()}</strong> shares purely through reinvestment, before counting any new money you add.`});
-    insights.push({type:'neutral',text:`Curious how a different dividend growth rate would change this outcome? The <a href="javascript:go('divgrowth',null)" style="color:var(--a);text-decoration:underline">Dividend Growth</a> calculator projects future income under different growth assumptions.`});
+    insights.push({type:'neutral',text:`Curious how a different dividend growth rate would change this outcome? The <a href="/divgrowth" style="color:var(--a);text-decoration:underline">Dividend Growth</a> calculator projects future income under different growth assumptions.`});
   renderInsights('dr-insights',insights);
 }
 
@@ -395,7 +395,7 @@ function cDivGrowth(){
     }
   }
   if(!reinvest)insights.push({type:'neutral',text:`This assumes dividends are taken as cash, not reinvested — check the reinvest box to see how much faster income grows when dividends buy more shares.`});
-    insights.push({type:'neutral',text:`If this income is meant to eventually cover living expenses, see how it stacks up against a real target with the <a href="javascript:go('retirement',null)" style="color:var(--a);text-decoration:underline">Retirement</a> or <a href="javascript:go('fire',null)" style="color:var(--a);text-decoration:underline">FIRE</a> calculator.`});
+    insights.push({type:'neutral',text:`If this income is meant to eventually cover living expenses, see how it stacks up against a real target with the <a href="/retirement" style="color:var(--a);text-decoration:underline">Retirement</a> or <a href="/fire" style="color:var(--a);text-decoration:underline">FIRE</a> calculator.`});
   renderInsights('dg-insights',insights);
 }
 
@@ -428,7 +428,7 @@ function calcETF(){
   if(spread>1)insights.push({type:'neutral',text:`Over ${years} years, the gap between the best (<strong>${best.name}</strong>) and weakest (<strong>${worst.name}</strong>) option here is roughly <strong>${f$(spread)}</strong>.`});
   const dragAmt=Math.abs(sim(10.5)-baseNoFee);
   if(dragAmt>50)insights.push({type:exp>0.5?'bad':'good',text:`Your <strong>${exp}%</strong> expense ratio costs you about <strong>${f$(dragAmt)}</strong> over this period compared to a 0%-fee fund — ${exp>0.5?'consider a lower-cost index option':'this is a very low, index-fund-typical fee'}.`});
-    insights.push({type:'neutral',text:`Not sure how much of your portfolio should even be in ETFs versus other assets? The <a href="javascript:go('allocation',null)" style="color:var(--a);text-decoration:underline">Asset Allocation</a> calculator finds a mix appropriate for your age and risk tolerance.`});
+    insights.push({type:'neutral',text:`Not sure how much of your portfolio should even be in ETFs versus other assets? The <a href="/allocation" style="color:var(--a);text-decoration:underline">Asset Allocation</a> calculator finds a mix appropriate for your age and risk tolerance.`});
   renderInsights('et-insights',insights);
 }
 
@@ -466,7 +466,7 @@ function calcDCF(){
   const tvShare=tvPV/fair*100;
   if(tvShare>60)insights.push({type:'neutral',text:`<strong>${tvShare.toFixed(0)}%</strong> of this valuation comes from the terminal value — meaning most of the estimate depends on assumptions about growth far in the future, not the next ${yrs} years.`});
   if(price<fair*0.7)insights.push({type:'bad',text:`Even in the <strong>bear case</strong> ($${(fair*.7).toFixed(2)}), the estimated value is above the current price of $${price.toFixed(2)} — worth double-checking your growth assumptions aren't too optimistic.`});
-    insights.push({type:'neutral',text:`Want a faster gut-check than a full DCF? The <a href="javascript:go('peg',null)" style="color:var(--a);text-decoration:underline">PEG Ratio</a> calculator compares valuation against growth in seconds.`});
+    insights.push({type:'neutral',text:`Want a faster gut-check than a full DCF? The <a href="/peg" style="color:var(--a);text-decoration:underline">PEG Ratio</a> calculator compares valuation against growth in seconds.`});
   renderInsights('dc-insights',insights);
 }
 
@@ -530,7 +530,7 @@ function cPEG(){
     }
     insights.push({type:'neutral',text:`At this <strong>${growth}%</strong> growth rate, a "fairly valued" PEG of 1.0 corresponds to a P/E of about <strong>${growth.toFixed(1)}</strong> — this stock is currently trading at a P/E of <strong>${pe.toFixed(1)}</strong>.`});
   }
-    insights.push({type:'neutral',text:`PEG doesn't account for debt levels — the <a href="javascript:go('evebitda',null)" style="color:var(--a);text-decoration:underline">EV/EBITDA</a> calculator gives a capital-structure-neutral comparison if you're comparing companies with different debt loads.`});
+    insights.push({type:'neutral',text:`PEG doesn't account for debt levels — the <a href="/evebitda" style="color:var(--a);text-decoration:underline">EV/EBITDA</a> calculator gives a capital-structure-neutral comparison if you're comparing companies with different debt loads.`});
   renderInsights('pg-insights',insights);
 }
 
@@ -587,7 +587,7 @@ function cEVEBITDA(){
       insights.push({type:'neutral',text:`At a <strong>${targetMult}x</strong> target multiple, the implied price of <strong>$${impliedPrice.toFixed(2)}</strong> is close to the current $${price.toFixed(2)} price — the stock looks roughly fairly valued against this benchmark.`});
     }
   }
-    insights.push({type:'neutral',text:`Want a growth-adjusted view instead? The <a href="javascript:go('peg',null)" style="color:var(--a);text-decoration:underline">PEG Ratio</a> calculator factors the earnings growth rate in directly.`});
+    insights.push({type:'neutral',text:`Want a growth-adjusted view instead? The <a href="/peg" style="color:var(--a);text-decoration:underline">PEG Ratio</a> calculator factors the earnings growth rate in directly.`});
   renderInsights('ev-insights',insights);
 }
 
@@ -637,7 +637,7 @@ function calcDC2(){
   else insights.push({type:'neutral',text:`Both methods land very close together here — your debts don't differ enough in rate or balance order for either approach to clearly win.`});
   const firstPayoff=sn.order[0];
   if(firstPayoff)insights.push({type:'neutral',text:`If you value early motivation over pure savings, <strong>Snowball</strong> clears your first debt (<strong>${firstPayoff.name}</strong>) by month <strong>${firstPayoff.month}</strong> — often sooner than Avalanche clears its first target.`});
-    insights.push({type:'neutral',text:`Ready to commit to a payoff plan with your real balances? The <a href="javascript:go('debt',null)" style="color:var(--a);text-decoration:underline">Debt Payoff</a> calculator locks in a month-by-month schedule.`});
+    insights.push({type:'neutral',text:`Ready to commit to a payoff plan with your real balances? The <a href="/debt" style="color:var(--a);text-decoration:underline">Debt Payoff</a> calculator locks in a month-by-month schedule.`});
   renderInsights('dc2-insights',insights);
 }
 
@@ -667,7 +667,7 @@ function calcRP(){
   const insights=[];
   insights.push({type:coc>=8?'good':coc>=0?'neutral':'bad',text:`Your cash-on-cash return is <strong>${pct(coc)}</strong> — ${coc>=8?'above the 8% benchmark many investors target':coc>=0?'positive, but below the 8% benchmark many investors target':'negative, meaning this property is costing you money every month'}.`});
   insights.push({type:'neutral',text:`Over 10 years, factoring in both appreciation and rental income, this property could return roughly <strong>${pct(ret10)}</strong> on your initial <strong>${f$(tinv)}</strong> investment.`});
-    insights.push({type:'neutral',text:`Already own a rental and want ongoing yield tracking instead of a purchase analysis? The <a href="javascript:go('rental',null)" style="color:var(--a);text-decoration:underline">Rental Yield</a> calculator is built for that.`});
+    insights.push({type:'neutral',text:`Already own a rental and want ongoing yield tracking instead of a purchase analysis? The <a href="/rental" style="color:var(--a);text-decoration:underline">Rental Yield</a> calculator is built for that.`});
   renderInsights('rp-insights',insights);
 }
 
@@ -699,7 +699,7 @@ function cBurn(){
   if(growth>0 && mrr>0 && isFinite(burnMultiple) && burnMultiple>0){
     insights.push({type:burnMultiple<2?'good':burnMultiple<4?'neutral':'bad',text:`Your burn multiple is roughly <strong>${burnMultiple.toFixed(1)}x</strong> — ${burnMultiple<2?'efficient, spending less than $2 for every $1 of new revenue growth':burnMultiple<4?'a healthy range for most growth-stage startups':'high; investors will likely scrutinize this closely'}.`});
   }
-    insights.push({type:'neutral',text:`Want to see when revenue growth alone extends this runway? Model it with <a href="javascript:go('revenue',null)" style="color:var(--a);text-decoration:underline">Revenue Forecast</a> or find your exact <a href="javascript:go('breakeven',null)" style="color:var(--a);text-decoration:underline">Break-Even</a> point.`});
+    insights.push({type:'neutral',text:`Want to see when revenue growth alone extends this runway? Model it with <a href="/revenue" style="color:var(--a);text-decoration:underline">Revenue Forecast</a> or find your exact <a href="/breakeven" style="color:var(--a);text-decoration:underline">Break-Even</a> point.`});
   renderInsights('br-insights',insights);
 }
 
@@ -719,7 +719,7 @@ function cPricing(){
   if(comp>0 && Math.abs(rec-comp)/comp>0.15){
     insights.push({type:'neutral',text:`Your recommended price is <strong>${rec>comp?'above':'below'}</strong> the competitor midpoint of <strong>${f$(comp)}</strong> by about <strong>${Math.abs((rec-comp)/comp*100).toFixed(0)}%</strong>.`});
   }
-    insights.push({type:'neutral',text:`Once you've settled on a price, see exactly how many units you need to sell to break even with the <a href="javascript:go('breakeven',null)" style="color:var(--a);text-decoration:underline">Break-Even Point</a> calculator.`});
+    insights.push({type:'neutral',text:`Once you've settled on a price, see exactly how many units you need to sell to break even with the <a href="/breakeven" style="color:var(--a);text-decoration:underline">Break-Even Point</a> calculator.`});
   renderInsights('pr-insights',insights);
 }
 
@@ -758,7 +758,7 @@ function calcEquity(){
   insights.push({type:totalDilution>50?'bad':'neutral',text:`Founders started with <strong>${startPct.toFixed(0)}%</strong> combined and now hold <strong>${fPct.toFixed(1)}%</strong> after ${rounds.length} round${rounds.length!==1?'s':''} and the option pool — a total dilution of <strong>${totalDilution.toFixed(0)} points</strong>.`});
   const founderValue=lastVal*fPct/100;
   insights.push({type:'good',text:`Despite the dilution, the founders' stake is now worth roughly <strong>${f$(founderValue)}</strong> on paper, based on the most recent <strong>${f$(lastVal)}</strong> valuation.`});
-    insights.push({type:'neutral',text:`Want to see how one specific future event — a secondary sale or option exercise — affects your EPS? Try the <a href="javascript:go('dilutionimpact',null)" style="color:var(--a);text-decoration:underline">Stock Dilution Impact</a> calculator.`});
+    insights.push({type:'neutral',text:`Want to see how one specific future event — a secondary sale or option exercise — affects your EPS? Try the <a href="/dilutionimpact" style="color:var(--a);text-decoration:underline">Stock Dilution Impact</a> calculator.`});
   renderInsights('eq-insights',insights);
 }
 
@@ -796,7 +796,7 @@ function cDilutionImpact(){
   }
   insights.push({type:'neutral',text:`Net income would need to grow by roughly <strong>${pct(offsetPct)}</strong> to fully offset this dilution and bring EPS back to where it started.`});
   if(gel('di-source').value==='secondary')insights.push({type:'neutral',text:`Check the company's stated use of proceeds — capital that grows future earnings by at least <strong>${pct(offsetPct)}</strong> would make this dilution roughly neutral for EPS over time.`});
-    insights.push({type:'neutral',text:`Curious how this compares across multiple future funding rounds instead of one event? Model it with the <a href="javascript:go('equity',null)" style="color:var(--a);text-decoration:underline">Equity Dilution</a> calculator.`});
+    insights.push({type:'neutral',text:`Curious how this compares across multiple future funding rounds instead of one event? Model it with the <a href="/equity" style="color:var(--a);text-decoration:underline">Equity Dilution</a> calculator.`});
   renderInsights('di-insights',insights);
 }
 
@@ -826,7 +826,7 @@ function calcRevenue(){
   }
   const spreadPct=oD[oD.length-1].r>0?((oD[oD.length-1].r-pD[pD.length-1].r)/oD[oD.length-1].r*100):0;
   if(spreadPct>30)insights.push({type:'neutral',text:`The gap between your pessimistic and optimistic scenarios is wide (<strong>${f$(pD[pD.length-1].r)}</strong> to <strong>${f$(oD[oD.length-1].r)}</strong>) — small changes in growth or churn assumptions swing the outcome significantly here.`});
-    insights.push({type:'neutral',text:`Wondering how these growth scenarios affect your cash runway? Plug your numbers into the <a href="javascript:go('burnrate',null)" style="color:var(--a);text-decoration:underline">Burn Rate</a> calculator next.`});
+    insights.push({type:'neutral',text:`Wondering how these growth scenarios affect your cash runway? Plug your numbers into the <a href="/burnrate" style="color:var(--a);text-decoration:underline">Burn Rate</a> calculator next.`});
   renderInsights('rf-insights',insights);
 }
 
@@ -860,7 +860,7 @@ function cLoan(){
     }
   }
   if(pf>0)insights.push({type:'neutral',text:`Don't forget the <strong>${f$(pf)}</strong> processing fee — it's a one-time cost on top of your EMI and total interest.`});
-    insights.push({type:'neutral',text:`Already have this loan and want to see the exact effect of extra payments? The <a href="javascript:go('prepay',null)" style="color:var(--a);text-decoration:underline">Loan Prepayment</a> calculator breaks it down year by year.`});
+    insights.push({type:'neutral',text:`Already have this loan and want to see the exact effect of extra payments? The <a href="/prepay" style="color:var(--a);text-decoration:underline">Loan Prepayment</a> calculator breaks it down year by year.`});
   renderInsights('l-insights',insights);
 }
 
@@ -923,7 +923,7 @@ function cPrepay(){
 
   const insights=[];
   if(intSaved>0)insights.push({type:'good',text:`These extra payments save you <strong>${f$(Math.max(0,intSaved))}</strong> in interest and clear the loan <strong>${Math.max(0,timeSaved)} months</strong> sooner.`});
-  insights.push({type:'neutral',text:`Comparing a few different loan offers instead of prepaying this one? The <a href="javascript:go('loancomp',null)" style="color:var(--a);text-decoration:underline">Loan Comparison</a> calculator ranks multiple offers by total cost side by side.`});
+  insights.push({type:'neutral',text:`Comparing a few different loan offers instead of prepaying this one? The <a href="/loancomp" style="color:var(--a);text-decoration:underline">Loan Comparison</a> calculator ranks multiple offers by total cost side by side.`});
   renderInsights('pp-insights',insights);
 }
 
@@ -960,7 +960,7 @@ function cProvident(){
     const stepGain=bal2-bal;
     if(stepGain>0)insights.push({type:'neutral',text:`Stepping up your contribution by just <strong>5% a year</strong> would grow your maturity value to roughly <strong>${f$(bal2)}</strong> — an extra <strong>${f$(stepGain)}</strong>.`});
   }
-    insights.push({type:'neutral',text:`Want to see this alongside your other retirement savings? The <a href="javascript:go('retirement',null)" style="color:var(--a);text-decoration:underline">Retirement</a> calculator combines all your sources into one target.`});
+    insights.push({type:'neutral',text:`Want to see this alongside your other retirement savings? The <a href="/retirement" style="color:var(--a);text-decoration:underline">Retirement</a> calculator combines all your sources into one target.`});
   renderInsights('pf-insights',insights);
 }
 
@@ -1020,7 +1020,7 @@ function cAlloc(){
   }
   if(alloc.crypto>10)insights.push({type:'bad',text:`A <strong>${alloc.crypto.toFixed(0)}%</strong> crypto allocation is well above the 0-5% "satellite" range most advisors recommend, given its high volatility.`});
   insights.push({type:'neutral',text:`At a <strong>${pct(blended)}</strong> blended return, <strong>${f$(val)}</strong> would grow to roughly <strong>${f$(future)}</strong> after ${years} years.`});
-    insights.push({type:'neutral',text:`Want to check if this mix actually gets you to your real retirement number? Run your numbers through the <a href="javascript:go('retirement',null)" style="color:var(--a);text-decoration:underline">Retirement</a> or <a href="javascript:go('fire',null)" style="color:var(--a);text-decoration:underline">FIRE</a> calculator next.`});
+    insights.push({type:'neutral',text:`Want to check if this mix actually gets you to your real retirement number? Run your numbers through the <a href="/retirement" style="color:var(--a);text-decoration:underline">Retirement</a> or <a href="/fire" style="color:var(--a);text-decoration:underline">FIRE</a> calculator next.`});
   renderInsights('aa-insights',insights);
 }
 
@@ -1052,7 +1052,7 @@ function cSip(){
     const stepGain=corpus3-corpus;
     if(stepGain>0)insights.push({type:'neutral',text:`Stepping up your contribution by just <strong>5% a year</strong> (tracking typical salary growth) would add roughly <strong>${f$(stepGain)}</strong> to your final corpus.`});
   }
-    insights.push({type:'neutral',text:`Is this corpus actually enough for your goals? Check it against a real retirement target with <a href="javascript:go('retirement',null)" style="color:var(--a);text-decoration:underline">Retirement</a> or <a href="javascript:go('fire',null)" style="color:var(--a);text-decoration:underline">FIRE</a>.`});
+    insights.push({type:'neutral',text:`Is this corpus actually enough for your goals? Check it against a real retirement target with <a href="/retirement" style="color:var(--a);text-decoration:underline">Retirement</a> or <a href="/fire" style="color:var(--a);text-decoration:underline">FIRE</a>.`});
   renderInsights('i-insights',insights);
 }
 
@@ -1117,7 +1117,7 @@ function cSWP(){
     }
   }
   if(infl===0)insights.push({type:'neutral',text:`Your withdrawal amount never increases — its real purchasing power will fall over time as prices rise. Consider setting an annual increase matching your expected inflation rate.`});
-    insights.push({type:'neutral',text:`Still building toward this corpus rather than withdrawing from it? The <a href="javascript:go('invest',null)" style="color:var(--a);text-decoration:underline">SIP</a> or <a href="javascript:go('retirement',null)" style="color:var(--a);text-decoration:underline">Retirement</a> calculator projects the accumulation phase.`});
+    insights.push({type:'neutral',text:`Still building toward this corpus rather than withdrawing from it? The <a href="/invest" style="color:var(--a);text-decoration:underline">SIP</a> or <a href="/retirement" style="color:var(--a);text-decoration:underline">Retirement</a> calculator projects the accumulation phase.`});
   renderInsights('sw-insights',insights);
 }
 
@@ -1145,7 +1145,7 @@ function cTax(){
     if(roomLeft>0)insights.push({type:'neutral',text:`You have about <strong>${f$(roomLeft)}</strong> of room left in your current <strong>${marginalRate}%</strong> bracket before crossing into the next one.`});
   }
   insights.push({type:'neutral',text:`This estimates <strong>federal tax only</strong> — state income tax (0% to 13%+ depending on where you live) is calculated separately and isn't included here.`});
-    insights.push({type:'neutral',text:`Want to see how this tax bill fits into your overall monthly budget? Check your full picture with the <a href="javascript:go('cashflow',null)" style="color:var(--a);text-decoration:underline">Cash Flow</a> calculator.`});
+    insights.push({type:'neutral',text:`Want to see how this tax bill fits into your overall monthly budget? Check your full picture with the <a href="/cashflow" style="color:var(--a);text-decoration:underline">Cash Flow</a> calculator.`});
   renderInsights('t-insights',insights);
 }
 
@@ -1176,7 +1176,7 @@ function cMortgage(){
   if(intSaved>1000&&timeSaved>0){
     insights.push({type:'neutral',text:`Paying an extra <strong>${f$(extraTest)}/mo</strong> would save roughly <strong>${f$(intSaved)}</strong> in interest and pay off the mortgage <strong>${(timeSaved/12).toFixed(1)} years</strong> sooner.`});
   }
-    insights.push({type:'neutral',text:`Not sure if buying is even the better move for you right now? The <a href="javascript:go('rentvsbuy',null)" style="color:var(--a);text-decoration:underline">Rent vs Buy</a> calculator compares your net worth under both scenarios.`});
+    insights.push({type:'neutral',text:`Not sure if buying is even the better move for you right now? The <a href="/rentvsbuy" style="color:var(--a);text-decoration:underline">Rent vs Buy</a> calculator compares your net worth under both scenarios.`});
   renderInsights('m-insights',insights);
 }
 
@@ -1238,7 +1238,7 @@ function cRentVsBuy(){
   }else if(rent0>breakevenRent*1.15){
     insights.push({type:'neutral',text:`Your rent of <strong>${f$(rent0)}/mo</strong> is well above the rough "5% rule" breakeven of <strong>${f$(breakevenRent)}/mo</strong> for this home price — a quick signal that buying may be the better deal here.`});
   }
-    insights.push({type:'neutral',text:`Already leaning toward buying? Compare specific mortgage offers side by side with the <a href="javascript:go('mortcomp',null)" style="color:var(--a);text-decoration:underline">Mortgage Comparison</a> calculator.`});
+    insights.push({type:'neutral',text:`Already leaning toward buying? Compare specific mortgage offers side by side with the <a href="/mortcomp" style="color:var(--a);text-decoration:underline">Mortgage Comparison</a> calculator.`});
   renderInsights('rb-insights',insights);
 }
 
@@ -1272,7 +1272,7 @@ function cMortComp(){
   }
   const spread=worstTotal.total-bestTotal.total;
   if(spread>1000)insights.push({type:'neutral',text:`The gap between the cheapest and most expensive option here is <strong>${f$(spread)}</strong> over the full loan term.`});
-    insights.push({type:'neutral',text:`Picked a favorite? See its full monthly payment breakdown including taxes, insurance, and PMI with the <a href="javascript:go('mortgage',null)" style="color:var(--a);text-decoration:underline">Mortgage</a> calculator.`});
+    insights.push({type:'neutral',text:`Picked a favorite? See its full monthly payment breakdown including taxes, insurance, and PMI with the <a href="/mortgage" style="color:var(--a);text-decoration:underline">Mortgage</a> calculator.`});
   renderInsights('mc-insights',insights);
 }
 
@@ -1313,7 +1313,7 @@ function cLoanComp(){
   if(spread>200)insights.push({type:'neutral',text:`The gap between the cheapest and most expensive offer here is <strong>${f$(spread)}</strong> over the full loan term.`});
   const feeOnly=res.filter(r=>r.feeAmt>0);
   if(feeOnly.length>0 && feeOnly.length<res.length)insights.push({type:'neutral',text:`Some offers charge a processing fee and others don't — that's already factored into the total cost above, not just the EMI.`});
-    insights.push({type:'neutral',text:`Already picked an offer? See exactly how much extra payments would save on it with the <a href="javascript:go('prepay',null)" style="color:var(--a);text-decoration:underline">Loan Prepayment</a> calculator.`});
+    insights.push({type:'neutral',text:`Already picked an offer? See exactly how much extra payments would save on it with the <a href="/prepay" style="color:var(--a);text-decoration:underline">Loan Prepayment</a> calculator.`});
   renderInsights('lc-insights',insights);
 }
 
@@ -1360,7 +1360,7 @@ function cAutoLoan(){
   if(term>60){
     insights.push({type:'bad',text:`A <strong>${term}-month</strong> term is longer than the common 60-month sweet spot — it lowers your payment but increases total interest and extends the window where you could owe more than the car is worth.`});
   }
-    insights.push({type:'neutral',text:`Weighing this against a personal or other loan type? The <a href="javascript:go('loancomp',null)" style="color:var(--a);text-decoration:underline">Loan Comparison</a> calculator ranks multiple offers by total cost side by side.`});
+    insights.push({type:'neutral',text:`Weighing this against a personal or other loan type? The <a href="/loancomp" style="color:var(--a);text-decoration:underline">Loan Comparison</a> calculator ranks multiple offers by total cost side by side.`});
   renderInsights('al-insights',insights);
 }
 
@@ -1381,7 +1381,7 @@ function cSavings(){
   if(isFinite(dbl))insights.push({type:'neutral',text:`At <strong>${pct(r*100)}</strong>, your money roughly doubles every <strong>${dbl.toFixed(1)} years</strong> — even without adding another dollar.`});
   if(mo===0 && init>0)insights.push({type:'neutral',text:`You're not adding any monthly contributions — even a small recurring deposit would meaningfully grow your final balance.`});
   if(fb>0){
-    insights.push({type:'neutral',text:`Is <strong>${f$(fb)}</strong> actually enough? That depends entirely on what it's for. Retirement guidance commonly targets <strong>25x</strong> your real annual expenses (the 4% rule) — plug your own expenses into the <a href="javascript:go('retirement',null)" style="color:var(--a);text-decoration:underline">Retirement</a> or <a href="javascript:go('fire',null)" style="color:var(--a);text-decoration:underline">FIRE</a> calculator to see your specific target, or the <a href="javascript:go('savingsgoal',null)" style="color:var(--a);text-decoration:underline">Savings Goal</a> calculator if you're saving toward a specific number like a house down payment.`});
+    insights.push({type:'neutral',text:`Is <strong>${f$(fb)}</strong> actually enough? That depends entirely on what it's for. Retirement guidance commonly targets <strong>25x</strong> your real annual expenses (the 4% rule) — plug your own expenses into the <a href="/retirement" style="color:var(--a);text-decoration:underline">Retirement</a> or <a href="/fire" style="color:var(--a);text-decoration:underline">FIRE</a> calculator to see your specific target, or the <a href="/savingsgoal" style="color:var(--a);text-decoration:underline">Savings Goal</a> calculator if you're saving toward a specific number like a house down payment.`});
   }
   renderInsights('sv-insights',insights);
 }
@@ -1406,7 +1406,7 @@ function cStock(){
   }
   if(feeDragPct>1)insights.push({type:'neutral',text:`Brokerage fees ate <strong>${f$(bc_+sc_)}</strong> of this trade — about <strong>${feeDragPct.toFixed(1)}%</strong> of your buy cost.`});
   if(days<365)insights.push({type:'neutral',text:`Held for <strong>${days} days</strong> — under a year, so this gain would typically be taxed as a <strong>short-term</strong> capital gain at your ordinary income rate, not the lower long-term rate.`});
-    insights.push({type:'neutral',text:`Want a longer-term view instead of a single trade? The <a href="javascript:go('cagr',null)" style="color:var(--a);text-decoration:underline">CAGR</a> calculator shows your annualized growth rate over multiple years.`});
+    insights.push({type:'neutral',text:`Want a longer-term view instead of a single trade? The <a href="/cagr" style="color:var(--a);text-decoration:underline">CAGR</a> calculator shows your annualized growth rate over multiple years.`});
   renderInsights('sk-insights',insights);
 }
 
@@ -1449,7 +1449,7 @@ function cRetire(){
     insights.push({type:'neutral',text:`Retiring a few years later or trimming retirement expenses can also significantly reduce this shortfall.`});
   }
   if(real<2)insights.push({type:'bad',text:`Your real (inflation-adjusted) return is only <strong>${pct(real)}</strong> — inflation is eating most of your gains.`});
-    insights.push({type:'neutral',text:`Considering retiring earlier than the traditional timeline? The <a href="javascript:go('fire',null)" style="color:var(--a);text-decoration:underline">FIRE</a> calculator uses a more conservative withdrawal rate suited to longer retirements.`});
+    insights.push({type:'neutral',text:`Considering retiring earlier than the traditional timeline? The <a href="/fire" style="color:var(--a);text-decoration:underline">FIRE</a> calculator uses a more conservative withdrawal rate suited to longer retirements.`});
   renderInsights('rt-insights',insights);
 }
 
@@ -1519,7 +1519,7 @@ function cFire(){
   }else if(progressPct>=10){
     insights.push({type:'neutral',text:`You're <strong>${pct(progressPct)}</strong> of the way to your FI number based on current net worth alone, before counting future growth.`});
   }
-    insights.push({type:'neutral',text:`Want the more traditional 25x/4%-rule version of this calculation instead? The <a href="javascript:go('retirement',null)" style="color:var(--a);text-decoration:underline">Retirement</a> calculator uses that standard baseline.`});
+    insights.push({type:'neutral',text:`Want the more traditional 25x/4%-rule version of this calculation instead? The <a href="/retirement" style="color:var(--a);text-decoration:underline">Retirement</a> calculator uses that standard baseline.`});
   renderInsights('fi-insights',insights);
 }
 
@@ -1568,7 +1568,7 @@ function cDebt(){
     const otherStrat=strat==='avalanche'?'snowball':'avalanche';
     insights.push({type:'neutral',text:`Your highest-rate debt is <strong>${highest.name}</strong> at <strong>${highest.rate}%</strong> — the ${strat} method prioritizes ${strat==='avalanche'?'this one first':'your smallest balance first, which may not be this one'}.`});
   }
-    insights.push({type:'neutral',text:`Want to compare snowball vs avalanche side by side before committing to one? The <a href="javascript:go('debtcomp',null)" style="color:var(--a);text-decoration:underline">Snowball vs Avalanche</a> calculator shows both at once.`});
+    insights.push({type:'neutral',text:`Want to compare snowball vs avalanche side by side before committing to one? The <a href="/debtcomp" style="color:var(--a);text-decoration:underline">Snowball vs Avalanche</a> calculator shows both at once.`});
   renderInsights('dp-insights',insights);
 }
 
@@ -1594,7 +1594,7 @@ function cRental(){
   }
   if(cap<5)insights.push({type:'neutral',text:`A <strong>${pct(cap)}</strong> cap rate is below the commonly cited <strong>5%</strong> benchmark many investors look for.`});
   else insights.push({type:'good',text:`A <strong>${pct(cap)}</strong> cap rate clears the commonly cited <strong>5%</strong> benchmark many investors look for.`});
-    insights.push({type:'neutral',text:`Evaluating whether to buy this property in the first place? The <a href="javascript:go('rentalprop',null)" style="color:var(--a);text-decoration:underline">Rental Property</a> calculator analyzes cap rate and cash-on-cash return for a purchase decision.`});
+    insights.push({type:'neutral',text:`Evaluating whether to buy this property in the first place? The <a href="/rentalprop" style="color:var(--a);text-decoration:underline">Rental Property</a> calculator analyzes cap rate and cash-on-cash return for a purchase decision.`});
   renderInsights('ry-insights',insights);
 }
 
@@ -1644,7 +1644,7 @@ function cCF(){
     const biggestPct=te>0?(biggest.amt*(FM[biggest.freq]||1))/te*100:0;
     if(biggestPct>35)insights.push({type:'neutral',text:`<strong>${biggest.name}</strong> is your largest expense at <strong>${biggestPct.toFixed(0)}%</strong> of total spending — worth a closer look if you need to free up cash flow.`});
   }
-    insights.push({type:'neutral',text:`Want a single score summarizing your overall financial position, not just this month's flow? Try the <a href="javascript:go('healthscore',null)" style="color:var(--a);text-decoration:underline">Financial Health Score</a>.`});
+    insights.push({type:'neutral',text:`Want a single score summarizing your overall financial position, not just this month's flow? Try the <a href="/healthscore" style="color:var(--a);text-decoration:underline">Financial Health Score</a>.`});
   renderInsights('cf-insights',insights);
 }
 
@@ -1674,7 +1674,7 @@ function cBE(){
     const beuDrop=beu-beuUp5;
     if(beuDrop>0)insights.push({type:'neutral',text:`A <strong>5% price increase</strong> would lower your break-even point to roughly <strong>${beuUp5.toLocaleString()} units</strong> — ${beuDrop.toLocaleString()} fewer units needed.`});
   }
-    insights.push({type:'neutral',text:`Want to check your runway alongside this break-even point? The <a href="javascript:go('burnrate',null)" style="color:var(--a);text-decoration:underline">Burn Rate</a> calculator shows how many months you have to reach it.`});
+    insights.push({type:'neutral',text:`Want to check your runway alongside this break-even point? The <a href="/burnrate" style="color:var(--a);text-decoration:underline">Burn Rate</a> calculator shows how many months you have to reach it.`});
   renderInsights('be-insights',insights);
 }
 
@@ -1825,7 +1825,7 @@ function cSavingsGoal(){
   }else{
     insights.push({type:'bad',text:'The required monthly amount isn\'t calculating to an achievable number — check your inputs (timeline may be too short or rate too high).'});
   }
-    insights.push({type:'neutral',text:`Saving for a rainy-day fund rather than a specific purchase? The <a href="javascript:go('emergencyfund',null)" style="color:var(--a);text-decoration:underline">Emergency Fund</a> calculator sizes that target differently.`});
+    insights.push({type:'neutral',text:`Saving for a rainy-day fund rather than a specific purchase? The <a href="/emergencyfund" style="color:var(--a);text-decoration:underline">Emergency Fund</a> calculator sizes that target differently.`});
   renderInsights('sg-insights',insights);
 }
 
@@ -1893,7 +1893,7 @@ function cEmergency(){
     :coverMonths<=9?'9 months is a conservative target — a good fit for self-employed or variable income.'
     :'12+ months is an ultra-safe target, ideal for single-income households.';
   insights.push({type:'neutral',text:coverLabel});
-    insights.push({type:'neutral',text:`Saving toward a specific goal instead, like a down payment? The <a href="javascript:go('savingsgoal',null)" style="color:var(--a);text-decoration:underline">Savings Goal</a> calculator shows the monthly amount needed to hit it by a target date.`});
+    insights.push({type:'neutral',text:`Saving toward a specific goal instead, like a down payment? The <a href="/savingsgoal" style="color:var(--a);text-decoration:underline">Savings Goal</a> calculator shows the monthly amount needed to hit it by a target date.`});
   renderInsights('ef-insights',insights);
 }
 
@@ -1984,7 +1984,7 @@ function cHealthScore(){
   if(retireRate < 10) insights.push({type:retireRate<3?'bad':'neutral',text:`Contribute at least <strong>10%</strong> of income to retirement (currently <strong>${retireRate.toFixed(1)}%</strong>) — take full advantage of any employer match first.`});
   if(insurance < 2) insights.push({type:'bad',text:'Get both health and life insurance — unexpected medical bills or loss of income can devastate finances without coverage.'});
   if(insights.length === 0) insights.push({type:'good',text:'You\'re hitting all key financial targets. Consider increasing investments, giving back, or exploring early retirement.'});
-    insights.push({type:'neutral',text:`Want to dig into any one of these areas specifically? Check your <a href="javascript:go('cashflow',null)" style="color:var(--a);text-decoration:underline">Cash Flow</a>, <a href="javascript:go('emergencyfund',null)" style="color:var(--a);text-decoration:underline">Emergency Fund</a>, or <a href="javascript:go('retirement',null)" style="color:var(--a);text-decoration:underline">Retirement</a> numbers individually.`});
+    insights.push({type:'neutral',text:`Want to dig into any one of these areas specifically? Check your <a href="/cashflow" style="color:var(--a);text-decoration:underline">Cash Flow</a>, <a href="/emergencyfund" style="color:var(--a);text-decoration:underline">Emergency Fund</a>, or <a href="/retirement" style="color:var(--a);text-decoration:underline">Retirement</a> numbers individually.`});
   renderInsights('hs-tips',insights);
 }
 
