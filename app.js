@@ -195,7 +195,7 @@ const SECTIONS=[
     {id:'cashflow',icon:'💵',name:'Cash Flow Analyzer',desc:'See whether more money is coming in than going out, and what\'s left over each month'},
   ]},
   {title:'🔬 Tools',badge:false,items:[
-    {id:'currency',icon:'💱',name:'Currency Converter',desc:'Quickly convert between 15 major world currencies using approximate exchange rates'},
+    {id:'currency',icon:'💱',name:'Currency Converter',desc:'Quickly convert between 15 major world currencies using live, daily-updated exchange rates'},
     {id:'scientific',icon:'🔬',name:'Scientific Calculator',desc:'A full scientific calculator with trig, logarithms, powers, factorials, and memory functions'},
   ]},
 ];
@@ -1679,13 +1679,53 @@ function cBE(){
 }
 
 // ── Currency ─────────────────────────────────────────────────────
-const RATES={USD:1,EUR:0.92,GBP:0.79,JPY:149.5,CNY:7.24,CAD:1.36,AUD:1.53,CHF:0.88,INR:83.2,SGD:1.34,AED:3.67,SAR:3.75,MYR:4.68,THB:35.8,KWD:0.307};
+const EXR_API_KEY='5908540a603b886de099390d';
+const RATES_FALLBACK={USD:1,EUR:0.92,GBP:0.79,JPY:149.5,CNY:7.24,CAD:1.36,AUD:1.53,CHF:0.88,INR:83.2,SGD:1.34,AED:3.67,SAR:3.75,MYR:4.68,THB:35.8,KWD:0.307};
+let RATES={...RATES_FALLBACK};
+let ratesLive=false,ratesUpdated=null;
+const CU_CACHE_KEY='fincalc_fx_rates_v1',CU_CACHE_MS=24*60*60*1000;
+
+function renderCurrencyStatus(){
+  const el=gel('cu-status');if(!el)return;
+  if(ratesLive&&ratesUpdated){
+    el.innerHTML=`<span style="color:var(--g)">●</span> Live rates as of ${ratesUpdated.toLocaleString()}`;
+  }else{
+    el.innerHTML=`<span style="color:var(--m)">●</span> Live rates unavailable right now — showing approximate reference rates`;
+  }
+}
+function buildCurrencyGrid(){
+  const grid=gel('cu-grid');if(!grid)return;
+  grid.innerHTML='';
+  ['EUR','GBP','JPY','CAD','AUD','INR','SGD','AED'].forEach(c=>{grid.innerHTML+=`<div class="sbox"><div class="lbl">USD → ${c}</div><div class="val" style="font-size:13px">${(RATES[c]||0).toFixed(4)}</div></div>`;});
+}
+async function loadLiveRates(){
+  try{
+    const cached=JSON.parse(localStorage.getItem(CU_CACHE_KEY)||'null');
+    if(cached&&Date.now()-cached.ts<CU_CACHE_MS){
+      RATES=cached.rates;ratesLive=true;ratesUpdated=new Date(cached.ts);
+      renderCurrencyStatus();cCurrency();buildCurrencyGrid();
+      return;
+    }
+  }catch(e){}
+  try{
+    const res=await fetch(`https://v6.exchangerate-api.com/v6/${EXR_API_KEY}/latest/USD`);
+    const data=await res.json();
+    if(data.result!=='success')throw new Error('API returned an error');
+    const live={USD:1};
+    Object.keys(RATES_FALLBACK).forEach(k=>{if(typeof data.conversion_rates[k]==='number')live[k]=data.conversion_rates[k];});
+    RATES=live;ratesLive=true;ratesUpdated=new Date();
+    try{localStorage.setItem(CU_CACHE_KEY,JSON.stringify({rates:RATES,ts:Date.now()}));}catch(e){}
+  }catch(e){
+    RATES={...RATES_FALLBACK};ratesLive=false;ratesUpdated=null;
+  }
+  renderCurrencyStatus();cCurrency();buildCurrencyGrid();
+}
 function buildCurrency(){
   const from=gel('cu-from'),to=gel('cu-to');
-  Object.keys(RATES).forEach(k=>{from.innerHTML+=`<option value="${k}">${k}</option>`;to.innerHTML+=`<option value="${k}">${k}</option>`;});
-  to.value='EUR';cCurrency();
-  const grid=gel('cu-grid');
-  ['EUR','GBP','JPY','CAD','AUD','INR','SGD','AED'].forEach(c=>{grid.innerHTML+=`<div class="sbox"><div class="lbl">USD → ${c}</div><div class="val" style="font-size:13px">${RATES[c].toFixed(4)}</div></div>`;});
+  Object.keys(RATES_FALLBACK).forEach(k=>{from.innerHTML+=`<option value="${k}">${k}</option>`;to.innerHTML+=`<option value="${k}">${k}</option>`;});
+  to.value='EUR';
+  buildCurrencyGrid();cCurrency();renderCurrencyStatus();
+  loadLiveRates();
 }
 function cCurrency(){
   const amt=+gel('cu-amt').value||0,f=gel('cu-from').value,t=gel('cu-to').value;
@@ -1979,7 +2019,7 @@ const DISCLAIMER_CAT={
   realestate:'Property values, rental income, taxes, and financing terms vary significantly by location and lender. <strong>Verify all figures with a local real estate or mortgage professional</strong> before making a purchase or investment decision.',
   business:'Business projections depend on assumptions that may not reflect your actual market, costs, or growth trajectory. <strong>Validate key assumptions with your own financial data</strong> before using these figures for planning or fundraising.',
   credit:'Loan terms, interest rates, and fees vary by lender and are subject to change. <strong>Confirm exact figures with your lender or financial institution</strong> before making borrowing or repayment decisions.',
-  currency:'Exchange rates shown are approximate and for reference only — they are not live market rates and should not be used for actual currency trading, transfers, or international payments. <strong>Check with your bank or payment provider for current rates.</strong>'
+  currency:'Exchange rates are pulled from a live rates provider and cached for up to 24 hours — they are indicative reference rates, not real-time interbank or market rates, and do not include the spread or fees your bank or payment provider will charge. <strong>Check with your bank or payment provider for the exact rate on any actual transaction.</strong>'
 };
 const PANEL_DISCLAIMER={
   loan:'credit',prepay:'credit',loancomp:'credit',autoloan:'credit',debtcomp:'credit',debt:'credit',
