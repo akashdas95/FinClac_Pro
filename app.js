@@ -185,6 +185,7 @@ const SECTIONS=[
     {id:'invest',icon:'📈',name:'SIP / Investment',desc:'Project how your monthly investments grow into a future lump sum, with optional yearly step-ups'},
     {id:'swp',icon:'📉',name:'SWP Calculator',desc:'See how long a lump sum lasts when you withdraw a fixed monthly income from it'},
     {id:'stock',icon:'📉',name:'Stock P&L',desc:'Calculate your real profit or loss on a trade after accounting for brokerage fees'},
+    {id:'split',icon:'🔀',name:'Stock Split Calculator',desc:'See exactly how many new shares you\'ll have and your adjusted cost basis after any forward or reverse split'},
   ]},
   {title:'🚀 Startup & Business',badge:false,items:[
     {id:'burnrate',icon:'🔥',name:'Burn Rate',desc:'Find out how many months of cash your startup has left before it runs out of money'},
@@ -1467,6 +1468,40 @@ function cStock(){
   renderInsights('sk-insights',insights);
 }
 
+// ── Stock Split ──────────────────────────────────────────────────
+function cSplit(){
+  const sh=+gel('sp-sh').value||0,price=+gel('sp-price').value||0;
+  const newR=+gel('sp-new').value||1,oldR=+gel('sp-old').value||1;
+  const basis=+gel('sp-basis').value||0;
+  const ratio=newR/oldR;
+  const newSh=sh*ratio;
+  const newPrice=ratio?price/ratio:price;
+  const valueBefore=sh*price,valueAfter=newSh*newPrice;
+  const newBasis=ratio?basis/ratio:basis;
+
+  gel('sp-newsh').textContent=(Number.isInteger(newSh)?newSh:newSh.toFixed(2)).toString();
+  gel('sp-newprice').textContent='$'+newPrice.toFixed(2);
+  gel('sp-value').textContent=f$(valueAfter);
+  gel('sp-newbasis').textContent='$'+newBasis.toFixed(2);
+  gel('sp-vbefore').textContent=f$(valueBefore);
+  gel('sp-vafter').textContent=f$(valueAfter);
+  gel('sp-ratio').textContent=(newR>=oldR?`${newR}-for-${oldR}`:`${newR}-for-${oldR} (reverse)`);
+
+  const insights=[];
+  const isReverse=newR<oldR;
+  insights.push({type:'neutral',text:isReverse
+    ? `This is a <strong>reverse split</strong> — every <strong>${oldR}</strong> old shares become <strong>${newR}</strong> new share${newR===1?'':'s'}. Your <strong>${sh}</strong> shares become <strong>${newSh.toFixed(newSh%1?2:0)}</strong> shares at roughly <strong>$${newPrice.toFixed(2)}</strong> each.`
+    : `Every <strong>${oldR}</strong> old share${oldR===1?'':'s'} becomes <strong>${newR}</strong> new shares. Your <strong>${sh}</strong> shares become <strong>${newSh.toFixed(newSh%1?2:0)}</strong> shares at roughly <strong>$${newPrice.toFixed(2)}</strong> each.`});
+  insights.push({type:'good',text:`Total value is unchanged: <strong>${f$(valueBefore)}</strong> before and after — a split doesn't create or destroy any value, it only changes how many pieces it's divided into.`});
+  if(newSh%1!==0){
+    insights.push({type:'bad',text:`Your new share count isn't a whole number — brokers typically pay <strong>cash-in-lieu</strong> for the fractional remainder rather than issuing a partial share, and that cash payout is generally a taxable event.`});
+  }
+  if(basis>0){
+    insights.push({type:'neutral',text:`Your cost basis <strong>per share</strong> adjusts from <strong>$${basis.toFixed(2)}</strong> to <strong>$${newBasis.toFixed(2)}</strong> — but your <em>total</em> cost basis of <strong>${f$(sh*basis)}</strong> stays the same, just spread across the new share count.`});
+  }
+  renderInsights('sp-insights',insights);
+}
+
 // ── Retirement ───────────────────────────────────────────────────
 function cRetire(){
   const age=+gel('rt-age').value||30,ret=+gel('rt-ret').value||65,save=+gel('rt-save').value||0,contrib=+gel('rt-contrib').value||0;
@@ -2431,7 +2466,7 @@ function initPage(id){
     renderXIRR,renderFounders,renderRounds,renderDebtRows,renderCFRows,renderDC2,
     calcCAGR,calcDRIP,cDivGrowth,calcETF,calcDCF,cBurn,cPricing,calcEquity,cDilutionImpact,calcRevenue,
     cLoan,cPrepay,cAutoLoan,cSip,cSWP,cTax,cMortgage,cHeloc,cRentVsBuy,cSavings,cProvident,cAllocRecommend,
-    cStock,cPEG,cEVEBITDA,cRetire,cFire,cDebt,cRental,calcRP,cCF,cBE,cSavingsGoal,cEmergency,cHealthScore,
+    cStock,cSplit,cPEG,cEVEBITDA,cRetire,cFire,cDebt,cRental,calcRP,cCF,cBE,cSavingsGoal,cEmergency,cHealthScore,
     cCurrency, injectDisclaimers, injectInputHints, injectPrintButtons, attachChartTooltips];
   calls.forEach(fn=>{ try{ fn(); }catch(e){ /* element not on this page — expected */ } });
   if(window.__isHome){

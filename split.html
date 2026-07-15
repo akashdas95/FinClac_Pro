@@ -3,15 +3,18 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>SaaS Revenue Forecasting: Bear, Base, and Bull Scenarios Explained | FinCalc Blog</title>
-<meta name="description" content="A single revenue projection number is usually a red flag — here's why ranges matter more.">
-<link rel="canonical" href="https://finclac.com/blog/saas-revenue-forecasting-scenarios">
+<title>Stock Split Calculator — How Many Shares Will You Have After a Split? | FinCalc</title>
+<meta name="description" content="See exactly how many new shares you'll own, your new price per share, and your adjusted cost basis after any stock split or reverse split. Free stock split calculator.">
+<link rel="canonical" href="https://finclac.com/split">
 <meta name="robots" content="index, follow">
-<meta property="og:type" content="article">
-<meta property="og:title" content="SaaS Revenue Forecasting: Bear, Base, and Bull Scenarios Explained">
-<meta property="og:description" content="A single revenue projection number is usually a red flag — here's why ranges matter more.">
-<meta property="og:url" content="https://finclac.com/blog/saas-revenue-forecasting-scenarios">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Stock Split Calculator — How Many Shares Will You Have After a Split? | FinCalc">
+<meta property="og:description" content="See exactly how many new shares you'll own, your new price per share, and your adjusted cost basis after any stock split or reverse split. Free stock split calculator.">
+<meta property="og:url" content="https://finclac.com/split">
 <meta property="og:site_name" content="FinCalc">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Stock Split Calculator — How Many Shares Will You Have After a Split? | FinCalc">
+<meta name="twitter:description" content="See exactly how many new shares you'll own, your new price per share, and your adjusted cost basis after any stock split or reverse split. Free stock split calculator.">
 <style>*{box-sizing:border-box;margin:0;padding:0}
 :root{--bg:#0B0E11;--s:#141920;--s2:#1C2430;--bd:#232D3A;--t:#E8EDF2;--m:#6B7A8D;--tb:#A3B2C4;--a:#F0B90B;--g:#0ECB81;--r:#F6465D;--b:#1890FF;--p:#9B59B6;--fn:'DM Sans',sans-serif;--mo:'DM Mono',monospace}
 body{background:var(--bg);color:var(--t);font-family:var(--fn);font-size:14px;line-height:1.5;min-height:100vh}
@@ -260,7 +263,7 @@ body{background:var(--bg);color:var(--t);font-family:var(--fn);font-size:14px;li
   gtag('config', 'G-61RHHG8E6Q');
 </script>
 <meta name="msvalidate.01" content="175D12831D109E3E7E1A856004E0F393" />
-<script type="application/ld+json">{"@context": "https://schema.org", "@type": "BlogPosting", "headline": "SaaS Revenue Forecasting: Bear, Base, and Bull Scenarios Explained", "url": "https://finclac.com/blog/saas-revenue-forecasting-scenarios", "description": "A single revenue projection number is usually a red flag — here's why ranges matter more.", "publisher": {"@type": "Organization", "name": "FinCalc"}, "isPartOf": {"@type": "WebSite", "name": "FinCalc", "url": "https://finclac.com/"}}</script>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "WebApplication", "name": "Stock Split Calculator", "url": "https://finclac.com/split", "description": "See exactly how many new shares you'll own, your new price per share, and your adjusted cost basis after any stock split or reverse split. Free stock split calculator.", "applicationCategory": "FinanceApplication", "operatingSystem": "Any (web-based)", "offers": {"@type": "Offer", "price": "0", "priceCurrency": "USD"}, "isPartOf": {"@type": "WebSite", "name": "FinCalc", "url": "https://finclac.com/"}}</script>
 </head>
 <body>
 <div class="topbar">
@@ -271,7 +274,7 @@ body{background:var(--bg);color:var(--t);font-family:var(--fn);font-size:14px;li
   </div>
 </div>
 <div class="nav">
-  <a class="ntab" href="/" onclick="go('home',this);return false;">🏠 Home</a><a class="ntab on" href="/blog">📝 Blog</a>
+  <a class="ntab on" href="/" onclick="go('home',this);return false;">🏠 Home</a><a class="ntab" href="/blog">📝 Blog</a>
   <a class="ntab" href="/cagr" onclick="go('cagr',this);return false;">📐 CAGR</a>
   <a class="ntab" href="/xirr" onclick="go('xirr',this);return false;">📅 XIRR</a>
   <a class="ntab" href="/drip" onclick="go('drip',this);return false;">💧 DRIP</a>
@@ -304,33 +307,109 @@ body{background:var(--bg);color:var(--t);font-family:var(--fn);font-size:14px;li
   <a class="ntab" href="/scientific" onclick="go('scientific',this);return false;">🔬 Scientific</a>
 </div>
 <div class="content">
-<div class="panel on" id="blog-saas-revenue-forecasting-scenarios">
-<a class="back-btn" href="/blog">← Back to Blog</a>
-<div class="card" style="max-width:760px;margin:0 auto">
-  <div class="card-title">Article</div>
-  <p class="guide-p" style="margin-top:0;color:var(--m);font-size:13px">July 2026</p>
-  
-<h1 class="guide-h2" style="margin-top:0">SaaS Revenue Forecasting: Bear, Base, and Bull Scenarios Explained</h1>
-<p class="guide-p">Startup founders and investors alike often want a single revenue number for next year — but a single-point forecast is usually more misleading than helpful. Building bear, base, and bull scenarios instead gives a far more honest and useful picture.</p>
+<div id="split" class="panel on">
+<a class="back-btn" href="/" onclick="go('home',null);return false;">← Back to Home</a>
+<div class="calc-links"><span class="calc-links-label">🔗 Related</span><a class="calc-link-btn" href="/stock" onclick="go('stock',null);return false;">📉 Stock P&L</a><a class="calc-link-btn" href="/cagr" onclick="go('cagr',null);return false;">📐 CAGR</a><a class="calc-link-btn" href="/drip" onclick="go('drip',null);return false;">💧 DRIP</a><a class="calc-link-btn" href="/dilutionimpact" onclick="go('dilutionimpact',null);return false;">🧬 Stock Dilution</a></div>
 
-<h2 class="guide-h3">Why single-number forecasts are misleading</h2>
-<p class="guide-p">Revenue growth depends on multiple uncertain inputs — customer acquisition rate, churn, expansion revenue, pricing changes — each with real variance. Presenting one precise-looking number implies a false confidence that rarely survives contact with reality. A range that reflects genuine uncertainty is more honest and, ultimately, more useful for planning.</p>
 
-<h2 class="guide-h3">The three scenarios, defined properly</h2>
-<p class="guide-p"><strong>Bear case:</strong> conservative assumptions — slower customer acquisition, higher churn, minimal expansion revenue. This should represent a genuinely plausible "things go worse than hoped" outcome, useful for stress-testing whether the business survives a rough year.</p>
-<p class="guide-p"><strong>Base case:</strong> your realistic, most-likely expectation given current trends continuing roughly as they have been — this is the number you'd actually plan hiring and spending around.</p>
-<p class="guide-p"><strong>Bull case:</strong> an optimistic but still plausible scenario if key initiatives succeed — a new channel takes off, churn improves meaningfully, or a major deal closes. This shouldn't be a fantasy number, just the genuinely achievable upper end.</p>
-
-<h2 class="guide-h3">Key SaaS metrics that drive the forecast</h2>
-<p class="guide-p"><strong>ARR (Annual Recurring Revenue):</strong> your predictable, recurring revenue base, the foundation any forecast builds from. <strong>Churn rate:</strong> the percentage of revenue or customers lost each period — even small differences in churn compound dramatically over a multi-year forecast. <strong>LTV (Lifetime Value):</strong> the total revenue expected from an average customer over their relationship with you — critical for understanding whether your customer acquisition spending is sustainable.</p>
-
-<h2 class="guide-h3">Why churn assumptions matter more than growth assumptions</h2>
-<p class="guide-p">Founders often focus forecasting energy on new customer acquisition, but small changes in churn rate frequently have a larger cumulative effect on long-term revenue than similarly-sized changes in new customer growth — because churn compounds against your entire existing base, not just new additions. Scenario models that don't vary churn assumptions between bear/base/bull are missing one of the most important levers.</p>
-
-<h2 class="guide-h3">Build your own scenarios</h2>
-<p class="guide-p">The free <a href="/revenue" style="color:var(--a);text-decoration:underline">Revenue Forecast Calculator</a> models bear, base, and bull growth scenarios with ARR and LTV metrics built in. Pair it with the <a href="/burnrate" style="color:var(--a);text-decoration:underline">Burn Rate Calculator</a> to see how each revenue scenario affects your cash runway.</p>
-
+<div class="two">
+  <div class="card">
+    <h1 class="card-title" style="margin:0 0 1.25rem">How Many Shares Will You Have After a Stock Split?</h1>
+    <div class="g2">
+      <div class="field"><label>Shares Owned (Before Split)</label><input type="number" id="sp-sh" value="100" oninput="cSplit()"></div>
+      <div class="field"><label>Price per Share Before Split ($)</label><div class="ip"><span class="pfx">$</span><input type="number" id="sp-price" value="200" step="0.01" oninput="cSplit()"></div></div>
+      <div class="field"><label>Split Ratio — New Shares</label><input type="number" id="sp-new" value="4" oninput="cSplit()"></div>
+      <div class="field"><label>Split Ratio — Old Shares</label><input type="number" id="sp-old" value="1" oninput="cSplit()"></div>
+    </div>
+    <div class="input-hint">💡 Enter a 4-for-1 split as New=4, Old=1. Enter a 1-for-10 <strong>reverse</strong> split as New=1, Old=10.</div>
+    <div class="field"><label>Your Original Cost Basis per Share ($, optional)</label><div class="ip"><span class="pfx">$</span><input type="number" id="sp-basis" value="150" step="0.01" oninput="cSplit()"></div></div>
+    <div class="sgrid">
+      <div class="sbox"><div class="lbl">New Shares Owned</div><div class="val" style="color:var(--a)" id="sp-newsh">0</div></div>
+      <div class="sbox"><div class="lbl">New Price per Share</div><div class="val" id="sp-newprice">$0</div></div>
+      <div class="sbox"><div class="lbl">Total Value (Unchanged)</div><div class="val" style="color:var(--g)" id="sp-value">$0</div></div>
+      <div class="sbox"><div class="lbl">New Cost Basis / Share</div><div class="val" id="sp-newbasis">$0</div></div>
+    </div>
+  </div>
+  <div class="card">
+    <div class="card-title">Split Summary</div>
+    <div class="rrow"><span class="rk">Value before split</span><span class="rv" id="sp-vbefore">$0</span></div>
+    <div class="rrow"><span class="rk">Value after split</span><span class="rv" style="color:var(--g)" id="sp-vafter">$0</span></div>
+    <div class="rrow"><span class="rk">Split ratio</span><span class="rv" style="color:var(--a)" id="sp-ratio">—</span></div>
+    <div class="insight-box" id="sp-insights"></div>
+  </div>
 </div>
+
+<div class="calc-guide">
+  <div class="guide-toggle">
+    <div class="guide-toggle-title">📖 Stock Splits — What Actually Changes (and What Doesn't)</div>
+  </div>
+  <div class="guide-body">
+<div class="guide-p">A stock split is one of the most misunderstood events in investing — the share price changes dramatically, the share count changes dramatically, but the actual value of what you own doesn't change at all. Understanding exactly what a split does (and doesn't do) prevents both false excitement and unnecessary worry.</div>
+
+<div class="guide-h3">The Core Formula</div>
+<div class="guide-formula">New Shares = Old Shares × (New Ratio / Old Ratio)   |   New Price = Old Price × (Old Ratio / New Ratio)</div>
+<div class="guide-p">A 4-for-1 split turns 100 shares worth $200 each ($20,000 total) into 400 shares worth $50 each — still $20,000 total. Nothing about the company's actual value, your ownership percentage, or your total investment has changed; only the number of pieces it's divided into.</div>
+
+<div class="guide-h3">Why Companies Split Their Stock</div>
+<div class="guide-p">Companies typically split shares to bring a high per-share price back into a more "accessible" range, especially in markets or brokerages where fractional share trading isn't universal. A $2,000 share price can psychologically deter smaller investors even though it represents no different value proposition than 20 shares at $100 — a split addresses that psychology without changing the underlying economics.</div>
+
+<div class="guide-h3">Forward Splits vs. Reverse Splits</div>
+<table class="guide-table"><thead><tr><th>Type</th><th>Effect</th><th>Common Reason</th></tr></thead><tbody>
+<tr><td>Forward split (e.g. 4-for-1)</td><td>More shares, lower price each</td><td>Make share price more accessible after strong growth</td></tr>
+<tr><td>Reverse split (e.g. 1-for-10)</td><td>Fewer shares, higher price each</td><td>Meet minimum listing price requirements, or reduce perceived "penny stock" appearance</td></tr>
+</tbody></table>
+<div class="guide-p">A reverse split carries no inherent negative meaning mathematically — value is preserved exactly the same way a forward split preserves it. In practice, though, reverse splits are far more often associated with companies trying to avoid delisting from an exchange for trading below a minimum price threshold, which is why they tend to carry a more negative connotation among investors even though the mechanism itself is value-neutral.</div>
+
+<div class="guide-h3">Cost Basis: What You Actually Need to Track for Taxes</div>
+<div class="guide-p">Your <em>total</em> cost basis (what you originally paid, in aggregate) doesn't change in a split — but your cost basis <em>per share</em> does, since that same total is now spread across a different number of shares. If you originally paid $150/share for 100 shares ($15,000 total) and a 4-for-1 split gives you 400 shares, your new cost basis is $37.50/share — still $15,000 in total. Brokerages typically adjust this automatically on your statements, but it's worth verifying, especially for older positions or shares transferred between brokers.</div>
+
+<div class="guide-h3">Fractional Shares After a Reverse Split</div>
+<div class="guide-p">Reverse splits often produce fractional share counts — for example, 105 shares under a 1-for-10 reverse split would mathematically become 10.5 shares. Since fractional shares can't always be issued, brokers typically pay you cash instead for the fractional remainder ("cash-in-lieu"), which is generally a taxable event even though the rest of the split itself is not.</div>
+<div class="guide-tip">💡 A stock split changes nothing about whether a company is a good investment — it's a purely mechanical event. Don't let a lower post-split share price create a false sense that the stock is suddenly "cheaper" in any meaningful sense; the valuation is identical to before the split.</div>
+
+  </div>
+</div>
+
+<div class="faq-section">
+<div class="faq-section-title">❓ Frequently Asked Questions</div>
+<div class="faq-item">
+  <div class="faq-q" onclick="toggleFAQ(this)">
+    <span>Does a stock split make my investment worth more?</span>
+    <span class="faq-icon">+</span>
+  </div>
+  <div class="faq-a">No. A split changes only <strong>how many shares</strong> you own and their <strong>price per share</strong> — the total value of your position is mathematically identical immediately before and after a split.</div>
+</div>
+<div class="faq-item">
+  <div class="faq-q" onclick="toggleFAQ(this)">
+    <span>What does a "4-for-1" split mean?</span>
+    <span class="faq-icon">+</span>
+  </div>
+  <div class="faq-a">For every <strong>1 share</strong> you owned before, you now own <strong>4 shares</strong> after the split, each worth roughly one-fourth the pre-split price. 100 shares at $200 becomes 400 shares at $50.</div>
+</div>
+<div class="faq-item">
+  <div class="faq-q" onclick="toggleFAQ(this)">
+    <span>What's a reverse stock split?</span>
+    <span class="faq-icon">+</span>
+  </div>
+  <div class="faq-a">The opposite of a normal split — your share count <strong>decreases</strong> and the price per share <strong>increases</strong> proportionally. A 1-for-10 reverse split turns 1,000 shares at $2 into 100 shares at $20. Total value is unchanged, but reverse splits are often (not always) associated with companies trying to avoid exchange delisting.</div>
+</div>
+<div class="faq-item">
+  <div class="faq-q" onclick="toggleFAQ(this)">
+    <span>Do I need to do anything when a stock I own splits?</span>
+    <span class="faq-icon">+</span>
+  </div>
+  <div class="faq-a">Usually no — your brokerage automatically adjusts your share count, price, and cost basis. It's still worth double-checking your account afterward, particularly your <strong>per-share cost basis</strong>, since that figure matters for capital gains tax calculations when you eventually sell.</div>
+</div>
+<div class="faq-item">
+  <div class="faq-q" onclick="toggleFAQ(this)">
+    <span>Is a stock split a taxable event?</span>
+    <span class="faq-icon">+</span>
+  </div>
+  <div class="faq-a">No, the split itself isn't taxable — you haven't sold anything or realized any gain. The one exception is <strong>cash-in-lieu of fractional shares</strong>, which can occur after a reverse split and is generally treated as a taxable sale of that fractional amount.</div>
+</div>
+</div>
+
+
 </div>
 </div><!-- content -->
 <div class="site-footer">
@@ -338,15 +417,15 @@ body{background:var(--bg);color:var(--t);font-family:var(--fn);font-size:14px;li
     <div class="logo-mark" style="width:22px;height:22px;background:var(--a);border-radius:5px;display:flex;align-items:center;justify-content:center;color:#000;font-size:11px;font-weight:700">FC</div>
     FinCalc
   </div>
-  <div class="footer-copy">© 2025 FinCalc · Free Financial Calculators · <a href="/about" style="color:inherit">About</a> · <a href="/privacy" style="color:inherit">Privacy Policy</a> · <a href="/terms" style="color:inherit">Terms</a></div>
+  <div class="footer-copy">© 2025 FinCalc · Free Financial Calculators · <a href="/blog" style="color:inherit">Blog</a> · <a href="/about" style="color:inherit">About</a> · <a href="/privacy" style="color:inherit">Privacy Policy</a> · <a href="/terms" style="color:inherit">Terms</a></div>
   <!-- tinystartups · Launched on Tiny Startups -->
 <a href="https://www.tinystartups.com/startup/finclaccom" target="_blank" rel="noopener"
    style="display:inline-flex;align-items:center;gap:10px;padding:8px 14px 8px 10px;border-radius:12px;text-decoration:none;font-family:'Inter',system-ui,sans-serif;background:linear-gradient(#fff,#fff) padding-box,linear-gradient(90deg,#3525E6,#D81FE0,#22B8F0) border-box;border:2px solid transparent;color:#0E0B1F;flex-shrink:0">
   <svg width="34" height="34" viewBox="0 0 100 100">
-    <defs><linearGradient id="tsg3" x1=".1" y1="0" x2=".9" y2="1">
+    <defs><linearGradient id="tsg" x1=".1" y1="0" x2=".9" y2="1">
       <stop offset="0%" stop-color="#3525E6"/><stop offset="55%" stop-color="#D81FE0"/><stop offset="100%" stop-color="#22B8F0"/>
     </linearGradient></defs>
-    <path d="M50 6C52 32 68 48 94 50C68 52 52 68 50 94C48 68 32 52 6 50C32 48 48 32 50 6Z" fill="url(#tsg3)"/>
+    <path d="M50 6C52 32 68 48 94 50C68 52 52 68 50 94C48 68 32 52 6 50C32 48 48 32 50 6Z" fill="url(#tsg)"/>
   </svg>
   <span style="display:flex;flex-direction:column;line-height:1.1">
     <span style="font-family:monospace;font-size:7px;font-weight:600;letter-spacing:0.15em;text-transform:uppercase;color:#6A6585">Launched on</span>
@@ -357,7 +436,7 @@ body{background:var(--bg);color:var(--t);font-family:var(--fn);font-size:14px;li
   <img src="https://devglobe.app/badges/launched-on-devglobe-dark.svg" alt="Launched on DevGlobe" width="250" height="54" />
 </a>
 </div>
-<script src="/app.js"></script>
-<script>initPage('blog-saas-revenue-forecasting-scenarios');</script>
+<script src="app.js"></script>
+<script>initPage('split');</script>
 </body>
 </html>
