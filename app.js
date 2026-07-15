@@ -157,6 +157,7 @@ const SECTIONS=[
     {id:'autoloan',icon:'🚗',name:'Auto Loan Calculator',desc:'Calculate your car payment including trade-in, sales tax, and new vs used loan rates'},
     {id:'tax',icon:'🧾',name:'Tax Estimator',desc:'Estimate your US federal income tax, effective rate, and what you actually take home'},
     {id:'mortgage',icon:'🏠',name:'Mortgage',desc:'Estimate your full monthly home payment including property tax, insurance, and PMI'},
+    {id:'heloc',icon:'🏡',name:'HELOC Calculator',desc:'Find out how much you can borrow against your home equity and what payments look like in the draw vs repayment period'},
     {id:'rentvsbuy',icon:'🏘️',name:'Rent vs Buy Calculator',desc:'Compare your net worth over time if you rent vs buy a home, and find the breakeven year'},
     {id:'mortcomp',icon:'⚖️',name:'Mortgage Comparison',desc:'Compare up to 3 mortgage offers side by side to see which one actually costs less'},
     {id:'savings',icon:'🏛️',name:'Savings Estimator',desc:'See how your savings grow over time with compound interest, and how long it takes to double'},
@@ -1178,6 +1179,62 @@ function cMortgage(){
   }
     insights.push({type:'neutral',text:`Not sure if buying is even the better move for you right now? The <a href="/rentvsbuy" style="color:var(--a);text-decoration:underline">Rent vs Buy</a> calculator compares your net worth under both scenarios.`});
   renderInsights('m-insights',insights);
+}
+
+// ── HELOC ────────────────────────────────────────────────────────
+function cHeloc(){
+  const value=+gel('hl-value').value||0;
+  const bal=+gel('hl-bal').value||0;
+  const cltv=(+gel('hl-cltv').value||0)/100;
+  const rate=(+gel('hl-rate').value||0)/100;
+  const r=rate/12;
+  const drawYears=+gel('hl-draw').value||1;
+  const repayYears=+gel('hl-repay').value||1;
+  const drawMonths=drawYears*12,repayMonths=repayYears*12;
+  let drawAmt=+gel('hl-draw-amt').value||0;
+
+  const limit=Math.max(0,value*cltv-bal);
+  const clamped=drawAmt>limit;
+  if(clamped)drawAmt=limit;
+
+  const ioPayment=drawAmt*r;
+  const piPayment=r?drawAmt*r*Math.pow(1+r,repayMonths)/(Math.pow(1+r,repayMonths)-1):drawAmt/repayMonths;
+  const drawInterestTotal=ioPayment*drawMonths;
+  const repayTotalPaid=piPayment*repayMonths;
+  const repayInterestTotal=Math.max(0,repayTotalPaid-drawAmt);
+  const totalInterest=drawInterestTotal+repayInterestTotal;
+  const totalCost=drawAmt+totalInterest;
+  const equityAfter=value-bal-drawAmt;
+  const cltvAfter=value?((bal+drawAmt)/value*100):0;
+
+  gel('hl-limit').textContent=f$(limit);
+  gel('hl-io').textContent=f$(ioPayment);
+  gel('hl-pi').textContent=f$(piPayment);
+  gel('hl-total-int').textContent=f$(totalInterest);
+  gel('hl-equity').textContent=f$(equityAfter);
+  gel('hl-cltv-out').textContent=pct(cltvAfter);
+  gel('hl-total-cost').textContent=f$(totalCost);
+
+  drawDonut('hl-donut',[drawAmt,drawInterestTotal,repayInterestTotal],['#F0B90B','#F6465D','#1890FF']);
+  renderAmortTable('hl-amort-table',drawAmt,r,repayMonths);
+
+  const insights=[];
+  if(clamped){
+    insights.push({type:'bad',text:`Your requested draw exceeds your available credit limit of <strong>${f$(limit)}</strong> — the numbers above use the maximum available amount instead.`});
+  }
+  if(limit<=0){
+    insights.push({type:'bad',text:`Based on your current mortgage balance and max CLTV, you don't have equity available to draw against yet.`});
+  }else{
+    const paymentJump=piPayment-ioPayment;
+    if(paymentJump>0&&ioPayment>0){
+      const jumpPct=paymentJump/ioPayment*100;
+      insights.push({type:jumpPct>100?'bad':'neutral',text:`Your payment jumps from <strong>${f$(ioPayment)}/mo</strong> during the draw period to <strong>${f$(piPayment)}/mo</strong> once repayment begins — a <strong>${jumpPct.toFixed(0)}%</strong> increase. Make sure your budget can absorb this once the draw period ends.`});
+    }
+    const intRatio=drawAmt>0?(totalInterest/drawAmt*100):0;
+    insights.push({type:intRatio>50?'bad':'neutral',text:`Across the full draw-plus-repayment timeline, you'll pay <strong>${f$(totalInterest)}</strong> in interest on a <strong>${f$(drawAmt)}</strong> draw — that's <strong>${intRatio.toFixed(0)}%</strong> of what you borrowed.`});
+  }
+  insights.push({type:'neutral',text:`Considering a fixed-rate alternative instead? The <a href="/mortgage" style="color:var(--a);text-decoration:underline">Mortgage</a> and <a href="/prepay" style="color:var(--a);text-decoration:underline">Loan Prepayment</a> calculators can help you compare.`});
+  renderInsights('hl-insights',insights);
 }
 
 // ── Rent vs Buy ──────────────────────────────────────────────────
@@ -2373,7 +2430,7 @@ function initPage(id){
   const calls = [buildDir,buildSci,buildCurrency,buildMortComp,buildLoanComp,initGuideAccordions,
     renderXIRR,renderFounders,renderRounds,renderDebtRows,renderCFRows,renderDC2,
     calcCAGR,calcDRIP,cDivGrowth,calcETF,calcDCF,cBurn,cPricing,calcEquity,cDilutionImpact,calcRevenue,
-    cLoan,cPrepay,cAutoLoan,cSip,cSWP,cTax,cMortgage,cRentVsBuy,cSavings,cProvident,cAllocRecommend,
+    cLoan,cPrepay,cAutoLoan,cSip,cSWP,cTax,cMortgage,cHeloc,cRentVsBuy,cSavings,cProvident,cAllocRecommend,
     cStock,cPEG,cEVEBITDA,cRetire,cFire,cDebt,cRental,calcRP,cCF,cBE,cSavingsGoal,cEmergency,cHealthScore,
     cCurrency, injectDisclaimers, injectInputHints, injectPrintButtons, attachChartTooltips];
   calls.forEach(fn=>{ try{ fn(); }catch(e){ /* element not on this page — expected */ } });
