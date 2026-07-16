@@ -131,14 +131,14 @@ html{scroll-behavior:smooth}
 .sci-btn.op{color:var(--a)}.sci-btn.eq{background:var(--a);color:#000;border-color:var(--a);font-weight:600}.sci-btn.cl{color:var(--r)}.sci-btn.fn{color:var(--b)}
 @media(max-width:700px){.two,.two-eq,.three{grid-template-columns:1fr}.g2,.g3{grid-template-columns:1fr}.sci-grid{grid-template-columns:repeat(4,1fr)}}
 @media(max-width:700px){.searchbox{width:170px;padding:8px 12px}.searchbox input{font-size:13px}}
-@media(max-width:700px){.download-btn,.share-btn{font-size:9.5px;padding:3px 7px;gap:3px;border-radius:12px}}
+@media(max-width:700px){.download-btn,.share-btn{font-size:9.5px;padding:3px 7px;gap:3px;border-radius:12px;flex:1;justify-content:center}.calc-btn-row{gap:6px;margin-bottom:1.25rem}}
 
 }
 
 
 /* Inter-calculator links */
 .calc-links{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 2.5rem;padding:10px 12px;background:var(--s2);border-radius:8px;border-left:3px solid var(--g);align-items:center;clear:both}
-.calc-links-label{font-size:10px;color:#fff;text-transform:uppercase;letter-spacing:.6px;font-weight:600;margin-right:4px;flex-shrink:0}
+.calc-links-label{font-size:10px;color:#fff;text-transform:uppercase;letter-spacing:.6px;font-weight:600;margin-right:4px;flex-shrink:0;white-space:nowrap}
 .calc-link-btn{padding:4px 10px;background:var(--bg);border:1px solid var(--g);border-radius:20px;color:var(--g);font-size:11px;cursor:pointer;font-family:var(--fn);transition:all .18s;white-space:nowrap;text-decoration:none}
 .calc-link-btn:hover{background:var(--g);color:#000;border-color:var(--g)}
 .related-box{clear:both;margin-top:28px;background:var(--s);border:1px solid var(--bd);border-radius:10px;padding:14px 16px;box-shadow:0 1px 3px rgba(0,0,0,.25)}
@@ -230,10 +230,11 @@ html{scroll-behavior:smooth}
 .insight-line strong{font-weight:700}
 
 /* Print button (visual style, hidden in print itself) */
-.download-btn{background:var(--s2);border:1px solid var(--bd);color:var(--tb);font-size:12.5px;font-weight:500;cursor:pointer;display:inline-flex;align-items:center;gap:6px;padding:7px 14px;border-radius:20px;font-family:var(--fn);transition:all .18s;margin-bottom:2.75rem;margin-left:8px;float:right}
+.calc-btn-row{display:flex;justify-content:flex-end;gap:8px;margin-bottom:1.75rem;clear:both}
+.download-btn{background:var(--s2);border:1px solid var(--bd);color:var(--tb);font-size:12.5px;font-weight:500;cursor:pointer;display:inline-flex;align-items:center;gap:6px;padding:7px 14px;border-radius:20px;font-family:var(--fn);transition:all .18s}
 .download-btn:disabled{opacity:.6;cursor:wait}
 .download-btn:hover{color:var(--t);border-color:var(--g);background:var(--s)}
-.share-btn{background:var(--s2);border:1px solid var(--bd);color:var(--tb);font-size:12.5px;font-weight:500;cursor:pointer;display:inline-flex;align-items:center;gap:6px;padding:7px 14px;border-radius:20px;font-family:var(--fn);transition:all .18s;margin-bottom:2.75rem;float:right}
+.share-btn{background:var(--s2);border:1px solid var(--bd);color:var(--tb);font-size:12.5px;font-weight:500;cursor:pointer;display:inline-flex;align-items:center;gap:6px;padding:7px 14px;border-radius:20px;font-family:var(--fn);transition:all .18s}
 .share-btn:hover{color:var(--t);border-color:var(--a);background:var(--s)}
 .print-header{display:none}
 

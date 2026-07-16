@@ -2469,6 +2469,21 @@ async function downloadCalculatorPDF(id){
   }
 }
 
+function _getCalcBtnRow(panel){
+  let row=panel.querySelector('.calc-btn-row');
+  if(row)return row;
+  row=document.createElement('div');
+  row.className='calc-btn-row';
+  const anchor=panel.querySelector('.calc-links');
+  if(anchor)anchor.insertAdjacentElement('beforebegin',row);
+  else{
+    const back=panel.querySelector('.back-btn');
+    if(back)back.insertAdjacentElement('afterend',row);
+    else panel.insertBefore(row,panel.firstChild);
+  }
+  return row;
+}
+
 function injectPrintButtons(){
   document.querySelectorAll('.panel').forEach(panel=>{
     if(panel.id==='home'||panel.id==='privacy'||panel.id==='about'||panel.id==='terms'||panel.id==='scientific'||panel.id==='currency'||panel.id.indexOf('blog')===0)return;
@@ -2477,9 +2492,7 @@ function injectPrintButtons(){
     btn.className='download-btn';
     btn.innerHTML='⬇️ Download Result';
     btn.onclick=function(){downloadCalculatorPDF(panel.id);};
-    const back=panel.querySelector('.back-btn');
-    if(back)back.insertAdjacentElement('afterend',btn);
-    else panel.insertBefore(btn,panel.firstChild);
+    _getCalcBtnRow(panel).appendChild(btn);
   });
 }
 
@@ -2492,9 +2505,7 @@ function injectShareButtons(){
     btn.className='share-btn';
     btn.innerHTML='🔗 Share Result';
     btn.onclick=function(){openShareModal(panel.id);};
-    const back=panel.querySelector('.back-btn');
-    if(back)back.insertAdjacentElement('afterend',btn);
-    else panel.insertBefore(btn,panel.firstChild);
+    _getCalcBtnRow(panel).appendChild(btn);
   });
 }
 
