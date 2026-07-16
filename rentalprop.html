@@ -30,7 +30,7 @@ body{background:var(--bg);color:var(--t);font-family:var(--fn);font-size:14px;li
 .ntab{padding:8px 13px;font-size:12px;font-weight:500;color:#fff;cursor:pointer;border-bottom:2px solid transparent;white-space:nowrap;background:none;border-top:none;border-left:none;border-right:none;transition:all .18s;font-family:var(--fn);text-decoration:none;display:inline-block}
 .ntab.on{color:var(--a);border-bottom-color:var(--a)}
 .ntab:hover:not(.on){color:var(--t)}
-.content{padding:1.25rem}
+.content{padding:1.25rem;max-width:1366px;margin:0 auto}
 .panel{display:none}.panel.on{display:block}.panel.on::after{content:'';display:table;clear:both}
 .dir-sec{margin-bottom:1.75rem}
 .dir-sec-h{font-size:11px;font-weight:600;color:var(--m);letter-spacing:.8px;text-transform:uppercase;margin-bottom:.75rem;display:flex;align-items:center;gap:8px}
@@ -109,6 +109,7 @@ body{background:var(--bg);color:var(--t);font-family:var(--fn);font-size:14px;li
 .sci-btn.op{color:var(--a)}.sci-btn.eq{background:var(--a);color:#000;border-color:var(--a);font-weight:600}.sci-btn.cl{color:var(--r)}.sci-btn.fn{color:var(--b)}
 @media(max-width:700px){.two,.two-eq,.three{grid-template-columns:1fr}.g2,.g3{grid-template-columns:1fr}.sci-grid{grid-template-columns:repeat(4,1fr)}}
 @media(max-width:700px){.searchbox{width:170px;padding:8px 12px}.searchbox input{font-size:13px}}
+@media(max-width:700px){.download-btn,.share-btn{font-size:9.5px;padding:3px 7px;gap:3px;border-radius:12px}}
 
 }
 
@@ -118,6 +119,13 @@ body{background:var(--bg);color:var(--t);font-family:var(--fn);font-size:14px;li
 .calc-links-label{font-size:10px;color:#fff;text-transform:uppercase;letter-spacing:.6px;font-weight:600;margin-right:4px;flex-shrink:0}
 .calc-link-btn{padding:4px 10px;background:var(--bg);border:1px solid var(--g);border-radius:20px;color:var(--g);font-size:11px;cursor:pointer;font-family:var(--fn);transition:all .18s;white-space:nowrap;text-decoration:none}
 .calc-link-btn:hover{background:var(--g);color:#000;border-color:var(--g)}
+.related-box{clear:both;margin-top:28px;background:var(--s);border:1px solid var(--bd);border-radius:10px;padding:14px 16px;box-shadow:0 1px 3px rgba(0,0,0,.25)}
+.related-box-title{font-size:11px;font-weight:700;color:var(--m);text-transform:uppercase;letter-spacing:.6px;margin-bottom:10px;display:flex;align-items:center;gap:6px}
+.related-item{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:9px 10px;border-radius:7px;text-decoration:none;color:var(--t);font-size:13px;line-height:1.5;font-weight:500;transition:background .15s,color .15s}
+.related-item:not(:last-child){margin-bottom:2px}
+.related-item:hover{background:var(--s2);color:var(--a)}
+.related-arrow{color:var(--a);flex-shrink:0;font-size:14px;transition:transform .15s}
+.related-item:hover .related-arrow{transform:translateX(3px)}
 
 
 /* Footer */
@@ -129,9 +137,11 @@ body{background:var(--bg);color:var(--t);font-family:var(--fn);font-size:14px;li
 
 /* Calculator Guide Articles */
 .calc-guide{margin-top:2.5rem;border-top:1px solid var(--bd);padding-top:1.75rem}
-.guide-toggle{display:flex;align-items:center;justify-content:space-between;padding:10px 14px;background:var(--s2);border:1px solid var(--bd);border-radius:8px;margin-bottom:0}
+.guide-toggle{display:flex;align-items:center;justify-content:space-between;padding:10px 14px;background:var(--s2);border:1px solid var(--bd);border-radius:8px;margin-bottom:0;max-width:980px}
+@media(min-width:1048px){.guide-toggle{margin-left:auto;margin-right:auto}}
 .guide-toggle-title{font-size:14px;font-weight:700;color:var(--t);display:flex;align-items:center;gap:8px;letter-spacing:.1px}
 .guide-body{display:block;padding:1.5rem 0 0;max-width:980px}
+@media(min-width:1048px){.guide-body{margin:0 auto}}
 .guide-h2{font-size:22px;font-weight:700;color:var(--t);margin:1.75rem 0 .85rem;letter-spacing:-.2px;line-height:1.3}
 .guide-h2:first-child{margin-top:0}
 .guide-h3{font-size:16px;font-weight:700;color:var(--t);margin:2rem 0 .75rem;letter-spacing:-.1px;line-height:1.35;padding-top:.25rem;border-top:1px solid var(--bd)}
@@ -198,10 +208,31 @@ body{background:var(--bg);color:var(--t);font-family:var(--fn);font-size:14px;li
 .insight-line strong{font-weight:700}
 
 /* Print button (visual style, hidden in print itself) */
-.download-btn{background:var(--s2);border:1px solid var(--bd);color:var(--tb);font-size:12.5px;font-weight:500;cursor:pointer;display:inline-flex;align-items:center;gap:6px;padding:7px 14px;border-radius:20px;font-family:var(--fn);transition:all .18s;margin-bottom:1rem;float:right}
+.download-btn{background:var(--s2);border:1px solid var(--bd);color:var(--tb);font-size:12.5px;font-weight:500;cursor:pointer;display:inline-flex;align-items:center;gap:6px;padding:7px 14px;border-radius:20px;font-family:var(--fn);transition:all .18s;margin-bottom:2.75rem;margin-left:8px;float:right}
 .download-btn:disabled{opacity:.6;cursor:wait}
 .download-btn:hover{color:var(--t);border-color:var(--g);background:var(--s)}
+.share-btn{background:var(--s2);border:1px solid var(--bd);color:var(--tb);font-size:12.5px;font-weight:500;cursor:pointer;display:inline-flex;align-items:center;gap:6px;padding:7px 14px;border-radius:20px;font-family:var(--fn);transition:all .18s;margin-bottom:2.75rem;float:right}
+.share-btn:hover{color:var(--t);border-color:var(--a);background:var(--s)}
 .print-header{display:none}
+
+/* Share modal */
+.share-backdrop{display:none;position:fixed;inset:0;background:rgba(0,0,0,.6);z-index:1000;align-items:center;justify-content:center;padding:1rem}
+.share-backdrop.on{display:flex}
+.share-modal{background:var(--s);border:1px solid var(--bd);border-radius:14px;padding:1.5rem;width:100%;max-width:380px;box-shadow:0 20px 60px rgba(0,0,0,.5)}
+.share-modal-head{display:flex;align-items:center;justify-content:space-between;margin-bottom:1.1rem}
+.share-modal-title{font-size:15px;font-weight:700;color:var(--t)}
+.share-modal-close{background:none;border:none;color:var(--m);font-size:20px;cursor:pointer;line-height:1;padding:2px 6px;border-radius:6px}
+.share-modal-close:hover{color:var(--t);background:var(--s2)}
+.share-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-bottom:1rem}
+.share-opt{display:flex;flex-direction:column;align-items:center;gap:6px;background:none;border:none;cursor:pointer;padding:6px 2px;border-radius:10px;transition:background .15s}
+.share-opt:hover{background:var(--s2)}
+.share-opt-ic{width:44px;height:44px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:19px;color:#fff}
+.share-opt-lbl{font-size:10.5px;color:var(--tb);font-weight:500}
+.share-link-row{display:flex;gap:8px;align-items:center;background:var(--bg);border:1px solid var(--bd);border-radius:8px;padding:8px 10px}
+.share-link-row input{flex:1;background:none;border:none;outline:none;color:var(--tb);font-family:var(--mo);font-size:12px}
+.share-copy-btn{background:var(--a);color:#fff;border:none;border-radius:6px;padding:6px 12px;font-size:12px;font-weight:600;cursor:pointer;font-family:var(--fn);flex-shrink:0}
+.share-copy-btn:hover{opacity:.9}
+.share-copy-btn.copied{background:var(--g)}
 
 /* Print stylesheet: show only the active calculator's inputs/outputs, hide everything else */
 @media print{
@@ -308,8 +339,8 @@ body{background:var(--bg);color:var(--t);font-family:var(--fn);font-size:14px;li
 </div>
 <div class="content">
 <div id="rentalprop" class="panel on">
-<a class="back-btn" href="/" onclick="go('home',null);return false;">← Back to Home</a>
-<div class="calc-links"><span class="calc-links-label">🔗 Related</span><a class="calc-link-btn" href="/rental" onclick="go('rental',null);return false;">🏘️ Rental Yield</a><a class="calc-link-btn" href="/mortgage" onclick="go('mortgage',null);return false;">🏠 Mortgage</a><a class="calc-link-btn" href="/cagr" onclick="go('cagr',null);return false;">📐 CAGR</a><a class="calc-link-btn" href="/cashflow" onclick="go('cashflow',null);return false;">💵 Cash Flow</a></div><div class="calc-links" style="margin-top:8px;background:transparent;border:none;padding:4px 0"><span class="calc-links-label">📖 Related reading</span><div style="margin-top:6px;font-size:12.5px;line-height:1.6"><a href="/blog/rental-property-cap-rate-vs-cash-on-cash" style="color:var(--a);text-decoration:underline">Rental Property Cash Flow: Cap Rate vs Cash-on-Cash Return Explained</a><br></div></div>
+
+<div class="related-box"><div class="related-box-title">📖 Related Articles</div><a class="related-item" href="/blog/rental-property-cap-rate-vs-cash-on-cash">Rental Property Cash Flow: Cap Rate vs Cash-on-Cash Return Explained<span class="related-arrow">→</span></a></div>
 
 
 <h1 style="margin:0;font-size:16px;font-weight:500;margin-bottom:4px">Rental Property Calculator</h1>
@@ -317,23 +348,23 @@ body{background:var(--bg);color:var(--t);font-family:var(--fn);font-size:14px;li
   <div class="card">
     <div class="card-title">Property & Financing</div>
     <div class="g2">
-      <div class="field"><label>Purchase Price ($)</label><div class="ip"><span class="pfx">$</span><input type="number" id="rp-price" value="350000" oninput="calcRP()"></div></div>
-      <div class="field"><label>Down Payment (%)</label><input type="number" id="rp-down" value="25" oninput="calcRP()"></div>
-      <div class="field"><label>Mortgage Rate (% p.a.)</label><input type="number" id="rp-rate" value="7" step="0.1" oninput="calcRP()"></div>
-      <div class="field"><label>Loan Tenure (years)</label><input type="number" id="rp-tenure" value="30" oninput="calcRP()"></div>
-      <div class="field"><label>Monthly Rent ($)</label><div class="ip"><span class="pfx">$</span><input type="number" id="rp-rent" value="2500" oninput="calcRP()"></div></div>
-      <div class="field"><label>Vacancy Rate (%)</label><input type="number" id="rp-vac" value="5" oninput="calcRP()"></div>
-      <div class="field"><label>Annual Appreciation (%)</label><input type="number" id="rp-appr" value="4" step="0.5" oninput="calcRP()"></div>
+      <div class="field"><label>Purchase Price ($)</label><div class="ip"><span class="pfx">$</span><input type="text" inputmode="decimal" id="rp-price" value="350000" oninput="calcRP()"></div></div>
+      <div class="field"><label>Down Payment (%)</label><input type="text" inputmode="decimal" id="rp-down" value="25" oninput="calcRP()"></div>
+      <div class="field"><label>Mortgage Rate (% p.a.)</label><input type="text" inputmode="decimal" id="rp-rate" value="7" step="0.1" oninput="calcRP()"></div>
+      <div class="field"><label>Loan Tenure (years)</label><input type="text" inputmode="decimal" id="rp-tenure" value="30" oninput="calcRP()"></div>
+      <div class="field"><label>Monthly Rent ($)</label><div class="ip"><span class="pfx">$</span><input type="text" inputmode="decimal" id="rp-rent" value="2500" oninput="calcRP()"></div></div>
+      <div class="field"><label>Vacancy Rate (%)</label><input type="text" inputmode="decimal" id="rp-vac" value="5" oninput="calcRP()"></div>
+      <div class="field"><label>Annual Appreciation (%)</label><input type="text" inputmode="decimal" id="rp-appr" value="4" step="0.5" oninput="calcRP()"></div>
     </div>
   </div>
   <div class="card">
     <div class="card-title">Operating Costs</div>
     <div class="g2">
-      <div class="field"><label>Property Tax (annual $)</label><div class="ip"><span class="pfx">$</span><input type="number" id="rp-ptax" value="4200" oninput="calcRP()"></div></div>
-      <div class="field"><label>Insurance (annual $)</label><div class="ip"><span class="pfx">$</span><input type="number" id="rp-ins" value="1500" oninput="calcRP()"></div></div>
-      <div class="field"><label>Maintenance (monthly $)</label><div class="ip"><span class="pfx">$</span><input type="number" id="rp-maint" value="200" oninput="calcRP()"></div></div>
-      <div class="field"><label>Property Mgmt (%)</label><input type="number" id="rp-mgmt" value="8" oninput="calcRP()"></div>
-      <div class="field"><label>Buying/Closing Costs (%)</label><input type="number" id="rp-buycost" value="3" step="0.5" oninput="calcRP()"></div>
+      <div class="field"><label>Property Tax (annual $)</label><div class="ip"><span class="pfx">$</span><input type="text" inputmode="decimal" id="rp-ptax" value="4200" oninput="calcRP()"></div></div>
+      <div class="field"><label>Insurance (annual $)</label><div class="ip"><span class="pfx">$</span><input type="text" inputmode="decimal" id="rp-ins" value="1500" oninput="calcRP()"></div></div>
+      <div class="field"><label>Maintenance (monthly $)</label><div class="ip"><span class="pfx">$</span><input type="text" inputmode="decimal" id="rp-maint" value="200" oninput="calcRP()"></div></div>
+      <div class="field"><label>Property Mgmt (%)</label><input type="text" inputmode="decimal" id="rp-mgmt" value="8" oninput="calcRP()"></div>
+      <div class="field"><label>Buying/Closing Costs (%)</label><input type="text" inputmode="decimal" id="rp-buycost" value="3" step="0.5" oninput="calcRP()"></div>
     </div>
   </div>
 </div>
@@ -369,6 +400,7 @@ body{background:var(--bg);color:var(--t);font-family:var(--fn);font-size:14px;li
   </div>
 </div>
 
+<div style="margin-top:1.75rem;margin-bottom:1.75rem"><div class="calc-links"><span class="calc-links-label">🔗 Related Calculators</span><a class="calc-link-btn" href="/rental" onclick="go('rental',null);return false;">🏘️ Rental Yield</a><a class="calc-link-btn" href="/mortgage" onclick="go('mortgage',null);return false;">🏠 Mortgage</a><a class="calc-link-btn" href="/cagr" onclick="go('cagr',null);return false;">📐 CAGR</a><a class="calc-link-btn" href="/cashflow" onclick="go('cashflow',null);return false;">💵 Cash Flow</a></div></div>
 <div class="calc-guide">
   <div class="guide-toggle">
     <div class="guide-toggle-title">📖 Rental Property Investment — Full Analysis Guide</div>

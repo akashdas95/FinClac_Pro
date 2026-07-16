@@ -1,4 +1,55 @@
 const gel=id=>document.getElementById(id);
+
+// ── Comma-formatted numeric inputs ─────────────────────────────
+// Inputs are type="text" inputmode="decimal" with commas shown for
+// readability. We shadow the element's `value` accessor so every
+// existing +gel(id).value / this.value read site keeps getting a
+// clean, comma-free numeric string automatically — no call sites
+// elsewhere in this file need to change.
+const _nativeValueDesc=Object.getOwnPropertyDescriptor(HTMLInputElement.prototype,'value');
+function _fmtDisplay(raw){
+  if(raw===''||raw==null)return '';
+  let s=String(raw);
+  const neg=s.startsWith('-');
+  if(neg)s=s.slice(1);
+  let [intPart,decPart]=s.split('.');
+  intPart=(intPart||'').replace(/\D/g,'').replace(/\B(?=(\d{3})+(?!\d))/g,',');
+  let out=intPart;
+  if(decPart!==undefined)out+='.'+decPart.replace(/\D/g,'');
+  return (neg?'-':'')+out;
+}
+function _enableCommaFormat(el){
+  if(el.__commaFmt)return;
+  el.__commaFmt=true;
+  Object.defineProperty(el,'value',{
+    get(){ return _nativeValueDesc.get.call(el).replace(/,/g,''); },
+    set(v){ _nativeValueDesc.set.call(el,_fmtDisplay(v)); },
+    configurable:true
+  });
+  _nativeValueDesc.set.call(el,_fmtDisplay(_nativeValueDesc.get.call(el)));
+  el.addEventListener('input',()=>{
+    const start=el.selectionStart, prevLen=_nativeValueDesc.get.call(el).length;
+    const raw=_nativeValueDesc.get.call(el).replace(/,/g,'');
+    const formatted=_fmtDisplay(raw);
+    _nativeValueDesc.set.call(el,formatted);
+    const pos=Math.max(0,start+(formatted.length-prevLen));
+    el.setSelectionRange(pos,pos);
+  });
+}
+function applyCommaFormatting(root){
+  (root||document).querySelectorAll('input[type="text"][inputmode="decimal"]').forEach(_enableCommaFormat);
+}
+if(!window.__commaFmtObserverInit){
+  window.__commaFmtObserverInit=true;
+  new MutationObserver(muts=>{
+    muts.forEach(m=>m.addedNodes.forEach(node=>{
+      if(node.nodeType!==1)return;
+      if(node.matches&&node.matches('input[type="text"][inputmode="decimal"]'))_enableCommaFormat(node);
+      if(node.querySelectorAll)applyCommaFormatting(node);
+    }));
+  }).observe(document.documentElement,{childList:true,subtree:true});
+}
+
 const f$=n=>'$'+Math.abs(Math.round(n)).toLocaleString('en-US');
 const pct=(n,d=1)=>isFinite(n)?n.toFixed(d)+'%':'∞';
 const fk=n=>n>=1e9?(n/1e9).toFixed(1)+'B':n>=1e6?(n/1e6).toFixed(1)+'M':n>=1e3?(n/1e3).toFixed(0)+'K':Math.round(n).toString();
@@ -253,7 +304,7 @@ function renderXIRR(){
   xirrFlows.forEach((fl,i)=>{
     el.innerHTML+=`<div style="display:grid;grid-template-columns:1fr 1fr 36px;gap:8px;margin-bottom:6px;align-items:center">
       <input type="date" value="${fl.date}" onchange="xirrFlows[${i}].date=this.value;calcXIRR()" style="background:var(--bg);border:1px solid var(--bd);border-radius:6px;padding:8px;color:var(--t);font-family:var(--mo);font-size:12px;outline:none;width:100%">
-      <div class="ip" style="display:block"><span class="pfx">$</span><input type="number" value="${fl.amt}" onchange="xirrFlows[${i}].amt=+this.value;calcXIRR()" style="width:100%;background:var(--bg);border:1px solid var(--bd);border-radius:6px;padding:8px 8px 8px 20px;color:${fl.amt<0?'var(--r)':'var(--g)'};font-family:var(--mo);font-size:13px;outline:none"></div>
+      <div class="ip" style="display:block"><span class="pfx">$</span><input type="text" inputmode="decimal" value="${fl.amt}" onchange="xirrFlows[${i}].amt=+this.value;calcXIRR()" style="width:100%;background:var(--bg);border:1px solid var(--bd);border-radius:6px;padding:8px 8px 8px 20px;color:${fl.amt<0?'var(--r)':'var(--g)'};font-family:var(--mo);font-size:13px;outline:none"></div>
       <button class="btn-del" onclick="xirrFlows.splice(${i},1);renderXIRR()">✕</button>
     </div>`;
   });
@@ -600,9 +651,9 @@ function renderDC2(){
   dc2Debts.forEach((d,i)=>{
     el.innerHTML+=`<div style="display:grid;grid-template-columns:1.5fr 1fr 1fr 1fr 36px;gap:8px;margin-bottom:6px;align-items:center">
       <input type="text" value="${d.name}" oninput="dc2Debts[${i}].name=this.value;calcDC2()" style="background:var(--bg);border:1px solid var(--bd);border-radius:6px;padding:8px;color:var(--t);font-size:13px;outline:none;width:100%">
-      <div class="ip"><span class="pfx">$</span><input type="number" value="${d.bal}" oninput="dc2Debts[${i}].bal=+this.value;calcDC2()" style="width:100%;background:var(--bg);border:1px solid var(--bd);border-radius:6px;padding:8px 8px 8px 20px;color:var(--t);font-family:var(--mo);font-size:13px;outline:none"></div>
-      <input type="number" value="${d.rate}" step="0.1" oninput="dc2Debts[${i}].rate=+this.value;calcDC2()" style="background:var(--bg);border:1px solid var(--bd);border-radius:6px;padding:8px;color:var(--t);font-family:var(--mo);font-size:13px;outline:none;width:100%">
-      <div class="ip"><span class="pfx">$</span><input type="number" value="${d.min}" oninput="dc2Debts[${i}].min=+this.value;calcDC2()" style="width:100%;background:var(--bg);border:1px solid var(--bd);border-radius:6px;padding:8px 8px 8px 20px;color:var(--t);font-family:var(--mo);font-size:13px;outline:none"></div>
+      <div class="ip"><span class="pfx">$</span><input type="text" inputmode="decimal" value="${d.bal}" oninput="dc2Debts[${i}].bal=+this.value;calcDC2()" style="width:100%;background:var(--bg);border:1px solid var(--bd);border-radius:6px;padding:8px 8px 8px 20px;color:var(--t);font-family:var(--mo);font-size:13px;outline:none"></div>
+      <input type="text" inputmode="decimal" value="${d.rate}" step="0.1" oninput="dc2Debts[${i}].rate=+this.value;calcDC2()" style="background:var(--bg);border:1px solid var(--bd);border-radius:6px;padding:8px;color:var(--t);font-family:var(--mo);font-size:13px;outline:none;width:100%">
+      <div class="ip"><span class="pfx">$</span><input type="text" inputmode="decimal" value="${d.min}" oninput="dc2Debts[${i}].min=+this.value;calcDC2()" style="width:100%;background:var(--bg);border:1px solid var(--bd);border-radius:6px;padding:8px 8px 8px 20px;color:var(--t);font-family:var(--mo);font-size:13px;outline:none"></div>
       <button class="btn-del" onclick="dc2Debts.splice(${i},1);renderDC2()">✕</button>
     </div>`;
   });calcDC2();
@@ -731,12 +782,12 @@ let rounds=[{name:'Seed',raise:2e6,pre:1e7},{name:'Series A',raise:1e7,pre:4e7}]
 const EQC=['#F0B90B','#0ECB81','#1890FF','#9B59B6','#F6465D','#26a17b'];
 function renderFounders(){
   const el=gel('eq-founders');el.innerHTML='';
-  founders.forEach((f,i)=>{el.innerHTML+=`<div style="display:grid;grid-template-columns:1fr 1fr 36px;gap:8px;margin-bottom:6px;align-items:end"><div class="field" style="margin:0"><input type="text" value="${f.name}" oninput="founders[${i}].name=this.value;calcEquity()" style="width:100%;background:var(--bg);border:1px solid var(--bd);border-radius:6px;padding:8px;color:var(--t);font-size:13px;outline:none"></div><div class="field" style="margin:0"><input type="number" value="${f.pct}" step="0.5" oninput="founders[${i}].pct=+this.value;calcEquity()" placeholder="%" style="width:100%;background:var(--bg);border:1px solid var(--bd);border-radius:6px;padding:8px;color:var(--t);font-family:var(--mo);font-size:13px;outline:none"></div><button class="btn-del" onclick="founders.splice(${i},1);renderFounders()">✕</button></div>`;});
+  founders.forEach((f,i)=>{el.innerHTML+=`<div style="display:grid;grid-template-columns:1fr 1fr 36px;gap:8px;margin-bottom:6px;align-items:end"><div class="field" style="margin:0"><input type="text" value="${f.name}" oninput="founders[${i}].name=this.value;calcEquity()" style="width:100%;background:var(--bg);border:1px solid var(--bd);border-radius:6px;padding:8px;color:var(--t);font-size:13px;outline:none"></div><div class="field" style="margin:0"><input type="text" inputmode="decimal" value="${f.pct}" step="0.5" oninput="founders[${i}].pct=+this.value;calcEquity()" placeholder="%" style="width:100%;background:var(--bg);border:1px solid var(--bd);border-radius:6px;padding:8px;color:var(--t);font-family:var(--mo);font-size:13px;outline:none"></div><button class="btn-del" onclick="founders.splice(${i},1);renderFounders()">✕</button></div>`;});
   calcEquity();
 }
 function renderRounds(){
   const el=gel('eq-rounds');el.innerHTML='';
-  rounds.forEach((r,i)=>{el.innerHTML+=`<div style="border:1px solid var(--bd);border-radius:8px;padding:10px;margin-bottom:8px"><div style="display:flex;justify-content:space-between;margin-bottom:8px"><input type="text" value="${r.name}" oninput="rounds[${i}].name=this.value;calcEquity()" style="background:none;border:none;color:var(--t);font-weight:500;font-size:13px;outline:none;width:100px"><button class="btn-del" onclick="rounds.splice(${i},1);renderRounds()" style="padding:3px 8px">✕</button></div><div class="g2"><div class="field" style="margin-bottom:6px"><label>Raise Amount ($)</label><div class="ip"><span class="pfx">$</span><input type="number" value="${r.raise}" oninput="rounds[${i}].raise=+this.value;calcEquity()" style="width:100%;background:var(--bg);border:1px solid var(--bd);border-radius:6px;padding:8px 8px 8px 20px;color:var(--t);font-family:var(--mo);font-size:13px;outline:none"></div></div><div class="field" style="margin-bottom:6px"><label>Pre-money Val. ($)</label><div class="ip"><span class="pfx">$</span><input type="number" value="${r.pre}" oninput="rounds[${i}].pre=+this.value;calcEquity()" style="width:100%;background:var(--bg);border:1px solid var(--bd);border-radius:6px;padding:8px 8px 8px 20px;color:var(--t);font-family:var(--mo);font-size:13px;outline:none"></div></div></div></div>`;});
+  rounds.forEach((r,i)=>{el.innerHTML+=`<div style="border:1px solid var(--bd);border-radius:8px;padding:10px;margin-bottom:8px"><div style="display:flex;justify-content:space-between;margin-bottom:8px"><input type="text" value="${r.name}" oninput="rounds[${i}].name=this.value;calcEquity()" style="background:none;border:none;color:var(--t);font-weight:500;font-size:13px;outline:none;width:100px"><button class="btn-del" onclick="rounds.splice(${i},1);renderRounds()" style="padding:3px 8px">✕</button></div><div class="g2"><div class="field" style="margin-bottom:6px"><label>Raise Amount ($)</label><div class="ip"><span class="pfx">$</span><input type="text" inputmode="decimal" value="${r.raise}" oninput="rounds[${i}].raise=+this.value;calcEquity()" style="width:100%;background:var(--bg);border:1px solid var(--bd);border-radius:6px;padding:8px 8px 8px 20px;color:var(--t);font-family:var(--mo);font-size:13px;outline:none"></div></div><div class="field" style="margin-bottom:6px"><label>Pre-money Val. ($)</label><div class="ip"><span class="pfx">$</span><input type="text" inputmode="decimal" value="${r.pre}" oninput="rounds[${i}].pre=+this.value;calcEquity()" style="width:100%;background:var(--bg);border:1px solid var(--bd);border-radius:6px;padding:8px 8px 8px 20px;color:var(--t);font-family:var(--mo);font-size:13px;outline:none"></div></div></div></div>`;});
   calcEquity();
 }
 function addFounder(){founders.push({name:'Co-founder',pct:10});renderFounders();}
@@ -1305,7 +1356,7 @@ const MCC=['#F0B90B','#0ECB81','#1890FF'];
 const mcd=[{down:20,rate:7,years:30},{down:10,rate:6.5,years:25},{down:30,rate:7.5,years:15}];
 function buildMortComp(){
   const cols=gel('mc-cols');cols.innerHTML='';
-  mcd.forEach((d,i)=>{cols.innerHTML+=`<div class="cmp-col" id="mc-col-${i}"><div style="font-size:13px;font-weight:600;color:${MCC[i]};margin-bottom:1rem">Option ${i+1}</div><div class="field"><label>Down Payment %</label><input type="number" id="mc-down-${i}" value="${d.down}" oninput="cMortComp()"></div><div class="field"><label>Interest Rate %</label><input type="number" id="mc-rate-${i}" value="${d.rate}" step="0.1" oninput="cMortComp()"></div><div class="field"><label>Tenure (years)</label><input type="number" id="mc-years-${i}" value="${d.years}" oninput="cMortComp()"></div></div>`;});
+  mcd.forEach((d,i)=>{cols.innerHTML+=`<div class="cmp-col" id="mc-col-${i}"><div style="font-size:13px;font-weight:600;color:${MCC[i]};margin-bottom:1rem">Option ${i+1}</div><div class="field"><label>Down Payment %</label><input type="text" inputmode="decimal" id="mc-down-${i}" value="${d.down}" oninput="cMortComp()"></div><div class="field"><label>Interest Rate %</label><input type="text" inputmode="decimal" id="mc-rate-${i}" value="${d.rate}" step="0.1" oninput="cMortComp()"></div><div class="field"><label>Tenure (years)</label><input type="text" inputmode="decimal" id="mc-years-${i}" value="${d.years}" oninput="cMortComp()"></div></div>`;});
   cMortComp();
 }
 function cMortComp(){
@@ -1339,7 +1390,7 @@ const LCC=['#F0B90B','#0ECB81','#1890FF'];
 const lcd=[{amt:25000,rate:6.5,years:5,fee:1},{amt:25000,rate:7.2,years:4,fee:0},{amt:24000,rate:5.9,years:6,fee:2}];
 function buildLoanComp(){
   const cols=gel('lc-cols');cols.innerHTML='';
-  lcd.forEach((d,i)=>{cols.innerHTML+=`<div class="cmp-col" id="lc-col-${i}"><div style="font-size:13px;font-weight:600;color:${LCC[i]};margin-bottom:1rem">Offer ${i+1}</div><div class="field"><label>Loan Amount ($)</label><div class="ip"><span class="pfx">$</span><input type="number" id="lc-amt-${i}" value="${d.amt}" oninput="cLoanComp()"></div></div><div class="field"><label>Interest Rate (%)</label><input type="number" id="lc-rate-${i}" value="${d.rate}" step="0.1" oninput="cLoanComp()"></div><div class="field"><label>Tenure (years)</label><input type="number" id="lc-years-${i}" value="${d.years}" step="0.5" oninput="cLoanComp()"></div><div class="field"><label>Processing Fee (%)</label><input type="number" id="lc-fee-${i}" value="${d.fee}" step="0.25" oninput="cLoanComp()"></div></div>`;});
+  lcd.forEach((d,i)=>{cols.innerHTML+=`<div class="cmp-col" id="lc-col-${i}"><div style="font-size:13px;font-weight:600;color:${LCC[i]};margin-bottom:1rem">Offer ${i+1}</div><div class="field"><label>Loan Amount ($)</label><div class="ip"><span class="pfx">$</span><input type="text" inputmode="decimal" id="lc-amt-${i}" value="${d.amt}" oninput="cLoanComp()"></div></div><div class="field"><label>Interest Rate (%)</label><input type="text" inputmode="decimal" id="lc-rate-${i}" value="${d.rate}" step="0.1" oninput="cLoanComp()"></div><div class="field"><label>Tenure (years)</label><input type="text" inputmode="decimal" id="lc-years-${i}" value="${d.years}" step="0.5" oninput="cLoanComp()"></div><div class="field"><label>Processing Fee (%)</label><input type="text" inputmode="decimal" id="lc-fee-${i}" value="${d.fee}" step="0.25" oninput="cLoanComp()"></div></div>`;});
   cLoanComp();
 }
 function cLoanComp(){
@@ -1621,9 +1672,9 @@ function renderDebtRows(){
   const el=gel('debt-rows');el.innerHTML='';
   debts.forEach((d,i)=>{el.innerHTML+=`<div style="display:grid;grid-template-columns:1.5fr 1fr 1fr 1fr 36px;gap:8px;margin-bottom:6px;align-items:center">
     <input type="text" value="${d.name}" oninput="debts[${i}].name=this.value;cDebt()" style="background:var(--bg);border:1px solid var(--bd);border-radius:6px;padding:8px;color:var(--t);font-size:13px;outline:none;width:100%">
-    <div class="ip"><span class="pfx">$</span><input type="number" value="${d.bal}" oninput="debts[${i}].bal=+this.value;cDebt()" style="width:100%;background:var(--bg);border:1px solid var(--bd);border-radius:6px;padding:8px 8px 8px 20px;color:var(--t);font-family:var(--mo);font-size:13px;outline:none"></div>
-    <input type="number" value="${d.rate}" step="0.1" oninput="debts[${i}].rate=+this.value;cDebt()" style="background:var(--bg);border:1px solid var(--bd);border-radius:6px;padding:8px;color:var(--t);font-family:var(--mo);font-size:13px;outline:none;width:100%">
-    <div class="ip"><span class="pfx">$</span><input type="number" value="${d.min}" oninput="debts[${i}].min=+this.value;cDebt()" style="width:100%;background:var(--bg);border:1px solid var(--bd);border-radius:6px;padding:8px 8px 8px 20px;color:var(--t);font-family:var(--mo);font-size:13px;outline:none"></div>
+    <div class="ip"><span class="pfx">$</span><input type="text" inputmode="decimal" value="${d.bal}" oninput="debts[${i}].bal=+this.value;cDebt()" style="width:100%;background:var(--bg);border:1px solid var(--bd);border-radius:6px;padding:8px 8px 8px 20px;color:var(--t);font-family:var(--mo);font-size:13px;outline:none"></div>
+    <input type="text" inputmode="decimal" value="${d.rate}" step="0.1" oninput="debts[${i}].rate=+this.value;cDebt()" style="background:var(--bg);border:1px solid var(--bd);border-radius:6px;padding:8px;color:var(--t);font-family:var(--mo);font-size:13px;outline:none;width:100%">
+    <div class="ip"><span class="pfx">$</span><input type="text" inputmode="decimal" value="${d.min}" oninput="debts[${i}].min=+this.value;cDebt()" style="width:100%;background:var(--bg);border:1px solid var(--bd);border-radius:6px;padding:8px 8px 8px 20px;color:var(--t);font-family:var(--mo);font-size:13px;outline:none"></div>
     <button class="btn-del" onclick="debts.splice(${i},1);renderDebtRows()">✕</button>
   </div>`;});cDebt();
 }
@@ -1703,7 +1754,7 @@ function cfRowHtml(type,i,r){
   const arr=type==='i'?'cfIncome':'cfExpense';
   return`<div style="display:grid;grid-template-columns:1.5fr 1fr 90px 36px;gap:8px;margin-bottom:6px;align-items:center">
     <input type="text" value="${r.name}" oninput="${arr}[${i}].name=this.value;cCF()" style="background:var(--bg);border:1px solid var(--bd);border-radius:6px;padding:8px;color:var(--t);font-size:13px;outline:none;width:100%">
-    <div class="ip"><span class="pfx">$</span><input type="number" value="${r.amt}" oninput="${arr}[${i}].amt=+this.value;cCF()" style="width:100%;background:var(--bg);border:1px solid var(--bd);border-radius:6px;padding:8px 8px 8px 20px;color:var(--t);font-family:var(--mo);font-size:13px;outline:none"></div>
+    <div class="ip"><span class="pfx">$</span><input type="text" inputmode="decimal" value="${r.amt}" oninput="${arr}[${i}].amt=+this.value;cCF()" style="width:100%;background:var(--bg);border:1px solid var(--bd);border-radius:6px;padding:8px 8px 8px 20px;color:var(--t);font-family:var(--mo);font-size:13px;outline:none"></div>
     <select onchange="${arr}[${i}].freq=this.value;cCF()" style="background:var(--bg);border:1px solid var(--bd);border-radius:6px;padding:8px;color:var(--t);font-size:12px;outline:none;width:100%">
       <option value="monthly" ${r.freq==='monthly'?'selected':''}>Monthly</option>
       <option value="weekly" ${r.freq==='weekly'?'selected':''}>Weekly</option>
@@ -2271,7 +2322,7 @@ function _loadPdfLib(){
 // skipping nav/guide/FAQ/disclaimer/related-links (same scope as the
 // old print stylesheet used).
 function _extractCalculatorData(panel){
-  const SKIP_CLASSES=['back-btn','print-btn','download-btn','calc-links','calc-guide','faq-section','calc-disclaimer','input-hint'];
+  const SKIP_CLASSES=['back-btn','print-btn','download-btn','share-btn','calc-links','calc-guide','faq-section','calc-disclaimer','input-hint'];
   const blocks=[];
 
   // Special-cased: calculators whose row entries live in a plain JS array
@@ -2432,6 +2483,111 @@ function injectPrintButtons(){
   });
 }
 
+// ── Share Result ────────────────────────────────────────────────
+function injectShareButtons(){
+  document.querySelectorAll('.panel').forEach(panel=>{
+    if(panel.id==='home'||panel.id==='privacy'||panel.id==='about'||panel.id==='terms'||panel.id==='scientific'||panel.id==='currency'||panel.id.indexOf('blog')===0)return;
+    if(panel.querySelector('.share-btn'))return;
+    const btn=document.createElement('button');
+    btn.className='share-btn';
+    btn.innerHTML='🔗 Share Result';
+    btn.onclick=function(){openShareModal(panel.id);};
+    const back=panel.querySelector('.back-btn');
+    if(back)back.insertAdjacentElement('afterend',btn);
+    else panel.insertBefore(btn,panel.firstChild);
+  });
+}
+
+function _ensureShareModal(){
+  if(gel('share-backdrop'))return;
+  const wrap=document.createElement('div');
+  wrap.id='share-backdrop';
+  wrap.className='share-backdrop';
+  wrap.onclick=function(e){ if(e.target===wrap) closeShareModal(); };
+  wrap.innerHTML=`
+    <div class="share-modal">
+      <div class="share-modal-head">
+        <div class="share-modal-title" id="share-modal-title">Share Result</div>
+        <button class="share-modal-close" onclick="closeShareModal()">✕</button>
+      </div>
+      <div class="share-grid">
+        <button class="share-opt" onclick="_shareVia('whatsapp')"><span class="share-opt-ic" style="background:#25D366">💬</span><span class="share-opt-lbl">WhatsApp</span></button>
+        <button class="share-opt" onclick="_shareVia('telegram')"><span class="share-opt-ic" style="background:#26A5E4">✈️</span><span class="share-opt-lbl">Telegram</span></button>
+        <button class="share-opt" onclick="_shareVia('x')"><span class="share-opt-ic" style="background:#000">𝕏</span><span class="share-opt-lbl">X</span></button>
+        <button class="share-opt" onclick="_shareVia('facebook')"><span class="share-opt-ic" style="background:#1877F2">f</span><span class="share-opt-lbl">Facebook</span></button>
+        <button class="share-opt" onclick="_shareVia('messenger')"><span class="share-opt-ic" style="background:#00B2FF">💭</span><span class="share-opt-lbl">Messenger</span></button>
+        <button class="share-opt" onclick="_shareVia('email')"><span class="share-opt-ic" style="background:#64748B">✉️</span><span class="share-opt-lbl">Email</span></button>
+        <button class="share-opt" onclick="_shareVia('sms')"><span class="share-opt-ic" style="background:#0F9D58">📱</span><span class="share-opt-lbl">Messages</span></button>
+        <button class="share-opt" onclick="_shareVia('more')"><span class="share-opt-ic" style="background:#7C3AED">⋯</span><span class="share-opt-lbl">More</span></button>
+      </div>
+      <div class="share-link-row">
+        <input type="text" id="share-link-input" readonly>
+        <button class="share-copy-btn" id="share-copy-btn" onclick="_copyShareLink()">Copy</button>
+      </div>
+    </div>`;
+  document.body.appendChild(wrap);
+}
+
+let _shareCtx={url:'',text:'',title:''};
+
+function openShareModal(panelId){
+  _ensureShareModal();
+  const panel=gel(panelId);
+  const nameEl=panel? panel.querySelector('.card-title'):null;
+  const calcName=nameEl? nameEl.textContent.trim():'Calculator';
+  const url=location.href;
+  _shareCtx={
+    url:url,
+    title:`${calcName} — FinCalc`,
+    text:`Check out my ${calcName} results on FinCalc:`
+  };
+  gel('share-modal-title').textContent=`Share ${calcName}`;
+  gel('share-link-input').value=url;
+  const copyBtn=gel('share-copy-btn');
+  copyBtn.textContent='Copy'; copyBtn.classList.remove('copied');
+  gel('share-backdrop').classList.add('on');
+}
+
+function closeShareModal(){
+  const b=gel('share-backdrop');
+  if(b)b.classList.remove('on');
+}
+
+function _copyShareLink(){
+  const input=gel('share-link-input');
+  const btn=gel('share-copy-btn');
+  const done=()=>{ btn.textContent='Copied!'; btn.classList.add('copied'); setTimeout(()=>{btn.textContent='Copy';btn.classList.remove('copied');},1800); };
+  if(navigator.clipboard&&navigator.clipboard.writeText){
+    navigator.clipboard.writeText(input.value).then(done).catch(()=>{ input.select(); document.execCommand('copy'); done(); });
+  }else{
+    input.select(); document.execCommand('copy'); done();
+  }
+}
+
+function _shareVia(platform){
+  const {url,text,title}=_shareCtx;
+  const eu=encodeURIComponent(url), et=encodeURIComponent(text), etitle=encodeURIComponent(title);
+  let target='';
+  switch(platform){
+    case 'whatsapp': target=`https://wa.me/?text=${et}%20${eu}`; break;
+    case 'telegram': target=`https://t.me/share/url?url=${eu}&text=${et}`; break;
+    case 'x': target=`https://twitter.com/intent/tweet?text=${et}&url=${eu}`; break;
+    case 'facebook': target=`https://www.facebook.com/sharer/sharer.php?u=${eu}`; break;
+    case 'messenger': target=`fb-messenger://share/?link=${eu}`; break;
+    case 'email': target=`mailto:?subject=${etitle}&body=${et}%0A%0A${eu}`; break;
+    case 'sms': target=`sms:?&body=${et}%20${eu}`; break;
+    case 'more':
+      if(navigator.share){
+        navigator.share({title,text,url}).catch(()=>{});
+        return;
+      }
+      _copyShareLink();
+      alert('Link copied! Paste it into Instagram, TikTok, or any app to share.');
+      return;
+  }
+  window.open(target,'_blank','noopener,noreferrer,width=600,height=650');
+}
+
 function toggleFAQ(el){
   el.parentElement.classList.toggle('open');
 }
@@ -2467,7 +2623,7 @@ function initPage(id){
     calcCAGR,calcDRIP,cDivGrowth,calcETF,calcDCF,cBurn,cPricing,calcEquity,cDilutionImpact,calcRevenue,
     cLoan,cPrepay,cAutoLoan,cSip,cSWP,cTax,cMortgage,cHeloc,cRentVsBuy,cSavings,cProvident,cAllocRecommend,
     cStock,cSplit,cPEG,cEVEBITDA,cRetire,cFire,cDebt,cRental,calcRP,cCF,cBE,cSavingsGoal,cEmergency,cHealthScore,
-    cCurrency, injectDisclaimers, injectInputHints, injectPrintButtons, attachChartTooltips];
+    cCurrency, injectDisclaimers, injectInputHints, injectPrintButtons, injectShareButtons, attachChartTooltips, applyCommaFormatting];
   calls.forEach(fn=>{ try{ fn(); }catch(e){ /* element not on this page — expected */ } });
   if(window.__isHome){
     const params = new URLSearchParams(location.search);
