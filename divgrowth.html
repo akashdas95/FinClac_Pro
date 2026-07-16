@@ -49,6 +49,8 @@ body{background:var(--bg);color:var(--t);font-family:var(--fn);font-size:14px;li
 .card{background:var(--s);border:1px solid var(--bd);border-radius:10px;padding:1.25rem}
 .mb16{margin-bottom:16px}
 .card-title{font-size:11px;font-weight:600;color:var(--m);letter-spacing:.8px;text-transform:uppercase;margin-bottom:1.25rem}
+.calc-header{margin-bottom:1.75rem}.calc-page-title{margin:0 0 .4rem;font-size:26px;font-weight:700;color:#fff;line-height:1.3;letter-spacing:-.3px}.calc-subtitle{font-size:15px;font-weight:500;color:var(--t);margin:0 0 .6rem;line-height:1.4}
+.calc-desc{font-size:13px;color:var(--m);line-height:1.65;margin:0;max-width:680px}
 .input-hint{font-size:11.5px;color:var(--a);background:rgba(240,185,11,.08);border:1px solid rgba(240,185,11,.25);border-radius:6px;padding:6px 10px;margin:-.75rem 0 1rem;line-height:1.5}
 .chart-tooltip{position:fixed;display:none;background:#1C2430;border:1px solid #232D3A;border-radius:6px;padding:7px 11px;font-size:11.5px;color:#E8EDF2;pointer-events:none;z-index:9999;box-shadow:0 4px 14px rgba(0,0,0,.45);font-family:'DM Sans',sans-serif;line-height:1.5;max-width:200px}
 .chart-tooltip strong{color:#F0B90B}
@@ -109,7 +111,7 @@ body{background:var(--bg);color:var(--t);font-family:var(--fn);font-size:14px;li
 .sci-btn.op{color:var(--a)}.sci-btn.eq{background:var(--a);color:#000;border-color:var(--a);font-weight:600}.sci-btn.cl{color:var(--r)}.sci-btn.fn{color:var(--b)}
 @media(max-width:700px){.two,.two-eq,.three{grid-template-columns:1fr}.g2,.g3{grid-template-columns:1fr}.sci-grid{grid-template-columns:repeat(4,1fr)}}
 @media(max-width:700px){.searchbox{width:170px;padding:8px 12px}.searchbox input{font-size:13px}}
-@media(max-width:700px){.download-btn,.share-btn{font-size:9.5px;padding:3px 7px;gap:3px;border-radius:12px;flex:1;justify-content:center}.calc-btn-row{gap:6px;margin-bottom:1.25rem}}
+@media(max-width:700px){.download-btn,.share-btn{font-size:9.5px;padding:3px 7px;gap:3px;border-radius:12px;flex:1;justify-content:center}.calc-btn-row{gap:6px;margin-bottom:1.25rem}}@media(max-width:700px){.calc-page-title{font-size:21px}.calc-subtitle{font-size:13.5px}.calc-desc{font-size:12.5px}.calc-header{margin-bottom:1.25rem}}
 
 }
 
@@ -340,13 +342,16 @@ body{background:var(--bg);color:var(--t);font-family:var(--fn);font-size:14px;li
 </div>
 <div class="content">
 <div id="divgrowth" class="panel on">
+<div class="calc-header">
+<h1 class="calc-page-title">Dividend Growth Calculator</h1>
+<h2 class="calc-subtitle">Project your future dividend income year by year</h2>
+    <p class="calc-desc">This dividend growth calculator projects how a stock's dividend payout and your total income from it will grow over time, based on your share count, yield, and an assumed annual dividend growth rate.</p>
+</div>
 
-<div class="related-box"><div class="related-box-title">📖 Related Articles</div><a class="related-item" href="/blog/power-of-reinvesting-dividends">The Power of Reinvesting Dividends: A Long-Term Growth Case Study<span class="related-arrow">→</span></a></div>
 
 
 <div class="two">
   <div class="card">
-    <h1 class="card-title" style="margin:0 0 1.25rem">Dividend Growth Calculator</h1>
     <div class="g2">
       <div class="field"><label>Investment Amount ($)</label><div class="ip"><span class="pfx">$</span><input type="text" inputmode="decimal" id="dg-amount-a" value="15000" oninput="cDivGrowth()"></div></div>
       <div class="field"><label>Current Dividend Yield (%/yr)</label><input type="text" inputmode="decimal" id="dg-yield-a" value="3" step="0.1" oninput="cDivGrowth()"></div>
@@ -383,6 +388,7 @@ body{background:var(--bg);color:var(--t);font-family:var(--fn);font-size:14px;li
 </div>
 
 <div style="margin-top:1.75rem;margin-bottom:1.75rem"><div class="calc-links"><span class="calc-links-label">🔗 Related Calculators</span><a class="calc-link-btn" href="/drip" onclick="go('drip',null);return false;">💧 DRIP</a><a class="calc-link-btn" href="/cagr" onclick="go('cagr',null);return false;">📐 CAGR</a><a class="calc-link-btn" href="/retirement" onclick="go('retirement',null);return false;">👴 Retirement</a><a class="calc-link-btn" href="/fire" onclick="go('fire',null);return false;">🔥 FIRE Calculator</a></div></div>
+<div class="related-box"><div class="related-box-title">📖 Related Articles</div><a class="related-item" href="/blog/power-of-reinvesting-dividends">The Power of Reinvesting Dividends: A Long-Term Growth Case Study<span class="related-arrow">→</span></a></div>
 <div class="calc-guide">
   <div class="guide-toggle">
     <div class="guide-toggle-title">📖 Dividend Growth Investing — Building Rising Income</div>

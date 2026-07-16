@@ -2277,18 +2277,7 @@ function injectDisclaimers(){
 // which have no calculator inputs).
 const NO_HINT_PANELS=new Set(['home','privacy','about','terms','currency','scientific']);
 function injectInputHints(){
-  document.querySelectorAll('.panel').forEach(panel=>{
-    if(NO_HINT_PANELS.has(panel.id)||panel.id.indexOf('blog')===0)return;
-    if(panel.querySelector('.input-hint'))return;
-    const firstCard=[...panel.querySelectorAll('.card')].find(c=>c.querySelector('.card-title'));
-    if(!firstCard)return;
-    const title=firstCard.querySelector('.card-title');
-    if(!title)return;
-    const hint=document.createElement('div');
-    hint.className='input-hint';
-    hint.innerHTML='💡 The numbers below are just examples — replace them with your own to get your personalized result.';
-    title.insertAdjacentElement('afterend',hint);
-  });
+  // hint removed per request
 }
 
 // ── Print: a button per calculator that prints just that calculator's
