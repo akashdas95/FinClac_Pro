@@ -191,7 +191,7 @@ function drawBars(id,labels,vals,colors,H_=130){
     ctx.fillStyle=colors[i%colors.length];
     if(ctx.roundRect)ctx.roundRect(x,y,bw,bh,3);else ctx.rect(x,y,bw,bh);
     ctx.fill();
-    ctx.fillStyle='#6B7A8D';ctx.font='9px DM Sans';ctx.textAlign='center';
+    ctx.fillStyle='#8393A6';ctx.font='9px DM Sans';ctx.textAlign='center';
     ctx.fillText((labels[i]||'').substring(0,9),x+bw/2,H-6);
     ctx.fillStyle='#E8EDF2';ctx.font='500 9px DM Mono';
     ctx.fillText('$'+fk(v),x+bw/2,y-4);
@@ -225,6 +225,7 @@ const SECTIONS=[
     {id:'savingsgoal',icon:'🎯',name:'Savings Goal Calculator',desc:'Figure out exactly how much to save each month to hit a specific savings target on time'},
     {id:'emergencyfund',icon:'🛡️',name:'Emergency Fund Calculator',desc:'Find out how big your emergency fund should be and how long it\'ll take to build it'},
     {id:'healthscore',icon:'💯',name:'Financial Health Score',desc:'Get a single score out of 100 that sums up how healthy your overall finances really are'},
+    {id:'lifeinsurance',icon:'🛡️',name:'Life Insurance Needs',desc:'Find out how much life insurance coverage your family would actually need'},
   ]},
   {title:'📈 Investing & Valuation',badge:true,items:[
     {id:'cagr',icon:'📐',name:'CAGR Calculator',desc:'Find the steady annual growth rate that explains how an investment grew over time'},
@@ -458,7 +459,7 @@ function cDivGrowth(){
 }
 
 // ── ETF ─────────────────────────────────────────────────────────
-const ETFS=[{name:'S&P 500 (SPY)',ret:10.5,color:'#F0B90B'},{name:'Total Mkt (VTI)',ret:10.8,color:'#0ECB81'},{name:'NASDAQ (QQQ)',ret:14.2,color:'#1890FF'},{name:'Intl Dev (VXUS)',ret:7.2,color:'#9B59B6'}];
+const ETFS=[{name:'S&P 500 (SPY)',ret:10.5,color:'#F0B90B'},{name:'Total Mkt (VTI)',ret:10.8,color:'#0ECB81'},{name:'NASDAQ (QQQ)',ret:14.2,color:'#1890FF'},{name:'Intl Dev (VXUS)',ret:7.2,color:'#B478D1'}];
 function calcETF(){
   const init=+gel('et-init').value||0,monthly=+gel('et-monthly').value||0,years=+gel('et-years').value||1,exp=+gel('et-exp').value||0;
   const sim=r=>{const net=(r-exp)/100,mr=net/12,n=years*12;return mr?init*Math.pow(1+mr,n)+monthly*(Math.pow(1+mr,n)-1)/mr*(1+mr):init+monthly*n;};
@@ -538,14 +539,14 @@ function cPEG(){
 
   let verdict,vColor,gaugeScore,gaugeHex;
   if(eps<=0||growth<=0){
-    verdict='Not meaningful';vColor='var(--m)';gaugeScore=50;gaugeHex='#6B7A8D';
+    verdict='Not meaningful';vColor='var(--m)';gaugeScore=50;gaugeHex='#8393A6';
     gel('pg-peg').textContent='N/A';gel('pg-peg').style.color='var(--m)';
   }else{
     gel('pg-peg').textContent=peg.toFixed(2);
     if(peg<1){verdict='Undervalued';vColor='var(--g)';gaugeHex='#0ECB81';}
     else if(peg<=1.3){verdict='Fairly Valued';vColor='var(--a)';gaugeHex='#F0B90B';}
     else if(peg<=2){verdict='Moderately Priced';vColor='var(--a)';gaugeHex='#F0B90B';}
-    else{verdict='Overvalued';vColor='var(--r)';gaugeHex='#F6465D';}
+    else{verdict='Overvalued';vColor='var(--r)';gaugeHex='#F65E72';}
     gel('pg-peg').style.color=peg<1?'var(--g)':peg<=2?'var(--a)':'var(--r)';
     gaugeScore=Math.max(0,Math.min(100,100-(peg*33.3)));
   }
@@ -627,7 +628,7 @@ function cEVEBITDA(){
     gel('ev-impliedmktcap').textContent='N/A';
     gel('ev-impliedprice').textContent='N/A';
     gel('ev-upside').textContent='N/A';gel('ev-upside').style.color='var(--m)';
-    drawBars('ev-chart',['Current','Implied'],[price,0],['#F0B90B','#6B7A8D'],140);
+    drawBars('ev-chart',['Current','Implied'],[price,0],['#F0B90B','#8393A6'],140);
   }
 
   const insights=[];
@@ -720,7 +721,7 @@ function calcRP(){
   const score=capRate>6?3:capRate>4?2:capRate>2?1:0;
   const lbls=['⚠️ Poor Investment','🟡 Below Average','🟢 Decent Return','🚀 Strong Investment'],cols=['var(--r)','var(--a)','var(--b)','var(--g)'];
   gel('rp-verdict').innerHTML=`<div style="background:var(--s2);border-radius:8px;padding:12px;border-left:3px solid ${cols[score]}"><div style="font-size:13px;font-weight:600;color:${cols[score]};margin-bottom:4px">${lbls[score]}</div><div style="font-size:12px;color:var(--m)">Cap rate ${pct(capRate)} · Cash flow ${cf>=0?'positive ✓':'negative ✗'} · Gross yield ${pct(grossY)}</div></div>`;
-  drawDonut('rp-donut',[Math.max(0,noi),emi*12,annCosts],['#0ECB81','#F6465D','#6B7A8D']);
+  drawDonut('rp-donut',[Math.max(0,noi),emi*12,annCosts],['#0ECB81','#F65E72','#8393A6']);
 
   const insights=[];
   insights.push({type:coc>=8?'good':coc>=0?'neutral':'bad',text:`Your cash-on-cash return is <strong>${pct(coc)}</strong> — ${coc>=8?'above the 8% benchmark many investors target':coc>=0?'positive, but below the 8% benchmark many investors target':'negative, meaning this property is costing you money every month'}.`});
@@ -784,7 +785,7 @@ function cPricing(){
 // ── Equity ──────────────────────────────────────────────────────
 let founders=[{name:'Founder A',pct:45},{name:'Founder B',pct:45}];
 let rounds=[{name:'Seed',raise:2e6,pre:1e7},{name:'Series A',raise:1e7,pre:4e7}];
-const EQC=['#F0B90B','#0ECB81','#1890FF','#9B59B6','#F6465D','#26a17b'];
+const EQC=['#F0B90B','#0ECB81','#1890FF','#B478D1','#F65E72','#26a17b'];
 function renderFounders(){
   const el=gel('eq-founders');el.innerHTML='';
   founders.forEach((f,i)=>{el.innerHTML+=`<div style="display:grid;grid-template-columns:1fr 1fr 36px;gap:8px;margin-bottom:6px;align-items:end"><div class="field" style="margin:0"><input type="text" value="${f.name}" oninput="founders[${i}].name=this.value;calcEquity()" style="width:100%;background:var(--bg);border:1px solid var(--bd);border-radius:6px;padding:8px;color:var(--t);font-size:13px;outline:none"></div><div class="field" style="margin:0"><input type="text" inputmode="decimal" value="${f.pct}" step="0.5" oninput="founders[${i}].pct=+this.value;calcEquity()" placeholder="%" style="width:100%;background:var(--bg);border:1px solid var(--bd);border-radius:6px;padding:8px;color:var(--t);font-family:var(--mo);font-size:13px;outline:none"></div><button class="btn-del" onclick="founders.splice(${i},1);renderFounders()">✕</button></div>`;});
@@ -843,7 +844,7 @@ function cDilutionImpact(){
   gel('di-valbefore').textContent=f$(valBefore);
   gel('di-valafter').textContent=f$(valAfter);
 
-  drawBars('di-chart',['Before','After'],[valBefore,valAfter],['#0ECB81','#F6465D'],150);
+  drawBars('di-chart',['Before','After'],[valBefore,valAfter],['#0ECB81','#F65E72'],150);
 
   const sourceLabel={secondary:'secondary offering',options:'option/RSU exercise',convert:'convertible note conversion'}[gel('di-source').value]||'share issuance';
   const insights=[];
@@ -872,7 +873,7 @@ function calcRevenue(){
   se('rf-arr',f$(bD[bD.length-1].r*12));se('rf-cum',f$(bD[bD.length-1].cum));
   se('rf-custs',Math.round(bD[bD.length-1].cust).toLocaleString());
   se('rf-ltv',churn?f$(arpu/churn):'∞');se('rf-range',f$(pD[pD.length-1].r)+' – '+f$(oD[oD.length-1].r));
-  drawLine('rf-chart',[{data:pD.map(d=>d.r),color:'#F6465D',fill:true},{data:bD.map(d=>d.r),color:'#1890FF',fill:true,w:2.5},{data:oD.map(d=>d.r),color:'#0ECB81',fill:true}],165);
+  drawLine('rf-chart',[{data:pD.map(d=>d.r),color:'#F65E72',fill:true},{data:bD.map(d=>d.r),color:'#1890FF',fill:true,w:2.5},{data:oD.map(d=>d.r),color:'#0ECB81',fill:true}],165);
   gel('rf-table').innerHTML=`<thead><tr><th style="text-align:left">Month</th><th>MRR</th><th>Cumulative</th><th>Customers</th><th>MoM Growth</th></tr></thead><tbody>`+bD.filter((_,i)=>i%Math.max(1,Math.floor(months/10))===0||i===months-1).slice(0,13).map((d,i,a)=>{const prev=i>0?a[i-1].r:mrr,g=prev?(d.r/prev-1)*100:0;return`<tr><td>Mo ${d.m}</td><td style="color:var(--a)">${f$(d.r)}</td><td>${f$(d.cum)}</td><td>${Math.round(d.cust).toLocaleString()}</td><td style="color:${g>=0?'var(--g)':'var(--r)'}">${g>=0?'+':''}${g.toFixed(1)}%</td></tr>`;}).join('')+'</tbody>';
 
   const insights=[];
@@ -895,7 +896,7 @@ function cLoan(){
   const tot=emi*n,pf=P*fee;
   gel('l-emi').textContent=f$(emi);gel('l-int').textContent=f$(int);gel('l-tot').textContent=f$(tot+pf);gel('l-pf').textContent=f$(pf);
   gel('l-pp').textContent=Math.round(P/tot*100)+'%';gel('l-ip').textContent=Math.round(int/tot*100)+'%';gel('l-coc').textContent=pct(int/P*100);
-  drawDonut('l-donut',[P,int,pf],['#F0B90B','#F6465D','#6B7A8D']);
+  drawDonut('l-donut',[P,int,pf],['#F0B90B','#F65E72','#8393A6']);
   if(type!=='flat')renderAmortTable('l-amort-table',P,r,n);
   else gel('l-amort-table').innerHTML='<tbody><tr><td style="padding:10px 8px;font-size:12px;color:var(--m)">Amortization breakdown isn\'t applicable to flat-rate loans, since interest is calculated on the original principal for the full term rather than a declining balance.</td></tr></tbody>';
 
@@ -966,7 +967,7 @@ function cPrepay(){
   gel('pp-oldint').textContent=f$(oldInt);
   gel('pp-savedpct').textContent=pct(Math.max(0,savedPct));
 
-  drawLine('pp-chart',[{data:yearlyBalOrig,color:'#F6465D',fill:false,w:2,dash:[5,4]},{data:yearlyBal,color:'#0ECB81',fill:true,w:2.5}],175);
+  drawLine('pp-chart',[{data:yearlyBalOrig,color:'#F65E72',fill:false,w:2,dash:[5,4]},{data:yearlyBal,color:'#0ECB81',fill:true,w:2.5}],175);
 
   // Year-by-year comparison table
   const years=Math.ceil(Math.max(n,newTerm)/12);
@@ -1060,7 +1061,7 @@ function cAlloc(){
   const future=val*Math.pow(1+blended/100,years);
   gel('aa-future').textContent=f$(future);
 
-  drawDonut('aa-donut',[alloc.stocks,alloc.bonds,alloc.cash,alloc.gold,alloc.crypto],['#F0B90B','#1890FF','#0ECB81','#9B59B6','#F6465D']);
+  drawDonut('aa-donut',[alloc.stocks,alloc.bonds,alloc.cash,alloc.gold,alloc.crypto],['#F0B90B','#1890FF','#0ECB81','#B478D1','#F65E72']);
 
   const years_arr=[],vals=[];
   for(let y=0;y<=years;y++){years_arr.push('Y'+y);vals.push(val*Math.pow(1+blended/100,y));}
@@ -1145,7 +1146,7 @@ function cSWP(){
     gel('sw-status').innerHTML='✓ Sustainable';gel('sw-status').style.color='var(--g)';
   }
 
-  drawLine('sw-chart',[{data:yearlyBal.slice(0,Math.min(yearlyBal.length,40)),color:depleted?'#F6465D':'#0ECB81',fill:true}],170);
+  drawLine('sw-chart',[{data:yearlyBal.slice(0,Math.min(yearlyBal.length,40)),color:depleted?'#F65E72':'#0ECB81',fill:true}],170);
 
   let rows='<thead><tr><th style="text-align:left;padding:6px 8px;font-size:11px;color:var(--m);border-bottom:1px solid var(--bd)">Year</th><th style="padding:6px 8px;font-size:11px;border-bottom:1px solid var(--bd);color:var(--r)">Withdrawn</th><th style="padding:6px 8px;font-size:11px;border-bottom:1px solid var(--bd);color:var(--g)">Balance</th></tr></thead><tbody>';
   const rowsToShow=depleted?Math.ceil(depletedMonth/12):yearlyWithdrawn.length;
@@ -1214,7 +1215,7 @@ function cMortgage(){
   gel('m-pay').textContent=f$(emi+ti);gel('m-loan').textContent=f$(loan);gel('m-int').textContent=f$(interest);
   gel('m-total').textContent=f$(emi*n+ptax*(n/12)+ins*(n/12));gel('m-dp').textContent=f$(price*dp);
   gel('m-ti').textContent=f$(ti);gel('m-aff').textContent=pct(((emi+ti)*12)/price*100);
-  drawDonut('m-donut',[loan,interest,(ptax+ins)*(n/12)/12*n],['#F0B90B','#F6465D','#1890FF']);
+  drawDonut('m-donut',[loan,interest,(ptax+ins)*(n/12)/12*n],['#F0B90B','#F65E72','#1890FF']);
   renderAmortTable('m-amort-table',loan,r,n);
 
   const insights=[];
@@ -1272,7 +1273,7 @@ function cHeloc(){
   gel('hl-cltv-out').textContent=pct(cltvAfter);
   gel('hl-total-cost').textContent=f$(totalCost);
 
-  drawDonut('hl-donut',[drawAmt,drawInterestTotal,repayInterestTotal],['#F0B90B','#F6465D','#1890FF']);
+  drawDonut('hl-donut',[drawAmt,drawInterestTotal,repayInterestTotal],['#F0B90B','#F65E72','#1890FF']);
   renderAmortTable('hl-amort-table',drawAmt,r,repayMonths);
 
   const insights=[];
@@ -1452,7 +1453,7 @@ function cAutoLoan(){
   gel('al-total').textContent=f$(totalCost);
   gel('al-salestax').textContent=f$(salesTax);
 
-  drawDonut('al-donut',[financed-salesTax,totalInterest,salesTax],['#F0B90B','#F6465D','#1890FF']);
+  drawDonut('al-donut',[financed-salesTax,totalInterest,salesTax],['#F0B90B','#F65E72','#1890FF']);
   renderAmortTable('al-amort-table',financed,r,n);
 
   // Comparison: same financed amount at both rates, for direct rate comparison regardless of selected condition
@@ -1713,6 +1714,57 @@ function cDCA(){
   }
   insights.push({type:'neutral',text:`This projection assumes a smooth, steady price growth rate for simplicity — real markets move up and down, which is exactly the volatility that makes DCA's share-averaging effect meaningful in practice.`});
   renderInsights('dc-insights',insights);
+}
+
+// ── Life Insurance Needs ────────────────────────────────────────
+function cLifeIns(){
+  const income=+gel('li-income').value||0;
+  const years=+gel('li-years').value||0;
+  const mortgage=+gel('li-mortgage').value||0;
+  const debt=+gel('li-debt').value||0;
+  const education=+gel('li-education').value||0;
+  const final_=+gel('li-final').value||0;
+  const existingCov=+gel('li-existing-cov').value||0;
+  const savings=+gel('li-savings').value||0;
+
+  const incomeNeed=income*years;
+  const obligations=mortgage+debt+education+final_;
+  const grossNeed=incomeNeed+obligations;
+  const offset=existingCov+savings;
+  const netNeed=Math.max(grossNeed-offset,0);
+
+  gel('li-need').textContent=f$(netNeed);
+  gel('li-income-need').textContent=f$(incomeNeed);
+  gel('li-obligations').textContent=f$(obligations);
+  gel('li-offset').textContent='−'+f$(offset);
+
+  gel('li-r-income').textContent=f$(incomeNeed);
+  gel('li-r-mortgage').textContent=f$(mortgage);
+  gel('li-r-debt').textContent=f$(debt);
+  gel('li-r-education').textContent=f$(education);
+  gel('li-r-final').textContent=f$(final_);
+  gel('li-r-existing').textContent='−'+f$(existingCov);
+  gel('li-r-savings').textContent='−'+f$(savings);
+  gel('li-r-total').textContent=f$(netNeed);
+
+  const insights=[];
+  const ruleOfThumb=income*10;
+  if(netNeed>0){
+    const diff=netNeed-ruleOfThumb;
+    if(Math.abs(diff)>ruleOfThumb*0.15){
+      insights.push({type:'neutral',text:`Your needs-based estimate of <strong>${f$(netNeed)}</strong> differs from the common "10× income" rule of thumb (${f$(ruleOfThumb)}) by <strong>${f$(Math.abs(diff))}</strong> — the needs-based number accounts for your actual mortgage, debts, and savings, so it's usually the more accurate one to use.`});
+    }else{
+      insights.push({type:'neutral',text:`Your needs-based estimate of <strong>${f$(netNeed)}</strong> is fairly close to the common "10× income" rule of thumb (${f$(ruleOfThumb)}).`});
+    }
+    insights.push({type:'good',text:`Consider a <strong>term life policy</strong> around <strong>${f$(netNeed)}</strong> — term coverage is typically far cheaper than permanent life insurance for this kind of temporary, needs-based gap.`});
+  }else{
+    insights.push({type:'good',text:`Based on your existing coverage and savings, you may already have your income-replacement and obligation needs covered. Revisit this after any major life change.`});
+  }
+  if(offset>0){
+    insights.push({type:'neutral',text:`Your existing coverage and savings of <strong>${f$(offset)}</strong> are already reducing how much additional insurance you'd need.`});
+  }
+  insights.push({type:'neutral',text:`This is an estimate for general planning purposes, not personalized financial or insurance advice — a licensed insurance professional can help account for your full situation.`});
+  renderInsights('li-insights',insights);
 }
 
 // ── 401(k) ──────────────────────────────────────────────────────
@@ -2070,7 +2122,7 @@ function cCF(){
   gel('cf-inc').textContent=f$(ti);gel('cf-exp').textContent=f$(te);
   const nE=gel('cf-net');nE.textContent=f$(net);nE.style.color=net>=0?'var(--g)':'var(--r)';
   gel('cf-sr').textContent=pct(sr);gel('cf-sr').style.color=sr>=20?'var(--g)':sr>=10?'var(--a)':'var(--r)';
-  drawBars('cf-chart',['Income','Expenses','Net'],[ti,te,Math.max(0,net)],['#0ECB81','#F6465D','#F0B90B'],135);
+  drawBars('cf-chart',['Income','Expenses','Net'],[ti,te,Math.max(0,net)],['#0ECB81','#F65E72','#F0B90B'],135);
   const bars=gel('cf-bars');bars.innerHTML='';
   cfExpense.forEach(r=>{const mo=r.amt*(FM[r.freq]||1),p_=te>0?mo/te*100:0;bars.innerHTML+=`<div style="margin-bottom:10px"><div style="display:flex;justify-content:space-between;font-size:12px;margin-bottom:3px"><span>${r.name}</span><span style="font-family:var(--mo);color:var(--m)">${f$(mo)} (${p_.toFixed(0)}%)</span></div><div class="pbar-bg"><div class="pbar-fill" style="width:${p_.toFixed(1)}%;background:${p_>40?'var(--r)':p_>20?'var(--a)':'var(--b)'}"></div></div></div>`;});
 
@@ -2098,7 +2150,7 @@ function cBE(){
   gel('be-mos').textContent=pct(mos);gel('be-cm').textContent=f$(cm)+'/unit';gel('be-gm').textContent=pct(sp>0?cm/sp*100:0);
   gel('be-ol').textContent=(profit>0?(cm*eu)/profit:0).toFixed(1)+'x';
   const s=8,p1=[],p2=[];for(let i=1;i<=s;i++){const u=eu*2*i/s;p1.push(fc);p2.push(sp*u);}
-  drawLine('be-chart',[{data:p1,color:'#F6465D',fill:false},{data:p2,color:'#0ECB81',fill:false,w:2.5}],175);
+  drawLine('be-chart',[{data:p1,color:'#F65E72',fill:false},{data:p2,color:'#0ECB81',fill:false,w:2.5}],175);
 
   const insights=[];
   if(isFinite(beu)){
@@ -2492,8 +2544,8 @@ function cHealthScore(){
                 total >= 75 ? {g:'A', label:'Very Good', color:'#0ECB81',desc:'Strong finances with minor areas to improve'} :
                 total >= 65 ? {g:'B', label:'Good',      color:'#F0B90B',desc:'Solid foundation, some key areas need attention'} :
                 total >= 50 ? {g:'C', label:'Fair',      color:'#F0B90B',desc:'You are managing, but important gaps exist'} :
-                total >= 35 ? {g:'D', label:'Poor',      color:'#F6465D',desc:'Significant financial stress — take action now'} :
-                              {g:'F', label:'Critical',  color:'#F6465D',desc:'Urgent action needed across multiple areas'};
+                total >= 35 ? {g:'D', label:'Poor',      color:'#F65E72',desc:'Significant financial stress — take action now'} :
+                              {g:'F', label:'Critical',  color:'#F65E72',desc:'Urgent action needed across multiple areas'};
 
   gel('hs-score-num').textContent = total;
   gel('hs-score-num').style.color = grade.color;
@@ -2582,7 +2634,7 @@ const PANEL_DISCLAIMER={
   loan:'credit',prepay:'credit',loancomp:'credit',autoloan:'credit',debtcomp:'credit',debt:'credit',
   tax:'tax',salary:'tax',
   mortgage:'realestate',mortcomp:'realestate',rental:'realestate',rentalprop:'realestate',rentvsbuy:'realestate',
-  savings:'investing',provident:'investing',retirement:'investing',fire:'investing',savingsgoal:'investing',emergencyfund:'investing',healthscore:'investing','401k':'investing',millionaire:'investing',
+  savings:'investing',provident:'investing',retirement:'investing',fire:'investing',savingsgoal:'investing',emergencyfund:'investing',healthscore:'investing','401k':'investing',millionaire:'investing',lifeinsurance:'investing',
   cagr:'investing',xirr:'investing',drip:'investing',divgrowth:'investing',etf:'investing',allocation:'investing',dcf:'investing',peg:'investing',evebitda:'investing',invest:'investing',swp:'investing',stock:'investing',dilutionimpact:'investing',dca:'investing',
   burnrate:'business',pricing:'business',equity:'business',revenue:'business',breakeven:'business',cashflow:'business',
   currency:'currency',remit:'currency'
@@ -3035,7 +3087,7 @@ function initPage(id){
   const calls = [buildDir,buildSci,buildCurrency,buildMortComp,buildLoanComp,initGuideAccordions,
     renderXIRR,renderFounders,renderRounds,renderDebtRows,renderCFRows,renderDC2,
     calcCAGR,calcDRIP,cDivGrowth,calcETF,calcDCF,cBurn,cPricing,calcEquity,cDilutionImpact,calcRevenue,
-    cLoan,cPrepay,cAutoLoan,cSip,cSWP,cTax,cMortgage,cHeloc,cRentVsBuy,cSavings,cProvident,cAllocRecommend,cSalary,c401k,cMillionaire,cDCA,buildRemit,
+    cLoan,cPrepay,cAutoLoan,cSip,cSWP,cTax,cMortgage,cHeloc,cRentVsBuy,cSavings,cProvident,cAllocRecommend,cSalary,c401k,cMillionaire,cDCA,cLifeIns,buildRemit,
     cStock,cSplit,cPEG,cEVEBITDA,cRetire,cFire,cDebt,cRental,calcRP,cCF,cBE,cSavingsGoal,cEmergency,cHealthScore,
     cCurrency, injectDisclaimers, injectInputHints, injectPrintButtons, injectShareButtons, attachChartTooltips, applyCommaFormatting];
   calls.forEach(fn=>{ try{ fn(); }catch(e){ /* element not on this page — expected */ } });

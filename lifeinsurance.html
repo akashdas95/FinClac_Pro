@@ -3,22 +3,22 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>401(k) Calculator — Estimate Your Retirement Savings Growth | FinCalc</title>
-<meta name="description" content="Estimate how your 401(k) balance grows to retirement, including employer match, salary growth, and IRS contribution limits. Free 401(k) calculator.">
-<link rel="canonical" href="https://finclac.com/401k">
+<title>Life Insurance Needs Calculator — How Much Coverage Do You Need? | FinCalc</title>
+<meta name="description" content="Calculate how much life insurance coverage you need based on income replacement, debts, mortgage, and future expenses. Free life insurance calculator.">
+<link rel="canonical" href="https://finclac.com/lifeinsurance">
 <meta name="robots" content="index, follow">
 <meta property="og:type" content="website">
-<meta property="og:title" content="401(k) Calculator — Estimate Your Retirement Savings Growth | FinCalc">
-<meta property="og:description" content="Estimate how your 401(k) balance grows to retirement, including employer match, salary growth, and IRS contribution limits. Free 401(k) calculator.">
-<meta property="og:url" content="https://finclac.com/401k">
+<meta property="og:title" content="Life Insurance Needs Calculator — How Much Coverage Do You Need? | FinCalc">
+<meta property="og:description" content="Calculate how much life insurance coverage you need based on income replacement, debts, mortgage, and future expenses. Free life insurance calculator.">
+<meta property="og:url" content="https://finclac.com/lifeinsurance">
 <meta property="og:site_name" content="FinCalc">
 <meta property="og:image" content="https://finclac.com/android-chrome-512x512.png">
 <meta property="og:image:width" content="512">
 <meta property="og:image:height" content="512">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="https://finclac.com/android-chrome-512x512.png">
-<meta name="twitter:title" content="401(k) Calculator — Estimate Your Retirement Savings Growth | FinCalc">
-<meta name="twitter:description" content="Estimate how your 401(k) balance grows to retirement, including employer match, salary growth, and IRS contribution limits. Free 401(k) calculator.">
+<meta name="twitter:title" content="Life Insurance Needs Calculator — How Much Coverage Do You Need? | FinCalc">
+<meta name="twitter:description" content="Calculate how much life insurance coverage you need based on income replacement, debts, mortgage, and future expenses. Free life insurance calculator.">
 <style>*{box-sizing:border-box;margin:0;padding:0}
 :root{--bg:#0B0E11;--s:#141920;--s2:#1C2430;--bd:#232D3A;--t:#E8EDF2;--m:#8393A6;--tb:#A3B2C4;--a:#F0B90B;--g:#0ECB81;--r:#F65E72;--b:#1890FF;--p:#B478D1;--fn:'DM Sans',sans-serif;--mo:'DM Mono',monospace}
 body{background:var(--bg);color:var(--t);font-family:var(--fn);font-size:14px;line-height:1.5;min-height:100vh}
@@ -303,7 +303,7 @@ body{background:var(--bg);color:var(--t);font-family:var(--fn);font-size:14px;li
   gtag('config', 'G-61RHHG8E6Q');
 </script>
 <meta name="msvalidate.01" content="175D12831D109E3E7E1A856004E0F393" />
-<script type="application/ld+json">{"@context": "https://schema.org", "@type": "WebApplication", "name": "401(k) Calculator", "url": "https://finclac.com/401k", "description": "Estimate how your 401(k) balance grows to retirement, including employer match, salary growth, and IRS contribution limits. Free 401(k) calculator.", "applicationCategory": "FinanceApplication", "operatingSystem": "Any (web-based)", "offers": {"@type": "Offer", "price": "0", "priceCurrency": "USD"}, "isPartOf": {"@type": "WebSite", "name": "FinCalc", "url": "https://finclac.com/"}}</script>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "WebApplication", "name": "Life Insurance Needs Calculator", "url": "https://finclac.com/lifeinsurance", "description": "Calculate how much life insurance coverage you need based on income replacement, debts, mortgage, and future expenses. Free life insurance calculator.", "applicationCategory": "FinanceApplication", "operatingSystem": "Any (web-based)", "offers": {"@type": "Offer", "price": "0", "priceCurrency": "USD"}, "isPartOf": {"@type": "WebSite", "name": "FinCalc", "url": "https://finclac.com/"}}</script>
 </head>
 <body>
 <a href="#main-content" class="skip-link">Skip to main content</a>
@@ -354,86 +354,89 @@ body{background:var(--bg);color:var(--t);font-family:var(--fn);font-size:14px;li
   <a class="ntab" href="/scientific" onclick="go('scientific',this);return false;">🔬 Scientific</a>
 </nav>
 <main class="content" id="main-content">
-<div id="401k" class="panel on">
+<div id="lifeinsurance" class="panel on">
 <div class="calc-header">
-<h1 class="calc-page-title">401(k) Calculator</h1>
-<h2 class="calc-subtitle">Project your 401(k) balance at retirement, including employer match</h2>
-<p class="calc-desc">This 401(k) calculator projects your retirement account balance based on your current savings, contribution rate, employer match, expected salary growth, and investment returns until your target retirement age.</p>
+<h1 class="calc-page-title">Life Insurance Needs Calculator</h1>
+<h2 class="calc-subtitle">Find out how much coverage your family would actually need</h2>
+<p class="calc-desc">This calculator estimates how much life insurance coverage you need by adding up income replacement, debts, mortgage balance, and future expenses, then subtracting the assets and coverage you already have.</p>
 </div>
 
 
 
 <div class="two">
   <div class="card">
-    <div class="card-title">Your 401(k) Details</div>
+    <div class="card-title">Income Replacement</div>
     <div class="g2">
-      <div class="field"><label>Current Age</label><input type="text" inputmode="decimal" id="k4-age" value="30" oninput="c401k()"></div>
-      <div class="field"><label>Retirement Age</label><input type="text" inputmode="decimal" id="k4-retage" value="65" oninput="c401k()"></div>
+      <div class="field"><label>Annual Income to Replace ($)</label><div class="ip"><span class="pfx">$</span><input type="text" inputmode="decimal" id="li-income" value="70000" oninput="cLifeIns()"></div></div>
+      <div class="field"><label>Years of Income Needed</label><input type="text" inputmode="decimal" id="li-years" value="15" oninput="cLifeIns()"></div>
     </div>
-    <div class="field"><label>Current 401(k) Balance ($)</label><div class="ip"><span class="pfx">$</span><input type="text" inputmode="decimal" id="k4-bal" value="20000" oninput="c401k()"></div></div>
-    <div class="field"><label>Annual Salary ($)</label><div class="ip"><span class="pfx">$</span><input type="text" inputmode="decimal" id="k4-salary" value="70000" oninput="c401k()"></div></div>
+    <div class="card-title" style="margin-top:1.25rem">Debts &amp; Future Costs</div>
     <div class="g2">
-      <div class="field"><label>Your Contribution (% of salary)</label><input type="text" inputmode="decimal" id="k4-contrib" value="6" step="0.1" oninput="c401k()"></div>
-      <div class="field"><label>Annual Salary Growth (%)</label><input type="text" inputmode="decimal" id="k4-growth" value="3" step="0.1" oninput="c401k()"></div>
+      <div class="field"><label>Mortgage Balance ($)</label><div class="ip"><span class="pfx">$</span><input type="text" inputmode="decimal" id="li-mortgage" value="250000" oninput="cLifeIns()"></div></div>
+      <div class="field"><label>Other Debt ($)</label><div class="ip"><span class="pfx">$</span><input type="text" inputmode="decimal" id="li-debt" value="15000" oninput="cLifeIns()"></div></div>
+      <div class="field"><label>Children's Future Education ($)</label><div class="ip"><span class="pfx">$</span><input type="text" inputmode="decimal" id="li-education" value="80000" oninput="cLifeIns()"></div></div>
+      <div class="field"><label>Final Expenses ($)</label><div class="ip"><span class="pfx">$</span><input type="text" inputmode="decimal" id="li-final" value="15000" oninput="cLifeIns()"></div></div>
     </div>
+    <div class="card-title" style="margin-top:1.25rem">What You Already Have</div>
     <div class="g2">
-      <div class="field"><label>Employer Match (%)</label><input type="text" inputmode="decimal" id="k4-matchrate" value="50" step="1" oninput="c401k()"></div>
-      <div class="field"><label>Match Limit (% of salary)</label><input type="text" inputmode="decimal" id="k4-matchlimit" value="6" step="0.1" oninput="c401k()"></div>
+      <div class="field"><label>Existing Life Insurance ($)</label><div class="ip"><span class="pfx">$</span><input type="text" inputmode="decimal" id="li-existing-cov" value="0" oninput="cLifeIns()"></div></div>
+      <div class="field"><label>Savings &amp; Investments ($)</label><div class="ip"><span class="pfx">$</span><input type="text" inputmode="decimal" id="li-savings" value="20000" oninput="cLifeIns()"></div></div>
     </div>
-    <div class="field"><label>Expected Annual Return (%)</label><input type="text" inputmode="decimal" id="k4-return" value="7" step="0.1" oninput="c401k()"></div>
     <div class="sgrid">
-      <div class="sbox"><div class="lbl">Balance at Retirement</div><div class="val" style="color:var(--a)" id="k4-final">$0</div></div>
-      <div class="sbox"><div class="lbl">Total Growth</div><div class="val" style="color:var(--g)" id="k4-growth-total">$0</div></div>
-      <div class="sbox"><div class="lbl">You Contributed</div><div class="val" id="k4-contrib-total">$0</div></div>
-      <div class="sbox"><div class="lbl">Employer Match</div><div class="val" id="k4-match-total">$0</div></div>
+      <div class="sbox"><div class="lbl">Recommended Coverage</div><div class="val" style="color:var(--a)" id="li-need">$0</div></div>
+      <div class="sbox"><div class="lbl">Income Replacement</div><div class="val" id="li-income-need">$0</div></div>
+      <div class="sbox"><div class="lbl">Debts + Future Costs</div><div class="val" id="li-obligations">$0</div></div>
+      <div class="sbox"><div class="lbl">Less: Assets &amp; Coverage</div><div class="val" style="color:var(--g)" id="li-offset">$0</div></div>
     </div>
   </div>
   <div class="card">
-    <div class="card-title">Growth Projection</div>
-    <canvas id="k4-chart" width="300" height="175" style="width:100%;margin:1rem 0"></canvas>
-    <div class="rrow"><span class="rk">Years to Retirement</span><span class="rv" id="k4-years">0</span></div>
-    <div class="rrow"><span class="rk">This Year's Contribution (You)</span><span class="rv" id="k4-annual-contrib">$0</span></div>
-    <div class="rrow"><span class="rk">This Year's Employer Match</span><span class="rv" style="color:var(--g)" id="k4-annual-match">$0</span></div>
-    <div class="insight-box" id="k4-insights"></div>
+    <div class="card-title">How This Adds Up</div>
+    <div class="rrow"><span class="rk">+ Income Replacement</span><span class="rv" id="li-r-income">$0</span></div>
+    <div class="rrow"><span class="rk">+ Mortgage Balance</span><span class="rv" id="li-r-mortgage">$0</span></div>
+    <div class="rrow"><span class="rk">+ Other Debt</span><span class="rv" id="li-r-debt">$0</span></div>
+    <div class="rrow"><span class="rk">+ Education Costs</span><span class="rv" id="li-r-education">$0</span></div>
+    <div class="rrow"><span class="rk">+ Final Expenses</span><span class="rv" id="li-r-final">$0</span></div>
+    <div class="rrow"><span class="rk">− Existing Coverage</span><span class="rv" style="color:var(--g)" id="li-r-existing">$0</span></div>
+    <div class="rrow"><span class="rk">− Savings &amp; Investments</span><span class="rv" style="color:var(--g)" id="li-r-savings">$0</span></div>
+    <div class="rrow"><span class="rk">= Coverage Gap</span><span class="rv" style="color:var(--a)" id="li-r-total">$0</span></div>
+    <div class="insight-box" id="li-insights"></div>
   </div>
 </div>
 
-<div style="margin-top:1.75rem;margin-bottom:1.75rem"><div class="calc-links"><span class="calc-links-label">🔗 Related Calculators</span><a class="calc-link-btn" href="/retirement" onclick="go('retirement',null);return false;">👴 Retirement</a><a class="calc-link-btn" href="/fire" onclick="go('fire',null);return false;">🔥 FIRE</a><a class="calc-link-btn" href="/savings" onclick="go('savings',null);return false;">🏛️ Savings</a><a class="calc-link-btn" href="/salary" onclick="go('salary',null);return false;">💵 Salary</a><a class="calc-link-btn" href="/tax" onclick="go('tax',null);return false;">🧾 Tax</a><a class="calc-link-btn" href="/provident" onclick="go('provident',null);return false;">🏦 Provident Fund</a></div></div>
+<div style="margin-top:1.75rem;margin-bottom:1.75rem"><div class="calc-links"><span class="calc-links-label">🔗 Related Calculators</span><a class="calc-link-btn" href="/emergencyfund" onclick="go('emergencyfund',null);return false;">🛡️ Emergency Fund</a><a class="calc-link-btn" href="/healthscore" onclick="go('healthscore',null);return false;">💯 Health Score</a><a class="calc-link-btn" href="/debt" onclick="go('debt',null);return false;">💳 Debt Payoff</a><a class="calc-link-btn" href="/mortgage" onclick="go('mortgage',null);return false;">🏠 Mortgage</a><a class="calc-link-btn" href="/retirement" onclick="go('retirement',null);return false;">👴 Retirement</a><a class="calc-link-btn" href="/savingsgoal" onclick="go('savingsgoal',null);return false;">🎯 Savings Goal</a></div></div>
 <div class="calc-guide">
   <div class="guide-toggle">
-    <div class="guide-toggle-title">📖 401(k) Basics — Employer Match, Limits &amp; Growth</div>
+    <div class="guide-toggle-title">📖 How Much Life Insurance Do You Actually Need?</div>
   </div>
   <div class="guide-body">
-<div class="guide-p">A 401(k) is an employer-sponsored retirement account that lets you contribute a portion of your paycheck before it's taxed (traditional) or after tax with tax-free withdrawals later (Roth), invest that money in the market, and — in many plans — receive free matching contributions from your employer. The combination of pre-tax growth, employer match, and decades of compounding makes it one of the most powerful retirement tools available to most workers.</div>
+<div class="guide-p">The point of life insurance isn't to leave your family a windfall — it's to replace what would disappear if your income stopped tomorrow: the paycheck, the ability to pay off the house, the money set aside for your kids' education. A needs-based calculation adds up those specific obligations rather than relying on a generic rule of thumb, which is why it tends to be more accurate for your actual situation.</div>
 
-<div class="guide-h3">Why the Employer Match Is "Free Money"</div>
-<div class="guide-p">A common match structure is "50% up to 6%" — meaning your employer contributes 50 cents for every dollar you contribute, up to a contribution of 6% of your salary. On a $70,000 salary, contributing the full 6% ($4,200/year) gets you an extra $2,100/year from your employer — an instant 50% return before any market growth at all. Contributing less than the match threshold effectively leaves part of your compensation on the table.</div>
-<div class="guide-formula">Employer Match = min(Your Contribution %, Match Limit %) × Match Rate</div>
+<div class="guide-h3">The Needs-Based Formula</div>
+<div class="guide-formula">Coverage Need = Income Replacement + Debts + Mortgage + Education + Final Expenses − Existing Coverage − Savings</div>
+<div class="guide-p">This is a version of the widely-used <strong>DIME method</strong> (Debt, Income, Mortgage, Education), extended to also net out assets you already have. Each component represents a real financial gap your family would face without your income — add them up, then subtract what you already have set aside to cover it.</div>
 
-<div class="guide-h3">2025 IRS Contribution Limits</div>
-<table class="guide-table"><thead><tr><th>Category</th><th>2025 Limit</th></tr></thead><tbody>
-<tr><td>Employee elective deferral (under 50)</td><td>$23,500</td></tr>
-<tr><td>Catch-up contribution (age 50+)</td><td>+$7,500 ($31,000 total)</td></tr>
-<tr><td>Combined employee + employer limit</td><td>$70,000 (or 100% of compensation, if lower)</td></tr>
+<div class="guide-h3">Breaking Down Each Component</div>
+<table class="guide-table"><thead><tr><th>Component</th><th>What It Covers</th></tr></thead><tbody>
+<tr><td>Income replacement</td><td>Annual income × number of years your family would need it (until kids are grown, spouse retires, etc.)</td></tr>
+<tr><td>Mortgage balance</td><td>Paying off the house so your family isn't forced to sell or relocate</td></tr>
+<tr><td>Other debt</td><td>Credit cards, auto loans, personal loans — anything that wouldn't disappear with you</td></tr>
+<tr><td>Education costs</td><td>Future college or schooling costs for children, estimated in today's dollars</td></tr>
+<tr><td>Final expenses</td><td>Funeral costs, medical bills, and estate settlement — typically $10,000–$20,000</td></tr>
+<tr><td>Existing coverage &amp; savings</td><td>Subtracted, since you don't need to insure what you've already covered</td></tr>
 </tbody></table>
-<div class="guide-p">These limits apply to your own elective deferrals — employer match contributions don't count against your personal $23,500 limit, but they do count toward the combined $70,000 cap. Very few savers hit the combined limit; the employee deferral limit is the one that matters for most people.</div>
 
-<div class="guide-h3">Worked Example: 30 to 65, $70,000 Salary</div>
-<div class="guide-p">Starting with a $20,000 balance, contributing 6% of a $70,000 salary (with 3% annual raises), a 50%-up-to-6% employer match, and a 7% average annual return over 35 years:</div>
-<table class="guide-table"><thead><tr><th>Component</th><th>Approximate Total</th></tr></thead><tbody>
-<tr><td>Your contributions</td><td>~$225,000</td></tr>
-<tr><td>Employer match</td><td>~$113,000</td></tr>
-<tr><td>Investment growth</td><td>~$1,100,000+</td></tr>
-</tbody></table>
-<div class="guide-p">This illustrates the same pattern true of all long-horizon retirement accounts: investment growth, not contributions, ends up being the largest single component of the final balance — which is exactly why starting early and staying invested matters more than trying to time the market.</div>
+<div class="guide-h3">Needs-Based vs the "10x Income" Rule of Thumb</div>
+<div class="guide-p">A common shortcut is "buy 10x your annual income" in coverage. It's easy to remember, but it ignores your actual mortgage balance, number of dependents, and existing savings — so it can meaningfully over- or under-insure you depending on your situation. Someone with a paid-off house and a large investment portfolio likely needs far less than 10x income; someone with a large mortgage, young kids, and no savings likely needs more. The needs-based method above accounts for your specific numbers instead of a flat multiple.</div>
 
-<div class="guide-h3">Traditional vs Roth 401(k)</div>
-<table class="guide-table"><thead><tr><th></th><th>Traditional 401(k)</th><th>Roth 401(k)</th></tr></thead><tbody>
-<tr><td>Contributions</td><td>Pre-tax (reduces taxable income now)</td><td>After-tax (no deduction now)</td></tr>
-<tr><td>Withdrawals in retirement</td><td>Taxed as ordinary income</td><td>Tax-free (if qualified)</td></tr>
-<tr><td>Best if you expect...</td><td>Lower tax bracket in retirement</td><td>Higher tax bracket in retirement</td></tr>
+<div class="guide-h3">Term vs Permanent Life Insurance</div>
+<table class="guide-table"><thead><tr><th></th><th>Term Life</th><th>Permanent (Whole) Life</th></tr></thead><tbody>
+<tr><td>Cost</td><td>Much lower for the same coverage</td><td>Significantly higher premiums</td></tr>
+<tr><td>Duration</td><td>Fixed period (10/20/30 years)</td><td>Lifetime, as long as premiums are paid</td></tr>
+<tr><td>Cash value</td><td>None — pure insurance</td><td>Builds cash value over time</td></tr>
+<tr><td>Best for</td><td>Covering a specific need with an end date (mortgage, kids' education years)</td><td>Permanent needs (estate planning, lifelong dependents)</td></tr>
 </tbody></table>
-<div class="guide-tip">💡 At minimum, contribute enough to capture your full employer match — it's an immediate, guaranteed return that no investment strategy can reliably beat. Beyond the match, increasing your contribution rate by 1% whenever you get a raise is a painless way to accelerate savings without feeling a change in take-home pay.</div>
+<div class="guide-p">Most people's life insurance need is temporary by nature — it shrinks as the mortgage gets paid down, kids grow up, and savings build — which is why term life insurance covers the large majority of needs-based coverage at a fraction of the cost of permanent policies.</div>
+<div class="guide-tip">💡 Re-run this calculation every few years or after major life events — a new mortgage, a new child, or a paid-off debt can all shift your actual coverage need significantly in either direction.</div>
 
   </div>
 </div>
@@ -442,41 +445,40 @@ body{background:var(--bg);color:var(--t);font-family:var(--fn);font-size:14px;li
 <div class="faq-section-title">❓ Frequently Asked Questions</div>
 <div class="faq-item">
   <div class="faq-q" onclick="toggleFAQ(this)">
-    <span>How much should I contribute to my 401(k)?</span>
+    <span>How much life insurance do I need?</span>
     <span class="faq-icon">+</span>
   </div>
-  <div class="faq-a">At minimum, contribute enough to get your full employer match — it's an immediate, guaranteed return. Beyond that, many financial planners suggest working toward <strong>10–15% of your salary</strong> (including employer match) for a comfortable retirement, though your specific target depends on your age, existing savings, and retirement goals.</div>
+  <div class="faq-a">It depends on your income, debts, mortgage, dependents, and existing savings — there's no single number that fits everyone. A needs-based calculation (income replacement + debts + mortgage + education + final expenses, minus existing coverage and savings) is generally more accurate than flat rules of thumb like "10x your income."</div>
 </div>
 <div class="faq-item">
   <div class="faq-q" onclick="toggleFAQ(this)">
-    <span>What is a 401(k) employer match?</span>
+    <span>What is the DIME method?</span>
     <span class="faq-icon">+</span>
   </div>
-  <div class="faq-a">An employer match is free money your company contributes to your 401(k) based on how much you contribute. A common formula is <strong>50% up to 6%</strong> — your employer adds 50 cents for every dollar you contribute, up to a contribution of 6% of your salary. Not contributing enough to get the full match means giving up part of your compensation.</div>
+  <div class="faq-a">DIME stands for <strong>Debt, Income, Mortgage, Education</strong> — the four core categories a needs-based life insurance calculation adds together to estimate total coverage need, before subtracting any existing coverage and savings you already have.</div>
 </div>
 <div class="faq-item">
   <div class="faq-q" onclick="toggleFAQ(this)">
-    <span>What is the 401(k) contribution limit for 2025?</span>
+    <span>Should I get term or whole life insurance?</span>
     <span class="faq-icon">+</span>
   </div>
-  <div class="faq-a">For 2025, the employee elective deferral limit is <strong>$23,500</strong> for those under 50, and <strong>$31,000</strong> for those 50 and older (including a $7,500 catch-up contribution). Employer match contributions don't count against this personal limit.</div>
+  <div class="faq-a">For most people, <strong>term life insurance</strong> is significantly cheaper and covers the temporary needs (mortgage, raising kids) that make up the bulk of most coverage calculations. <strong>Whole life insurance</strong> costs much more but lasts a lifetime and builds cash value — it's worth considering for permanent needs like estate planning, but isn't necessary for most income-replacement purposes.</div>
 </div>
 <div class="faq-item">
   <div class="faq-q" onclick="toggleFAQ(this)">
-    <span>Traditional or Roth 401(k) — which is better?</span>
+    <span>Do stay-at-home parents need life insurance?</span>
     <span class="faq-icon">+</span>
   </div>
-  <div class="faq-a">A <strong>Traditional 401(k)</strong> gives you a tax deduction now and taxes withdrawals in retirement — better if you expect to be in a lower tax bracket later. A <strong>Roth 401(k)</strong> is funded with after-tax money but grows and withdraws tax-free — better if you expect to be in a higher bracket in retirement. Many people split contributions between both to hedge against future tax-rate uncertainty.</div>
+  <div class="faq-a">Often yes. A stay-at-home parent provides real economic value — childcare, household management — that would need to be replaced with paid services if they were gone. This calculator can still be used by estimating the cost of replacing those services as the "income" figure, even without a traditional paycheck.</div>
 </div>
 <div class="faq-item">
   <div class="faq-q" onclick="toggleFAQ(this)">
-    <span>What happens to my 401(k) if I change jobs?</span>
+    <span>How often should I recheck my coverage amount?</span>
     <span class="faq-icon">+</span>
   </div>
-  <div class="faq-a">You generally have four options: leave it with your former employer's plan (if allowed), roll it into your new employer's 401(k), roll it into an IRA, or cash it out (triggering taxes and, if you're under 59½, typically a 10% early withdrawal penalty). Rolling over to an IRA or new 401(k) is usually the best way to avoid taxes and penalties while keeping the money invested.</div>
+  <div class="faq-a">Recalculate after any major life change — a new child, a new mortgage, a significant raise, paying off debt, or a growing investment portfolio. Coverage needs typically shrink over time as debts get paid down and savings grow, so many people are able to reduce coverage (or let a term policy expire) as they approach retirement.</div>
 </div>
 </div>
-
 
 
 </div>
@@ -506,6 +508,6 @@ body{background:var(--bg);color:var(--t);font-family:var(--fn);font-size:14px;li
 </a>
 </footer>
 <script src="app.js?v=20260718b"></script>
-<script>initPage('401k');</script>
+<script>initPage('lifeinsurance');</script>
 </body>
 </html>
