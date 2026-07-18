@@ -2286,15 +2286,15 @@ function cRemit(){
 
 
 // ── Scientific ───────────────────────────────────────────────────
-let scV='0',scE='',scM=0,scNew=true;
+let scV='0',scE='',scM=0,scNew=true,scHist='';
 const SC=[['MC','MR','MS','M+','M-'],['sin','cos','tan','log','ln'],['x²','√','1/x','n!','π'],['(',')','^','C','⌫'],['7','8','9','÷','%'],['4','5','6','×',''],['1','2','3','-',''],['0','.','±','+','=']];
 function buildSci(){
   const g=gel('sc-grid');g.innerHTML='';
   SC.forEach(row=>row.forEach(b=>{if(!b){g.innerHTML+='<div></div>';return;}let cls='sci-btn';if(b==='=')cls+=' eq';else if(['C','⌫'].includes(b))cls+=' cl';else if(['+','-','×','÷','^','%'].includes(b))cls+=' op';else if(['sin','cos','tan','log','ln','x²','√','1/x','n!'].includes(b))cls+=' fn';g.innerHTML+=`<button class="${cls}" onclick="scP('${b}')">${b}</button>`;}));
 }
-function scU(){gel('sc-disp').textContent=scV;gel('sc-expr').textContent=scE;}
+function scU(){gel('sc-disp').textContent=scV;gel('sc-expr').textContent=scHist||scE;}
 function scP(k){
-  if(k==='C'){scV='0';scE='';scNew=true;}
+  if(k==='C'){scV='0';scE='';scHist='';scNew=true;}
   else if(k==='⌫'){scV=scV.length>1?scV.slice(0,-1):'0';}
   else if(k==='MC')scM=0;else if(k==='MR'){scV=String(scM);scNew=true;}
   else if(k==='MS')scM=parseFloat(scV)||0;else if(k==='M+')scM+=parseFloat(scV)||0;else if(k==='M-')scM-=parseFloat(scV)||0;
@@ -2304,17 +2304,23 @@ function scP(k){
     else if(k==='log')r=Math.log10(v);else if(k==='ln')r=Math.log(v);else if(k==='x²')r=v*v;
     else if(k==='√')r=Math.sqrt(v);else if(k==='1/x')r=1/v;
     else if(k==='n!'){let f=1;for(let i=2;i<=v;i++)f*=i;r=f;}
-    scE=`${k}(${v})`;scV=isFinite(r)?parseFloat(r.toFixed(10)).toString():'Error';scNew=true;
+    scHist=`${k}(${v})`;scE='';scV=isFinite(r)?parseFloat(r.toFixed(10)).toString():'Error';scNew=true;
   }
   else if(k==='π'){scV=String(Math.PI);scNew=true;}
   else if(k==='±')scV=String(-parseFloat(scV)||0);
   else if(k==='.'){if(scNew){scV='0.';scNew=false;}else if(!scV.includes('.'))scV+='.';}
   else if(k==='='){
+    scHist='';
     try{let e=scE+scV;e=e.replace(/×/g,'*').replace(/÷/g,'/').replace(/\^/g,'**');const r=Function('"use strict";return('+e+')')();scE='';scV=isFinite(r)?parseFloat(r.toFixed(10)).toString():'Error';scNew=true;}
     catch{scV='Error';scNew=true;}
   }
-  else if(['+','-','×','÷','^','%'].includes(k)){scE=(scNew&&scE?scE.slice(0,-scV.length):scE)+scV+k;scNew=true;}
-  else{if(scNew){scV=k;scNew=false;}else scV=scV==='0'?k:scV+k;}
+  else if(['+','-','×','÷','^','%'].includes(k)){
+    scHist='';
+    if(scE && /[+\-×÷^%]$/.test(scE)){scE=scE.slice(0,-1)+k;}
+    else{scE=scE+scV+k;}
+    scNew=true;
+  }
+  else{scHist='';if(scNew){scV=k;scNew=false;}else scV=scV==='0'?k:scV+k;}
   scU();
 }
 
