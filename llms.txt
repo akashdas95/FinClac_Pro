@@ -1,0 +1,24 @@
+# FinCalc
+
+> FinCalc is a free collection of 47 online financial calculators covering personal finance, investing, loans, retirement, and business finance. All calculators run entirely in the browser — no signup, no data stored.
+
+## Calculators
+
+- [Salary Calculator](https://finclac.com/salary): Convert pay between hourly, daily, monthly, and yearly
+- [401(k) Calculator](https://finclac.com/401k): Project 401(k) balance at retirement, including employer match
+- [Millionaire Calculator](https://finclac.com/millionaire): Find out what age you'll reach $1,000,000
+- [Dollar Cost Averaging Calculator](https://finclac.com/dca): Shares bought, average cost per share, DCA vs lump sum
+- [International Transfer Cost Calculator](https://finclac.com/remit): True cost of sending money abroad, including rate markup
+- [Mortgage Calculator](https://finclac.com/mortgage): Monthly payment with taxes, insurance, and PMI
+- [Loan / EMI Calculator](https://finclac.com/loan): Loan payment schedule and amortization
+- [Retirement Planner](https://finclac.com/retirement): Retirement savings projection adjusted for inflation
+- [FIRE Calculator](https://finclac.com/fire): Financial independence / early retirement timeline
+- [Tax Estimator](https://finclac.com/tax): US federal income tax and effective rate estimate
+- [CAGR Calculator](https://finclac.com/cagr): Compound annual growth rate
+- [Currency Converter](https://finclac.com/currency): Live exchange rates across 15 major currencies
+
+See [sitemap.xml](https://finclac.com/sitemap.xml) for the full list of calculators and articles.
+
+## Notes
+
+All calculators produce estimates for general informational and educational purposes only, not financial, tax, legal, or investment advice.
