@@ -3,18 +3,18 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Revenue Forecast Calculator — SaaS Bear, Base & Bull Growth Scenarios | FinCalc</title>
-<meta name="description" content="Forecast SaaS revenue with bear, base, and bull growth scenarios, ARR, and LTV. Free revenue forecasting tool for startups.">
-<link rel="canonical" href="https://finclac.com/revenue">
+<title>Millionaire Calculator — Find Out What Age You'll Hit $1,000,000 | FinCalc</title>
+<meta name="description" content="Find out exactly what age you'll become a millionaire based on your current savings, monthly contributions, and investment return. Free millionaire timeline calculator.">
+<link rel="canonical" href="https://finclac.com/millionaire">
 <meta name="robots" content="index, follow">
 <meta property="og:type" content="website">
-<meta property="og:title" content="Revenue Forecast Calculator — SaaS Bear, Base & Bull Growth Scenarios | FinCalc">
-<meta property="og:description" content="Forecast SaaS revenue with bear, base, and bull growth scenarios, ARR, and LTV. Free revenue forecasting tool for startups.">
-<meta property="og:url" content="https://finclac.com/revenue">
+<meta property="og:title" content="Millionaire Calculator — Find Out What Age You'll Hit $1,000,000 | FinCalc">
+<meta property="og:description" content="Find out exactly what age you'll become a millionaire based on your current savings, monthly contributions, and investment return. Free millionaire timeline calculator.">
+<meta property="og:url" content="https://finclac.com/millionaire">
 <meta property="og:site_name" content="FinCalc">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Revenue Forecast Calculator — SaaS Bear, Base & Bull Growth Scenarios | FinCalc">
-<meta name="twitter:description" content="Forecast SaaS revenue with bear, base, and bull growth scenarios, ARR, and LTV. Free revenue forecasting tool for startups.">
+<meta name="twitter:title" content="Millionaire Calculator — Find Out What Age You'll Hit $1,000,000 | FinCalc">
+<meta name="twitter:description" content="Find out exactly what age you'll become a millionaire based on your current savings, monthly contributions, and investment return. Free millionaire timeline calculator.">
 <style>*{box-sizing:border-box;margin:0;padding:0}
 :root{--bg:#0B0E11;--s:#141920;--s2:#1C2430;--bd:#232D3A;--t:#E8EDF2;--m:#6B7A8D;--tb:#A3B2C4;--a:#F0B90B;--g:#0ECB81;--r:#F6465D;--b:#1890FF;--p:#9B59B6;--fn:'DM Sans',sans-serif;--mo:'DM Mono',monospace}
 body{background:var(--bg);color:var(--t);font-family:var(--fn);font-size:14px;line-height:1.5;min-height:100vh}
@@ -297,7 +297,7 @@ body{background:var(--bg);color:var(--t);font-family:var(--fn);font-size:14px;li
   gtag('config', 'G-61RHHG8E6Q');
 </script>
 <meta name="msvalidate.01" content="175D12831D109E3E7E1A856004E0F393" />
-<script type="application/ld+json">{"@context": "https://schema.org", "@type": "WebApplication", "name": "Revenue Forecast Calculator", "url": "https://finclac.com/revenue", "description": "Forecast SaaS revenue with bear, base, and bull growth scenarios, ARR, and LTV. Free revenue forecasting tool for startups.", "applicationCategory": "FinanceApplication", "operatingSystem": "Any (web-based)", "offers": {"@type": "Offer", "price": "0", "priceCurrency": "USD"}, "isPartOf": {"@type": "WebSite", "name": "FinCalc", "url": "https://finclac.com/"}}</script>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "WebApplication", "name": "Millionaire Calculator", "url": "https://finclac.com/millionaire", "description": "Find out exactly what age you'll become a millionaire based on your current savings, monthly contributions, and investment return. Free millionaire timeline calculator.", "applicationCategory": "FinanceApplication", "operatingSystem": "Any (web-based)", "offers": {"@type": "Offer", "price": "0", "priceCurrency": "USD"}, "isPartOf": {"@type": "WebSite", "name": "FinCalc", "url": "https://finclac.com/"}}</script>
 </head>
 <body>
 <div class="topbar">
@@ -346,94 +346,75 @@ body{background:var(--bg);color:var(--t);font-family:var(--fn);font-size:14px;li
   <a class="ntab" href="/scientific" onclick="go('scientific',this);return false;">🔬 Scientific</a>
 </div>
 <div class="content">
-<div id="revenue" class="panel on">
+<div id="millionaire" class="panel on">
 <div class="calc-header">
-<h1 class="calc-page-title">Revenue Forecast Calculator</h1>
-<h2 class="calc-subtitle">Forecast SaaS revenue under bear, base & bull scenarios</h2>
-<p class="calc-desc">This revenue forecast calculator projects monthly recurring revenue growth under bear, base, and bull scenarios based on your starting MRR, growth rate, and churn, so you can plan for a range of outcomes.</p>
+<h1 class="calc-page-title">Millionaire Calculator</h1>
+<h2 class="calc-subtitle">Find out exactly what age you'll hit $1,000,000 (or any target)</h2>
+<p class="calc-desc">This millionaire calculator projects when your net worth will reach $1,000,000 — or any target you choose — based on your current savings, monthly contributions, and expected investment return.</p>
 </div>
 
 
 
-<div class="card mb16">
-  <div class="card-title">Revenue Forecast Assumptions</div>
-  <div class="g3">
-    <div class="field"><label>Current MRR ($)</label><div class="ip"><span class="pfx">$</span><input type="text" inputmode="decimal" id="rf-mrr" value="500000" oninput="calcRevenue()"></div></div>
-    <div class="field"><label>Forecast Period (months)</label><input type="text" inputmode="decimal" id="rf-months" value="12" min="3" max="36" oninput="calcRevenue()"></div>
-    <div class="field"><label>Churn Rate (%/mo)</label><input type="text" inputmode="decimal" id="rf-churn" value="3" step="0.5" oninput="calcRevenue()"></div>
-    <div class="field"><label>🐻 Pessimistic Growth %/mo</label><input type="text" inputmode="decimal" id="rf-pess" value="2" step="0.5" oninput="calcRevenue()"></div>
-    <div class="field"><label>📊 Base Growth %/mo</label><input type="text" inputmode="decimal" id="rf-base" value="8" step="0.5" oninput="calcRevenue()"></div>
-    <div class="field"><label>🚀 Optimistic Growth %/mo</label><input type="text" inputmode="decimal" id="rf-opt" value="15" step="0.5" oninput="calcRevenue()"></div>
-    <div class="field"><label>ARPU / Customer ($)</label><div class="ip"><span class="pfx">$</span><input type="text" inputmode="decimal" id="rf-arpu" value="2500" oninput="calcRevenue()"></div></div>
-    <div class="field"><label>One-time Revenue/mo ($)</label><div class="ip"><span class="pfx">$</span><input type="text" inputmode="decimal" id="rf-onetime" value="50000" oninput="calcRevenue()"></div></div>
-  </div>
-</div>
-<div class="two-eq mb16">
+<div class="two">
   <div class="card">
-    <div class="card-title">Scenarios</div>
-    <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px;margin-bottom:1rem">
-      <div class="sbox" style="border-top:3px solid var(--r)"><div class="lbl">🐻 Pessimistic</div><div class="val" style="color:var(--r)" id="rf-p">$0</div><div style="font-size:10px;color:var(--m);margin-top:3px" id="rf-pg"></div></div>
-      <div class="sbox" style="border-top:3px solid var(--b)"><div class="lbl">📊 Base Case</div><div class="val" style="color:var(--b)" id="rf-b">$0</div><div style="font-size:10px;color:var(--m);margin-top:3px" id="rf-bg"></div></div>
-      <div class="sbox" style="border-top:3px solid var(--g)"><div class="lbl">🚀 Optimistic</div><div class="val" style="color:var(--g)" id="rf-o">$0</div><div style="font-size:10px;color:var(--m);margin-top:3px" id="rf-og"></div></div>
+    <div class="card-title">Your Timeline</div>
+    <div class="g2">
+      <div class="field"><label>Current Age</label><input type="text" inputmode="decimal" id="mi-age" value="28" oninput="cMillionaire()"></div>
+      <div class="field"><label>Target Net Worth ($)</label><div class="ip"><span class="pfx">$</span><input type="text" inputmode="decimal" id="mi-target" value="1000000" oninput="cMillionaire()"></div></div>
     </div>
-    <canvas id="rf-chart" width="500" height="165" style="width:100%"></canvas>
+    <div class="field"><label>Current Savings / Net Worth ($)</label><div class="ip"><span class="pfx">$</span><input type="text" inputmode="decimal" id="mi-current" value="15000" oninput="cMillionaire()"></div></div>
+    <div class="g2">
+      <div class="field"><label>Monthly Savings ($)</label><div class="ip"><span class="pfx">$</span><input type="text" inputmode="decimal" id="mi-monthly" value="1000" oninput="cMillionaire()"></div></div>
+      <div class="field"><label>Expected Annual Return (%)</label><input type="text" inputmode="decimal" id="mi-rate" value="8" step="0.1" oninput="cMillionaire()"></div>
+    </div>
+    <div class="sgrid">
+      <div class="sbox"><div class="lbl">You'll Hit It At Age</div><div class="val" style="color:var(--a)" id="mi-age-result">—</div></div>
+      <div class="sbox"><div class="lbl">Years From Now</div><div class="val" style="color:var(--a)" id="mi-years">—</div></div>
+      <div class="sbox"><div class="lbl">Total You'll Contribute</div><div class="val" id="mi-contrib">$0</div></div>
+      <div class="sbox"><div class="lbl">Total Investment Growth</div><div class="val" style="color:var(--g)" id="mi-growth">$0</div></div>
+    </div>
   </div>
   <div class="card">
-    <div class="card-title">KPIs (Base Case)</div>
-    <div class="rrow"><span class="rk">ARR at end of period</span><span class="rv" style="color:var(--b)" id="rf-arr">$0</span></div>
-    <div class="rrow"><span class="rk">Cumulative revenue</span><span class="rv" style="color:var(--b)" id="rf-cum">$0</span></div>
-    <div class="rrow"><span class="rk">Projected customers</span><span class="rv" id="rf-custs">0</span></div>
-    <div class="rrow"><span class="rk">LTV (ARPU ÷ churn)</span><span class="rv" style="color:var(--g)" id="rf-ltv">$0</span></div>
-    <div class="rrow"><span class="rk">Revenue range at end</span><span class="rv" style="color:var(--a)" id="rf-range">—</span></div>
-    <div class="insight-box" id="rf-insights"></div>
+    <div class="card-title">Path to Your Goal</div>
+    <canvas id="mi-chart" width="300" height="175" style="width:100%;margin:1rem 0"></canvas>
+    <div class="rrow"><span class="rk">Target Date</span><span class="rv" id="mi-date">—</span></div>
+    <div class="rrow"><span class="rk">Already Saved (% of Target)</span><span class="rv" id="mi-pct">0%</span></div>
+    <div class="rrow"><span class="rk">If You Save $200/mo More</span><span class="rv" style="color:var(--g)" id="mi-faster">—</span></div>
+    <div class="insight-box" id="mi-insights"></div>
   </div>
 </div>
-<div class="card"><div class="card-title">Monthly Forecast Table (Base Case)</div><div style="overflow-x:auto"><table class="tbl" id="rf-table"></table></div></div>
 
-<div style="margin-top:1.75rem;margin-bottom:1.75rem"><div class="calc-links"><span class="calc-links-label">🔗 Related Calculators</span><a class="calc-link-btn" href="/burnrate" onclick="go('burnrate',null);return false;">🔥 Burn Rate</a><a class="calc-link-btn" href="/breakeven" onclick="go('breakeven',null);return false;">📊 Break-even</a><a class="calc-link-btn" href="/cashflow" onclick="go('cashflow',null);return false;">💵 Cash Flow</a><a class="calc-link-btn" href="/pricing" onclick="go('pricing',null);return false;">🏷️ Pricing</a></div></div>
-<div class="related-box"><div class="related-box-title">📖 Related Articles</div><a class="related-item" href="/blog/saas-revenue-forecasting-scenarios">SaaS Revenue Forecasting: Bear, Base, and Bull Scenarios Explained<span class="related-arrow">→</span></a></div>
+<div style="margin-top:1.75rem;margin-bottom:1.75rem"><div class="calc-links"><span class="calc-links-label">🔗 Related Calculators</span><a class="calc-link-btn" href="/fire" onclick="go('fire',null);return false;">🔥 FIRE</a><a class="calc-link-btn" href="/retirement" onclick="go('retirement',null);return false;">👴 Retirement</a><a class="calc-link-btn" href="/401k" onclick="go('401k',null);return false;">🏦 401(k)</a><a class="calc-link-btn" href="/savingsgoal" onclick="go('savingsgoal',null);return false;">🎯 Savings Goal</a><a class="calc-link-btn" href="/cagr" onclick="go('cagr',null);return false;">📐 CAGR</a><a class="calc-link-btn" href="/invest" onclick="go('invest',null);return false;">📈 Investment</a></div></div>
 <div class="calc-guide">
   <div class="guide-toggle">
-    <div class="guide-toggle-title">📖 Revenue Forecasting — 3-Scenario Planning</div>
+    <div class="guide-toggle-title">📖 Becoming a Millionaire — The Real Math</div>
   </div>
   <div class="guide-body">
-<div class="guide-p">Revenue forecasting for an early-stage business is part science, part informed storytelling. Investors and operators alike know that any single-point forecast ("we'll hit $2M ARR next year") is almost certainly wrong in the specific number — the real value of forecasting comes from understanding the range of plausible outcomes and the key assumptions driving each scenario.</div>
+<div class="guide-p">"Millionaire" sounds like an exclusive club, but reaching $1,000,000 in net worth is mostly a function of three unglamorous variables: how much you save, how early you start, and how consistently you let your investments compound. It's less about a single lucky break and more about time doing the heavy lifting — the same math behind every million-dollar portfolio, whether it took 15 years or 40.</div>
 
-<div class="guide-h3">MRR and ARR: The Core SaaS Metrics</div>
-<div class="guide-formula">ARR = MRR × 12</div>
-<div class="guide-p">Monthly Recurring Revenue (MRR) is the predictable, repeating monthly revenue from active subscriptions — explicitly excluding one-time fees, setup charges, or non-recurring services. Annual Recurring Revenue (ARR) simply annualizes that figure. These metrics matter because they strip out the noise of one-time revenue and reveal the true, compounding growth engine of a subscription business.</div>
+<div class="guide-h3">The Formula Behind the Timeline</div>
+<div class="guide-formula">Target = Current × (1+r)^n + Monthly × [((1+r)^n − 1) / r]</div>
+<div class="guide-p">Where r is your monthly return rate and n is the number of months. This calculator solves that equation for n — the number of months until your current savings plus ongoing contributions, compounding at your expected return, cross your target. The two levers you control directly are your monthly contribution and your starting age; the return rate depends on your investment choices and the market.</div>
 
-<div class="guide-h3">The T2D3 Growth Framework</div>
-<div class="guide-p">Popularized by venture capital firm Bessemer Venture Partners, "T2D3" describes a commonly cited growth trajectory benchmark for top-quartile SaaS companies: Triple, Triple, Double, Double, Double — meaning ARR triples in year one and two of meaningful scale, then doubles for three subsequent years.</div>
-<table class="guide-table"><thead><tr><th>Year</th><th>Growth Multiple</th><th>Example Starting at $1M ARR</th></tr></thead><tbody>
-<tr><td>1</td><td>3x</td><td>$3M</td></tr>
-<tr><td>2</td><td>3x</td><td>$9M</td></tr>
-<tr><td>3</td><td>2x</td><td>$18M</td></tr>
-<tr><td>4</td><td>2x</td><td>$36M</td></tr>
-<tr><td>5</td><td>2x</td><td>$72M</td></tr>
+<div class="guide-h3">Worked Example: Starting at 25 vs Starting at 35</div>
+<table class="guide-table"><thead><tr><th>Start Age</th><th>Monthly Savings</th><th>Return</th><th>Age at $1,000,000</th></tr></thead><tbody>
+<tr><td>25</td><td>$700</td><td>8%</td><td>~54</td></tr>
+<tr><td>35</td><td>$700</td><td>8%</td><td>~64</td></tr>
+<tr><td>35</td><td>$1,400</td><td>8%</td><td>~57</td></tr>
 </tbody></table>
-<div class="guide-p">Very few companies actually achieve this exact trajectory — it represents a benchmark for elite outliers, not a typical or expected outcome — but it's widely referenced by venture investors as a mental model for what "great" looks like at each stage.</div>
+<div class="guide-p">Starting 10 years later at the same contribution level costs about 10 extra years to reach the same goal. Doubling the monthly contribution to compensate closes most — but not all — of that gap, which illustrates why "start now, even with less" consistently beats "wait until I can save more."</div>
 
-<div class="guide-h3">Revenue Churn: The Leak in the Bucket</div>
-<div class="guide-formula">Revenue Churn Rate = Lost MRR in Period / Starting MRR × 100%</div>
-<div class="guide-p">Even a business adding new customers steadily can stagnate or shrink if churn (lost revenue from cancellations and downgrades) outpaces new growth. A SaaS company with $500,000 MRR losing 3% monthly to churn is losing $15,000/month before counting any new sales — meaning it needs to add at least that much in new MRR every single month just to stay flat.</div>
-
-<div class="guide-h3">Negative Net Revenue Churn: The Holy Grail</div>
-<div class="guide-p">The best-performing SaaS companies achieve what's called negative net revenue churn — where expansion revenue from existing customers (upsells, seat additions, plan upgrades) exceeds the revenue lost from cancellations and downgrades, meaning the existing customer base actually grows in revenue even with zero new customer acquisition. This is considered one of the strongest possible signals of product-market fit and pricing power.</div>
-
-<div class="guide-h3">LTV and CAC: Is the Growth Engine Actually Profitable?</div>
-<div class="guide-formula">LTV = Average Revenue Per Customer / Monthly Churn Rate<br>CAC = Total Sales &amp; Marketing Spend / New Customers Acquired</div>
-<div class="guide-p">Worked example: a customer paying $200/month with a 2% monthly churn rate has an expected lifetime value of $200 / 0.02 = $10,000. If acquiring that customer cost $2,500 in sales and marketing spend, the LTV:CAC ratio is 4:1 — generally considered healthy. A widely cited rule of thumb suggests an LTV:CAC ratio of at least 3:1 for a sustainable SaaS business; ratios below 1:1 mean the company is losing money on every customer acquired, before even accounting for fixed operating costs.</div>
-<table class="guide-table"><thead><tr><th>LTV:CAC Ratio</th><th>Interpretation</th></tr></thead><tbody>
-<tr><td>Below 1:1</td><td>Losing money per customer — unsustainable</td></tr>
-<tr><td>1:1 – 3:1</td><td>Marginal, needs improvement in retention or acquisition cost</td></tr>
-<tr><td>3:1 – 5:1</td><td>Healthy, generally considered a strong growth engine</td></tr>
-<tr><td>Above 5:1</td><td>Excellent — though may also signal under-investment in growth</td></tr>
+<div class="guide-h3">How Much Difference Does Return Rate Make?</div>
+<table class="guide-table"><thead><tr><th>Annual Return</th><th>Time to $1M ($1,000/mo, $10k start)</th></tr></thead><tbody>
+<tr><td>4% (conservative/bonds)</td><td>~36 years</td></tr>
+<tr><td>7% (balanced portfolio)</td><td>~27 years</td></tr>
+<tr><td>10% (aggressive/equity-heavy)</td><td>~22 years</td></tr>
 </tbody></table>
+<div class="guide-p">Higher expected returns typically come with higher volatility, so this isn't simply "pick the biggest number" — the right rate assumption depends on your actual investment mix, time horizon, and risk tolerance. Historically, a diversified stock portfolio has averaged roughly 7-10% annually before inflation over long periods, though any individual decade can vary substantially.</div>
 
-<div class="guide-h3">Building a Three-Scenario Forecast</div>
-<div class="guide-p">Rather than a single forecast number, build bear, base, and bull cases by varying your key assumptions: new customer acquisition rate, churn rate, and average revenue per account. This forces explicit acknowledgment of uncertainty and gives investors (and yourself) a realistic range rather than false precision.</div>
-<div class="guide-tip">💡 Revisit and recalibrate your forecast model monthly against actual results — the value of a forecast isn't really in being "right," it's in the discipline of understanding which assumptions are driving your business, so you can catch problems (like rising churn) early rather than discovering them a quarter later.</div>
+<div class="guide-h3">A Note on Inflation</div>
+<div class="guide-p">This calculator (like most millionaire calculators) projects your <strong>nominal</strong> net worth — the dollar figure without adjusting for inflation. $1,000,000 in 30 years will not have the purchasing power of $1,000,000 today; at 3% average inflation, its real value would be closer to $412,000 in today's dollars. This doesn't mean the milestone is meaningless, but it's worth keeping in mind when comparing your future timeline to what a million dollars means today.</div>
+<div class="guide-tip">💡 The single biggest lever most people underuse isn't a higher return rate — it's starting today instead of "when I make more money." Every year you delay is a year of compounding you can never get back, even if you eventually save more per month.</div>
 
   </div>
 </div>
@@ -441,26 +422,44 @@ body{background:var(--bg);color:var(--t);font-family:var(--fn);font-size:14px;li
 <div class="faq-section">
 <div class="faq-section-title">❓ Frequently Asked Questions</div>
 <div class="faq-item">
-  <div class="faq-q" onclick="toggleFAQ(this)"><span>What is ARR vs MRR?</span><span class="faq-icon">+</span></div>
-  <div class="faq-a"><strong>MRR (Monthly Recurring Revenue)</strong> is predictable monthly subscription revenue. <strong>ARR (Annual Recurring Revenue)</strong> is simply MRR × 12. ARR is the standard metric for SaaS valuations and growth benchmarking.</div>
+  <div class="faq-q" onclick="toggleFAQ(this)">
+    <span>How long does it actually take to become a millionaire?</span>
+    <span class="faq-icon">+</span>
+  </div>
+  <div class="faq-a">It depends heavily on your starting savings, monthly contribution, and investment return — but as a reference point, saving $1,000/month starting from $10,000 at a 7% average annual return reaches $1,000,000 in roughly 27 years. Higher contributions or returns shorten that timeline significantly; use the calculator above with your own numbers for an exact estimate.</div>
 </div>
 <div class="faq-item">
-  <div class="faq-q" onclick="toggleFAQ(this)"><span>What is a good revenue growth rate?</span><span class="faq-icon">+</span></div>
-  <div class="faq-a">For early-stage SaaS startups, investors often look for the <strong>T2D3 framework</strong> (triple, triple, double, double, double growth years). For established companies, 20–30% annual growth is considered strong.</div>
+  <div class="faq-q" onclick="toggleFAQ(this)">
+    <span>Is $1,000,000 still considered "rich"?</span>
+    <span class="faq-icon">+</span>
+  </div>
+  <div class="faq-a">It depends on context. $1,000,000 in net worth puts you in a relatively small percentile of household wealth globally, but due to inflation it buys meaningfully less than it did decades ago, and a $1M retirement portfolio using a common 4% withdrawal guideline generates roughly $40,000/year in income — comfortable in many areas, but not extravagant in higher cost-of-living regions.</div>
 </div>
 <div class="faq-item">
-  <div class="faq-q" onclick="toggleFAQ(this)"><span>What is revenue churn?</span><span class="faq-icon">+</span></div>
-  <div class="faq-a"><span class="faq-formula">Revenue Churn Rate = Lost MRR / Beginning MRR × 100%</span>Churn measures subscription revenue lost monthly from cancellations or downgrades. World-class SaaS achieves <strong>negative churn</strong> — expansion revenue from existing customers exceeds losses.</div>
+  <div class="faq-q" onclick="toggleFAQ(this)">
+    <span>What's a realistic investment return to assume?</span>
+    <span class="faq-icon">+</span>
+  </div>
+  <div class="faq-a">A diversified, stock-heavy portfolio has historically averaged roughly <strong>7-10% annually</strong> before inflation over long periods (multiple decades), though returns vary significantly year to year and there's no guarantee of future performance. More conservative, bond-heavy portfolios have historically averaged lower, in the 3-5% range. Choose a rate that matches your actual investment mix and risk tolerance.</div>
 </div>
 <div class="faq-item">
-  <div class="faq-q" onclick="toggleFAQ(this)"><span>What is LTV (Lifetime Value)?</span><span class="faq-icon">+</span></div>
-  <div class="faq-a"><span class="faq-formula">LTV = Average Revenue Per Customer / Monthly Churn Rate</span>LTV is the total expected revenue from a customer over their lifetime. A healthy SaaS business has an <strong>LTV:CAC ratio of 3:1 or higher</strong>.</div>
+  <div class="faq-q" onclick="toggleFAQ(this)">
+    <span>Does this calculator account for inflation?</span>
+    <span class="faq-icon">+</span>
+  </div>
+  <div class="faq-a">No — like most millionaire calculators, this shows your projected <strong>nominal</strong> (non-inflation-adjusted) net worth. $1,000,000 several decades from now will have less real purchasing power than $1,000,000 today. If you want to target a specific real purchasing power, consider setting your target amount higher to compensate for expected inflation over your timeline.</div>
 </div>
 <div class="faq-item">
-  <div class="faq-q" onclick="toggleFAQ(this)"><span>What is CAC (Customer Acquisition Cost)?</span><span class="faq-icon">+</span></div>
-  <div class="faq-a"><span class="faq-formula">CAC = Total Sales &amp; Marketing Spend / New Customers Acquired</span>CAC tells you how much you spend to acquire one customer. Combined with LTV, it tells you whether your business model is profitable at scale.</div>
+  <div class="faq-q" onclick="toggleFAQ(this)">
+    <span>What's the fastest way to shorten my timeline?</span>
+    <span class="faq-icon">+</span>
+  </div>
+  <div class="faq-a">Increasing your monthly contribution has the most direct, controllable impact, especially earlier in your timeline. Starting sooner rather than later is the second biggest lever, since it maximizes how long your money compounds. Increasing your expected return by taking on more investment risk can help too, but comes with more volatility and isn't guaranteed.</div>
 </div>
 </div>
+
+
+
 </div>
 </div><!-- content -->
 <div class="site-footer">
@@ -488,6 +487,6 @@ body{background:var(--bg);color:var(--t);font-family:var(--fn);font-size:14px;li
 </a>
 </div>
 <script src="app.js"></script>
-<script>initPage('revenue');</script>
+<script>initPage('millionaire');</script>
 </body>
 </html>

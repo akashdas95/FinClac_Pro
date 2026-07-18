@@ -3,18 +3,18 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Revenue Forecast Calculator — SaaS Bear, Base & Bull Growth Scenarios | FinCalc</title>
-<meta name="description" content="Forecast SaaS revenue with bear, base, and bull growth scenarios, ARR, and LTV. Free revenue forecasting tool for startups.">
-<link rel="canonical" href="https://finclac.com/revenue">
+<title>Dollar Cost Averaging (DCA) Calculator — Shares, Average Cost &amp; DCA vs Lump Sum | FinCalc</title>
+<meta name="description" content="Calculate shares bought, average cost per share, and ending value from regular investing, and compare dollar cost averaging vs investing a lump sum. Free DCA calculator.">
+<link rel="canonical" href="https://finclac.com/dca">
 <meta name="robots" content="index, follow">
 <meta property="og:type" content="website">
-<meta property="og:title" content="Revenue Forecast Calculator — SaaS Bear, Base & Bull Growth Scenarios | FinCalc">
-<meta property="og:description" content="Forecast SaaS revenue with bear, base, and bull growth scenarios, ARR, and LTV. Free revenue forecasting tool for startups.">
-<meta property="og:url" content="https://finclac.com/revenue">
+<meta property="og:title" content="Dollar Cost Averaging (DCA) Calculator — Shares, Average Cost &amp; DCA vs Lump Sum | FinCalc">
+<meta property="og:description" content="Calculate shares bought, average cost per share, and ending value from regular investing, and compare dollar cost averaging vs investing a lump sum. Free DCA calculator.">
+<meta property="og:url" content="https://finclac.com/dca">
 <meta property="og:site_name" content="FinCalc">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Revenue Forecast Calculator — SaaS Bear, Base & Bull Growth Scenarios | FinCalc">
-<meta name="twitter:description" content="Forecast SaaS revenue with bear, base, and bull growth scenarios, ARR, and LTV. Free revenue forecasting tool for startups.">
+<meta name="twitter:title" content="Dollar Cost Averaging (DCA) Calculator — Shares, Average Cost &amp; DCA vs Lump Sum | FinCalc">
+<meta name="twitter:description" content="Calculate shares bought, average cost per share, and ending value from regular investing, and compare dollar cost averaging vs investing a lump sum. Free DCA calculator.">
 <style>*{box-sizing:border-box;margin:0;padding:0}
 :root{--bg:#0B0E11;--s:#141920;--s2:#1C2430;--bd:#232D3A;--t:#E8EDF2;--m:#6B7A8D;--tb:#A3B2C4;--a:#F0B90B;--g:#0ECB81;--r:#F6465D;--b:#1890FF;--p:#9B59B6;--fn:'DM Sans',sans-serif;--mo:'DM Mono',monospace}
 body{background:var(--bg);color:var(--t);font-family:var(--fn);font-size:14px;line-height:1.5;min-height:100vh}
@@ -297,7 +297,7 @@ body{background:var(--bg);color:var(--t);font-family:var(--fn);font-size:14px;li
   gtag('config', 'G-61RHHG8E6Q');
 </script>
 <meta name="msvalidate.01" content="175D12831D109E3E7E1A856004E0F393" />
-<script type="application/ld+json">{"@context": "https://schema.org", "@type": "WebApplication", "name": "Revenue Forecast Calculator", "url": "https://finclac.com/revenue", "description": "Forecast SaaS revenue with bear, base, and bull growth scenarios, ARR, and LTV. Free revenue forecasting tool for startups.", "applicationCategory": "FinanceApplication", "operatingSystem": "Any (web-based)", "offers": {"@type": "Offer", "price": "0", "priceCurrency": "USD"}, "isPartOf": {"@type": "WebSite", "name": "FinCalc", "url": "https://finclac.com/"}}</script>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "WebApplication", "name": "Dollar Cost Averaging Calculator", "url": "https://finclac.com/dca", "description": "Calculate shares bought, average cost per share, and ending value from regular investing, and compare dollar cost averaging vs investing a lump sum. Free DCA calculator.", "applicationCategory": "FinanceApplication", "operatingSystem": "Any (web-based)", "offers": {"@type": "Offer", "price": "0", "priceCurrency": "USD"}, "isPartOf": {"@type": "WebSite", "name": "FinCalc", "url": "https://finclac.com/"}}</script>
 </head>
 <body>
 <div class="topbar">
@@ -346,94 +346,84 @@ body{background:var(--bg);color:var(--t);font-family:var(--fn);font-size:14px;li
   <a class="ntab" href="/scientific" onclick="go('scientific',this);return false;">🔬 Scientific</a>
 </div>
 <div class="content">
-<div id="revenue" class="panel on">
+<div id="dca" class="panel on">
 <div class="calc-header">
-<h1 class="calc-page-title">Revenue Forecast Calculator</h1>
-<h2 class="calc-subtitle">Forecast SaaS revenue under bear, base & bull scenarios</h2>
-<p class="calc-desc">This revenue forecast calculator projects monthly recurring revenue growth under bear, base, and bull scenarios based on your starting MRR, growth rate, and churn, so you can plan for a range of outcomes.</p>
+<h1 class="calc-page-title">Dollar Cost Averaging (DCA) Calculator</h1>
+<h2 class="calc-subtitle">See your average cost per share, ending value, and how DCA compares to a lump sum</h2>
+<p class="calc-desc">This DCA calculator projects your total shares bought, average cost per share, and ending value from investing a fixed amount on a regular schedule, and compares the result to investing the same total as a lump sum upfront.</p>
 </div>
 
 
 
-<div class="card mb16">
-  <div class="card-title">Revenue Forecast Assumptions</div>
-  <div class="g3">
-    <div class="field"><label>Current MRR ($)</label><div class="ip"><span class="pfx">$</span><input type="text" inputmode="decimal" id="rf-mrr" value="500000" oninput="calcRevenue()"></div></div>
-    <div class="field"><label>Forecast Period (months)</label><input type="text" inputmode="decimal" id="rf-months" value="12" min="3" max="36" oninput="calcRevenue()"></div>
-    <div class="field"><label>Churn Rate (%/mo)</label><input type="text" inputmode="decimal" id="rf-churn" value="3" step="0.5" oninput="calcRevenue()"></div>
-    <div class="field"><label>🐻 Pessimistic Growth %/mo</label><input type="text" inputmode="decimal" id="rf-pess" value="2" step="0.5" oninput="calcRevenue()"></div>
-    <div class="field"><label>📊 Base Growth %/mo</label><input type="text" inputmode="decimal" id="rf-base" value="8" step="0.5" oninput="calcRevenue()"></div>
-    <div class="field"><label>🚀 Optimistic Growth %/mo</label><input type="text" inputmode="decimal" id="rf-opt" value="15" step="0.5" oninput="calcRevenue()"></div>
-    <div class="field"><label>ARPU / Customer ($)</label><div class="ip"><span class="pfx">$</span><input type="text" inputmode="decimal" id="rf-arpu" value="2500" oninput="calcRevenue()"></div></div>
-    <div class="field"><label>One-time Revenue/mo ($)</label><div class="ip"><span class="pfx">$</span><input type="text" inputmode="decimal" id="rf-onetime" value="50000" oninput="calcRevenue()"></div></div>
-  </div>
-</div>
-<div class="two-eq mb16">
+<div class="two">
   <div class="card">
-    <div class="card-title">Scenarios</div>
-    <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px;margin-bottom:1rem">
-      <div class="sbox" style="border-top:3px solid var(--r)"><div class="lbl">🐻 Pessimistic</div><div class="val" style="color:var(--r)" id="rf-p">$0</div><div style="font-size:10px;color:var(--m);margin-top:3px" id="rf-pg"></div></div>
-      <div class="sbox" style="border-top:3px solid var(--b)"><div class="lbl">📊 Base Case</div><div class="val" style="color:var(--b)" id="rf-b">$0</div><div style="font-size:10px;color:var(--m);margin-top:3px" id="rf-bg"></div></div>
-      <div class="sbox" style="border-top:3px solid var(--g)"><div class="lbl">🚀 Optimistic</div><div class="val" style="color:var(--g)" id="rf-o">$0</div><div style="font-size:10px;color:var(--m);margin-top:3px" id="rf-og"></div></div>
+    <div class="card-title">Recurring Investment</div>
+    <div class="g2">
+      <div class="field"><label>Amount per Investment ($)</label><div class="ip"><span class="pfx">$</span><input type="text" inputmode="decimal" id="dc-amt" value="500" oninput="cDCA()"></div></div>
+      <div class="field"><label>Frequency</label><select id="dc-freq" onchange="cDCA()">
+        <option value="52">Weekly</option>
+        <option value="26">Bi-Weekly</option>
+        <option value="12" selected>Monthly</option>
+        <option value="4">Quarterly</option>
+      </select></div>
     </div>
-    <canvas id="rf-chart" width="500" height="165" style="width:100%"></canvas>
+    <div class="field"><label>Investment Duration (years)</label><input type="text" inputmode="decimal" id="dc-years" value="3" oninput="cDCA()"></div>
+    <div class="g2">
+      <div class="field"><label>Starting Share Price ($)</label><div class="ip"><span class="pfx">$</span><input type="text" inputmode="decimal" id="dc-price" value="50" step="0.01" oninput="cDCA()"></div></div>
+      <div class="field"><label>Expected Annual Price Growth (%)</label><input type="text" inputmode="decimal" id="dc-growth" value="8" step="0.1" oninput="cDCA()"></div>
+    </div>
+    <div class="sgrid">
+      <div class="sbox"><div class="lbl">Total Shares Bought</div><div class="val" style="color:var(--a)" id="dc-shares">0</div></div>
+      <div class="sbox"><div class="lbl">Average Cost / Share</div><div class="val" style="color:var(--a)" id="dc-avgcost">$0</div></div>
+      <div class="sbox"><div class="lbl">Total Invested</div><div class="val" id="dc-invested">$0</div></div>
+      <div class="sbox"><div class="lbl">Ending Value</div><div class="val" style="color:var(--g)" id="dc-value">$0</div></div>
+    </div>
   </div>
   <div class="card">
-    <div class="card-title">KPIs (Base Case)</div>
-    <div class="rrow"><span class="rk">ARR at end of period</span><span class="rv" style="color:var(--b)" id="rf-arr">$0</span></div>
-    <div class="rrow"><span class="rk">Cumulative revenue</span><span class="rv" style="color:var(--b)" id="rf-cum">$0</span></div>
-    <div class="rrow"><span class="rk">Projected customers</span><span class="rv" id="rf-custs">0</span></div>
-    <div class="rrow"><span class="rk">LTV (ARPU ÷ churn)</span><span class="rv" style="color:var(--g)" id="rf-ltv">$0</span></div>
-    <div class="rrow"><span class="rk">Revenue range at end</span><span class="rv" style="color:var(--a)" id="rf-range">—</span></div>
-    <div class="insight-box" id="rf-insights"></div>
+    <div class="card-title">DCA vs Lump Sum</div>
+    <canvas id="dc-chart" width="300" height="175" style="width:100%;margin:1rem 0"></canvas>
+    <div class="rrow"><span class="rk">Final Share Price</span><span class="rv" id="dc-finalprice">$0</span></div>
+    <div class="rrow"><span class="rk">Total Gain / Loss</span><span class="rv" style="color:var(--g)" id="dc-gain">$0</span></div>
+    <div class="rrow"><span class="rk">Return %</span><span class="rv" style="color:var(--g)" id="dc-return">0%</span></div>
+    <div class="rrow"><span class="rk">Lump Sum Ending Value</span><span class="rv" id="dc-lumpvalue">$0</span></div>
+    <div class="insight-box" id="dc-insights"></div>
   </div>
 </div>
-<div class="card"><div class="card-title">Monthly Forecast Table (Base Case)</div><div style="overflow-x:auto"><table class="tbl" id="rf-table"></table></div></div>
 
-<div style="margin-top:1.75rem;margin-bottom:1.75rem"><div class="calc-links"><span class="calc-links-label">🔗 Related Calculators</span><a class="calc-link-btn" href="/burnrate" onclick="go('burnrate',null);return false;">🔥 Burn Rate</a><a class="calc-link-btn" href="/breakeven" onclick="go('breakeven',null);return false;">📊 Break-even</a><a class="calc-link-btn" href="/cashflow" onclick="go('cashflow',null);return false;">💵 Cash Flow</a><a class="calc-link-btn" href="/pricing" onclick="go('pricing',null);return false;">🏷️ Pricing</a></div></div>
-<div class="related-box"><div class="related-box-title">📖 Related Articles</div><a class="related-item" href="/blog/saas-revenue-forecasting-scenarios">SaaS Revenue Forecasting: Bear, Base, and Bull Scenarios Explained<span class="related-arrow">→</span></a></div>
+<div style="margin-top:1.75rem;margin-bottom:1.75rem"><div class="calc-links"><span class="calc-links-label">🔗 Related Calculators</span><a class="calc-link-btn" href="/invest" onclick="go('invest',null);return false;">📈 SIP/Investment</a><a class="calc-link-btn" href="/cagr" onclick="go('cagr',null);return false;">📐 CAGR</a><a class="calc-link-btn" href="/etf" onclick="go('etf',null);return false;">📊 ETF</a><a class="calc-link-btn" href="/millionaire" onclick="go('millionaire',null);return false;">💎 Millionaire</a><a class="calc-link-btn" href="/divgrowth" onclick="go('divgrowth',null);return false;">💰 Dividend Growth</a><a class="calc-link-btn" href="/retirement" onclick="go('retirement',null);return false;">👴 Retirement</a></div></div>
 <div class="calc-guide">
   <div class="guide-toggle">
-    <div class="guide-toggle-title">📖 Revenue Forecasting — 3-Scenario Planning</div>
+    <div class="guide-toggle-title">📖 Dollar Cost Averaging — How It Works &amp; When It Wins</div>
   </div>
   <div class="guide-body">
-<div class="guide-p">Revenue forecasting for an early-stage business is part science, part informed storytelling. Investors and operators alike know that any single-point forecast ("we'll hit $2M ARR next year") is almost certainly wrong in the specific number — the real value of forecasting comes from understanding the range of plausible outcomes and the key assumptions driving each scenario.</div>
+<div class="guide-p">Dollar cost averaging (DCA) means investing a fixed amount of money on a regular schedule — weekly, biweekly, or monthly — regardless of whether prices are up or down that day. Instead of trying to time the market, you buy more shares when prices are low and fewer shares when prices are high, which smooths out your average purchase price over time.</div>
 
-<div class="guide-h3">MRR and ARR: The Core SaaS Metrics</div>
-<div class="guide-formula">ARR = MRR × 12</div>
-<div class="guide-p">Monthly Recurring Revenue (MRR) is the predictable, repeating monthly revenue from active subscriptions — explicitly excluding one-time fees, setup charges, or non-recurring services. Annual Recurring Revenue (ARR) simply annualizes that figure. These metrics matter because they strip out the noise of one-time revenue and reveal the true, compounding growth engine of a subscription business.</div>
+<div class="guide-h3">The Average Cost Formula</div>
+<div class="guide-formula">Average Cost per Share = Total Amount Invested / Total Shares Purchased</div>
+<div class="guide-p">Because each fixed-dollar investment buys a different number of shares depending on the price that period, your average cost per share is a <em>weighted</em> average — it's naturally pulled lower by the periods where you bought more shares at cheaper prices, which is the core mechanic behind DCA's risk-smoothing effect.</div>
 
-<div class="guide-h3">The T2D3 Growth Framework</div>
-<div class="guide-p">Popularized by venture capital firm Bessemer Venture Partners, "T2D3" describes a commonly cited growth trajectory benchmark for top-quartile SaaS companies: Triple, Triple, Double, Double, Double — meaning ARR triples in year one and two of meaningful scale, then doubles for three subsequent years.</div>
-<table class="guide-table"><thead><tr><th>Year</th><th>Growth Multiple</th><th>Example Starting at $1M ARR</th></tr></thead><tbody>
-<tr><td>1</td><td>3x</td><td>$3M</td></tr>
-<tr><td>2</td><td>3x</td><td>$9M</td></tr>
-<tr><td>3</td><td>2x</td><td>$18M</td></tr>
-<tr><td>4</td><td>2x</td><td>$36M</td></tr>
-<tr><td>5</td><td>2x</td><td>$72M</td></tr>
+<div class="guide-h3">Worked Example: $500/Month, Volatile Price</div>
+<div class="guide-p">Investing $500 a month into a stock priced at $50, then $40, then $60, then $50 again over four months:</div>
+<table class="guide-table"><thead><tr><th>Month</th><th>Price</th><th>Amount</th><th>Shares Bought</th></tr></thead><tbody>
+<tr><td>1</td><td>$50</td><td>$500</td><td>10.00</td></tr>
+<tr><td>2</td><td>$40</td><td>$500</td><td>12.50</td></tr>
+<tr><td>3</td><td>$60</td><td>$500</td><td>8.33</td></tr>
+<tr><td>4</td><td>$50</td><td>$500</td><td>10.00</td></tr>
 </tbody></table>
-<div class="guide-p">Very few companies actually achieve this exact trajectory — it represents a benchmark for elite outliers, not a typical or expected outcome — but it's widely referenced by venture investors as a mental model for what "great" looks like at each stage.</div>
+<div class="guide-p">Total invested: $2,000 for 40.83 shares, an average cost of <strong>$48.98/share</strong> — lower than the simple average of the four prices ($50), because the extra shares bought during the $40 dip pull the weighted average down. This is the mechanical advantage of DCA during volatile, sideways, or dipping markets.</div>
 
-<div class="guide-h3">Revenue Churn: The Leak in the Bucket</div>
-<div class="guide-formula">Revenue Churn Rate = Lost MRR in Period / Starting MRR × 100%</div>
-<div class="guide-p">Even a business adding new customers steadily can stagnate or shrink if churn (lost revenue from cancellations and downgrades) outpaces new growth. A SaaS company with $500,000 MRR losing 3% monthly to churn is losing $15,000/month before counting any new sales — meaning it needs to add at least that much in new MRR every single month just to stay flat.</div>
-
-<div class="guide-h3">Negative Net Revenue Churn: The Holy Grail</div>
-<div class="guide-p">The best-performing SaaS companies achieve what's called negative net revenue churn — where expansion revenue from existing customers (upsells, seat additions, plan upgrades) exceeds the revenue lost from cancellations and downgrades, meaning the existing customer base actually grows in revenue even with zero new customer acquisition. This is considered one of the strongest possible signals of product-market fit and pricing power.</div>
-
-<div class="guide-h3">LTV and CAC: Is the Growth Engine Actually Profitable?</div>
-<div class="guide-formula">LTV = Average Revenue Per Customer / Monthly Churn Rate<br>CAC = Total Sales &amp; Marketing Spend / New Customers Acquired</div>
-<div class="guide-p">Worked example: a customer paying $200/month with a 2% monthly churn rate has an expected lifetime value of $200 / 0.02 = $10,000. If acquiring that customer cost $2,500 in sales and marketing spend, the LTV:CAC ratio is 4:1 — generally considered healthy. A widely cited rule of thumb suggests an LTV:CAC ratio of at least 3:1 for a sustainable SaaS business; ratios below 1:1 mean the company is losing money on every customer acquired, before even accounting for fixed operating costs.</div>
-<table class="guide-table"><thead><tr><th>LTV:CAC Ratio</th><th>Interpretation</th></tr></thead><tbody>
-<tr><td>Below 1:1</td><td>Losing money per customer — unsustainable</td></tr>
-<tr><td>1:1 – 3:1</td><td>Marginal, needs improvement in retention or acquisition cost</td></tr>
-<tr><td>3:1 – 5:1</td><td>Healthy, generally considered a strong growth engine</td></tr>
-<tr><td>Above 5:1</td><td>Excellent — though may also signal under-investment in growth</td></tr>
+<div class="guide-h3">DCA vs Lump Sum: What the Research Actually Shows</div>
+<div class="guide-p">It's a common misconception that DCA reliably outperforms investing a lump sum all at once. In reality, because markets trend upward over most multi-year periods historically, investing a lump sum immediately has outperformed dollar cost averaging into the same asset in roughly two-thirds of historical periods studied — simply because more of your money spends more time invested and growing. DCA's real advantage isn't higher expected returns; it's <strong>reduced regret and reduced risk of catastrophically bad timing</strong>, since you're never putting all your capital in at a single, potentially unlucky price point.</div>
+<table class="guide-table"><thead><tr><th></th><th>Lump Sum</th><th>Dollar Cost Averaging</th></tr></thead><tbody>
+<tr><td>Expected return (rising market)</td><td>Typically higher</td><td>Typically slightly lower</td></tr>
+<tr><td>Risk of bad single-day timing</td><td>Higher</td><td>Lower</td></tr>
+<tr><td>Emotional ease of investing</td><td>Harder (all at once)</td><td>Easier (gradual)</td></tr>
+<tr><td>Best suited for</td><td>Money you have all at once and won't need to touch</td><td>Regular income (paychecks) or large sums you're uneasy deploying at once</td></tr>
 </tbody></table>
 
-<div class="guide-h3">Building a Three-Scenario Forecast</div>
-<div class="guide-p">Rather than a single forecast number, build bear, base, and bull cases by varying your key assumptions: new customer acquisition rate, churn rate, and average revenue per account. This forces explicit acknowledgment of uncertainty and gives investors (and yourself) a realistic range rather than false precision.</div>
-<div class="guide-tip">💡 Revisit and recalibrate your forecast model monthly against actual results — the value of a forecast isn't really in being "right," it's in the discipline of understanding which assumptions are driving your business, so you can catch problems (like rising churn) early rather than discovering them a quarter later.</div>
+<div class="guide-h3">When DCA Makes the Most Practical Sense</div>
+<div class="guide-p">For most people, DCA isn't really a choice between two strategies — it's simply how investing works when you're funding contributions from a paycheck rather than a windfall. In that case, DCA isn't "versus" lump sum at all; it's the only realistic option, and a perfectly good one. The lump-sum-vs-DCA debate mainly applies when you have a large sum of money already in hand (an inheritance, bonus, or sale proceeds) and are deciding whether to invest it all immediately or spread it out.</div>
+<div class="guide-tip">💡 If you're investing a regular paycheck, don't overthink DCA — just automate the contribution and stay consistent. The debate about DCA vs lump sum mainly matters if you're sitting on a large sum of cash right now and unsure whether to deploy it all at once.</div>
 
   </div>
 </div>
@@ -441,26 +431,43 @@ body{background:var(--bg);color:var(--t);font-family:var(--fn);font-size:14px;li
 <div class="faq-section">
 <div class="faq-section-title">❓ Frequently Asked Questions</div>
 <div class="faq-item">
-  <div class="faq-q" onclick="toggleFAQ(this)"><span>What is ARR vs MRR?</span><span class="faq-icon">+</span></div>
-  <div class="faq-a"><strong>MRR (Monthly Recurring Revenue)</strong> is predictable monthly subscription revenue. <strong>ARR (Annual Recurring Revenue)</strong> is simply MRR × 12. ARR is the standard metric for SaaS valuations and growth benchmarking.</div>
+  <div class="faq-q" onclick="toggleFAQ(this)">
+    <span>What is dollar cost averaging?</span>
+    <span class="faq-icon">+</span>
+  </div>
+  <div class="faq-a">Dollar cost averaging (DCA) is investing a fixed dollar amount on a regular schedule (like every month) regardless of the current price, rather than investing a lump sum all at once. It results in buying more shares when prices are low and fewer when prices are high, smoothing your average purchase price over time.</div>
 </div>
 <div class="faq-item">
-  <div class="faq-q" onclick="toggleFAQ(this)"><span>What is a good revenue growth rate?</span><span class="faq-icon">+</span></div>
-  <div class="faq-a">For early-stage SaaS startups, investors often look for the <strong>T2D3 framework</strong> (triple, triple, double, double, double growth years). For established companies, 20–30% annual growth is considered strong.</div>
+  <div class="faq-q" onclick="toggleFAQ(this)">
+    <span>Does dollar cost averaging beat investing a lump sum?</span>
+    <span class="faq-icon">+</span>
+  </div>
+  <div class="faq-a">Not usually, in terms of pure expected return. Historical studies have found that investing a lump sum immediately outperforms DCA in roughly two-thirds of periods, since markets tend to rise over time and more money is invested sooner. DCA's real benefit is reducing the risk and regret of unlucky timing, not higher average returns.</div>
 </div>
 <div class="faq-item">
-  <div class="faq-q" onclick="toggleFAQ(this)"><span>What is revenue churn?</span><span class="faq-icon">+</span></div>
-  <div class="faq-a"><span class="faq-formula">Revenue Churn Rate = Lost MRR / Beginning MRR × 100%</span>Churn measures subscription revenue lost monthly from cancellations or downgrades. World-class SaaS achieves <strong>negative churn</strong> — expansion revenue from existing customers exceeds losses.</div>
+  <div class="faq-q" onclick="toggleFAQ(this)">
+    <span>How do I calculate my average cost per share?</span>
+    <span class="faq-icon">+</span>
+  </div>
+  <div class="faq-a"><span class="faq-formula">Average Cost = Total Invested / Total Shares</span>Add up everything you've invested across all purchases, then divide by the total number of shares you own. Because each purchase buys a different number of shares depending on the price at the time, this is a weighted average, not a simple average of the purchase prices.</div>
 </div>
 <div class="faq-item">
-  <div class="faq-q" onclick="toggleFAQ(this)"><span>What is LTV (Lifetime Value)?</span><span class="faq-icon">+</span></div>
-  <div class="faq-a"><span class="faq-formula">LTV = Average Revenue Per Customer / Monthly Churn Rate</span>LTV is the total expected revenue from a customer over their lifetime. A healthy SaaS business has an <strong>LTV:CAC ratio of 3:1 or higher</strong>.</div>
+  <div class="faq-q" onclick="toggleFAQ(this)">
+    <span>Is DCA a good strategy for investing my paycheck?</span>
+    <span class="faq-icon">+</span>
+  </div>
+  <div class="faq-a">Yes — if you're investing from regular income rather than a lump sum you already have, DCA isn't really a choice, it's simply how the investing happens naturally. It's a sound, low-effort way to stay consistently invested without trying to time the market.</div>
 </div>
 <div class="faq-item">
-  <div class="faq-q" onclick="toggleFAQ(this)"><span>What is CAC (Customer Acquisition Cost)?</span><span class="faq-icon">+</span></div>
-  <div class="faq-a"><span class="faq-formula">CAC = Total Sales &amp; Marketing Spend / New Customers Acquired</span>CAC tells you how much you spend to acquire one customer. Combined with LTV, it tells you whether your business model is profitable at scale.</div>
+  <div class="faq-q" onclick="toggleFAQ(this)">
+    <span>When should I use lump sum investing instead of DCA?</span>
+    <span class="faq-icon">+</span>
+  </div>
+  <div class="faq-a">If you already have a large sum of money (an inheritance, bonus, or windfall) and a long time horizon, investing it as a lump sum has historically produced higher expected returns than spreading it out. Consider DCA instead if the emotional difficulty of investing it all at once might cause you to delay investing altogether, or if you specifically want to reduce the risk of a single bad entry point.</div>
 </div>
 </div>
+
+
 </div>
 </div><!-- content -->
 <div class="site-footer">
@@ -488,6 +495,6 @@ body{background:var(--bg);color:var(--t);font-family:var(--fn);font-size:14px;li
 </a>
 </div>
 <script src="app.js"></script>
-<script>initPage('revenue');</script>
+<script>initPage('dca');</script>
 </body>
 </html>

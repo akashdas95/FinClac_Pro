@@ -304,7 +304,7 @@ body{background:var(--bg);color:var(--t);font-family:var(--fn);font-size:14px;li
   <a class="logo" href="/"><div class="logo-mark">FC</div>FinCalc</a>
   <div class="searchbox">
     <svg width="18" height="18" fill="none" stroke="#0ECB81" stroke-width="2" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
-    <input id="srch" placeholder="Search 40 calculators..." oninput="doSearch()" onkeydown="if(event.key==='Enter')goSearch()">
+    <input id="srch" placeholder="Search 47 calculators..." oninput="doSearch()" onkeydown="if(event.key==='Enter')goSearch()">
   </div>
 </div>
 <div class="nav">
@@ -322,7 +322,9 @@ body{background:var(--bg);color:var(--t);font-family:var(--fn);font-size:14px;li
   <a class="ntab" href="/revenue" onclick="go('revenue',this);return false;">📊 Revenue Forecast</a>
   <a class="ntab" href="/loan" onclick="go('loan',this);return false;">🏦 Loan/EMI</a>
   <a class="ntab" href="/invest" onclick="go('invest',this);return false;">📈 SIP/Investment</a>
+  <a class="ntab" href="/dca" onclick="go('dca',this);return false;">📊 DCA</a>
   <a class="ntab" href="/tax" onclick="go('tax',this);return false;">🧾 Tax</a>
+  <a class="ntab" href="/salary" onclick="go('salary',this);return false;">💵 Salary</a>
   <a class="ntab" href="/mortgage" onclick="go('mortgage',this);return false;">🏠 Mortgage</a>
   <a class="ntab" href="/heloc" onclick="go('heloc',this);return false;">🏡 HELOC</a>
   <a class="ntab" href="/mortcomp" onclick="go('mortcomp',this);return false;">⚖️ Mtg Compare</a>
@@ -330,6 +332,8 @@ body{background:var(--bg);color:var(--t);font-family:var(--fn);font-size:14px;li
   <a class="ntab" href="/stock" onclick="go('stock',this);return false;">📉 Stock P&amp;L</a>
   <a class="ntab" href="/split" onclick="go('split',this);return false;">🔀 Stock Split</a>
   <a class="ntab" href="/retirement" onclick="go('retirement',this);return false;">👴 Retirement</a>
+  <a class="ntab" href="/401k" onclick="go('401k',this);return false;">🏦 401(k)</a>
+  <a class="ntab" href="/millionaire" onclick="go('millionaire',this);return false;">💎 Millionaire</a>
   <a class="ntab" href="/debt" onclick="go('debt',this);return false;">💳 Debt Payoff</a>
   <a class="ntab" href="/rental" onclick="go('rental',this);return false;">🏘️ Rental Yield</a>
   <a class="ntab" href="/cashflow" onclick="go('cashflow',this);return false;">💵 Cash Flow</a>
@@ -338,6 +342,7 @@ body{background:var(--bg);color:var(--t);font-family:var(--fn);font-size:14px;li
   <a class="ntab" href="/emergencyfund" onclick="go('emergencyfund',this);return false;">🛡️ Emergency Fund</a>
   <a class="ntab" href="/healthscore" onclick="go('healthscore',this);return false;">💯 Health Score</a>
   <a class="ntab" href="/currency" onclick="go('currency',this);return false;">💱 Currency</a>
+  <a class="ntab" href="/remit" onclick="go('remit',this);return false;">🌍 Transfer Cost</a>
   <a class="ntab" href="/scientific" onclick="go('scientific',this);return false;">🔬 Scientific</a>
 </div>
 <div class="content">
@@ -382,7 +387,7 @@ body{background:var(--bg);color:var(--t);font-family:var(--fn);font-size:14px;li
   </div>
 </div>
 
-<div style="margin-top:1.75rem;margin-bottom:1.75rem"><div class="calc-links"><span class="calc-links-label">🔗 Related Calculators</span><a class="calc-link-btn" href="/retirement" onclick="go('retirement',null);return false;">👴 Retirement</a><a class="calc-link-btn" href="/savingsgoal" onclick="go('savingsgoal',null);return false;">🎯 Savings Goal</a><a class="calc-link-btn" href="/invest" onclick="go('invest',null);return false;">📈 SIP / Investment</a><a class="calc-link-btn" href="/healthscore" onclick="go('healthscore',null);return false;">💯 Health Score</a></div></div>
+<div style="margin-top:1.75rem;margin-bottom:1.75rem"><div class="calc-links"><span class="calc-links-label">🔗 Related Calculators</span><a class="calc-link-btn" href="/millionaire" onclick="go('millionaire',null);return false;">💎 Millionaire</a><a class="calc-link-btn" href="/retirement" onclick="go('retirement',null);return false;">👴 Retirement</a><a class="calc-link-btn" href="/savingsgoal" onclick="go('savingsgoal',null);return false;">🎯 Savings Goal</a><a class="calc-link-btn" href="/invest" onclick="go('invest',null);return false;">📈 SIP / Investment</a><a class="calc-link-btn" href="/healthscore" onclick="go('healthscore',null);return false;">💯 Health Score</a></div></div>
 <div class="related-box"><div class="related-box-title">📖 Related Articles</div><a class="related-item" href="/blog/fire-number-how-to-calculate">The Real Math Behind FIRE: How to Calculate Your Retirement Number<span class="related-arrow">→</span></a></div>
 <div class="calc-guide">
   <div class="guide-toggle">

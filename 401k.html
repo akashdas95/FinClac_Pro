@@ -3,18 +3,18 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Revenue Forecast Calculator — SaaS Bear, Base & Bull Growth Scenarios | FinCalc</title>
-<meta name="description" content="Forecast SaaS revenue with bear, base, and bull growth scenarios, ARR, and LTV. Free revenue forecasting tool for startups.">
-<link rel="canonical" href="https://finclac.com/revenue">
+<title>401(k) Calculator — Estimate Your Retirement Savings Growth | FinCalc</title>
+<meta name="description" content="Estimate how your 401(k) balance grows to retirement, including employer match, salary growth, and IRS contribution limits. Free 401(k) calculator.">
+<link rel="canonical" href="https://finclac.com/401k">
 <meta name="robots" content="index, follow">
 <meta property="og:type" content="website">
-<meta property="og:title" content="Revenue Forecast Calculator — SaaS Bear, Base & Bull Growth Scenarios | FinCalc">
-<meta property="og:description" content="Forecast SaaS revenue with bear, base, and bull growth scenarios, ARR, and LTV. Free revenue forecasting tool for startups.">
-<meta property="og:url" content="https://finclac.com/revenue">
+<meta property="og:title" content="401(k) Calculator — Estimate Your Retirement Savings Growth | FinCalc">
+<meta property="og:description" content="Estimate how your 401(k) balance grows to retirement, including employer match, salary growth, and IRS contribution limits. Free 401(k) calculator.">
+<meta property="og:url" content="https://finclac.com/401k">
 <meta property="og:site_name" content="FinCalc">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Revenue Forecast Calculator — SaaS Bear, Base & Bull Growth Scenarios | FinCalc">
-<meta name="twitter:description" content="Forecast SaaS revenue with bear, base, and bull growth scenarios, ARR, and LTV. Free revenue forecasting tool for startups.">
+<meta name="twitter:title" content="401(k) Calculator — Estimate Your Retirement Savings Growth | FinCalc">
+<meta name="twitter:description" content="Estimate how your 401(k) balance grows to retirement, including employer match, salary growth, and IRS contribution limits. Free 401(k) calculator.">
 <style>*{box-sizing:border-box;margin:0;padding:0}
 :root{--bg:#0B0E11;--s:#141920;--s2:#1C2430;--bd:#232D3A;--t:#E8EDF2;--m:#6B7A8D;--tb:#A3B2C4;--a:#F0B90B;--g:#0ECB81;--r:#F6465D;--b:#1890FF;--p:#9B59B6;--fn:'DM Sans',sans-serif;--mo:'DM Mono',monospace}
 body{background:var(--bg);color:var(--t);font-family:var(--fn);font-size:14px;line-height:1.5;min-height:100vh}
@@ -297,7 +297,7 @@ body{background:var(--bg);color:var(--t);font-family:var(--fn);font-size:14px;li
   gtag('config', 'G-61RHHG8E6Q');
 </script>
 <meta name="msvalidate.01" content="175D12831D109E3E7E1A856004E0F393" />
-<script type="application/ld+json">{"@context": "https://schema.org", "@type": "WebApplication", "name": "Revenue Forecast Calculator", "url": "https://finclac.com/revenue", "description": "Forecast SaaS revenue with bear, base, and bull growth scenarios, ARR, and LTV. Free revenue forecasting tool for startups.", "applicationCategory": "FinanceApplication", "operatingSystem": "Any (web-based)", "offers": {"@type": "Offer", "price": "0", "priceCurrency": "USD"}, "isPartOf": {"@type": "WebSite", "name": "FinCalc", "url": "https://finclac.com/"}}</script>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "WebApplication", "name": "401(k) Calculator", "url": "https://finclac.com/401k", "description": "Estimate how your 401(k) balance grows to retirement, including employer match, salary growth, and IRS contribution limits. Free 401(k) calculator.", "applicationCategory": "FinanceApplication", "operatingSystem": "Any (web-based)", "offers": {"@type": "Offer", "price": "0", "priceCurrency": "USD"}, "isPartOf": {"@type": "WebSite", "name": "FinCalc", "url": "https://finclac.com/"}}</script>
 </head>
 <body>
 <div class="topbar">
@@ -346,94 +346,86 @@ body{background:var(--bg);color:var(--t);font-family:var(--fn);font-size:14px;li
   <a class="ntab" href="/scientific" onclick="go('scientific',this);return false;">🔬 Scientific</a>
 </div>
 <div class="content">
-<div id="revenue" class="panel on">
+<div id="401k" class="panel on">
 <div class="calc-header">
-<h1 class="calc-page-title">Revenue Forecast Calculator</h1>
-<h2 class="calc-subtitle">Forecast SaaS revenue under bear, base & bull scenarios</h2>
-<p class="calc-desc">This revenue forecast calculator projects monthly recurring revenue growth under bear, base, and bull scenarios based on your starting MRR, growth rate, and churn, so you can plan for a range of outcomes.</p>
+<h1 class="calc-page-title">401(k) Calculator</h1>
+<h2 class="calc-subtitle">Project your 401(k) balance at retirement, including employer match</h2>
+<p class="calc-desc">This 401(k) calculator projects your retirement account balance based on your current savings, contribution rate, employer match, expected salary growth, and investment returns until your target retirement age.</p>
 </div>
 
 
 
-<div class="card mb16">
-  <div class="card-title">Revenue Forecast Assumptions</div>
-  <div class="g3">
-    <div class="field"><label>Current MRR ($)</label><div class="ip"><span class="pfx">$</span><input type="text" inputmode="decimal" id="rf-mrr" value="500000" oninput="calcRevenue()"></div></div>
-    <div class="field"><label>Forecast Period (months)</label><input type="text" inputmode="decimal" id="rf-months" value="12" min="3" max="36" oninput="calcRevenue()"></div>
-    <div class="field"><label>Churn Rate (%/mo)</label><input type="text" inputmode="decimal" id="rf-churn" value="3" step="0.5" oninput="calcRevenue()"></div>
-    <div class="field"><label>🐻 Pessimistic Growth %/mo</label><input type="text" inputmode="decimal" id="rf-pess" value="2" step="0.5" oninput="calcRevenue()"></div>
-    <div class="field"><label>📊 Base Growth %/mo</label><input type="text" inputmode="decimal" id="rf-base" value="8" step="0.5" oninput="calcRevenue()"></div>
-    <div class="field"><label>🚀 Optimistic Growth %/mo</label><input type="text" inputmode="decimal" id="rf-opt" value="15" step="0.5" oninput="calcRevenue()"></div>
-    <div class="field"><label>ARPU / Customer ($)</label><div class="ip"><span class="pfx">$</span><input type="text" inputmode="decimal" id="rf-arpu" value="2500" oninput="calcRevenue()"></div></div>
-    <div class="field"><label>One-time Revenue/mo ($)</label><div class="ip"><span class="pfx">$</span><input type="text" inputmode="decimal" id="rf-onetime" value="50000" oninput="calcRevenue()"></div></div>
-  </div>
-</div>
-<div class="two-eq mb16">
+<div class="two">
   <div class="card">
-    <div class="card-title">Scenarios</div>
-    <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px;margin-bottom:1rem">
-      <div class="sbox" style="border-top:3px solid var(--r)"><div class="lbl">🐻 Pessimistic</div><div class="val" style="color:var(--r)" id="rf-p">$0</div><div style="font-size:10px;color:var(--m);margin-top:3px" id="rf-pg"></div></div>
-      <div class="sbox" style="border-top:3px solid var(--b)"><div class="lbl">📊 Base Case</div><div class="val" style="color:var(--b)" id="rf-b">$0</div><div style="font-size:10px;color:var(--m);margin-top:3px" id="rf-bg"></div></div>
-      <div class="sbox" style="border-top:3px solid var(--g)"><div class="lbl">🚀 Optimistic</div><div class="val" style="color:var(--g)" id="rf-o">$0</div><div style="font-size:10px;color:var(--m);margin-top:3px" id="rf-og"></div></div>
+    <div class="card-title">Your 401(k) Details</div>
+    <div class="g2">
+      <div class="field"><label>Current Age</label><input type="text" inputmode="decimal" id="k4-age" value="30" oninput="c401k()"></div>
+      <div class="field"><label>Retirement Age</label><input type="text" inputmode="decimal" id="k4-retage" value="65" oninput="c401k()"></div>
     </div>
-    <canvas id="rf-chart" width="500" height="165" style="width:100%"></canvas>
+    <div class="field"><label>Current 401(k) Balance ($)</label><div class="ip"><span class="pfx">$</span><input type="text" inputmode="decimal" id="k4-bal" value="20000" oninput="c401k()"></div></div>
+    <div class="field"><label>Annual Salary ($)</label><div class="ip"><span class="pfx">$</span><input type="text" inputmode="decimal" id="k4-salary" value="70000" oninput="c401k()"></div></div>
+    <div class="g2">
+      <div class="field"><label>Your Contribution (% of salary)</label><input type="text" inputmode="decimal" id="k4-contrib" value="6" step="0.1" oninput="c401k()"></div>
+      <div class="field"><label>Annual Salary Growth (%)</label><input type="text" inputmode="decimal" id="k4-growth" value="3" step="0.1" oninput="c401k()"></div>
+    </div>
+    <div class="g2">
+      <div class="field"><label>Employer Match (%)</label><input type="text" inputmode="decimal" id="k4-matchrate" value="50" step="1" oninput="c401k()"></div>
+      <div class="field"><label>Match Limit (% of salary)</label><input type="text" inputmode="decimal" id="k4-matchlimit" value="6" step="0.1" oninput="c401k()"></div>
+    </div>
+    <div class="field"><label>Expected Annual Return (%)</label><input type="text" inputmode="decimal" id="k4-return" value="7" step="0.1" oninput="c401k()"></div>
+    <div class="sgrid">
+      <div class="sbox"><div class="lbl">Balance at Retirement</div><div class="val" style="color:var(--a)" id="k4-final">$0</div></div>
+      <div class="sbox"><div class="lbl">Total Growth</div><div class="val" style="color:var(--g)" id="k4-growth-total">$0</div></div>
+      <div class="sbox"><div class="lbl">You Contributed</div><div class="val" id="k4-contrib-total">$0</div></div>
+      <div class="sbox"><div class="lbl">Employer Match</div><div class="val" id="k4-match-total">$0</div></div>
+    </div>
   </div>
   <div class="card">
-    <div class="card-title">KPIs (Base Case)</div>
-    <div class="rrow"><span class="rk">ARR at end of period</span><span class="rv" style="color:var(--b)" id="rf-arr">$0</span></div>
-    <div class="rrow"><span class="rk">Cumulative revenue</span><span class="rv" style="color:var(--b)" id="rf-cum">$0</span></div>
-    <div class="rrow"><span class="rk">Projected customers</span><span class="rv" id="rf-custs">0</span></div>
-    <div class="rrow"><span class="rk">LTV (ARPU ÷ churn)</span><span class="rv" style="color:var(--g)" id="rf-ltv">$0</span></div>
-    <div class="rrow"><span class="rk">Revenue range at end</span><span class="rv" style="color:var(--a)" id="rf-range">—</span></div>
-    <div class="insight-box" id="rf-insights"></div>
+    <div class="card-title">Growth Projection</div>
+    <canvas id="k4-chart" width="300" height="175" style="width:100%;margin:1rem 0"></canvas>
+    <div class="rrow"><span class="rk">Years to Retirement</span><span class="rv" id="k4-years">0</span></div>
+    <div class="rrow"><span class="rk">This Year's Contribution (You)</span><span class="rv" id="k4-annual-contrib">$0</span></div>
+    <div class="rrow"><span class="rk">This Year's Employer Match</span><span class="rv" style="color:var(--g)" id="k4-annual-match">$0</span></div>
+    <div class="insight-box" id="k4-insights"></div>
   </div>
 </div>
-<div class="card"><div class="card-title">Monthly Forecast Table (Base Case)</div><div style="overflow-x:auto"><table class="tbl" id="rf-table"></table></div></div>
 
-<div style="margin-top:1.75rem;margin-bottom:1.75rem"><div class="calc-links"><span class="calc-links-label">🔗 Related Calculators</span><a class="calc-link-btn" href="/burnrate" onclick="go('burnrate',null);return false;">🔥 Burn Rate</a><a class="calc-link-btn" href="/breakeven" onclick="go('breakeven',null);return false;">📊 Break-even</a><a class="calc-link-btn" href="/cashflow" onclick="go('cashflow',null);return false;">💵 Cash Flow</a><a class="calc-link-btn" href="/pricing" onclick="go('pricing',null);return false;">🏷️ Pricing</a></div></div>
-<div class="related-box"><div class="related-box-title">📖 Related Articles</div><a class="related-item" href="/blog/saas-revenue-forecasting-scenarios">SaaS Revenue Forecasting: Bear, Base, and Bull Scenarios Explained<span class="related-arrow">→</span></a></div>
+<div style="margin-top:1.75rem;margin-bottom:1.75rem"><div class="calc-links"><span class="calc-links-label">🔗 Related Calculators</span><a class="calc-link-btn" href="/retirement" onclick="go('retirement',null);return false;">👴 Retirement</a><a class="calc-link-btn" href="/fire" onclick="go('fire',null);return false;">🔥 FIRE</a><a class="calc-link-btn" href="/savings" onclick="go('savings',null);return false;">🏛️ Savings</a><a class="calc-link-btn" href="/salary" onclick="go('salary',null);return false;">💵 Salary</a><a class="calc-link-btn" href="/tax" onclick="go('tax',null);return false;">🧾 Tax</a><a class="calc-link-btn" href="/provident" onclick="go('provident',null);return false;">🏦 Provident Fund</a></div></div>
 <div class="calc-guide">
   <div class="guide-toggle">
-    <div class="guide-toggle-title">📖 Revenue Forecasting — 3-Scenario Planning</div>
+    <div class="guide-toggle-title">📖 401(k) Basics — Employer Match, Limits &amp; Growth</div>
   </div>
   <div class="guide-body">
-<div class="guide-p">Revenue forecasting for an early-stage business is part science, part informed storytelling. Investors and operators alike know that any single-point forecast ("we'll hit $2M ARR next year") is almost certainly wrong in the specific number — the real value of forecasting comes from understanding the range of plausible outcomes and the key assumptions driving each scenario.</div>
+<div class="guide-p">A 401(k) is an employer-sponsored retirement account that lets you contribute a portion of your paycheck before it's taxed (traditional) or after tax with tax-free withdrawals later (Roth), invest that money in the market, and — in many plans — receive free matching contributions from your employer. The combination of pre-tax growth, employer match, and decades of compounding makes it one of the most powerful retirement tools available to most workers.</div>
 
-<div class="guide-h3">MRR and ARR: The Core SaaS Metrics</div>
-<div class="guide-formula">ARR = MRR × 12</div>
-<div class="guide-p">Monthly Recurring Revenue (MRR) is the predictable, repeating monthly revenue from active subscriptions — explicitly excluding one-time fees, setup charges, or non-recurring services. Annual Recurring Revenue (ARR) simply annualizes that figure. These metrics matter because they strip out the noise of one-time revenue and reveal the true, compounding growth engine of a subscription business.</div>
+<div class="guide-h3">Why the Employer Match Is "Free Money"</div>
+<div class="guide-p">A common match structure is "50% up to 6%" — meaning your employer contributes 50 cents for every dollar you contribute, up to a contribution of 6% of your salary. On a $70,000 salary, contributing the full 6% ($4,200/year) gets you an extra $2,100/year from your employer — an instant 50% return before any market growth at all. Contributing less than the match threshold effectively leaves part of your compensation on the table.</div>
+<div class="guide-formula">Employer Match = min(Your Contribution %, Match Limit %) × Match Rate</div>
 
-<div class="guide-h3">The T2D3 Growth Framework</div>
-<div class="guide-p">Popularized by venture capital firm Bessemer Venture Partners, "T2D3" describes a commonly cited growth trajectory benchmark for top-quartile SaaS companies: Triple, Triple, Double, Double, Double — meaning ARR triples in year one and two of meaningful scale, then doubles for three subsequent years.</div>
-<table class="guide-table"><thead><tr><th>Year</th><th>Growth Multiple</th><th>Example Starting at $1M ARR</th></tr></thead><tbody>
-<tr><td>1</td><td>3x</td><td>$3M</td></tr>
-<tr><td>2</td><td>3x</td><td>$9M</td></tr>
-<tr><td>3</td><td>2x</td><td>$18M</td></tr>
-<tr><td>4</td><td>2x</td><td>$36M</td></tr>
-<tr><td>5</td><td>2x</td><td>$72M</td></tr>
+<div class="guide-h3">2025 IRS Contribution Limits</div>
+<table class="guide-table"><thead><tr><th>Category</th><th>2025 Limit</th></tr></thead><tbody>
+<tr><td>Employee elective deferral (under 50)</td><td>$23,500</td></tr>
+<tr><td>Catch-up contribution (age 50+)</td><td>+$7,500 ($31,000 total)</td></tr>
+<tr><td>Combined employee + employer limit</td><td>$70,000 (or 100% of compensation, if lower)</td></tr>
 </tbody></table>
-<div class="guide-p">Very few companies actually achieve this exact trajectory — it represents a benchmark for elite outliers, not a typical or expected outcome — but it's widely referenced by venture investors as a mental model for what "great" looks like at each stage.</div>
+<div class="guide-p">These limits apply to your own elective deferrals — employer match contributions don't count against your personal $23,500 limit, but they do count toward the combined $70,000 cap. Very few savers hit the combined limit; the employee deferral limit is the one that matters for most people.</div>
 
-<div class="guide-h3">Revenue Churn: The Leak in the Bucket</div>
-<div class="guide-formula">Revenue Churn Rate = Lost MRR in Period / Starting MRR × 100%</div>
-<div class="guide-p">Even a business adding new customers steadily can stagnate or shrink if churn (lost revenue from cancellations and downgrades) outpaces new growth. A SaaS company with $500,000 MRR losing 3% monthly to churn is losing $15,000/month before counting any new sales — meaning it needs to add at least that much in new MRR every single month just to stay flat.</div>
-
-<div class="guide-h3">Negative Net Revenue Churn: The Holy Grail</div>
-<div class="guide-p">The best-performing SaaS companies achieve what's called negative net revenue churn — where expansion revenue from existing customers (upsells, seat additions, plan upgrades) exceeds the revenue lost from cancellations and downgrades, meaning the existing customer base actually grows in revenue even with zero new customer acquisition. This is considered one of the strongest possible signals of product-market fit and pricing power.</div>
-
-<div class="guide-h3">LTV and CAC: Is the Growth Engine Actually Profitable?</div>
-<div class="guide-formula">LTV = Average Revenue Per Customer / Monthly Churn Rate<br>CAC = Total Sales &amp; Marketing Spend / New Customers Acquired</div>
-<div class="guide-p">Worked example: a customer paying $200/month with a 2% monthly churn rate has an expected lifetime value of $200 / 0.02 = $10,000. If acquiring that customer cost $2,500 in sales and marketing spend, the LTV:CAC ratio is 4:1 — generally considered healthy. A widely cited rule of thumb suggests an LTV:CAC ratio of at least 3:1 for a sustainable SaaS business; ratios below 1:1 mean the company is losing money on every customer acquired, before even accounting for fixed operating costs.</div>
-<table class="guide-table"><thead><tr><th>LTV:CAC Ratio</th><th>Interpretation</th></tr></thead><tbody>
-<tr><td>Below 1:1</td><td>Losing money per customer — unsustainable</td></tr>
-<tr><td>1:1 – 3:1</td><td>Marginal, needs improvement in retention or acquisition cost</td></tr>
-<tr><td>3:1 – 5:1</td><td>Healthy, generally considered a strong growth engine</td></tr>
-<tr><td>Above 5:1</td><td>Excellent — though may also signal under-investment in growth</td></tr>
+<div class="guide-h3">Worked Example: 30 to 65, $70,000 Salary</div>
+<div class="guide-p">Starting with a $20,000 balance, contributing 6% of a $70,000 salary (with 3% annual raises), a 50%-up-to-6% employer match, and a 7% average annual return over 35 years:</div>
+<table class="guide-table"><thead><tr><th>Component</th><th>Approximate Total</th></tr></thead><tbody>
+<tr><td>Your contributions</td><td>~$225,000</td></tr>
+<tr><td>Employer match</td><td>~$113,000</td></tr>
+<tr><td>Investment growth</td><td>~$1,100,000+</td></tr>
 </tbody></table>
+<div class="guide-p">This illustrates the same pattern true of all long-horizon retirement accounts: investment growth, not contributions, ends up being the largest single component of the final balance — which is exactly why starting early and staying invested matters more than trying to time the market.</div>
 
-<div class="guide-h3">Building a Three-Scenario Forecast</div>
-<div class="guide-p">Rather than a single forecast number, build bear, base, and bull cases by varying your key assumptions: new customer acquisition rate, churn rate, and average revenue per account. This forces explicit acknowledgment of uncertainty and gives investors (and yourself) a realistic range rather than false precision.</div>
-<div class="guide-tip">💡 Revisit and recalibrate your forecast model monthly against actual results — the value of a forecast isn't really in being "right," it's in the discipline of understanding which assumptions are driving your business, so you can catch problems (like rising churn) early rather than discovering them a quarter later.</div>
+<div class="guide-h3">Traditional vs Roth 401(k)</div>
+<table class="guide-table"><thead><tr><th></th><th>Traditional 401(k)</th><th>Roth 401(k)</th></tr></thead><tbody>
+<tr><td>Contributions</td><td>Pre-tax (reduces taxable income now)</td><td>After-tax (no deduction now)</td></tr>
+<tr><td>Withdrawals in retirement</td><td>Taxed as ordinary income</td><td>Tax-free (if qualified)</td></tr>
+<tr><td>Best if you expect...</td><td>Lower tax bracket in retirement</td><td>Higher tax bracket in retirement</td></tr>
+</tbody></table>
+<div class="guide-tip">💡 At minimum, contribute enough to capture your full employer match — it's an immediate, guaranteed return that no investment strategy can reliably beat. Beyond the match, increasing your contribution rate by 1% whenever you get a raise is a painless way to accelerate savings without feeling a change in take-home pay.</div>
 
   </div>
 </div>
@@ -441,26 +433,44 @@ body{background:var(--bg);color:var(--t);font-family:var(--fn);font-size:14px;li
 <div class="faq-section">
 <div class="faq-section-title">❓ Frequently Asked Questions</div>
 <div class="faq-item">
-  <div class="faq-q" onclick="toggleFAQ(this)"><span>What is ARR vs MRR?</span><span class="faq-icon">+</span></div>
-  <div class="faq-a"><strong>MRR (Monthly Recurring Revenue)</strong> is predictable monthly subscription revenue. <strong>ARR (Annual Recurring Revenue)</strong> is simply MRR × 12. ARR is the standard metric for SaaS valuations and growth benchmarking.</div>
+  <div class="faq-q" onclick="toggleFAQ(this)">
+    <span>How much should I contribute to my 401(k)?</span>
+    <span class="faq-icon">+</span>
+  </div>
+  <div class="faq-a">At minimum, contribute enough to get your full employer match — it's an immediate, guaranteed return. Beyond that, many financial planners suggest working toward <strong>10–15% of your salary</strong> (including employer match) for a comfortable retirement, though your specific target depends on your age, existing savings, and retirement goals.</div>
 </div>
 <div class="faq-item">
-  <div class="faq-q" onclick="toggleFAQ(this)"><span>What is a good revenue growth rate?</span><span class="faq-icon">+</span></div>
-  <div class="faq-a">For early-stage SaaS startups, investors often look for the <strong>T2D3 framework</strong> (triple, triple, double, double, double growth years). For established companies, 20–30% annual growth is considered strong.</div>
+  <div class="faq-q" onclick="toggleFAQ(this)">
+    <span>What is a 401(k) employer match?</span>
+    <span class="faq-icon">+</span>
+  </div>
+  <div class="faq-a">An employer match is free money your company contributes to your 401(k) based on how much you contribute. A common formula is <strong>50% up to 6%</strong> — your employer adds 50 cents for every dollar you contribute, up to a contribution of 6% of your salary. Not contributing enough to get the full match means giving up part of your compensation.</div>
 </div>
 <div class="faq-item">
-  <div class="faq-q" onclick="toggleFAQ(this)"><span>What is revenue churn?</span><span class="faq-icon">+</span></div>
-  <div class="faq-a"><span class="faq-formula">Revenue Churn Rate = Lost MRR / Beginning MRR × 100%</span>Churn measures subscription revenue lost monthly from cancellations or downgrades. World-class SaaS achieves <strong>negative churn</strong> — expansion revenue from existing customers exceeds losses.</div>
+  <div class="faq-q" onclick="toggleFAQ(this)">
+    <span>What is the 401(k) contribution limit for 2025?</span>
+    <span class="faq-icon">+</span>
+  </div>
+  <div class="faq-a">For 2025, the employee elective deferral limit is <strong>$23,500</strong> for those under 50, and <strong>$31,000</strong> for those 50 and older (including a $7,500 catch-up contribution). Employer match contributions don't count against this personal limit.</div>
 </div>
 <div class="faq-item">
-  <div class="faq-q" onclick="toggleFAQ(this)"><span>What is LTV (Lifetime Value)?</span><span class="faq-icon">+</span></div>
-  <div class="faq-a"><span class="faq-formula">LTV = Average Revenue Per Customer / Monthly Churn Rate</span>LTV is the total expected revenue from a customer over their lifetime. A healthy SaaS business has an <strong>LTV:CAC ratio of 3:1 or higher</strong>.</div>
+  <div class="faq-q" onclick="toggleFAQ(this)">
+    <span>Traditional or Roth 401(k) — which is better?</span>
+    <span class="faq-icon">+</span>
+  </div>
+  <div class="faq-a">A <strong>Traditional 401(k)</strong> gives you a tax deduction now and taxes withdrawals in retirement — better if you expect to be in a lower tax bracket later. A <strong>Roth 401(k)</strong> is funded with after-tax money but grows and withdraws tax-free — better if you expect to be in a higher bracket in retirement. Many people split contributions between both to hedge against future tax-rate uncertainty.</div>
 </div>
 <div class="faq-item">
-  <div class="faq-q" onclick="toggleFAQ(this)"><span>What is CAC (Customer Acquisition Cost)?</span><span class="faq-icon">+</span></div>
-  <div class="faq-a"><span class="faq-formula">CAC = Total Sales &amp; Marketing Spend / New Customers Acquired</span>CAC tells you how much you spend to acquire one customer. Combined with LTV, it tells you whether your business model is profitable at scale.</div>
+  <div class="faq-q" onclick="toggleFAQ(this)">
+    <span>What happens to my 401(k) if I change jobs?</span>
+    <span class="faq-icon">+</span>
+  </div>
+  <div class="faq-a">You generally have four options: leave it with your former employer's plan (if allowed), roll it into your new employer's 401(k), roll it into an IRA, or cash it out (triggering taxes and, if you're under 59½, typically a 10% early withdrawal penalty). Rolling over to an IRA or new 401(k) is usually the best way to avoid taxes and penalties while keeping the money invested.</div>
 </div>
 </div>
+
+
+
 </div>
 </div><!-- content -->
 <div class="site-footer">
@@ -488,6 +498,6 @@ body{background:var(--bg);color:var(--t);font-family:var(--fn);font-size:14px;li
 </a>
 </div>
 <script src="app.js"></script>
-<script>initPage('revenue');</script>
+<script>initPage('401k');</script>
 </body>
 </html>

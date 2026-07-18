@@ -207,6 +207,7 @@ const SECTIONS=[
     {id:'loancomp',icon:'📋',name:'Loan Comparison',desc:'Compare up to 3 loan offers side by side to see which one actually costs less overall'},
     {id:'autoloan',icon:'🚗',name:'Auto Loan Calculator',desc:'Calculate your car payment including trade-in, sales tax, and new vs used loan rates'},
     {id:'tax',icon:'🧾',name:'Tax Estimator',desc:'Estimate your US federal income tax, effective rate, and what you actually take home'},
+    {id:'salary',icon:'💵',name:'Salary Calculator',desc:'Convert your pay between hourly, daily, monthly, and yearly instantly'},
     {id:'mortgage',icon:'🏠',name:'Mortgage',desc:'Estimate your full monthly home payment including property tax, insurance, and PMI'},
     {id:'heloc',icon:'🏡',name:'HELOC Calculator',desc:'Find out how much you can borrow against your home equity and what payments look like in the draw vs repayment period'},
     {id:'rentvsbuy',icon:'🏘️',name:'Rent vs Buy Calculator',desc:'Compare your net worth over time if you rent vs buy a home, and find the breakeven year'},
@@ -214,6 +215,8 @@ const SECTIONS=[
     {id:'savings',icon:'🏛️',name:'Savings Estimator',desc:'See how your savings grow over time with compound interest, and how long it takes to double'},
     {id:'provident',icon:'🏦',name:'Provident Fund Calculator',desc:'Project your provident fund (EPF/PF) maturity value from your monthly contributions and interest rate'},
     {id:'retirement',icon:'👴',name:'Retirement Planner',desc:'Find out if you\'re saving enough to retire comfortably, adjusted for inflation'},
+    {id:'401k',icon:'🏦',name:'401(k) Calculator',desc:'Project your 401(k) balance at retirement, including employer match'},
+    {id:'millionaire',icon:'💎',name:'Millionaire Calculator',desc:'Find out exactly what age you\'ll hit $1,000,000 based on your savings and investment rate'},
     {id:'fire',icon:'🔥',name:'FIRE Calculator',desc:'Find out how many years until you reach financial independence based on your savings rate'},
     {id:'debtcomp',icon:'❄️',name:'Snowball vs Avalanche',desc:'Compare two popular debt payoff strategies to see which clears your debt faster and cheaper'},
     {id:'debt',icon:'💳',name:'Debt Payoff Planner',desc:'Build a custom plan to pay off your debt and see exactly how much interest you\'ll save'},
@@ -234,6 +237,7 @@ const SECTIONS=[
     {id:'peg',icon:'📏',name:'PEG Ratio Calculator',desc:'Check whether a stock\'s price is justified by its earnings growth, not just its P/E ratio'},
     {id:'evebitda',icon:'🏢',name:'EV/EBITDA Calculator',desc:'Value a company by its full enterprise value, and see what a peer multiple implies for the share price'},
     {id:'invest',icon:'📈',name:'SIP / Investment',desc:'Project how your monthly investments grow into a future lump sum, with optional yearly step-ups'},
+    {id:'dca',icon:'📊',name:'Dollar Cost Averaging',desc:'Calculate shares bought, average cost per share, and compare DCA vs a lump sum investment'},
     {id:'swp',icon:'📉',name:'SWP Calculator',desc:'See how long a lump sum lasts when you withdraw a fixed monthly income from it'},
     {id:'stock',icon:'📉',name:'Stock P&L',desc:'Calculate your real profit or loss on a trade after accounting for brokerage fees'},
     {id:'split',icon:'🔀',name:'Stock Split Calculator',desc:'See exactly how many new shares you\'ll have and your adjusted cost basis after any forward or reverse split'},
@@ -249,6 +253,7 @@ const SECTIONS=[
   ]},
   {title:'🔬 Tools',badge:false,items:[
     {id:'currency',icon:'💱',name:'Currency Converter',desc:'Quickly convert between 15 major world currencies using live, daily-updated exchange rates'},
+    {id:'remit',icon:'🌍',name:'International Transfer Cost',desc:'See the true cost of sending money abroad, including hidden exchange rate markup'},
     {id:'scientific',icon:'🔬',name:'Scientific Calculator',desc:'A full scientific calculator with trig, logarithms, powers, factorials, and memory functions'},
   ]},
 ];
@@ -1495,6 +1500,299 @@ function cSavings(){
   renderInsights('sv-insights',insights);
 }
 
+// ── Salary ──────────────────────────────────────────────────────
+function cSalary(){
+  const amt=+gel('sl-amount').value||0;
+  const period=gel('sl-period').value;
+  const hrsDay=+gel('sl-hours').value||8;
+  const daysWeek=+gel('sl-days').value||5;
+  const weeksYear=+gel('sl-weeks').value||52;
+
+  const workDays=daysWeek*weeksYear;
+  const workHours=hrsDay*workDays;
+
+  let annual=0;
+  if(period==='hourly')annual=amt*workHours;
+  else if(period==='daily')annual=amt*workDays;
+  else if(period==='monthly')annual=amt*12;
+  else annual=amt;
+
+  const hourly=workHours>0?annual/workHours:0;
+  const daily=workDays>0?annual/workDays:0;
+  const monthly=annual/12;
+  const weekly=weeksYear>0?annual/weeksYear:0;
+  const biweekly=weekly*2;
+  const semiMonthly=annual/24;
+
+  gel('sl-hourly').textContent='$'+hourly.toFixed(2);
+  gel('sl-daily').textContent='$'+daily.toFixed(2);
+  gel('sl-monthly').textContent=f$(monthly);
+  gel('sl-yearly').textContent=f$(annual);
+  gel('sl-weekly').textContent='$'+weekly.toFixed(2);
+  gel('sl-biweekly').textContent='$'+biweekly.toFixed(2);
+  gel('sl-semimonthly').textContent='$'+semiMonthly.toFixed(2);
+  gel('sl-workdays').textContent=workDays.toLocaleString('en-US');
+  gel('sl-workhours').textContent=workHours.toLocaleString('en-US');
+
+  const insights=[];
+  const FED_MIN=7.25;
+  if(hourly>0 && hourly<FED_MIN){
+    insights.push({type:'bad',text:`This works out to <strong>$${hourly.toFixed(2)}/hr</strong>, which is below the US federal minimum wage of <strong>$${FED_MIN.toFixed(2)}/hr</strong> (state minimums may be higher).`});
+  }else if(hourly>=25){
+    insights.push({type:'good',text:`At <strong>$${hourly.toFixed(2)}/hr</strong>, this is well above the US federal minimum wage of $${FED_MIN.toFixed(2)}/hr.`});
+  }
+  const MEDIAN_US=59000;
+  if(annual>0){
+    if(annual>=MEDIAN_US*1.05){
+      insights.push({type:'good',text:`<strong>${f$(annual)}/year</strong> is above the roughly $${(MEDIAN_US/1000).toFixed(0)}k median individual income in the US.`});
+    }else if(annual<=MEDIAN_US*0.95){
+      insights.push({type:'neutral',text:`<strong>${f$(annual)}/year</strong> is below the roughly $${(MEDIAN_US/1000).toFixed(0)}k median individual income in the US.`});
+    }else{
+      insights.push({type:'neutral',text:`<strong>${f$(annual)}/year</strong> is roughly in line with the median individual income in the US.`});
+    }
+  }
+  insights.push({type:'neutral',text:`All figures above are <strong>gross pay</strong> before taxes and deductions. Use the <a href="/tax" style="color:var(--a);text-decoration:underline">Tax Estimator</a> to see roughly what you'd actually take home.`});
+  renderInsights('sl-insights',insights);
+}
+
+// ── Millionaire Timeline ────────────────────────────────────────
+function _miMonthsToTarget(current,monthly,target,mr){
+  if(current>=target)return 0;
+  if(mr<=0){
+    if(monthly<=0)return Infinity;
+    return (target-current)/monthly;
+  }
+  const denom=current*mr+monthly;
+  if(denom<=0)return Infinity;
+  const x=(target*mr+monthly)/denom;
+  if(x<=0)return Infinity;
+  return Math.log(x)/Math.log(1+mr);
+}
+function cMillionaire(){
+  const age=+gel('mi-age').value||0;
+  const target=+gel('mi-target').value||1000000;
+  const current=+gel('mi-current').value||0;
+  const monthly=+gel('mi-monthly').value||0;
+  const annRate=(+gel('mi-rate').value||0)/100;
+  const mr=Math.pow(1+annRate,1/12)-1;
+
+  const months=_miMonthsToTarget(current,monthly,target,mr);
+  const achievable=isFinite(months);
+  const years=achievable?months/12:Infinity;
+  const hitAge=achievable?age+years:Infinity;
+
+  let totalContrib=0,totalGrowth=0,finalBal=current;
+  if(achievable){
+    totalContrib=monthly*months;
+    finalBal=target;
+    totalGrowth=Math.max(finalBal-current-totalContrib,0);
+  }
+
+  gel('mi-age-result').textContent=achievable?hitAge.toFixed(1):'—';
+  gel('mi-years').textContent=achievable?years.toFixed(1)+' yrs':'—';
+  gel('mi-contrib').textContent=achievable?f$(totalContrib):'—';
+  gel('mi-growth').textContent=achievable?f$(totalGrowth):'—';
+
+  if(achievable){
+    const d=new Date();d.setMonth(d.getMonth()+Math.round(months));
+    gel('mi-date').textContent=d.toLocaleDateString('en-US',{month:'short',year:'numeric'});
+  }else{
+    gel('mi-date').textContent='Not reachable';
+  }
+  gel('mi-pct').textContent=target>0?pct(Math.min(current/target*100,100)):'0%';
+
+  const fasterMonths=_miMonthsToTarget(current,monthly+200,target,mr);
+  if(achievable && isFinite(fasterMonths) && fasterMonths<months){
+    const diffYears=(months-fasterMonths)/12;
+    gel('mi-faster').textContent=diffYears>=1?diffYears.toFixed(1)+' yrs sooner':Math.round(diffYears*12)+' mo sooner';
+  }else{
+    gel('mi-faster').textContent='—';
+  }
+
+  // Chart: balance path vs flat target line, capped at reach point (or 40yr max)
+  const chartMonths=achievable?Math.ceil(months):480;
+  const steps=12,balPts=[],targetPts=[];
+  for(let i=0;i<=steps;i++){
+    const m=chartMonths*i/steps;
+    const bal=mr>0?current*Math.pow(1+mr,m)+monthly*((Math.pow(1+mr,m)-1)/mr):current+monthly*m;
+    balPts.push(Math.min(bal,target*1.05));
+    targetPts.push(target);
+  }
+  drawLine('mi-chart',[{data:balPts,color:'#0ECB81',fill:true},{data:targetPts,color:'#F0B90B',fill:false,dash:[6,4],w:1.5}],175);
+
+  const insights=[];
+  if(!achievable){
+    insights.push({type:'bad',text:`At your current contribution and return rate, you won't reach <strong>${f$(target)}</strong> — try increasing your monthly savings or expected return.`});
+  }else if(hitAge<=45){
+    insights.push({type:'good',text:`You're on track to hit <strong>${f$(target)}</strong> by age <strong>${hitAge.toFixed(0)}</strong> — that's <strong>${years.toFixed(1)} years</strong> from now.`});
+  }else{
+    insights.push({type:'neutral',text:`At this pace, you'll reach <strong>${f$(target)}</strong> by age <strong>${hitAge.toFixed(0)}</strong>, in about <strong>${years.toFixed(1)} years</strong>.`});
+  }
+  if(achievable && totalGrowth>0){
+    const growthShare=totalGrowth/target*100;
+    insights.push({type:'neutral',text:`Of your final <strong>${f$(target)}</strong>, roughly <strong>${growthShare.toFixed(0)}%</strong> comes from investment growth rather than money you personally contributed — compounding is doing most of the work.`});
+  }
+  if(achievable && isFinite(fasterMonths) && fasterMonths<months){
+    const diffYears=(months-fasterMonths)/12;
+    insights.push({type:'good',text:`Adding just <strong>$200/month</strong> more would get you there roughly <strong>${diffYears.toFixed(1)} years sooner</strong>.`});
+  }
+  insights.push({type:'neutral',text:`This is your <strong>nominal</strong> (non-inflation-adjusted) net worth. Due to inflation, this amount will buy less in the future than it would today — see the guide below for details.`});
+  renderInsights('mi-insights',insights);
+}
+
+// ── Dollar Cost Averaging ───────────────────────────────────────
+function cDCA(){
+  const amt=+gel('dc-amt').value||0;
+  const periodsPerYear=+gel('dc-freq').value||12;
+  const years=+gel('dc-years').value||0;
+  const startPrice=+gel('dc-price').value||0;
+  const annGrowth=(+gel('dc-growth').value||0)/100;
+
+  const N=Math.max(Math.round(periodsPerYear*years),0);
+  const periodRate=Math.pow(1+annGrowth,1/periodsPerYear)-1;
+
+  let totalShares=0,totalInvested=0;
+  const pricePath=[startPrice],valuePath=[0],lumpPath=[amt*N>0?amt*N/Math.max(startPrice,0.0001)*startPrice:0];
+  for(let i=1;i<=N;i++){
+    const price=startPrice*Math.pow(1+periodRate,i);
+    if(price>0){totalShares+=amt/price;}
+    totalInvested+=amt;
+    pricePath.push(price);
+  }
+  const finalPrice=startPrice*Math.pow(1+periodRate,N);
+  const endingValue=totalShares*finalPrice;
+  const avgCost=totalShares>0?totalInvested/totalShares:0;
+  const gain=endingValue-totalInvested;
+  const returnPct=totalInvested>0?gain/totalInvested*100:0;
+
+  const lumpShares=startPrice>0?totalInvested/startPrice:0;
+  const lumpValue=lumpShares*finalPrice;
+
+  gel('dc-shares').textContent=totalShares.toLocaleString('en-US',{maximumFractionDigits:2});
+  gel('dc-avgcost').textContent='$'+avgCost.toFixed(2);
+  gel('dc-invested').textContent=f$(totalInvested);
+  gel('dc-value').textContent=f$(endingValue);
+  gel('dc-finalprice').textContent='$'+finalPrice.toFixed(2);
+  gel('dc-gain').textContent=(gain>=0?'+':'')+f$(gain);
+  gel('dc-return').textContent=(returnPct>=0?'+':'')+returnPct.toFixed(1)+'%';
+  gel('dc-lumpvalue').textContent=f$(lumpValue);
+  const gainEl=gel('dc-gain'),retEl=gel('dc-return');
+  gainEl.style.color=gain>=0?'var(--g)':'var(--r)';
+  retEl.style.color=gain>=0?'var(--g)':'var(--r)';
+
+  // chart: DCA value path vs Lump Sum value path over periods
+  const steps=Math.min(N,24)||1;
+  const dcaPts=[0],lumpPts=[0];
+  let runningShares=0,runningInvested=0;
+  for(let s=1;s<=steps;s++){
+    const i=Math.round(N*s/steps);
+    let shares=0,inv=0;
+    for(let k=1;k<=i;k++){const price=startPrice*Math.pow(1+periodRate,k);if(price>0)shares+=amt/price;inv+=amt;}
+    const price_i=startPrice*Math.pow(1+periodRate,i);
+    dcaPts.push(shares*price_i);
+    const lShares=startPrice>0?inv/startPrice:0;
+    lumpPts.push(lShares*price_i);
+  }
+  drawLine('dc-chart',[{data:lumpPts,color:'#F0B90B',fill:false,w:2},{data:dcaPts,color:'#0ECB81',fill:true}],175);
+
+  const insights=[];
+  if(totalShares>0){
+    const savedPct=startPrice>0?(1-avgCost/startPrice)*100:0;
+    if(savedPct>0.5){
+      insights.push({type:'good',text:`Your average cost of <strong>$${avgCost.toFixed(2)}/share</strong> is about <strong>${savedPct.toFixed(1)}% below</strong> the starting price — dollar cost averaging worked in your favor here because prices were rising, so early purchases came in cheaper.`});
+    }else{
+      insights.push({type:'neutral',text:`Your average cost per share came out to <strong>$${avgCost.toFixed(2)}</strong>, close to the starting price of $${startPrice.toFixed(2)}.`});
+    }
+  }
+  if(lumpValue>endingValue){
+    const diff=lumpValue-endingValue;
+    insights.push({type:'neutral',text:`In this steadily-rising price scenario, investing the same <strong>${f$(totalInvested)}</strong> as a lump sum on day one would have ended with <strong>${f$(diff)} more</strong> — this is expected in a smoothly rising market, since more money is invested for longer. Real markets are volatile, not smooth, which is where DCA's risk-reduction benefit comes in.`});
+  }else if(endingValue>lumpValue){
+    const diff=endingValue-lumpValue;
+    insights.push({type:'good',text:`In this scenario, dollar cost averaging actually ended <strong>${f$(diff)} ahead</strong> of a lump sum invested at the (higher) starting price.`});
+  }
+  insights.push({type:'neutral',text:`This projection assumes a smooth, steady price growth rate for simplicity — real markets move up and down, which is exactly the volatility that makes DCA's share-averaging effect meaningful in practice.`});
+  renderInsights('dc-insights',insights);
+}
+
+// ── 401(k) ──────────────────────────────────────────────────────
+function c401k(){
+  const age=+gel('k4-age').value||0;
+  const retAge=+gel('k4-retage').value||age;
+  let balance=+gel('k4-bal').value||0;
+  let salary=+gel('k4-salary').value||0;
+  const contribPct=(+gel('k4-contrib').value||0)/100;
+  const salaryGrowth=(+gel('k4-growth').value||0)/100;
+  const matchRate=(+gel('k4-matchrate').value||0)/100;
+  const matchLimitPct=(+gel('k4-matchlimit').value||0)/100;
+  const annReturn=(+gel('k4-return').value||0)/100;
+
+  const years=Math.max(retAge-age,0);
+  const monthlyReturn=Math.pow(1+annReturn,1/12)-1;
+  const IRS_LIMIT=23500;
+
+  let totalContrib=0,totalMatch=0;
+  let firstYearContrib=0,firstYearMatch=0;
+  const yearlyBalances=[balance],yearlyContribBasis=[balance];
+  let contribBasis=balance;
+
+  for(let y=0;y<years;y++){
+    let yearContrib=0,yearMatch=0;
+    const effMatchPct=Math.min(contribPct,matchLimitPct)*matchRate;
+    let annualEmployeeAmt=salary*contribPct;
+    if(annualEmployeeAmt>IRS_LIMIT)annualEmployeeAmt=IRS_LIMIT;
+    const monthlyEmployee=annualEmployeeAmt/12;
+    const monthlyMatch=salary*effMatchPct/12;
+    for(let m=0;m<12;m++){
+      balance=balance*(1+monthlyReturn)+monthlyEmployee+monthlyMatch;
+      contribBasis+=monthlyEmployee+monthlyMatch;
+      yearContrib+=monthlyEmployee;
+      yearMatch+=monthlyMatch;
+    }
+    totalContrib+=yearContrib;
+    totalMatch+=yearMatch;
+    if(y===0){firstYearContrib=yearContrib;firstYearMatch=yearMatch;}
+    salary*=(1+salaryGrowth);
+    yearlyBalances.push(balance);
+    yearlyContribBasis.push(contribBasis);
+  }
+
+  const startBal=+gel('k4-bal').value||0;
+  const totalGrowth=balance-startBal-totalContrib-totalMatch;
+
+  gel('k4-final').textContent=f$(balance);
+  gel('k4-growth-total').textContent=f$(Math.max(totalGrowth,0));
+  gel('k4-contrib-total').textContent=f$(totalContrib);
+  gel('k4-match-total').textContent=f$(totalMatch);
+  gel('k4-years').textContent=years+' yrs';
+  gel('k4-annual-contrib').textContent=f$(firstYearContrib);
+  gel('k4-annual-match').textContent=f$(firstYearMatch);
+
+  drawLine('k4-chart',[
+    {data:yearlyContribBasis,color:'#0ECB81',fill:true},
+    {data:yearlyBalances,color:'#F0B90B',fill:false,w:2.5}
+  ],175);
+
+  const insights=[];
+  const initialSalary=+gel('k4-salary').value||0;
+  const annualEmployeeAmt0=Math.min(initialSalary*contribPct,IRS_LIMIT);
+  if(contribPct*100<matchLimitPct*100){
+    const missedMatch=(matchLimitPct-contribPct)*matchRate*initialSalary;
+    insights.push({type:'bad',text:`You're contributing below the <strong>${(matchLimitPct*100).toFixed(1)}%</strong> match threshold — increasing your contribution to at least that level would capture roughly <strong>${f$(missedMatch)}/year</strong> more in free employer match.`});
+  }else{
+    insights.push({type:'good',text:`You're contributing enough to capture your <strong>full employer match</strong> — that's free money on top of your own savings.`});
+  }
+  if(annualEmployeeAmt0>=IRS_LIMIT*0.95){
+    insights.push({type:'neutral',text:`Your contribution is near or at the 2025 IRS employee deferral limit of <strong>${f$(IRS_LIMIT)}</strong>. Contributions are capped at this limit regardless of your elected percentage.`});
+  }
+  if(years>0){
+    const growthShare=balance>0?(Math.max(totalGrowth,0)/balance*100):0;
+    insights.push({type:'neutral',text:`Of your projected <strong>${f$(balance)}</strong> balance, roughly <strong>${growthShare.toFixed(0)}%</strong> comes from investment growth rather than contributions — the longer your money stays invested, the larger this share becomes.`});
+  }
+  insights.push({type:'neutral',text:`This projection assumes steady returns and doesn't account for market volatility, fees, or contribution limit changes over time. Try the <a href="/retirement" style="color:var(--a);text-decoration:underline">Retirement</a> calculator to see how this fits your overall retirement income picture.`});
+  renderInsights('k4-insights',insights);
+}
+
 // ── Stock ────────────────────────────────────────────────────────
 function cStock(){
   const sh=+gel('sk-sh').value||0,buy=+gel('sk-buy').value||0,sell=+gel('sk-sell').value||0,bc=(+gel('sk-bc').value||0)/100,sc=(+gel('sk-sc').value||0)/100,days=+gel('sk-days').value||1;
@@ -1877,6 +2175,116 @@ function cCurrency(){
   gel('cu-lbl').textContent=`1 ${f} = ${(RATES[t]/RATES[f]).toFixed(4)} ${t}`;
 }
 
+// ── International Transfer Cost ────────────────────────────────
+function renderRemitStatus(){
+  const el=gel('rm-status');if(!el)return;
+  if(ratesLive&&ratesUpdated){
+    el.innerHTML=`<span style="color:var(--g)">●</span> Mid-market rate live as of ${ratesUpdated.toLocaleString()}`;
+  }else{
+    el.innerHTML=`<span style="color:var(--m)">●</span> Live rates unavailable right now — showing approximate reference rates`;
+  }
+}
+async function loadRemitRates(){
+  try{
+    const cached=JSON.parse(localStorage.getItem(CU_CACHE_KEY)||'null');
+    if(cached&&Date.now()-cached.ts<CU_CACHE_MS){
+      RATES=cached.rates;ratesLive=true;ratesUpdated=new Date(cached.ts);
+      renderRemitStatus();rmApplyMidRate();
+      return;
+    }
+  }catch(e){}
+  try{
+    const res=await fetch(`https://v6.exchangerate-api.com/v6/${EXR_API_KEY}/latest/USD`);
+    const data=await res.json();
+    if(data.result!=='success')throw new Error('API returned an error');
+    const live={USD:1};
+    Object.keys(RATES_FALLBACK).forEach(k=>{if(typeof data.conversion_rates[k]==='number')live[k]=data.conversion_rates[k];});
+    RATES=live;ratesLive=true;ratesUpdated=new Date();
+    try{localStorage.setItem(CU_CACHE_KEY,JSON.stringify({rates:RATES,ts:Date.now()}));}catch(e){}
+  }catch(e){
+    RATES={...RATES_FALLBACK};ratesLive=false;ratesUpdated=null;
+  }
+  renderRemitStatus();rmApplyMidRate();
+}
+function rmApplyMidRate(){
+  const f=gel('rm-from'),t=gel('rm-to');
+  if(!f||!t)return;
+  const mid=RATES[t.value]/RATES[f.value];
+  const rateInput=gel('rm-rate');
+  if(rateInput && (!rateInput.dataset.touched || +rateInput.value===0)){
+    rateInput.value=(mid*0.975).toFixed(4);
+  }
+  cRemit();
+}
+function rmCurrencyChanged(){
+  const f=gel('rm-from').value,t=gel('rm-to').value;
+  gel('rm-from-lbl').textContent=f;
+  gel('rm-to-lbl').textContent=t;
+  const rateInput=gel('rm-rate');
+  if(rateInput)rateInput.dataset.touched='';
+  rmApplyMidRate();
+}
+function buildRemit(){
+  const from=gel('rm-from'),to=gel('rm-to');
+  Object.keys(RATES_FALLBACK).forEach(k=>{from.innerHTML+=`<option value="${k}">${k}</option>`;to.innerHTML+=`<option value="${k}">${k}</option>`;});
+  to.value='EUR';
+  gel('rm-from-lbl').textContent=from.value;
+  gel('rm-to-lbl').textContent=to.value;
+  const rateInput=gel('rm-rate');
+  if(rateInput)rateInput.addEventListener('input',()=>{rateInput.dataset.touched='1';});
+  loadRemitRates();
+}
+function cRemit(){
+  const from=gel('rm-from'),to=gel('rm-to');
+  if(!from||!to)return;
+  const f=from.value,t=to.value;
+  const amt=+gel('rm-amt').value||0;
+  const fee=+gel('rm-fee').value||0;
+  const mid=RATES[t]/RATES[f];
+  let provRate=+gel('rm-rate').value||0;
+  if(provRate<=0)provRate=mid;
+
+  const amountAfterFee=Math.max(amt-fee,0);
+  const received=amountAfterFee*provRate;
+  const idealReceived=amt*mid;
+  const totalCostTo=Math.max(idealReceived-received,0);
+  const totalCostFrom=mid>0?totalCostTo/mid:0;
+  const markupCostFrom=Math.max(totalCostFrom-fee,0);
+  const markupPct=mid>0?Math.max((mid-provRate)/mid*100,0):0;
+  const effRate=amt>0?received/amt:0;
+  const costPct=amt>0?totalCostFrom/amt*100:0;
+
+  gel('rm-received').textContent=received.toLocaleString('en-US',{maximumFractionDigits:2})+' '+t;
+  gel('rm-cost').textContent='$'+totalCostFrom.toFixed(2);
+  gel('rm-effrate').textContent=effRate.toFixed(4);
+  gel('rm-costpct').textContent=costPct.toFixed(2)+'%';
+  gel('rm-midrate').textContent=`1 ${f} = ${mid.toFixed(4)} ${t}`;
+  gel('rm-provrate').textContent=`1 ${f} = ${provRate.toFixed(4)} ${t}`;
+  gel('rm-feecost').textContent='$'+fee.toFixed(2);
+  gel('rm-markupcost').textContent='$'+markupCostFrom.toFixed(2);
+  gel('rm-markuppct').textContent=markupPct.toFixed(2)+'%';
+
+  gel('rm-ideal').textContent=idealReceived.toLocaleString('en-US',{maximumFractionDigits:2})+' '+t;
+  gel('rm-actual').textContent=received.toLocaleString('en-US',{maximumFractionDigits:2})+' '+t;
+
+  const insights=[];
+  if(markupPct>=2){
+    insights.push({type:'bad',text:`The exchange rate offered includes a hidden markup of about <strong>${markupPct.toFixed(1)}%</strong> vs the mid-market rate — that's costing you roughly <strong>$${markupCostFrom.toFixed(2)}</strong> beyond the visible fee, often the bigger part of the total cost.`});
+  }else if(markupPct<=0.5){
+    insights.push({type:'good',text:`The exchange rate offered is close to the true mid-market rate (<strong>${markupPct.toFixed(2)}%</strong> markup) — this is a competitive rate.`});
+  }else{
+    insights.push({type:'neutral',text:`The exchange rate offered has a moderate markup of about <strong>${markupPct.toFixed(1)}%</strong> vs the mid-market rate.`});
+  }
+  if(fee>0){
+    insights.push({type:'neutral',text:`On top of the rate markup, this provider charges a visible fee of <strong>$${fee.toFixed(2)}</strong>. Total cost combining both is <strong>$${totalCostFrom.toFixed(2)}</strong> (<strong>${costPct.toFixed(1)}%</strong> of the amount sent).`});
+  }
+  if(amt>0){
+    insights.push({type:'neutral',text:`At the true mid-market rate with no fee, your recipient would get <strong>${idealReceived.toLocaleString('en-US',{maximumFractionDigits:2})} ${t}</strong> instead of <strong>${received.toLocaleString('en-US',{maximumFractionDigits:2})} ${t}</strong> — always compare a few providers' actual quoted rates before sending, since markups vary widely.`});
+  }
+  renderInsights('rm-insights',insights);
+}
+
+
 // ── Scientific ───────────────────────────────────────────────────
 let scV='0',scE='',scM=0,scNew=true;
 const SC=[['MC','MR','MS','M+','M-'],['sin','cos','tan','log','ln'],['x²','√','1/x','n!','π'],['(',')','^','C','⌫'],['7','8','9','÷','%'],['4','5','6','×',''],['1','2','3','-',''],['0','.','±','+','=']];
@@ -2166,12 +2574,12 @@ const DISCLAIMER_CAT={
 };
 const PANEL_DISCLAIMER={
   loan:'credit',prepay:'credit',loancomp:'credit',autoloan:'credit',debtcomp:'credit',debt:'credit',
-  tax:'tax',
+  tax:'tax',salary:'tax',
   mortgage:'realestate',mortcomp:'realestate',rental:'realestate',rentalprop:'realestate',rentvsbuy:'realestate',
-  savings:'investing',provident:'investing',retirement:'investing',fire:'investing',savingsgoal:'investing',emergencyfund:'investing',healthscore:'investing',
-  cagr:'investing',xirr:'investing',drip:'investing',divgrowth:'investing',etf:'investing',allocation:'investing',dcf:'investing',peg:'investing',evebitda:'investing',invest:'investing',swp:'investing',stock:'investing',dilutionimpact:'investing',
+  savings:'investing',provident:'investing',retirement:'investing',fire:'investing',savingsgoal:'investing',emergencyfund:'investing',healthscore:'investing','401k':'investing',millionaire:'investing',
+  cagr:'investing',xirr:'investing',drip:'investing',divgrowth:'investing',etf:'investing',allocation:'investing',dcf:'investing',peg:'investing',evebitda:'investing',invest:'investing',swp:'investing',stock:'investing',dilutionimpact:'investing',dca:'investing',
   burnrate:'business',pricing:'business',equity:'business',revenue:'business',breakeven:'business',cashflow:'business',
-  currency:'currency'
+  currency:'currency',remit:'currency'
   // scientific intentionally excluded — pure math tool, no financial disclaimer applies
 };
 // ── Chart tooltips: hover a pie/donut slice or bar to see its exact
@@ -2492,7 +2900,7 @@ function injectShareButtons(){
     if(panel.querySelector('.share-btn'))return;
     const btn=document.createElement('button');
     btn.className='share-btn';
-    btn.innerHTML='🔗 Share Result';
+    btn.innerHTML='🔗 Share Calculator';
     btn.onclick=function(){openShareModal(panel.id);};
     _getCalcBtnRow(panel).appendChild(btn);
   });
@@ -2507,7 +2915,7 @@ function _ensureShareModal(){
   wrap.innerHTML=`
     <div class="share-modal">
       <div class="share-modal-head">
-        <div class="share-modal-title" id="share-modal-title">Share Result</div>
+        <div class="share-modal-title" id="share-modal-title">Share Calculator</div>
         <button class="share-modal-close" onclick="closeShareModal()">✕</button>
       </div>
       <div class="share-grid">
@@ -2621,7 +3029,7 @@ function initPage(id){
   const calls = [buildDir,buildSci,buildCurrency,buildMortComp,buildLoanComp,initGuideAccordions,
     renderXIRR,renderFounders,renderRounds,renderDebtRows,renderCFRows,renderDC2,
     calcCAGR,calcDRIP,cDivGrowth,calcETF,calcDCF,cBurn,cPricing,calcEquity,cDilutionImpact,calcRevenue,
-    cLoan,cPrepay,cAutoLoan,cSip,cSWP,cTax,cMortgage,cHeloc,cRentVsBuy,cSavings,cProvident,cAllocRecommend,
+    cLoan,cPrepay,cAutoLoan,cSip,cSWP,cTax,cMortgage,cHeloc,cRentVsBuy,cSavings,cProvident,cAllocRecommend,cSalary,c401k,cMillionaire,cDCA,buildRemit,
     cStock,cSplit,cPEG,cEVEBITDA,cRetire,cFire,cDebt,cRental,calcRP,cCF,cBE,cSavingsGoal,cEmergency,cHealthScore,
     cCurrency, injectDisclaimers, injectInputHints, injectPrintButtons, injectShareButtons, attachChartTooltips, applyCommaFormatting];
   calls.forEach(fn=>{ try{ fn(); }catch(e){ /* element not on this page — expected */ } });

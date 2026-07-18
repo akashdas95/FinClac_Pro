@@ -3,18 +3,18 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Revenue Forecast Calculator — SaaS Bear, Base & Bull Growth Scenarios | FinCalc</title>
-<meta name="description" content="Forecast SaaS revenue with bear, base, and bull growth scenarios, ARR, and LTV. Free revenue forecasting tool for startups.">
-<link rel="canonical" href="https://finclac.com/revenue">
+<title>Salary Calculator — Convert Hourly, Daily, Monthly &amp; Yearly Pay | FinCalc</title>
+<meta name="description" content="Convert your pay between hourly, daily, monthly, and yearly salary instantly. Free salary calculator with weekly, bi-weekly, and semi-monthly breakdowns.">
+<link rel="canonical" href="https://finclac.com/salary">
 <meta name="robots" content="index, follow">
 <meta property="og:type" content="website">
-<meta property="og:title" content="Revenue Forecast Calculator — SaaS Bear, Base & Bull Growth Scenarios | FinCalc">
-<meta property="og:description" content="Forecast SaaS revenue with bear, base, and bull growth scenarios, ARR, and LTV. Free revenue forecasting tool for startups.">
-<meta property="og:url" content="https://finclac.com/revenue">
+<meta property="og:title" content="Salary Calculator — Convert Hourly, Daily, Monthly &amp; Yearly Pay | FinCalc">
+<meta property="og:description" content="Convert your pay between hourly, daily, monthly, and yearly salary instantly. Free salary calculator with weekly, bi-weekly, and semi-monthly breakdowns.">
+<meta property="og:url" content="https://finclac.com/salary">
 <meta property="og:site_name" content="FinCalc">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Revenue Forecast Calculator — SaaS Bear, Base & Bull Growth Scenarios | FinCalc">
-<meta name="twitter:description" content="Forecast SaaS revenue with bear, base, and bull growth scenarios, ARR, and LTV. Free revenue forecasting tool for startups.">
+<meta name="twitter:title" content="Salary Calculator — Convert Hourly, Daily, Monthly &amp; Yearly Pay | FinCalc">
+<meta name="twitter:description" content="Convert your pay between hourly, daily, monthly, and yearly salary instantly. Free salary calculator with weekly, bi-weekly, and semi-monthly breakdowns.">
 <style>*{box-sizing:border-box;margin:0;padding:0}
 :root{--bg:#0B0E11;--s:#141920;--s2:#1C2430;--bd:#232D3A;--t:#E8EDF2;--m:#6B7A8D;--tb:#A3B2C4;--a:#F0B90B;--g:#0ECB81;--r:#F6465D;--b:#1890FF;--p:#9B59B6;--fn:'DM Sans',sans-serif;--mo:'DM Mono',monospace}
 body{background:var(--bg);color:var(--t);font-family:var(--fn);font-size:14px;line-height:1.5;min-height:100vh}
@@ -297,7 +297,7 @@ body{background:var(--bg);color:var(--t);font-family:var(--fn);font-size:14px;li
   gtag('config', 'G-61RHHG8E6Q');
 </script>
 <meta name="msvalidate.01" content="175D12831D109E3E7E1A856004E0F393" />
-<script type="application/ld+json">{"@context": "https://schema.org", "@type": "WebApplication", "name": "Revenue Forecast Calculator", "url": "https://finclac.com/revenue", "description": "Forecast SaaS revenue with bear, base, and bull growth scenarios, ARR, and LTV. Free revenue forecasting tool for startups.", "applicationCategory": "FinanceApplication", "operatingSystem": "Any (web-based)", "offers": {"@type": "Offer", "price": "0", "priceCurrency": "USD"}, "isPartOf": {"@type": "WebSite", "name": "FinCalc", "url": "https://finclac.com/"}}</script>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "WebApplication", "name": "Salary Calculator", "url": "https://finclac.com/salary", "description": "Convert your pay between hourly, daily, monthly, and yearly salary instantly. Free salary calculator with weekly, bi-weekly, and semi-monthly breakdowns.", "applicationCategory": "FinanceApplication", "operatingSystem": "Any (web-based)", "offers": {"@type": "Offer", "price": "0", "priceCurrency": "USD"}, "isPartOf": {"@type": "WebSite", "name": "FinCalc", "url": "https://finclac.com/"}}</script>
 </head>
 <body>
 <div class="topbar">
@@ -346,94 +346,82 @@ body{background:var(--bg);color:var(--t);font-family:var(--fn);font-size:14px;li
   <a class="ntab" href="/scientific" onclick="go('scientific',this);return false;">🔬 Scientific</a>
 </div>
 <div class="content">
-<div id="revenue" class="panel on">
+<div id="salary" class="panel on">
 <div class="calc-header">
-<h1 class="calc-page-title">Revenue Forecast Calculator</h1>
-<h2 class="calc-subtitle">Forecast SaaS revenue under bear, base & bull scenarios</h2>
-<p class="calc-desc">This revenue forecast calculator projects monthly recurring revenue growth under bear, base, and bull scenarios based on your starting MRR, growth rate, and churn, so you can plan for a range of outcomes.</p>
+<h1 class="calc-page-title">Salary Calculator</h1>
+<h2 class="calc-subtitle">Convert your pay between hourly, daily, monthly, and yearly in one click</h2>
+<p class="calc-desc">This salary calculator converts any pay rate into hourly, daily, monthly, and yearly equivalents, plus weekly and bi-weekly figures, based on your actual working hours and days.</p>
 </div>
 
 
 
-<div class="card mb16">
-  <div class="card-title">Revenue Forecast Assumptions</div>
-  <div class="g3">
-    <div class="field"><label>Current MRR ($)</label><div class="ip"><span class="pfx">$</span><input type="text" inputmode="decimal" id="rf-mrr" value="500000" oninput="calcRevenue()"></div></div>
-    <div class="field"><label>Forecast Period (months)</label><input type="text" inputmode="decimal" id="rf-months" value="12" min="3" max="36" oninput="calcRevenue()"></div>
-    <div class="field"><label>Churn Rate (%/mo)</label><input type="text" inputmode="decimal" id="rf-churn" value="3" step="0.5" oninput="calcRevenue()"></div>
-    <div class="field"><label>🐻 Pessimistic Growth %/mo</label><input type="text" inputmode="decimal" id="rf-pess" value="2" step="0.5" oninput="calcRevenue()"></div>
-    <div class="field"><label>📊 Base Growth %/mo</label><input type="text" inputmode="decimal" id="rf-base" value="8" step="0.5" oninput="calcRevenue()"></div>
-    <div class="field"><label>🚀 Optimistic Growth %/mo</label><input type="text" inputmode="decimal" id="rf-opt" value="15" step="0.5" oninput="calcRevenue()"></div>
-    <div class="field"><label>ARPU / Customer ($)</label><div class="ip"><span class="pfx">$</span><input type="text" inputmode="decimal" id="rf-arpu" value="2500" oninput="calcRevenue()"></div></div>
-    <div class="field"><label>One-time Revenue/mo ($)</label><div class="ip"><span class="pfx">$</span><input type="text" inputmode="decimal" id="rf-onetime" value="50000" oninput="calcRevenue()"></div></div>
-  </div>
-</div>
-<div class="two-eq mb16">
+<div class="two">
   <div class="card">
-    <div class="card-title">Scenarios</div>
-    <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px;margin-bottom:1rem">
-      <div class="sbox" style="border-top:3px solid var(--r)"><div class="lbl">🐻 Pessimistic</div><div class="val" style="color:var(--r)" id="rf-p">$0</div><div style="font-size:10px;color:var(--m);margin-top:3px" id="rf-pg"></div></div>
-      <div class="sbox" style="border-top:3px solid var(--b)"><div class="lbl">📊 Base Case</div><div class="val" style="color:var(--b)" id="rf-b">$0</div><div style="font-size:10px;color:var(--m);margin-top:3px" id="rf-bg"></div></div>
-      <div class="sbox" style="border-top:3px solid var(--g)"><div class="lbl">🚀 Optimistic</div><div class="val" style="color:var(--g)" id="rf-o">$0</div><div style="font-size:10px;color:var(--m);margin-top:3px" id="rf-og"></div></div>
+    <div class="card-title">Pay Details</div>
+    <div class="field"><label>Amount ($)</label><div class="ip"><span class="pfx">$</span><input type="text" inputmode="decimal" id="sl-amount" value="25" oninput="cSalary()"></div></div>
+    <div class="field"><label>This Amount Is Paid</label><select id="sl-period" onchange="cSalary()">
+      <option value="hourly">Hourly</option>
+      <option value="daily">Daily</option>
+      <option value="monthly">Monthly</option>
+      <option value="yearly">Yearly</option>
+    </select></div>
+    <div class="g2">
+      <div class="field"><label>Hours per Day</label><input type="text" inputmode="decimal" id="sl-hours" value="8" oninput="cSalary()"></div>
+      <div class="field"><label>Days per Week</label><input type="text" inputmode="decimal" id="sl-days" value="5" oninput="cSalary()"></div>
     </div>
-    <canvas id="rf-chart" width="500" height="165" style="width:100%"></canvas>
+    <div class="field"><label>Weeks Worked per Year</label><input type="text" inputmode="decimal" id="sl-weeks" value="52" oninput="cSalary()"></div>
+    <div class="sgrid">
+      <div class="sbox"><div class="lbl">Hourly</div><div class="val" style="color:var(--a)" id="sl-hourly">$0</div></div>
+      <div class="sbox"><div class="lbl">Daily</div><div class="val" style="color:var(--a)" id="sl-daily">$0</div></div>
+      <div class="sbox"><div class="lbl">Monthly</div><div class="val" style="color:var(--g)" id="sl-monthly">$0</div></div>
+      <div class="sbox"><div class="lbl">Yearly</div><div class="val" style="color:var(--g)" id="sl-yearly">$0</div></div>
+    </div>
   </div>
   <div class="card">
-    <div class="card-title">KPIs (Base Case)</div>
-    <div class="rrow"><span class="rk">ARR at end of period</span><span class="rv" style="color:var(--b)" id="rf-arr">$0</span></div>
-    <div class="rrow"><span class="rk">Cumulative revenue</span><span class="rv" style="color:var(--b)" id="rf-cum">$0</span></div>
-    <div class="rrow"><span class="rk">Projected customers</span><span class="rv" id="rf-custs">0</span></div>
-    <div class="rrow"><span class="rk">LTV (ARPU ÷ churn)</span><span class="rv" style="color:var(--g)" id="rf-ltv">$0</span></div>
-    <div class="rrow"><span class="rk">Revenue range at end</span><span class="rv" style="color:var(--a)" id="rf-range">—</span></div>
-    <div class="insight-box" id="rf-insights"></div>
+    <div class="card-title">Full Pay Breakdown</div>
+    <div class="rrow"><span class="rk">Weekly</span><span class="rv" id="sl-weekly">$0</span></div>
+    <div class="rrow"><span class="rk">Bi-Weekly</span><span class="rv" id="sl-biweekly">$0</span></div>
+    <div class="rrow"><span class="rk">Semi-Monthly</span><span class="rv" id="sl-semimonthly">$0</span></div>
+    <div class="rrow"><span class="rk">Working Days / Year</span><span class="rv" id="sl-workdays">0</span></div>
+    <div class="rrow"><span class="rk">Working Hours / Year</span><span class="rv" id="sl-workhours">0</span></div>
+    <div class="insight-box" id="sl-insights"></div>
   </div>
 </div>
-<div class="card"><div class="card-title">Monthly Forecast Table (Base Case)</div><div style="overflow-x:auto"><table class="tbl" id="rf-table"></table></div></div>
 
-<div style="margin-top:1.75rem;margin-bottom:1.75rem"><div class="calc-links"><span class="calc-links-label">🔗 Related Calculators</span><a class="calc-link-btn" href="/burnrate" onclick="go('burnrate',null);return false;">🔥 Burn Rate</a><a class="calc-link-btn" href="/breakeven" onclick="go('breakeven',null);return false;">📊 Break-even</a><a class="calc-link-btn" href="/cashflow" onclick="go('cashflow',null);return false;">💵 Cash Flow</a><a class="calc-link-btn" href="/pricing" onclick="go('pricing',null);return false;">🏷️ Pricing</a></div></div>
-<div class="related-box"><div class="related-box-title">📖 Related Articles</div><a class="related-item" href="/blog/saas-revenue-forecasting-scenarios">SaaS Revenue Forecasting: Bear, Base, and Bull Scenarios Explained<span class="related-arrow">→</span></a></div>
+<div style="margin-top:1.75rem;margin-bottom:1.75rem"><div class="calc-links"><span class="calc-links-label">🔗 Related Calculators</span><a class="calc-link-btn" href="/tax" onclick="go('tax',null);return false;">🧾 Tax</a><a class="calc-link-btn" href="/cashflow" onclick="go('cashflow',null);return false;">💵 Cash Flow</a><a class="calc-link-btn" href="/retirement" onclick="go('retirement',null);return false;">👴 Retirement</a><a class="calc-link-btn" href="/savingsgoal" onclick="go('savingsgoal',null);return false;">🎯 Savings Goal</a><a class="calc-link-btn" href="/breakeven" onclick="go('breakeven',null);return false;">📊 Break-even</a><a class="calc-link-btn" href="/healthscore" onclick="go('healthscore',null);return false;">💯 Health Score</a></div></div>
 <div class="calc-guide">
   <div class="guide-toggle">
-    <div class="guide-toggle-title">📖 Revenue Forecasting — 3-Scenario Planning</div>
+    <div class="guide-toggle-title">📖 Salary Conversions — Hourly, Daily, Monthly &amp; Yearly Pay</div>
   </div>
   <div class="guide-body">
-<div class="guide-p">Revenue forecasting for an early-stage business is part science, part informed storytelling. Investors and operators alike know that any single-point forecast ("we'll hit $2M ARR next year") is almost certainly wrong in the specific number — the real value of forecasting comes from understanding the range of plausible outcomes and the key assumptions driving each scenario.</div>
+<div class="guide-p">Job offers, freelance rates, and pay stubs rarely use the same time period, which makes comparing them directly harder than it should be. An hourly contract rate, a monthly salary, and an annual package all describe the same thing — your earning power — just measured on different clocks. Converting everything to one common basis is the fastest way to compare offers apples-to-apples.</div>
 
-<div class="guide-h3">MRR and ARR: The Core SaaS Metrics</div>
-<div class="guide-formula">ARR = MRR × 12</div>
-<div class="guide-p">Monthly Recurring Revenue (MRR) is the predictable, repeating monthly revenue from active subscriptions — explicitly excluding one-time fees, setup charges, or non-recurring services. Annual Recurring Revenue (ARR) simply annualizes that figure. These metrics matter because they strip out the noise of one-time revenue and reveal the true, compounding growth engine of a subscription business.</div>
+<div class="guide-h3">The Core Conversion Formula</div>
+<div class="guide-formula">Annual Pay = Hourly Rate × Hours per Day × Days per Week × Weeks per Year</div>
+<div class="guide-p">Once you know your annual pay, every other period falls out of it: divide by 12 for monthly, by the number of weeks worked for weekly, by working days for daily, and by total working hours for hourly. The two assumptions that matter most are hours worked per day and days worked per week — change either one and every converted figure shifts with it.</div>
 
-<div class="guide-h3">The T2D3 Growth Framework</div>
-<div class="guide-p">Popularized by venture capital firm Bessemer Venture Partners, "T2D3" describes a commonly cited growth trajectory benchmark for top-quartile SaaS companies: Triple, Triple, Double, Double, Double — meaning ARR triples in year one and two of meaningful scale, then doubles for three subsequent years.</div>
-<table class="guide-table"><thead><tr><th>Year</th><th>Growth Multiple</th><th>Example Starting at $1M ARR</th></tr></thead><tbody>
-<tr><td>1</td><td>3x</td><td>$3M</td></tr>
-<tr><td>2</td><td>3x</td><td>$9M</td></tr>
-<tr><td>3</td><td>2x</td><td>$18M</td></tr>
-<tr><td>4</td><td>2x</td><td>$36M</td></tr>
-<tr><td>5</td><td>2x</td><td>$72M</td></tr>
+<div class="guide-h3">Worked Example: $25/Hour, Full-Time</div>
+<div class="guide-p">At a standard full-time schedule — 8 hours a day, 5 days a week, 52 weeks a year — that's 2,080 working hours annually:</div>
+<table class="guide-table"><thead><tr><th>Period</th><th>Amount</th></tr></thead><tbody>
+<tr><td>Hourly</td><td>$25.00</td></tr>
+<tr><td>Daily</td><td>$200.00</td></tr>
+<tr><td>Weekly</td><td>$1,000.00</td></tr>
+<tr><td>Monthly</td><td>$4,333.33</td></tr>
+<tr><td>Yearly</td><td>$52,000</td></tr>
 </tbody></table>
-<div class="guide-p">Very few companies actually achieve this exact trajectory — it represents a benchmark for elite outliers, not a typical or expected outcome — but it's widely referenced by venture investors as a mental model for what "great" looks like at each stage.</div>
+<div class="guide-p">Notice monthly isn't just weekly × 4 — since most years have slightly more than 4 weeks per month (52 ÷ 12 = 4.33), the monthly figure comes from dividing the annual total by 12 instead, which is the more accurate method.</div>
 
-<div class="guide-h3">Revenue Churn: The Leak in the Bucket</div>
-<div class="guide-formula">Revenue Churn Rate = Lost MRR in Period / Starting MRR × 100%</div>
-<div class="guide-p">Even a business adding new customers steadily can stagnate or shrink if churn (lost revenue from cancellations and downgrades) outpaces new growth. A SaaS company with $500,000 MRR losing 3% monthly to churn is losing $15,000/month before counting any new sales — meaning it needs to add at least that much in new MRR every single month just to stay flat.</div>
+<div class="guide-h3">Gross Pay vs Take-Home Pay</div>
+<div class="guide-p">Every figure this calculator produces is <strong>gross pay</strong> — your earnings before taxes, insurance premiums, retirement contributions, and other payroll deductions. Take-home ("net") pay is typically 10–30% lower than gross pay depending on your tax bracket, state, and benefit elections. Use the <a href="/tax" style="color:var(--a);text-decoration:underline">Tax Estimator</a> alongside this calculator to see roughly what lands in your bank account.</div>
 
-<div class="guide-h3">Negative Net Revenue Churn: The Holy Grail</div>
-<div class="guide-p">The best-performing SaaS companies achieve what's called negative net revenue churn — where expansion revenue from existing customers (upsells, seat additions, plan upgrades) exceeds the revenue lost from cancellations and downgrades, meaning the existing customer base actually grows in revenue even with zero new customer acquisition. This is considered one of the strongest possible signals of product-market fit and pricing power.</div>
-
-<div class="guide-h3">LTV and CAC: Is the Growth Engine Actually Profitable?</div>
-<div class="guide-formula">LTV = Average Revenue Per Customer / Monthly Churn Rate<br>CAC = Total Sales &amp; Marketing Spend / New Customers Acquired</div>
-<div class="guide-p">Worked example: a customer paying $200/month with a 2% monthly churn rate has an expected lifetime value of $200 / 0.02 = $10,000. If acquiring that customer cost $2,500 in sales and marketing spend, the LTV:CAC ratio is 4:1 — generally considered healthy. A widely cited rule of thumb suggests an LTV:CAC ratio of at least 3:1 for a sustainable SaaS business; ratios below 1:1 mean the company is losing money on every customer acquired, before even accounting for fixed operating costs.</div>
-<table class="guide-table"><thead><tr><th>LTV:CAC Ratio</th><th>Interpretation</th></tr></thead><tbody>
-<tr><td>Below 1:1</td><td>Losing money per customer — unsustainable</td></tr>
-<tr><td>1:1 – 3:1</td><td>Marginal, needs improvement in retention or acquisition cost</td></tr>
-<tr><td>3:1 – 5:1</td><td>Healthy, generally considered a strong growth engine</td></tr>
-<tr><td>Above 5:1</td><td>Excellent — though may also signal under-investment in growth</td></tr>
+<div class="guide-h3">Common Pay Period Assumptions</div>
+<table class="guide-table"><thead><tr><th>Schedule</th><th>Typical Assumption</th></tr></thead><tbody>
+<tr><td>Standard full-time</td><td>8 hrs/day, 5 days/week, 52 weeks/year (2,080 hrs/year)</td></tr>
+<tr><td>Full-time with 2 weeks unpaid leave</td><td>8 hrs/day, 5 days/week, 50 weeks/year (2,000 hrs/year)</td></tr>
+<tr><td>Part-time (4 days/week)</td><td>8 hrs/day, 4 days/week, 52 weeks/year (1,664 hrs/year)</td></tr>
+<tr><td>Compressed schedule (10-hr days)</td><td>10 hrs/day, 4 days/week, 52 weeks/year (2,080 hrs/year)</td></tr>
 </tbody></table>
-
-<div class="guide-h3">Building a Three-Scenario Forecast</div>
-<div class="guide-p">Rather than a single forecast number, build bear, base, and bull cases by varying your key assumptions: new customer acquisition rate, churn rate, and average revenue per account. This forces explicit acknowledgment of uncertainty and gives investors (and yourself) a realistic range rather than false precision.</div>
-<div class="guide-tip">💡 Revisit and recalibrate your forecast model monthly against actual results — the value of a forecast isn't really in being "right," it's in the discipline of understanding which assumptions are driving your business, so you can catch problems (like rising churn) early rather than discovering them a quarter later.</div>
+<div class="guide-tip">💡 When comparing a salaried offer to a contract or freelance hourly rate, remember the salaried role usually also includes paid time off, health insurance, and employer retirement matching — benefits with real dollar value that a straight hourly comparison misses.</div>
 
   </div>
 </div>
@@ -441,26 +429,44 @@ body{background:var(--bg);color:var(--t);font-family:var(--fn);font-size:14px;li
 <div class="faq-section">
 <div class="faq-section-title">❓ Frequently Asked Questions</div>
 <div class="faq-item">
-  <div class="faq-q" onclick="toggleFAQ(this)"><span>What is ARR vs MRR?</span><span class="faq-icon">+</span></div>
-  <div class="faq-a"><strong>MRR (Monthly Recurring Revenue)</strong> is predictable monthly subscription revenue. <strong>ARR (Annual Recurring Revenue)</strong> is simply MRR × 12. ARR is the standard metric for SaaS valuations and growth benchmarking.</div>
+  <div class="faq-q" onclick="toggleFAQ(this)">
+    <span>How do I convert hourly pay to an annual salary?</span>
+    <span class="faq-icon">+</span>
+  </div>
+  <div class="faq-a"><span class="faq-formula">Annual = Hourly × Hours/Day × Days/Week × Weeks/Year</span>At a standard full-time schedule of 8 hours a day, 5 days a week, 52 weeks a year, multiply your hourly rate by 2,080 to get your annual salary. A $25/hr rate works out to $52,000 a year.</div>
 </div>
 <div class="faq-item">
-  <div class="faq-q" onclick="toggleFAQ(this)"><span>What is a good revenue growth rate?</span><span class="faq-icon">+</span></div>
-  <div class="faq-a">For early-stage SaaS startups, investors often look for the <strong>T2D3 framework</strong> (triple, triple, double, double, double growth years). For established companies, 20–30% annual growth is considered strong.</div>
+  <div class="faq-q" onclick="toggleFAQ(this)">
+    <span>Why isn't monthly pay just weekly pay times 4?</span>
+    <span class="faq-icon">+</span>
+  </div>
+  <div class="faq-a">Because most months have slightly more than 4 weeks — 52 weeks ÷ 12 months = 4.33 weeks per month on average. Multiplying weekly pay by exactly 4 understates your real monthly income. The accurate method is to divide your annual salary by 12 directly.</div>
 </div>
 <div class="faq-item">
-  <div class="faq-q" onclick="toggleFAQ(this)"><span>What is revenue churn?</span><span class="faq-icon">+</span></div>
-  <div class="faq-a"><span class="faq-formula">Revenue Churn Rate = Lost MRR / Beginning MRR × 100%</span>Churn measures subscription revenue lost monthly from cancellations or downgrades. World-class SaaS achieves <strong>negative churn</strong> — expansion revenue from existing customers exceeds losses.</div>
+  <div class="faq-q" onclick="toggleFAQ(this)">
+    <span>What's the difference between bi-weekly and semi-monthly pay?</span>
+    <span class="faq-icon">+</span>
+  </div>
+  <div class="faq-a"><strong>Bi-weekly</strong> pay happens every two weeks, giving you 26 paychecks a year (occasionally 27). <strong>Semi-monthly</strong> pay happens twice a month on fixed dates (like the 1st and 15th), giving you exactly 24 paychecks a year. Bi-weekly paychecks are a consistent amount; semi-monthly paychecks are also consistent, but the two schedules land on different calendar dates.</div>
 </div>
 <div class="faq-item">
-  <div class="faq-q" onclick="toggleFAQ(this)"><span>What is LTV (Lifetime Value)?</span><span class="faq-icon">+</span></div>
-  <div class="faq-a"><span class="faq-formula">LTV = Average Revenue Per Customer / Monthly Churn Rate</span>LTV is the total expected revenue from a customer over their lifetime. A healthy SaaS business has an <strong>LTV:CAC ratio of 3:1 or higher</strong>.</div>
+  <div class="faq-q" onclick="toggleFAQ(this)">
+    <span>Are these figures gross pay or take-home pay?</span>
+    <span class="faq-icon">+</span>
+  </div>
+  <div class="faq-a">All figures shown are <strong>gross pay</strong> — before taxes and deductions. Your actual take-home pay will be lower after federal and state income tax, Social Security, Medicare, and any benefit contributions. Use the Tax Estimator calculator for an estimate of your after-tax income.</div>
 </div>
 <div class="faq-item">
-  <div class="faq-q" onclick="toggleFAQ(this)"><span>What is CAC (Customer Acquisition Cost)?</span><span class="faq-icon">+</span></div>
-  <div class="faq-a"><span class="faq-formula">CAC = Total Sales &amp; Marketing Spend / New Customers Acquired</span>CAC tells you how much you spend to acquire one customer. Combined with LTV, it tells you whether your business model is profitable at scale.</div>
+  <div class="faq-q" onclick="toggleFAQ(this)">
+    <span>How many hours does a full-time employee work per year?</span>
+    <span class="faq-icon">+</span>
+  </div>
+  <div class="faq-a">The standard assumption is <strong>2,080 hours per year</strong> — 8 hours a day, 5 days a week, 52 weeks a year. Some employers use 2,000 hours (assuming 2 unpaid weeks off) or slightly less to account for holidays and PTO, so check your specific employer's assumption when comparing offers.</div>
 </div>
 </div>
+
+
+
 </div>
 </div><!-- content -->
 <div class="site-footer">
@@ -488,6 +494,6 @@ body{background:var(--bg);color:var(--t);font-family:var(--fn);font-size:14px;li
 </a>
 </div>
 <script src="app.js"></script>
-<script>initPage('revenue');</script>
+<script>initPage('salary');</script>
 </body>
 </html>
