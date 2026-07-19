@@ -3104,7 +3104,8 @@ function toggleNavDD(btn){
 window.addEventListener('resize',()=>{
   document.querySelectorAll('.nav-dd.open').forEach(d=>{d.classList.remove('open');d.querySelector('.nav-dd-btn').setAttribute('aria-expanded','false');});
 });
-window.addEventListener('scroll',()=>{
+window.addEventListener('scroll',e=>{
+  if(e.target && e.target.closest && e.target.closest('.nav-dd-menu'))return;
   document.querySelectorAll('.nav-dd.open').forEach(d=>{d.classList.remove('open');d.querySelector('.nav-dd-btn').setAttribute('aria-expanded','false');});
 },true);
 document.addEventListener('click',e=>{
