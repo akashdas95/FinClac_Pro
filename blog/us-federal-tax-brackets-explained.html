@@ -27,6 +27,21 @@ body{background:var(--bg);color:var(--t);font-family:var(--fn);font-size:14px;li
 .ntab{padding:8px 13px;font-size:12px;font-weight:500;color:#fff;cursor:pointer;border-bottom:2px solid transparent;white-space:nowrap;background:none;border-top:none;border-left:none;border-right:none;transition:all .18s;font-family:var(--fn);text-decoration:none;display:inline-block}
 .ntab.on{color:var(--a);border-bottom-color:var(--a)}
 .ntab:hover:not(.on){color:var(--t)}
+.nav-dd{position:relative;display:inline-block}
+.nav-dd-btn{padding:8px 11px 8px 13px;font-size:12px;font-weight:500;color:#fff;cursor:pointer;border-bottom:2px solid transparent;white-space:nowrap;background:none;border-top:none;border-left:none;border-right:none;transition:all .18s;font-family:var(--fn);display:inline-flex;align-items:center;gap:4px}
+.nav-dd-btn::after{content:'▾';font-size:8px;opacity:.65;margin-left:1px;transition:transform .15s}
+.nav-dd-btn:hover{color:var(--t)}
+.nav-dd-btn.on{color:var(--a);border-bottom-color:var(--a)}
+.nav-dd.open .nav-dd-btn::after{transform:rotate(180deg)}
+.nav-dd-menu{display:none;position:fixed;background:var(--s2);border:1px solid var(--bd);border-radius:10px;padding:8px;box-shadow:0 14px 36px rgba(0,0,0,.5);z-index:300;width:560px;max-width:88vw;max-height:70vh;overflow-y:auto}
+.nav-dd.open .nav-dd-menu{display:grid;grid-template-columns:repeat(2,1fr);gap:1px}
+.nav-dd-item{display:flex;align-items:center;gap:8px;padding:7px 9px;border-radius:6px;font-size:12.5px;color:var(--tb);text-decoration:none;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.nav-dd-item:hover{background:var(--s);color:#fff}
+.nav-dd-item.on{color:var(--a);font-weight:600;background:var(--s)}
+@media(max-width:700px){
+  .nav-dd-menu{width:86vw;max-width:340px}
+  .nav-dd.open .nav-dd-menu{grid-template-columns:1fr}
+}
 .content{padding:1.25rem}
 .panel{display:none}.panel.on{display:block}.panel.on::after{content:'';display:table;clear:both}
 .dir-sec{margin-bottom:1.75rem}
@@ -271,37 +286,13 @@ body{background:var(--bg);color:var(--t);font-family:var(--fn);font-size:14px;li
   </div>
 </div>
 <div class="nav">
-  <a class="ntab" href="/" onclick="go('home',this);return false;">🏠 Home</a><a class="ntab on" href="/blog">📝 Blog</a>
-  <a class="ntab" href="/cagr" onclick="go('cagr',this);return false;">📐 CAGR</a>
-  <a class="ntab" href="/xirr" onclick="go('xirr',this);return false;">📅 XIRR</a>
-  <a class="ntab" href="/drip" onclick="go('drip',this);return false;">💧 DRIP</a>
-  <a class="ntab" href="/etf" onclick="go('etf',this);return false;">🗂️ ETF Growth</a>
-  <a class="ntab" href="/dcf" onclick="go('dcf',this);return false;">🏦 DCF Valuation</a>
-  <a class="ntab" href="/debtcomp" onclick="go('debtcomp',this);return false;">❄️ Snowball vs Avalanche</a>
-  <a class="ntab" href="/rentalprop" onclick="go('rentalprop',this);return false;">🏡 Rental Property</a>
-  <a class="ntab" href="/burnrate" onclick="go('burnrate',this);return false;">🔥 Burn Rate</a>
-  <a class="ntab" href="/pricing" onclick="go('pricing',this);return false;">🏷️ Pricing</a>
-  <a class="ntab" href="/equity" onclick="go('equity',this);return false;">📐 Equity Dilution</a>
-  <a class="ntab" href="/revenue" onclick="go('revenue',this);return false;">📊 Revenue Forecast</a>
-  <a class="ntab" href="/loan" onclick="go('loan',this);return false;">🏦 Loan/EMI</a>
-  <a class="ntab" href="/invest" onclick="go('invest',this);return false;">📈 SIP/Investment</a>
-  <a class="ntab" href="/tax" onclick="go('tax',this);return false;">🧾 Tax</a>
-  <a class="ntab" href="/mortgage" onclick="go('mortgage',this);return false;">🏠 Mortgage</a>
-  <a class="ntab" href="/heloc" onclick="go('heloc',this);return false;">🏡 HELOC</a>
-  <a class="ntab" href="/mortcomp" onclick="go('mortcomp',this);return false;">⚖️ Mtg Compare</a>
-  <a class="ntab" href="/savings" onclick="go('savings',this);return false;">🏛️ Savings</a>
-  <a class="ntab" href="/stock" onclick="go('stock',this);return false;">📉 Stock P&amp;L</a>
-  <a class="ntab" href="/split" onclick="go('split',this);return false;">🔀 Stock Split</a>
-  <a class="ntab" href="/retirement" onclick="go('retirement',this);return false;">👴 Retirement</a>
-  <a class="ntab" href="/debt" onclick="go('debt',this);return false;">💳 Debt Payoff</a>
-  <a class="ntab" href="/rental" onclick="go('rental',this);return false;">🏘️ Rental Yield</a>
-  <a class="ntab" href="/cashflow" onclick="go('cashflow',this);return false;">💵 Cash Flow</a>
-  <a class="ntab" href="/breakeven" onclick="go('breakeven',this);return false;">📊 Break-even</a>
-  <a class="ntab" href="/savingsgoal" onclick="go('savingsgoal',this);return false;">🎯 Savings Goal</a>
-  <a class="ntab" href="/emergencyfund" onclick="go('emergencyfund',this);return false;">🛡️ Emergency Fund</a>
-  <a class="ntab" href="/healthscore" onclick="go('healthscore',this);return false;">💯 Health Score</a>
-  <a class="ntab" href="/currency" onclick="go('currency',this);return false;">💱 Currency</a>
-  <a class="ntab" href="/scientific" onclick="go('scientific',this);return false;">🔬 Scientific</a>
+  <a class="ntab" href="/" onclick="go('home',this);return false;">🏠 Home</a>
+  <a class="ntab on" href="/blog">📝 Blog</a>
+  <div class="nav-dd" data-cat="0"><button class="nav-dd-btn" onclick="toggleNavDD(this)" aria-haspopup="true" aria-expanded="false">💰 Personal Finance</button><div class="nav-dd-menu" id="nav-dd-0"></div></div>
+  <div class="nav-dd" data-cat="1"><button class="nav-dd-btn" onclick="toggleNavDD(this)" aria-haspopup="true" aria-expanded="false">📈 Investing</button><div class="nav-dd-menu" id="nav-dd-1"></div></div>
+  <div class="nav-dd" data-cat="2"><button class="nav-dd-btn" onclick="toggleNavDD(this)" aria-haspopup="true" aria-expanded="false">🚀 Startup &amp; Business</button><div class="nav-dd-menu" id="nav-dd-2"></div></div>
+  <div class="nav-dd" data-cat="3"><button class="nav-dd-btn" onclick="toggleNavDD(this)" aria-haspopup="true" aria-expanded="false">🔬 Tools</button><div class="nav-dd-menu" id="nav-dd-3"></div></div>
+
 </div>
 <div class="content">
 <div class="panel on" id="blog-us-federal-tax-brackets-explained">
@@ -358,7 +349,7 @@ body{background:var(--bg);color:var(--t);font-family:var(--fn);font-size:14px;li
   <img src="https://devglobe.app/badges/launched-on-devglobe-dark.svg" alt="Launched on DevGlobe" width="250" height="54" />
 </a>
 </div>
-<script src="/app.js"></script>
+<script src="/app.js?v=20260718b"></script>
 <script>initPage('blog-us-federal-tax-brackets-explained');</script>
 </body>
 </html>
