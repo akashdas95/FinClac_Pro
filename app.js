@@ -226,6 +226,7 @@ const SECTIONS=[
     {id:'emergencyfund',icon:'🛡️',name:'Emergency Fund Calculator',desc:'Find out how big your emergency fund should be and how long it\'ll take to build it'},
     {id:'healthscore',icon:'💯',name:'Financial Health Score',desc:'Get a single score out of 100 that sums up how healthy your overall finances really are'},
     {id:'lifeinsurance',icon:'🛡️',name:'Life Insurance Needs',desc:'Find out how much life insurance coverage your family would actually need'},
+    {id:'healthinsurance',icon:'🏥',name:'Health Insurance Cost',desc:'Compare two health plans by their true total annual cost, not just the premium'},
   ]},
   {title:'📈 Investing & Valuation',badge:true,items:[
     {id:'cagr',icon:'📐',name:'CAGR Calculator',desc:'Find the steady annual growth rate that explains how an investment grew over time'},
@@ -1767,6 +1768,82 @@ function cLifeIns(){
   renderInsights('li-insights',insights);
 }
 
+// ── Health Insurance ─────────────────────────────────────────────
+function _hiOOP(expenses,deductible,coinsPct,oopMax){
+  let oop;
+  if(expenses<=deductible)oop=expenses;
+  else oop=deductible+(expenses-deductible)*coinsPct;
+  oop=Math.min(oop,oopMax,expenses);
+  return Math.max(oop,0);
+}
+function _hiTotalCost(expenses,premiumMonthly,deductible,coinsPct,oopMax){
+  return premiumMonthly*12+_hiOOP(expenses,deductible,coinsPct,oopMax);
+}
+function cHealthIns(){
+  const expenses=+gel('hi-expenses').value||0;
+  const aPremium=+gel('hi-a-premium').value||0;
+  const aDeductible=+gel('hi-a-deductible').value||0;
+  const aCoins=(+gel('hi-a-coins').value||0)/100;
+  const aOopMax=+gel('hi-a-oopmax').value||0;
+  const bPremium=+gel('hi-b-premium').value||0;
+  const bDeductible=+gel('hi-b-deductible').value||0;
+  const bCoins=(+gel('hi-b-coins').value||0)/100;
+  const bOopMax=+gel('hi-b-oopmax').value||0;
+
+  const aOop=_hiOOP(expenses,aDeductible,aCoins,aOopMax);
+  const bOop=_hiOOP(expenses,bDeductible,bCoins,bOopMax);
+  const aTotal=aPremium*12+aOop;
+  const bTotal=bPremium*12+bOop;
+
+  gel('hi-a-total').textContent=f$(aTotal);
+  gel('hi-b-total').textContent=f$(bTotal);
+  gel('hi-a-r-premium').textContent=f$(aPremium*12);
+  gel('hi-a-r-oop').textContent=f$(aOop);
+  gel('hi-b-r-premium').textContent=f$(bPremium*12);
+  gel('hi-b-r-oop').textContent=f$(bOop);
+
+  const diff=Math.abs(aTotal-bTotal);
+  if(aTotal<bTotal){gel('hi-cheaper').textContent='Plan A';}
+  else if(bTotal<aTotal){gel('hi-cheaper').textContent='Plan B';}
+  else{gel('hi-cheaper').textContent='Tied';}
+  gel('hi-savings').textContent=f$(diff);
+
+  // find break-even usage level via sampling
+  const maxE=Math.max(aOopMax,bOopMax)*2+10000;
+  const steps=4000;
+  let breakEven=null;
+  let prevDiff=_hiTotalCost(0,aPremium,aDeductible,aCoins,aOopMax)-_hiTotalCost(0,bPremium,bDeductible,bCoins,bOopMax);
+  for(let i=1;i<=steps;i++){
+    const e=maxE*i/steps;
+    const d=_hiTotalCost(e,aPremium,aDeductible,aCoins,aOopMax)-_hiTotalCost(e,bPremium,bDeductible,bCoins,bOopMax);
+    if((prevDiff<0&&d>=0)||(prevDiff>0&&d<=0)){
+      const ePrev=maxE*(i-1)/steps;
+      breakEven=ePrev+(e-ePrev)*Math.abs(prevDiff)/(Math.abs(prevDiff)+Math.abs(d)||1);
+      break;
+    }
+    prevDiff=d;
+  }
+  gel('hi-breakeven').textContent=breakEven!==null?f$(breakEven)+'/yr':'No crossover';
+
+  const insights=[];
+  if(diff>0){
+    const cheaper=aTotal<bTotal?'Plan A':'Plan B';
+    insights.push({type:'good',text:`At <strong>${f$(expenses)}</strong> in expected annual expenses, <strong>${cheaper}</strong> costs <strong>${f$(diff)} less</strong> in total for the year.`});
+  }else{
+    insights.push({type:'neutral',text:`At this usage level, both plans cost about the same in total.`});
+  }
+  if(breakEven!==null){
+    insights.push({type:'neutral',text:`These two plans cost the same at roughly <strong>${f$(breakEven)}</strong> in annual medical spending. Below that, the lower-premium plan tends to win; above it, the lower-deductible plan tends to win.`});
+  }
+  const lowerPremiumIsA=aPremium<bPremium;
+  const lowerPremiumCheaper=(lowerPremiumIsA&&aTotal<bTotal)||(!lowerPremiumIsA&&bTotal<aTotal);
+  if(expenses>Math.min(aDeductible,bDeductible)&&!lowerPremiumCheaper){
+    insights.push({type:'bad',text:`The lower-premium plan is not actually cheaper at your expected usage level — its higher deductible and coinsurance outweigh the premium savings once you factor in real healthcare use.`});
+  }
+  insights.push({type:'neutral',text:`This estimate doesn't include copays for specific services, prescription drug tiers, or network differences — review the plan documents for the full picture before deciding.`});
+  renderInsights('hi-insights',insights);
+}
+
 // ── 401(k) ──────────────────────────────────────────────────────
 function c401k(){
   const age=+gel('k4-age').value||0;
@@ -2634,7 +2711,7 @@ const PANEL_DISCLAIMER={
   loan:'credit',prepay:'credit',loancomp:'credit',autoloan:'credit',debtcomp:'credit',debt:'credit',
   tax:'tax',salary:'tax',
   mortgage:'realestate',mortcomp:'realestate',rental:'realestate',rentalprop:'realestate',rentvsbuy:'realestate',
-  savings:'investing',provident:'investing',retirement:'investing',fire:'investing',savingsgoal:'investing',emergencyfund:'investing',healthscore:'investing','401k':'investing',millionaire:'investing',lifeinsurance:'investing',
+  savings:'investing',provident:'investing',retirement:'investing',fire:'investing',savingsgoal:'investing',emergencyfund:'investing',healthscore:'investing','401k':'investing',millionaire:'investing',lifeinsurance:'investing',healthinsurance:'investing',
   cagr:'investing',xirr:'investing',drip:'investing',divgrowth:'investing',etf:'investing',allocation:'investing',dcf:'investing',peg:'investing',evebitda:'investing',invest:'investing',swp:'investing',stock:'investing',dilutionimpact:'investing',dca:'investing',
   burnrate:'business',pricing:'business',equity:'business',revenue:'business',breakeven:'business',cashflow:'business',
   currency:'currency',remit:'currency'
@@ -3142,7 +3219,7 @@ function initPage(id){
   const calls = [buildDir,buildSci,buildCurrency,buildMortComp,buildLoanComp,initGuideAccordions,
     renderXIRR,renderFounders,renderRounds,renderDebtRows,renderCFRows,renderDC2,
     calcCAGR,calcDRIP,cDivGrowth,calcETF,calcDCF,cBurn,cPricing,calcEquity,cDilutionImpact,calcRevenue,
-    cLoan,cPrepay,cAutoLoan,cSip,cSWP,cTax,cMortgage,cHeloc,cRentVsBuy,cSavings,cProvident,cAllocRecommend,cSalary,c401k,cMillionaire,cDCA,cLifeIns,buildRemit,
+    cLoan,cPrepay,cAutoLoan,cSip,cSWP,cTax,cMortgage,cHeloc,cRentVsBuy,cSavings,cProvident,cAllocRecommend,cSalary,c401k,cMillionaire,cDCA,cLifeIns,cHealthIns,buildRemit,
     cStock,cSplit,cPEG,cEVEBITDA,cRetire,cFire,cDebt,cRental,calcRP,cCF,cBE,cSavingsGoal,cEmergency,cHealthScore,
     cCurrency, injectDisclaimers, injectInputHints, injectPrintButtons, injectShareButtons, attachChartTooltips, applyCommaFormatting];
   calls.forEach(fn=>{ try{ fn(); }catch(e){ /* element not on this page — expected */ } });
