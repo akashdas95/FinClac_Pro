@@ -203,6 +203,8 @@ function drawBars(id,labels,vals,colors,H_=130){
 const SECTIONS=[
   {title:'💰 Personal Finance',badge:false,items:[
     {id:'loan',icon:'🏦',name:'Loan / EMI',desc:'Find your monthly loan payment and see exactly how much of it goes to interest vs principal'},
+    {id:'loaneligibility',icon:'✅',name:'Loan Eligibility',desc:'Find out how much loan you may qualify for based on your income and existing debts'},
+    {id:'dti',icon:'📊',name:'Debt-to-Income Ratio',desc:'Check your DTI against what lenders typically look for'},
     {id:'prepay',icon:'⏩',name:'Loan Prepayment',desc:'See how much time and interest you can save by paying extra toward your loan each month'},
     {id:'loancomp',icon:'📋',name:'Loan Comparison',desc:'Compare up to 3 loan offers side by side to see which one actually costs less overall'},
     {id:'autoloan',icon:'🚗',name:'Auto Loan Calculator',desc:'Calculate your car payment including trade-in, sales tax, and new vs used loan rates'},
@@ -1844,6 +1846,97 @@ function cHealthIns(){
   renderInsights('hi-insights',insights);
 }
 
+// ── Loan Eligibility ────────────────────────────────────────────
+function cLoanElig(){
+  const income=+gel('le-income').value||0;
+  const existing=+gel('le-existing').value||0;
+  const dtiPct=(+gel('le-dti').value||0)/100;
+  const annRate=(+gel('le-rate').value||0)/100;
+  const years=+gel('le-years').value||0;
+
+  const maxEMI=income*dtiPct;
+  const capacity=Math.max(maxEMI-existing,0);
+  const r=annRate/12, n=years*12;
+  let loan=0;
+  if(capacity>0&&n>0){
+    loan = r>0 ? capacity*((Math.pow(1+r,n)-1)/(r*Math.pow(1+r,n))) : capacity*n;
+  }
+  const dtiUsed=income>0?(existing/income*100):0;
+
+  gel('le-loan').textContent=f$(loan);
+  gel('le-capacity').textContent=f$(capacity);
+  gel('le-maxemi').textContent=f$(maxEMI);
+  gel('le-used').textContent=pct(dtiUsed);
+
+  gel('le-r-income').textContent=f$(income);
+  gel('le-r-dti').textContent=(dtiPct*100).toFixed(0)+'%';
+  gel('le-r-maxemi').textContent=f$(maxEMI);
+  gel('le-r-existing').textContent='−'+f$(existing);
+  gel('le-r-capacity').textContent=f$(capacity);
+  gel('le-r-loan').textContent=f$(loan);
+
+  const insights=[];
+  if(capacity<=0){
+    insights.push({type:'bad',text:`Your existing debt payments already use up your entire allowed DTI budget, leaving no room for a new loan at a ${(dtiPct*100).toFixed(0)}% DTI cap. Paying down existing debt would be the most direct way to open up eligibility.`});
+  }else{
+    insights.push({type:'good',text:`Based on your income and existing debt, you may be eligible for a loan of roughly <strong>${f$(loan)}</strong> at these terms.`});
+    if(dtiUsed>0){
+      insights.push({type:'neutral',text:`Your existing debt already uses <strong>${pct(dtiUsed)}</strong> of your income, leaving <strong>${f$(capacity)}/month</strong> in EMI capacity for this new loan.`});
+    }
+  }
+  if(dtiPct*100>45){
+    insights.push({type:'neutral',text:`A ${(dtiPct*100).toFixed(0)}% max DTI is on the higher end — many lenders cap total DTI closer to 36-43%. Actual offers may be more conservative than this estimate.`});
+  }
+  insights.push({type:'neutral',text:`This is an estimate based on income and debt alone — actual approval also depends on credit score, employment history, and lender-specific policies.`});
+  renderInsights('le-insights',insights);
+}
+
+// ── Debt-to-Income Ratio ────────────────────────────────────────
+function cDTI(){
+  const income=+gel('dti-income').value||0;
+  const housing=+gel('dti-housing').value||0;
+  const other=+gel('dti-other').value||0;
+
+  const totalDebt=housing+other;
+  const backEnd=income>0?(totalDebt/income*100):0;
+  const frontEnd=income>0?(housing/income*100):0;
+  const remaining=income-totalDebt;
+
+  let rating,ratingColor,ratingType;
+  if(backEnd<=36){rating='Excellent';ratingColor='var(--g)';ratingType='good';}
+  else if(backEnd<=43){rating='Acceptable';ratingColor='var(--a)';ratingType='neutral';}
+  else if(backEnd<=50){rating='High';ratingColor='var(--r)';ratingType='bad';}
+  else{rating='Risky';ratingColor='var(--r)';ratingType='bad';}
+
+  gel('dti-back').textContent=pct(backEnd);
+  gel('dti-front').textContent=pct(frontEnd);
+  gel('dti-totaldebt').textContent=f$(totalDebt);
+  gel('dti-rating').textContent=rating;
+  gel('dti-rating').style.color=ratingColor;
+
+  gel('dti-r-income').textContent=f$(income);
+  gel('dti-r-housing').textContent=f$(housing);
+  gel('dti-r-other').textContent=f$(other);
+  gel('dti-r-total').textContent=f$(totalDebt);
+  gel('dti-r-remaining').textContent=f$(remaining);
+
+  const insights=[];
+  if(backEnd<=36){
+    insights.push({type:'good',text:`At <strong>${pct(backEnd)}</strong>, your back-end DTI is in the excellent range — this generally qualifies for the widest range of loan products and the best available rates.`});
+  }else if(backEnd<=43){
+    insights.push({type:'neutral',text:`At <strong>${pct(backEnd)}</strong>, your back-end DTI is acceptable to most lenders, though some become more selective in this range.`});
+  }else if(backEnd<=50){
+    insights.push({type:'bad',text:`At <strong>${pct(backEnd)}</strong>, your back-end DTI is on the high side — many conventional lenders may hesitate or require stronger credit and savings to offset it.`});
+  }else{
+    insights.push({type:'bad',text:`At <strong>${pct(backEnd)}</strong>, your back-end DTI is above what most lenders consider serviceable. Reducing debt payments before applying for new credit would likely improve your options significantly.`});
+  }
+  if(frontEnd>28){
+    insights.push({type:'neutral',text:`Your housing payment alone takes up <strong>${pct(frontEnd)}</strong> of your income — above the commonly cited 28% front-end guideline, even before other debts are counted.`});
+  }
+  insights.push({type:'neutral',text:`Paying off even one smaller debt in full often improves DTI faster than partial payments spread across several, since it removes a whole monthly obligation from the calculation.`});
+  renderInsights('dti-insights',insights);
+}
+
 // ── 401(k) ──────────────────────────────────────────────────────
 function c401k(){
   const age=+gel('k4-age').value||0;
@@ -2708,7 +2801,7 @@ const DISCLAIMER_CAT={
   currency:'Exchange rates are pulled from a live rates provider and cached for up to 24 hours — they are indicative reference rates, not real-time interbank or market rates, and do not include the spread or fees your bank or payment provider will charge. <strong>Check with your bank or payment provider for the exact rate on any actual transaction.</strong>'
 };
 const PANEL_DISCLAIMER={
-  loan:'credit',prepay:'credit',loancomp:'credit',autoloan:'credit',debtcomp:'credit',debt:'credit',
+  loan:'credit',prepay:'credit',loancomp:'credit',autoloan:'credit',debtcomp:'credit',debt:'credit',loaneligibility:'credit',dti:'credit',
   tax:'tax',salary:'tax',
   mortgage:'realestate',mortcomp:'realestate',rental:'realestate',rentalprop:'realestate',rentvsbuy:'realestate',
   savings:'investing',provident:'investing',retirement:'investing',fire:'investing',savingsgoal:'investing',emergencyfund:'investing',healthscore:'investing','401k':'investing',millionaire:'investing',lifeinsurance:'investing',healthinsurance:'investing',
@@ -3219,7 +3312,7 @@ function initPage(id){
   const calls = [buildDir,buildSci,buildCurrency,buildMortComp,buildLoanComp,initGuideAccordions,
     renderXIRR,renderFounders,renderRounds,renderDebtRows,renderCFRows,renderDC2,
     calcCAGR,calcDRIP,cDivGrowth,calcETF,calcDCF,cBurn,cPricing,calcEquity,cDilutionImpact,calcRevenue,
-    cLoan,cPrepay,cAutoLoan,cSip,cSWP,cTax,cMortgage,cHeloc,cRentVsBuy,cSavings,cProvident,cAllocRecommend,cSalary,c401k,cMillionaire,cDCA,cLifeIns,cHealthIns,buildRemit,
+    cLoan,cPrepay,cAutoLoan,cSip,cSWP,cTax,cMortgage,cHeloc,cRentVsBuy,cSavings,cProvident,cAllocRecommend,cSalary,c401k,cMillionaire,cDCA,cLifeIns,cHealthIns,cLoanElig,cDTI,buildRemit,
     cStock,cSplit,cPEG,cEVEBITDA,cRetire,cFire,cDebt,cRental,calcRP,cCF,cBE,cSavingsGoal,cEmergency,cHealthScore,
     cCurrency, injectDisclaimers, injectInputHints, injectPrintButtons, injectShareButtons, attachChartTooltips, applyCommaFormatting];
   calls.forEach(fn=>{ try{ fn(); }catch(e){ /* element not on this page — expected */ } });
