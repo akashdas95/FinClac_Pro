@@ -895,7 +895,7 @@ function calcRevenue(){
 // ── Loan ────────────────────────────────────────────────────────
 function cLoan(){
   const P=+gel('l-amt').value||0,r=(+gel('l-rate').value||0)/12/100,n=+gel('l-n').value||1,fee=(+gel('l-fee').value||0)/100,type=gel('l-type').value;
-  let emi,int;if(type==='flat'){emi=(P+P*(r*12)*n)/n;int=P*(r*12)*n;}else{emi=r?P*r*Math.pow(1+r,n)/(Math.pow(1+r,n)-1):P/n;int=emi*n-P;}
+  let emi,int;if(type==='flat'){emi=(P+P*r*n)/n;int=P*r*n;}else{emi=r?P*r*Math.pow(1+r,n)/(Math.pow(1+r,n)-1):P/n;int=emi*n-P;}
   const tot=emi*n,pf=P*fee;
   gel('l-emi').textContent=f$(emi);gel('l-int').textContent=f$(int);gel('l-tot').textContent=f$(tot+pf);gel('l-pf').textContent=f$(pf);
   gel('l-pp').textContent=Math.round(P/tot*100)+'%';gel('l-ip').textContent=Math.round(int/tot*100)+'%';gel('l-coc').textContent=pct(int/P*100);
