@@ -265,7 +265,7 @@ function buildDir(){
   const el=gel('dir-home');el.innerHTML='';
   SECTIONS.forEach(sec=>{
     const slug=sec.title.replace(/[^\w\s-]/g,'').trim().toLowerCase().replace(/\s+/g,'-');
-    let html=`<div class="dir-sec" id="dir-sec-${slug}"><div class="dir-sec-h">${sec.title}${sec.badge?' <span class="badge-new">New</span>':''}</div><div class="dir-grid">`;
+    let html=`<div class="dir-sec" id="dir-sec-${slug}"><a class="dir-sec-h" href="/${slug}" style="text-decoration:none;color:inherit" onclick="location.href='/${slug}';return false;">${sec.title}${sec.badge?' <span class="badge-new">New</span>':''}</a><div class="dir-grid">`;
     sec.items.forEach(it=>{html+=`<a class="dir-card" href="/${it.id}" onclick="location.href='/${it.id}';return false;"><div class="dir-icon">${it.icon}</div><div class="dir-name">${it.name}</div><div class="dir-desc">${it.desc}</div></a>`;});
     html+='</div></div>';el.innerHTML+=html;
   });
@@ -3111,7 +3111,7 @@ function _getCalcBtnRow(panel){
 
 function injectPrintButtons(){
   document.querySelectorAll('.panel').forEach(panel=>{
-    if(panel.id==='home'||panel.id==='privacy'||panel.id==='about'||panel.id==='terms'||panel.id==='scientific'||panel.id==='currency'||panel.id.indexOf('blog')===0)return;
+    if(panel.id==='home'||panel.id==='privacy'||panel.id==='about'||panel.id==='terms'||panel.id==='scientific'||panel.id==='currency'||panel.id==='personal-finance'||panel.id==='investing-valuation'||panel.id==='startup-business'||panel.id==='tools'||panel.id.indexOf('blog')===0)return;
     if(panel.querySelector('.download-btn'))return;
     const btn=document.createElement('button');
     btn.className='download-btn';
@@ -3124,7 +3124,7 @@ function injectPrintButtons(){
 // ── Share Result ────────────────────────────────────────────────
 function injectShareButtons(){
   document.querySelectorAll('.panel').forEach(panel=>{
-    if(panel.id==='home'||panel.id==='privacy'||panel.id==='about'||panel.id==='terms'||panel.id==='scientific'||panel.id==='currency'||panel.id.indexOf('blog')===0)return;
+    if(panel.id==='home'||panel.id==='privacy'||panel.id==='about'||panel.id==='terms'||panel.id==='scientific'||panel.id==='currency'||panel.id==='personal-finance'||panel.id==='investing-valuation'||panel.id==='startup-business'||panel.id==='tools'||panel.id.indexOf('blog')===0)return;
     if(panel.querySelector('.share-btn'))return;
     const btn=document.createElement('button');
     btn.className='share-btn';
@@ -3304,18 +3304,68 @@ function highlightNavTab(id){
     });
   });
 }
+const PAGE_FNS={
+  '401k':[c401k],
+  'allocation':[cAllocRecommend],
+  'autoloan':[cAutoLoan],
+  'breakeven':[cBE],
+  'burnrate':[cBurn],
+  'cagr':[calcCAGR],
+  'cashflow':[renderCFRows,cCF],
+  'currency':[buildCurrency,cCurrency],
+  'dca':[cDCA],
+  'dcf':[calcDCF],
+  'debt':[renderDebtRows,cDebt],
+  'debtcomp':[renderDC2],
+  'dilutionimpact':[cDilutionImpact],
+  'divgrowth':[cDivGrowth],
+  'drip':[calcDRIP],
+  'dti':[cDTI],
+  'emergencyfund':[cEmergency],
+  'equity':[renderFounders,renderRounds,calcEquity],
+  'etf':[calcETF],
+  'evebitda':[cEVEBITDA],
+  'fire':[cFire],
+  'healthinsurance':[cHealthIns],
+  'healthscore':[cHealthScore],
+  'heloc':[cHeloc],
+  'home':[buildDir],
+  'invest':[cSip],
+  'lifeinsurance':[cLifeIns],
+  'loan':[cLoan],
+  'loancomp':[buildLoanComp],
+  'loaneligibility':[cLoanElig],
+  'millionaire':[cMillionaire],
+  'mortcomp':[buildMortComp],
+  'mortgage':[cMortgage],
+  'peg':[cPEG],
+  'prepay':[cPrepay],
+  'pricing':[cPricing],
+  'provident':[cProvident],
+  'remit':[buildRemit],
+  'rental':[cRental],
+  'rentalprop':[calcRP],
+  'rentvsbuy':[cRentVsBuy],
+  'retirement':[cRetire],
+  'revenue':[calcRevenue],
+  'salary':[cSalary],
+  'savings':[cSavings],
+  'savingsgoal':[cSavingsGoal],
+  'scientific':[buildSci],
+  'split':[cSplit],
+  'stock':[cStock],
+  'swp':[cSWP],
+  'tax':[cTax],
+  'xirr':[renderXIRR]
+};
 function initPage(id){
   document.body.dataset.page = id;
   window.__isHome = (id === 'home');
   buildNavDropdowns();
   highlightNavTab(id);
-  const calls = [buildDir,buildSci,buildCurrency,buildMortComp,buildLoanComp,initGuideAccordions,
-    renderXIRR,renderFounders,renderRounds,renderDebtRows,renderCFRows,renderDC2,
-    calcCAGR,calcDRIP,cDivGrowth,calcETF,calcDCF,cBurn,cPricing,calcEquity,cDilutionImpact,calcRevenue,
-    cLoan,cPrepay,cAutoLoan,cSip,cSWP,cTax,cMortgage,cHeloc,cRentVsBuy,cSavings,cProvident,cAllocRecommend,cSalary,c401k,cMillionaire,cDCA,cLifeIns,cHealthIns,cLoanElig,cDTI,buildRemit,
-    cStock,cSplit,cPEG,cEVEBITDA,cRetire,cFire,cDebt,cRental,calcRP,cCF,cBE,cSavingsGoal,cEmergency,cHealthScore,
-    cCurrency, injectDisclaimers, injectInputHints, injectPrintButtons, injectShareButtons, attachChartTooltips, applyCommaFormatting];
-  calls.forEach(fn=>{ try{ fn(); }catch(e){ /* element not on this page — expected */ } });
+  const shared = [initGuideAccordions,injectDisclaimers,injectInputHints,injectPrintButtons,injectShareButtons,attachChartTooltips,applyCommaFormatting];
+  shared.forEach(fn=>{ try{ fn(); }catch(e){ /* utility fn, expected to be safe site-wide */ } });
+  (PAGE_FNS[id] || []).forEach(fn=>{ try{ fn(); }catch(e){ console.error('initPage: error running', fn.name, 'on page', id, e); } });
   if(window.__isHome){
     const params = new URLSearchParams(location.search);
     const q = params.get('q');
