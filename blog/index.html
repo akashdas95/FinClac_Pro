@@ -39,7 +39,7 @@ html[data-theme="light"] .footer-copy a{color:#000!important}
 body,.card,.dir-card,.topbar,.nav,.nav-dd-menu,.searchbox,.footer{transition:background-color .2s ease,border-color .2s ease,color .2s ease}
 .theme-toggle{display:inline-flex;align-items:center;gap:6px;padding:6px 12px;border-radius:20px;background:var(--s2);border:1px solid var(--bd);color:var(--t);font-size:12px;font-weight:500;cursor:pointer;font-family:var(--fn);transition:all .15s}
 .theme-toggle:hover{border-color:var(--a)}
-body{background:var(--bg);color:var(--t);font-family:var(--fn);font-size:14px;line-height:1.5;min-height:100vh}
+body{background:var(--bg);color:var(--t);font-family:var(--fn);font-size:14px;line-height:1.5;min-height:100vh;display:flex;flex-direction:column}
 .topbar{background:var(--s);border-bottom:1px solid var(--bd);padding:0 1.25rem;display:flex;align-items:center;justify-content:space-between;height:52px;position:sticky;top:0;z-index:200}
 .logo{display:flex;align-items:center;gap:8px;font-size:16px;font-weight:600;color:var(--t);text-decoration:none}
 .logo-mark{width:28px;height:28px;background:var(--a);border-radius:6px;display:flex;align-items:center;justify-content:center;color:#000;font-size:13px;font-weight:700}
@@ -67,7 +67,7 @@ body{background:var(--bg);color:var(--t);font-family:var(--fn);font-size:14px;li
   .nav-dd-menu{width:86vw;max-width:340px}
   .nav-dd.open .nav-dd-menu{grid-template-columns:1fr}
 }
-.content{padding:1.25rem}
+.content{padding:1.25rem;flex:1 0 auto}
 .panel{display:none}.panel.on{display:block}.panel.on::after{content:'';display:table;clear:both}
 .dir-sec{margin-bottom:1.75rem}
 .dir-sec-h{font-size:11px;font-weight:600;color:var(--m);letter-spacing:.8px;text-transform:uppercase;margin-bottom:.75rem;display:flex;align-items:center;gap:8px}
@@ -342,10 +342,10 @@ body{background:var(--bg);color:var(--t);font-family:var(--fn);font-size:14px;li
 <div class="nav">
   <a class="ntab" href="/" onclick="go('home',this);return false;">🏠 Home</a>
   <a class="ntab on" href="/blog">📝 Blog</a>
-  <div class="nav-dd" data-cat="0"><button class="nav-dd-btn" onclick="toggleNavDD(this)" aria-haspopup="true" aria-expanded="false">💰 Personal Finance</button><div class="nav-dd-menu" id="nav-dd-0"></div></div>
-  <div class="nav-dd" data-cat="1"><button class="nav-dd-btn" onclick="toggleNavDD(this)" aria-haspopup="true" aria-expanded="false">📈 Investing</button><div class="nav-dd-menu" id="nav-dd-1"></div></div>
-  <div class="nav-dd" data-cat="2"><button class="nav-dd-btn" onclick="toggleNavDD(this)" aria-haspopup="true" aria-expanded="false">🚀 Startup &amp; Business</button><div class="nav-dd-menu" id="nav-dd-2"></div></div>
-  <div class="nav-dd" data-cat="3"><button class="nav-dd-btn" onclick="toggleNavDD(this)" aria-haspopup="true" aria-expanded="false">🔬 Tools</button><div class="nav-dd-menu" id="nav-dd-3"></div></div>
+  <div class="nav-dd" data-cat="0"><button class="nav-dd-btn" onclick="toggleNavDD(this)" aria-haspopup="true" aria-expanded="false">💰 Personal Finance</button><div class="nav-dd-menu" id="nav-dd-0"><a class="nav-dd-item" href="/loan" onclick="go('loan',this);return false;">🏦 Loan / EMI</a><a class="nav-dd-item" href="/loaneligibility" onclick="go('loaneligibility',this);return false;">✅ Loan Eligibility</a><a class="nav-dd-item" href="/dti" onclick="go('dti',this);return false;">📊 Debt-to-Income Ratio</a><a class="nav-dd-item" href="/prepay" onclick="go('prepay',this);return false;">⏩ Loan Prepayment</a><a class="nav-dd-item" href="/loancomp" onclick="go('loancomp',this);return false;">📋 Loan Comparison</a><a class="nav-dd-item" href="/autoloan" onclick="go('autoloan',this);return false;">🚗 Auto Loan Calculator</a><a class="nav-dd-item" href="/tax" onclick="go('tax',this);return false;">🧾 Tax Estimator</a><a class="nav-dd-item" href="/salary" onclick="go('salary',this);return false;">💵 Salary Calculator</a><a class="nav-dd-item" href="/mortgage" onclick="go('mortgage',this);return false;">🏠 Mortgage</a><a class="nav-dd-item" href="/heloc" onclick="go('heloc',this);return false;">🏡 HELOC Calculator</a><a class="nav-dd-item" href="/rentvsbuy" onclick="go('rentvsbuy',this);return false;">🏘️ Rent vs Buy Calculator</a><a class="nav-dd-item" href="/mortcomp" onclick="go('mortcomp',this);return false;">⚖️ Mortgage Comparison</a><a class="nav-dd-item" href="/savings" onclick="go('savings',this);return false;">🏛️ Savings Estimator</a><a class="nav-dd-item" href="/provident" onclick="go('provident',this);return false;">🏦 Provident Fund Calculator</a><a class="nav-dd-item" href="/retirement" onclick="go('retirement',this);return false;">👴 Retirement Planner</a><a class="nav-dd-item" href="/401k" onclick="go('401k',this);return false;">🏦 401(k) Calculator</a><a class="nav-dd-item" href="/millionaire" onclick="go('millionaire',this);return false;">💎 Millionaire Calculator</a><a class="nav-dd-item" href="/fire" onclick="go('fire',this);return false;">🔥 FIRE Calculator</a><a class="nav-dd-item" href="/debtcomp" onclick="go('debtcomp',this);return false;">❄️ Snowball vs Avalanche</a><a class="nav-dd-item" href="/debt" onclick="go('debt',this);return false;">💳 Debt Payoff Planner</a><a class="nav-dd-item" href="/rental" onclick="go('rental',this);return false;">🏘️ Rental Yield</a><a class="nav-dd-item" href="/rentalprop" onclick="go('rentalprop',this);return false;">🏡 Rental Property</a><a class="nav-dd-item" href="/savingsgoal" onclick="go('savingsgoal',this);return false;">🎯 Savings Goal Calculator</a><a class="nav-dd-item" href="/emergencyfund" onclick="go('emergencyfund',this);return false;">🛡️ Emergency Fund Calculator</a><a class="nav-dd-item" href="/healthscore" onclick="go('healthscore',this);return false;">💯 Financial Health Score</a><a class="nav-dd-item" href="/lifeinsurance" onclick="go('lifeinsurance',this);return false;">🛡️ Life Insurance Needs</a><a class="nav-dd-item" href="/healthinsurance" onclick="go('healthinsurance',this);return false;">🏥 Health Insurance Cost</a></div></div>
+  <div class="nav-dd" data-cat="1"><button class="nav-dd-btn" onclick="toggleNavDD(this)" aria-haspopup="true" aria-expanded="false">📈 Investing</button><div class="nav-dd-menu" id="nav-dd-1"><a class="nav-dd-item" href="/cagr" onclick="go('cagr',this);return false;">📐 CAGR Calculator</a><a class="nav-dd-item" href="/xirr" onclick="go('xirr',this);return false;">📅 XIRR Calculator</a><a class="nav-dd-item" href="/drip" onclick="go('drip',this);return false;">💧 Dividend Reinvestment</a><a class="nav-dd-item" href="/divgrowth" onclick="go('divgrowth',this);return false;">📈 Dividend Growth Calculator</a><a class="nav-dd-item" href="/etf" onclick="go('etf',this);return false;">🗂️ ETF Growth Calculator</a><a class="nav-dd-item" href="/allocation" onclick="go('allocation',this);return false;">🥧 Asset Allocation Calculator</a><a class="nav-dd-item" href="/dcf" onclick="go('dcf',this);return false;">🏦 Stock DCF Valuation</a><a class="nav-dd-item" href="/peg" onclick="go('peg',this);return false;">📏 PEG Ratio Calculator</a><a class="nav-dd-item" href="/evebitda" onclick="go('evebitda',this);return false;">🏢 EV/EBITDA Calculator</a><a class="nav-dd-item" href="/invest" onclick="go('invest',this);return false;">📈 SIP / Investment</a><a class="nav-dd-item" href="/dca" onclick="go('dca',this);return false;">📊 Dollar Cost Averaging</a><a class="nav-dd-item" href="/swp" onclick="go('swp',this);return false;">📉 SWP Calculator</a><a class="nav-dd-item" href="/stock" onclick="go('stock',this);return false;">📉 Stock P&amp;L</a><a class="nav-dd-item" href="/split" onclick="go('split',this);return false;">🔀 Stock Split Calculator</a></div></div>
+  <div class="nav-dd" data-cat="2"><button class="nav-dd-btn" onclick="toggleNavDD(this)" aria-haspopup="true" aria-expanded="false">🚀 Startup &amp; Business</button><div class="nav-dd-menu" id="nav-dd-2"><a class="nav-dd-item" href="/burnrate" onclick="go('burnrate',this);return false;">🔥 Burn Rate</a><a class="nav-dd-item" href="/pricing" onclick="go('pricing',this);return false;">🏷️ Pricing Calculator</a><a class="nav-dd-item" href="/equity" onclick="go('equity',this);return false;">📐 Equity Dilution</a><a class="nav-dd-item" href="/dilutionimpact" onclick="go('dilutionimpact',this);return false;">📉 Stock Dilution Impact Calculator</a><a class="nav-dd-item" href="/revenue" onclick="go('revenue',this);return false;">📊 Revenue Forecast</a><a class="nav-dd-item" href="/breakeven" onclick="go('breakeven',this);return false;">📈 Break-even Analysis</a><a class="nav-dd-item" href="/cashflow" onclick="go('cashflow',this);return false;">💵 Cash Flow Analyzer</a></div></div>
+  <div class="nav-dd" data-cat="3"><button class="nav-dd-btn" onclick="toggleNavDD(this)" aria-haspopup="true" aria-expanded="false">🔬 Tools</button><div class="nav-dd-menu" id="nav-dd-3"><a class="nav-dd-item" href="/currency" onclick="go('currency',this);return false;">💱 Currency Converter</a><a class="nav-dd-item" href="/remit" onclick="go('remit',this);return false;">🌍 International Transfer Cost</a><a class="nav-dd-item" href="/scientific" onclick="go('scientific',this);return false;">🔬 Scientific Calculator</a></div></div>
 
 </div>
 <div class="content">
@@ -379,6 +379,17 @@ body{background:var(--bg);color:var(--t);font-family:var(--fn);font-size:14px;li
     <div class="blog-byline-text"><span class="blog-byline-name">FinCalc Team</span><span class="blog-byline-dot">·</span>July 2026 · 5 min read</div>
   </div>
 </a>
+
+  <a href="/blog/best-free-financial-calculators" class="blog-post-card">
+    <div style="height:130px;overflow:hidden;border-radius:10px;margin-bottom:1rem"><svg viewBox="0 0 760 220" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:auto;border-radius:12px;display:block" role="img" aria-hidden="true"><rect width="760" height="220" fill="var(--s2)"/><rect x="260" y="60" width="70" height="70" rx="8" fill="var(--m)" opacity="0.7"/><rect x="345" y="60" width="70" height="70" rx="8" fill="var(--a)" opacity="0.7"/><rect x="430" y="60" width="70" height="70" rx="8" fill="var(--g)" opacity="0.7"/><rect x="260" y="145" width="70" height="20" rx="4" fill="var(--m)" opacity="0.35"/><rect x="345" y="145" width="70" height="20" rx="4" fill="var(--a)" opacity="0.35"/><rect x="430" y="145" width="70" height="20" rx="4" fill="var(--g)" opacity="0.35"/></svg></div>
+    <div class="blog-post-top">
+      <div class="blog-avatar blog-avatar-sm">FC</div>
+      <div class="blog-byline-text"><span class="blog-byline-name">FinCalc Team</span><span class="blog-byline-dot">·</span>July 2026 · 6 min read</div>
+    </div>
+    <h2 class="blog-post-title">12 Free Financial Calculators Worth Bookmarking in 2026</h2>
+    <p class="blog-post-excerpt">No signup, no paywall. Twelve free calculators for loans, retirement, investing, and the big life decisions, grouped by what they actually help you decide.</p>
+    <div class="blog-post-footer"><span class="blog-cat-tag" style="background:color-mix(in srgb, var(--m) 14%, transparent);color:var(--m)">Personal Finance</span><span class="blog-post-cta">Read article →</span></div>
+  </a>
 
   <a href="/blog/budgeting-guide-that-works" class="blog-post-card">
     <div style="height:130px;overflow:hidden;border-radius:10px;margin-bottom:1rem"><svg viewBox="0 0 760 220" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:auto;border-radius:12px;display:block" role="img" aria-hidden="true">
@@ -1467,6 +1478,61 @@ body{background:var(--bg);color:var(--t);font-family:var(--fn);font-size:14px;li
     <div class="blog-post-footer"><span class="blog-cat-tag" style="background:color-mix(in srgb, var(--r) 14%, transparent);color:var(--r)">Debt</span><span class="blog-post-cta">Read article →</span></div>
   </a>
 
+  <a href="/blog/stock-splits-explained" class="blog-post-card">
+    <div style="height:130px;overflow:hidden;border-radius:10px;margin-bottom:1rem"><svg viewBox="0 0 760 220" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:auto;border-radius:12px;display:block" role="img" aria-hidden="true"><rect width="760" height="220" fill="var(--s2)"/><rect x="300" y="90" width="80" height="60" rx="8" fill="var(--a)" opacity="0.85"/><rect x="410" y="70" width="60" height="45" rx="6" fill="var(--a)" opacity="0.6"/><rect x="490" y="100" width="60" height="45" rx="6" fill="var(--a)" opacity="0.6"/><rect x="230" y="100" width="50" height="40" rx="6" fill="var(--a)" opacity="0.6"/></svg></div>
+    <div class="blog-post-top">
+      <div class="blog-avatar blog-avatar-sm">FC</div>
+      <div class="blog-byline-text"><span class="blog-byline-name">FinCalc Team</span><span class="blog-byline-dot">·</span>July 2026 · 4 min read</div>
+    </div>
+    <h2 class="blog-post-title">Stock Splits Explained: Why a 4-for-1 Split Doesn't Make You Richer</h2>
+    <p class="blog-post-excerpt">A stock split doesn't create or destroy a single dollar of value. Here's what actually changes — and why the market reacts anyway.</p>
+    <div class="blog-post-footer"><span class="blog-cat-tag" style="background:color-mix(in srgb, var(--a) 14%, transparent);color:var(--a)">Investing</span><span class="blog-post-cta">Read article →</span></div>
+  </a>
+
+  <a href="/blog/mid-market-rate-vs-bank-rate" class="blog-post-card">
+    <div style="height:130px;overflow:hidden;border-radius:10px;margin-bottom:1rem"><svg viewBox="0 0 760 220" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:auto;border-radius:12px;display:block" role="img" aria-hidden="true"><rect width="760" height="220" fill="var(--s2)"/><circle cx="330" cy="110" r="55" fill="none" stroke="var(--m)" stroke-width="8" opacity="0.7"/><text x="330" y="120" font-size="34" text-anchor="middle" fill="var(--m)" font-family="Arial,sans-serif" font-weight="700">$</text><circle cx="450" cy="110" r="55" fill="none" stroke="var(--a)" stroke-width="8"/><text x="450" y="120" font-size="34" text-anchor="middle" fill="var(--a)" font-family="Arial,sans-serif" font-weight="700">€</text></svg></div>
+    <div class="blog-post-top">
+      <div class="blog-avatar blog-avatar-sm">FC</div>
+      <div class="blog-byline-text"><span class="blog-byline-name">FinCalc Team</span><span class="blog-byline-dot">·</span>July 2026 · 4 min read</div>
+    </div>
+    <h2 class="blog-post-title">Why the Exchange Rate You See Online Isn't the Rate You Get</h2>
+    <p class="blog-post-excerpt">The mid-market rate on Google isn't what your bank or card charges you. Here's where the difference goes.</p>
+    <div class="blog-post-footer"><span class="blog-cat-tag" style="background:color-mix(in srgb, var(--m) 14%, transparent);color:var(--m)">Personal Finance</span><span class="blog-post-cta">Read article →</span></div>
+  </a>
+
+  <a href="/blog/premium-vs-deductible-health-insurance" class="blog-post-card">
+    <div style="height:130px;overflow:hidden;border-radius:10px;margin-bottom:1rem"><svg viewBox="0 0 760 220" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:auto;border-radius:12px;display:block" role="img" aria-hidden="true"><rect width="760" height="220" fill="var(--s2)"/><path d="M380 60 L430 85 L430 135 Q430 165 380 180 Q330 165 330 135 L330 85 Z" fill="none" stroke="var(--g)" stroke-width="8"/><path d="M362 122 L374 134 L400 104" fill="none" stroke="var(--g)" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+    <div class="blog-post-top">
+      <div class="blog-avatar blog-avatar-sm">FC</div>
+      <div class="blog-byline-text"><span class="blog-byline-name">FinCalc Team</span><span class="blog-byline-dot">·</span>July 2026 · 4 min read</div>
+    </div>
+    <h2 class="blog-post-title">Premium vs. Deductible: The Health Insurance Math Nobody Explains</h2>
+    <p class="blog-post-excerpt">The cheapest monthly premium is often the most expensive plan. Here's how to actually compare health insurance costs.</p>
+    <div class="blog-post-footer"><span class="blog-cat-tag" style="background:color-mix(in srgb, var(--m) 14%, transparent);color:var(--m)">Personal Finance</span><span class="blog-post-cta">Read article →</span></div>
+  </a>
+
+  <a href="/blog/remittance-transfer-costs" class="blog-post-card">
+    <div style="height:130px;overflow:hidden;border-radius:10px;margin-bottom:1rem"><svg viewBox="0 0 760 220" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:auto;border-radius:12px;display:block" role="img" aria-hidden="true"><rect width="760" height="220" fill="var(--s2)"/><circle cx="300" cy="110" r="40" fill="var(--m)" opacity="0.15"/><circle cx="460" cy="110" r="40" fill="var(--a)" opacity="0.25"/><path d="M340 110 L420 110" stroke="var(--t)" stroke-width="4" marker-end="url(#arrow)"/><polygon points="410,100 425,110 410,120" fill="var(--t)"/></svg></div>
+    <div class="blog-post-top">
+      <div class="blog-avatar blog-avatar-sm">FC</div>
+      <div class="blog-byline-text"><span class="blog-byline-name">FinCalc Team</span><span class="blog-byline-dot">·</span>July 2026 · 4 min read</div>
+    </div>
+    <h2 class="blog-post-title">The Real Cost of Sending Money Abroad (It's Not the Fee)</h2>
+    <p class="blog-post-excerpt">The advertised transfer fee is often the smallest cost. The exchange rate markup is where providers actually make money.</p>
+    <div class="blog-post-footer"><span class="blog-cat-tag" style="background:color-mix(in srgb, var(--m) 14%, transparent);color:var(--m)">Personal Finance</span><span class="blog-post-cta">Read article →</span></div>
+  </a>
+
+  <a href="/blog/how-much-life-insurance-do-you-need" class="blog-post-card">
+    <div style="height:130px;overflow:hidden;border-radius:10px;margin-bottom:1rem"><svg viewBox="0 0 760 220" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:auto;border-radius:12px;display:block" role="img" aria-hidden="true"><rect width="760" height="220" fill="var(--s2)"/><path d="M380 55 C 420 55 450 85 450 120 C 450 160 380 185 380 185 C 380 185 310 160 310 120 C 310 85 340 55 380 55 Z" fill="none" stroke="var(--m)" stroke-width="8"/></svg></div>
+    <div class="blog-post-top">
+      <div class="blog-avatar blog-avatar-sm">FC</div>
+      <div class="blog-byline-text"><span class="blog-byline-name">FinCalc Team</span><span class="blog-byline-dot">·</span>July 2026 · 4 min read</div>
+    </div>
+    <h2 class="blog-post-title">How Much Life Insurance Do You Actually Need?</h2>
+    <p class="blog-post-excerpt">Income replacement, debt payoff, and future expenses — the three numbers that determine your real coverage need.</p>
+    <div class="blog-post-footer"><span class="blog-cat-tag" style="background:color-mix(in srgb, var(--m) 14%, transparent);color:var(--m)">Personal Finance</span><span class="blog-post-cta">Read article →</span></div>
+  </a>
+
 </div>
 </div>
 </div><!-- content -->
@@ -1514,7 +1580,7 @@ document.addEventListener('DOMContentLoaded', function(){
   if(btn) btn.textContent = current === 'light' ? '\ud83c\udf19 Dark' : '\u2600\ufe0f Light';
 });
 </script>
-<script src="/app.js?v=20260718b"></script>
+<script src="/app.js?v=20260729b"></script>
 <script>initPage('blog-index');</script>
 </body>
 </html>
