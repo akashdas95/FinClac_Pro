@@ -3111,7 +3111,7 @@ function _getCalcBtnRow(panel){
 
 function injectPrintButtons(){
   document.querySelectorAll('.panel').forEach(panel=>{
-    if(panel.id==='home'||panel.id==='privacy'||panel.id==='about'||panel.id==='terms'||panel.id==='scientific'||panel.id==='currency'||panel.id==='personal-finance'||panel.id==='investing-valuation'||panel.id==='startup-business'||panel.id==='tools'||panel.id.indexOf('blog')===0)return;
+    if(panel.id==='home'||panel.id==='privacy'||panel.id==='about'||panel.id==='terms'||panel.id==='scientific'||panel.id==='currency'||panel.id==='personal-finance'||panel.id==='investing-valuation'||panel.id==='startup-business'||panel.id==='tools'||panel.id==='404'||panel.id.indexOf('blog')===0)return;
     if(panel.querySelector('.download-btn'))return;
     const btn=document.createElement('button');
     btn.className='download-btn';
@@ -3124,7 +3124,7 @@ function injectPrintButtons(){
 // ── Share Result ────────────────────────────────────────────────
 function injectShareButtons(){
   document.querySelectorAll('.panel').forEach(panel=>{
-    if(panel.id==='home'||panel.id==='privacy'||panel.id==='about'||panel.id==='terms'||panel.id==='scientific'||panel.id==='currency'||panel.id==='personal-finance'||panel.id==='investing-valuation'||panel.id==='startup-business'||panel.id==='tools'||panel.id.indexOf('blog')===0)return;
+    if(panel.id==='home'||panel.id==='privacy'||panel.id==='about'||panel.id==='terms'||panel.id==='scientific'||panel.id==='currency'||panel.id==='personal-finance'||panel.id==='investing-valuation'||panel.id==='startup-business'||panel.id==='tools'||panel.id==='404'||panel.id.indexOf('blog')===0)return;
     if(panel.querySelector('.share-btn'))return;
     const btn=document.createElement('button');
     btn.className='share-btn';
