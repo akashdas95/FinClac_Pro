@@ -3,14 +3,14 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>The Real Cost of Sending Money Abroad (It's Not the Fee) | FinCalc Blog</title>
-<meta name="description" content="The advertised transfer fee is often the smallest cost. The exchange rate markup is where providers actually make money.">
-<link rel="canonical" href="https://finclac.com/blog/remittance-transfer-costs">
+<title>How to Calculate After-Tax Cash Flow (With a Worked Example) | FinCalc Blog</title>
+<meta name="description" content="Cash flow tells you what moved. After-tax cash flow tells you what you actually keep. Here's the real formula and where it gets tricky.">
+<link rel="canonical" href="https://finclac.com/blog/after-tax-cash-flow-explained">
 <meta name="robots" content="index, follow">
 <meta property="og:type" content="article">
-<meta property="og:title" content="The Real Cost of Sending Money Abroad (It's Not the Fee)">
-<meta property="og:description" content="The advertised transfer fee is often the smallest cost. The exchange rate markup is where providers actually make money.">
-<meta property="og:url" content="https://finclac.com/blog/remittance-transfer-costs">
+<meta property="og:title" content="How to Calculate After-Tax Cash Flow (With a Worked Example)">
+<meta property="og:description" content="Cash flow tells you what moved. After-tax cash flow tells you what you actually keep. Here's the real formula and where it gets tricky.">
+<meta property="og:url" content="https://finclac.com/blog/after-tax-cash-flow-explained">
 <meta property="og:site_name" content="FinCalc">
 <style>*{box-sizing:border-box;margin:0;padding:0}
 :root{--bg:#0B0E11;--s:#141920;--s2:#1C2430;--bd:#232D3A;--t:#E8EDF2;--m:#8393A6;--tb:#A3B2C4;--a:#F0B90B;--g:#0ECB81;--r:#F65E72;--b:#1890FF;--p:#B478D1;--fn:'DM Sans',sans-serif;--mo:'DM Mono',monospace}
@@ -314,7 +314,7 @@ body{background:var(--bg);color:var(--t);font-family:var(--fn);font-size:14px;li
 </script>
 <meta name="msvalidate.01" content="175D12831D109E3E7E1A856004E0F393" />
 <script type="application/ld+json">{"@context": "https://schema.org", "@type": "BlogPosting", "headline": "CAGR vs. Average Return: Why Your Investment App Is Lying to You", "url": "https://finclac.com/blog/cagr-vs-average-return", "description": "The two numbers look similar but tell very different stories — here's the actual math and why it matters.", "publisher": {"@type": "Organization", "name": "FinCalc"}, "isPartOf": {"@type": "WebSite", "name": "FinCalc", "url": "https://finclac.com/"}}</script>
-<script type="application/ld+json">{"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Home", "item": "https://finclac.com/"}, {"@type": "ListItem", "position": 2, "name": "Blog", "item": "https://finclac.com/blog"}, {"@type": "ListItem", "position": 3, "name": "The Real Cost of Sending Money Abroad (It's Not the Fee)", "item": "https://finclac.com/blog/remittance-transfer-costs"}]}</script>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Home", "item": "https://finclac.com/"}, {"@type": "ListItem", "position": 2, "name": "Blog", "item": "https://finclac.com/blog"}, {"@type": "ListItem", "position": 3, "name": "How to Calculate After-Tax Cash Flow (With a Worked Example)", "item": "https://finclac.com/blog/after-tax-cash-flow-explained"}]}</script>
 </head>
 <body>
 <div class="topbar">
@@ -331,36 +331,37 @@ body{background:var(--bg);color:var(--t);font-family:var(--fn);font-size:14px;li
 
 </div>
 <div class="content">
-<div class="panel on" id="blog-remittance-transfer-costs">
+<div class="panel on" id="blog-after-tax-cash-flow-explained">
 <div class="card" style="max-width:760px;margin:0 auto">
-  <div class="blog-cat-tag" style="background:color-mix(in srgb, var(--m) 14%, transparent);color:var(--m)">Personal Finance</div>
-<h1 class="blog-article-title">The Real Cost of Sending Money Abroad (It's Not the Fee)</h1>
+  <div class="blog-cat-tag" style="background:color-mix(in srgb, var(--p) 14%, transparent);color:var(--p)">Business</div>
+<h1 class="blog-article-title">How to Calculate After-Tax Cash Flow (With a Worked Example)</h1>
 <div class="blog-byline" style="margin-bottom:1.75rem">
   <div class="blog-avatar">FC</div>
   <div class="blog-byline-text"><span class="blog-byline-name">FinCalc Team</span><span class="blog-byline-dot">·</span>July 2026 · 4 min read</div>
 </div>
 
-<p class="guide-p">"$0 transfer fee" is one of the most technically true, practically misleading claims in personal finance. Sending money abroad has two separate costs — a flat fee and an exchange rate markup — and providers overwhelmingly advertise only the one that's easiest to make look small or nonexistent.</p>
+<p class="guide-p">Cash flow tells you what moved. After-tax cash flow tells you what you actually got to keep. Confusing the two is one of the more common ways a business or an individual investor ends up thinking they're doing better than they actually are — the gap between the two numbers is entirely made of tax, and it's rarely small.</p>
 
-<h2 class="guide-h3">The two costs of every transfer</h2>
-<p class="guide-p">Every international money transfer has a flat fee (a stated dollar amount charged for the transfer) and an exchange rate markup (the difference between the mid-market exchange rate and the rate you're actually given). A provider can advertise "$0 fee" while still marking up the exchange rate by 2–4%, which on a $2,000 transfer is $40–80 that never appears as a line item — it's baked into a worse conversion rate.</p>
+<h2 class="guide-h3">What after-tax cash flow actually means</h2>
+<p class="guide-p">After-tax cash flow is the cash left over from an activity once the tax owed on that activity has been paid or set aside — as opposed to pre-tax (or "gross") cash flow, which is just money in minus money out, with no tax accounted for at all. The formula in its simplest form is:</p>
+<p class="guide-p"><strong>After-Tax Cash Flow = Pre-Tax Cash Flow − Taxes Paid on That Cash Flow</strong></p>
+<p class="guide-p">It sounds almost too simple to write down, and the arithmetic genuinely is simple — the part that trips people up is correctly identifying which taxes apply and to what portion of the cash flow, which is rarely as clean as "take 25% off the top."</p>
 
-<h2 class="guide-h3">A worked comparison: $1,000 sent abroad, three ways</h2>
-<p class="guide-p"><strong>Traditional bank wire:</strong> often a flat $25–45 fee plus a 2–4% exchange rate markup — commonly $45–85 in total cost on $1,000.<br>
-<strong>Dedicated transfer/fintech app:</strong> typically a small flat fee (or none) plus a markup closer to 0.3–1% — often $5–15 in total cost.<br>
-<strong>Cash-based remittance service:</strong> variable, but historically among the highest-cost options for smaller amounts, sometimes $30–60+ combined on $1,000, particularly to certain corridors.</p>
-<p class="guide-p">The exact numbers shift by provider, corridor, and transfer size, but the pattern holds broadly: the provider showing the flashiest "no fee" banner is not reliably the cheapest, because the fee was rarely where most of the cost lived in the first place.</p>
+<h2 class="guide-h3">Why pre-tax numbers alone are misleading</h2>
+<p class="guide-p">Two rental properties both generating $20,000/year in pre-tax cash flow can have meaningfully different after-tax outcomes depending on depreciation, mortgage interest deductions, and the owner's marginal tax bracket. Two small businesses with identical revenue and pre-tax profit can end up with very different real cash in the bank depending on their tax structure (LLC vs S-corp vs C-corp) and what deductions they're eligible for. Comparing pre-tax numbers across different situations is comparing numbers that don't mean the same thing in practice — the after-tax number is the one that's actually comparable, because it reflects what each situation truly nets out to.</p>
 
-<h2 class="guide-h3">Why "no fee" transfers are rarely free</h2>
-<p class="guide-p">A transfer business still needs to make money. If it isn't charging a visible fee, it is almost certainly recovering that revenue through the exchange rate spread instead — a markup that's harder for an average customer to notice or compare, since it requires knowing the current mid-market rate to spot.</p>
+<h2 class="guide-h3">A worked example</h2>
+<p class="guide-p">Say a small rental property generates $24,000 in annual rental income and $10,000 in deductible expenses (mortgage interest, maintenance, property management, depreciation), leaving $14,000 in taxable income. At a 24% marginal tax rate, that's $3,360 in tax owed. If the property's actual pre-tax cash flow (income minus all cash expenses, which may differ from taxable income due to non-cash deductions like depreciation) is $16,000, the after-tax cash flow is $16,000 − $3,360 = $12,640. The gap between "$16,000 cash flow" and "$12,640 I actually keep" is exactly the kind of thing that matters when comparing this investment against alternatives.</p>
 
-<h2 class="guide-h3">Speed vs. cost tradeoffs</h2>
-<p class="guide-p">Faster settlement — same-day or instant transfers — often carries a cost premium over standard 2–5 business day transfers, either as a higher flat fee or a wider exchange rate spread. If timing isn't urgent, choosing standard speed is frequently the cheaper option purely on cost, independent of which provider you use.</p>
+<h2 class="guide-h3">Where the calculation gets genuinely tricky</h2>
+<p class="guide-p"><strong>Non-cash deductions.</strong> Depreciation reduces taxable income without being an actual cash outflow, which is why taxable income and pre-tax cash flow often aren't the same number — a common source of confusion when people try to shortcut the calculation.</p>
+<p class="guide-p"><strong>Different tax treatment by income type.</strong> Ordinary income, capital gains, and business income can all be taxed at different rates, so a single blended "my tax rate" figure can meaningfully misstate after-tax cash flow if a cash flow stream mixes multiple income types.</p>
+<p class="guide-p"><strong>Marginal vs. effective rate.</strong> Using your effective (average) tax rate on a cash flow that pushes you into a higher marginal bracket will understate the tax owed on that specific cash flow — the marginal rate is usually the more accurate one to apply to incremental income.</p>
 
-<h2 class="guide-h3">A checklist for evaluating any provider</h2>
-<p class="guide-p">Before sending a transfer: check the mid-market rate for your currency pair at that moment, compare it to the rate you're actually being offered to find the real markup, add any stated flat fee, and calculate the total effective cost as a percentage of the amount sent. That single percentage is the only number that lets you compare providers fairly — not the advertised fee alone.</p>
+<h2 class="guide-h3">Why this matters for actual decisions</h2>
+<p class="guide-p">After-tax cash flow is the number that should drive comparisons between investments, business structures, or even a raise versus a bonus — because it's the only version of "how much cash flow" that's directly comparable across situations with different tax treatment. A pre-tax comparison can make a lower-taxed option look worse than it actually is, or a higher-taxed option look better than it actually is.</p>
 
-<p class="guide-p">To run this comparison for your own transfer amount, the free <a href="/remit" style="color:var(--a);text-decoration:underline">International Money Transfer Cost Calculator</a> calculates the true total cost — fee plus exchange rate markup — against the mid-market rate. If you're converting currency for a purpose other than sending it abroad, see our companion piece on <a href="/blog/mid-market-rate-vs-bank-rate" style="color:var(--a);text-decoration:underline">why the exchange rate you see online isn't the rate you get</a>.</p>
+<p class="guide-p">To model your own numbers, start with the free <a href="/cashflow" style="color:var(--a);text-decoration:underline">Cash Flow Calculator</a> for your pre-tax inflows and outflows, then use the <a href="/tax" style="color:var(--a);text-decoration:underline">US Federal Tax Calculator</a> to find your accurate marginal rate to apply against it.</p>
 
 
 </div>
@@ -411,6 +412,6 @@ document.addEventListener('DOMContentLoaded', function(){
 });
 </script>
 <script src="/app.js?v=20260729c"></script>
-<script>initPage('blog-remittance-transfer-costs');</script>
+<script>initPage('blog-after-tax-cash-flow-explained');</script>
 </body>
 </html>

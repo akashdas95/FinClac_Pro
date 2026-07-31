@@ -3,14 +3,14 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>The Real Cost of Sending Money Abroad (It's Not the Fee) | FinCalc Blog</title>
-<meta name="description" content="The advertised transfer fee is often the smallest cost. The exchange rate markup is where providers actually make money.">
-<link rel="canonical" href="https://finclac.com/blog/remittance-transfer-costs">
+<title>How to Forecast SaaS Revenue (Without Guessing) | FinCalc Blog</title>
+<meta name="description" content="A single-line revenue forecast is a guess in a spreadsheet. Here's how to build a real bear, base, and bull case from four inputs.">
+<link rel="canonical" href="https://finclac.com/blog/how-to-forecast-saas-revenue">
 <meta name="robots" content="index, follow">
 <meta property="og:type" content="article">
-<meta property="og:title" content="The Real Cost of Sending Money Abroad (It's Not the Fee)">
-<meta property="og:description" content="The advertised transfer fee is often the smallest cost. The exchange rate markup is where providers actually make money.">
-<meta property="og:url" content="https://finclac.com/blog/remittance-transfer-costs">
+<meta property="og:title" content="How to Forecast SaaS Revenue (Without Guessing)">
+<meta property="og:description" content="A single-line revenue forecast is a guess in a spreadsheet. Here's how to build a real bear, base, and bull case from four inputs.">
+<meta property="og:url" content="https://finclac.com/blog/how-to-forecast-saas-revenue">
 <meta property="og:site_name" content="FinCalc">
 <style>*{box-sizing:border-box;margin:0;padding:0}
 :root{--bg:#0B0E11;--s:#141920;--s2:#1C2430;--bd:#232D3A;--t:#E8EDF2;--m:#8393A6;--tb:#A3B2C4;--a:#F0B90B;--g:#0ECB81;--r:#F65E72;--b:#1890FF;--p:#B478D1;--fn:'DM Sans',sans-serif;--mo:'DM Mono',monospace}
@@ -314,7 +314,7 @@ body{background:var(--bg);color:var(--t);font-family:var(--fn);font-size:14px;li
 </script>
 <meta name="msvalidate.01" content="175D12831D109E3E7E1A856004E0F393" />
 <script type="application/ld+json">{"@context": "https://schema.org", "@type": "BlogPosting", "headline": "CAGR vs. Average Return: Why Your Investment App Is Lying to You", "url": "https://finclac.com/blog/cagr-vs-average-return", "description": "The two numbers look similar but tell very different stories — here's the actual math and why it matters.", "publisher": {"@type": "Organization", "name": "FinCalc"}, "isPartOf": {"@type": "WebSite", "name": "FinCalc", "url": "https://finclac.com/"}}</script>
-<script type="application/ld+json">{"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Home", "item": "https://finclac.com/"}, {"@type": "ListItem", "position": 2, "name": "Blog", "item": "https://finclac.com/blog"}, {"@type": "ListItem", "position": 3, "name": "The Real Cost of Sending Money Abroad (It's Not the Fee)", "item": "https://finclac.com/blog/remittance-transfer-costs"}]}</script>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Home", "item": "https://finclac.com/"}, {"@type": "ListItem", "position": 2, "name": "Blog", "item": "https://finclac.com/blog"}, {"@type": "ListItem", "position": 3, "name": "How to Forecast SaaS Revenue (Without Guessing)", "item": "https://finclac.com/blog/how-to-forecast-saas-revenue"}]}</script>
 </head>
 <body>
 <div class="topbar">
@@ -331,36 +331,41 @@ body{background:var(--bg);color:var(--t);font-family:var(--fn);font-size:14px;li
 
 </div>
 <div class="content">
-<div class="panel on" id="blog-remittance-transfer-costs">
+<div class="panel on" id="blog-how-to-forecast-saas-revenue">
 <div class="card" style="max-width:760px;margin:0 auto">
-  <div class="blog-cat-tag" style="background:color-mix(in srgb, var(--m) 14%, transparent);color:var(--m)">Personal Finance</div>
-<h1 class="blog-article-title">The Real Cost of Sending Money Abroad (It's Not the Fee)</h1>
+  <div class="blog-cat-tag" style="background:color-mix(in srgb, var(--p) 14%, transparent);color:var(--p)">Business</div>
+<h1 class="blog-article-title">How to Forecast SaaS Revenue (Without Guessing)</h1>
 <div class="blog-byline" style="margin-bottom:1.75rem">
   <div class="blog-avatar">FC</div>
-  <div class="blog-byline-text"><span class="blog-byline-name">FinCalc Team</span><span class="blog-byline-dot">·</span>July 2026 · 4 min read</div>
+  <div class="blog-byline-text"><span class="blog-byline-name">FinCalc Team</span><span class="blog-byline-dot">·</span>July 2026 · 5 min read</div>
 </div>
 
-<p class="guide-p">"$0 transfer fee" is one of the most technically true, practically misleading claims in personal finance. Sending money abroad has two separate costs — a flat fee and an exchange rate markup — and providers overwhelmingly advertise only the one that's easiest to make look small or nonexistent.</p>
+<p class="guide-p">Ask a SaaS founder for their revenue forecast and you'll often get one number — a straight line up and to the right. Ask a SaaS investor what they think of that forecast and you'll usually get a raised eyebrow, because a single-point forecast is a guess wearing a spreadsheet's clothing. A real forecast is a range, built from a small number of assumptions that actually drive the business.</p>
 
-<h2 class="guide-h3">The two costs of every transfer</h2>
-<p class="guide-p">Every international money transfer has a flat fee (a stated dollar amount charged for the transfer) and an exchange rate markup (the difference between the mid-market exchange rate and the rate you're actually given). A provider can advertise "$0 fee" while still marking up the exchange rate by 2–4%, which on a $2,000 transfer is $40–80 that never appears as a line item — it's baked into a worse conversion rate.</p>
+<h2 class="guide-h3">The four inputs that actually matter</h2>
+<p class="guide-p">Underneath every SaaS revenue forecast, however complex the spreadsheet looks, there are really only a handful of drivers worth getting right:</p>
+<p class="guide-p"><strong>Starting MRR (Monthly Recurring Revenue).</strong> Your current baseline — the one input that isn't a guess.</p>
+<p class="guide-p"><strong>New customer growth rate.</strong> How fast you're adding new paying customers or new MRR each month, usually expressed as a percentage growth rate or a flat number of new customers.</p>
+<p class="guide-p"><strong>Churn rate.</strong> The percentage of MRR (or customers) you lose each month. This one has an outsized effect on long-run forecasts because it compounds against you the same way growth compounds for you.</p>
+<p class="guide-p"><strong>Expansion revenue.</strong> Revenue growth from existing customers upgrading, adding seats, or moving to higher tiers — separate from new customer acquisition, and often underestimated in early forecasts.</p>
 
-<h2 class="guide-h3">A worked comparison: $1,000 sent abroad, three ways</h2>
-<p class="guide-p"><strong>Traditional bank wire:</strong> often a flat $25–45 fee plus a 2–4% exchange rate markup — commonly $45–85 in total cost on $1,000.<br>
-<strong>Dedicated transfer/fintech app:</strong> typically a small flat fee (or none) plus a markup closer to 0.3–1% — often $5–15 in total cost.<br>
-<strong>Cash-based remittance service:</strong> variable, but historically among the highest-cost options for smaller amounts, sometimes $30–60+ combined on $1,000, particularly to certain corridors.</p>
-<p class="guide-p">The exact numbers shift by provider, corridor, and transfer size, but the pattern holds broadly: the provider showing the flashiest "no fee" banner is not reliably the cheapest, because the fee was rarely where most of the cost lived in the first place.</p>
+<h2 class="guide-h3">Why a single-point forecast is close to useless</h2>
+<p class="guide-p">A forecast built on "we'll grow 10% month over month" is really a forecast built on one specific, optimistic assumption holding true for every single month of the forecast period — which almost never happens in practice. Growth rates fluctuate, churn spikes in bad quarters, and expansion revenue is lumpy. A single-point forecast doesn't communicate any of that uncertainty; it just presents one path as if it were the only plausible one.</p>
 
-<h2 class="guide-h3">Why "no fee" transfers are rarely free</h2>
-<p class="guide-p">A transfer business still needs to make money. If it isn't charging a visible fee, it is almost certainly recovering that revenue through the exchange rate spread instead — a markup that's harder for an average customer to notice or compare, since it requires knowing the current mid-market rate to spot.</p>
+<h2 class="guide-h3">Bear, base, and bull: building a real range</h2>
+<p class="guide-p">The standard fix is to forecast three scenarios instead of one, using the same model with different assumptions plugged in for growth and churn:</p>
+<p class="guide-p"><strong>Bear case</strong> — conservative growth, higher-than-current churn. This is your "if things go worse than expected" floor, useful for runway planning and worst-case cash decisions.</p>
+<p class="guide-p"><strong>Base case</strong> — growth and churn roughly in line with your recent actual trend, extrapolated forward. This is the number you'd actually plan around operationally.</p>
+<p class="guide-p"><strong>Bull case</strong> — improved growth, reduced churn. Useful for understanding upside, but not what you should be budgeting against.</p>
+<p class="guide-p">The gap between the bear and bull case tells you how sensitive your business actually is to small changes in growth and churn assumptions — a wide gap means the business is high-variance, and a narrow gap means the forecast is more robust to being slightly wrong.</p>
 
-<h2 class="guide-h3">Speed vs. cost tradeoffs</h2>
-<p class="guide-p">Faster settlement — same-day or instant transfers — often carries a cost premium over standard 2–5 business day transfers, either as a higher flat fee or a wider exchange rate spread. If timing isn't urgent, choosing standard speed is frequently the cheaper option purely on cost, independent of which provider you use.</p>
+<h2 class="guide-h3">A simplified worked example</h2>
+<p class="guide-p">Start at $50,000 MRR. In the base case, assume 8% month-over-month new growth and 3% monthly churn — net growth of roughly 5%/month. Over 12 months compounding monthly, that reaches roughly $89,000 MRR. In the bear case, drop new growth to 5% and raise churn to 4%, for roughly 1%/month net growth, reaching only about $56,000 MRR over the same period — a dramatically different outcome from what looks like a small assumption change. That sensitivity is exactly why the three-scenario approach matters more than getting a single number "right."</p>
 
-<h2 class="guide-h3">A checklist for evaluating any provider</h2>
-<p class="guide-p">Before sending a transfer: check the mid-market rate for your currency pair at that moment, compare it to the rate you're actually being offered to find the real markup, add any stated flat fee, and calculate the total effective cost as a percentage of the amount sent. That single percentage is the only number that lets you compare providers fairly — not the advertised fee alone.</p>
+<h2 class="guide-h3">What forecasts commonly get wrong</h2>
+<p class="guide-p">The most frequent mistake is applying a flat blended churn rate across the whole customer base, when in reality churn is usually concentrated in a specific cohort (often newer or lower-tier customers) and much lower elsewhere — a blended rate can understate risk in the near term and overstate it once the business matures. The second most common mistake is forgetting expansion revenue entirely, which for a healthy SaaS business is often responsible for a meaningful share of net new MRR growth, not just new customer acquisition.</p>
 
-<p class="guide-p">To run this comparison for your own transfer amount, the free <a href="/remit" style="color:var(--a);text-decoration:underline">International Money Transfer Cost Calculator</a> calculates the true total cost — fee plus exchange rate markup — against the mid-market rate. If you're converting currency for a purpose other than sending it abroad, see our companion piece on <a href="/blog/mid-market-rate-vs-bank-rate" style="color:var(--a);text-decoration:underline">why the exchange rate you see online isn't the rate you get</a>.</p>
+<p class="guide-p">To run your own bear, base, and bull projections — including ARR and LTV — the free <a href="/revenue" style="color:var(--a);text-decoration:underline">Revenue Forecast Calculator</a> builds all three scenarios from the same growth and churn inputs described here.</p>
 
 
 </div>
@@ -411,6 +416,6 @@ document.addEventListener('DOMContentLoaded', function(){
 });
 </script>
 <script src="/app.js?v=20260729c"></script>
-<script>initPage('blog-remittance-transfer-costs');</script>
+<script>initPage('blog-how-to-forecast-saas-revenue');</script>
 </body>
 </html>

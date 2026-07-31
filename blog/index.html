@@ -350,7 +350,6 @@ body{background:var(--bg);color:var(--t);font-family:var(--fn);font-size:14px;li
 </div>
 <div class="content">
 <div class="panel on" id="blog-index">
-<a class="back-btn" href="/">← Back to Home</a>
 <h1 class="blog-serif" style="font-size:40px;font-weight:700;margin:1.75rem auto .5rem;max-width:700px;letter-spacing:-.5px;line-height:1.15">FinCalc Blog</h1>
 <p style="color:var(--tb);font-size:16px;margin:0 auto 3rem;max-width:700px;line-height:1.5">Practical, honest guides on the math behind money decisions — loans, investing, retirement, and everything in between.</p>
 <div class="blog-post-list">
@@ -389,6 +388,28 @@ body{background:var(--bg);color:var(--t);font-family:var(--fn);font-size:14px;li
     <h2 class="blog-post-title">12 Free Financial Calculators Worth Bookmarking in 2026</h2>
     <p class="blog-post-excerpt">No signup, no paywall. Twelve free calculators for loans, retirement, investing, and the big life decisions, grouped by what they actually help you decide.</p>
     <div class="blog-post-footer"><span class="blog-cat-tag" style="background:color-mix(in srgb, var(--m) 14%, transparent);color:var(--m)">Personal Finance</span><span class="blog-post-cta">Read article →</span></div>
+  </a>
+
+  <a href="/blog/after-tax-cash-flow-explained" class="blog-post-card">
+    <div style="height:130px;overflow:hidden;border-radius:10px;margin-bottom:1rem"><svg viewBox="0 0 760 220" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:auto;border-radius:12px;display:block" role="img" aria-hidden="true"><rect width="760" height="220" fill="var(--s2)"/><rect x="280" y="70" width="90" height="90" rx="10" fill="var(--p)" opacity="0.7"/><text x="325" y="128" font-size="30" text-anchor="middle" fill="var(--bg)" font-family="Arial,sans-serif" font-weight="700">$</text><path d="M400 115 L470 115" stroke="var(--t)" stroke-width="4"/><polygon points="460,105 478,115 460,125" fill="var(--t)"/></svg></div>
+    <div class="blog-post-top">
+      <div class="blog-avatar blog-avatar-sm">FC</div>
+      <div class="blog-byline-text"><span class="blog-byline-name">FinCalc Team</span><span class="blog-byline-dot">·</span>July 2026 · 4 min read</div>
+    </div>
+    <h2 class="blog-post-title">How to Calculate After-Tax Cash Flow (With a Worked Example)</h2>
+    <p class="blog-post-excerpt">Cash flow tells you what moved. After-tax cash flow tells you what you actually keep. Here's the real formula and where it gets tricky.</p>
+    <div class="blog-post-footer"><span class="blog-cat-tag" style="background:color-mix(in srgb, var(--p) 14%, transparent);color:var(--p)">Business</span><span class="blog-post-cta">Read article →</span></div>
+  </a>
+
+  <a href="/blog/how-to-forecast-saas-revenue" class="blog-post-card">
+    <div style="height:130px;overflow:hidden;border-radius:10px;margin-bottom:1rem"><svg viewBox="0 0 760 220" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:auto;border-radius:12px;display:block" role="img" aria-hidden="true"><rect width="760" height="220" fill="var(--s2)"/><polyline points="260,160 320,120 380,140 440,80 500,95" fill="none" stroke="var(--g)" stroke-width="5"/><polyline points="260,160 320,140 380,150 440,120 500,130" fill="none" stroke="var(--m)" stroke-width="4" opacity="0.5" stroke-dasharray="6,4"/></svg></div>
+    <div class="blog-post-top">
+      <div class="blog-avatar blog-avatar-sm">FC</div>
+      <div class="blog-byline-text"><span class="blog-byline-name">FinCalc Team</span><span class="blog-byline-dot">·</span>July 2026 · 5 min read</div>
+    </div>
+    <h2 class="blog-post-title">How to Forecast SaaS Revenue (Without Guessing)</h2>
+    <p class="blog-post-excerpt">A single-line revenue forecast is a guess in a spreadsheet. Here's how to build a real bear, base, and bull case from four inputs.</p>
+    <div class="blog-post-footer"><span class="blog-cat-tag" style="background:color-mix(in srgb, var(--p) 14%, transparent);color:var(--p)">Business</span><span class="blog-post-cta">Read article →</span></div>
   </a>
 
   <a href="/blog/budgeting-guide-that-works" class="blog-post-card">
@@ -1580,7 +1601,7 @@ document.addEventListener('DOMContentLoaded', function(){
   if(btn) btn.textContent = current === 'light' ? '\ud83c\udf19 Dark' : '\u2600\ufe0f Light';
 });
 </script>
-<script src="/app.js?v=20260729b"></script>
+<script src="/app.js?v=20260729c"></script>
 <script>initPage('blog-index');</script>
 </body>
 </html>
