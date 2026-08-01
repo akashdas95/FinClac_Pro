@@ -224,9 +224,11 @@ const SECTIONS=[
     {id:'networth',icon:'💼',name:'Net Worth Calculator',desc:'Total your assets and liabilities to see your net worth, liquidity split, and debt-to-asset ratio'},
     {id:'debtcomp',icon:'❄️',name:'Snowball vs Avalanche',desc:'Compare two popular debt payoff strategies to see which clears your debt faster and cheaper'},
     {id:'debt',icon:'💳',name:'Debt Payoff Planner',desc:'Build a custom plan to pay off your debt and see exactly how much interest you\'ll save'},
+    {id:'ccpayoff',icon:'🎫',name:'Credit Card Payoff',desc:'Compare minimum payments vs a fixed payment to see the real payoff time and interest cost'},
     {id:'rental',icon:'🏘️',name:'Rental Yield',desc:'Check whether a rental property\'s income justifies its price using gross and net yield'},
     {id:'rentalprop',icon:'🏡',name:'Rental Property',desc:'Run the full numbers on a rental property — cash flow, returns, and a 10-year outlook'},
     {id:'savingsgoal',icon:'🎯',name:'Savings Goal Calculator',desc:'Figure out exactly how much to save each month to hit a specific savings target on time'},
+    {id:'budget',icon:'🥧',name:'50/30/20 Budget Calculator',desc:'Compare your actual spending against the 50/30/20 rule for needs, wants, and savings'},
     {id:'emergencyfund',icon:'🛡️',name:'Emergency Fund Calculator',desc:'Find out how big your emergency fund should be and how long it\'ll take to build it'},
     {id:'healthscore',icon:'💯',name:'Financial Health Score',desc:'Get a single score out of 100 that sums up how healthy your overall finances really are'},
     {id:'lifeinsurance',icon:'🛡️',name:'Life Insurance Needs',desc:'Find out how much life insurance coverage your family would actually need'},
@@ -260,6 +262,7 @@ const SECTIONS=[
   ]},
   {title:'🔬 Tools',badge:false,items:[
     {id:'currency',icon:'💱',name:'Currency Converter',desc:'Quickly convert between 15 major world currencies using live, daily-updated exchange rates'},
+    {id:'billsplit',icon:'🍽️',name:'Itemized Bill Splitter',desc:'Split a restaurant bill fairly by what each person ordered, with tax and tip split proportionally'},
     {id:'remit',icon:'🌍',name:'International Transfer Cost',desc:'See the true cost of sending money abroad, including hidden exchange rate markup'},
     {id:'scientific',icon:'🔬',name:'Scientific Calculator',desc:'A full scientific calculator with trig, logarithms, powers, factorials, and memory functions'},
   ]},
@@ -1067,6 +1070,55 @@ function cProvident(){
 // ── Asset Allocation ──────────────────────────────────────────
 const AA_RETURNS={stocks:10,bonds:4.5,cash:3,gold:7,crypto:25};
 const AA_VOL={stocks:18,bonds:6,cash:0.5,gold:15,crypto:65};
+function calcBudget(){
+  const income=+gel('bg-income').value||0;
+  const needsPct=(+gel('bg-needs-pct').value||0)/100,wantsPct=(+gel('bg-wants-pct').value||0)/100,savingsPct=(+gel('bg-savings-pct').value||0)/100;
+  const needsActual=+gel('bg-needs-actual').value||0,wantsActual=+gel('bg-wants-actual').value||0,savingsActual=+gel('bg-savings-actual').value||0;
+
+  const needsRec=income*needsPct,wantsRec=income*wantsPct,savingsRec=income*savingsPct;
+  const totalSpend=needsActual+wantsActual+savingsActual;
+  const leftover=income-totalSpend;
+
+  const setCompare=(id,rec,actual,higherIsBetter)=>{
+    const e=gel(id);if(!e)return;
+    e.textContent=f$(rec)+' / '+f$(actual);
+    const over=actual>rec*1.05,under=actual<rec*0.95;
+    let color='var(--t)';
+    if(higherIsBetter){ if(over)color='var(--g)'; else if(under)color='var(--r)'; }
+    else{ if(over)color='var(--r)'; else if(under)color='var(--g)'; }
+    e.style.color=color;
+  };
+  setCompare('bg-needs-compare',needsRec,needsActual,false);
+  setCompare('bg-wants-compare',wantsRec,wantsActual,false);
+  setCompare('bg-savings-compare',savingsRec,savingsActual,true);
+
+  const se=(id,v)=>{const e=gel(id);if(e)e.textContent=v;};
+  se('bg-totalspend',f$(totalSpend));
+  const leftoverEl=gel('bg-leftover');
+  if(leftoverEl){leftoverEl.textContent=(leftover<0?'-':'')+f$(Math.abs(leftover));leftoverEl.style.color=leftover>=0?'var(--g)':'var(--r)';}
+
+  const unallocated=Math.max(leftover,0);
+  drawDonut('bg-donut',[needsActual,wantsActual,savingsActual,unallocated],['#1890FF','#F0B90B','#0ECB81','#8393A6']);
+
+  const insights=[];
+  if(leftover<0){
+    insights.push({type:'bad',text:`Your spending exceeds your take-home pay by <strong>${f$(Math.abs(leftover))}</strong>/month — this budget isn't currently sustainable without drawing down savings or debt.`});
+  }
+  if(income>0){
+    if(needsActual>needsRec*1.1){
+      insights.push({type:'neutral',text:`Needs spending is <strong>${f$(needsActual-needsRec)}</strong> over the ${(needsPct*100).toFixed(0)}% target — if this gap is large and persistent, it's often worth examining the biggest fixed cost first, usually housing.`});
+    }
+    if(wantsActual>wantsRec*1.1){
+      insights.push({type:'neutral',text:`Wants spending is <strong>${f$(wantsActual-wantsRec)}</strong> over the ${(wantsPct*100).toFixed(0)}% target — this is usually the easiest category to adjust short-term.`});
+    }
+    if(savingsActual<savingsRec*0.9){
+      insights.push({type:'bad',text:`Savings &amp; debt payoff is <strong>${f$(savingsRec-savingsActual)}</strong> under the ${(savingsPct*100).toFixed(0)}% target — this is the category with the most long-term impact if it's consistently underfunded.`});
+    }else if(savingsActual>=savingsRec){
+      insights.push({type:'good',text:`You're meeting or exceeding your <strong>${(savingsPct*100).toFixed(0)}%</strong> savings &amp; debt payoff target — that's the category that compounds the most over time.`});
+    }
+  }
+  renderInsights('bg-insights',insights);
+}
 function calcNetWorth(){
   const cash=+gel('nw-cash').value||0,invest=+gel('nw-invest').value||0,retire=+gel('nw-retire').value||0;
   const home=+gel('nw-home').value||0,vehicle=+gel('nw-vehicle').value||0,other=+gel('nw-other').value||0;
@@ -1594,6 +1646,64 @@ function calcInflation(){
   }
   insights.push({type:'neutral',text:`This uses a constant assumed rate, not official year-by-year CPI data — adjust the rate above to match a different assumption or period.`});
   renderInsights('if-insights',insights);
+}
+function ccSimulate(balance0,monthlyRate,paymentFn){
+  let balance=balance0,months=0,totalInterest=0;
+  const trail=[balance0];
+  const CAP=600; // 50 years
+  while(balance>0.005 && months<CAP){
+    const interest=balance*monthlyRate;
+    let payment=paymentFn(balance,interest);
+    if(payment<=interest+1e-9){months=Infinity;break;} // never covers interest -> balance never shrinks
+    if(payment>balance+interest)payment=balance+interest;
+    balance=balance+interest-payment;
+    totalInterest+=interest;
+    months++;
+    trail.push(Math.max(balance,0));
+  }
+  return {months,totalInterest,trail,neverPaysOff:!isFinite(months)};
+}
+function calcCCPayoff(){
+  const balance0=+gel('cc-balance').value||0,apr=(+gel('cc-apr').value||0)/100;
+  const minPct=(+gel('cc-minpct').value||0)/100,minFloor=+gel('cc-minfloor').value||0;
+  const fixedPayment=+gel('cc-fixed').value||0;
+  const monthlyRate=Math.pow(1+apr/365,30)-1;
+
+  const minResult=ccSimulate(balance0,monthlyRate,(bal,interest)=>Math.max(minFloor,bal*minPct+interest));
+  const fixedResult=ccSimulate(balance0,monthlyRate,()=>fixedPayment);
+
+  const se=(id,v)=>{const e=gel(id);if(e)e.textContent=v;};
+  se('cc-minmonths',minResult.neverPaysOff?'Never':minResult.months+' mo');
+  se('cc-minint',minResult.neverPaysOff?'∞':f$(minResult.totalInterest));
+  se('cc-fixedmonths',fixedResult.neverPaysOff?'Never':fixedResult.months+' mo');
+  se('cc-fixedint',fixedResult.neverPaysOff?'∞':f$(fixedResult.totalInterest));
+  const saved=(!minResult.neverPaysOff && !fixedResult.neverPaysOff)?minResult.totalInterest-fixedResult.totalInterest:0;
+  const timeSaved=(!minResult.neverPaysOff && !fixedResult.neverPaysOff)?minResult.months-fixedResult.months:0;
+  se('cc-saved',(!minResult.neverPaysOff && !fixedResult.neverPaysOff)?f$(saved):'—');
+  se('cc-timesaved',(!minResult.neverPaysOff && !fixedResult.neverPaysOff)?timeSaved+' months':'—');
+
+  const chartLen=Math.min(Math.max(minResult.neverPaysOff?0:minResult.trail.length,fixedResult.neverPaysOff?0:fixedResult.trail.length,fixedResult.neverPaysOff?0:fixedResult.trail.length)||fixedResult.trail.length,240);
+  const minTrail=minResult.trail.slice(0,chartLen);
+  const fixedTrail=fixedResult.trail.slice(0,chartLen);
+  while(minTrail.length<chartLen)minTrail.push(0);
+  while(fixedTrail.length<chartLen)fixedTrail.push(0);
+  drawLine('cc-chart',[{data:minTrail,color:'#F65E72',fill:false,w:2},{data:fixedTrail,color:'#0ECB81',fill:false,w:2.5}],175);
+
+  const insights=[];
+  if(minResult.neverPaysOff){
+    insights.push({type:'bad',text:`At this minimum payment structure, the balance <strong>never actually shrinks</strong> — the minimum payment doesn't cover the interest accruing each month. A fixed payment of at least <strong>${f$(balance0*monthlyRate+1)}</strong>/month is needed just to stop the balance from growing.`});
+  }else{
+    insights.push({type:'bad',text:`Paying only the minimum, this balance takes <strong>${minResult.months} months</strong> (${(minResult.months/12).toFixed(1)} years) to pay off, costing <strong>${f$(minResult.totalInterest)}</strong> in interest — ${minResult.totalInterest>balance0?'more than the original balance itself':`${(minResult.totalInterest/balance0*100).toFixed(0)}% of the original balance`}.`});
+  }
+  if(!fixedResult.neverPaysOff && !minResult.neverPaysOff){
+    insights.push({type:'good',text:`At a fixed <strong>${f$(fixedPayment)}</strong>/month, the same balance is paid off in <strong>${fixedResult.months} months</strong>, saving <strong>${f$(saved)}</strong> in interest and <strong>${timeSaved} months</strong> compared to minimum-only payments.`});
+  }else if(!fixedResult.neverPaysOff){
+    insights.push({type:'good',text:`At a fixed <strong>${f$(fixedPayment)}</strong>/month, this balance is paid off in <strong>${fixedResult.months} months</strong>, costing <strong>${f$(fixedResult.totalInterest)}</strong> in interest.`});
+  }else{
+    const neededPayment=balance0*monthlyRate;
+    insights.push({type:'bad',text:`Your fixed payment of <strong>${f$(fixedPayment)}</strong>/month doesn't even cover the interest accruing each month — the balance will grow, not shrink. You'd need at least <strong>${f$(neededPayment+1)}</strong>/month just to stop it from growing, and more than that to actually pay it down.`});
+  }
+  renderInsights('cc-insights',insights);
 }
 function cSavings(){
   const init=+gel('sv-init').value||0,mo=+gel('sv-monthly').value||0,r=(+gel('sv-rate').value||0)/100,y=+gel('sv-years').value||1,k=+gel('sv-comp').value;
@@ -2299,6 +2409,94 @@ function cFire(){
 }
 
 // ── Debt Payoff ──────────────────────────────────────────────────
+let bsPeople=[{name:'Alex'},{name:'Sam'},{name:'Jordan'}];
+let bsItems=[{desc:'Ribeye Steak',price:32,person:0},{desc:'Caesar Salad',price:12,person:1},{desc:'Fries (shared)',price:8,person:-1}];
+function renderBSPeople(){
+  const el=gel('bs-people-rows');if(!el)return;el.innerHTML='';
+  bsPeople.forEach((p,i)=>{
+    el.innerHTML+=`<div style="display:grid;grid-template-columns:1fr 36px;gap:8px;margin-bottom:6px;align-items:center">
+      <input type="text" value="${p.name}" oninput="bsPeople[${i}].name=this.value;calcBillSplit()" style="background:var(--bg);border:1px solid var(--bd);border-radius:6px;padding:8px;color:var(--t);font-size:13px;outline:none;width:100%">
+      <button class="btn-del" onclick="removeBSPerson(${i})">✕</button>
+    </div>`;
+  });
+  renderBSItems();
+}
+function addBSPerson(){bsPeople.push({name:'Person '+(bsPeople.length+1)});renderBSPeople();}
+function removeBSPerson(i){
+  bsPeople.splice(i,1);
+  bsItems.forEach(it=>{
+    if(it.person===i)it.person=-1;
+    else if(it.person>i)it.person--;
+  });
+  renderBSPeople();
+}
+function renderBSItems(){
+  const el=gel('bs-items-rows');if(!el)return;el.innerHTML='';
+  bsItems.forEach((it,i)=>{
+    const options=bsPeople.map((p,pi)=>`<option value="${pi}" ${it.person===pi?'selected':''}>${p.name}</option>`).join('')+`<option value="-1" ${it.person===-1?'selected':''}>Split Evenly</option>`;
+    el.innerHTML+=`<div style="display:grid;grid-template-columns:2fr 1fr 1.5fr 36px;gap:8px;margin-bottom:6px;align-items:center">
+      <input type="text" value="${it.desc}" oninput="bsItems[${i}].desc=this.value;calcBillSplit()" style="background:var(--bg);border:1px solid var(--bd);border-radius:6px;padding:8px;color:var(--t);font-size:13px;outline:none;width:100%">
+      <div class="ip"><span class="pfx">$</span><input type="text" inputmode="decimal" value="${it.price}" oninput="bsItems[${i}].price=+this.value;calcBillSplit()" style="width:100%;background:var(--bg);border:1px solid var(--bd);border-radius:6px;padding:8px 8px 8px 20px;color:var(--t);font-family:var(--mo);font-size:13px;outline:none"></div>
+      <select onchange="bsItems[${i}].person=+this.value;calcBillSplit()" style="width:100%;background:var(--bg);border:1px solid var(--bd);border-radius:6px;padding:8px;color:var(--t);font-family:var(--fn);font-size:13px;outline:none">${options}</select>
+      <button class="btn-del" onclick="bsItems.splice(${i},1);renderBSItems();">✕</button>
+    </div>`;
+  });
+  calcBillSplit();
+}
+function addBSItem(){bsItems.push({desc:'New Item',price:10,person:bsPeople.length?0:-1});renderBSItems();}
+function calcBillSplit(){
+  const taxEl=gel('bs-tax'),tipEl=gel('bs-tip'),basisEl=gel('bs-tipbasis');
+  if(!taxEl||!tipEl||!basisEl)return;
+  const tax=+taxEl.value||0,tipPct=(+tipEl.value||0)/100,tipBasis=basisEl.value;
+  const subtotal=bsItems.reduce((a,it)=>a+(it.price||0),0);
+  const tipBase=tipBasis==='total'?subtotal+tax:subtotal;
+  const tip=tipBase*tipPct;
+  const grand=subtotal+tax+tip;
+
+  const se=(id,v)=>{const e=gel(id);if(e)e.textContent=v;};
+  se('bs-subtotal',f$(subtotal));
+  se('bs-taxout',f$(tax));
+  se('bs-tipout',f$(tip));
+  se('bs-grandtotal',f$(grand));
+
+  const n=bsPeople.length;
+  const personItemTotal=bsPeople.map(()=>0);
+  bsItems.forEach(it=>{
+    const price=it.price||0;
+    if(it.person===-1){
+      if(n>0)personItemTotal.forEach((_,i)=>personItemTotal[i]+=price/n);
+    }else if(it.person>=0&&it.person<n){
+      personItemTotal[it.person]+=price;
+    }
+  });
+
+  const breakdownEl=gel('bs-breakdown');
+  if(breakdownEl){
+    if(n===0){
+      breakdownEl.innerHTML='<div style="color:var(--m);font-size:13px;padding:8px 0">Add at least one person to see the breakdown.</div>';
+    }else{
+      breakdownEl.innerHTML=bsPeople.map((p,i)=>{
+        const share=subtotal>0?personItemTotal[i]/subtotal:1/n;
+        const personTax=tax*share,personTip=tip*share,personTotal=personItemTotal[i]+personTax+personTip;
+        return `<div class="rrow"><span class="rk">${p.name||('Person '+(i+1))}</span><span class="rv">${f$(personTotal)}</span></div>`;
+      }).join('');
+    }
+  }
+
+  const insights=[];
+  if(n===0){
+    insights.push({type:'neutral',text:'Add people above, then assign items to see a fair per-person breakdown.'});
+  }else if(subtotal===0){
+    insights.push({type:'neutral',text:'Add item prices above to calculate the split.'});
+  }else{
+    const sorted=personItemTotal.map((t,i)=>({name:bsPeople[i].name||('Person '+(i+1)),t})).sort((a,b)=>b.t-a.t);
+    if(sorted.length>1&&sorted[0].t>0){
+      insights.push({type:'neutral',text:`${sorted[0].name} ordered the most (<strong>${f$(sorted[0].t)}</strong> of items) and will pay a proportionally larger share of tax and tip too — an even split would have charged everyone the same regardless of what they ordered.`});
+    }
+    insights.push({type:'good',text:`Tip is calculated on the ${tipBasis==='total'?'subtotal + tax':'pre-tax subtotal'} (<strong>${f$(tipBase)}</strong>) at <strong>${(tipPct*100).toFixed(0)}%</strong>, for a total tip of <strong>${f$(tip)}</strong>.`});
+  }
+  renderInsights('bs-insights',insights);
+}
 let debts=[{name:'Credit Card',bal:8000,rate:22,min:200},{name:'Car Loan',bal:15000,rate:7,min:300},{name:'Student Loan',bal:25000,rate:5.5,min:280}];
 function renderDebtRows(){
   const el=gel('debt-rows');el.innerHTML='';
@@ -3420,11 +3618,14 @@ const PAGE_FNS={
   '401k':[c401k],
   'allocation':[cAllocRecommend],
   'autoloan':[cAutoLoan],
+  'billsplit':[renderBSPeople],
   'breakeven':[cBE],
+  'budget':[calcBudget],
   'burnrate':[cBurn],
   'cac':[calcCAC],
   'cagr':[calcCAGR],
   'cashflow':[renderCFRows,cCF],
+  'ccpayoff':[calcCCPayoff],
   'currency':[buildCurrency,cCurrency],
   'dca':[cDCA],
   'dcf':[calcDCF],
