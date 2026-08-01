@@ -215,11 +215,13 @@ const SECTIONS=[
     {id:'rentvsbuy',icon:'🏘️',name:'Rent vs Buy Calculator',desc:'Compare your net worth over time if you rent vs buy a home, and find the breakeven year'},
     {id:'mortcomp',icon:'⚖️',name:'Mortgage Comparison',desc:'Compare up to 3 mortgage offers side by side to see which one actually costs less'},
     {id:'savings',icon:'🏛️',name:'Savings Estimator',desc:'See how your savings grow over time with compound interest, and how long it takes to double'},
+    {id:'inflation',icon:'🎈',name:'Inflation Calculator',desc:'See what an amount then is worth now, or will be worth in the future, using your own inflation rate'},
     {id:'provident',icon:'🏦',name:'Provident Fund Calculator',desc:'Project your provident fund (EPF/PF) maturity value from your monthly contributions and interest rate'},
     {id:'retirement',icon:'👴',name:'Retirement Planner',desc:'Find out if you\'re saving enough to retire comfortably, adjusted for inflation'},
     {id:'401k',icon:'🏦',name:'401(k) Calculator',desc:'Project your 401(k) balance at retirement, including employer match'},
     {id:'millionaire',icon:'💎',name:'Millionaire Calculator',desc:'Find out exactly what age you\'ll hit $1,000,000 based on your savings and investment rate'},
     {id:'fire',icon:'🔥',name:'FIRE Calculator',desc:'Find out how many years until you reach financial independence based on your savings rate'},
+    {id:'networth',icon:'💼',name:'Net Worth Calculator',desc:'Total your assets and liabilities to see your net worth, liquidity split, and debt-to-asset ratio'},
     {id:'debtcomp',icon:'❄️',name:'Snowball vs Avalanche',desc:'Compare two popular debt payoff strategies to see which clears your debt faster and cheaper'},
     {id:'debt',icon:'💳',name:'Debt Payoff Planner',desc:'Build a custom plan to pay off your debt and see exactly how much interest you\'ll save'},
     {id:'rental',icon:'🏘️',name:'Rental Yield',desc:'Check whether a rental property\'s income justifies its price using gross and net yield'},
@@ -252,6 +254,7 @@ const SECTIONS=[
     {id:'equity',icon:'📐',name:'Equity Dilution',desc:'See how much of your company you\'ll still own after future funding rounds and option pools'},
     {id:'dilutionimpact',icon:'📉',name:'Stock Dilution Impact Calculator',desc:'See how a new share offering affects EPS and the value of your existing shares'},
     {id:'revenue',icon:'📊',name:'Revenue Forecast',desc:'Forecast your monthly recurring revenue under best-case, expected, and worst-case scenarios'},
+    {id:'cac',icon:'🎯',name:'CAC & LTV:CAC Ratio',desc:'Find your customer acquisition cost and whether your growth engine is actually profitable'},
     {id:'breakeven',icon:'📈',name:'Break-even Analysis',desc:'Find out exactly how many units you need to sell before your business starts turning a profit'},
     {id:'cashflow',icon:'💵',name:'Cash Flow Analyzer',desc:'See whether more money is coming in than going out, and what\'s left over each month'},
   ]},
@@ -863,6 +866,41 @@ function cDilutionImpact(){
 }
 
 // ── Revenue Forecast ────────────────────────────────────────────
+function calcCAC(){
+  const spend=+gel('cac-spend').value||0,newcust=+gel('cac-newcust').value||1;
+  const arpu=+gel('cac-arpu').value||0,margin=(+gel('cac-margin').value||0)/100,churn=(+gel('cac-churn').value||0)/100;
+  const cac=spend/newcust;
+  const gp=arpu*margin;
+  const ltv=churn?gp/churn:Infinity;
+  const ratio=cac?ltv/cac:0;
+  const payback=gp?cac/gp:Infinity;
+  const se=(id,v)=>{const e=gel(id);if(e)e.textContent=v;};
+  se('cac-cac',f$(cac));
+  se('cac-ltv',isFinite(ltv)?f$(ltv):'∞');
+  se('cac-ratio',(isFinite(ratio)?ratio.toFixed(1):'∞')+':1');
+  se('cac-payback',isFinite(payback)?payback.toFixed(1)+' months':'∞');
+  se('cac-gp',f$(gp));
+  let verdict='Unsustainable',vcolor='var(--r)';
+  if(ratio>=5){verdict='Excellent';vcolor='var(--g)';}
+  else if(ratio>=3){verdict='Healthy';vcolor='var(--g)';}
+  else if(ratio>=1){verdict='Marginal';vcolor='var(--a)';}
+  const vEl=gel('cac-verdict');if(vEl){vEl.textContent=verdict;vEl.style.color=vcolor;}
+  drawBars('cac-chart',['CAC','LTV'],[cac,isFinite(ltv)?ltv:cac*10],['#F65E72','#0ECB81'],150);
+
+  const insights=[];
+  if(ratio<1){
+    insights.push({type:'bad',text:`Your LTV:CAC ratio is <strong>${ratio.toFixed(1)}:1</strong> — you're losing money on every customer acquired, before even counting fixed operating costs. Either acquisition cost needs to come down or retention/pricing needs to improve.`});
+  }else if(ratio<3){
+    insights.push({type:'neutral',text:`Your LTV:CAC ratio is <strong>${ratio.toFixed(1)}:1</strong> — technically profitable per customer, but below the commonly cited <strong>3:1</strong> healthy benchmark. Small improvements in churn or CAC would meaningfully change this.`});
+  }else{
+    insights.push({type:'good',text:`Your LTV:CAC ratio is <strong>${ratio.toFixed(1)}:1</strong>, at or above the commonly cited <strong>3:1</strong> healthy benchmark — your growth engine looks profitable at these assumptions.`});
+  }
+  if(isFinite(payback)&&payback>18){
+    insights.push({type:'neutral',text:`Your CAC payback period is <strong>${payback.toFixed(1)} months</strong> — beyond 18 months, that's a lot of capital tied up per customer before they turn profitable, which can strain cash flow even with a good LTV:CAC ratio.`});
+  }
+  insights.push({type:'neutral',text:`Want to see how this acquisition spend plays into your overall revenue trajectory? Model it in the <a href="/revenue" style="color:var(--a);text-decoration:underline">Revenue Forecast</a> calculator next.`});
+  renderInsights('cac-insights',insights);
+}
 function calcRevenue(){
   const mrr=+gel('rf-mrr').value||0,months=Math.min(36,+gel('rf-months').value||12),churn=(+gel('rf-churn').value||0)/100;
   const pess=(+gel('rf-pess').value||0)/100,base=(+gel('rf-base').value||0)/100,opt=(+gel('rf-opt').value||0)/100;
@@ -1029,6 +1067,46 @@ function cProvident(){
 // ── Asset Allocation ──────────────────────────────────────────
 const AA_RETURNS={stocks:10,bonds:4.5,cash:3,gold:7,crypto:25};
 const AA_VOL={stocks:18,bonds:6,cash:0.5,gold:15,crypto:65};
+function calcNetWorth(){
+  const cash=+gel('nw-cash').value||0,invest=+gel('nw-invest').value||0,retire=+gel('nw-retire').value||0;
+  const home=+gel('nw-home').value||0,vehicle=+gel('nw-vehicle').value||0,other=+gel('nw-other').value||0;
+  const mortgage=+gel('nw-mortgage').value||0,auto=+gel('nw-auto').value||0,student=+gel('nw-student').value||0;
+  const cc=+gel('nw-cc').value||0,otherdebt=+gel('nw-otherdebt').value||0;
+
+  const totalAssets=cash+invest+retire+home+vehicle+other;
+  const totalLiab=mortgage+auto+student+cc+otherdebt;
+  const netWorth=totalAssets-totalLiab;
+  const liquidNW=cash+invest-totalLiab;
+  const illiquidNW=netWorth-liquidNW;
+  const debtRatio=totalAssets?(totalLiab/totalAssets)*100:0;
+
+  const se=(id,v)=>{const e=gel(id);if(e)e.textContent=v;};
+  se('nw-totalassets',f$(totalAssets));
+  se('nw-totalliab',f$(totalLiab));
+  const nwEl=gel('nw-networth');
+  if(nwEl){nwEl.textContent=(netWorth<0?'-':'')+f$(Math.abs(netWorth));nwEl.style.color=netWorth>=0?'var(--g)':'var(--r)';}
+  se('nw-ratio',pct(debtRatio));
+  se('nw-liquid',(liquidNW<0?'-':'')+f$(Math.abs(liquidNW)));
+  se('nw-illiquid',(illiquidNW<0?'-':'')+f$(Math.abs(illiquidNW)));
+
+  drawDonut('nw-donut',[cash,invest,retire,home,vehicle,other],['#0ECB81','#1890FF','#9B59B6','#F0B90B','#F6465D','#8393A6']);
+
+  const insights=[];
+  if(netWorth<0){
+    insights.push({type:'neutral',text:`Your net worth is currently <strong>negative</strong> — common early on, especially with a mortgage or student loans in the mix. What matters most from here is the trend, not this single snapshot.`});
+  }else{
+    insights.push({type:'good',text:`Your net worth is <strong>${f$(netWorth)}</strong>. Assets exceed liabilities by that amount.`});
+  }
+  if(totalAssets>0 && illiquidNW/Math.max(netWorth,1)>0.7 && netWorth>0){
+    insights.push({type:'neutral',text:`Most of your net worth is <strong>illiquid</strong> (home equity, retirement, vehicles) — real wealth, but not quickly accessible. Your liquid net worth is ${liquidNW<0?'-':''}${f$(Math.abs(liquidNW))}.`});
+  }
+  if(debtRatio>50){
+    insights.push({type:'neutral',text:`Your debt-to-asset ratio is <strong>${pct(debtRatio)}</strong> — more than half your assets are debt-financed. Common with a mortgage, but worth watching as it should trend down as loans are paid off.`});
+  }else if(totalAssets>0){
+    insights.push({type:'good',text:`Your debt-to-asset ratio is <strong>${pct(debtRatio)}</strong> — less than half your assets are debt-financed.`});
+  }
+  renderInsights('nw-insights',insights);
+}
 function cAllocRecommend(){
   const age=+gel('aa-age').value||30,risk=gel('aa-risk').value;
   let equity=Math.max(10,Math.min(90,110-age));
@@ -1483,6 +1561,40 @@ function cAutoLoan(){
 }
 
 // ── Savings ─────────────────────────────────────────────────────
+function calcInflation(){
+  const amount=+gel('if-amount').value||0,rate=(+gel('if-rate').value||0)/100;
+  const startYear=+gel('if-startyear').value||0,endYear=+gel('if-endyear').value||0;
+  const years=endYear-startYear;
+  const adjusted=amount*Math.pow(1+rate,years);
+  const cumulative=amount?((adjusted/amount)-1)*100:0;
+  const buypower=Math.pow(1+rate,years)?1/Math.pow(1+rate,years):0;
+
+  const se=(id,v)=>{const e=gel(id);if(e)e.textContent=v;};
+  se('if-adjusted',f$(adjusted));
+  se('if-cumulative',(cumulative<0?'':'')+pct(cumulative));
+  se('if-years',years);
+  se('if-buypower','$'+buypower.toFixed(2));
+  se('if-rateused',pct(rate*100));
+
+  const steps=10,labels=[],vals=[];
+  for(let i=0;i<=steps;i++){
+    const y=startYear+(years*i/steps);
+    vals.push(amount*Math.pow(1+rate,years*i/steps));
+  }
+  drawLine('if-chart',[{data:vals,color:'#F0B90B',fill:true}],175);
+
+  const insights=[];
+  if(years===0){
+    insights.push({type:'neutral',text:'Set different start and end years to see how purchasing power changes over that period.'});
+  }else if(years>0){
+    insights.push({type:'neutral',text:`At an assumed <strong>${pct(rate*100)}</strong> annual inflation rate, <strong>${f$(amount)}</strong> in ${startYear} has the same purchasing power as <strong>${f$(adjusted)}</strong> in ${endYear} — a cumulative increase of <strong>${cumulative.toFixed(1)}%</strong> over ${years} years.`});
+    insights.push({type:'neutral',text:`Put another way, every $1 from ${startYear} has the buying power of roughly <strong>$${buypower.toFixed(2)}</strong> in ${endYear} dollars under this assumption.`});
+  }else{
+    insights.push({type:'neutral',text:`Going backward ${Math.abs(years)} years, <strong>${f$(amount)}</strong> in ${startYear} would have the equivalent purchasing power of <strong>${f$(adjusted)}</strong> in ${endYear}.`});
+  }
+  insights.push({type:'neutral',text:`This uses a constant assumed rate, not official year-by-year CPI data — adjust the rate above to match a different assumption or period.`});
+  renderInsights('if-insights',insights);
+}
 function cSavings(){
   const init=+gel('sv-init').value||0,mo=+gel('sv-monthly').value||0,r=(+gel('sv-rate').value||0)/100,y=+gel('sv-years').value||1,k=+gel('sv-comp').value;
   const rk=r/k,n=k*y,fb=init*Math.pow(1+rk,n)+mo*(Math.pow(1+rk,n)-1)/(rk||1)*(1+rk)*(12/k);
@@ -3310,6 +3422,7 @@ const PAGE_FNS={
   'autoloan':[cAutoLoan],
   'breakeven':[cBE],
   'burnrate':[cBurn],
+  'cac':[calcCAC],
   'cagr':[calcCAGR],
   'cashflow':[renderCFRows,cCF],
   'currency':[buildCurrency,cCurrency],
@@ -3330,6 +3443,7 @@ const PAGE_FNS={
   'healthscore':[cHealthScore],
   'heloc':[cHeloc],
   'home':[buildDir],
+  'inflation':[calcInflation],
   'invest':[cSip],
   'lifeinsurance':[cLifeIns],
   'loan':[cLoan],
@@ -3338,6 +3452,7 @@ const PAGE_FNS={
   'millionaire':[cMillionaire],
   'mortcomp':[buildMortComp],
   'mortgage':[cMortgage],
+  'networth':[calcNetWorth],
   'peg':[cPEG],
   'prepay':[cPrepay],
   'pricing':[cPricing],
