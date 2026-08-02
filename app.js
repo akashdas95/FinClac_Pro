@@ -218,6 +218,7 @@ const SECTIONS=[
     {id:'inflation',icon:'🎈',name:'Inflation Calculator',desc:'See what an amount then is worth now, or will be worth in the future, using your own inflation rate'},
     {id:'provident',icon:'🏦',name:'Provident Fund Calculator',desc:'Project your provident fund (EPF/PF) maturity value from your monthly contributions and interest rate'},
     {id:'retirement',icon:'👴',name:'Retirement Planner',desc:'Find out if you\'re saving enough to retire comfortably, adjusted for inflation'},
+    {id:'socialsecurity',icon:'📜',name:'Social Security Estimator',desc:'See how claiming early or delaying to 70 changes your monthly Social Security benefit'},
     {id:'401k',icon:'🏦',name:'401(k) Calculator',desc:'Project your 401(k) balance at retirement, including employer match'},
     {id:'millionaire',icon:'💎',name:'Millionaire Calculator',desc:'Find out exactly what age you\'ll hit $1,000,000 based on your savings and investment rate'},
     {id:'fire',icon:'🔥',name:'FIRE Calculator',desc:'Find out how many years until you reach financial independence based on your savings rate'},
@@ -2296,6 +2297,83 @@ function cSplit(){
 }
 
 // ── Retirement ───────────────────────────────────────────────────
+function ssFRAMonths(by){
+  if(by<=1937)return 65*12;
+  if(by===1938)return 65*12+2;
+  if(by===1939)return 65*12+4;
+  if(by===1940)return 65*12+6;
+  if(by===1941)return 65*12+8;
+  if(by===1942)return 65*12+10;
+  if(by>=1943&&by<=1954)return 66*12;
+  if(by===1955)return 66*12+2;
+  if(by===1956)return 66*12+4;
+  if(by===1957)return 66*12+6;
+  if(by===1958)return 66*12+8;
+  if(by===1959)return 66*12+10;
+  return 67*12;
+}
+function ssBenefitAtAge(claimAgeYears,fraMo,pia){
+  const claimMo=claimAgeYears*12;
+  const diff=claimMo-fraMo;
+  if(diff<0){
+    const earlyMonths=-diff;
+    const first36=Math.min(earlyMonths,36),extra=Math.max(earlyMonths-36,0);
+    const reduction=first36*(5/9)/100+extra*(5/12)/100;
+    return pia*(1-Math.min(reduction,1));
+  }else if(diff>0){
+    const maxDelayMo=70*12-fraMo;
+    const delayMonths=Math.min(diff,maxDelayMo);
+    const increase=delayMonths*(2/3)/100;
+    return pia*(1+increase);
+  }
+  return pia;
+}
+function calcSocialSecurity(){
+  const pia=+gel('ss-pia').value||0;
+  const birthYear=+gel('ss-birthyear').value||1990;
+  const claimAgeRaw=+gel('ss-claimage').value||67;
+  const claimClamped=Math.max(62,Math.min(70,claimAgeRaw));
+
+  const fraMo=ssFRAMonths(birthYear);
+  const fraYears=Math.floor(fraMo/12),fraRemMonths=fraMo%12;
+  const benefit=ssBenefitAtAge(claimClamped,fraMo,pia);
+  const benefit62=ssBenefitAtAge(62,fraMo,pia);
+  const benefit70=ssBenefitAtAge(70,fraMo,pia);
+
+  const se=(id,v)=>{const e=gel(id);if(e)e.textContent=v;};
+  se('ss-fra',fraYears+(fraRemMonths?(' yr '+fraRemMonths+'mo'):' yr'));
+  se('ss-benefit',f$(benefit)+'/mo');
+  const vsFraPct=pia?((benefit/pia-1)*100):0;
+  se('ss-vsfra',(vsFraPct>=0?'+':'')+vsFraPct.toFixed(1)+'%');
+  se('ss-annual',f$(benefit*12));
+  se('ss-age62',f$(benefit62)+'/mo');
+  se('ss-agefra',f$(pia)+'/mo');
+  se('ss-age70',f$(benefit70)+'/mo');
+
+  let breakevenAge=null;
+  if(benefit70>benefit62){
+    breakevenAge=(70*benefit70-62*benefit62)/(benefit70-benefit62);
+  }
+  se('ss-breakeven',(breakevenAge&&isFinite(breakevenAge))?('~age '+breakevenAge.toFixed(0)):'—');
+
+  const ages=[],vals=[];
+  for(let a=62;a<=70;a++){ages.push(String(a));vals.push(ssBenefitAtAge(a,fraMo,pia));}
+  drawBars('ss-chart',ages,vals,['#1890FF'],150);
+
+  const insights=[];
+  if(claimAgeRaw<62||claimAgeRaw>70){
+    insights.push({type:'neutral',text:'Social Security can only be claimed between ages 62 and 70 — using the closest valid age for this calculation.'});
+  }
+  if(claimClamped*12<fraMo){
+    insights.push({type:'neutral',text:`Claiming at ${claimClamped} is <strong>${Math.abs(vsFraPct).toFixed(1)}% lower</strong> than waiting until your Full Retirement Age of ${fraYears}${fraRemMonths?(' and '+fraRemMonths+' months'):''}, and that reduction is permanent for the life of the benefit.`});
+  }else if(claimClamped*12>fraMo){
+    insights.push({type:'good',text:`Claiming at ${claimClamped} is <strong>${vsFraPct.toFixed(1)}% higher</strong> than your Full Retirement Age benefit, thanks to delayed retirement credits.`});
+  }
+  if(breakevenAge){
+    insights.push({type:'neutral',text:`Delaying from 62 to 70 breaks even in cumulative total (before investment growth or inflation) around age <strong>${breakevenAge.toFixed(0)}</strong> — collecting past that age means delaying paid off in total dollars received.`});
+  }
+  renderInsights('ss-insights',insights);
+}
 function cRetire(){
   const age=+gel('rt-age').value||30,ret=+gel('rt-ret').value||65,save=+gel('rt-save').value||0,contrib=+gel('rt-contrib').value||0;
   const rate=(+gel('rt-rate').value||0)/100,inf=(+gel('rt-inf').value||0)/100,exp=+gel('rt-exp').value||0,life=+gel('rt-life').value||85;
@@ -3667,6 +3745,7 @@ const PAGE_FNS={
   'salary':[cSalary],
   'savings':[cSavings],
   'savingsgoal':[cSavingsGoal],
+  'socialsecurity':[calcSocialSecurity],
   'scientific':[buildSci],
   'split':[cSplit],
   'stock':[cStock],
