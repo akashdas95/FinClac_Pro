@@ -206,6 +206,7 @@ const SECTIONS=[
     {id:'loaneligibility',icon:'✅',name:'Loan Eligibility',desc:'Find out how much loan you may qualify for based on your income and existing debts'},
     {id:'dti',icon:'📊',name:'Debt-to-Income Ratio',desc:'Check your DTI against what lenders typically look for'},
     {id:'prepay',icon:'⏩',name:'Loan Prepayment',desc:'See how much time and interest you can save by paying extra toward your loan each month'},
+    {id:'refinance',icon:'🔀',name:'Refinance Break-Even',desc:'Find out how many months it takes to recoup closing costs, and whether refinancing is worth it'},
     {id:'loancomp',icon:'📋',name:'Loan Comparison',desc:'Compare up to 3 loan offers side by side to see which one actually costs less overall'},
     {id:'autoloan',icon:'🚗',name:'Auto Loan Calculator',desc:'Calculate your car payment including trade-in, sales tax, and new vs used loan rates'},
     {id:'tax',icon:'🧾',name:'Tax Estimator',desc:'Estimate your US federal income tax, effective rate, and what you actually take home'},
@@ -249,6 +250,7 @@ const SECTIONS=[
     {id:'dca',icon:'📊',name:'Dollar Cost Averaging',desc:'Calculate shares bought, average cost per share, and compare DCA vs a lump sum investment'},
     {id:'swp',icon:'📉',name:'SWP Calculator',desc:'See how long a lump sum lasts when you withdraw a fixed monthly income from it'},
     {id:'stock',icon:'📉',name:'Stock P&L',desc:'Calculate your real profit or loss on a trade after accounting for brokerage fees'},
+    {id:'options',icon:'⚡',name:'Options Profit & Breakeven',desc:'Find the breakeven price, max profit, max loss, and P&L for a call or put position'},
     {id:'split',icon:'🔀',name:'Stock Split Calculator',desc:'See exactly how many new shares you\'ll have and your adjusted cost basis after any forward or reverse split'},
   ]},
   {title:'🚀 Startup & Business',badge:false,items:[
@@ -969,6 +971,67 @@ function cLoan(){
 }
 
 // ── Loan Prepayment ─────────────────────────────────────────────
+function rfPmt(principal,r,n){
+  return r?principal*r*Math.pow(1+r,n)/(Math.pow(1+r,n)-1):principal/n;
+}
+function calcRefinance(){
+  const balance=+gel('rf-balance').value||0;
+  const currentRate=(+gel('rf-currentrate').value||0)/12/100;
+  const currentTermMo=(+gel('rf-currentterm').value||1)*12;
+  const newRate=(+gel('rf-newrate').value||0)/12/100;
+  const newTermMo=(+gel('rf-newterm').value||1)*12;
+  const cashout=+gel('rf-cashout').value||0;
+  const closing=+gel('rf-closing').value||0;
+
+  const currentPay=rfPmt(balance,currentRate,currentTermMo);
+  const newBalance=balance+cashout;
+  const newPay=rfPmt(newBalance,newRate,newTermMo);
+  const monthlySavings=currentPay-newPay;
+
+  const currentTotalInterest=currentPay*currentTermMo-balance;
+  const newTotalInterest=newPay*newTermMo-newBalance;
+
+  const se=(id,v)=>{const e=gel(id);if(e)e.textContent=v;};
+  se('rf-currentpay',f$(currentPay));
+  se('rf-newpay',f$(newPay));
+  const savingsEl=gel('rf-savings');
+  if(savingsEl){savingsEl.textContent=(monthlySavings<0?'-':'')+f$(Math.abs(monthlySavings));savingsEl.style.color=monthlySavings>=0?'var(--g)':'var(--r)';}
+  se('rf-currentinterest',f$(currentTotalInterest));
+  se('rf-newinterest',f$(newTotalInterest));
+
+  const breakevenEl=gel('rf-breakeven');
+  let breakevenMonths=null;
+  if(monthlySavings>0){
+    breakevenMonths=closing/monthlySavings;
+    if(breakevenEl){breakevenEl.textContent=breakevenMonths.toFixed(0)+' months';breakevenEl.style.color='var(--g)';}
+  }else if(breakevenEl){
+    breakevenEl.textContent='Never';breakevenEl.style.color='var(--r)';
+  }
+
+  const months=Math.max(currentTermMo,newTermMo,1);
+  const chartLen=Math.min(months,360);
+  const step=Math.max(1,Math.floor(chartLen/40));
+  const currentSeries=[],newSeries=[];
+  for(let m=0;m<=chartLen;m+=step){
+    currentSeries.push(Math.min(m,currentTermMo)*currentPay);
+    newSeries.push(closing+Math.min(m,newTermMo)*newPay);
+  }
+  drawLine('rf-chart',[{data:currentSeries,color:'#8393A6',fill:false,w:2},{data:newSeries,color:'#0ECB81',fill:false,w:2.5}],175);
+
+  const insights=[];
+  if(monthlySavings<=0){
+    insights.push({type:'bad',text:`Your new payment is <strong>${f$(Math.abs(monthlySavings))}</strong> ${monthlySavings<0?'higher':'the same'} than your current payment${cashout>0?' — likely because the cash-out amount increased your loan balance enough to offset the lower rate':''}. This refinance doesn't reduce your monthly payment.`});
+  }else if(breakevenMonths!==null){
+    const rating=breakevenMonths<=24?'good':breakevenMonths<=60?'neutral':'bad';
+    insights.push({type:rating,text:`You'll break even on the <strong>${f$(closing)}</strong> in closing costs after <strong>${breakevenMonths.toFixed(0)} months</strong> (${(breakevenMonths/12).toFixed(1)} years). Refinancing is only worth it if you keep this loan longer than that.`});
+  }
+  if(newTermMo>currentTermMo&&newTotalInterest>currentTotalInterest){
+    insights.push({type:'neutral',text:`The new loan's <strong>${(newTermMo/12).toFixed(0)}-year</strong> term is longer than your <strong>${(currentTermMo/12).toFixed(0)}</strong> remaining years on the current loan — even at a lower rate, total interest paid is <strong>${f$(newTotalInterest-currentTotalInterest)}</strong> higher because you're paying for longer.`});
+  }else if(newTotalInterest<currentTotalInterest){
+    insights.push({type:'good',text:`Total interest on the new loan is <strong>${f$(currentTotalInterest-newTotalInterest)}</strong> lower than staying on your current loan, even after accounting for the different term length.`});
+  }
+  renderInsights('rf-insights',insights);
+}
 function cPrepay(){
   const P=+gel('pp-amt').value||0,r=(+gel('pp-rate').value||0)/12/100,n=+gel('pp-n').value||1;
   const extra=+gel('pp-extra').value||0,lump=+gel('pp-lump').value||0,lumpMo=+gel('pp-lumpmo').value||0;
@@ -2239,6 +2302,57 @@ function c401k(){
 }
 
 // ── Stock ────────────────────────────────────────────────────────
+function calcOptions(){
+  const type=gel('op-type').value,position=gel('op-position').value;
+  const strike=+gel('op-strike').value||0,premium=+gel('op-premium').value||0;
+  const contracts=+gel('op-contracts').value||1,target=+gel('op-target').value||0;
+  const mult=100*contracts;
+
+  const breakeven=type==='call'?strike+premium:strike-premium;
+  const intrinsicAt=(price)=>type==='call'?Math.max(price-strike,0):Math.max(strike-price,0);
+  const totalPremium=premium*mult;
+
+  let maxProfit,maxLoss;
+  if(position==='long'){
+    maxLoss=totalPremium;
+    maxProfit=(type==='call')?Infinity:Math.max(strike-premium,0)*mult;
+  }else{
+    maxProfit=totalPremium;
+    maxLoss=(type==='call')?Infinity:Math.max(strike-premium,0)*mult;
+  }
+
+  const intrinsicTarget=intrinsicAt(target);
+  const targetPL=position==='long'?(intrinsicTarget-premium)*mult:(premium-intrinsicTarget)*mult;
+
+  const se=(id,v)=>{const e=gel(id);if(e)e.textContent=v;};
+  se('op-breakeven',f$(breakeven));
+  se('op-maxprofit',isFinite(maxProfit)?f$(maxProfit):'Unlimited');
+  se('op-maxloss',isFinite(maxLoss)?f$(maxLoss):'Unlimited');
+  const targetEl=gel('op-targetpl');
+  if(targetEl){targetEl.textContent=(targetPL<0?'-':'')+f$(Math.abs(targetPL));targetEl.style.color=targetPL>=0?'var(--g)':'var(--r)';}
+  se('op-totalpremium',f$(totalPremium));
+
+  const rangeLow=strike*0.6,rangeHigh=strike*1.4,steps=40,vals=[];
+  for(let i=0;i<=steps;i++){
+    const price=rangeLow+(rangeHigh-rangeLow)*i/steps;
+    const intr=intrinsicAt(price);
+    const pl=position==='long'?(intr-premium)*mult:(premium-intr)*mult;
+    vals.push(pl);
+  }
+  drawLine('op-chart',[{data:vals,color:position==='long'?'#0ECB81':'#F65E72',fill:true}],175);
+
+  const insights=[];
+  const posLabel=position==='long'?'Long':'Short',typeLabel=type==='call'?'Call':'Put';
+  insights.push({type:'neutral',text:`This ${posLabel} ${typeLabel} breaks even at a stock price of <strong>${f$(breakeven)}</strong>.`});
+  if(!isFinite(maxLoss)){
+    insights.push({type:'bad',text:`This position has <strong>unlimited</strong> theoretical loss potential — risk grows without a cap as the stock price moves against the position.`});
+  }
+  if(!isFinite(maxProfit)){
+    insights.push({type:'good',text:`This position has <strong>unlimited</strong> theoretical profit potential above the breakeven price.`});
+  }
+  insights.push({type:targetPL>=0?'good':'bad',text:`At your target price of <strong>${f$(target)}</strong>, this position would show a <strong>${targetPL>=0?'profit':'loss'}</strong> of <strong>${f$(Math.abs(targetPL))}</strong>.`});
+  renderInsights('op-insights',insights);
+}
 function cStock(){
   const sh=+gel('sk-sh').value||0,buy=+gel('sk-buy').value||0,sell=+gel('sk-sell').value||0,bc=(+gel('sk-bc').value||0)/100,sc=(+gel('sk-sc').value||0)/100,days=+gel('sk-days').value||1;
   const bt=sh*buy,st=sh*sell,bc_=bt*bc,sc_=st*sc,pnl=st-bt-bc_-sc_,ret=bt?pnl/bt*100:0,ann=(Math.pow(1+ret/100,365/days)-1)*100,bep=buy*(1+bc)/(1-sc);
@@ -3732,10 +3846,12 @@ const PAGE_FNS={
   'mortcomp':[buildMortComp],
   'mortgage':[cMortgage],
   'networth':[calcNetWorth],
+  'options':[calcOptions],
   'peg':[cPEG],
   'prepay':[cPrepay],
   'pricing':[cPricing],
   'provident':[cProvident],
+  'refinance':[calcRefinance],
   'remit':[buildRemit],
   'rental':[cRental],
   'rentalprop':[calcRP],
