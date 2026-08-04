@@ -3,12 +3,12 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Credit Card Payoff Calculator — Minimum vs Fixed Payment | FinCalc</title>
+<title>Credit Card Payoff Calculator | FinCalc</title>
 <meta name="description" content="See how long it really takes to pay off a credit card on minimum payments vs a fixed payment, and how much interest each approach costs.">
 <link rel="canonical" href="https://finclac.com/ccpayoff">
 <meta name="robots" content="index, follow">
 <meta property="og:type" content="website">
-<meta property="og:title" content="Credit Card Payoff Calculator — Minimum vs Fixed Payment | FinCalc">
+<meta property="og:title" content="Credit Card Payoff Calculator | FinCalc">
 <meta property="og:description" content="See how long it really takes to pay off a credit card on minimum payments vs a fixed payment, and how much interest each approach costs.">
 <meta property="og:url" content="https://finclac.com/ccpayoff">
 <meta property="og:site_name" content="FinCalc">
@@ -17,7 +17,7 @@
 <meta property="og:image:height" content="512">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="https://finclac.com/android-chrome-512x512.png">
-<meta name="twitter:title" content="Credit Card Payoff Calculator — Minimum vs Fixed Payment | FinCalc">
+<meta name="twitter:title" content="Credit Card Payoff Calculator | FinCalc">
 <meta name="twitter:description" content="See how long it really takes to pay off a credit card on minimum payments vs a fixed payment, and how much interest each approach costs.">
 <style>html{scrollbar-gutter:stable;overflow-y:scroll}*{box-sizing:border-box;margin:0;padding:0}
 :root{--bg:#0B0E11;--s:#141920;--s2:#1C2430;--bd:#232D3A;--t:#E8EDF2;--m:#8393A6;--tb:#A3B2C4;--a:#F0B90B;--g:#0ECB81;--r:#F65E72;--b:#1890FF;--p:#B478D1;--fn:'DM Sans',sans-serif;--mo:'DM Mono',monospace}
@@ -86,7 +86,7 @@ body{background:var(--bg);color:var(--t);font-family:var(--fn);font-size:14px;li
 .dir-sec-h{font-size:11px;font-weight:600;color:var(--m);letter-spacing:.8px;text-transform:uppercase;margin-bottom:.75rem;display:flex;align-items:center;gap:8px}
 .dir-sec-h::after{content:'';flex:1;height:1px;background:var(--bd)}
 .dir-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(178px,1fr));gap:10px}
-.dir-card{background:linear-gradient(135deg,#0d1117 60%,#071510 100%);border:1px solid #0ECB81;border-radius:12px;padding:1.25rem 1.1rem;cursor:pointer;transition:all .2s;box-shadow:0 2px 12px rgba(14,203,129,.1),0 1px 3px rgba(0,0,0,.4);text-decoration:none;display:block;color:inherit}
+.dir-card{background:linear-gradient(135deg,#0d1117 60%,#071510 100%);border:1px solid #0ECB81;border-radius:12px;padding:1.25rem 1.1rem;cursor:pointer;transition:all .2s;box-shadow:0 2px 12px rgba(14,203,129,.1),0 1px 3px rgba(0,0,0,.4);text-decoration:none;display:block;color:inherit;position:relative}.pop-star{position:absolute;top:10px;right:12px;font-size:14px;line-height:1;filter:drop-shadow(0 1px 2px rgba(0,0,0,.35));z-index:2}
 .dir-card:hover{border-color:#ffffff;transform:translateY(-2px);box-shadow:0 6px 28px rgba(255,255,255,.12),0 2px 8px rgba(0,0,0,.5)}
 .dir-icon{font-size:28px;margin-bottom:10px;line-height:1}
 .dir-name{font-size:15px;font-weight:600;margin-bottom:5px;color:var(--t)}
@@ -401,6 +401,7 @@ body{background:var(--bg);color:var(--t);font-family:var(--fn);font-size:14px;li
 </div>
 
 <div style="margin-top:1.75rem;margin-bottom:1.75rem"><div class="calc-links"><span class="calc-links-label">🔗 Related Calculators</span><a class="calc-link-btn" href="/debt" onclick="go('debt',null);return false;">💳 Debt Payoff Planner</a><a class="calc-link-btn" href="/debtcomp" onclick="go('debtcomp',null);return false;">❄️ Snowball vs Avalanche</a><a class="calc-link-btn" href="/emergencyfund" onclick="go('emergencyfund',null);return false;">🛡️ Emergency Fund</a><a class="calc-link-btn" href="/networth" onclick="go('networth',null);return false;">💼 Net Worth</a></div></div>
+<div class="related-box"><div class="related-box-title">📖 Related Articles</div><a class="related-item" href="/blog/why-minimum-payments-never-shrink-your-balance">Why Your Credit Card Minimum Payment Never Seems to Go Down<span class="related-arrow">→</span></a></div>
 <div class="calc-guide">
   <div class="guide-toggle">
     <div class="guide-toggle-title">📖 Why Minimum Payments Take So Long</div>
@@ -491,7 +492,7 @@ document.addEventListener('DOMContentLoaded', function(){
   if(btn) btn.textContent = current === 'light' ? '\ud83c\udf19 Dark' : '\u2600\ufe0f Light';
 });
 </script>
-<script src="app.js?v=20260731c"></script>
+<script src="app.js?v=20260731d"></script>
 <script>initPage('ccpayoff');</script>
 </body>
 </html>

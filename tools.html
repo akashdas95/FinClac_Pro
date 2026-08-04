@@ -86,7 +86,7 @@ body{background:var(--bg);color:var(--t);font-family:var(--fn);font-size:14px;li
 .dir-sec-h{font-size:11px;font-weight:600;color:var(--m);letter-spacing:.8px;text-transform:uppercase;margin-bottom:.75rem;display:flex;align-items:center;gap:8px}
 .dir-sec-h::after{content:'';flex:1;height:1px;background:var(--bd)}
 .dir-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(178px,1fr));gap:10px}
-.dir-card{background:linear-gradient(135deg,#0d1117 60%,#071510 100%);border:1px solid #0ECB81;border-radius:12px;padding:1.25rem 1.1rem;cursor:pointer;transition:all .2s;box-shadow:0 2px 12px rgba(14,203,129,.1),0 1px 3px rgba(0,0,0,.4);text-decoration:none;display:block;color:inherit}
+.dir-card{background:linear-gradient(135deg,#0d1117 60%,#071510 100%);border:1px solid #0ECB81;border-radius:12px;padding:1.25rem 1.1rem;cursor:pointer;transition:all .2s;box-shadow:0 2px 12px rgba(14,203,129,.1),0 1px 3px rgba(0,0,0,.4);text-decoration:none;display:block;color:inherit;position:relative}.pop-star{position:absolute;top:10px;right:12px;font-size:14px;line-height:1;filter:drop-shadow(0 1px 2px rgba(0,0,0,.35));z-index:2}
 .dir-card:hover{border-color:#ffffff;transform:translateY(-2px);box-shadow:0 6px 28px rgba(255,255,255,.12),0 2px 8px rgba(0,0,0,.5)}
 .dir-icon{font-size:28px;margin-bottom:10px;line-height:1}
 .dir-name{font-size:15px;font-weight:600;margin-bottom:5px;color:var(--t)}
@@ -368,7 +368,7 @@ body{background:var(--bg);color:var(--t);font-family:var(--fn);font-size:14px;li
 <main class="content" id="main-content">
 <div id="tools" class="panel on">
 <div class="calc-header"><h1 class="calc-page-title">Tools Calculators</h1><p class="calc-desc">General-purpose calculators that don't fit neatly into a single financial category, but are genuinely useful alongside the ones that do — currency conversion, cross-border transfer costs, and a full scientific calculator for checking the math behind everything else.</p></div>
-<div class="dir-grid" style="margin-top:1.5rem"><a class="dir-card" href="/currency"><div class="dir-icon">💱</div><div class="dir-name">Currency Converter</div><div class="dir-desc">Quickly convert between 15 major world currencies using live, daily-updated exchange rates</div></a><a class="dir-card" href="/billsplit"><div class="dir-icon">🍽️</div><div class="dir-name">Itemized Bill Splitter</div><div class="dir-desc">Split a restaurant bill fairly by what each person ordered, with tax and tip split proportionally</div></a><a class="dir-card" href="/remit"><div class="dir-icon">🌍</div><div class="dir-name">International Transfer Cost</div><div class="dir-desc">See the true cost of sending money abroad, including hidden exchange rate markup</div></a><a class="dir-card" href="/scientific"><div class="dir-icon">🔬</div><div class="dir-name">Scientific Calculator</div><div class="dir-desc">A full scientific calculator with trig, logarithms, powers, factorials, and memory functions</div></a></div>
+<div class="dir-grid" style="margin-top:1.5rem"><a class="dir-card" href="/currency"><span class="pop-star" title="Popular calculator" aria-label="Popular calculator">⭐</span><div class="dir-icon">💱</div><div class="dir-name">Currency Converter</div><div class="dir-desc">Quickly convert between 15 major world currencies using live, daily-updated exchange rates</div></a><a class="dir-card" href="/billsplit"><div class="dir-icon">🍽️</div><div class="dir-name">Itemized Bill Splitter</div><div class="dir-desc">Split a restaurant bill fairly by what each person ordered, with tax and tip split proportionally</div></a><a class="dir-card" href="/remit"><div class="dir-icon">🌍</div><div class="dir-name">International Transfer Cost</div><div class="dir-desc">See the true cost of sending money abroad, including hidden exchange rate markup</div></a><a class="dir-card" href="/scientific"><div class="dir-icon">🔬</div><div class="dir-name">Scientific Calculator</div><div class="dir-desc">A full scientific calculator with trig, logarithms, powers, factorials, and memory functions</div></a></div>
 <div class="related-box" style="margin-top:1.75rem"><div class="related-box-title">📖 Related Reading</div><a class="related-item" href="/blog/mid-market-rate-vs-bank-rate">Why the Exchange Rate You See Online Isn't the Rate You Get<span class="related-arrow">→</span></a><a class="related-item" href="/blog/remittance-transfer-costs">The Real Cost of Sending Money Abroad (It's Not the Fee)<span class="related-arrow">→</span></a></div>
 
 </div>
@@ -417,7 +417,7 @@ document.addEventListener('DOMContentLoaded', function(){
   if(btn) btn.textContent = current === 'light' ? '\ud83c\udf19 Dark' : '\u2600\ufe0f Light';
 });
 </script>
-<script src="app.js?v=20260731c"></script>
+<script src="app.js?v=20260731d"></script>
 <script>initPage('tools');</script>
 </body>
 </html>

@@ -1,6 +1,6 @@
 # FinCalc
 
-> FinCalc is a free collection of 47 online financial calculators covering personal finance, investing, loans, retirement, and business finance. All calculators run entirely in the browser — no signup, no data stored.
+> FinCalc is a free collection of 60 online financial calculators covering personal finance, investing, loans, retirement, and business finance. All calculators run entirely in the browser — no signup, no data stored.
 
 ## Calculators
 
@@ -16,6 +16,15 @@
 - [Tax Estimator](https://finclac.com/tax): US federal income tax and effective rate estimate
 - [CAGR Calculator](https://finclac.com/cagr): Compound annual growth rate
 - [Currency Converter](https://finclac.com/currency): Live exchange rates across 15 major currencies
+- [Net Worth Calculator](https://finclac.com/networth): Total assets and liabilities, liquid vs illiquid split
+- [Refinance Break-Even Calculator](https://finclac.com/refinance): Months to recoup mortgage refinance closing costs
+- [Social Security Benefit Estimator](https://finclac.com/socialsecurity): Benefit impact of claiming age 62-70
+- [Options Profit & Breakeven Calculator](https://finclac.com/options): Breakeven, max profit, and max loss for calls and puts
+- [Credit Card Payoff Calculator](https://finclac.com/ccpayoff): Minimum payment vs fixed payment payoff time and interest
+- [50/30/20 Budget Calculator](https://finclac.com/budget): Actual spending vs the 50/30/20 needs/wants/savings rule
+- [CAC & LTV:CAC Ratio Calculator](https://finclac.com/cac): Customer acquisition cost and lifetime value ratio for SaaS
+- [Itemized Bill Splitter](https://finclac.com/billsplit): Proportional bill splitting by what each person ordered
+- [Inflation Calculator](https://finclac.com/inflation): Purchasing power over time using a chosen inflation rate
 
 See [sitemap.xml](https://finclac.com/sitemap.xml) for the full list of calculators and articles.
 

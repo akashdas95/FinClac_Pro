@@ -202,42 +202,42 @@ function drawBars(id,labels,vals,colors,H_=130){
 // ── Directory ───────────────────────────────────────────────────
 const SECTIONS=[
   {title:'💰 Personal Finance',badge:false,items:[
-    {id:'loan',icon:'🏦',name:'Loan / EMI',desc:'Find your monthly loan payment and see exactly how much of it goes to interest vs principal'},
+    {id:'loan',icon:'🏦',name:'Loan / EMI',desc:'Find your monthly loan payment and see exactly how much of it goes to interest vs principal',popular:true},
     {id:'loaneligibility',icon:'✅',name:'Loan Eligibility',desc:'Find out how much loan you may qualify for based on your income and existing debts'},
     {id:'dti',icon:'📊',name:'Debt-to-Income Ratio',desc:'Check your DTI against what lenders typically look for'},
     {id:'prepay',icon:'⏩',name:'Loan Prepayment',desc:'See how much time and interest you can save by paying extra toward your loan each month'},
     {id:'refinance',icon:'🔀',name:'Refinance Break-Even',desc:'Find out how many months it takes to recoup closing costs, and whether refinancing is worth it'},
     {id:'loancomp',icon:'📋',name:'Loan Comparison',desc:'Compare up to 3 loan offers side by side to see which one actually costs less overall'},
-    {id:'autoloan',icon:'🚗',name:'Auto Loan Calculator',desc:'Calculate your car payment including trade-in, sales tax, and new vs used loan rates'},
-    {id:'tax',icon:'🧾',name:'Tax Estimator',desc:'Estimate your US federal income tax, effective rate, and what you actually take home'},
-    {id:'salary',icon:'💵',name:'Salary Calculator',desc:'Convert your pay between hourly, daily, monthly, and yearly instantly'},
-    {id:'mortgage',icon:'🏠',name:'Mortgage',desc:'Estimate your full monthly home payment including property tax, insurance, and PMI'},
+    {id:'autoloan',icon:'🚗',name:'Auto Loan Calculator',desc:'Calculate your car payment including trade-in, sales tax, and new vs used loan rates',popular:true},
+    {id:'tax',icon:'🧾',name:'Tax Estimator',desc:'Estimate your US federal income tax, effective rate, and what you actually take home',popular:true},
+    {id:'salary',icon:'💵',name:'Salary Calculator',desc:'Convert your pay between hourly, daily, monthly, and yearly instantly',popular:true},
+    {id:'mortgage',icon:'🏠',name:'Mortgage',desc:'Estimate your full monthly home payment including property tax, insurance, and PMI',popular:true},
     {id:'heloc',icon:'🏡',name:'HELOC Calculator',desc:'Find out how much you can borrow against your home equity and what payments look like in the draw vs repayment period'},
     {id:'rentvsbuy',icon:'🏘️',name:'Rent vs Buy Calculator',desc:'Compare your net worth over time if you rent vs buy a home, and find the breakeven year'},
     {id:'mortcomp',icon:'⚖️',name:'Mortgage Comparison',desc:'Compare up to 3 mortgage offers side by side to see which one actually costs less'},
-    {id:'savings',icon:'🏛️',name:'Savings Estimator',desc:'See how your savings grow over time with compound interest, and how long it takes to double'},
+    {id:'savings',icon:'🏛️',name:'Savings Estimator',desc:'See how your savings grow over time with compound interest, and how long it takes to double',popular:true},
     {id:'inflation',icon:'🎈',name:'Inflation Calculator',desc:'See what an amount then is worth now, or will be worth in the future, using your own inflation rate'},
     {id:'provident',icon:'🏦',name:'Provident Fund Calculator',desc:'Project your provident fund (EPF/PF) maturity value from your monthly contributions and interest rate'},
-    {id:'retirement',icon:'👴',name:'Retirement Planner',desc:'Find out if you\'re saving enough to retire comfortably, adjusted for inflation'},
+    {id:'retirement',icon:'👴',name:'Retirement Planner',desc:'Find out if you\'re saving enough to retire comfortably, adjusted for inflation',popular:true},
     {id:'socialsecurity',icon:'📜',name:'Social Security Estimator',desc:'See how claiming early or delaying to 70 changes your monthly Social Security benefit'},
-    {id:'401k',icon:'🏦',name:'401(k) Calculator',desc:'Project your 401(k) balance at retirement, including employer match'},
+    {id:'401k',icon:'🏦',name:'401(k) Calculator',desc:'Project your 401(k) balance at retirement, including employer match',popular:true},
     {id:'millionaire',icon:'💎',name:'Millionaire Calculator',desc:'Find out exactly what age you\'ll hit $1,000,000 based on your savings and investment rate'},
     {id:'fire',icon:'🔥',name:'FIRE Calculator',desc:'Find out how many years until you reach financial independence based on your savings rate'},
     {id:'networth',icon:'💼',name:'Net Worth Calculator',desc:'Total your assets and liabilities to see your net worth, liquidity split, and debt-to-asset ratio'},
     {id:'debtcomp',icon:'❄️',name:'Snowball vs Avalanche',desc:'Compare two popular debt payoff strategies to see which clears your debt faster and cheaper'},
-    {id:'debt',icon:'💳',name:'Debt Payoff Planner',desc:'Build a custom plan to pay off your debt and see exactly how much interest you\'ll save'},
+    {id:'debt',icon:'💳',name:'Debt Payoff Planner',desc:'Build a custom plan to pay off your debt and see exactly how much interest you\'ll save',popular:true},
     {id:'ccpayoff',icon:'🎫',name:'Credit Card Payoff',desc:'Compare minimum payments vs a fixed payment to see the real payoff time and interest cost'},
     {id:'rental',icon:'🏘️',name:'Rental Yield',desc:'Check whether a rental property\'s income justifies its price using gross and net yield'},
     {id:'rentalprop',icon:'🏡',name:'Rental Property',desc:'Run the full numbers on a rental property — cash flow, returns, and a 10-year outlook'},
     {id:'savingsgoal',icon:'🎯',name:'Savings Goal Calculator',desc:'Figure out exactly how much to save each month to hit a specific savings target on time'},
-    {id:'budget',icon:'🥧',name:'50/30/20 Budget Calculator',desc:'Compare your actual spending against the 50/30/20 rule for needs, wants, and savings'},
+    {id:'budget',icon:'🥧',name:'50/30/20 Budget Calculator',desc:'Compare your actual spending against the 50/30/20 rule for needs, wants, and savings',popular:true},
     {id:'emergencyfund',icon:'🛡️',name:'Emergency Fund Calculator',desc:'Find out how big your emergency fund should be and how long it\'ll take to build it'},
     {id:'healthscore',icon:'💯',name:'Financial Health Score',desc:'Get a single score out of 100 that sums up how healthy your overall finances really are'},
     {id:'lifeinsurance',icon:'🛡️',name:'Life Insurance Needs',desc:'Find out how much life insurance coverage your family would actually need'},
     {id:'healthinsurance',icon:'🏥',name:'Health Insurance Cost',desc:'Compare two health plans by their true total annual cost, not just the premium'},
   ]},
   {title:'📈 Investing & Valuation',badge:true,items:[
-    {id:'cagr',icon:'📐',name:'CAGR Calculator',desc:'Find the steady annual growth rate that explains how an investment grew over time'},
+    {id:'cagr',icon:'📐',name:'CAGR Calculator',desc:'Find the steady annual growth rate that explains how an investment grew over time',popular:true},
     {id:'xirr',icon:'📅',name:'XIRR Calculator',desc:'Calculate your true annualized return when you\'ve invested or withdrawn money at irregular times'},
     {id:'drip',icon:'💧',name:'Dividend Reinvestment',desc:'See how much faster your investment grows when dividends are automatically reinvested'},
     {id:'divgrowth',icon:'📈',name:'Dividend Growth Calculator',desc:'Project how much your dividend income could grow over time, and your yield on cost'},
@@ -264,7 +264,7 @@ const SECTIONS=[
     {id:'cashflow',icon:'💵',name:'Cash Flow Analyzer',desc:'See whether more money is coming in than going out, and what\'s left over each month'},
   ]},
   {title:'🔬 Tools',badge:false,items:[
-    {id:'currency',icon:'💱',name:'Currency Converter',desc:'Quickly convert between 15 major world currencies using live, daily-updated exchange rates'},
+    {id:'currency',icon:'💱',name:'Currency Converter',desc:'Quickly convert between 15 major world currencies using live, daily-updated exchange rates',popular:true},
     {id:'billsplit',icon:'🍽️',name:'Itemized Bill Splitter',desc:'Split a restaurant bill fairly by what each person ordered, with tax and tip split proportionally'},
     {id:'remit',icon:'🌍',name:'International Transfer Cost',desc:'See the true cost of sending money abroad, including hidden exchange rate markup'},
     {id:'scientific',icon:'🔬',name:'Scientific Calculator',desc:'A full scientific calculator with trig, logarithms, powers, factorials, and memory functions'},
@@ -275,7 +275,7 @@ function buildDir(){
   SECTIONS.forEach(sec=>{
     const slug=sec.title.replace(/[^\w\s-]/g,'').trim().toLowerCase().replace(/\s+/g,'-');
     let html=`<div class="dir-sec" id="dir-sec-${slug}"><a class="dir-sec-h" href="/${slug}" style="text-decoration:none;color:inherit" onclick="location.href='/${slug}';return false;">${sec.title}${sec.badge?' <span class="badge-new">New</span>':''}</a><div class="dir-grid">`;
-    sec.items.forEach(it=>{html+=`<a class="dir-card" href="/${it.id}" onclick="location.href='/${it.id}';return false;"><div class="dir-icon">${it.icon}</div><div class="dir-name">${it.name}</div><div class="dir-desc">${it.desc}</div></a>`;});
+    sec.items.forEach(it=>{html+=`<a class="dir-card" href="/${it.id}" onclick="location.href='/${it.id}';return false;">${it.popular?'<span class="pop-star" title="Popular calculator" aria-label="Popular calculator">⭐</span>':''}<div class="dir-icon">${it.icon}</div><div class="dir-name">${it.name}</div><div class="dir-desc">${it.desc}</div></a>`;});
     html+='</div></div>';el.innerHTML+=html;
   });
 }
