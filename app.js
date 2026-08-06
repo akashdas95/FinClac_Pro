@@ -69,6 +69,46 @@ function renderInsights(id,lines){
 // collapsible section. Pure DOM restructuring — CSS only activates the
 // collapsed/click behavior at ≤700px; above that, everything still
 // renders exactly as before (this just adds inert wrapper elements).
+function attachInputGuards(){
+  const GROWTH_WORDS=/growth|change in|decline/i;
+  document.querySelectorAll('input[inputmode="decimal"]').forEach(input=>{
+    if(input.dataset.guarded)return; // avoid double-binding if this ever re-runs
+    input.dataset.guarded='1';
+    const allowNeg=input.dataset.allowNegative==='1'||(()=>{
+      const label=input.closest('.field')?.querySelector('label');
+      return label&&GROWTH_WORDS.test(label.textContent);
+    })();
+    const showWarn=(msg)=>{
+      input.classList.add('field-warn');
+      let msgEl=input.closest('.field,.ip')?.parentElement?.querySelector('.field-warn-msg')||input.parentElement.querySelector('.field-warn-msg');
+      if(!msgEl){
+        msgEl=document.createElement('div');
+        msgEl.className='field-warn-msg';
+        const host=input.closest('.ip')||input;
+        host.insertAdjacentElement('afterend',msgEl);
+      }
+      msgEl.textContent=msg;
+      msgEl.style.display='';
+    };
+    const clearWarn=()=>{
+      input.classList.remove('field-warn');
+      const host=input.closest('.ip')||input;
+      const msgEl=host.nextElementSibling;
+      if(msgEl&&msgEl.classList.contains('field-warn-msg'))msgEl.style.display='none';
+    };
+    input.addEventListener('blur',()=>{
+      const raw=input.value.trim();
+      if(raw===''){clearWarn();return;}
+      const v=parseFloat(raw);
+      if(isNaN(v)){showWarn('Enter a valid number');return;}
+      if(v<0&&!allowNeg){showWarn('Enter a positive number');return;}
+      clearWarn();
+    });
+    input.addEventListener('input',()=>{
+      if(input.classList.contains('field-warn'))clearWarn();
+    });
+  });
+}
 function initGuideAccordions(){
   document.querySelectorAll('.guide-body').forEach(body=>{
     if(body.dataset.accordionized)return;
@@ -322,11 +362,12 @@ function renderXIRR(){
   xirrFlows.forEach((fl,i)=>{
     el.innerHTML+=`<div style="display:grid;grid-template-columns:1fr 1fr 36px;gap:8px;margin-bottom:6px;align-items:center">
       <input type="date" value="${fl.date}" onchange="xirrFlows[${i}].date=this.value;calcXIRR()" style="background:var(--bg);border:1px solid var(--bd);border-radius:6px;padding:8px;color:var(--t);font-family:var(--mo);font-size:12px;outline:none;width:100%">
-      <div class="ip" style="display:block"><span class="pfx">$</span><input type="text" inputmode="decimal" value="${fl.amt}" onchange="xirrFlows[${i}].amt=+this.value;calcXIRR()" style="width:100%;background:var(--bg);border:1px solid var(--bd);border-radius:6px;padding:8px 8px 8px 20px;color:${fl.amt<0?'var(--r)':'var(--g)'};font-family:var(--mo);font-size:13px;outline:none"></div>
-      <button class="btn-del" onclick="xirrFlows.splice(${i},1);renderXIRR()">✕</button>
+      <div class="ip" style="display:block"><span class="pfx">$</span><input type="text" inputmode="decimal" data-allow-negative="1" value="${fl.amt}" onchange="xirrFlows[${i}].amt=+this.value;calcXIRR()" style="width:100%;background:var(--bg);border:1px solid var(--bd);border-radius:6px;padding:8px 8px 8px 20px;color:${fl.amt<0?'var(--r)':'var(--g)'};font-family:var(--mo);font-size:13px;outline:none"></div>
+      <button class="btn-del" aria-label="Remove cash flow ${i+1}" onclick="xirrFlows.splice(${i},1);renderXIRR()">✕</button>
     </div>`;
   });
   calcXIRR();
+  attachInputGuards();
 }
 function addXIRR(){xirrFlows.push({date:new Date().toISOString().split('T')[0],amt:-1000});renderXIRR();}
 function calcXIRR(){
@@ -672,9 +713,9 @@ function renderDC2(){
       <div class="ip"><span class="pfx">$</span><input type="text" inputmode="decimal" value="${d.bal}" oninput="dc2Debts[${i}].bal=+this.value;calcDC2()" style="width:100%;background:var(--bg);border:1px solid var(--bd);border-radius:6px;padding:8px 8px 8px 20px;color:var(--t);font-family:var(--mo);font-size:13px;outline:none"></div>
       <input type="text" inputmode="decimal" value="${d.rate}" step="0.1" oninput="dc2Debts[${i}].rate=+this.value;calcDC2()" style="background:var(--bg);border:1px solid var(--bd);border-radius:6px;padding:8px;color:var(--t);font-family:var(--mo);font-size:13px;outline:none;width:100%">
       <div class="ip"><span class="pfx">$</span><input type="text" inputmode="decimal" value="${d.min}" oninput="dc2Debts[${i}].min=+this.value;calcDC2()" style="width:100%;background:var(--bg);border:1px solid var(--bd);border-radius:6px;padding:8px 8px 8px 20px;color:var(--t);font-family:var(--mo);font-size:13px;outline:none"></div>
-      <button class="btn-del" onclick="dc2Debts.splice(${i},1);renderDC2()">✕</button>
+      <button class="btn-del" aria-label="Remove debt ${i+1}" onclick="dc2Debts.splice(${i},1);renderDC2()">✕</button>
     </div>`;
-  });calcDC2();
+  });calcDC2();attachInputGuards();
 }
 function addDC2(){dc2Debts.push({name:'New Debt',bal:5000,rate:10,min:100});renderDC2();}
 function simDebt(strat,extra){
@@ -800,13 +841,15 @@ let rounds=[{name:'Seed',raise:2e6,pre:1e7},{name:'Series A',raise:1e7,pre:4e7}]
 const EQC=['#F0B90B','#0ECB81','#1890FF','#B478D1','#F65E72','#26a17b'];
 function renderFounders(){
   const el=gel('eq-founders');el.innerHTML='';
-  founders.forEach((f,i)=>{el.innerHTML+=`<div style="display:grid;grid-template-columns:1fr 1fr 36px;gap:8px;margin-bottom:6px;align-items:end"><div class="field" style="margin:0"><input type="text" value="${f.name}" oninput="founders[${i}].name=this.value;calcEquity()" style="width:100%;background:var(--bg);border:1px solid var(--bd);border-radius:6px;padding:8px;color:var(--t);font-size:13px;outline:none"></div><div class="field" style="margin:0"><input type="text" inputmode="decimal" value="${f.pct}" step="0.5" oninput="founders[${i}].pct=+this.value;calcEquity()" placeholder="%" style="width:100%;background:var(--bg);border:1px solid var(--bd);border-radius:6px;padding:8px;color:var(--t);font-family:var(--mo);font-size:13px;outline:none"></div><button class="btn-del" onclick="founders.splice(${i},1);renderFounders()">✕</button></div>`;});
+  founders.forEach((f,i)=>{el.innerHTML+=`<div style="display:grid;grid-template-columns:1fr 1fr 36px;gap:8px;margin-bottom:6px;align-items:end"><div class="field" style="margin:0"><input type="text" value="${f.name}" oninput="founders[${i}].name=this.value;calcEquity()" style="width:100%;background:var(--bg);border:1px solid var(--bd);border-radius:6px;padding:8px;color:var(--t);font-size:13px;outline:none"></div><div class="field" style="margin:0"><input type="text" inputmode="decimal" value="${f.pct}" step="0.5" oninput="founders[${i}].pct=+this.value;calcEquity()" placeholder="%" style="width:100%;background:var(--bg);border:1px solid var(--bd);border-radius:6px;padding:8px;color:var(--t);font-family:var(--mo);font-size:13px;outline:none"></div><button class="btn-del" aria-label="Remove founder ${(f.name||('founder '+(i+1))).replace(/"/g,'&quot;')}" onclick="founders.splice(${i},1);renderFounders()">✕</button></div>`;});
   calcEquity();
+  attachInputGuards();
 }
 function renderRounds(){
   const el=gel('eq-rounds');el.innerHTML='';
-  rounds.forEach((r,i)=>{el.innerHTML+=`<div style="border:1px solid var(--bd);border-radius:8px;padding:10px;margin-bottom:8px"><div style="display:flex;justify-content:space-between;margin-bottom:8px"><input type="text" value="${r.name}" oninput="rounds[${i}].name=this.value;calcEquity()" style="background:none;border:none;color:var(--t);font-weight:500;font-size:13px;outline:none;width:100px"><button class="btn-del" onclick="rounds.splice(${i},1);renderRounds()" style="padding:3px 8px">✕</button></div><div class="g2"><div class="field" style="margin-bottom:6px"><label>Raise Amount ($)</label><div class="ip"><span class="pfx">$</span><input type="text" inputmode="decimal" value="${r.raise}" oninput="rounds[${i}].raise=+this.value;calcEquity()" style="width:100%;background:var(--bg);border:1px solid var(--bd);border-radius:6px;padding:8px 8px 8px 20px;color:var(--t);font-family:var(--mo);font-size:13px;outline:none"></div></div><div class="field" style="margin-bottom:6px"><label>Pre-money Val. ($)</label><div class="ip"><span class="pfx">$</span><input type="text" inputmode="decimal" value="${r.pre}" oninput="rounds[${i}].pre=+this.value;calcEquity()" style="width:100%;background:var(--bg);border:1px solid var(--bd);border-radius:6px;padding:8px 8px 8px 20px;color:var(--t);font-family:var(--mo);font-size:13px;outline:none"></div></div></div></div>`;});
+  rounds.forEach((r,i)=>{el.innerHTML+=`<div style="border:1px solid var(--bd);border-radius:8px;padding:10px;margin-bottom:8px"><div style="display:flex;justify-content:space-between;margin-bottom:8px"><input type="text" value="${r.name}" oninput="rounds[${i}].name=this.value;calcEquity()" style="background:none;border:none;color:var(--t);font-weight:500;font-size:13px;outline:none;width:100px"><button class="btn-del" aria-label="Remove funding round ${(r.name||('round '+(i+1))).replace(/"/g,'&quot;')}" onclick="rounds.splice(${i},1);renderRounds()" style="padding:3px 8px">✕</button></div><div class="g2"><div class="field" style="margin-bottom:6px"><label>Raise Amount ($)</label><div class="ip"><span class="pfx">$</span><input type="text" inputmode="decimal" value="${r.raise}" oninput="rounds[${i}].raise=+this.value;calcEquity()" style="width:100%;background:var(--bg);border:1px solid var(--bd);border-radius:6px;padding:8px 8px 8px 20px;color:var(--t);font-family:var(--mo);font-size:13px;outline:none"></div></div><div class="field" style="margin-bottom:6px"><label>Pre-money Val. ($)</label><div class="ip"><span class="pfx">$</span><input type="text" inputmode="decimal" value="${r.pre}" oninput="rounds[${i}].pre=+this.value;calcEquity()" style="width:100%;background:var(--bg);border:1px solid var(--bd);border-radius:6px;padding:8px 8px 8px 20px;color:var(--t);font-family:var(--mo);font-size:13px;outline:none"></div></div></div></div>`;});
   calcEquity();
+  attachInputGuards();
 }
 function addFounder(){founders.push({name:'Co-founder',pct:10});renderFounders();}
 function addRound(){rounds.push({name:'New Round',raise:5e6,pre:2e7});renderRounds();}
@@ -2608,7 +2651,7 @@ function renderBSPeople(){
   bsPeople.forEach((p,i)=>{
     el.innerHTML+=`<div style="display:grid;grid-template-columns:1fr 36px;gap:8px;margin-bottom:6px;align-items:center">
       <input type="text" value="${p.name}" oninput="bsPeople[${i}].name=this.value;calcBillSplit()" style="background:var(--bg);border:1px solid var(--bd);border-radius:6px;padding:8px;color:var(--t);font-size:13px;outline:none;width:100%">
-      <button class="btn-del" onclick="removeBSPerson(${i})">✕</button>
+      <button class="btn-del" aria-label="Remove person ${(p.name||('person '+(i+1))).replace(/"/g,'&quot;')}" onclick="removeBSPerson(${i})">✕</button>
     </div>`;
   });
   renderBSItems();
@@ -2630,10 +2673,11 @@ function renderBSItems(){
       <input type="text" value="${it.desc}" oninput="bsItems[${i}].desc=this.value;calcBillSplit()" style="background:var(--bg);border:1px solid var(--bd);border-radius:6px;padding:8px;color:var(--t);font-size:13px;outline:none;width:100%">
       <div class="ip"><span class="pfx">$</span><input type="text" inputmode="decimal" value="${it.price}" oninput="bsItems[${i}].price=+this.value;calcBillSplit()" style="width:100%;background:var(--bg);border:1px solid var(--bd);border-radius:6px;padding:8px 8px 8px 20px;color:var(--t);font-family:var(--mo);font-size:13px;outline:none"></div>
       <select onchange="bsItems[${i}].person=+this.value;calcBillSplit()" style="width:100%;background:var(--bg);border:1px solid var(--bd);border-radius:6px;padding:8px;color:var(--t);font-family:var(--fn);font-size:13px;outline:none">${options}</select>
-      <button class="btn-del" onclick="bsItems.splice(${i},1);renderBSItems();">✕</button>
+      <button class="btn-del" aria-label="Remove item ${(it.desc||('item '+(i+1))).replace(/"/g,'&quot;')}" onclick="bsItems.splice(${i},1);renderBSItems();">✕</button>
     </div>`;
   });
   calcBillSplit();
+  attachInputGuards();
 }
 function addBSItem(){bsItems.push({desc:'New Item',price:10,person:bsPeople.length?0:-1});renderBSItems();}
 function calcBillSplit(){
@@ -2697,8 +2741,8 @@ function renderDebtRows(){
     <div class="ip"><span class="pfx">$</span><input type="text" inputmode="decimal" value="${d.bal}" oninput="debts[${i}].bal=+this.value;cDebt()" style="width:100%;background:var(--bg);border:1px solid var(--bd);border-radius:6px;padding:8px 8px 8px 20px;color:var(--t);font-family:var(--mo);font-size:13px;outline:none"></div>
     <input type="text" inputmode="decimal" value="${d.rate}" step="0.1" oninput="debts[${i}].rate=+this.value;cDebt()" style="background:var(--bg);border:1px solid var(--bd);border-radius:6px;padding:8px;color:var(--t);font-family:var(--mo);font-size:13px;outline:none;width:100%">
     <div class="ip"><span class="pfx">$</span><input type="text" inputmode="decimal" value="${d.min}" oninput="debts[${i}].min=+this.value;cDebt()" style="width:100%;background:var(--bg);border:1px solid var(--bd);border-radius:6px;padding:8px 8px 8px 20px;color:var(--t);font-family:var(--mo);font-size:13px;outline:none"></div>
-    <button class="btn-del" onclick="debts.splice(${i},1);renderDebtRows()">✕</button>
-  </div>`;});cDebt();
+    <button class="btn-del" aria-label="Remove debt ${(d.name||('debt '+(i+1))).replace(/"/g,'&quot;')}" onclick="debts.splice(${i},1);renderDebtRows()">✕</button>
+  </div>`;});cDebt();attachInputGuards();
 }
 function addDebt(){debts.push({name:'New Debt',bal:5000,rate:10,min:100});renderDebtRows();}
 function cDebt(){
@@ -2771,6 +2815,7 @@ function renderCFRows(){
   gel('cf-i-rows').innerHTML='';cfIncome.forEach((r,i)=>{gel('cf-i-rows').innerHTML+=cfRowHtml('i',i,r);});
   gel('cf-e-rows').innerHTML='';cfExpense.forEach((r,i)=>{gel('cf-e-rows').innerHTML+=cfRowHtml('e',i,r);});
   cCF();
+  attachInputGuards();
 }
 function cfRowHtml(type,i,r){
   const arr=type==='i'?'cfIncome':'cfExpense';
@@ -2783,7 +2828,7 @@ function cfRowHtml(type,i,r){
       <option value="biweekly" ${r.freq==='biweekly'?'selected':''}>Bi-weekly</option>
       <option value="annually" ${r.freq==='annually'?'selected':''}>Annual</option>
     </select>
-    <button class="btn-del" onclick="${arr}.splice(${i},1);renderCFRows()">✕</button>
+    <button class="btn-del" aria-label="Remove ${(r.name||('entry '+(i+1))).replace(/"/g,'&quot;')}" onclick="${arr}.splice(${i},1);renderCFRows()">✕</button>
   </div>`;
 }
 function addCF(type){if(type==='i')cfIncome.push({name:'New Income',amt:1000,freq:'monthly'});else cfExpense.push({name:'New Expense',amt:200,freq:'monthly'});renderCFRows();}
@@ -3874,7 +3919,7 @@ function initPage(id){
   window.__isHome = (id === 'home');
   buildNavDropdowns();
   highlightNavTab(id);
-  const shared = [initGuideAccordions,injectDisclaimers,injectInputHints,injectPrintButtons,injectShareButtons,attachChartTooltips,applyCommaFormatting];
+  const shared = [initGuideAccordions,injectDisclaimers,injectInputHints,injectPrintButtons,injectShareButtons,attachChartTooltips,applyCommaFormatting,attachInputGuards];
   shared.forEach(fn=>{ try{ fn(); }catch(e){ /* utility fn, expected to be safe site-wide */ } });
   (PAGE_FNS[id] || []).forEach(fn=>{ try{ fn(); }catch(e){ console.error('initPage: error running', fn.name, 'on page', id, e); } });
   if(window.__isHome){
