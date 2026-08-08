@@ -86,7 +86,7 @@ body{background:var(--bg);color:var(--t);font-family:var(--fn);font-size:14px;li
 .dir-sec-h{font-size:11px;font-weight:600;color:var(--m);letter-spacing:.8px;text-transform:uppercase;margin-bottom:.75rem;display:flex;align-items:center;gap:8px}
 .dir-sec-h::after{content:'';flex:1;height:1px;background:var(--bd)}
 .dir-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(178px,1fr));gap:10px}
-.dir-card{background:linear-gradient(135deg,#0d1117 60%,#071510 100%);border:1px solid #0ECB81;border-radius:12px;padding:1.25rem 1.1rem;cursor:pointer;transition:all .2s;box-shadow:0 2px 12px rgba(14,203,129,.1),0 1px 3px rgba(0,0,0,.4);text-decoration:none;display:block;color:inherit;position:relative}.pop-star{position:absolute;top:10px;right:12px;font-size:14px;line-height:1;filter:drop-shadow(0 1px 2px rgba(0,0,0,.35));z-index:2}.field-warn{border-color:var(--r)!important}.field-warn-msg{font-size:11px;color:var(--r);margin-top:4px;line-height:1.3}
+.dir-card{background:linear-gradient(135deg,#0d1117 60%,#071510 100%);border:1px solid #0ECB81;border-radius:12px;padding:1.25rem 1.1rem;cursor:pointer;transition:all .2s;box-shadow:0 2px 12px rgba(14,203,129,.1),0 1px 3px rgba(0,0,0,.4);text-decoration:none;display:block;color:inherit;position:relative}.pop-star{position:absolute;top:10px;right:12px;font-size:14px;line-height:1;filter:drop-shadow(0 1px 2px rgba(0,0,0,.35));z-index:2}.field-warn{border-color:var(--r)!important}.field-warn-msg{font-size:11px;color:var(--r);margin-top:4px;line-height:1.3}.tip-ic{position:relative;display:inline-flex;align-items:center;justify-content:center;width:14px;height:14px;border-radius:50%;background:var(--bd);color:var(--m);font-size:9.5px;font-style:normal;font-weight:700;cursor:help;flex-shrink:0;vertical-align:middle;margin-left:2px}.tip-ic:hover,.tip-ic:focus{background:var(--a);color:var(--bg);outline:none}.tip-ic:hover .tip-box,.tip-ic:focus .tip-box{opacity:1;visibility:visible;transform:translateY(0)}.tip-box{position:absolute;bottom:calc(100% + 8px);left:0;background:var(--s2);border:1px solid var(--bd);border-radius:8px;padding:9px 11px;font-size:11.5px;line-height:1.5;color:var(--tb);width:230px;max-width:min(230px,70vw);opacity:0;visibility:hidden;transform:translateY(4px);transition:opacity .15s,transform .15s;z-index:80;box-shadow:0 6px 20px rgba(0,0,0,.35);font-weight:400;pointer-events:none;white-space:normal}
 .dir-card:hover{border-color:#ffffff;transform:translateY(-2px);box-shadow:0 6px 28px rgba(255,255,255,.12),0 2px 8px rgba(0,0,0,.5)}
 .dir-icon{font-size:28px;margin-bottom:10px;line-height:1}
 .dir-name{font-size:15px;font-weight:600;margin-bottom:5px;color:var(--t)}
@@ -380,20 +380,20 @@ body{background:var(--bg);color:var(--t);font-family:var(--fn);font-size:14px;li
   <div class="card">
     <div class="card-title">Income Replacement</div>
     <div class="g2">
-      <div class="field"><label>Annual Income to Replace ($)</label><div class="ip"><span class="pfx">$</span><input type="text" inputmode="decimal" id="li-income" value="70000" oninput="cLifeIns()"></div></div>
-      <div class="field"><label>Years of Income Needed</label><input type="text" inputmode="decimal" id="li-years" value="15" oninput="cLifeIns()"></div>
+      <div class="field"><label>Annual Income to Replace ($) <span class="tip-ic" tabindex="0" role="button" aria-label="More info: The yearly income your dependents would need replaced if you weren't there to earn it.">i<span class="tip-box">The yearly income your dependents would need replaced if you weren't there to earn it.</span></span></label><div class="ip"><span class="pfx">$</span><input type="text" inputmode="decimal" id="li-income" placeholder="e.g. 70000" oninput="cLifeIns()"></div></div>
+      <div class="field"><label>Years of Income Needed <span class="tip-ic" tabindex="0" role="button" aria-label="More info: How many years of income replacement you want this coverage to provide.">i<span class="tip-box">How many years of income replacement you want this coverage to provide.</span></span></label><input type="text" inputmode="decimal" id="li-years" placeholder="e.g. 15" oninput="cLifeIns()"></div>
     </div>
     <div class="card-title" style="margin-top:1.25rem">Debts &amp; Future Costs</div>
     <div class="g2">
-      <div class="field"><label>Mortgage Balance ($)</label><div class="ip"><span class="pfx">$</span><input type="text" inputmode="decimal" id="li-mortgage" value="250000" oninput="cLifeIns()"></div></div>
-      <div class="field"><label>Other Debt ($)</label><div class="ip"><span class="pfx">$</span><input type="text" inputmode="decimal" id="li-debt" value="15000" oninput="cLifeIns()"></div></div>
-      <div class="field"><label>Children's Future Education ($)</label><div class="ip"><span class="pfx">$</span><input type="text" inputmode="decimal" id="li-education" value="80000" oninput="cLifeIns()"></div></div>
-      <div class="field"><label>Final Expenses ($)</label><div class="ip"><span class="pfx">$</span><input type="text" inputmode="decimal" id="li-final" value="15000" oninput="cLifeIns()"></div></div>
+      <div class="field"><label>Mortgage Balance ($) <span class="tip-ic" tabindex="0" role="button" aria-label="More info: The current amount owed on the mortgage.">i<span class="tip-box">The current amount owed on the mortgage.</span></span></label><div class="ip"><span class="pfx">$</span><input type="text" inputmode="decimal" id="li-mortgage" placeholder="e.g. 250000" oninput="cLifeIns()"></div></div>
+      <div class="field"><label>Other Debt ($) <span class="tip-ic" tabindex="0" role="button" aria-label="More info: Any debt not already captured in the categories above.">i<span class="tip-box">Any debt not already captured in the categories above.</span></span></label><div class="ip"><span class="pfx">$</span><input type="text" inputmode="decimal" id="li-debt" placeholder="e.g. 15000" oninput="cLifeIns()"></div></div>
+      <div class="field"><label>Children's Future Education ($) <span class="tip-ic" tabindex="0" role="button" aria-label="More info: An estimate of future education costs you want this coverage to help fund.">i<span class="tip-box">An estimate of future education costs you want this coverage to help fund.</span></span></label><div class="ip"><span class="pfx">$</span><input type="text" inputmode="decimal" id="li-education" placeholder="e.g. 80000" oninput="cLifeIns()"></div></div>
+      <div class="field"><label>Final Expenses ($) <span class="tip-ic" tabindex="0" role="button" aria-label="More info: Estimated funeral, burial, and other end-of-life costs.">i<span class="tip-box">Estimated funeral, burial, and other end-of-life costs.</span></span></label><div class="ip"><span class="pfx">$</span><input type="text" inputmode="decimal" id="li-final" placeholder="e.g. 15000" oninput="cLifeIns()"></div></div>
     </div>
     <div class="card-title" style="margin-top:1.25rem">What You Already Have</div>
     <div class="g2">
-      <div class="field"><label>Existing Life Insurance ($)</label><div class="ip"><span class="pfx">$</span><input type="text" inputmode="decimal" id="li-existing-cov" value="0" oninput="cLifeIns()"></div></div>
-      <div class="field"><label>Savings &amp; Investments ($)</label><div class="ip"><span class="pfx">$</span><input type="text" inputmode="decimal" id="li-savings" value="20000" oninput="cLifeIns()"></div></div>
+      <div class="field"><label>Existing Life Insurance ($) <span class="tip-ic" tabindex="0" role="button" aria-label="More info: Coverage you already have, such as through an employer policy.">i<span class="tip-box">Coverage you already have, such as through an employer policy.</span></span></label><div class="ip"><span class="pfx">$</span><input type="text" inputmode="decimal" id="li-existing-cov" placeholder="e.g. 0" oninput="cLifeIns()"></div></div>
+      <div class="field"><label>Savings &amp; Investments ($) <span class="tip-ic" tabindex="0" role="button" aria-label="More info: Combined balance of savings and investment accounts.">i<span class="tip-box">Combined balance of savings and investment accounts.</span></span></label><div class="ip"><span class="pfx">$</span><input type="text" inputmode="decimal" id="li-savings" placeholder="e.g. 20000" oninput="cLifeIns()"></div></div>
     </div>
     <div class="sgrid">
       <div class="sbox"><div class="lbl">Recommended Coverage</div><div class="val" style="color:var(--a)" id="li-need">$0</div></div>
@@ -544,7 +544,7 @@ document.addEventListener('DOMContentLoaded', function(){
   if(btn) btn.textContent = current === 'light' ? '\ud83c\udf19 Dark' : '\u2600\ufe0f Light';
 });
 </script>
-<script src="app.js?v=20260731e"></script>
+<script src="app.js?v=20260731f"></script>
 <script>initPage('lifeinsurance');</script>
 </body>
 </html>

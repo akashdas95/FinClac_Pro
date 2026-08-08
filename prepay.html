@@ -86,7 +86,7 @@ body{background:var(--bg);color:var(--t);font-family:var(--fn);font-size:14px;li
 .dir-sec-h{font-size:11px;font-weight:600;color:var(--m);letter-spacing:.8px;text-transform:uppercase;margin-bottom:.75rem;display:flex;align-items:center;gap:8px}
 .dir-sec-h::after{content:'';flex:1;height:1px;background:var(--bd)}
 .dir-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(178px,1fr));gap:10px}
-.dir-card{background:linear-gradient(135deg,#0d1117 60%,#071510 100%);border:1px solid #0ECB81;border-radius:12px;padding:1.25rem 1.1rem;cursor:pointer;transition:all .2s;box-shadow:0 2px 12px rgba(14,203,129,.1),0 1px 3px rgba(0,0,0,.4);text-decoration:none;display:block;color:inherit;position:relative}.pop-star{position:absolute;top:10px;right:12px;font-size:14px;line-height:1;filter:drop-shadow(0 1px 2px rgba(0,0,0,.35));z-index:2}.field-warn{border-color:var(--r)!important}.field-warn-msg{font-size:11px;color:var(--r);margin-top:4px;line-height:1.3}
+.dir-card{background:linear-gradient(135deg,#0d1117 60%,#071510 100%);border:1px solid #0ECB81;border-radius:12px;padding:1.25rem 1.1rem;cursor:pointer;transition:all .2s;box-shadow:0 2px 12px rgba(14,203,129,.1),0 1px 3px rgba(0,0,0,.4);text-decoration:none;display:block;color:inherit;position:relative}.pop-star{position:absolute;top:10px;right:12px;font-size:14px;line-height:1;filter:drop-shadow(0 1px 2px rgba(0,0,0,.35));z-index:2}.field-warn{border-color:var(--r)!important}.field-warn-msg{font-size:11px;color:var(--r);margin-top:4px;line-height:1.3}.tip-ic{position:relative;display:inline-flex;align-items:center;justify-content:center;width:14px;height:14px;border-radius:50%;background:var(--bd);color:var(--m);font-size:9.5px;font-style:normal;font-weight:700;cursor:help;flex-shrink:0;vertical-align:middle;margin-left:2px}.tip-ic:hover,.tip-ic:focus{background:var(--a);color:var(--bg);outline:none}.tip-ic:hover .tip-box,.tip-ic:focus .tip-box{opacity:1;visibility:visible;transform:translateY(0)}.tip-box{position:absolute;bottom:calc(100% + 8px);left:0;background:var(--s2);border:1px solid var(--bd);border-radius:8px;padding:9px 11px;font-size:11.5px;line-height:1.5;color:var(--tb);width:230px;max-width:min(230px,70vw);opacity:0;visibility:hidden;transform:translateY(4px);transition:opacity .15s,transform .15s;z-index:80;box-shadow:0 6px 20px rgba(0,0,0,.35);font-weight:400;pointer-events:none;white-space:normal}
 .dir-card:hover{border-color:#ffffff;transform:translateY(-2px);box-shadow:0 6px 28px rgba(255,255,255,.12),0 2px 8px rgba(0,0,0,.5)}
 .dir-icon{font-size:28px;margin-bottom:10px;line-height:1}
 .dir-name{font-size:15px;font-weight:600;margin-bottom:5px;color:var(--t)}
@@ -379,12 +379,12 @@ body{background:var(--bg);color:var(--t);font-family:var(--fn);font-size:14px;li
 <div class="two">
   <div class="card">
     <div class="g2">
-      <div class="field"><label>Loan Amount ($)</label><div class="ip"><span class="pfx">$</span><input type="text" inputmode="decimal" id="pp-amt" value="500000" oninput="cPrepay()"></div></div>
-      <div class="field"><label>Interest Rate (% p.a.)</label><input type="text" inputmode="decimal" id="pp-rate" value="7" step="0.1" oninput="cPrepay()"></div>
-      <div class="field"><label>Original Tenure (months)</label><input type="text" inputmode="decimal" id="pp-n" value="240" oninput="cPrepay()"></div>
-      <div class="field"><label>Extra Monthly Payment ($)</label><div class="ip"><span class="pfx">$</span><input type="text" inputmode="decimal" id="pp-extra" value="200" oninput="cPrepay()"></div></div>
-      <div class="field"><label>One-Time Lump Sum ($)</label><div class="ip"><span class="pfx">$</span><input type="text" inputmode="decimal" id="pp-lump" value="10000" oninput="cPrepay()"></div></div>
-      <div class="field"><label>Lump Sum Applied At (month #)</label><input type="text" inputmode="decimal" id="pp-lumpmo" value="12" oninput="cPrepay()"></div>
+      <div class="field"><label>Loan Amount ($) <span class="tip-ic" tabindex="0" role="button" aria-label="More info: The total amount being borrowed.">i<span class="tip-box">The total amount being borrowed.</span></span></label><div class="ip"><span class="pfx">$</span><input type="text" inputmode="decimal" id="pp-amt" placeholder="e.g. 500000" oninput="cPrepay()"></div></div>
+      <div class="field"><label>Interest Rate (% p.a.) <span class="tip-ic" tabindex="0" role="button" aria-label="More info: The annual interest rate on this loan or account.">i<span class="tip-box">The annual interest rate on this loan or account.</span></span></label><input type="text" inputmode="decimal" id="pp-rate" placeholder="e.g. 7" step="0.1" oninput="cPrepay()"></div>
+      <div class="field"><label>Original Tenure (months) <span class="tip-ic" tabindex="0" role="button" aria-label="More info: The original length of the loan, in months, before any changes.">i<span class="tip-box">The original length of the loan, in months, before any changes.</span></span></label><input type="text" inputmode="decimal" id="pp-n" placeholder="e.g. 240" oninput="cPrepay()"></div>
+      <div class="field"><label>Extra Monthly Payment ($) <span class="tip-ic" tabindex="0" role="button" aria-label="More info: Additional amount paid toward principal each month, on top of the required payment.">i<span class="tip-box">Additional amount paid toward principal each month, on top of the required payment.</span></span></label><div class="ip"><span class="pfx">$</span><input type="text" inputmode="decimal" id="pp-extra" placeholder="e.g. 200" oninput="cPrepay()"></div></div>
+      <div class="field"><label>One-Time Lump Sum ($) <span class="tip-ic" tabindex="0" role="button" aria-label="More info: A single upfront amount, separate from any ongoing contributions.">i<span class="tip-box">A single upfront amount, separate from any ongoing contributions.</span></span></label><div class="ip"><span class="pfx">$</span><input type="text" inputmode="decimal" id="pp-lump" placeholder="e.g. 10000" oninput="cPrepay()"></div></div>
+      <div class="field"><label>Lump Sum Applied At (month #) <span class="tip-ic" tabindex="0" role="button" aria-label="More info: Which month of the loan the extra one-time payment is applied.">i<span class="tip-box">Which month of the loan the extra one-time payment is applied.</span></span></label><input type="text" inputmode="decimal" id="pp-lumpmo" placeholder="e.g. 12" oninput="cPrepay()"></div>
     </div>
     <div class="sgrid">
       <div class="sbox"><div class="lbl">New Payoff Time</div><div class="val" style="color:var(--g)" id="pp-newterm">0 mo</div></div>
@@ -545,7 +545,7 @@ document.addEventListener('DOMContentLoaded', function(){
   if(btn) btn.textContent = current === 'light' ? '\ud83c\udf19 Dark' : '\u2600\ufe0f Light';
 });
 </script>
-<script src="app.js?v=20260731e"></script>
+<script src="app.js?v=20260731f"></script>
 <script>initPage('prepay');</script>
 </body>
 </html>

@@ -409,7 +409,7 @@ function calcDRIP(){
   let sh=shares,pr=price,tots=[],divs=[],totDiv=0;
   for(let y=1;y<=Math.min(years,40);y++){
     pr*=(1+grow);const dy=divYield*Math.pow(1+divGrow,y-1),annDiv=sh*pr*dy;
-    totDiv+=annDiv;sh+=annDiv/pr+(monthly*12)/pr;tots.push(sh*pr);divs.push(annDiv);
+    totDiv+=annDiv;sh+=pr?(annDiv/pr+(monthly*12)/pr):0;tots.push(sh*pr);divs.push(annDiv);
   }
   const invested=shares*price+monthly*12*years,finalPortfolio=tots[tots.length-1]||0;
   gel('dr-final').textContent=f$(finalPortfolio);
@@ -549,9 +549,10 @@ function calcDCF(){
   const ticker=gel('dc-ticker').value,price=+gel('dc-price').value||0,eps=+gel('dc-eps').value||0,shares=+gel('dc-shares').value||0,grow=(+gel('dc-grow').value||0)/100,tgrow=(+gel('dc-tgrow').value||0)/100,disc=(+gel('dc-disc').value||0)/100,yrs=+gel('dc-yrs').value||10;
   const proj=Array.from({length:yrs},(_,i)=>eps*Math.pow(1+grow,i+1));
   const pv=proj.map((e,i)=>e/Math.pow(1+disc,i+1));
-  const tv=(proj[yrs-1]*(1+tgrow))/(disc-tgrow),tvPV=tv/Math.pow(1+disc,yrs);
+  const denom=disc-tgrow;
+  const tv=denom!==0?(proj[yrs-1]*(1+tgrow))/denom:0,tvPV=tv/Math.pow(1+disc,yrs);
   const fair=pv.reduce((a,b)=>a+b,0)+tvPV;
-  const upside=(fair-price)/price*100,mos=(fair-price)/fair*100;
+  const upside=price?(fair-price)/price*100:0,mos=fair?(fair-price)/fair*100:0;
   gel('dc-ticker-lbl').textContent=ticker;
   gel('dc-fair').textContent='$'+fair.toFixed(2);gel('dc-fair').style.color=fair>price?'var(--g)':'var(--r)';
   gel('dc-cur').textContent='$'+price;
@@ -562,7 +563,7 @@ function calcDCF(){
   gel('dc-base').textContent='$'+fair.toFixed(2);
   gel('dc-bull').textContent='$'+(fair*1.3).toFixed(2);gel('dc-bull').style.color='var(--g)';
   let tbl=`<thead><tr><th style="text-align:left">Year</th><th>Proj EPS</th><th>PV of EPS</th><th>Cumulative PV</th><th>% of Value</th></tr></thead><tbody>`;
-  let cum=0;proj.forEach((e,i)=>{cum+=pv[i];if(i===yrs-1)cum+=tvPV;tbl+=`<tr><td>Y${i+1}</td><td style="color:var(--a)">$${e.toFixed(2)}</td><td>$${pv[i].toFixed(2)}</td><td>$${cum.toFixed(2)}</td><td style="color:var(--g)">${pct(pv[i]/fair*100)}</td></tr>`;});
+  let cum=0;proj.forEach((e,i)=>{cum+=pv[i];if(i===yrs-1)cum+=tvPV;tbl+=`<tr><td>Y${i+1}</td><td style="color:var(--a)">$${e.toFixed(2)}</td><td>$${pv[i].toFixed(2)}</td><td>$${cum.toFixed(2)}</td><td style="color:var(--g)">${pct(fair?pv[i]/fair*100:0)}</td></tr>`;});
   tbl+=`<tr class="hl"><td style="color:var(--p)">Terminal</td><td style="color:var(--p)">$${(proj[yrs-1]*(1+tgrow)).toFixed(2)}</td><td style="color:var(--p)">$${tvPV.toFixed(2)}</td><td style="color:var(--a)">$${fair.toFixed(2)}</td><td style="color:var(--p)">${pct(tvPV/fair*100)}</td></tr></tbody>`;
   gel('dc-table').innerHTML=tbl;
   drawLine('dc-chart',[{data:proj,color:'#F0B90B',fill:true},{data:pv,color:'#0ECB81',fill:false,dash:[4,3]}],130);
@@ -985,7 +986,7 @@ function cLoan(){
   let emi,int;if(type==='flat'){emi=(P+P*r*n)/n;int=P*r*n;}else{emi=r?P*r*Math.pow(1+r,n)/(Math.pow(1+r,n)-1):P/n;int=emi*n-P;}
   const tot=emi*n,pf=P*fee;
   gel('l-emi').textContent=f$(emi);gel('l-int').textContent=f$(int);gel('l-tot').textContent=f$(tot+pf);gel('l-pf').textContent=f$(pf);
-  gel('l-pp').textContent=Math.round(P/tot*100)+'%';gel('l-ip').textContent=Math.round(int/tot*100)+'%';gel('l-coc').textContent=pct(int/P*100);
+  gel('l-pp').textContent=(tot?Math.round(P/tot*100):0)+'%';gel('l-ip').textContent=(tot?Math.round(int/tot*100):0)+'%';gel('l-coc').textContent=pct(int/P*100);
   drawDonut('l-donut',[P,int,pf],['#F0B90B','#F65E72','#8393A6']);
   if(type!=='flat')renderAmortTable('l-amort-table',P,r,n);
   else gel('l-amort-table').innerHTML='<tbody><tr><td style="padding:10px 8px;font-size:12px;color:var(--m)">Amortization breakdown isn\'t applicable to flat-rate loans, since interest is calculated on the original principal for the full term rather than a declining balance.</td></tr></tbody>';

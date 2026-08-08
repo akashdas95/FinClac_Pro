@@ -86,7 +86,7 @@ body{background:var(--bg);color:var(--t);font-family:var(--fn);font-size:14px;li
 .dir-sec-h{font-size:11px;font-weight:600;color:var(--m);letter-spacing:.8px;text-transform:uppercase;margin-bottom:.75rem;display:flex;align-items:center;gap:8px}
 .dir-sec-h::after{content:'';flex:1;height:1px;background:var(--bd)}
 .dir-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(178px,1fr));gap:10px}
-.dir-card{background:linear-gradient(135deg,#0d1117 60%,#071510 100%);border:1px solid #0ECB81;border-radius:12px;padding:1.25rem 1.1rem;cursor:pointer;transition:all .2s;box-shadow:0 2px 12px rgba(14,203,129,.1),0 1px 3px rgba(0,0,0,.4);text-decoration:none;display:block;color:inherit;position:relative}.pop-star{position:absolute;top:10px;right:12px;font-size:14px;line-height:1;filter:drop-shadow(0 1px 2px rgba(0,0,0,.35));z-index:2}.field-warn{border-color:var(--r)!important}.field-warn-msg{font-size:11px;color:var(--r);margin-top:4px;line-height:1.3}
+.dir-card{background:linear-gradient(135deg,#0d1117 60%,#071510 100%);border:1px solid #0ECB81;border-radius:12px;padding:1.25rem 1.1rem;cursor:pointer;transition:all .2s;box-shadow:0 2px 12px rgba(14,203,129,.1),0 1px 3px rgba(0,0,0,.4);text-decoration:none;display:block;color:inherit;position:relative}.pop-star{position:absolute;top:10px;right:12px;font-size:14px;line-height:1;filter:drop-shadow(0 1px 2px rgba(0,0,0,.35));z-index:2}.field-warn{border-color:var(--r)!important}.field-warn-msg{font-size:11px;color:var(--r);margin-top:4px;line-height:1.3}.tip-ic{position:relative;display:inline-flex;align-items:center;justify-content:center;width:14px;height:14px;border-radius:50%;background:var(--bd);color:var(--m);font-size:9.5px;font-style:normal;font-weight:700;cursor:help;flex-shrink:0;vertical-align:middle;margin-left:2px}.tip-ic:hover,.tip-ic:focus{background:var(--a);color:var(--bg);outline:none}.tip-ic:hover .tip-box,.tip-ic:focus .tip-box{opacity:1;visibility:visible;transform:translateY(0)}.tip-box{position:absolute;bottom:calc(100% + 8px);left:0;background:var(--s2);border:1px solid var(--bd);border-radius:8px;padding:9px 11px;font-size:11.5px;line-height:1.5;color:var(--tb);width:230px;max-width:min(230px,70vw);opacity:0;visibility:hidden;transform:translateY(4px);transition:opacity .15s,transform .15s;z-index:80;box-shadow:0 6px 20px rgba(0,0,0,.35);font-weight:400;pointer-events:none;white-space:normal}
 .dir-card:hover{border-color:#ffffff;transform:translateY(-2px);box-shadow:0 6px 28px rgba(255,255,255,.12),0 2px 8px rgba(0,0,0,.5)}
 .dir-icon{font-size:28px;margin-bottom:10px;line-height:1}
 .dir-name{font-size:15px;font-weight:600;margin-bottom:5px;color:var(--t)}
@@ -380,20 +380,20 @@ body{background:var(--bg);color:var(--t);font-family:var(--fn);font-size:14px;li
   <div class="card">
     <div class="card-title">Your 401(k) Details</div>
     <div class="g2">
-      <div class="field"><label>Current Age</label><input type="text" inputmode="decimal" id="k4-age" value="30" oninput="c401k()"></div>
-      <div class="field"><label>Retirement Age</label><input type="text" inputmode="decimal" id="k4-retage" value="65" oninput="c401k()"></div>
+      <div class="field"><label>Current Age <span class="tip-ic" tabindex="0" role="button" aria-label="More info: Your age today.">i<span class="tip-box">Your age today.</span></span></label><input type="text" inputmode="decimal" id="k4-age" placeholder="e.g. 30" oninput="c401k()"></div>
+      <div class="field"><label>Retirement Age <span class="tip-ic" tabindex="0" role="button" aria-label="More info: The age you plan to stop working and begin drawing on savings.">i<span class="tip-box">The age you plan to stop working and begin drawing on savings.</span></span></label><input type="text" inputmode="decimal" id="k4-retage" placeholder="e.g. 65" oninput="c401k()"></div>
     </div>
-    <div class="field"><label>Current 401(k) Balance ($)</label><div class="ip"><span class="pfx">$</span><input type="text" inputmode="decimal" id="k4-bal" value="20000" oninput="c401k()"></div></div>
-    <div class="field"><label>Annual Salary ($)</label><div class="ip"><span class="pfx">$</span><input type="text" inputmode="decimal" id="k4-salary" value="70000" oninput="c401k()"></div></div>
+    <div class="field"><label>Current 401(k) Balance ($) <span class="tip-ic" tabindex="0" role="button" aria-label="More info: The current balance of your 401(k) account today.">i<span class="tip-box">The current balance of your 401(k) account today.</span></span></label><div class="ip"><span class="pfx">$</span><input type="text" inputmode="decimal" id="k4-bal" placeholder="e.g. 20000" oninput="c401k()"></div></div>
+    <div class="field"><label>Annual Salary ($) <span class="tip-ic" tabindex="0" role="button" aria-label="More info: Your gross yearly salary before taxes.">i<span class="tip-box">Your gross yearly salary before taxes.</span></span></label><div class="ip"><span class="pfx">$</span><input type="text" inputmode="decimal" id="k4-salary" placeholder="e.g. 70000" oninput="c401k()"></div></div>
     <div class="g2">
-      <div class="field"><label>Your Contribution (% of salary)</label><input type="text" inputmode="decimal" id="k4-contrib" value="6" step="0.1" oninput="c401k()"></div>
-      <div class="field"><label>Annual Salary Growth (%)</label><input type="text" inputmode="decimal" id="k4-growth" value="3" step="0.1" oninput="c401k()"></div>
+      <div class="field"><label>Your Contribution (% of salary) <span class="tip-ic" tabindex="0" role="button" aria-label="More info: The percentage of your salary you contribute.">i<span class="tip-box">The percentage of your salary you contribute.</span></span></label><input type="text" inputmode="decimal" id="k4-contrib" placeholder="e.g. 6" step="0.1" oninput="c401k()"></div>
+      <div class="field"><label>Annual Salary Growth (%) <span class="tip-ic" tabindex="0" role="button" aria-label="More info: How much you expect your salary to increase each year, e.g. from raises.">i<span class="tip-box">How much you expect your salary to increase each year, e.g. from raises.</span></span></label><input type="text" inputmode="decimal" id="k4-growth" placeholder="e.g. 3" step="0.1" oninput="c401k()"></div>
     </div>
     <div class="g2">
-      <div class="field"><label>Employer Match (%)</label><input type="text" inputmode="decimal" id="k4-matchrate" value="50" step="1" oninput="c401k()"></div>
-      <div class="field"><label>Match Limit (% of salary)</label><input type="text" inputmode="decimal" id="k4-matchlimit" value="6" step="0.1" oninput="c401k()"></div>
+      <div class="field"><label>Employer Match (%) <span class="tip-ic" tabindex="0" role="button" aria-label="More info: The percentage of your contribution your employer matches, up to their limit.">i<span class="tip-box">The percentage of your contribution your employer matches, up to their limit.</span></span></label><input type="text" inputmode="decimal" id="k4-matchrate" placeholder="e.g. 50" step="1" oninput="c401k()"></div>
+      <div class="field"><label>Match Limit (% of salary) <span class="tip-ic" tabindex="0" role="button" aria-label="More info: The maximum percentage of salary your employer will match contributions on.">i<span class="tip-box">The maximum percentage of salary your employer will match contributions on.</span></span></label><input type="text" inputmode="decimal" id="k4-matchlimit" placeholder="e.g. 6" step="0.1" oninput="c401k()"></div>
     </div>
-    <div class="field"><label>Expected Annual Return (%)</label><input type="text" inputmode="decimal" id="k4-return" value="7" step="0.1" oninput="c401k()"></div>
+    <div class="field"><label>Expected Annual Return (%) <span class="tip-ic" tabindex="0" role="button" aria-label="More info: The average yearly return you expect this investment to earn.">i<span class="tip-box">The average yearly return you expect this investment to earn.</span></span></label><input type="text" inputmode="decimal" id="k4-return" placeholder="e.g. 7" step="0.1" oninput="c401k()"></div>
     <div class="sgrid">
       <div class="sbox"><div class="lbl">Balance at Retirement</div><div class="val" style="color:var(--a)" id="k4-final">$0</div></div>
       <div class="sbox"><div class="lbl">Total Growth</div><div class="val" style="color:var(--g)" id="k4-growth-total">$0</div></div>
@@ -542,7 +542,7 @@ document.addEventListener('DOMContentLoaded', function(){
   if(btn) btn.textContent = current === 'light' ? '\ud83c\udf19 Dark' : '\u2600\ufe0f Light';
 });
 </script>
-<script src="app.js?v=20260731e"></script>
+<script src="app.js?v=20260731f"></script>
 <script>initPage('401k');</script>
 </body>
 </html>

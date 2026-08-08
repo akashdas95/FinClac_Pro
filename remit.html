@@ -86,7 +86,7 @@ body{background:var(--bg);color:var(--t);font-family:var(--fn);font-size:14px;li
 .dir-sec-h{font-size:11px;font-weight:600;color:var(--m);letter-spacing:.8px;text-transform:uppercase;margin-bottom:.75rem;display:flex;align-items:center;gap:8px}
 .dir-sec-h::after{content:'';flex:1;height:1px;background:var(--bd)}
 .dir-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(178px,1fr));gap:10px}
-.dir-card{background:linear-gradient(135deg,#0d1117 60%,#071510 100%);border:1px solid #0ECB81;border-radius:12px;padding:1.25rem 1.1rem;cursor:pointer;transition:all .2s;box-shadow:0 2px 12px rgba(14,203,129,.1),0 1px 3px rgba(0,0,0,.4);text-decoration:none;display:block;color:inherit;position:relative}.pop-star{position:absolute;top:10px;right:12px;font-size:14px;line-height:1;filter:drop-shadow(0 1px 2px rgba(0,0,0,.35));z-index:2}.field-warn{border-color:var(--r)!important}.field-warn-msg{font-size:11px;color:var(--r);margin-top:4px;line-height:1.3}
+.dir-card{background:linear-gradient(135deg,#0d1117 60%,#071510 100%);border:1px solid #0ECB81;border-radius:12px;padding:1.25rem 1.1rem;cursor:pointer;transition:all .2s;box-shadow:0 2px 12px rgba(14,203,129,.1),0 1px 3px rgba(0,0,0,.4);text-decoration:none;display:block;color:inherit;position:relative}.pop-star{position:absolute;top:10px;right:12px;font-size:14px;line-height:1;filter:drop-shadow(0 1px 2px rgba(0,0,0,.35));z-index:2}.field-warn{border-color:var(--r)!important}.field-warn-msg{font-size:11px;color:var(--r);margin-top:4px;line-height:1.3}.tip-ic{position:relative;display:inline-flex;align-items:center;justify-content:center;width:14px;height:14px;border-radius:50%;background:var(--bd);color:var(--m);font-size:9.5px;font-style:normal;font-weight:700;cursor:help;flex-shrink:0;vertical-align:middle;margin-left:2px}.tip-ic:hover,.tip-ic:focus{background:var(--a);color:var(--bg);outline:none}.tip-ic:hover .tip-box,.tip-ic:focus .tip-box{opacity:1;visibility:visible;transform:translateY(0)}.tip-box{position:absolute;bottom:calc(100% + 8px);left:0;background:var(--s2);border:1px solid var(--bd);border-radius:8px;padding:9px 11px;font-size:11.5px;line-height:1.5;color:var(--tb);width:230px;max-width:min(230px,70vw);opacity:0;visibility:hidden;transform:translateY(4px);transition:opacity .15s,transform .15s;z-index:80;box-shadow:0 6px 20px rgba(0,0,0,.35);font-weight:400;pointer-events:none;white-space:normal}
 .dir-card:hover{border-color:#ffffff;transform:translateY(-2px);box-shadow:0 6px 28px rgba(255,255,255,.12),0 2px 8px rgba(0,0,0,.5)}
 .dir-icon{font-size:28px;margin-bottom:10px;line-height:1}
 .dir-name{font-size:15px;font-weight:600;margin-bottom:5px;color:var(--t)}
@@ -380,13 +380,13 @@ body{background:var(--bg);color:var(--t);font-family:var(--fn);font-size:14px;li
   <div class="card">
     <div class="card-title">Transfer Details</div>
     <div class="g2">
-      <div class="field"><label>Amount to Send</label><input type="text" inputmode="decimal" id="rm-amt" value="1000" oninput="cRemit()"></div>
+      <div class="field"><label>Amount to Send <span class="tip-ic" tabindex="0" role="button" aria-label="More info: The amount you want to transfer, before fees or exchange rate markup are applied.">i<span class="tip-box">The amount you want to transfer, before fees or exchange rate markup are applied.</span></span></label><input type="text" inputmode="decimal" id="rm-amt" placeholder="e.g. 1000" oninput="cRemit()"></div>
       <div></div>
-      <div class="field"><label>Send Currency</label><select id="rm-from" onchange="rmCurrencyChanged()"></select></div>
-      <div class="field"><label>Receive Currency</label><select id="rm-to" onchange="rmCurrencyChanged()"></select></div>
+      <div class="field"><label>Send Currency <span class="tip-ic" tabindex="0" role="button" aria-label="More info: The currency you're converting from or sending.">i<span class="tip-box">The currency you're converting from or sending.</span></span></label><select id="rm-from" onchange="rmCurrencyChanged()"></select></div>
+      <div class="field"><label>Receive Currency <span class="tip-ic" tabindex="0" role="button" aria-label="More info: The currency you want to convert or receive funds in.">i<span class="tip-box">The currency you want to convert or receive funds in.</span></span></label><select id="rm-to" onchange="rmCurrencyChanged()"></select></div>
     </div>
-    <div class="field"><label>Provider's Exchange Rate (1 <span id="rm-from-lbl">USD</span> = ? <span id="rm-to-lbl">EUR</span>)</label><input type="text" inputmode="decimal" id="rm-rate" value="0" step="0.0001" oninput="cRemit()"></div>
-    <div class="field"><label>Transfer Fee</label><input type="text" inputmode="decimal" id="rm-fee" value="4.99" oninput="cRemit()"></div>
+    <div class="field"><label>Provider's Exchange Rate (1 <span id="rm-from-lbl">USD</span> = ? <span id="rm-to-lbl">EUR</span>)</label><input type="text" inputmode="decimal" id="rm-rate" placeholder="e.g. 0" step="0.0001" oninput="cRemit()"></div>
+    <div class="field"><label>Transfer Fee <span class="tip-ic" tabindex="0" role="button" aria-label="More info: The flat fee charged for this transfer, separate from any exchange rate markup.">i<span class="tip-box">The flat fee charged for this transfer, separate from any exchange rate markup.</span></span></label><input type="text" inputmode="decimal" id="rm-fee" placeholder="e.g. 4.99" oninput="cRemit()"></div>
     <p id="rm-status" style="font-size:11px;color:var(--m);margin:.25rem 0 0">Loading mid-market rate…</p>
     <div class="sgrid">
       <div class="sbox"><div class="lbl">Recipient Gets</div><div class="val" style="color:var(--a)" id="rm-received">0</div></div>
@@ -542,7 +542,7 @@ document.addEventListener('DOMContentLoaded', function(){
   if(btn) btn.textContent = current === 'light' ? '\ud83c\udf19 Dark' : '\u2600\ufe0f Light';
 });
 </script>
-<script src="app.js?v=20260731e"></script>
+<script src="app.js?v=20260731f"></script>
 <script>initPage('remit');</script>
 </body>
 </html>

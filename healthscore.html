@@ -86,7 +86,7 @@ body{background:var(--bg);color:var(--t);font-family:var(--fn);font-size:14px;li
 .dir-sec-h{font-size:11px;font-weight:600;color:var(--m);letter-spacing:.8px;text-transform:uppercase;margin-bottom:.75rem;display:flex;align-items:center;gap:8px}
 .dir-sec-h::after{content:'';flex:1;height:1px;background:var(--bd)}
 .dir-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(178px,1fr));gap:10px}
-.dir-card{background:linear-gradient(135deg,#0d1117 60%,#071510 100%);border:1px solid #0ECB81;border-radius:12px;padding:1.25rem 1.1rem;cursor:pointer;transition:all .2s;box-shadow:0 2px 12px rgba(14,203,129,.1),0 1px 3px rgba(0,0,0,.4);text-decoration:none;display:block;color:inherit;position:relative}.pop-star{position:absolute;top:10px;right:12px;font-size:14px;line-height:1;filter:drop-shadow(0 1px 2px rgba(0,0,0,.35));z-index:2}.field-warn{border-color:var(--r)!important}.field-warn-msg{font-size:11px;color:var(--r);margin-top:4px;line-height:1.3}
+.dir-card{background:linear-gradient(135deg,#0d1117 60%,#071510 100%);border:1px solid #0ECB81;border-radius:12px;padding:1.25rem 1.1rem;cursor:pointer;transition:all .2s;box-shadow:0 2px 12px rgba(14,203,129,.1),0 1px 3px rgba(0,0,0,.4);text-decoration:none;display:block;color:inherit;position:relative}.pop-star{position:absolute;top:10px;right:12px;font-size:14px;line-height:1;filter:drop-shadow(0 1px 2px rgba(0,0,0,.35));z-index:2}.field-warn{border-color:var(--r)!important}.field-warn-msg{font-size:11px;color:var(--r);margin-top:4px;line-height:1.3}.tip-ic{position:relative;display:inline-flex;align-items:center;justify-content:center;width:14px;height:14px;border-radius:50%;background:var(--bd);color:var(--m);font-size:9.5px;font-style:normal;font-weight:700;cursor:help;flex-shrink:0;vertical-align:middle;margin-left:2px}.tip-ic:hover,.tip-ic:focus{background:var(--a);color:var(--bg);outline:none}.tip-ic:hover .tip-box,.tip-ic:focus .tip-box{opacity:1;visibility:visible;transform:translateY(0)}.tip-box{position:absolute;bottom:calc(100% + 8px);left:0;background:var(--s2);border:1px solid var(--bd);border-radius:8px;padding:9px 11px;font-size:11.5px;line-height:1.5;color:var(--tb);width:230px;max-width:min(230px,70vw);opacity:0;visibility:hidden;transform:translateY(4px);transition:opacity .15s,transform .15s;z-index:80;box-shadow:0 6px 20px rgba(0,0,0,.35);font-weight:400;pointer-events:none;white-space:normal}
 .dir-card:hover{border-color:#ffffff;transform:translateY(-2px);box-shadow:0 6px 28px rgba(255,255,255,.12),0 2px 8px rgba(0,0,0,.5)}
 .dir-icon{font-size:28px;margin-bottom:10px;line-height:1}
 .dir-name{font-size:15px;font-weight:600;margin-bottom:5px;color:var(--t)}
@@ -378,10 +378,10 @@ body{background:var(--bg);color:var(--t);font-family:var(--fn);font-size:14px;li
 <div class="two-eq" style="margin-bottom:16px">
   <div class="card">
     <div class="card-title">Income & Expenses</div>
-    <div class="field"><label>Monthly Gross Income ($)</label><div class="ip"><span class="pfx">$</span><input type="text" inputmode="decimal" id="hs-income" value="6000" oninput="cHealthScore()"></div></div>
-    <div class="field"><label>Monthly Total Expenses ($)</label><div class="ip"><span class="pfx">$</span><input type="text" inputmode="decimal" id="hs-expenses" value="4200" oninput="cHealthScore()"></div></div>
-    <div class="field"><label>Monthly Debt Payments ($)</label><div class="ip"><span class="pfx">$</span><input type="text" inputmode="decimal" id="hs-debt-pay" value="600" oninput="cHealthScore()"></div></div>
-    <div class="field"><label>Emergency Fund (months of expenses)</label>
+    <div class="field"><label>Monthly Gross Income ($) <span class="tip-ic" tabindex="0" role="button" aria-label="More info: Your monthly income before taxes and deductions.">i<span class="tip-box">Your monthly income before taxes and deductions.</span></span></label><div class="ip"><span class="pfx">$</span><input type="text" inputmode="decimal" id="hs-income" placeholder="e.g. 6000" oninput="cHealthScore()"></div></div>
+    <div class="field"><label>Monthly Total Expenses ($) <span class="tip-ic" tabindex="0" role="button" aria-label="More info: All of your monthly spending combined.">i<span class="tip-box">All of your monthly spending combined.</span></span></label><div class="ip"><span class="pfx">$</span><input type="text" inputmode="decimal" id="hs-expenses" placeholder="e.g. 4200" oninput="cHealthScore()"></div></div>
+    <div class="field"><label>Monthly Debt Payments ($) <span class="tip-ic" tabindex="0" role="button" aria-label="More info: Your total required monthly payments across all debts.">i<span class="tip-box">Your total required monthly payments across all debts.</span></span></label><div class="ip"><span class="pfx">$</span><input type="text" inputmode="decimal" id="hs-debt-pay" placeholder="e.g. 600" oninput="cHealthScore()"></div></div>
+    <div class="field"><label>Emergency Fund (months of expenses) <span class="tip-ic" tabindex="0" role="button" aria-label="More info: How many months of expenses you want your emergency fund to cover.">i<span class="tip-box">How many months of expenses you want your emergency fund to cover.</span></span></label>
       <select id="hs-ef" onchange="cHealthScore()">
         <option value="0">None</option>
         <option value="1">Less than 1 month</option>
@@ -395,10 +395,10 @@ body{background:var(--bg);color:var(--t);font-family:var(--fn);font-size:14px;li
   </div>
   <div class="card">
     <div class="card-title">Savings & Debt</div>
-    <div class="field"><label>Monthly Retirement Savings ($)</label><div class="ip"><span class="pfx">$</span><input type="text" inputmode="decimal" id="hs-retire-save" value="400" oninput="cHealthScore()"></div></div>
-    <div class="field"><label>Total Outstanding Debt ($)</label><div class="ip"><span class="pfx">$</span><input type="text" inputmode="decimal" id="hs-total-debt" value="25000" oninput="cHealthScore()"></div></div>
-    <div class="field"><label>Total Net Worth / Assets ($)</label><div class="ip"><span class="pfx">$</span><input type="text" inputmode="decimal" id="hs-networth" value="40000" oninput="cHealthScore()"></div></div>
-    <div class="field"><label>Do you have life/health insurance?</label>
+    <div class="field"><label>Monthly Retirement Savings ($) <span class="tip-ic" tabindex="0" role="button" aria-label="More info: How much you contribute to retirement accounts each month.">i<span class="tip-box">How much you contribute to retirement accounts each month.</span></span></label><div class="ip"><span class="pfx">$</span><input type="text" inputmode="decimal" id="hs-retire-save" placeholder="e.g. 400" oninput="cHealthScore()"></div></div>
+    <div class="field"><label>Total Outstanding Debt ($) <span class="tip-ic" tabindex="0" role="button" aria-label="More info: The full remaining balance owed.">i<span class="tip-box">The full remaining balance owed.</span></span></label><div class="ip"><span class="pfx">$</span><input type="text" inputmode="decimal" id="hs-total-debt" placeholder="e.g. 25000" oninput="cHealthScore()"></div></div>
+    <div class="field"><label>Total Net Worth / Assets ($) <span class="tip-ic" tabindex="0" role="button" aria-label="More info: Your total assets, or total net worth, depending on what this calculator needs.">i<span class="tip-box">Your total assets, or total net worth, depending on what this calculator needs.</span></span></label><div class="ip"><span class="pfx">$</span><input type="text" inputmode="decimal" id="hs-networth" placeholder="e.g. 40000" oninput="cHealthScore()"></div></div>
+    <div class="field"><label>Do you have life/health insurance? <span class="tip-ic" tabindex="0" role="button" aria-label="More info: Whether you already have a policy in place — affects how much additional coverage may be needed.">i<span class="tip-box">Whether you already have a policy in place — affects how much additional coverage may be needed.</span></span></label>
       <select id="hs-insurance" onchange="cHealthScore()">
         <option value="0">No insurance</option>
         <option value="1">Health only</option>
@@ -573,7 +573,7 @@ document.addEventListener('DOMContentLoaded', function(){
   if(btn) btn.textContent = current === 'light' ? '\ud83c\udf19 Dark' : '\u2600\ufe0f Light';
 });
 </script>
-<script src="app.js?v=20260731e"></script>
+<script src="app.js?v=20260731f"></script>
 <script>initPage('healthscore');</script>
 </body>
 </html>

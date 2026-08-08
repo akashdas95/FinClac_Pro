@@ -86,7 +86,7 @@ body{background:var(--bg);color:var(--t);font-family:var(--fn);font-size:14px;li
 .dir-sec-h{font-size:11px;font-weight:600;color:var(--m);letter-spacing:.8px;text-transform:uppercase;margin-bottom:.75rem;display:flex;align-items:center;gap:8px}
 .dir-sec-h::after{content:'';flex:1;height:1px;background:var(--bd)}
 .dir-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(178px,1fr));gap:10px}
-.dir-card{background:linear-gradient(135deg,#0d1117 60%,#071510 100%);border:1px solid #0ECB81;border-radius:12px;padding:1.25rem 1.1rem;cursor:pointer;transition:all .2s;box-shadow:0 2px 12px rgba(14,203,129,.1),0 1px 3px rgba(0,0,0,.4);text-decoration:none;display:block;color:inherit;position:relative}.pop-star{position:absolute;top:10px;right:12px;font-size:14px;line-height:1;filter:drop-shadow(0 1px 2px rgba(0,0,0,.35));z-index:2}.field-warn{border-color:var(--r)!important}.field-warn-msg{font-size:11px;color:var(--r);margin-top:4px;line-height:1.3}
+.dir-card{background:linear-gradient(135deg,#0d1117 60%,#071510 100%);border:1px solid #0ECB81;border-radius:12px;padding:1.25rem 1.1rem;cursor:pointer;transition:all .2s;box-shadow:0 2px 12px rgba(14,203,129,.1),0 1px 3px rgba(0,0,0,.4);text-decoration:none;display:block;color:inherit;position:relative}.pop-star{position:absolute;top:10px;right:12px;font-size:14px;line-height:1;filter:drop-shadow(0 1px 2px rgba(0,0,0,.35));z-index:2}.field-warn{border-color:var(--r)!important}.field-warn-msg{font-size:11px;color:var(--r);margin-top:4px;line-height:1.3}.tip-ic{position:relative;display:inline-flex;align-items:center;justify-content:center;width:14px;height:14px;border-radius:50%;background:var(--bd);color:var(--m);font-size:9.5px;font-style:normal;font-weight:700;cursor:help;flex-shrink:0;vertical-align:middle;margin-left:2px}.tip-ic:hover,.tip-ic:focus{background:var(--a);color:var(--bg);outline:none}.tip-ic:hover .tip-box,.tip-ic:focus .tip-box{opacity:1;visibility:visible;transform:translateY(0)}.tip-box{position:absolute;bottom:calc(100% + 8px);left:0;background:var(--s2);border:1px solid var(--bd);border-radius:8px;padding:9px 11px;font-size:11.5px;line-height:1.5;color:var(--tb);width:230px;max-width:min(230px,70vw);opacity:0;visibility:hidden;transform:translateY(4px);transition:opacity .15s,transform .15s;z-index:80;box-shadow:0 6px 20px rgba(0,0,0,.35);font-weight:400;pointer-events:none;white-space:normal}
 .dir-card:hover{border-color:#ffffff;transform:translateY(-2px);box-shadow:0 6px 28px rgba(255,255,255,.12),0 2px 8px rgba(0,0,0,.5)}
 .dir-icon{font-size:28px;margin-bottom:10px;line-height:1}
 .dir-name{font-size:15px;font-weight:600;margin-bottom:5px;color:var(--t)}
@@ -377,11 +377,11 @@ body{background:var(--bg);color:var(--t);font-family:var(--fn);font-size:14px;li
 <div class="card mb16">
   <div class="card-title">Acquisition & Retention Inputs</div>
   <div class="g3">
-    <div class="field"><label>Sales &amp; Marketing Spend ($/mo)</label><div class="ip"><span class="pfx">$</span><input type="text" inputmode="decimal" id="cac-spend" value="50000" oninput="calcCAC()"></div></div>
-    <div class="field"><label>New Customers Acquired (mo)</label><input type="text" inputmode="decimal" id="cac-newcust" value="25" oninput="calcCAC()"></div>
-    <div class="field"><label>Avg Revenue Per Customer ($/mo)</label><div class="ip"><span class="pfx">$</span><input type="text" inputmode="decimal" id="cac-arpu" value="200" oninput="calcCAC()"></div></div>
-    <div class="field"><label>Gross Margin (%)</label><input type="text" inputmode="decimal" id="cac-margin" value="80" step="1" oninput="calcCAC()"></div>
-    <div class="field"><label>Monthly Churn Rate (%)</label><input type="text" inputmode="decimal" id="cac-churn" value="3" step="0.5" oninput="calcCAC()"></div>
+    <div class="field"><label>Sales &amp; Marketing Spend ($/mo) <span class="tip-ic" tabindex="0" role="button" aria-label="More info: Total monthly spend on sales and marketing, including salaries, ads, and tools.">i<span class="tip-box">Total monthly spend on sales and marketing, including salaries, ads, and tools.</span></span></label><div class="ip"><span class="pfx">$</span><input type="text" inputmode="decimal" id="cac-spend" placeholder="e.g. 50000" oninput="calcCAC()"></div></div>
+    <div class="field"><label>New Customers Acquired (mo) <span class="tip-ic" tabindex="0" role="button" aria-label="More info: How many new paying customers you acquired in the period.">i<span class="tip-box">How many new paying customers you acquired in the period.</span></span></label><input type="text" inputmode="decimal" id="cac-newcust" placeholder="e.g. 25" oninput="calcCAC()"></div>
+    <div class="field"><label>Avg Revenue Per Customer ($/mo) <span class="tip-ic" tabindex="0" role="button" aria-label="More info: The average amount one customer pays per month.">i<span class="tip-box">The average amount one customer pays per month.</span></span></label><div class="ip"><span class="pfx">$</span><input type="text" inputmode="decimal" id="cac-arpu" placeholder="e.g. 200" oninput="calcCAC()"></div></div>
+    <div class="field"><label>Gross Margin (%) <span class="tip-ic" tabindex="0" role="button" aria-label="More info: Revenue minus the cost of goods sold, divided by revenue — what's left before operating expenses.">i<span class="tip-box">Revenue minus the cost of goods sold, divided by revenue — what's left before operating expenses.</span></span></label><input type="text" inputmode="decimal" id="cac-margin" placeholder="e.g. 80" step="1" oninput="calcCAC()"></div>
+    <div class="field"><label>Monthly Churn Rate (%) <span class="tip-ic" tabindex="0" role="button" aria-label="More info: The percentage of customers or revenue lost each month.">i<span class="tip-box">The percentage of customers or revenue lost each month.</span></span></label><input type="text" inputmode="decimal" id="cac-churn" placeholder="e.g. 3" step="0.5" oninput="calcCAC()"></div>
   </div>
 </div>
 <div class="two-eq mb16">
@@ -514,7 +514,7 @@ document.addEventListener('DOMContentLoaded', function(){
   if(btn) btn.textContent = current === 'light' ? '\ud83c\udf19 Dark' : '\u2600\ufe0f Light';
 });
 </script>
-<script src="app.js?v=20260731e"></script>
+<script src="app.js?v=20260731f"></script>
 <script>initPage('cac');</script>
 </body>
 </html>
