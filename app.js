@@ -60,7 +60,7 @@ function renderInsights(id,lines){
   const el=gel(id);if(!el)return;
   if(!lines||!lines.length){el.innerHTML='';el.style.display='none';return;}
   el.style.display='';
-  el.innerHTML='<div class="insight-title">💡 Insights</div>'+lines.map(l=>
+  el.innerHTML='<div class="insight-title">💡 What This Means</div>'+lines.map(l=>
     `<div class="insight-line ${l.type}"><span class="ic">${ICN[l.type]||'i'}</span><span>${l.text}</span></div>`
   ).join('');
 }
@@ -69,6 +69,104 @@ function renderInsights(id,lines){
 // collapsible section. Pure DOM restructuring — CSS only activates the
 // collapsed/click behavior at ≤700px; above that, everything still
 // renders exactly as before (this just adds inert wrapper elements).
+function fillExampleValues(){
+  document.querySelectorAll('input[inputmode="decimal"]').forEach(input=>{
+    const ph=input.placeholder;
+    if(!ph||!ph.startsWith('e.g. '))return;
+    input.value=ph.slice(5);
+    const handler=input.getAttribute('oninput');
+    if(handler){ try{ new Function(handler).call(input); }catch(e){} }
+    input.dispatchEvent(new Event('input',{bubbles:true}));
+    input.dispatchEvent(new Event('blur',{bubbles:true}));
+  });
+  // Equity Dilution page: founders/rounds are rendered from JS state, not
+  // plain placeholder-driven inputs, so they need their own example reset.
+  if(document.getElementById('eq-founders') && typeof founders!=='undefined' && typeof renderFounders==='function'){
+    founders.length=0;
+    EQ_EXAMPLE_FOUNDERS.forEach(f=>founders.push({...f}));
+    renderFounders();
+  }
+  if(document.getElementById('eq-rounds') && typeof rounds!=='undefined' && typeof renderRounds==='function'){
+    rounds.length=0;
+    EQ_EXAMPLE_ROUNDS.forEach(r=>rounds.push({...r}));
+    renderRounds();
+  }
+  // Debt Payoff Planner
+  if(document.getElementById('debt-rows') && typeof debts!=='undefined' && typeof renderDebtRows==='function'){
+    debts.length=0;
+    DEBT_EXAMPLE.forEach(d=>debts.push({...d}));
+    renderDebtRows();
+  }
+  // Debt Snowball vs Avalanche
+  if(document.getElementById('dc2-rows') && typeof dc2Debts!=='undefined' && typeof renderDC2==='function'){
+    dc2Debts.length=0;
+    DC2_EXAMPLE.forEach(d=>dc2Debts.push({...d}));
+    renderDC2();
+  }
+  // Itemized Bill Splitter
+  if(document.getElementById('bs-people-rows') && typeof bsPeople!=='undefined' && typeof renderBSPeople==='function'){
+    bsPeople.length=0;
+    BS_EXAMPLE_PEOPLE.forEach(p=>bsPeople.push({...p}));
+    bsItems.length=0;
+    BS_EXAMPLE_ITEMS.forEach(it=>bsItems.push({...it}));
+    renderBSPeople();
+  }
+  // Cash Flow Calculator
+  if(document.getElementById('cf-i-rows') && typeof cfIncome!=='undefined' && typeof renderCFRows==='function'){
+    cfIncome.length=0;
+    CF_EXAMPLE_INCOME.forEach(r=>cfIncome.push({...r}));
+    cfExpense.length=0;
+    CF_EXAMPLE_EXPENSE.forEach(r=>cfExpense.push({...r}));
+    renderCFRows();
+  }
+}
+function resetCalculatorValues(){
+  document.querySelectorAll('input[inputmode="decimal"]').forEach(input=>{
+    input.value='';
+    input.classList.remove('field-warn');
+    const handler=input.getAttribute('oninput');
+    if(handler){ try{ new Function(handler).call(input); }catch(e){} }
+    input.dispatchEvent(new Event('input',{bubbles:true}));
+    input.dispatchEvent(new Event('blur',{bubbles:true}));
+  });
+  document.querySelectorAll('.field-warn-msg').forEach(msg=>{ msg.style.display='none'; });
+  if(document.getElementById('eq-founders') && typeof founders!=='undefined' && typeof renderFounders==='function'){
+    founders.length=0;
+    founders.push({name:'Founder A',pct:0},{name:'Founder B',pct:0});
+    renderFounders();
+  }
+  if(document.getElementById('eq-rounds') && typeof rounds!=='undefined' && typeof renderRounds==='function'){
+    rounds.length=0;
+    renderRounds();
+  }
+  // Debt Payoff Planner
+  if(document.getElementById('debt-rows') && typeof debts!=='undefined' && typeof renderDebtRows==='function'){
+    debts.length=0;
+    debts.push({name:'Debt 1',bal:0,rate:0,min:0});
+    renderDebtRows();
+  }
+  // Debt Snowball vs Avalanche
+  if(document.getElementById('dc2-rows') && typeof dc2Debts!=='undefined' && typeof renderDC2==='function'){
+    dc2Debts.length=0;
+    dc2Debts.push({name:'Debt 1',bal:0,rate:0,min:0});
+    renderDC2();
+  }
+  // Itemized Bill Splitter
+  if(document.getElementById('bs-people-rows') && typeof bsPeople!=='undefined' && typeof renderBSPeople==='function'){
+    bsPeople.length=0;
+    bsPeople.push({name:'Person 1'},{name:'Person 2'});
+    bsItems.length=0;
+    renderBSPeople();
+  }
+  // Cash Flow Calculator
+  if(document.getElementById('cf-i-rows') && typeof cfIncome!=='undefined' && typeof renderCFRows==='function'){
+    cfIncome.length=0;
+    cfIncome.push({name:'Income 1',amt:0,freq:'monthly'});
+    cfExpense.length=0;
+    cfExpense.push({name:'Expense 1',amt:0,freq:'monthly'});
+    renderCFRows();
+  }
+}
 function attachInputGuards(){
   const GROWTH_WORDS=/growth|change in|decline/i;
   document.querySelectorAll('input[inputmode="decimal"]').forEach(input=>{
@@ -217,7 +315,7 @@ function drawDonut(id,data,colors){
     c._segments.push({start:s,end:s+a,value:v,pct:v/tot*100,index:i});
     s+=a;
   });
-  ctx.beginPath();ctx.arc(cx,cy,r*.57,0,2*Math.PI);ctx.fillStyle='#141920';ctx.fill();
+  ctx.beginPath();ctx.arc(cx,cy,r*.57,0,2*Math.PI);ctx.fillStyle='#FFFFFF';ctx.fill();
 }
 function drawBars(id,labels,vals,colors,H_=130){
   const c=gel(id);if(!c)return;
@@ -231,11 +329,34 @@ function drawBars(id,labels,vals,colors,H_=130){
     ctx.fillStyle=colors[i%colors.length];
     if(ctx.roundRect)ctx.roundRect(x,y,bw,bh,3);else ctx.rect(x,y,bw,bh);
     ctx.fill();
-    ctx.fillStyle='#8393A6';ctx.font='9px DM Sans';ctx.textAlign='center';
+    ctx.fillStyle='#807965';ctx.font='9px \'IBM Plex Sans\'';ctx.textAlign='center';
     ctx.fillText((labels[i]||'').substring(0,9),x+bw/2,H-6);
-    ctx.fillStyle='#E8EDF2';ctx.font='500 9px DM Mono';
+    ctx.fillStyle='#171B17';ctx.font='500 9px \'IBM Plex Mono\'';
     ctx.fillText('$'+fk(v),x+bw/2,y-4);
     c._bars.push({x,y,w:bw,h:bh,label:labels[i]||'',value:v});
+  });
+}
+// Zero-anchored bar chart for signed values (e.g. XIRR cash flows): positive
+// bars rise above the zero line in green, negative bars drop below it in red.
+function drawSignedBars(id,labels,vals,H_=150){
+  const c=gel(id);if(!c)return;
+  const ctx=c.getContext('2d'),W=c.width,H=H_,p=26,n=vals.length;
+  ctx.clearRect(0,0,W,H);
+  const mid=(H-p)/2+8;
+  const mx=Math.max(...vals.map(v=>Math.abs(v)))||1;
+  const bw=Math.min(48,(W-p*2)/n-6),gap=(W-p*2-bw*n)/((n-1)||1);
+  ctx.strokeStyle='#DBD5C4';ctx.lineWidth=1;
+  ctx.beginPath();ctx.moveTo(p-6,mid);ctx.lineTo(W-p+6,mid);ctx.stroke();
+  vals.forEach((v,i)=>{
+    const x=p+i*(bw+gap),bh=Math.abs(v)/mx*(mid-14),neg=v<0,y=neg?mid:mid-bh;
+    ctx.beginPath();
+    ctx.fillStyle=neg?'#8C2E22':'#0F4F35';
+    if(ctx.roundRect)ctx.roundRect(x,y,bw,bh,2);else ctx.rect(x,y,bw,bh);
+    ctx.fill();
+    ctx.fillStyle='#807965';ctx.font='8.5px \'IBM Plex Sans\'';ctx.textAlign='center';
+    ctx.fillText((labels[i]||'').substring(0,8),x+bw/2,H-6);
+    ctx.fillStyle=neg?'#8C2E22':'#0F4F35';ctx.font='500 8.5px \'IBM Plex Mono\'';
+    ctx.fillText((neg?'-$':'$')+fk(Math.abs(v)),x+bw/2,neg?y+bh+11:y-4);
   });
 }
 
@@ -360,7 +481,7 @@ let xirrFlows=[{date:'2020-01-01',amt:-10000},{date:'2021-06-15',amt:-5000},{dat
 function renderXIRR(){
   const el=gel('xirr-rows');el.innerHTML='';
   xirrFlows.forEach((fl,i)=>{
-    el.innerHTML+=`<div style="display:grid;grid-template-columns:1fr 1fr 36px;gap:8px;margin-bottom:6px;align-items:center">
+    el.innerHTML+=`<div class="row-3" style="margin-bottom:6px;align-items:center">
       <input type="date" value="${fl.date}" onchange="xirrFlows[${i}].date=this.value;calcXIRR()" style="background:var(--bg);border:1px solid var(--bd);border-radius:6px;padding:8px;color:var(--t);font-family:var(--mo);font-size:12px;outline:none;width:100%">
       <div class="ip" style="display:block"><span class="pfx">$</span><input type="text" inputmode="decimal" data-allow-negative="1" value="${fl.amt}" onchange="xirrFlows[${i}].amt=+this.value;calcXIRR()" style="width:100%;background:var(--bg);border:1px solid var(--bd);border-radius:6px;padding:8px 8px 8px 20px;color:${fl.amt<0?'var(--r)':'var(--g)'};font-family:var(--mo);font-size:13px;outline:none"></div>
       <button class="btn-del" aria-label="Remove cash flow ${i+1}" onclick="xirrFlows.splice(${i},1);renderXIRR()">✕</button>
@@ -389,6 +510,9 @@ function calcXIRR(){
   gel('xirr-vs-sp').textContent=r>=10?'✓ Outperforming':'✗ Underperforming';gel('xirr-vs-sp').style.color=r>=10?'var(--g)':'var(--r)';
   gel('xirr-vs-inf').textContent=r>=3?'✓ Real positive return':'✗ Real negative return';gel('xirr-vs-inf').style.color=r>=3?'var(--g)':'var(--r)';
 
+  const cfLabels=xirrFlows.map(f=>{const d=new Date(f.date);return d.toLocaleDateString('en-US',{month:'short',year:'2-digit'});});
+  drawSignedBars('xirr-chart',cfLabels,amounts,150);
+
   const insights=[];
   const gap=r-10;
   if(gap>=1){
@@ -406,10 +530,10 @@ function calcXIRR(){
 // ── DRIP ────────────────────────────────────────────────────────
 function calcDRIP(){
   const shares=+gel('dr-shares').value||0,price=+gel('dr-price').value||0,divYield=(+gel('dr-yield').value||0)/100,divGrow=(+gel('dr-divgrow').value||0)/100,grow=(+gel('dr-grow').value||0)/100,monthly=+gel('dr-monthly').value||0,years=+gel('dr-years').value||1;
-  let sh=shares,pr=price,tots=[],divs=[],totDiv=0;
+  let sh=shares,pr=price,tots=[],divs=[],shArr=[],priceArr=[],totDiv=0;
   for(let y=1;y<=Math.min(years,40);y++){
     pr*=(1+grow);const dy=divYield*Math.pow(1+divGrow,y-1),annDiv=sh*pr*dy;
-    totDiv+=annDiv;sh+=pr?(annDiv/pr+(monthly*12)/pr):0;tots.push(sh*pr);divs.push(annDiv);
+    totDiv+=annDiv;sh+=pr?(annDiv/pr+(monthly*12)/pr):0;tots.push(sh*pr);divs.push(annDiv);shArr.push(sh);priceArr.push(pr);
   }
   const invested=shares*price+monthly*12*years,finalPortfolio=tots[tots.length-1]||0;
   gel('dr-final').textContent=f$(finalPortfolio);
@@ -418,7 +542,14 @@ function calcDRIP(){
   gel('dr-totdiv').textContent=f$(totDiv);
   gel('dr-invested').textContent=f$(invested);
   const gain=finalPortfolio-invested;gel('dr-gain').textContent=f$(gain);gel('dr-gain').style.color=gain>=0?'var(--g)':'var(--r)';
-  drawLine('dr-chart',[{data:tots,color:'#F0B90B',fill:true},{data:divs.map(v=>v*10),color:'#0ECB81',fill:false,dash:[4,3]}],190);
+  drawLine('dr-chart',[{data:tots,color:'#F0B90B',fill:true},{data:divs.map(v=>v*10),color:'#0F4F35',fill:false,dash:[4,3]}],190);
+
+  let drRows='<thead><tr><th style="text-align:left;padding:6px 8px;font-size:11px;color:var(--m);border-bottom:1px solid var(--bd)">Year</th><th style="padding:6px 8px;font-size:11px;border-bottom:1px solid var(--bd);color:var(--m)">Shares</th><th style="padding:6px 8px;font-size:11px;border-bottom:1px solid var(--bd);color:var(--g)">Annual Dividend</th><th style="padding:6px 8px;font-size:11px;border-bottom:1px solid var(--bd);color:var(--a)">Portfolio Value</th></tr></thead><tbody>';
+  for(let i=0;i<tots.length;i++){
+    drRows+=`<tr><td style="text-align:left;font-size:12px;color:var(--m);border-bottom:1px solid var(--bd);padding:7px 8px">Year ${i+1}</td><td style="font-size:12px;font-family:var(--mo);border-bottom:1px solid var(--bd);padding:7px 8px">${Math.round(shArr[i]).toLocaleString()}</td><td style="font-size:12px;font-family:var(--mo);border-bottom:1px solid var(--bd);padding:7px 8px;color:var(--g)">${f$(divs[i])}</td><td style="font-size:12px;font-family:var(--mo);border-bottom:1px solid var(--bd);padding:7px 8px;color:var(--a);font-weight:600">${f$(tots[i])}</td></tr>`;
+  }
+  drRows+='</tbody>';
+  if(gel('dr-table'))gel('dr-table').innerHTML=drRows;
 
   // Without reinvestment comparison
   let sh2=shares,pr2=price,cashAccum=0;
@@ -474,8 +605,8 @@ function cDivGrowth(){
   const dbl=growthA>0?Math.log(2)/Math.log(1+growthA/100):Infinity;
   gel('dg-double').textContent=isFinite(dbl)?dbl.toFixed(1)+' yrs':'∞';
 
-  const datasets=[{data:incomeA,color:'#0ECB81',fill:!compare,w:2.5}];
-  if(compare)datasets.push({data:incomeB,color:'#1890FF',fill:false,w:2.5});
+  const datasets=[{data:incomeA,color:'#0F4F35',fill:!compare,w:2.5}];
+  if(compare)datasets.push({data:incomeB,color:'#1B3A5C',fill:false,w:2.5});
   drawLine('dg-chart',datasets,170);
   gel('dg-legend').innerHTML=compare?'<span style="color:var(--g)">━ Profile A</span><span style="color:var(--b)">━ Profile B</span>':'<span style="color:var(--g)">━ Profile A</span>';
 
@@ -512,7 +643,7 @@ function cDivGrowth(){
 }
 
 // ── ETF ─────────────────────────────────────────────────────────
-const ETFS=[{name:'S&P 500 (SPY)',ret:10.5,color:'#F0B90B'},{name:'Total Mkt (VTI)',ret:10.8,color:'#0ECB81'},{name:'NASDAQ (QQQ)',ret:14.2,color:'#1890FF'},{name:'Intl Dev (VXUS)',ret:7.2,color:'#B478D1'}];
+const ETFS=[{name:'S&P 500 (SPY)',ret:10.5,color:'#F0B90B'},{name:'Total Mkt (VTI)',ret:10.8,color:'#0F4F35'},{name:'NASDAQ (QQQ)',ret:14.2,color:'#1B3A5C'},{name:'Intl Dev (VXUS)',ret:7.2,color:'#8B6B9E'}];
 function calcETF(){
   const init=+gel('et-init').value||0,monthly=+gel('et-monthly').value||0,years=+gel('et-years').value||1,exp=+gel('et-exp').value||0;
   const sim=r=>{const net=(r-exp)/100,mr=net/12,n=years*12;return mr?init*Math.pow(1+mr,n)+monthly*(Math.pow(1+mr,n)-1)/mr*(1+mr):init+monthly*n;};
@@ -566,7 +697,7 @@ function calcDCF(){
   let cum=0;proj.forEach((e,i)=>{cum+=pv[i];if(i===yrs-1)cum+=tvPV;tbl+=`<tr><td>Y${i+1}</td><td style="color:var(--a)">$${e.toFixed(2)}</td><td>$${pv[i].toFixed(2)}</td><td>$${cum.toFixed(2)}</td><td style="color:var(--g)">${pct(fair?pv[i]/fair*100:0)}</td></tr>`;});
   tbl+=`<tr class="hl"><td style="color:var(--p)">Terminal</td><td style="color:var(--p)">$${(proj[yrs-1]*(1+tgrow)).toFixed(2)}</td><td style="color:var(--p)">$${tvPV.toFixed(2)}</td><td style="color:var(--a)">$${fair.toFixed(2)}</td><td style="color:var(--p)">${pct(tvPV/fair*100)}</td></tr></tbody>`;
   gel('dc-table').innerHTML=tbl;
-  drawLine('dc-chart',[{data:proj,color:'#F0B90B',fill:true},{data:pv,color:'#0ECB81',fill:false,dash:[4,3]}],130);
+  drawLine('dc-chart',[{data:proj,color:'#F0B90B',fill:true},{data:pv,color:'#0F4F35',fill:false,dash:[4,3]}],130);
 
   const insights=[];
   if(mos>=20){
@@ -593,14 +724,14 @@ function cPEG(){
 
   let verdict,vColor,gaugeScore,gaugeHex;
   if(eps<=0||growth<=0){
-    verdict='Not meaningful';vColor='var(--m)';gaugeScore=50;gaugeHex='#8393A6';
+    verdict='Not meaningful';vColor='var(--m)';gaugeScore=50;gaugeHex='#A39B87';
     gel('pg-peg').textContent='N/A';gel('pg-peg').style.color='var(--m)';
   }else{
     gel('pg-peg').textContent=peg.toFixed(2);
-    if(peg<1){verdict='Undervalued';vColor='var(--g)';gaugeHex='#0ECB81';}
+    if(peg<1){verdict='Undervalued';vColor='var(--g)';gaugeHex='#0F4F35';}
     else if(peg<=1.3){verdict='Fairly Valued';vColor='var(--a)';gaugeHex='#F0B90B';}
     else if(peg<=2){verdict='Moderately Priced';vColor='var(--a)';gaugeHex='#F0B90B';}
-    else{verdict='Overvalued';vColor='var(--r)';gaugeHex='#F65E72';}
+    else{verdict='Overvalued';vColor='var(--r)';gaugeHex='#8C2E22';}
     gel('pg-peg').style.color=peg<1?'var(--g)':peg<=2?'var(--a)':'var(--r)';
     gaugeScore=Math.max(0,Math.min(100,100-(peg*33.3)));
   }
@@ -676,13 +807,13 @@ function cEVEBITDA(){
     gel('ev-impliedprice').textContent=(impliedPrice<0?'-$':'$')+Math.abs(impliedPrice).toFixed(2);
     gel('ev-upside').textContent=(upside>=0?'+':'')+upside.toFixed(1)+'%';
     gel('ev-upside').style.color=upside>=0?'var(--g)':'var(--r)';
-    drawBars('ev-chart',['Current','Implied'],[price,Math.max(0,impliedPrice)],['#F0B90B','#0ECB81'],140);
+    drawBars('ev-chart',['Current','Implied'],[price,Math.max(0,impliedPrice)],['#F0B90B','#0F4F35'],140);
   }else{
     gel('ev-impliedev').textContent='N/A';
     gel('ev-impliedmktcap').textContent='N/A';
     gel('ev-impliedprice').textContent='N/A';
     gel('ev-upside').textContent='N/A';gel('ev-upside').style.color='var(--m)';
-    drawBars('ev-chart',['Current','Implied'],[price,0],['#F0B90B','#8393A6'],140);
+    drawBars('ev-chart',['Current','Implied'],[price,0],['#F0B90B','#A39B87'],140);
   }
 
   const insights=[];
@@ -706,10 +837,11 @@ function cEVEBITDA(){
 
 // ── Debt Comparison ─────────────────────────────────────────────
 let dc2Debts=[{name:'Credit Card',bal:8000,rate:22,min:200},{name:'Car Loan',bal:15000,rate:7,min:300},{name:'Student Loan',bal:25000,rate:5.5,min:280},{name:'Medical Bill',bal:3000,rate:0,min:100}];
+const DC2_EXAMPLE=[{name:'Credit Card',bal:8000,rate:22,min:200},{name:'Car Loan',bal:15000,rate:7,min:300},{name:'Student Loan',bal:25000,rate:5.5,min:280},{name:'Medical Bill',bal:3000,rate:0,min:100}];
 function renderDC2(){
   const el=gel('dc2-rows');el.innerHTML='';
   dc2Debts.forEach((d,i)=>{
-    el.innerHTML+=`<div style="display:grid;grid-template-columns:1.5fr 1fr 1fr 1fr 36px;gap:8px;margin-bottom:6px;align-items:center">
+    el.innerHTML+=`<div class="row-debt" style="margin-bottom:6px;align-items:center">
       <input type="text" value="${d.name}" oninput="dc2Debts[${i}].name=this.value;calcDC2()" style="background:var(--bg);border:1px solid var(--bd);border-radius:6px;padding:8px;color:var(--t);font-size:13px;outline:none;width:100%">
       <div class="ip"><span class="pfx">$</span><input type="text" inputmode="decimal" value="${d.bal}" oninput="dc2Debts[${i}].bal=+this.value;calcDC2()" style="width:100%;background:var(--bg);border:1px solid var(--bd);border-radius:6px;padding:8px 8px 8px 20px;color:var(--t);font-family:var(--mo);font-size:13px;outline:none"></div>
       <input type="text" inputmode="decimal" value="${d.rate}" step="0.1" oninput="dc2Debts[${i}].rate=+this.value;calcDC2()" style="background:var(--bg);border:1px solid var(--bd);border-radius:6px;padding:8px;color:var(--t);font-family:var(--mo);font-size:13px;outline:none;width:100%">
@@ -742,7 +874,7 @@ function calcDC2(){
   gel('dc2-faster').textContent=Math.max(0,sn.months-av.months)+' mo';
   const mkOrder=(data,color)=>data.order.map((o,i)=>`<div style="display:flex;align-items:center;gap:10px;margin-bottom:8px;background:var(--s2);border-radius:6px;padding:8px 10px"><div style="width:22px;height:22px;border-radius:50%;background:${color};color:#000;font-size:11px;font-weight:700;display:flex;align-items:center;justify-content:center;flex-shrink:0">${i+1}</div><div><div style="font-size:12px;font-weight:500">${o.name}</div><div style="font-size:11px;color:var(--m)">Month ${o.month} · ${(o.month/12).toFixed(1)} yrs</div></div></div>`).join('');
   gel('av-order').innerHTML=mkOrder(av,'var(--b)');gel('sn-order').innerHTML=mkOrder(sn,'var(--g)');
-  drawLine('dc2-chart',[{data:av.bH,color:'#1890FF',fill:true},{data:sn.bH,color:'#0ECB81',fill:false,w:2}],140);
+  drawLine('dc2-chart',[{data:av.bH,color:'#1B3A5C',fill:true},{data:sn.bH,color:'#0F4F35',fill:false,w:2}],140);
 
   const insights=[];
   const intDiff=sn.totInt-av.totInt,timeDiff=sn.months-av.months;
@@ -771,11 +903,11 @@ function calcRP(){
   const v10=price*Math.pow(1+appr,10),r10=annRent*10,ret10=(v10-price+r10)/tinv*100;
   gel('rp-10v').textContent=f$(v10);gel('rp-10r').textContent=f$(r10);
   gel('rp-10ret').textContent=pct(ret10);gel('rp-10ret').style.color=ret10>=0?'var(--g)':'var(--r)';
-  drawLine('rp-chart',[{data:Array.from({length:11},(_,i)=>price*Math.pow(1+appr,i)),color:'#F0B90B',fill:true},{data:Array.from({length:11},(_,i)=>annRent*i),color:'#0ECB81',fill:false}],155);
+  drawLine('rp-chart',[{data:Array.from({length:11},(_,i)=>price*Math.pow(1+appr,i)),color:'#F0B90B',fill:true},{data:Array.from({length:11},(_,i)=>annRent*i),color:'#0F4F35',fill:false}],155);
   const score=capRate>6?3:capRate>4?2:capRate>2?1:0;
   const lbls=['⚠️ Poor Investment','🟡 Below Average','🟢 Decent Return','🚀 Strong Investment'],cols=['var(--r)','var(--a)','var(--b)','var(--g)'];
   gel('rp-verdict').innerHTML=`<div style="background:var(--s2);border-radius:8px;padding:12px;border-left:3px solid ${cols[score]}"><div style="font-size:13px;font-weight:600;color:${cols[score]};margin-bottom:4px">${lbls[score]}</div><div style="font-size:12px;color:var(--m)">Cap rate ${pct(capRate)} · Cash flow ${cf>=0?'positive ✓':'negative ✗'} · Gross yield ${pct(grossY)}</div></div>`;
-  drawDonut('rp-donut',[Math.max(0,noi),emi*12,annCosts],['#0ECB81','#F65E72','#8393A6']);
+  drawDonut('rp-donut',[Math.max(0,noi),emi*12,annCosts],['#0F4F35','#8C2E22','#A39B87']);
 
   const insights=[];
   insights.push({type:coc>=8?'good':coc>=0?'neutral':'bad',text:`Your cash-on-cash return is <strong>${pct(coc)}</strong> — ${coc>=8?'above the 8% benchmark many investors target':coc>=0?'positive, but below the 8% benchmark many investors target':'negative, meaning this property is costing you money every month'}.`});
@@ -839,10 +971,12 @@ function cPricing(){
 // ── Equity ──────────────────────────────────────────────────────
 let founders=[{name:'Founder A',pct:45},{name:'Founder B',pct:45}];
 let rounds=[{name:'Seed',raise:2e6,pre:1e7},{name:'Series A',raise:1e7,pre:4e7}];
-const EQC=['#F0B90B','#0ECB81','#1890FF','#B478D1','#F65E72','#26a17b'];
+const EQ_EXAMPLE_FOUNDERS=[{name:'Founder A',pct:45},{name:'Founder B',pct:45}];
+const EQ_EXAMPLE_ROUNDS=[{name:'Seed',raise:2e6,pre:1e7},{name:'Series A',raise:1e7,pre:4e7}];
+const EQC=['#F0B90B','#0F4F35','#1B3A5C','#8B6B9E','#8C2E22','#5C7A5E'];
 function renderFounders(){
   const el=gel('eq-founders');el.innerHTML='';
-  founders.forEach((f,i)=>{el.innerHTML+=`<div style="display:grid;grid-template-columns:1fr 1fr 36px;gap:8px;margin-bottom:6px;align-items:end"><div class="field" style="margin:0"><input type="text" value="${f.name}" oninput="founders[${i}].name=this.value;calcEquity()" style="width:100%;background:var(--bg);border:1px solid var(--bd);border-radius:6px;padding:8px;color:var(--t);font-size:13px;outline:none"></div><div class="field" style="margin:0"><input type="text" inputmode="decimal" value="${f.pct}" step="0.5" oninput="founders[${i}].pct=+this.value;calcEquity()" placeholder="%" style="width:100%;background:var(--bg);border:1px solid var(--bd);border-radius:6px;padding:8px;color:var(--t);font-family:var(--mo);font-size:13px;outline:none"></div><button class="btn-del" aria-label="Remove founder ${(f.name||('founder '+(i+1))).replace(/"/g,'&quot;')}" onclick="founders.splice(${i},1);renderFounders()">✕</button></div>`;});
+  founders.forEach((f,i)=>{el.innerHTML+=`<div class="row-3" style="margin-bottom:6px;align-items:end"><div class="field" style="margin:0"><input type="text" value="${f.name}" oninput="founders[${i}].name=this.value;calcEquity()" style="width:100%;background:var(--bg);border:1px solid var(--bd);border-radius:6px;padding:8px;color:var(--t);font-size:13px;outline:none"></div><div class="field" style="margin:0"><input type="text" inputmode="decimal" value="${f.pct}" step="0.5" oninput="founders[${i}].pct=+this.value;calcEquity()" placeholder="%" style="width:100%;background:var(--bg);border:1px solid var(--bd);border-radius:6px;padding:8px;color:var(--t);font-family:var(--mo);font-size:13px;outline:none"></div><button class="btn-del" aria-label="Remove founder ${(f.name||('founder '+(i+1))).replace(/"/g,'&quot;')}" onclick="founders.splice(${i},1);renderFounders()">✕</button></div>`;});
   calcEquity();
   attachInputGuards();
 }
@@ -900,7 +1034,7 @@ function cDilutionImpact(){
   gel('di-valbefore').textContent=f$(valBefore);
   gel('di-valafter').textContent=f$(valAfter);
 
-  drawBars('di-chart',['Before','After'],[valBefore,valAfter],['#0ECB81','#F65E72'],150);
+  drawBars('di-chart',['Before','After'],[valBefore,valAfter],['#0F4F35','#8C2E22'],150);
 
   const sourceLabel={secondary:'secondary offering',options:'option/RSU exercise',convert:'convertible note conversion'}[gel('di-source').value]||'share issuance';
   const insights=[];
@@ -935,7 +1069,7 @@ function calcCAC(){
   else if(ratio>=3){verdict='Healthy';vcolor='var(--g)';}
   else if(ratio>=1){verdict='Marginal';vcolor='var(--a)';}
   const vEl=gel('cac-verdict');if(vEl){vEl.textContent=verdict;vEl.style.color=vcolor;}
-  drawBars('cac-chart',['CAC','LTV'],[cac,isFinite(ltv)?ltv:cac*10],['#F65E72','#0ECB81'],150);
+  drawBars('cac-chart',['CAC','LTV'],[cac,isFinite(ltv)?ltv:cac*10],['#8C2E22','#0F4F35'],150);
 
   const insights=[];
   if(ratio<1){
@@ -964,7 +1098,7 @@ function calcRevenue(){
   se('rf-arr',f$(bD[bD.length-1].r*12));se('rf-cum',f$(bD[bD.length-1].cum));
   se('rf-custs',Math.round(bD[bD.length-1].cust).toLocaleString());
   se('rf-ltv',churn?f$(arpu/churn):'∞');se('rf-range',f$(pD[pD.length-1].r)+' – '+f$(oD[oD.length-1].r));
-  drawLine('rf-chart',[{data:pD.map(d=>d.r),color:'#F65E72',fill:true},{data:bD.map(d=>d.r),color:'#1890FF',fill:true,w:2.5},{data:oD.map(d=>d.r),color:'#0ECB81',fill:true}],165);
+  drawLine('rf-chart',[{data:pD.map(d=>d.r),color:'#8C2E22',fill:true},{data:bD.map(d=>d.r),color:'#1B3A5C',fill:true,w:2.5},{data:oD.map(d=>d.r),color:'#0F4F35',fill:true}],165);
   gel('rf-table').innerHTML=`<thead><tr><th style="text-align:left">Month</th><th>MRR</th><th>Cumulative</th><th>Customers</th><th>MoM Growth</th></tr></thead><tbody>`+bD.filter((_,i)=>i%Math.max(1,Math.floor(months/10))===0||i===months-1).slice(0,13).map((d,i,a)=>{const prev=i>0?a[i-1].r:mrr,g=prev?(d.r/prev-1)*100:0;return`<tr><td>Mo ${d.m}</td><td style="color:var(--a)">${f$(d.r)}</td><td>${f$(d.cum)}</td><td>${Math.round(d.cust).toLocaleString()}</td><td style="color:${g>=0?'var(--g)':'var(--r)'}">${g>=0?'+':''}${g.toFixed(1)}%</td></tr>`;}).join('')+'</tbody>';
 
   const insights=[];
@@ -987,7 +1121,7 @@ function cLoan(){
   const tot=emi*n,pf=P*fee;
   gel('l-emi').textContent=f$(emi);gel('l-int').textContent=f$(int);gel('l-tot').textContent=f$(tot+pf);gel('l-pf').textContent=f$(pf);
   gel('l-pp').textContent=(tot?Math.round(P/tot*100):0)+'%';gel('l-ip').textContent=(tot?Math.round(int/tot*100):0)+'%';gel('l-coc').textContent=pct(int/P*100);
-  drawDonut('l-donut',[P,int,pf],['#F0B90B','#F65E72','#8393A6']);
+  drawDonut('l-donut',[P,int,pf],['#F0B90B','#8C2E22','#A39B87']);
   if(type!=='flat')renderAmortTable('l-amort-table',P,r,n);
   else gel('l-amort-table').innerHTML='<tbody><tr><td style="padding:10px 8px;font-size:12px;color:var(--m)">Amortization breakdown isn\'t applicable to flat-rate loans, since interest is calculated on the original principal for the full term rather than a declining balance.</td></tr></tbody>';
 
@@ -1060,7 +1194,7 @@ function calcRefinance(){
     currentSeries.push(Math.min(m,currentTermMo)*currentPay);
     newSeries.push(closing+Math.min(m,newTermMo)*newPay);
   }
-  drawLine('rf-chart',[{data:currentSeries,color:'#8393A6',fill:false,w:2},{data:newSeries,color:'#0ECB81',fill:false,w:2.5}],175);
+  drawLine('rf-chart',[{data:currentSeries,color:'#A39B87',fill:false,w:2},{data:newSeries,color:'#0F4F35',fill:false,w:2.5}],175);
 
   const insights=[];
   if(monthlySavings<=0){
@@ -1119,7 +1253,7 @@ function cPrepay(){
   gel('pp-oldint').textContent=f$(oldInt);
   gel('pp-savedpct').textContent=pct(Math.max(0,savedPct));
 
-  drawLine('pp-chart',[{data:yearlyBalOrig,color:'#F65E72',fill:false,w:2,dash:[5,4]},{data:yearlyBal,color:'#0ECB81',fill:true,w:2.5}],175);
+  drawLine('pp-chart',[{data:yearlyBalOrig,color:'#8C2E22',fill:false,w:2,dash:[5,4]},{data:yearlyBal,color:'#0F4F35',fill:true,w:2.5}],175);
 
   // Year-by-year comparison table
   const years=Math.ceil(Math.max(n,newTerm)/12);
@@ -1153,7 +1287,7 @@ function cProvident(){
   gel('pf-mat').textContent=f$(bal);gel('pf-int').textContent=f$(interest);gel('pf-contrib').textContent=f$(contrib);
   gel('pf-ratio').textContent=pct(contrib?interest/contrib*100:0);gel('pf-cagr').textContent=pct(cagr);
 
-  drawLine('pf-chart',[{data:yearlyContrib,color:'#0ECB81',fill:true},{data:yearlyBal,color:'#F0B90B',fill:false,w:2.5}],175);
+  drawLine('pf-chart',[{data:yearlyContrib,color:'#0F4F35',fill:true},{data:yearlyBal,color:'#F0B90B',fill:false,w:2.5}],175);
 
   let rows='<thead><tr><th style="text-align:left;padding:6px 8px;font-size:11px;color:var(--m);border-bottom:1px solid var(--bd)">Year</th><th style="padding:6px 8px;font-size:11px;border-bottom:1px solid var(--bd);color:var(--g)">Contributed</th><th style="padding:6px 8px;font-size:11px;border-bottom:1px solid var(--bd);color:var(--a)">Balance</th></tr></thead><tbody>';
   for(let i=0;i<yearlyBal.length;i++){
@@ -1206,7 +1340,7 @@ function calcBudget(){
   if(leftoverEl){leftoverEl.textContent=(leftover<0?'-':'')+f$(Math.abs(leftover));leftoverEl.style.color=leftover>=0?'var(--g)':'var(--r)';}
 
   const unallocated=Math.max(leftover,0);
-  drawDonut('bg-donut',[needsActual,wantsActual,savingsActual,unallocated],['#1890FF','#F0B90B','#0ECB81','#8393A6']);
+  drawDonut('bg-donut',[needsActual,wantsActual,savingsActual,unallocated],['#1B3A5C','#F0B90B','#0F4F35','#A39B87']);
 
   const insights=[];
   if(leftover<0){
@@ -1249,7 +1383,7 @@ function calcNetWorth(){
   se('nw-liquid',(liquidNW<0?'-':'')+f$(Math.abs(liquidNW)));
   se('nw-illiquid',(illiquidNW<0?'-':'')+f$(Math.abs(illiquidNW)));
 
-  drawDonut('nw-donut',[cash,invest,retire,home,vehicle,other],['#0ECB81','#1890FF','#9B59B6','#F0B90B','#F6465D','#8393A6']);
+  drawDonut('nw-donut',[cash,invest,retire,home,vehicle,other],['#0F4F35','#1B3A5C','#6B4A7A','#F0B90B','#8C2E22','#A39B87']);
 
   const insights=[];
   if(netWorth<0){
@@ -1302,7 +1436,7 @@ function cAlloc(){
   const future=val*Math.pow(1+blended/100,years);
   gel('aa-future').textContent=f$(future);
 
-  drawDonut('aa-donut',[alloc.stocks,alloc.bonds,alloc.cash,alloc.gold,alloc.crypto],['#F0B90B','#1890FF','#0ECB81','#B478D1','#F65E72']);
+  drawDonut('aa-donut',[alloc.stocks,alloc.bonds,alloc.cash,alloc.gold,alloc.crypto],['#F0B90B','#1B3A5C','#0F4F35','#8B6B9E','#8C2E22']);
 
   const years_arr=[],vals=[];
   for(let y=0;y<=years;y++){years_arr.push('Y'+y);vals.push(val*Math.pow(1+blended/100,y));}
@@ -1334,7 +1468,7 @@ function cSip(){
   gel('i-abs').textContent=pct(gain/inv*100);gel('i-cagr').textContent=pct(cagr);
   const pts=Array.from({length:Math.min(y,30)+1},(_,i)=>{const mr=rate/12,n=i*12;return lump*Math.pow(1+rate,i)+(mr?m*(Math.pow(1+mr,n)-1)/mr*(1+mr):m*n);});
   const invPts=Array.from({length:Math.min(y,30)+1},(_,i)=>lump+m*12*i);
-  drawLine('i-chart',[{data:invPts,color:'#0ECB81',fill:true},{data:pts,color:'#F0B90B',fill:false,w:2.5}],175);
+  drawLine('i-chart',[{data:invPts,color:'#0F4F35',fill:true},{data:pts,color:'#F0B90B',fill:false,w:2.5}],175);
 
   const insights=[];
   const gainRatio=inv>0?gain/inv*100:0;
@@ -1387,7 +1521,7 @@ function cSWP(){
     gel('sw-status').innerHTML='✓ Sustainable';gel('sw-status').style.color='var(--g)';
   }
 
-  drawLine('sw-chart',[{data:yearlyBal.slice(0,Math.min(yearlyBal.length,40)),color:depleted?'#F65E72':'#0ECB81',fill:true}],170);
+  drawLine('sw-chart',[{data:yearlyBal.slice(0,Math.min(yearlyBal.length,40)),color:depleted?'#8C2E22':'#0F4F35',fill:true}],170);
 
   let rows='<thead><tr><th style="text-align:left;padding:6px 8px;font-size:11px;color:var(--m);border-bottom:1px solid var(--bd)">Year</th><th style="padding:6px 8px;font-size:11px;border-bottom:1px solid var(--bd);color:var(--r)">Withdrawn</th><th style="padding:6px 8px;font-size:11px;border-bottom:1px solid var(--bd);color:var(--g)">Balance</th></tr></thead><tbody>';
   const rowsToShow=depleted?Math.ceil(depletedMonth/12):yearlyWithdrawn.length;
@@ -1456,7 +1590,7 @@ function cMortgage(){
   gel('m-pay').textContent=f$(emi+ti);gel('m-loan').textContent=f$(loan);gel('m-int').textContent=f$(interest);
   gel('m-total').textContent=f$(emi*n+ptax*(n/12)+ins*(n/12));gel('m-dp').textContent=f$(price*dp);
   gel('m-ti').textContent=f$(ti);gel('m-aff').textContent=pct(((emi+ti)*12)/price*100);
-  drawDonut('m-donut',[loan,interest,(ptax+ins)*(n/12)/12*n],['#F0B90B','#F65E72','#1890FF']);
+  drawDonut('m-donut',[loan,interest,(ptax+ins)*(n/12)/12*n],['#F0B90B','#8C2E22','#1B3A5C']);
   renderAmortTable('m-amort-table',loan,r,n);
 
   const insights=[];
@@ -1514,7 +1648,7 @@ function cHeloc(){
   gel('hl-cltv-out').textContent=pct(cltvAfter);
   gel('hl-total-cost').textContent=f$(totalCost);
 
-  drawDonut('hl-donut',[drawAmt,drawInterestTotal,repayInterestTotal],['#F0B90B','#F65E72','#1890FF']);
+  drawDonut('hl-donut',[drawAmt,drawInterestTotal,repayInterestTotal],['#F0B90B','#8C2E22','#1B3A5C']);
   renderAmortTable('hl-amort-table',drawAmt,r,repayMonths);
 
   const insights=[];
@@ -1578,7 +1712,7 @@ function cRentVsBuy(){
   if(finalBuy>finalRent){vEl.textContent='Buy wins by '+f$(finalBuy-finalRent);vEl.style.color='var(--g)';}
   else{vEl.textContent='Rent wins by '+f$(finalRent-finalBuy);vEl.style.color='var(--b)';}
 
-  drawLine('rb-chart',[{data:[down+closing,...buyNW],color:'#0ECB81',fill:false,w:2.5},{data:[down+closing,...rentNW],color:'#1890FF',fill:false,w:2.5}],170);
+  drawLine('rb-chart',[{data:[down+closing,...buyNW],color:'#0F4F35',fill:false,w:2.5},{data:[down+closing,...rentNW],color:'#1B3A5C',fill:false,w:2.5}],170);
 
   const insights=[];
   if(breakevenYear){
@@ -1599,11 +1733,11 @@ function cRentVsBuy(){
 }
 
 // ── Mortgage Compare ────────────────────────────────────────────
-const MCC=['#F0B90B','#0ECB81','#1890FF'];
+const MCC=['#F0B90B','#0F4F35','#1B3A5C'];
 const mcd=[{down:20,rate:7,years:30},{down:10,rate:6.5,years:25},{down:30,rate:7.5,years:15}];
 function buildMortComp(){
   const cols=gel('mc-cols');cols.innerHTML='';
-  mcd.forEach((d,i)=>{cols.innerHTML+=`<div class="cmp-col" id="mc-col-${i}"><div style="font-size:13px;font-weight:600;color:${MCC[i]};margin-bottom:1rem">Option ${i+1}</div><div class="field"><label>Down Payment %</label><input type="text" inputmode="decimal" id="mc-down-${i}" value="${d.down}" oninput="cMortComp()"></div><div class="field"><label>Interest Rate %</label><input type="text" inputmode="decimal" id="mc-rate-${i}" value="${d.rate}" step="0.1" oninput="cMortComp()"></div><div class="field"><label>Tenure (years)</label><input type="text" inputmode="decimal" id="mc-years-${i}" value="${d.years}" oninput="cMortComp()"></div></div>`;});
+  mcd.forEach((d,i)=>{cols.innerHTML+=`<div class="cmp-col" id="mc-col-${i}"><div style="font-size:13px;font-weight:600;color:${MCC[i]};margin-bottom:1rem">Option ${i+1}</div><div class="field"><label>Down Payment %</label><input type="text" inputmode="decimal" id="mc-down-${i}" placeholder="e.g. ${d.down}" oninput="cMortComp()"></div><div class="field"><label>Interest Rate %</label><input type="text" inputmode="decimal" id="mc-rate-${i}" placeholder="e.g. ${d.rate}" step="0.1" oninput="cMortComp()"></div><div class="field"><label>Tenure (years)</label><input type="text" inputmode="decimal" id="mc-years-${i}" placeholder="e.g. ${d.years}" oninput="cMortComp()"></div></div>`;});
   cMortComp();
 }
 function cMortComp(){
@@ -1633,11 +1767,11 @@ function cMortComp(){
 }
 
 // ── Loan Comparison ─────────────────────────────────────────────
-const LCC=['#F0B90B','#0ECB81','#1890FF'];
+const LCC=['#F0B90B','#0F4F35','#1B3A5C'];
 const lcd=[{amt:25000,rate:6.5,years:5,fee:1},{amt:25000,rate:7.2,years:4,fee:0},{amt:24000,rate:5.9,years:6,fee:2}];
 function buildLoanComp(){
   const cols=gel('lc-cols');cols.innerHTML='';
-  lcd.forEach((d,i)=>{cols.innerHTML+=`<div class="cmp-col" id="lc-col-${i}"><div style="font-size:13px;font-weight:600;color:${LCC[i]};margin-bottom:1rem">Offer ${i+1}</div><div class="field"><label>Loan Amount ($)</label><div class="ip"><span class="pfx">$</span><input type="text" inputmode="decimal" id="lc-amt-${i}" value="${d.amt}" oninput="cLoanComp()"></div></div><div class="field"><label>Interest Rate (%)</label><input type="text" inputmode="decimal" id="lc-rate-${i}" value="${d.rate}" step="0.1" oninput="cLoanComp()"></div><div class="field"><label>Tenure (years)</label><input type="text" inputmode="decimal" id="lc-years-${i}" value="${d.years}" step="0.5" oninput="cLoanComp()"></div><div class="field"><label>Processing Fee (%)</label><input type="text" inputmode="decimal" id="lc-fee-${i}" value="${d.fee}" step="0.25" oninput="cLoanComp()"></div></div>`;});
+  lcd.forEach((d,i)=>{cols.innerHTML+=`<div class="cmp-col" id="lc-col-${i}"><div style="font-size:13px;font-weight:600;color:${LCC[i]};margin-bottom:1rem">Offer ${i+1}</div><div class="field"><label>Loan Amount ($)</label><div class="ip"><span class="pfx">$</span><input type="text" inputmode="decimal" id="lc-amt-${i}" placeholder="e.g. ${d.amt}" oninput="cLoanComp()"></div></div><div class="field"><label>Interest Rate (%)</label><input type="text" inputmode="decimal" id="lc-rate-${i}" placeholder="e.g. ${d.rate}" step="0.1" oninput="cLoanComp()"></div><div class="field"><label>Tenure (years)</label><input type="text" inputmode="decimal" id="lc-years-${i}" placeholder="e.g. ${d.years}" step="0.5" oninput="cLoanComp()"></div><div class="field"><label>Processing Fee (%)</label><input type="text" inputmode="decimal" id="lc-fee-${i}" placeholder="e.g. ${d.fee}" step="0.25" oninput="cLoanComp()"></div></div>`;});
   cLoanComp();
 }
 function cLoanComp(){
@@ -1694,7 +1828,7 @@ function cAutoLoan(){
   gel('al-total').textContent=f$(totalCost);
   gel('al-salestax').textContent=f$(salesTax);
 
-  drawDonut('al-donut',[financed-salesTax,totalInterest,salesTax],['#F0B90B','#F65E72','#1890FF']);
+  drawDonut('al-donut',[financed-salesTax,totalInterest,salesTax],['#F0B90B','#8C2E22','#1B3A5C']);
   renderAmortTable('al-amort-table',financed,r,n);
 
   // Comparison: same financed amount at both rates, for direct rate comparison regardless of selected condition
@@ -1795,7 +1929,7 @@ function calcCCPayoff(){
   const fixedTrail=fixedResult.trail.slice(0,chartLen);
   while(minTrail.length<chartLen)minTrail.push(0);
   while(fixedTrail.length<chartLen)fixedTrail.push(0);
-  drawLine('cc-chart',[{data:minTrail,color:'#F65E72',fill:false,w:2},{data:fixedTrail,color:'#0ECB81',fill:false,w:2.5}],175);
+  drawLine('cc-chart',[{data:minTrail,color:'#8C2E22',fill:false,w:2},{data:fixedTrail,color:'#0F4F35',fill:false,w:2.5}],175);
 
   const insights=[];
   if(minResult.neverPaysOff){
@@ -1821,7 +1955,7 @@ function cSavings(){
   gel('sv-dbl').textContent=isFinite(dbl)?dbl.toFixed(1)+' yrs':'∞';gel('sv-ratio').textContent=pct(int/contrib*100);
   const steps=10,ip=[],fp=[];
   for(let i=1;i<=steps;i++){const yr=y*i/steps,ni=k*yr,b=init*Math.pow(1+rk,ni)+mo*(Math.pow(1+rk,ni)-1)/(rk||1)*(1+rk)*(12/k);ip.push(init+mo*12*yr);fp.push(b);}
-  drawLine('sv-chart',[{data:ip,color:'#0ECB81',fill:true},{data:fp,color:'#F0B90B',fill:false,w:2.5}],175);
+  drawLine('sv-chart',[{data:ip,color:'#0F4F35',fill:true},{data:fp,color:'#F0B90B',fill:false,w:2.5}],175);
 
   const insights=[];
   const intRatio=contrib>0?int/contrib*100:0;
@@ -1952,7 +2086,7 @@ function cMillionaire(){
     balPts.push(Math.min(bal,target*1.05));
     targetPts.push(target);
   }
-  drawLine('mi-chart',[{data:balPts,color:'#0ECB81',fill:true},{data:targetPts,color:'#F0B90B',fill:false,dash:[6,4],w:1.5}],175);
+  drawLine('mi-chart',[{data:balPts,color:'#0F4F35',fill:true},{data:targetPts,color:'#F0B90B',fill:false,dash:[6,4],w:1.5}],175);
 
   const insights=[];
   if(!achievable){
@@ -2027,7 +2161,7 @@ function cDCA(){
     const lShares=startPrice>0?inv/startPrice:0;
     lumpPts.push(lShares*price_i);
   }
-  drawLine('dc-chart',[{data:lumpPts,color:'#F0B90B',fill:false,w:2},{data:dcaPts,color:'#0ECB81',fill:true}],175);
+  drawLine('dc-chart',[{data:lumpPts,color:'#F0B90B',fill:false,w:2},{data:dcaPts,color:'#0F4F35',fill:true}],175);
 
   const insights=[];
   if(totalShares>0){
@@ -2321,7 +2455,7 @@ function c401k(){
   gel('k4-annual-match').textContent=f$(firstYearMatch);
 
   drawLine('k4-chart',[
-    {data:yearlyContribBasis,color:'#0ECB81',fill:true},
+    {data:yearlyContribBasis,color:'#0F4F35',fill:true},
     {data:yearlyBalances,color:'#F0B90B',fill:false,w:2.5}
   ],175);
 
@@ -2383,7 +2517,7 @@ function calcOptions(){
     const pl=position==='long'?(intr-premium)*mult:(premium-intr)*mult;
     vals.push(pl);
   }
-  drawLine('op-chart',[{data:vals,color:position==='long'?'#0ECB81':'#F65E72',fill:true}],175);
+  drawLine('op-chart',[{data:vals,color:position==='long'?'#0F4F35':'#8C2E22',fill:true}],175);
 
   const insights=[];
   const posLabel=position==='long'?'Long':'Short',typeLabel=type==='call'?'Call':'Put';
@@ -2516,7 +2650,7 @@ function calcSocialSecurity(){
 
   const ages=[],vals=[];
   for(let a=62;a<=70;a++){ages.push(String(a));vals.push(ssBenefitAtAge(a,fraMo,pia));}
-  drawBars('ss-chart',ages,vals,['#1890FF'],150);
+  drawBars('ss-chart',ages,vals,['#1B3A5C'],150);
 
   const insights=[];
   if(claimAgeRaw<62||claimAgeRaw>70){
@@ -2545,7 +2679,7 @@ function cRetire(){
   gel('rt-real').textContent=pct(real);
   const steps=10,d1=[],d2=[];
   for(let i=1;i<=steps;i++){const y2=yrs*i/steps,ni=y2*12,c=save*Math.pow(1+rate,y2)+(mr?contrib*(Math.pow(1+mr,ni)-1)/mr*(1+mr):contrib*ni);d1.push(save+contrib*12*y2);d2.push(c);}
-  drawLine('rt-chart',[{data:d1,color:'#0ECB81',fill:true},{data:d2,color:'#F0B90B',fill:false,w:2.5}],140);
+  drawLine('rt-chart',[{data:d1,color:'#0F4F35',fill:true},{data:d2,color:'#F0B90B',fill:false,w:2.5}],140);
 
   const insights=[];
   const pctOver=pvW>0?(corpus/pvW-1)*100:0;
@@ -2594,7 +2728,7 @@ function cFire(){
   const progressPct=fiNumber>0?Math.min(100,nw/fiNumber*100):0;
   gel('fi-pct').textContent=pct(progressPct);gel('fi-pbar').style.width=progressPct+'%';
 
-  drawLine('fi-chart',[{data:hist.slice(0,Math.min(hist.length,60)),color:'#0ECB81',fill:true},{data:hist.slice(0,Math.min(hist.length,60)).map(()=>fiNumber),color:'#F0B90B',fill:false,dash:[5,4]}],160);
+  drawLine('fi-chart',[{data:hist.slice(0,Math.min(hist.length,60)),color:'#0F4F35',fill:true},{data:hist.slice(0,Math.min(hist.length,60)).map(()=>fiNumber),color:'#F0B90B',fill:false,dash:[5,4]}],160);
 
   // FIRE variants
   const baristaIncome=expenses*0.33; // assume part-time covers ~1/3 of expenses by default
@@ -2645,8 +2779,10 @@ function cFire(){
 }
 
 // ── Debt Payoff ──────────────────────────────────────────────────
-let bsPeople=[{name:'Alex'},{name:'Sam'},{name:'Jordan'}];
-let bsItems=[{desc:'Ribeye Steak',price:32,person:0},{desc:'Caesar Salad',price:12,person:1},{desc:'Fries (shared)',price:8,person:-1}];
+let bsPeople=[{name:'Person 1'},{name:'Person 2'}];
+let bsItems=[];
+const BS_EXAMPLE_PEOPLE=[{name:'Alex'},{name:'Sam'},{name:'Jordan'}];
+const BS_EXAMPLE_ITEMS=[{desc:'Ribeye Steak',price:32,person:0},{desc:'Caesar Salad',price:12,person:1},{desc:'Fries (shared)',price:8,person:-1}];
 function renderBSPeople(){
   const el=gel('bs-people-rows');if(!el)return;el.innerHTML='';
   bsPeople.forEach((p,i)=>{
@@ -2670,7 +2806,7 @@ function renderBSItems(){
   const el=gel('bs-items-rows');if(!el)return;el.innerHTML='';
   bsItems.forEach((it,i)=>{
     const options=bsPeople.map((p,pi)=>`<option value="${pi}" ${it.person===pi?'selected':''}>${p.name}</option>`).join('')+`<option value="-1" ${it.person===-1?'selected':''}>Split Evenly</option>`;
-    el.innerHTML+=`<div style="display:grid;grid-template-columns:2fr 1fr 1.5fr 36px;gap:8px;margin-bottom:6px;align-items:center">
+    el.innerHTML+=`<div class="row-bs" style="margin-bottom:6px;align-items:center">
       <input type="text" value="${it.desc}" oninput="bsItems[${i}].desc=this.value;calcBillSplit()" style="background:var(--bg);border:1px solid var(--bd);border-radius:6px;padding:8px;color:var(--t);font-size:13px;outline:none;width:100%">
       <div class="ip"><span class="pfx">$</span><input type="text" inputmode="decimal" value="${it.price}" oninput="bsItems[${i}].price=+this.value;calcBillSplit()" style="width:100%;background:var(--bg);border:1px solid var(--bd);border-radius:6px;padding:8px 8px 8px 20px;color:var(--t);font-family:var(--mo);font-size:13px;outline:none"></div>
       <select onchange="bsItems[${i}].person=+this.value;calcBillSplit()" style="width:100%;background:var(--bg);border:1px solid var(--bd);border-radius:6px;padding:8px;color:var(--t);font-family:var(--fn);font-size:13px;outline:none">${options}</select>
@@ -2735,9 +2871,10 @@ function calcBillSplit(){
   renderInsights('bs-insights',insights);
 }
 let debts=[{name:'Credit Card',bal:8000,rate:22,min:200},{name:'Car Loan',bal:15000,rate:7,min:300},{name:'Student Loan',bal:25000,rate:5.5,min:280}];
+const DEBT_EXAMPLE=[{name:'Credit Card',bal:8000,rate:22,min:200},{name:'Car Loan',bal:15000,rate:7,min:300},{name:'Student Loan',bal:25000,rate:5.5,min:280}];
 function renderDebtRows(){
   const el=gel('debt-rows');el.innerHTML='';
-  debts.forEach((d,i)=>{el.innerHTML+=`<div style="display:grid;grid-template-columns:1.5fr 1fr 1fr 1fr 36px;gap:8px;margin-bottom:6px;align-items:center">
+  debts.forEach((d,i)=>{el.innerHTML+=`<div class="row-debt" style="margin-bottom:6px;align-items:center">
     <input type="text" value="${d.name}" oninput="debts[${i}].name=this.value;cDebt()" style="background:var(--bg);border:1px solid var(--bd);border-radius:6px;padding:8px;color:var(--t);font-size:13px;outline:none;width:100%">
     <div class="ip"><span class="pfx">$</span><input type="text" inputmode="decimal" value="${d.bal}" oninput="debts[${i}].bal=+this.value;cDebt()" style="width:100%;background:var(--bg);border:1px solid var(--bd);border-radius:6px;padding:8px 8px 8px 20px;color:var(--t);font-family:var(--mo);font-size:13px;outline:none"></div>
     <input type="text" inputmode="decimal" value="${d.rate}" step="0.1" oninput="debts[${i}].rate=+this.value;cDebt()" style="background:var(--bg);border:1px solid var(--bd);border-radius:6px;padding:8px;color:var(--t);font-family:var(--mo);font-size:13px;outline:none;width:100%">
@@ -2792,7 +2929,7 @@ function cRental(){
   gel('ry-coc').textContent=pct(coc);gel('ry-coc').style.color=coc>=0?'var(--g)':'var(--r)';
   gel('ry-cf').textContent=f$(cf/12);gel('ry-cf').style.color=cf>=0?'var(--g)':'var(--r)';
   gel('ry-cap').textContent=pct(cap);gel('ry-mort').textContent=f$(emi);gel('ry-inv').textContent=f$(tinv);
-  drawLine('ry-chart',[{data:Array.from({length:11},(_,i)=>price*Math.pow(1.04,i)),color:'#F0B90B',fill:true},{data:Array.from({length:11},(_,i)=>annRent*i),color:'#0ECB81',fill:false}],155);
+  drawLine('ry-chart',[{data:Array.from({length:11},(_,i)=>price*Math.pow(1.04,i)),color:'#F0B90B',fill:true},{data:Array.from({length:11},(_,i)=>annRent*i),color:'#0F4F35',fill:false}],155);
 
   const insights=[];
   const yieldGap=grossY-netY;
@@ -2811,6 +2948,8 @@ function cRental(){
 // ── Cash Flow ────────────────────────────────────────────────────
 let cfIncome=[{name:'Salary',amt:8000,freq:'monthly'},{name:'Freelance',amt:2000,freq:'monthly'}];
 let cfExpense=[{name:'Rent/Mortgage',amt:2000,freq:'monthly'},{name:'Food & Groceries',amt:800,freq:'monthly'},{name:'Transportation',amt:400,freq:'monthly'},{name:'Utilities',amt:200,freq:'monthly'},{name:'Entertainment',amt:300,freq:'monthly'}];
+const CF_EXAMPLE_INCOME=[{name:'Salary',amt:8000,freq:'monthly'},{name:'Freelance',amt:2000,freq:'monthly'}];
+const CF_EXAMPLE_EXPENSE=[{name:'Rent/Mortgage',amt:2000,freq:'monthly'},{name:'Food & Groceries',amt:800,freq:'monthly'},{name:'Transportation',amt:400,freq:'monthly'},{name:'Utilities',amt:200,freq:'monthly'},{name:'Entertainment',amt:300,freq:'monthly'}];
 const FM={monthly:1,weekly:4.33,biweekly:2.17,annually:1/12};
 function renderCFRows(){
   gel('cf-i-rows').innerHTML='';cfIncome.forEach((r,i)=>{gel('cf-i-rows').innerHTML+=cfRowHtml('i',i,r);});
@@ -2820,7 +2959,7 @@ function renderCFRows(){
 }
 function cfRowHtml(type,i,r){
   const arr=type==='i'?'cfIncome':'cfExpense';
-  return`<div style="display:grid;grid-template-columns:1.5fr 1fr 90px 36px;gap:8px;margin-bottom:6px;align-items:center">
+  return`<div class="row-cf" style="margin-bottom:6px;align-items:center">
     <input type="text" value="${r.name}" oninput="${arr}[${i}].name=this.value;cCF()" style="background:var(--bg);border:1px solid var(--bd);border-radius:6px;padding:8px;color:var(--t);font-size:13px;outline:none;width:100%">
     <div class="ip"><span class="pfx">$</span><input type="text" inputmode="decimal" value="${r.amt}" oninput="${arr}[${i}].amt=+this.value;cCF()" style="width:100%;background:var(--bg);border:1px solid var(--bd);border-radius:6px;padding:8px 8px 8px 20px;color:var(--t);font-family:var(--mo);font-size:13px;outline:none"></div>
     <select onchange="${arr}[${i}].freq=this.value;cCF()" style="background:var(--bg);border:1px solid var(--bd);border-radius:6px;padding:8px;color:var(--t);font-size:12px;outline:none;width:100%">
@@ -2840,7 +2979,7 @@ function cCF(){
   gel('cf-inc').textContent=f$(ti);gel('cf-exp').textContent=f$(te);
   const nE=gel('cf-net');nE.textContent=f$(net);nE.style.color=net>=0?'var(--g)':'var(--r)';
   gel('cf-sr').textContent=pct(sr);gel('cf-sr').style.color=sr>=20?'var(--g)':sr>=10?'var(--a)':'var(--r)';
-  drawBars('cf-chart',['Income','Expenses','Net'],[ti,te,Math.max(0,net)],['#0ECB81','#F65E72','#F0B90B'],135);
+  drawBars('cf-chart',['Income','Expenses','Net'],[ti,te,Math.max(0,net)],['#0F4F35','#8C2E22','#F0B90B'],135);
   const bars=gel('cf-bars');bars.innerHTML='';
   cfExpense.forEach(r=>{const mo=r.amt*(FM[r.freq]||1),p_=te>0?mo/te*100:0;bars.innerHTML+=`<div style="margin-bottom:10px"><div style="display:flex;justify-content:space-between;font-size:12px;margin-bottom:3px"><span>${r.name}</span><span style="font-family:var(--mo);color:var(--m)">${f$(mo)} (${p_.toFixed(0)}%)</span></div><div class="pbar-bg"><div class="pbar-fill" style="width:${p_.toFixed(1)}%;background:${p_>40?'var(--r)':p_>20?'var(--a)':'var(--b)'}"></div></div></div>`;});
 
@@ -2868,7 +3007,7 @@ function cBE(){
   gel('be-mos').textContent=pct(mos);gel('be-cm').textContent=f$(cm)+'/unit';gel('be-gm').textContent=pct(sp>0?cm/sp*100:0);
   gel('be-ol').textContent=(profit>0?(cm*eu)/profit:0).toFixed(1)+'x';
   const s=8,p1=[],p2=[];for(let i=1;i<=s;i++){const u=eu*2*i/s;p1.push(fc);p2.push(sp*u);}
-  drawLine('be-chart',[{data:p1,color:'#F65E72',fill:false},{data:p2,color:'#0ECB81',fill:false,w:2.5}],175);
+  drawLine('be-chart',[{data:p1,color:'#8C2E22',fill:false},{data:p2,color:'#0F4F35',fill:false,w:2.5}],175);
 
   const insights=[];
   if(isFinite(beu)){
@@ -3134,7 +3273,7 @@ function cSavingsGoal(){
     balPts.push(Math.min(bal,goal*1.05));
     goalPts.push(goal);
   }
-  drawLine('sg-chart',[{data:balPts,color:'#0ECB81',fill:true},{data:goalPts,color:'#F0B90B',fill:false,dash:[6,4],w:1.5}],190);
+  drawLine('sg-chart',[{data:balPts,color:'#0F4F35',fill:true},{data:goalPts,color:'#F0B90B',fill:false,dash:[6,4],w:1.5}],190);
 
   // Insights
   const insights=[];
@@ -3198,7 +3337,7 @@ function cEmergency(){
     b = b * (1 + rate) + saveRate;
   }
   drawLine('ef-chart', [
-    {data: balPts, color: '#0ECB81', fill: true},
+    {data: balPts, color: '#0F4F35', fill: true},
     {data: tgtPts, color: '#F0B90B', fill: false, dash: [6,4], w: 1.5}
   ], 170);
 
@@ -3258,12 +3397,12 @@ function cHealthScore(){
   const total = Math.round(s1*.25 + s2*.20 + s3*.20 + s4*.15 + s5*.10 + s6*.10);
 
   // Grade
-  const grade = total >= 85 ? {g:'A+',label:'Excellent',color:'#0ECB81',desc:'Outstanding financial health — keep it up!'} :
-                total >= 75 ? {g:'A', label:'Very Good', color:'#0ECB81',desc:'Strong finances with minor areas to improve'} :
+  const grade = total >= 85 ? {g:'A+',label:'Excellent',color:'#0F4F35',desc:'Outstanding financial health — keep it up!'} :
+                total >= 75 ? {g:'A', label:'Very Good', color:'#0F4F35',desc:'Strong finances with minor areas to improve'} :
                 total >= 65 ? {g:'B', label:'Good',      color:'#F0B90B',desc:'Solid foundation, some key areas need attention'} :
                 total >= 50 ? {g:'C', label:'Fair',      color:'#F0B90B',desc:'You are managing, but important gaps exist'} :
-                total >= 35 ? {g:'D', label:'Poor',      color:'#F65E72',desc:'Significant financial stress — take action now'} :
-                              {g:'F', label:'Critical',  color:'#F65E72',desc:'Urgent action needed across multiple areas'};
+                total >= 35 ? {g:'D', label:'Poor',      color:'#8C2E22',desc:'Significant financial stress — take action now'} :
+                              {g:'F', label:'Critical',  color:'#8C2E22',desc:'Urgent action needed across multiple areas'};
 
   gel('hs-score-num').textContent = total;
   gel('hs-score-num').style.color = grade.color;
@@ -3490,6 +3629,20 @@ function _loadPdfLib(){
   return _pdfLibPromise;
 }
 
+// Adds thousands-separator commas to a plain numeric string (e.g. the raw
+// value out of a text input) without touching values that aren't numeric —
+// percentages with a trailing %, plain text, dates, etc. pass through as-is.
+// Preserves whatever decimal precision the user actually typed.
+function _formatNumForPdf(val){
+  if(val==null)return '';
+  const s=String(val).trim();
+  if(s==='')return s;
+  const m=s.match(/^(-?)(\d+)(\.\d+)?$/);
+  if(!m)return s;
+  const [,sign,intPart,decPart]=m;
+  return sign+Number(intPart).toLocaleString('en-US')+(decPart||'');
+}
+
 // Walks a calculator panel and extracts its inputs + outputs as
 // {sectionTitle, rows:[[label,value],...]} blocks, in visual order,
 // skipping nav/guide/FAQ/disclaimer/related-links (same scope as the
@@ -3530,7 +3683,7 @@ function _extractCalculatorData(panel){
       const input=f.querySelector('input,select');
       if(!label||!input)return;
       fieldInputs.add(input);
-      let val=input.tagName==='SELECT'?input.options[input.selectedIndex]?.textContent.trim():input.value;
+      let val=input.tagName==='SELECT'?input.options[input.selectedIndex]?.textContent.trim():_formatNumForPdf(input.value);
       rows.push([label,String(val)]);
     });
     // loose label+input pairs not wrapped in .field (e.g. "Extra Payment", "Strategy")
@@ -3541,7 +3694,7 @@ function _extractCalculatorData(panel){
       if(!input||fieldInputs.has(input))return;
       const label=lbl.textContent.trim();
       if(!label)return;
-      let val=input.tagName==='SELECT'?input.options[input.selectedIndex]?.textContent.trim():input.value;
+      let val=input.tagName==='SELECT'?input.options[input.selectedIndex]?.textContent.trim():_formatNumForPdf(input.value);
       rows.push([label,String(val)]);
       fieldInputs.add(input);
     });
@@ -3647,7 +3800,7 @@ function _getCalcBtnRow(panel){
   if(row)return row;
   row=document.createElement('div');
   row.className='calc-btn-row';
-  const anchor=panel.querySelector('.calc-links');
+  const anchor=panel.querySelector('.calc-links-label')||panel.querySelector('.calc-links');
   if(anchor)anchor.insertAdjacentElement('beforebegin',row);
   else{
     const back=panel.querySelector('.back-btn');

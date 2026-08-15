@@ -3,6 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="stylesheet" href="/fonts/fonts.css">
+
 <title>FinCalc — Free Financial Calculators Online</title>
 <meta name="description" content="60 free financial calculators for loans, investing, retirement & taxes — CAGR, XIRR, SIP, EMI, mortgage & more. No signup.">
 <link rel="canonical" href="https://finclac.com/">
@@ -19,490 +21,539 @@
 <meta name="twitter:image" content="https://finclac.com/android-chrome-512x512.png">
 <meta name="twitter:title" content="FinCalc — Free Financial Calculators Online">
 <meta name="twitter:description" content="60 free financial calculators for loans, investing, retirement & taxes — CAGR, XIRR, SIP, EMI, mortgage & more. No signup.">
-<style>html{scrollbar-gutter:stable;overflow-y:scroll}*{box-sizing:border-box;margin:0;padding:0}
-:root{--bg:#0B0E11;--s:#141920;--s2:#1C2430;--bd:#232D3A;--t:#E8EDF2;--m:#8393A6;--tb:#A3B2C4;--a:#F0B90B;--g:#0ECB81;--r:#F65E72;--b:#1890FF;--p:#B478D1;--fn:'DM Sans',sans-serif;--mo:'DM Mono',monospace}
-html[data-theme="light"]{--bg:#F7F9FB;--s:#FFFFFF;--s2:#EFF3F8;--bd:#DCE3EC;--t:#0F172A;--m:#5B6B7F;--tb:#475569;--a:#946200;--g:#06754A;--r:#C81E45;--b:#1155C4;--p:#7D3C9E}
-html[data-theme="light"] body{background:var(--bg)}
-html[data-theme="light"] .topbar,html[data-theme="light"] .nav{box-shadow:0 1px 0 rgba(15,23,42,.04)}
-html[data-theme="light"] .card,html[data-theme="light"] .dir-card{box-shadow:0 1px 3px rgba(15,23,42,.06)}
-html[data-theme="light"] .dir-card{background:linear-gradient(135deg,#FFFFFF 60%,#F1FAF6 100%);border:1px solid #0ECB81;box-shadow:0 2px 10px rgba(6,117,74,.08),0 1px 3px rgba(15,23,42,.05)}
-html[data-theme="light"] .dir-card .dir-name{color:var(--t)}
-html[data-theme="light"] .dir-card .dir-desc{color:var(--m)}
-html[data-theme="light"] .skip-link,html[data-theme="light"] .btn,html[data-theme="light"] .sci-btn.eq,html[data-theme="light"] .calc-link-btn:hover,html[data-theme="light"] .guide-step-num{color:#fff}
-html[data-theme="light"] .logo-mark{background:#F0B90B!important;color:#000!important}
-html[data-theme="light"] .ntab.on{color:#0ECB81!important;border-bottom-color:#0ECB81!important}
-html[data-theme="light"] .nav-dd-btn.on{color:#0ECB81!important;border-bottom-color:#0ECB81!important}
-html[data-theme="light"] .hero-wrap{background:radial-gradient(ellipse 120% 100% at 15% 20%,rgba(6,117,74,.09),transparent 55%),radial-gradient(ellipse 100% 90% at 90% 80%,rgba(148,98,0,.10),transparent 55%),var(--s2)!important}
-html[data-theme="light"] .hero-badge{background:rgba(6,117,74,.10)!important;border-color:rgba(6,117,74,.25)!important}
-html[data-theme="light"] .hero-title{background:linear-gradient(100deg,#0F172A 30%,#0ECB81 70%,#F0B90B 100%);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;color:transparent!important}
-html[data-theme="light"] .hero-btn-primary{box-shadow:0 8px 20px rgba(6,117,74,.28)}
-html[data-theme="light"] .hero-btn-primary:hover{box-shadow:0 10px 26px rgba(6,117,74,.38);transform:translateY(-1px)}
-html[data-theme="light"] .stat-g,html[data-theme="light"] .stat-a,html[data-theme="light"] .stat-b{color:#06754A!important}
-html[data-theme="light"] .dir-icon{background:linear-gradient(135deg,rgba(6,117,74,.14),rgba(148,98,0,.10));border:1px solid rgba(6,117,74,.18);display:inline-flex;align-items:center;justify-content:center;width:40px;height:40px;border-radius:9px}
-html[data-theme="light"] .dir-card{transition:all .22s}
-html[data-theme="light"] .dir-card:hover{transform:translateY(-3px);border-color:#0ECB81;box-shadow:0 12px 28px rgba(14,203,129,.20),0 2px 8px rgba(15,23,42,.08)}
-html[data-theme="light"] .dir-sec-h{color:#0ECB81;font-weight:700}
-html[data-theme="light"] .dir-sec-h::after{background:linear-gradient(90deg,rgba(14,203,129,.35),var(--bd) 60%)}
-html[data-theme="light"] .searchbox{box-shadow:0 2px 10px rgba(6,117,74,.10)}
-html[data-theme="light"] .nav-dd-menu{box-shadow:0 14px 36px rgba(15,23,42,.15)}
-html[data-theme="light"] .footer-brand{color:#000!important}
-html[data-theme="light"] .footer-copy{color:#000!important}
-html[data-theme="light"] .footer-copy a{color:#000!important}
-body,.card,.dir-card,.topbar,.nav,.nav-dd-menu,.searchbox,.footer{transition:background-color .2s ease,border-color .2s ease,color .2s ease}
-.theme-toggle{display:inline-flex;align-items:center;gap:6px;padding:6px 12px;border-radius:20px;background:var(--s2);border:1px solid var(--bd);color:var(--t);font-size:12px;font-weight:500;cursor:pointer;font-family:var(--fn);transition:all .15s}
-.theme-toggle:hover{border-color:var(--a)}
-body{background:var(--bg);color:var(--t);font-family:var(--fn);font-size:14px;line-height:1.5;min-height:100vh;display:flex;flex-direction:column}
-.topbar{background:var(--s);border-bottom:1px solid var(--bd);padding:0 1.25rem;display:flex;align-items:center;justify-content:space-between;height:52px;position:sticky;top:0;z-index:200}
-.skip-link{position:absolute;left:-9999px;top:0;background:var(--a);color:#000;padding:10px 16px;border-radius:0 0 8px 0;font-weight:600;font-size:13px;z-index:9999;text-decoration:none}.skip-link:focus{left:0}
-.logo{display:flex;align-items:center;gap:8px;font-size:16px;font-weight:600;color:var(--t);text-decoration:none}
-.logo-mark{width:28px;height:28px;background:var(--a);border-radius:6px;display:flex;align-items:center;justify-content:center;color:#000;font-size:13px;font-weight:700}
-.searchbox{display:flex;align-items:center;gap:10px;background:#fff;border:1.5px solid var(--g);border-radius:9px;padding:10px 16px;width:340px;transition:border-color .15s}
-.searchbox:focus-within{border-color:var(--a)}
-.searchbox input{background:none;border:none;outline:none;color:#0D1117;font-family:var(--fn);font-size:15px;font-weight:500;width:100%}
-.searchbox input::placeholder{color:#6B7A8D;opacity:1}
-.nav{display:flex;gap:2px;padding:.75rem 1.25rem 0;border-bottom:1px solid var(--bd);overflow-x:auto;scrollbar-width:none;background:var(--bg);position:sticky;top:52px;z-index:100}
-.nav::-webkit-scrollbar{display:none}
-.ntab{padding:8px 13px;font-size:12px;font-weight:500;color:var(--t);cursor:pointer;border-bottom:2px solid transparent;white-space:nowrap;background:none;border-top:none;border-left:none;border-right:none;transition:all .18s;font-family:var(--fn);text-decoration:none;display:inline-block}
-.ntab.on{color:var(--a);border-bottom-color:var(--a)}
-.ntab:hover:not(.on){color:var(--t)}
-.nav-dd{position:relative;display:inline-block}
-.nav-dd-btn{padding:8px 11px 8px 13px;font-size:12px;font-weight:500;color:var(--t);cursor:pointer;border-bottom:2px solid transparent;white-space:nowrap;background:none;border-top:none;border-left:none;border-right:none;transition:all .18s;font-family:var(--fn);display:inline-flex;align-items:center;gap:4px}
-.nav-dd-btn::after{content:'▾';font-size:8px;opacity:.65;margin-left:1px;transition:transform .15s}
-.nav-dd-btn:hover{color:var(--t)}
-.nav-dd-btn.on{color:var(--a);border-bottom-color:var(--a)}
-.nav-dd.open .nav-dd-btn::after{transform:rotate(180deg)}
-.nav-dd-menu{display:none;position:fixed;background:var(--s2);border:1px solid var(--bd);border-radius:10px;padding:8px;box-shadow:0 14px 36px rgba(0,0,0,.5);z-index:300;width:560px;max-width:88vw;max-height:70vh;overflow-y:auto}
-.nav-dd.open .nav-dd-menu{display:grid;grid-template-columns:repeat(2,1fr);gap:1px}
-.nav-dd-item{display:flex;align-items:center;gap:8px;padding:7px 9px;border-radius:6px;font-size:12.5px;color:var(--tb);text-decoration:none;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.nav-dd-item:hover{background:var(--s);color:var(--t)}
-.nav-dd-item.on{color:var(--a);font-weight:600;background:var(--s)}
-@media(max-width:700px){
-  .nav-dd-menu{width:86vw;max-width:340px}
-  .nav-dd.open .nav-dd-menu{grid-template-columns:1fr}
+<style>
+:root{
+  --paper:#F6F4EE;
+  --paper2:#EFEBE1;
+  --ink:#171B17;
+  --ink-soft:#464C46;
+  --muted:#807965;
+  --line:#DBD5C4;
+  --ledger:#0F4F35;
+  --ledger-dim:#EFEBE1;
+  --brass:#8A6D33;
+  --brass-dim:#F1E9D4;
+  --red:#8C2E22;
+  --serif:'Fraunces',serif;
+  --sans:'IBM Plex Sans',sans-serif;
+  --mono:'IBM Plex Mono',monospace;
 }
-.content{padding:1.25rem;max-width:1366px;margin:0 auto;flex:1 0 auto}
-.panel{display:none}.panel.on{display:block}.panel.on::after{content:'';display:table;clear:both}
-.dir-sec{margin-bottom:1.75rem;scroll-margin-top:72px}
+*{box-sizing:border-box;margin:0;padding:0}
 html{scroll-behavior:smooth}
-.hero-wrap{padding:1.75rem 2rem;gap:1.5rem;flex-wrap:wrap}
-.hero-img{flex-shrink:0;width:200px;display:none;align-items:center;justify-content:center}
-.hero-img svg{width:100%;height:auto;max-width:200px}
-@media(min-width:949px){
-  .hero-wrap{flex-wrap:nowrap}
-  .hero-img{display:flex}
+body{
+  background:var(--paper);
+  color:var(--ink);
+  font-family:var(--sans);
+  line-height:1.5;
+  -webkit-font-smoothing:antialiased;
 }
-@media(min-width:1200px){
-  .hero-wrap{padding:2.5rem 3rem;gap:2.5rem}
-  .hero-img{width:340px}
-  .hero-img svg{max-width:340px}
-}
-.hero-btn-primary{background:var(--g);color:#fff;transition:all .18s;display:inline-block}
-.hero-btn-primary:hover{background:#0BAF6F;transform:translateY(-2px);box-shadow:0 6px 16px rgba(14,203,129,.35)}
-.hero-btn-secondary{background:#fff;color:var(--g);transition:all .18s;display:inline-block}
-.hero-btn-secondary:hover{background:#EFFCF6;transform:translateY(-2px);box-shadow:0 6px 16px rgba(0,0,0,.15)}
-@media(max-width:700px){
-  .hero-img{display:none}
-  .hero-ctas{flex-direction:column}
-  .hero-ctas a{width:100%;text-align:center;box-sizing:border-box}
-}
-.dir-sec-h{font-size:11px;font-weight:600;color:var(--m);letter-spacing:.8px;text-transform:uppercase;margin-bottom:.75rem;display:flex;align-items:center;gap:8px}
-.dir-sec-h::after{content:'';flex:1;height:1px;background:var(--bd)}
-.dir-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(178px,1fr));gap:10px}
-.dir-card{background:linear-gradient(135deg,#0d1117 60%,#071510 100%);border:1px solid #0ECB81;border-radius:12px;padding:1.25rem 1.1rem;cursor:pointer;transition:all .2s;box-shadow:0 2px 12px rgba(14,203,129,.1),0 1px 3px rgba(0,0,0,.4);text-decoration:none;display:block;color:inherit;position:relative}.pop-star{position:absolute;top:10px;right:12px;font-size:14px;line-height:1;filter:drop-shadow(0 1px 2px rgba(0,0,0,.35));z-index:2}.field-warn{border-color:var(--r)!important}.field-warn-msg{font-size:11px;color:var(--r);margin-top:4px;line-height:1.3}.tip-ic{position:relative;display:inline-flex;align-items:center;justify-content:center;width:14px;height:14px;border-radius:50%;background:var(--bd);color:var(--m);font-size:9.5px;font-style:normal;font-weight:700;cursor:help;flex-shrink:0;vertical-align:middle;margin-left:2px}.tip-ic:hover,.tip-ic:focus{background:var(--a);color:var(--bg);outline:none}.tip-ic:hover .tip-box,.tip-ic:focus .tip-box{opacity:1;visibility:visible;transform:translateY(0)}.tip-box{position:absolute;bottom:calc(100% + 8px);left:0;background:var(--s2);border:1px solid var(--bd);border-radius:8px;padding:9px 11px;font-size:11.5px;line-height:1.5;color:var(--tb);width:230px;max-width:min(230px,70vw);opacity:0;visibility:hidden;transform:translateY(4px);transition:opacity .15s,transform .15s;z-index:80;box-shadow:0 6px 20px rgba(0,0,0,.35);font-weight:400;pointer-events:none;white-space:normal}
-.dir-card:hover{border-color:#ffffff;transform:translateY(-2px);box-shadow:0 6px 28px rgba(255,255,255,.12),0 2px 8px rgba(0,0,0,.5)}
-.dir-icon{font-size:28px;margin-bottom:10px;line-height:1}
-.dir-name{font-size:15px;font-weight:600;margin-bottom:5px;color:var(--t)}
-.dir-desc{font-size:12px;color:var(--m);line-height:1.6}
-.two{display:grid;grid-template-columns:1fr 310px;gap:16px;margin-top:.5rem}
-.two-eq{display:grid;grid-template-columns:1fr 1fr;gap:16px}
-.three{display:grid;grid-template-columns:1fr 1fr 1fr;gap:16px}
-.g2{display:grid;grid-template-columns:1fr 1fr;gap:10px}
-.g3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px}
-.card{background:var(--s);border:1px solid var(--bd);border-radius:10px;padding:1.25rem}
-.mb16{margin-bottom:16px}
-.card-title{font-size:11px;font-weight:600;color:var(--m);letter-spacing:.8px;text-transform:uppercase;margin-bottom:1.25rem}
-.calc-header{margin-bottom:1.75rem}.calc-page-title{margin:0 0 .4rem;font-size:26px;font-weight:700;color:var(--t);line-height:1.3;letter-spacing:-.3px}.calc-subtitle{font-size:15px;font-weight:500;color:var(--t);margin:0 0 .6rem;line-height:1.4}
-.calc-desc{font-size:13px;color:var(--m);line-height:1.65;margin:0;max-width:680px}
-.input-hint{font-size:11.5px;color:var(--a);background:rgba(240,185,11,.08);border:1px solid rgba(240,185,11,.25);border-radius:6px;padding:6px 10px;margin:-.75rem 0 1rem;line-height:1.5}
-.chart-tooltip{position:fixed;display:none;background:#1C2430;border:1px solid #232D3A;border-radius:6px;padding:7px 11px;font-size:11.5px;color:#E8EDF2;pointer-events:none;z-index:9999;box-shadow:0 4px 14px rgba(0,0,0,.45);font-family:'DM Sans',sans-serif;line-height:1.5;max-width:200px}
-.chart-tooltip strong{color:#F0B90B}
-.field{margin-bottom:.9rem}
-.field label{display:block;font-size:12px;color:var(--t);margin-bottom:5px}
-.field input,.field select{width:100%;background:var(--bg);border:1px solid var(--bd);border-radius:6px;padding:8px 11px;color:var(--t);font-family:var(--mo);font-size:13px;outline:none;transition:border .15s}
-.field input:focus,.field select:focus{border-color:var(--a)}
-.field select option{background:var(--s2)}
-.ip{position:relative}
-.ip .pfx{position:absolute;left:10px;top:50%;transform:translateY(-50%);color:var(--m);font-size:13px;pointer-events:none;font-family:var(--mo)}
-.ip input{padding-left:22px}
-.sgrid{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:1rem}
-.sbox{background:var(--s2);border-radius:8px;padding:10px}
-.sbox .lbl{font-size:10px;color:var(--m);margin-bottom:3px;font-weight:500;text-transform:uppercase;letter-spacing:.4px}
-.sbox .val{font-size:15px;font-weight:600;font-family:var(--mo)}
-.rrow{display:flex;justify-content:space-between;padding:7px 0;border-bottom:1px solid var(--bd);font-size:13px}
-.rrow:last-child{border:none}
-.rk{color:var(--m);font-size:12px}
-.rv{font-family:var(--mo);font-weight:500}
-.btn{width:100%;padding:10px;background:var(--a);color:#000;border:none;border-radius:7px;font-family:var(--fn);font-size:13px;font-weight:600;cursor:pointer;margin-top:8px;transition:opacity .15s}
-.btn:hover{opacity:.88}
-.btn-sm{padding:6px 12px;border-radius:6px;font-size:12px;font-weight:500;cursor:pointer;border:none;font-family:var(--fn)}
-.btn-add{background:var(--s2)!important;color:var(--g)!important;border:1px solid var(--g)!important}
-.btn-del{background:transparent;color:var(--r);border:1px solid var(--bd);padding:6px 10px;border-radius:6px;cursor:pointer;font-size:13px}
-.back-btn{background:var(--s2);border:1px solid var(--bd);color:var(--tb);font-size:12.5px;font-weight:500;cursor:pointer;margin-bottom:1rem;display:inline-flex;align-items:center;gap:6px;padding:7px 14px;border-radius:20px;font-family:var(--fn);transition:all .18s;text-decoration:none}
-.back-btn:hover{color:var(--t);border-color:var(--g);background:var(--s)}
-.badge-new{background:rgba(14,203,129,.15);color:var(--g);font-size:10px;font-weight:600;padding:2px 7px;border-radius:4px}
-.pbar-bg{background:var(--bd);border-radius:3px;height:6px;overflow:hidden;margin-top:4px}
-.pbar-fill{height:100%;border-radius:3px;transition:width .4s}
-.tbl{width:100%;border-collapse:collapse;font-size:12px}
-.tbl th{color:var(--m);font-size:10px;text-transform:uppercase;padding:6px 8px;border-bottom:1px solid var(--bd);text-align:right;letter-spacing:.4px}
-.tbl th:first-child{text-align:left}
-.tbl td{padding:6px 8px;border-bottom:1px solid var(--bd);font-family:var(--mo);text-align:right}
-.tbl td:first-child{text-align:left;color:var(--m);font-family:var(--fn)}
-.tbl tr:last-child td{border:none}
-.tbl .hl{background:var(--s2)}
-.slab-tbl{width:100%;border-collapse:collapse;font-size:12px}
-.slab-tbl th{color:var(--m);font-size:10px;letter-spacing:.5px;text-transform:uppercase;padding:5px 0;border-bottom:1px solid var(--bd);text-align:left}
-.slab-tbl td{padding:6px 0;border-bottom:1px solid var(--bd);font-family:var(--mo)}
-.slab-tbl tr:last-child td{border:none}
-.slab-on td{color:var(--a)}
-.tline{position:relative;padding-left:20px}
-.tline::before{content:'';position:absolute;left:6px;top:0;bottom:0;width:1px;background:var(--bd)}
-.tl-i{position:relative;margin-bottom:12px;font-size:12px}
-.tl-i::before{content:'';position:absolute;left:-17px;top:4px;width:8px;height:8px;border-radius:50%;background:var(--a);border:2px solid var(--bg)}
-.tl-lbl{color:var(--m);font-size:11px}
-.cmp-col{background:var(--s2);border-radius:10px;padding:1rem;border:1px solid var(--bd)}
-.cmp-col.winner{border-color:var(--g)}
-.donut-wrap{display:flex;justify-content:center;align-items:center;gap:16px;padding:.75rem 0}
-.leg-i{display:flex;align-items:center;gap:6px;font-size:11px;color:var(--m);margin-bottom:5px}
-.leg-dot{width:8px;height:8px;border-radius:50%;flex-shrink:0}
-.sci-disp{background:var(--bg);border:1px solid var(--bd);border-radius:8px;padding:12px 14px;margin-bottom:10px;text-align:right}
-.sci-expr{font-size:12px;color:var(--m);font-family:var(--mo);min-height:18px}
-.sci-num{font-size:28px;font-family:var(--mo);font-weight:500;word-break:break-all}
-.sci-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:5px}
-.sci-btn{padding:10px 4px;border:1px solid var(--bd);border-radius:6px;background:var(--s2);color:var(--t);font-family:var(--mo);font-size:12px;cursor:pointer;text-align:center}
-.sci-btn:hover{background:var(--bd)}
-.sci-btn.op{color:var(--a)}.sci-btn.eq{background:var(--a);color:#000;border-color:var(--a);font-weight:600}.sci-btn.cl{color:var(--r)}.sci-btn.fn{color:var(--b)}
-@media(max-width:700px){.two,.two-eq,.three{grid-template-columns:1fr}.g2,.g3{grid-template-columns:1fr}.sci-grid{grid-template-columns:repeat(4,1fr)}}
-@media(max-width:700px){.searchbox{width:170px;padding:8px 12px}.searchbox input{font-size:13px}}
-@media(max-width:700px){.download-btn,.share-btn{font-size:9.5px;padding:3px 7px;gap:3px;border-radius:12px;flex:1;justify-content:center}.calc-btn-row{gap:6px;margin-bottom:1.25rem}}
+a{color:inherit;text-decoration:none}
 
+/* faint ledger-grid texture */
+.grain{
+  position:fixed;inset:0;pointer-events:none;z-index:0;opacity:.5;
+  background-image:
+    linear-gradient(var(--line) 1px, transparent 1px),
+    linear-gradient(90deg, var(--line) 1px, transparent 1px);
+  background-size: 64px 64px;
+  mask-image: radial-gradient(ellipse 100% 60% at 50% 0%, black 0%, transparent 70%);
+  opacity:.25;
 }
 
+/* ---------- top bar ---------- */
+.topbar{
+  position:sticky;top:0;z-index:50;
+  display:flex;align-items:center;justify-content:space-between;
+  padding:18px 40px;
+  background:rgba(246,244,238,.88);
+  backdrop-filter:blur(6px);
+  border-bottom:1px solid var(--line);
+}
+.brand{display:flex;align-items:center;gap:10px}
+.brand-mark{
+  width:30px;height:30px;background:#F0B90B;color:#000;
+  display:flex;align-items:center;justify-content:center;
+  font-family:var(--serif);font-weight:600;font-size:13px;
+  border-radius:6px;
+}
+.brand-name{font-family:var(--serif);font-weight:600;font-size:19px;letter-spacing:.2px}
+.brand-tag{font-family:var(--mono);font-size:10.5px;color:var(--muted);letter-spacing:.06em;margin-left:8px;padding-left:8px;border-left:1px solid var(--line)}
+.top-links{display:flex;align-items:center;gap:28px;font-size:13.5px;color:var(--ink-soft)}
+.top-links a{border-bottom:1px solid transparent;padding-bottom:2px;transition:border-color .15s,color .15s}
+.top-links a:hover{border-color:var(--ledger);color:var(--ink)}
+.top-cta{
+  font-family:var(--mono);font-size:12px;color:var(--paper);
+  background:var(--ledger);padding:9px 16px;border-radius:2px;
+  letter-spacing:.02em;
+}
+.topbar-right{display:flex;align-items:center;gap:12px}
+.mobile-menu-btn{display:none;background:none;border:1px solid var(--line);border-radius:6px;width:36px;height:36px;font-size:16px;color:var(--ink);cursor:pointer;align-items:center;justify-content:center}
+.mobile-menu{display:none;flex-direction:column;background:var(--paper);border-bottom:1px solid var(--line);padding:6px 20px 14px}
+.mobile-menu a{display:block;padding:12px 4px;font-size:14.5px;color:var(--ink);text-decoration:none;border-bottom:1px solid var(--line)}
+.mobile-menu a:last-child{border-bottom:none}
+.mobile-menu.open{display:flex}
+@media(max-width:860px){.mobile-menu-btn{display:flex}}
 
-/* Inter-calculator links */
-.calc-links{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 2.5rem;padding:10px 12px;background:var(--s2);border-radius:8px;border-left:3px solid var(--g);align-items:center;clear:both}
-.calc-links-label{font-size:10px;color:var(--t);text-transform:uppercase;letter-spacing:.6px;font-weight:600;margin-right:4px;flex-shrink:0;white-space:nowrap}
-.calc-link-btn{padding:4px 10px;background:var(--bg);border:1px solid var(--g);border-radius:20px;color:var(--g);font-size:11px;cursor:pointer;font-family:var(--fn);transition:all .18s;white-space:nowrap;text-decoration:none}
-.calc-link-btn:hover{background:var(--g);color:#000;border-color:var(--g)}
-.related-box{clear:both;margin-top:28px;background:var(--s);border:1px solid var(--bd);border-radius:10px;padding:14px 16px;box-shadow:0 1px 3px rgba(0,0,0,.25)}
-.related-box-title{font-size:11px;font-weight:700;color:var(--m);text-transform:uppercase;letter-spacing:.6px;margin-bottom:10px;display:flex;align-items:center;gap:6px}
-.related-item{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:9px 10px;border-radius:7px;text-decoration:none;color:var(--t);font-size:13px;line-height:1.5;font-weight:500;transition:background .15s,color .15s}
-.related-item:not(:last-child){margin-bottom:2px}
-.related-item:hover{background:var(--s2);color:var(--a)}
-.related-arrow{color:var(--a);flex-shrink:0;font-size:14px;transition:transform .15s}
-.related-item:hover .related-arrow{transform:translateX(3px)}
+/* ---------- hero ---------- */
+.hero{
+  position:relative;z-index:1;
+  padding:88px 40px 56px;
+  max-width:1180px;margin:0 auto;
+}
+.hero-eyebrow{
+  font-family:var(--mono);font-size:11.5px;letter-spacing:.12em;text-transform:uppercase;
+  color:var(--ledger);margin-bottom:22px;display:flex;align-items:center;gap:10px;
+}
+.hero-eyebrow::before{content:'';width:22px;height:1px;background:var(--ledger)}
+.hero-title{
+  font-family:var(--serif);font-weight:500;
+  font-size:clamp(38px,5.4vw,68px);
+  line-height:1.04;letter-spacing:-.01em;
+  max-width:15ch;
+}
+.hero-title em{font-style:italic;font-weight:400;color:var(--ledger)}
+.hero-sub{
+  margin-top:26px;max-width:52ch;
+  font-size:17px;color:var(--ink-soft);line-height:1.6;
+}
+.hero-row{
+  margin-top:40px;display:flex;gap:14px;flex-wrap:wrap;align-items:center;
+}
+.searchbox{
+  display:flex;align-items:center;gap:10px;
+  background:#fff;border:1px solid var(--ink);
+  padding:13px 18px;width:380px;max-width:100%;
+  font-family:var(--mono);font-size:13px;
+}
+.searchbox input{border:none;outline:none;font-family:var(--mono);font-size:13px;width:100%;background:transparent;color:var(--ink)}
+.searchbox input:focus-visible{outline:none}
+.searchbox input::placeholder{color:var(--muted)}
+.searchbox:focus-within{outline:2px solid var(--ledger);outline-offset:2px}
+a:focus-visible,button:focus-visible,.row:focus-visible,.blog-filter-tab:focus-visible{outline:2px solid var(--ledger);outline-offset:2px;border-radius:4px}
+.hero-stat{font-family:var(--mono);font-size:12px;color:var(--muted)}
+.hero-stat b{color:var(--ink);font-weight:500}
 
+/* ---------- ticker (signature element) ---------- */
+.ticker-wrap{
+  position:relative;z-index:1;
+  border-top:1px solid var(--line);border-bottom:1px solid var(--line);
+  background:var(--ink);overflow:hidden;
+}
+.ticker-track{
+  display:flex;white-space:nowrap;gap:0;
+  animation:scroll-left 42s linear infinite;
+}
+.ticker-wrap:hover .ticker-track{animation-play-state:paused}
+@keyframes scroll-left{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+.tick{
+  font-family:var(--mono);font-size:12.5px;color:#D9D3C2;
+  padding:13px 34px;border-right:1px solid #33392F;
+  display:flex;align-items:center;gap:10px;flex-shrink:0;
+}
+.tick .lbl{color:#8E9585;letter-spacing:.04em}
+.tick .val{color:#EDE7D6;font-weight:500}
+.tick .up{color:#7FBF9E}
+.tick .down{color:#D08877}
 
-/* Footer */
-.site-footer{background:var(--s);border-top:1px solid var(--bd);padding:1rem 1.25rem;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px;margin-top:1rem}
-.footer-brand{font-size:14px;font-weight:600;color:var(--t);display:flex;align-items:center;gap:8px}
-.footer-brand .logo-mark{width:22px;height:22px;font-size:11px}
-.footer-copy{font-size:11px;color:var(--m)}
+/* ---------- directory ---------- */
+.directory{position:relative;z-index:1;max-width:1180px;margin:0 auto;padding:64px 40px 40px}
+.dir-head{display:flex;align-items:baseline;justify-content:space-between;margin-bottom:8px;flex-wrap:wrap;gap:10px}
+.dir-head h2{font-family:var(--serif);font-weight:500;font-size:26px}
+.dir-head span{font-family:var(--mono);font-size:12px;color:var(--muted)}
 
+.section{margin-top:56px}
+.sec-head{display:flex;align-items:baseline;gap:16px;margin-bottom:22px;}
+.sec-tab{
+  font-family:var(--mono);font-size:12px;color:var(--paper);
+  background:var(--ledger);width:30px;height:30px;flex-shrink:0;
+  display:flex;align-items:center;justify-content:center;border-radius:2px;
+}
+.sec-tab.b{background:var(--brass)}
+.sec-tab.c{background:var(--red)}
+.sec-tab.d{background:var(--ink-soft)}
+.sec-title{font-family:var(--serif);font-weight:500;font-size:23px}
+.sec-count{font-family:var(--mono);font-size:11.5px;color:var(--muted);margin-left:auto;padding-bottom:4px}
+.sec-rule{height:1px;background:var(--line);margin-bottom:26px}
 
-/* Calculator Guide Articles */
-.calc-guide{margin-top:2.5rem;border-top:1px solid var(--bd);padding-top:1.75rem}
-.guide-toggle{display:flex;align-items:center;justify-content:space-between;padding:10px 14px;background:var(--s2);border:1px solid var(--bd);border-radius:8px;margin-bottom:0;max-width:980px}
-@media(min-width:1048px){.guide-toggle{margin-left:auto;margin-right:auto}}
-.guide-toggle-title{font-size:14px;font-weight:700;color:var(--t);display:flex;align-items:center;gap:8px;letter-spacing:.1px}
-.guide-body{display:block;padding:1.5rem 0 0;max-width:980px}
-@media(min-width:1048px){.guide-body{margin:0 auto}}
-.guide-h2{font-size:22px;font-weight:700;color:var(--t);margin:1.75rem 0 .85rem;letter-spacing:-.2px;line-height:1.3}
-.guide-h2:first-child{margin-top:0}
-.guide-h3{font-size:16px;font-weight:700;color:var(--t);margin:2rem 0 .75rem;letter-spacing:-.1px;line-height:1.35;padding-top:.25rem;border-top:1px solid var(--bd)}
-.guide-h3:first-child{margin-top:0;padding-top:0;border-top:none}
-.guide-p{font-size:14.5px;color:var(--tb);line-height:1.75;margin-bottom:1.1rem}
-.guide-p strong{color:var(--t);font-weight:600}
-.guide-formula{background:var(--s2);border-left:3px solid var(--a);border-radius:0 8px 8px 0;padding:14px 16px;font-family:var(--mo);font-size:13.5px;line-height:1.7;color:var(--a);margin:1.1rem 0;overflow-x:auto}
-.guide-tip{background:rgba(14,203,129,.08);border:1px solid rgba(14,203,129,.2);border-radius:8px;padding:13px 16px;font-size:13px;color:var(--g);margin:1.1rem 0;line-height:1.7;font-weight:500}
-.guide-warn{background:rgba(246,70,93,.08);border:1px solid rgba(246,70,93,.2);border-radius:8px;padding:13px 16px;font-size:13px;color:var(--r);margin:1.1rem 0;line-height:1.7;font-weight:500}
-.guide-table{width:100%;border-collapse:collapse;font-size:12.5px;margin:1.25rem 0}
-.guide-table th{background:var(--s2);color:var(--m);padding:9px 12px;text-align:left;font-size:10.5px;font-weight:700;text-transform:uppercase;letter-spacing:.5px;border-bottom:1px solid var(--bd)}
-.guide-table td{padding:9px 12px;border-bottom:1px solid var(--bd);color:var(--t);font-family:var(--mo)}
-.guide-table tr:last-child td{border:none}
-.guide-steps{counter-reset:step;margin:1.25rem 0}
-.guide-step{display:flex;gap:14px;margin-bottom:14px;font-size:14px;color:var(--tb);line-height:1.7}
-.guide-step-num{width:24px;height:24px;border-radius:50%;background:var(--g);color:#000;font-size:12px;font-weight:700;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:1px}
-
-.guide-sub-arrow{display:none}
-
-/* Mobile-only collapsible guide subsections (reduces cognitive load on small screens) */
-@media(max-width:700px){
-  .guide-sub{border-bottom:1px solid var(--bd)}
-  .guide-sub:last-child{border-bottom:none}
-  .guide-sub-head{display:flex;align-items:center;justify-content:space-between;gap:10px;cursor:pointer;user-select:none;padding:.25rem 0;margin:0}
-  .guide-sub-head .guide-h3{margin:1.5rem 0 0;padding-top:.25rem;border-top:1px solid var(--bd);flex:1}
-  .guide-sub:first-child .guide-sub-head .guide-h3{margin-top:0;padding-top:0;border-top:none}
-  .guide-sub-arrow{display:block;font-size:13px;color:var(--m);flex-shrink:0;transition:transform .25s;margin-top:1.4rem}
-  .guide-sub:first-child .guide-sub-arrow{margin-top:0}
-  .guide-sub.open .guide-sub-arrow{transform:rotate(180deg)}
-  .guide-sub-body{display:none;overflow:hidden}
-  .guide-sub.open .guide-sub-body{display:block}
+.grid{
+  display:grid;grid-template-columns:repeat(3,1fr);gap:16px;
+}
+.row{
+  border:1px solid rgba(23,27,23,.06);border-radius:14px;
+  padding:20px 22px;transition:transform .2s cubic-bezier(.2,.8,.2,1),box-shadow .2s,background-color .2s;
+  display:flex;flex-direction:column;gap:9px;min-height:132px;
+  position:relative;background:#fff;
+  box-shadow:0 1px 2px rgba(23,27,23,.04),0 4px 14px rgba(23,27,23,.05);
+}
+.row:hover{background:#fff;box-shadow:0 4px 10px rgba(23,27,23,.06),0 14px 32px rgba(23,27,23,.09);transform:translateY(-3px)}
+.row-top{display:flex;align-items:center;gap:11px}
+.row-icon{
+  width:36px;height:36px;flex-shrink:0;font-size:17px;
+  background:var(--ledger-dim);border:1px solid rgba(23,27,23,.05);border-radius:10px;
+  display:flex;align-items:center;justify-content:center;
+  transition:transform .2s,background-color .2s,border-color .2s;
+}
+.row:hover .row-icon{background:var(--ledger);border-color:var(--ledger);transform:scale(1.08) rotate(-4deg)}
+.row-name{font-size:16.5px;font-weight:600;letter-spacing:-.01em;font-family:var(--serif);color:var(--ink);flex:1;min-width:0}
+.row-arrow{font-size:14px;color:var(--muted);transition:transform .2s,color .2s;flex-shrink:0}
+.row:hover .row-arrow{transform:translateX(4px);color:var(--ledger)}
+.row-desc{font-size:12.5px;color:var(--ink-soft);line-height:1.55}
+.row-pop{
+  position:absolute;top:14px;right:14px;
+  font-family:var(--mono);font-size:9px;font-weight:700;color:#fff;
+  background:var(--brass);padding:4px 9px;border-radius:20px;
+  letter-spacing:.05em;text-transform:uppercase;
+  box-shadow:0 2px 6px rgba(138,109,51,.35);
 }
 
+/* ---------- trust strip ---------- */
+.trust{
+  position:relative;z-index:1;max-width:1180px;margin:80px auto 0;padding:0 40px 0;
+  display:grid;grid-template-columns:repeat(4,1fr);gap:1px;
+  background:var(--line);border:1px solid var(--line);
+}
+.trust-item{background:var(--paper);padding:26px 24px}
+.trust-num{font-family:var(--serif);font-size:30px;font-weight:500;color:var(--ledger)}
+.trust-lbl{font-family:var(--mono);font-size:11px;color:var(--muted);margin-top:6px;letter-spacing:.03em}
 
-/* FAQ Section */
-.faq-section{margin-top:2.5rem;border-top:1px solid var(--bd);padding-top:1.75rem}
-.faq-section-title{font-size:13px;font-weight:700;color:var(--m);text-transform:uppercase;letter-spacing:.8px;margin-bottom:1.1rem;display:flex;align-items:center;gap:8px}
-.faq-section-title::after{content:'';flex:1;height:1px;background:var(--bd)}
-.faq-item{border:1px solid var(--bd);border-radius:8px;margin-bottom:10px;overflow:hidden;transition:border-color .2s}
-.faq-item:hover{border-color:var(--g)}
-.faq-q{display:flex;align-items:center;justify-content:space-between;padding:14px 16px;cursor:pointer;font-size:14px;font-weight:600;color:var(--t);user-select:none;gap:12px;line-height:1.45}
-.faq-q .faq-icon{font-size:16px;color:var(--a);transition:transform .3s;flex-shrink:0}
-.faq-item.open .faq-icon{transform:rotate(45deg)}
-.faq-a{display:none;padding:2px 16px 16px;font-size:13.5px;color:var(--tb);line-height:1.75;border-top:1px solid var(--bd)}
-.faq-item.open .faq-a{display:block;padding-top:12px}
-.faq-a strong{color:var(--t);font-weight:600}
-.faq-a .faq-formula{background:var(--s2);border-left:3px solid var(--a);border-radius:0 6px 6px 0;padding:10px 13px;font-family:var(--mo);font-size:12.5px;color:var(--a);margin:.6rem 0;display:block;line-height:1.6}
+/* ---------- footer ---------- */
+footer{
+  position:relative;z-index:1;margin-top:90px;
+  border-top:1px solid var(--ink);background:var(--ink);color:#B9B39F;
+  padding:44px 40px 30px;
+}
+.foot-grid{max-width:1180px;margin:0 auto;display:flex;justify-content:space-between;flex-wrap:wrap;gap:32px}
+.foot-brand{font-family:var(--serif);color:var(--paper);font-size:18px;margin-bottom:8px;display:flex;align-items:center;gap:8px}
+.foot-brand .logo-mark{width:26px;height:26px;background:#F0B90B;color:#000;border-radius:6px;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700;font-family:var(--serif)}
+.foot-desc{font-size:12.5px;max-width:34ch;line-height:1.6;color:#948E7B}
+.foot-cols{display:flex;gap:56px;flex-wrap:wrap}
+.foot-col h4{font-family:var(--mono);font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:#7F7A69;margin-bottom:14px}
+.foot-col a{display:block;font-size:13px;margin-bottom:10px;color:#C9C3AF}
+.foot-col a:hover{color:var(--paper)}
+.foot-bottom{max-width:1180px;margin:36px auto 0;padding-top:20px;border-top:1px solid #2C3129;font-family:var(--mono);font-size:11px;color:#6F6A5A;display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px}
 
-/* Disclaimer */
-.calc-disclaimer{margin-top:2rem;padding-top:1.25rem;border-top:1px solid var(--bd);display:flex;gap:10px;align-items:flex-start}
-.calc-disclaimer .dx-icon{font-size:15px;color:var(--m);flex-shrink:0;margin-top:1px}
-.calc-disclaimer .dx-text{font-size:11.5px;color:var(--m);line-height:1.65}
-.calc-disclaimer .dx-text strong{color:var(--tb);font-weight:600}
-
-/* Insights */
-.insight-box{background:var(--s2);border:1px solid var(--bd);border-radius:10px;padding:14px 16px;margin:1rem 0}
-.insight-title{font-size:11px;font-weight:700;color:var(--m);text-transform:uppercase;letter-spacing:.6px;margin-bottom:.65rem;display:flex;align-items:center;gap:6px}
-.insight-line{display:flex;gap:9px;align-items:flex-start;font-size:13px;color:var(--t);line-height:1.55;margin-bottom:8px}
-.insight-line:last-child{margin-bottom:0}
-.insight-line .ic{flex-shrink:0;font-size:13px;font-weight:700;margin-top:1px;width:16px;text-align:center}
-.insight-line.good .ic{color:var(--g)}
-.insight-line.bad .ic{color:var(--r)}
-.insight-line.neutral .ic{color:var(--a)}
-.insight-line strong{font-weight:700}
-
-/* Print button (visual style, hidden in print itself) */
-.calc-btn-row{display:flex;justify-content:flex-end;gap:8px;margin-bottom:1.75rem;clear:both}
-.download-btn{background:var(--s2);border:1px solid var(--bd);color:var(--tb);font-size:12.5px;font-weight:500;cursor:pointer;display:inline-flex;align-items:center;gap:6px;padding:7px 14px;border-radius:20px;font-family:var(--fn);transition:all .18s}
-.download-btn:disabled{opacity:.6;cursor:wait}
-.download-btn:hover{color:var(--t);border-color:var(--g);background:var(--s)}
-.share-btn{background:var(--s2);border:1px solid var(--bd);color:var(--tb);font-size:12.5px;font-weight:500;cursor:pointer;display:inline-flex;align-items:center;gap:6px;padding:7px 14px;border-radius:20px;font-family:var(--fn);transition:all .18s}
-.share-btn:hover{color:var(--t);border-color:var(--a);background:var(--s)}
-.print-header{display:none}
-
-/* Share modal */
-.share-backdrop{display:none;position:fixed;inset:0;background:rgba(0,0,0,.6);z-index:1000;align-items:center;justify-content:center;padding:1rem}
-.share-backdrop.on{display:flex}
-.share-modal{background:var(--s);border:1px solid var(--bd);border-radius:14px;padding:1.5rem;width:100%;max-width:380px;box-shadow:0 20px 60px rgba(0,0,0,.5)}
-.share-modal-head{display:flex;align-items:center;justify-content:space-between;margin-bottom:1.1rem}
-.share-modal-title{font-size:15px;font-weight:700;color:var(--t)}
-.share-modal-close{background:none;border:none;color:var(--m);font-size:20px;cursor:pointer;line-height:1;padding:2px 6px;border-radius:6px}
-.share-modal-close:hover{color:var(--t);background:var(--s2)}
-.share-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-bottom:1rem}
-.share-opt{display:flex;flex-direction:column;align-items:center;gap:6px;background:none;border:none;cursor:pointer;padding:6px 2px;border-radius:10px;transition:background .15s}
-.share-opt:hover{background:var(--s2)}
-.share-opt-ic{width:44px;height:44px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:19px;color:#fff}
-.share-opt-lbl{font-size:10.5px;color:var(--tb);font-weight:500}
-.share-link-row{display:flex;gap:8px;align-items:center;background:var(--bg);border:1px solid var(--bd);border-radius:8px;padding:8px 10px}
-.share-link-row input{flex:1;background:none;border:none;outline:none;color:var(--tb);font-family:var(--mo);font-size:12px}
-.share-copy-btn{background:var(--a);color:#fff;border:none;border-radius:6px;padding:6px 12px;font-size:12px;font-weight:600;cursor:pointer;font-family:var(--fn);flex-shrink:0}
-.share-copy-btn:hover{opacity:.9}
-.share-copy-btn.copied{background:var(--g)}
-
-/* Print stylesheet: show only the active calculator's inputs/outputs, hide everything else */
-@media print{
-  html,body{background:#fff!important;color:#000!important}
-  .topbar,.nav,.site-footer,#srch-results,.search-overlay{display:none!important}
-  .content{padding:0!important}
-  .panel{display:none!important}
-  .panel.on{display:block!important}
-  .panel.on>*{display:none!important}
-  .panel.on .two,.panel.on .two-eq,.panel.on .three{display:grid!important;grid-template-columns:1fr 1fr!important;gap:16px;page-break-inside:avoid}
-  .panel.on .three{grid-template-columns:1fr 1fr 1fr!important}
-  /* Rescue calculators whose content isn't wrapped in .two/.two-eq/.three
-     (Loan/Mortgage Comparison use direct .card/.g3 children; Currency &
-     Scientific use a plain unclassed wrapper div) */
-  .panel.on>.card,.panel.on>.g3{display:block!important;page-break-inside:avoid}
-  #currency.panel.on>div:not(.print-header),#scientific.panel.on>div:not(.print-header){display:block!important}
-  /* Explicit hide, regardless of nesting depth — needed because DCF (and
-     potentially others) nest their guide/FAQ inside the same .card as
-     their actual results, so the blanket ">*" rule above can't catch it */
-  .panel.on .calc-guide,.panel.on .faq-section,.panel.on .calc-disclaimer,.panel.on .input-hint{display:none!important}
-  .print-header.show{display:block!important;margin-bottom:1rem;color:#000}
-  .print-header.show .ph-name{font-size:20px;font-weight:700;margin-bottom:2px;color:#000}
-  .print-header.show .ph-date{font-size:11px;color:#555}
-  .card{background:#fff!important;border:1px solid #ccc!important;color:#000!important;padding:14px!important;box-shadow:none!important;display:block!important}
-  .card *{visibility:visible}
-  .card *[style*="background:var(--s2)"],.card *[style*="background:var(--s)"]{background:#f7f7f7!important}
-  .card *[style*="color:var(--t)"]{color:#000!important}
-  .card *[style*="color:var(--m)"]{color:#666!important}
-  .card *[style*="color:var(--a)"]{color:#946800!important}
-  .card *[style*="color:var(--g)"]{color:#0a7a4d!important}
-  .card *[style*="color:var(--r)"]{color:#c0293f!important}
-  .card *[style*="color:var(--b)"]{color:#0d5fb5!important}
-  .card *[style*="color:var(--p)"]{color:#6e3a8a!important}
-  .card-title{color:#000!important;border-bottom:1px solid #ccc;padding-bottom:6px;margin-bottom:10px}
-  .field label{color:#444!important}
-  .field input,.field select{background:#f7f7f7!important;border:1px solid #ccc!important;color:#000!important}
-  .sgrid,.g2,.g3{display:grid!important}
-  .sbox{background:#f7f7f7!important;border:1px solid #ddd!important;display:block!important}
-  .sbox .lbl{color:#666!important}
-  .sbox .val{color:#000!important}
-  .rrow{color:#000!important;border-bottom:1px solid #eee!important;display:flex!important}
-  .tbl{display:table!important;width:100%}
-  .tbl,.tbl th,.tbl td{color:#000!important;border-color:#ccc!important}
-  .tbl th{background:#eee!important}
-  .donut-wrap,.leg-i{display:flex!important}
-  .insight-box,.insight-line,.insight-title{display:none!important}
-  canvas{display:block!important}
+@media(max-width:860px){
+  .topbar{padding:14px 20px}
+  .top-links{display:none}
+  .hero{padding:56px 20px 40px}
+  .directory{padding:48px 20px}
+  .grid{grid-template-columns:1fr}
+  .trust{grid-template-columns:repeat(2,1fr);padding:0 20px}
+  footer{padding:36px 20px 24px}
+}
+@media (prefers-reduced-motion:reduce){
+  .ticker-track{animation:none}
 }
 </style>
-<link rel="icon" href="/favicon.ico" sizes="any">
-<link rel="icon" type="image/svg+xml" href="/favicon.svg">
-<link rel="apple-touch-icon" href="/apple-touch-icon.png">
-<!-- Google tag (gtag.js) -->
-<link rel="preconnect" href="https://www.googletagmanager.com">
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-61RHHG8E6Q"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-  gtag('config', 'G-61RHHG8E6Q');
-</script>
-<meta name="msvalidate.01" content="175D12831D109E3E7E1A856004E0F393" />
-<script type="application/ld+json">{"@context": "https://schema.org", "@type": "WebSite", "name": "FinCalc", "url": "https://finclac.com/", "description": "60 free financial calculators for loans, investing, retirement & taxes — CAGR, XIRR, SIP, EMI, mortgage & more. No signup.", "potentialAction": {"@type": "SearchAction", "target": "https://finclac.com/?q={search_term_string}", "query-input": "required name=search_term_string"}}</script>
-<meta name="stackscope-claim" content="bwh8rzis">
 </head>
 <body>
-<a href="#main-content" class="skip-link">Skip to main content</a>
+<div class="grain"></div>
+
 <header class="topbar">
-  <a class="logo" href="/"><div class="logo-mark">FC</div>FinCalc</a>
-  <div style="display:flex;align-items:center;gap:12px">
-  <button class="theme-toggle" onclick="toggleTheme()" id="theme-toggle-btn">☀️ Light</button>
-  <div class="searchbox">
-    <svg width="18" height="18" fill="none" stroke="#0ECB81" stroke-width="2" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
-    <input id="srch" aria-label="Search calculators" placeholder="Search 60 calculators..." oninput="doSearch()" onkeydown="if(event.key==='Enter')goSearch()">
+  <div class="brand">
+    <div class="brand-mark">FC</div>
+    <div class="brand-name">FinCalc</div>
+    
   </div>
+  <nav class="top-links">
+    <a href="/personal-finance">Personal Finance</a>
+    <a href="/investing-valuation">Investing</a>
+    <a href="/startup-business">Business</a>
+    <a href="/tools">Tools</a>
+    <a href="/blog">Journal</a>
+  </nav>
+  <div class="topbar-right">
+    <button class="mobile-menu-btn" onclick="toggleMobileMenu()" id="mobile-menu-btn" aria-label="Open menu" aria-expanded="false">☰</button>
+    <a class="top-cta" href="#directory">Open Directory →</a>
   </div>
 </header>
-<nav class="nav" aria-label="Calculator categories">
-  <a class="ntab" href="/" onclick="go('home',this);return false;">🏠 Home</a>
-  <a class="ntab" href="/blog">📝 Blog</a>
-  <div class="nav-dd" data-cat="0"><button class="nav-dd-btn" onclick="toggleNavDD(this)" aria-haspopup="true" aria-expanded="false">💰 Personal Finance</button><div class="nav-dd-menu" id="nav-dd-0"><a class="nav-dd-item" href="/loan" onclick="go('loan',this);return false;">🏦 Loan / EMI</a><a class="nav-dd-item" href="/loaneligibility" onclick="go('loaneligibility',this);return false;">✅ Loan Eligibility</a><a class="nav-dd-item" href="/dti" onclick="go('dti',this);return false;">📊 Debt-to-Income Ratio</a><a class="nav-dd-item" href="/prepay" onclick="go('prepay',this);return false;">⏩ Loan Prepayment</a><a class="nav-dd-item" href="/refinance" onclick="go('refinance',this);return false;">🔀 Refinance Break-Even</a><a class="nav-dd-item" href="/loancomp" onclick="go('loancomp',this);return false;">📋 Loan Comparison</a><a class="nav-dd-item" href="/autoloan" onclick="go('autoloan',this);return false;">🚗 Auto Loan Calculator</a><a class="nav-dd-item" href="/tax" onclick="go('tax',this);return false;">🧾 Tax Estimator</a><a class="nav-dd-item" href="/salary" onclick="go('salary',this);return false;">💵 Salary Calculator</a><a class="nav-dd-item" href="/mortgage" onclick="go('mortgage',this);return false;">🏠 Mortgage</a><a class="nav-dd-item" href="/heloc" onclick="go('heloc',this);return false;">🏡 HELOC Calculator</a><a class="nav-dd-item" href="/rentvsbuy" onclick="go('rentvsbuy',this);return false;">🏘️ Rent vs Buy Calculator</a><a class="nav-dd-item" href="/mortcomp" onclick="go('mortcomp',this);return false;">⚖️ Mortgage Comparison</a><a class="nav-dd-item" href="/savings" onclick="go('savings',this);return false;">🏛️ Savings Estimator</a><a class="nav-dd-item" href="/inflation" onclick="go('inflation',this);return false;">🎈 Inflation Calculator</a><a class="nav-dd-item" href="/provident" onclick="go('provident',this);return false;">🏦 Provident Fund Calculator</a><a class="nav-dd-item" href="/retirement" onclick="go('retirement',this);return false;">👴 Retirement Planner</a><a class="nav-dd-item" href="/socialsecurity" onclick="go('socialsecurity',this);return false;">📜 Social Security Estimator</a><a class="nav-dd-item" href="/401k" onclick="go('401k',this);return false;">🏦 401(k) Calculator</a><a class="nav-dd-item" href="/millionaire" onclick="go('millionaire',this);return false;">💎 Millionaire Calculator</a><a class="nav-dd-item" href="/fire" onclick="go('fire',this);return false;">🔥 FIRE Calculator</a><a class="nav-dd-item" href="/networth" onclick="go('networth',this);return false;">💼 Net Worth Calculator</a><a class="nav-dd-item" href="/debtcomp" onclick="go('debtcomp',this);return false;">❄️ Snowball vs Avalanche</a><a class="nav-dd-item" href="/debt" onclick="go('debt',this);return false;">💳 Debt Payoff Planner</a><a class="nav-dd-item" href="/ccpayoff" onclick="go('ccpayoff',this);return false;">🎫 Credit Card Payoff</a><a class="nav-dd-item" href="/rental" onclick="go('rental',this);return false;">🏘️ Rental Yield</a><a class="nav-dd-item" href="/rentalprop" onclick="go('rentalprop',this);return false;">🏡 Rental Property</a><a class="nav-dd-item" href="/savingsgoal" onclick="go('savingsgoal',this);return false;">🎯 Savings Goal Calculator</a><a class="nav-dd-item" href="/budget" onclick="go('budget',this);return false;">🥧 50/30/20 Budget Calculator</a><a class="nav-dd-item" href="/emergencyfund" onclick="go('emergencyfund',this);return false;">🛡️ Emergency Fund Calculator</a><a class="nav-dd-item" href="/healthscore" onclick="go('healthscore',this);return false;">💯 Financial Health Score</a><a class="nav-dd-item" href="/lifeinsurance" onclick="go('lifeinsurance',this);return false;">🛡️ Life Insurance Needs</a><a class="nav-dd-item" href="/healthinsurance" onclick="go('healthinsurance',this);return false;">🏥 Health Insurance Cost</a></div></div>
-  <div class="nav-dd" data-cat="1"><button class="nav-dd-btn" onclick="toggleNavDD(this)" aria-haspopup="true" aria-expanded="false">📈 Investing</button><div class="nav-dd-menu" id="nav-dd-1"><a class="nav-dd-item" href="/cagr" onclick="go('cagr',this);return false;">📐 CAGR Calculator</a><a class="nav-dd-item" href="/xirr" onclick="go('xirr',this);return false;">📅 XIRR Calculator</a><a class="nav-dd-item" href="/drip" onclick="go('drip',this);return false;">💧 Dividend Reinvestment</a><a class="nav-dd-item" href="/divgrowth" onclick="go('divgrowth',this);return false;">📈 Dividend Growth Calculator</a><a class="nav-dd-item" href="/etf" onclick="go('etf',this);return false;">🗂️ ETF Growth Calculator</a><a class="nav-dd-item" href="/allocation" onclick="go('allocation',this);return false;">🥧 Asset Allocation Calculator</a><a class="nav-dd-item" href="/dcf" onclick="go('dcf',this);return false;">🏦 Stock DCF Valuation</a><a class="nav-dd-item" href="/peg" onclick="go('peg',this);return false;">📏 PEG Ratio Calculator</a><a class="nav-dd-item" href="/evebitda" onclick="go('evebitda',this);return false;">🏢 EV/EBITDA Calculator</a><a class="nav-dd-item" href="/invest" onclick="go('invest',this);return false;">📈 SIP / Investment</a><a class="nav-dd-item" href="/dca" onclick="go('dca',this);return false;">📊 Dollar Cost Averaging</a><a class="nav-dd-item" href="/swp" onclick="go('swp',this);return false;">📉 SWP Calculator</a><a class="nav-dd-item" href="/stock" onclick="go('stock',this);return false;">📉 Stock P&amp;L</a><a class="nav-dd-item" href="/options" onclick="go('options',this);return false;">⚡ Options Profit &amp; Breakeven</a><a class="nav-dd-item" href="/split" onclick="go('split',this);return false;">🔀 Stock Split Calculator</a></div></div>
-  <div class="nav-dd" data-cat="2"><button class="nav-dd-btn" onclick="toggleNavDD(this)" aria-haspopup="true" aria-expanded="false">🚀 Startup &amp; Business</button><div class="nav-dd-menu" id="nav-dd-2"><a class="nav-dd-item" href="/burnrate" onclick="go('burnrate',this);return false;">🔥 Burn Rate</a><a class="nav-dd-item" href="/pricing" onclick="go('pricing',this);return false;">🏷️ Pricing Calculator</a><a class="nav-dd-item" href="/equity" onclick="go('equity',this);return false;">📐 Equity Dilution</a><a class="nav-dd-item" href="/dilutionimpact" onclick="go('dilutionimpact',this);return false;">📉 Stock Dilution Impact Calculator</a><a class="nav-dd-item" href="/revenue" onclick="go('revenue',this);return false;">📊 Revenue Forecast</a><a class="nav-dd-item" href="/cac" onclick="go('cac',this);return false;">🎯 CAC &amp; LTV:CAC Ratio</a><a class="nav-dd-item" href="/breakeven" onclick="go('breakeven',this);return false;">📈 Break-even Analysis</a><a class="nav-dd-item" href="/cashflow" onclick="go('cashflow',this);return false;">💵 Cash Flow Analyzer</a></div></div>
-  <div class="nav-dd" data-cat="3"><button class="nav-dd-btn" onclick="toggleNavDD(this)" aria-haspopup="true" aria-expanded="false">🔬 Tools</button><div class="nav-dd-menu" id="nav-dd-3"><a class="nav-dd-item" href="/currency" onclick="go('currency',this);return false;">💱 Currency Converter</a><a class="nav-dd-item" href="/billsplit" onclick="go('billsplit',this);return false;">🍽️ Itemized Bill Splitter</a><a class="nav-dd-item" href="/remit" onclick="go('remit',this);return false;">🌍 International Transfer Cost</a><a class="nav-dd-item" href="/scientific" onclick="go('scientific',this);return false;">🔬 Scientific Calculator</a></div></div>
+<nav class="mobile-menu" id="mobile-menu">
+  <a href="/">Home</a>
+  <a href="/personal-finance">Personal Finance</a>
+  <a href="/investing-valuation">Investing &amp; Valuation</a>
+  <a href="/startup-business">Startup &amp; Business</a>
+  <a href="/tools">Tools</a>
+  <a href="/blog">Journal</a>
 </nav>
-<main class="content" id="main-content">
-<div id="home" class="panel on">
-  <div class="hero-wrap" style="background:var(--s2);border:1px solid var(--bd);border-radius:12px;margin-bottom:1.75rem;display:flex;align-items:center;justify-content:center">
-    <div style="flex:0 1 460px;min-width:280px">
-      <div class="hero-badge" style="display:inline-flex;align-items:center;gap:6px;background:var(--s);border:1px solid var(--bd);border-radius:20px;padding:5px 12px;font-size:11px;color:var(--g);font-weight:600;margin-bottom:18px">
-        <span style="width:6px;height:6px;border-radius:50%;background:var(--g)"></span>
-        60 free calculators, no signup
-      </div>
-      <h1 class="hero-title" style="margin:0 0 12px;font-size:32px;font-weight:700;color:var(--t);line-height:1.25;letter-spacing:-.3px">Every financial calculator you'll ever need</h1>
-      <h2 style="margin:0 0 10px;font-size:15px;font-weight:600;color:var(--t)">Free online calculators for investing, loans, retirement, and business finance</h2>
-      <p style="margin:0 0 26px;font-size:14.5px;color:var(--m);line-height:1.6;max-width:420px">CAGR, EMI, SIP, DCF, mortgage, retirement, and more — accurate, instant, and free. Nothing to install, nothing to sign up for.</p>
-      <div class="hero-ctas" style="display:flex;gap:10px;margin-bottom:28px;flex-wrap:nowrap">
-        <a href="#dir-sec-personal-finance" class="hero-btn-primary" style="font-weight:600;font-size:13.5px;padding:11px 22px;border-radius:8px;text-decoration:none;white-space:nowrap">Browse calculators</a>
-        <a href="/blog" class="hero-btn-secondary" style="font-weight:600;font-size:13.5px;padding:11px 22px;border-radius:8px;text-decoration:none;white-space:nowrap">Read the blog</a>
-      </div>
-      <div style="display:flex;gap:28px;flex-wrap:wrap">
-        <div><div class="stat-g" style="font-size:20px;font-weight:700;color:var(--t)">60</div><div style="font-size:11px;color:var(--m);margin-top:2px">calculators</div></div>
-        <div><div class="stat-a" style="font-size:20px;font-weight:700;color:var(--t)">100%</div><div style="font-size:11px;color:var(--m);margin-top:2px">free, no login</div></div>
-        <div><div class="stat-b" style="font-size:20px;font-weight:700;color:var(--t)">0</div><div style="font-size:11px;color:var(--m);margin-top:2px">data stored</div></div>
-      </div>
+
+<section class="hero">
+  <div class="hero-eyebrow">Sixty calculators · zero signup · inputs stay on your device</div>
+  <h1 class="hero-title">The arithmetic of <em>every</em> financial decision.</h1>
+  <p class="hero-sub">From a mortgage payment to a startup cap table — FinCalc runs the numbers precisely, in your browser, and shows its work. No account required, and your calculator inputs never leave your device.</p>
+  <div class="hero-row">
+    <div class="searchbox">
+      <span>⌕</span>
+      <input type="text" id="homeSearch" placeholder="Search 60 calculators — try &quot;refinance&quot;" autocomplete="off">
     </div>
-    <div class="hero-img">
-      <svg viewBox="0 0 340 320" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Illustration of coins, growth bars, and a rising trend line">
-        <defs>
-          <linearGradient id="coinA" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#FDD65C"/><stop offset="1" stop-color="#D99B0A"/></linearGradient>
-          <linearGradient id="coinB" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#FCE79B"/><stop offset="1" stop-color="#F0B90B"/></linearGradient>
-          <linearGradient id="barGr" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#3EE0A0"/><stop offset="1" stop-color="#0ECB81"/></linearGradient>
-          <radialGradient id="glowBig" cx="0.5" cy="0.5" r="0.5"><stop offset="0" stop-color="#0ECB81" stop-opacity="0.16"/><stop offset="1" stop-color="#0ECB81" stop-opacity="0"/></radialGradient>
-        </defs>
-        <circle cx="170" cy="160" r="160" fill="url(#glowBig)"/>
-        <ellipse cx="150" cy="270" rx="120" ry="16" fill="#000" opacity="0.22"/>
-        <g>
-          <rect x="20" y="190" width="26" height="70" rx="5" fill="url(#barGr)"/>
-          <rect x="54" y="150" width="26" height="110" rx="5" fill="url(#coinB)"/>
-          <rect x="88" y="110" width="26" height="150" rx="5" fill="url(#barGr)"/>
-        </g>
-        <g>
-          <ellipse cx="180" cy="190" rx="58" ry="58" fill="url(#coinA)"/>
-          <ellipse cx="180" cy="185" rx="58" ry="58" fill="url(#coinB)"/>
-          <circle cx="180" cy="185" r="43" fill="none" stroke="#B8790A" stroke-width="2" opacity="0.5"/>
-          <text x="180" y="197" text-anchor="middle" font-family="Arial,sans-serif" font-size="38" font-weight="700" fill="#8A5E06">$</text>
-        </g>
-        <g>
-          <ellipse cx="255" cy="225" rx="40" ry="40" fill="url(#coinA)"/>
-          <ellipse cx="255" cy="221" rx="40" ry="40" fill="url(#coinB)"/>
-          <circle cx="255" cy="221" r="29" fill="none" stroke="#B8790A" stroke-width="1.5" opacity="0.5"/>
-          <text x="255" y="230" text-anchor="middle" font-family="Arial,sans-serif" font-size="26" font-weight="700" fill="#8A5E06">$</text>
-        </g>
-        <path d="M40 150 Q80 90 140 100 T230 55 T320 20" fill="none" stroke="#0ECB81" stroke-width="4" stroke-linecap="round"/>
-        <circle cx="320" cy="20" r="7" fill="#0ECB81"/>
-        <circle cx="320" cy="20" r="12" fill="none" stroke="#0ECB81" stroke-width="1.5" opacity="0.5"/>
-        <g transform="translate(268,4)">
-          <rect width="62" height="28" rx="14" fill="#0ECB81"/>
-          <text x="31" y="19" text-anchor="middle" font-family="Arial,sans-serif" font-size="13" font-weight="700" fill="#04342C">+24%</text>
-        </g>
-      </svg>
-    </div>
+    <div class="hero-stat" id="searchStat">Most opened this week: <b>Mortgage</b>, <b>401(k)</b>, <b>CAGR</b></div>
   </div>
-  <div style="margin-bottom:1.5rem"><div style="font-size:11px;font-weight:600;color:var(--m);letter-spacing:.8px;text-transform:uppercase">All calculators</div></div>
-  <div id="dir-home"><div class="dir-sec" id="dir-sec-personal-finance"><a class="dir-sec-h" href="/personal-finance" style="text-decoration:none;color:inherit" onclick="location.href='/personal-finance';return false;">💰 Personal Finance</a><div class="dir-grid"><a class="dir-card" href="/loan" onclick="location.href='/loan';return false;"><span class="pop-star" title="Popular calculator" aria-label="Popular calculator">⭐</span><div class="dir-icon">🏦</div><div class="dir-name">Loan / EMI</div><div class="dir-desc">Find your monthly loan payment and see exactly how much of it goes to interest vs principal</div></a><a class="dir-card" href="/loaneligibility" onclick="location.href='/loaneligibility';return false;"><div class="dir-icon">✅</div><div class="dir-name">Loan Eligibility</div><div class="dir-desc">Find out how much loan you may qualify for based on your income and existing debts</div></a><a class="dir-card" href="/dti" onclick="location.href='/dti';return false;"><div class="dir-icon">📊</div><div class="dir-name">Debt-to-Income Ratio</div><div class="dir-desc">Check your DTI against what lenders typically look for</div></a><a class="dir-card" href="/prepay" onclick="location.href='/prepay';return false;"><div class="dir-icon">⏩</div><div class="dir-name">Loan Prepayment</div><div class="dir-desc">See how much time and interest you can save by paying extra toward your loan each month</div></a><a class="dir-card" href="/refinance" onclick="location.href='/refinance';return false;"><div class="dir-icon">🔀</div><div class="dir-name">Refinance Break-Even</div><div class="dir-desc">Find out how many months it takes to recoup closing costs, and whether refinancing is worth it</div></a><a class="dir-card" href="/loancomp" onclick="location.href='/loancomp';return false;"><div class="dir-icon">📋</div><div class="dir-name">Loan Comparison</div><div class="dir-desc">Compare up to 3 loan offers side by side to see which one actually costs less overall</div></a><a class="dir-card" href="/autoloan" onclick="location.href='/autoloan';return false;"><span class="pop-star" title="Popular calculator" aria-label="Popular calculator">⭐</span><div class="dir-icon">🚗</div><div class="dir-name">Auto Loan Calculator</div><div class="dir-desc">Calculate your car payment including trade-in, sales tax, and new vs used loan rates</div></a><a class="dir-card" href="/tax" onclick="location.href='/tax';return false;"><span class="pop-star" title="Popular calculator" aria-label="Popular calculator">⭐</span><div class="dir-icon">🧾</div><div class="dir-name">Tax Estimator</div><div class="dir-desc">Estimate your US federal income tax, effective rate, and what you actually take home</div></a><a class="dir-card" href="/salary" onclick="location.href='/salary';return false;"><span class="pop-star" title="Popular calculator" aria-label="Popular calculator">⭐</span><div class="dir-icon">💵</div><div class="dir-name">Salary Calculator</div><div class="dir-desc">Convert your pay between hourly, daily, monthly, and yearly instantly</div></a><a class="dir-card" href="/mortgage" onclick="location.href='/mortgage';return false;"><span class="pop-star" title="Popular calculator" aria-label="Popular calculator">⭐</span><div class="dir-icon">🏠</div><div class="dir-name">Mortgage</div><div class="dir-desc">Estimate your full monthly home payment including property tax, insurance, and PMI</div></a><a class="dir-card" href="/heloc" onclick="location.href='/heloc';return false;"><div class="dir-icon">🏡</div><div class="dir-name">HELOC Calculator</div><div class="dir-desc">Find out how much you can borrow against your home equity and what payments look like in the draw vs repayment period</div></a><a class="dir-card" href="/rentvsbuy" onclick="location.href='/rentvsbuy';return false;"><div class="dir-icon">🏘️</div><div class="dir-name">Rent vs Buy Calculator</div><div class="dir-desc">Compare your net worth over time if you rent vs buy a home, and find the breakeven year</div></a><a class="dir-card" href="/mortcomp" onclick="location.href='/mortcomp';return false;"><div class="dir-icon">⚖️</div><div class="dir-name">Mortgage Comparison</div><div class="dir-desc">Compare up to 3 mortgage offers side by side to see which one actually costs less</div></a><a class="dir-card" href="/savings" onclick="location.href='/savings';return false;"><span class="pop-star" title="Popular calculator" aria-label="Popular calculator">⭐</span><div class="dir-icon">🏛️</div><div class="dir-name">Savings Estimator</div><div class="dir-desc">See how your savings grow over time with compound interest, and how long it takes to double</div></a><a class="dir-card" href="/inflation" onclick="location.href='/inflation';return false;"><div class="dir-icon">🎈</div><div class="dir-name">Inflation Calculator</div><div class="dir-desc">See what an amount then is worth now, or will be worth in the future, using your own inflation rate</div></a><a class="dir-card" href="/provident" onclick="location.href='/provident';return false;"><div class="dir-icon">🏦</div><div class="dir-name">Provident Fund Calculator</div><div class="dir-desc">Project your provident fund (EPF/PF) maturity value from your monthly contributions and interest rate</div></a><a class="dir-card" href="/retirement" onclick="location.href='/retirement';return false;"><span class="pop-star" title="Popular calculator" aria-label="Popular calculator">⭐</span><div class="dir-icon">👴</div><div class="dir-name">Retirement Planner</div><div class="dir-desc">Find out if you're saving enough to retire comfortably, adjusted for inflation</div></a><a class="dir-card" href="/socialsecurity" onclick="location.href='/socialsecurity';return false;"><div class="dir-icon">📜</div><div class="dir-name">Social Security Estimator</div><div class="dir-desc">See how claiming early or delaying to 70 changes your monthly Social Security benefit</div></a><a class="dir-card" href="/401k" onclick="location.href='/401k';return false;"><span class="pop-star" title="Popular calculator" aria-label="Popular calculator">⭐</span><div class="dir-icon">🏦</div><div class="dir-name">401(k) Calculator</div><div class="dir-desc">Project your 401(k) balance at retirement, including employer match</div></a><a class="dir-card" href="/millionaire" onclick="location.href='/millionaire';return false;"><div class="dir-icon">💎</div><div class="dir-name">Millionaire Calculator</div><div class="dir-desc">Find out exactly what age you'll hit $1,000,000 based on your savings and investment rate</div></a><a class="dir-card" href="/fire" onclick="location.href='/fire';return false;"><div class="dir-icon">🔥</div><div class="dir-name">FIRE Calculator</div><div class="dir-desc">Find out how many years until you reach financial independence based on your savings rate</div></a><a class="dir-card" href="/networth" onclick="location.href='/networth';return false;"><div class="dir-icon">💼</div><div class="dir-name">Net Worth Calculator</div><div class="dir-desc">Total your assets and liabilities to see your net worth, liquidity split, and debt-to-asset ratio</div></a><a class="dir-card" href="/debtcomp" onclick="location.href='/debtcomp';return false;"><div class="dir-icon">❄️</div><div class="dir-name">Snowball vs Avalanche</div><div class="dir-desc">Compare two popular debt payoff strategies to see which clears your debt faster and cheaper</div></a><a class="dir-card" href="/debt" onclick="location.href='/debt';return false;"><span class="pop-star" title="Popular calculator" aria-label="Popular calculator">⭐</span><div class="dir-icon">💳</div><div class="dir-name">Debt Payoff Planner</div><div class="dir-desc">Build a custom plan to pay off your debt and see exactly how much interest you'll save</div></a><a class="dir-card" href="/ccpayoff" onclick="location.href='/ccpayoff';return false;"><div class="dir-icon">🎫</div><div class="dir-name">Credit Card Payoff</div><div class="dir-desc">Compare minimum payments vs a fixed payment to see the real payoff time and interest cost</div></a><a class="dir-card" href="/rental" onclick="location.href='/rental';return false;"><div class="dir-icon">🏘️</div><div class="dir-name">Rental Yield</div><div class="dir-desc">Check whether a rental property's income justifies its price using gross and net yield</div></a><a class="dir-card" href="/rentalprop" onclick="location.href='/rentalprop';return false;"><div class="dir-icon">🏡</div><div class="dir-name">Rental Property</div><div class="dir-desc">Run the full numbers on a rental property — cash flow, returns, and a 10-year outlook</div></a><a class="dir-card" href="/savingsgoal" onclick="location.href='/savingsgoal';return false;"><div class="dir-icon">🎯</div><div class="dir-name">Savings Goal Calculator</div><div class="dir-desc">Figure out exactly how much to save each month to hit a specific savings target on time</div></a><a class="dir-card" href="/budget" onclick="location.href='/budget';return false;"><span class="pop-star" title="Popular calculator" aria-label="Popular calculator">⭐</span><div class="dir-icon">🥧</div><div class="dir-name">50/30/20 Budget Calculator</div><div class="dir-desc">Compare your actual spending against the 50/30/20 rule for needs, wants, and savings</div></a><a class="dir-card" href="/emergencyfund" onclick="location.href='/emergencyfund';return false;"><div class="dir-icon">🛡️</div><div class="dir-name">Emergency Fund Calculator</div><div class="dir-desc">Find out how big your emergency fund should be and how long it'll take to build it</div></a><a class="dir-card" href="/healthscore" onclick="location.href='/healthscore';return false;"><div class="dir-icon">💯</div><div class="dir-name">Financial Health Score</div><div class="dir-desc">Get a single score out of 100 that sums up how healthy your overall finances really are</div></a><a class="dir-card" href="/lifeinsurance" onclick="location.href='/lifeinsurance';return false;"><div class="dir-icon">🛡️</div><div class="dir-name">Life Insurance Needs</div><div class="dir-desc">Find out how much life insurance coverage your family would actually need</div></a><a class="dir-card" href="/healthinsurance" onclick="location.href='/healthinsurance';return false;"><div class="dir-icon">🏥</div><div class="dir-name">Health Insurance Cost</div><div class="dir-desc">Compare two health plans by their true total annual cost, not just the premium</div></a></div></div><div class="dir-sec" id="dir-sec-investing-valuation"><a class="dir-sec-h" href="/investing-valuation" style="text-decoration:none;color:inherit" onclick="location.href='/investing-valuation';return false;">📈 Investing &amp; Valuation <span class="badge-new">New</span></a><div class="dir-grid"><a class="dir-card" href="/cagr" onclick="location.href='/cagr';return false;"><span class="pop-star" title="Popular calculator" aria-label="Popular calculator">⭐</span><div class="dir-icon">📐</div><div class="dir-name">CAGR Calculator</div><div class="dir-desc">Find the steady annual growth rate that explains how an investment grew over time</div></a><a class="dir-card" href="/xirr" onclick="location.href='/xirr';return false;"><div class="dir-icon">📅</div><div class="dir-name">XIRR Calculator</div><div class="dir-desc">Calculate your true annualized return when you've invested or withdrawn money at irregular times</div></a><a class="dir-card" href="/drip" onclick="location.href='/drip';return false;"><div class="dir-icon">💧</div><div class="dir-name">Dividend Reinvestment</div><div class="dir-desc">See how much faster your investment grows when dividends are automatically reinvested</div></a><a class="dir-card" href="/divgrowth" onclick="location.href='/divgrowth';return false;"><div class="dir-icon">📈</div><div class="dir-name">Dividend Growth Calculator</div><div class="dir-desc">Project how much your dividend income could grow over time, and your yield on cost</div></a><a class="dir-card" href="/etf" onclick="location.href='/etf';return false;"><div class="dir-icon">🗂️</div><div class="dir-name">ETF Growth Calculator</div><div class="dir-desc">Compare how popular ETFs like SPY, VTI, and QQQ would grow your money side by side</div></a><a class="dir-card" href="/allocation" onclick="location.href='/allocation';return false;"><div class="dir-icon">🥧</div><div class="dir-name">Asset Allocation Calculator</div><div class="dir-desc">Get a recommended stocks/bonds/cash mix based on your age and risk tolerance</div></a><a class="dir-card" href="/dcf" onclick="location.href='/dcf';return false;"><div class="dir-icon">🏦</div><div class="dir-name">Stock DCF Valuation</div><div class="dir-desc">Estimate what a stock is actually worth based on its future cash flows, not just its price</div></a><a class="dir-card" href="/peg" onclick="location.href='/peg';return false;"><div class="dir-icon">📏</div><div class="dir-name">PEG Ratio Calculator</div><div class="dir-desc">Check whether a stock's price is justified by its earnings growth, not just its P/E ratio</div></a><a class="dir-card" href="/evebitda" onclick="location.href='/evebitda';return false;"><div class="dir-icon">🏢</div><div class="dir-name">EV/EBITDA Calculator</div><div class="dir-desc">Value a company by its full enterprise value, and see what a peer multiple implies for the share price</div></a><a class="dir-card" href="/invest" onclick="location.href='/invest';return false;"><div class="dir-icon">📈</div><div class="dir-name">SIP / Investment</div><div class="dir-desc">Project how your monthly investments grow into a future lump sum, with optional yearly step-ups</div></a><a class="dir-card" href="/dca" onclick="location.href='/dca';return false;"><div class="dir-icon">📊</div><div class="dir-name">Dollar Cost Averaging</div><div class="dir-desc">Calculate shares bought, average cost per share, and compare DCA vs a lump sum investment</div></a><a class="dir-card" href="/swp" onclick="location.href='/swp';return false;"><div class="dir-icon">📉</div><div class="dir-name">SWP Calculator</div><div class="dir-desc">See how long a lump sum lasts when you withdraw a fixed monthly income from it</div></a><a class="dir-card" href="/stock" onclick="location.href='/stock';return false;"><div class="dir-icon">📉</div><div class="dir-name">Stock P&amp;L</div><div class="dir-desc">Calculate your real profit or loss on a trade after accounting for brokerage fees</div></a><a class="dir-card" href="/options" onclick="location.href='/options';return false;"><div class="dir-icon">⚡</div><div class="dir-name">Options Profit &amp; Breakeven</div><div class="dir-desc">Find the breakeven price, max profit, max loss, and P&amp;L for a call or put position</div></a><a class="dir-card" href="/split" onclick="location.href='/split';return false;"><div class="dir-icon">🔀</div><div class="dir-name">Stock Split Calculator</div><div class="dir-desc">See exactly how many new shares you'll have and your adjusted cost basis after any forward or reverse split</div></a></div></div><div class="dir-sec" id="dir-sec-startup-business"><a class="dir-sec-h" href="/startup-business" style="text-decoration:none;color:inherit" onclick="location.href='/startup-business';return false;">🚀 Startup &amp; Business</a><div class="dir-grid"><a class="dir-card" href="/burnrate" onclick="location.href='/burnrate';return false;"><div class="dir-icon">🔥</div><div class="dir-name">Burn Rate</div><div class="dir-desc">Find out how many months of cash your startup has left before it runs out of money</div></a><a class="dir-card" href="/pricing" onclick="location.href='/pricing';return false;"><div class="dir-icon">🏷️</div><div class="dir-name">Pricing Calculator</div><div class="dir-desc">Work out the right price for your product using cost-plus, value-based, or competitor pricing</div></a><a class="dir-card" href="/equity" onclick="location.href='/equity';return false;"><div class="dir-icon">📐</div><div class="dir-name">Equity Dilution</div><div class="dir-desc">See how much of your company you'll still own after future funding rounds and option pools</div></a><a class="dir-card" href="/dilutionimpact" onclick="location.href='/dilutionimpact';return false;"><div class="dir-icon">📉</div><div class="dir-name">Stock Dilution Impact Calculator</div><div class="dir-desc">See how a new share offering affects EPS and the value of your existing shares</div></a><a class="dir-card" href="/revenue" onclick="location.href='/revenue';return false;"><div class="dir-icon">📊</div><div class="dir-name">Revenue Forecast</div><div class="dir-desc">Forecast your monthly recurring revenue under best-case, expected, and worst-case scenarios</div></a><a class="dir-card" href="/cac" onclick="location.href='/cac';return false;"><div class="dir-icon">🎯</div><div class="dir-name">CAC &amp; LTV:CAC Ratio</div><div class="dir-desc">Find your customer acquisition cost and whether your growth engine is actually profitable</div></a><a class="dir-card" href="/breakeven" onclick="location.href='/breakeven';return false;"><div class="dir-icon">📈</div><div class="dir-name">Break-even Analysis</div><div class="dir-desc">Find out exactly how many units you need to sell before your business starts turning a profit</div></a><a class="dir-card" href="/cashflow" onclick="location.href='/cashflow';return false;"><div class="dir-icon">💵</div><div class="dir-name">Cash Flow Analyzer</div><div class="dir-desc">See whether more money is coming in than going out, and what's left over each month</div></a></div></div><div class="dir-sec" id="dir-sec-tools"><a class="dir-sec-h" href="/tools" style="text-decoration:none;color:inherit" onclick="location.href='/tools';return false;">🔬 Tools</a><div class="dir-grid"><a class="dir-card" href="/currency" onclick="location.href='/currency';return false;"><span class="pop-star" title="Popular calculator" aria-label="Popular calculator">⭐</span><div class="dir-icon">💱</div><div class="dir-name">Currency Converter</div><div class="dir-desc">Quickly convert between 15 major world currencies using live, daily-updated exchange rates</div></a><a class="dir-card" href="/billsplit" onclick="location.href='/billsplit';return false;"><div class="dir-icon">🍽️</div><div class="dir-name">Itemized Bill Splitter</div><div class="dir-desc">Split a restaurant bill fairly by what each person ordered, with tax and tip split proportionally</div></a><a class="dir-card" href="/remit" onclick="location.href='/remit';return false;"><div class="dir-icon">🌍</div><div class="dir-name">International Transfer Cost</div><div class="dir-desc">See the true cost of sending money abroad, including hidden exchange rate markup</div></a><a class="dir-card" href="/scientific" onclick="location.href='/scientific';return false;"><div class="dir-icon">🔬</div><div class="dir-name">Scientific Calculator</div><div class="dir-desc">A full scientific calculator with trig, logarithms, powers, factorials, and memory functions</div></a></div></div></div>
+</section>
+
+<div class="ticker-wrap">
+  <div class="ticker-track">
+    <span class="tick"><span class="lbl">MORTGAGE·30YR@6.8%</span><span class="val up">$2,847/mo</span></span>
+    <span class="tick"><span class="lbl">CAGR·2019→2026</span><span class="val up">14.2%</span></span>
+    <span class="tick"><span class="lbl">FIRE·SAVINGS 32%</span><span class="val">18.4 yrs</span></span>
+    <span class="tick"><span class="lbl">CC PAYOFF·MIN PMT</span><span class="val down">9.1 yrs</span></span>
+    <span class="tick"><span class="lbl">401(K)·EMPLOYER 4%</span><span class="val up">$1.42M</span></span>
+    <span class="tick"><span class="lbl">DTI RATIO</span><span class="val">28%</span></span>
+    <span class="tick"><span class="lbl">XIRR·IRREGULAR CF</span><span class="val up">11.7%</span></span>
+    <span class="tick"><span class="lbl">BURN RATE·RUNWAY</span><span class="val down">7.2 mo</span></span>
+    <span class="tick"><span class="lbl">RENT VS BUY·B/E YR</span><span class="val">6</span></span>
+    <span class="tick"><span class="lbl">SIP·STEP-UP 10%</span><span class="val up">$981K</span></span>
+    <!-- duplicate for seamless loop -->
+    <span class="tick"><span class="lbl">MORTGAGE·30YR@6.8%</span><span class="val up">$2,847/mo</span></span>
+    <span class="tick"><span class="lbl">CAGR·2019→2026</span><span class="val up">14.2%</span></span>
+    <span class="tick"><span class="lbl">FIRE·SAVINGS 32%</span><span class="val">18.4 yrs</span></span>
+    <span class="tick"><span class="lbl">CC PAYOFF·MIN PMT</span><span class="val down">9.1 yrs</span></span>
+    <span class="tick"><span class="lbl">401(K)·EMPLOYER 4%</span><span class="val up">$1.42M</span></span>
+    <span class="tick"><span class="lbl">DTI RATIO</span><span class="val">28%</span></span>
+    <span class="tick"><span class="lbl">XIRR·IRREGULAR CF</span><span class="val up">11.7%</span></span>
+    <span class="tick"><span class="lbl">BURN RATE·RUNWAY</span><span class="val down">7.2 mo</span></span>
+    <span class="tick"><span class="lbl">RENT VS BUY·B/E YR</span><span class="val">6</span></span>
+    <span class="tick"><span class="lbl">SIP·STEP-UP 10%</span><span class="val up">$981K</span></span>
+  </div>
 </div>
-</main><!-- content -->
-<footer class="site-footer">
-  <div class="footer-brand">
-    <div class="logo-mark" style="width:22px;height:22px;background:var(--a);border-radius:5px;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700">FC</div>
-    FinCalc
+
+<main class="directory" id="directory">
+  <div class="dir-head">
+    <h2>The Directory</h2>
+    <span id="dirCount">60 calculators / 4 ledgers</span>
   </div>
-  <div class="footer-copy">© 2025 FinCalc · Free Financial Calculators · <a href="/blog" style="color:inherit">Blog</a> · <a href="/about" style="color:inherit">About</a> · <a href="/privacy" style="color:inherit">Privacy Policy</a> · <a href="/terms" style="color:inherit">Terms</a></div>
-  <!-- tinystartups · Launched on Tiny Startups -->
-<a href="https://www.tinystartups.com/startup/finclaccom" target="_blank" rel="noopener"
-   style="display:inline-flex;align-items:center;gap:10px;padding:8px 14px 8px 10px;border-radius:12px;text-decoration:none;font-family:'Inter',system-ui,sans-serif;background:linear-gradient(#fff,#fff) padding-box,linear-gradient(90deg,#3525E6,#D81FE0,#22B8F0) border-box;border:2px solid transparent;color:#0E0B1F;flex-shrink:0">
-  <svg width="34" height="34" viewBox="0 0 100 100">
-    <defs><linearGradient id="tsg" x1=".1" y1="0" x2=".9" y2="1">
-      <stop offset="0%" stop-color="#3525E6"/><stop offset="55%" stop-color="#D81FE0"/><stop offset="100%" stop-color="#22B8F0"/>
-    </linearGradient></defs>
-    <path d="M50 6C52 32 68 48 94 50C68 52 52 68 50 94C48 68 32 52 6 50C32 48 48 32 50 6Z" fill="url(#tsg)"/>
-  </svg>
-  <span style="display:flex;flex-direction:column;line-height:1.1">
-    <span style="font-family:monospace;font-size:7px;font-weight:600;letter-spacing:0.15em;text-transform:uppercase;color:#6A6585">Launched on</span>
-    <span style="font-size:14px;font-weight:800;letter-spacing:-0.02em">Tiny Startups</span>
-  </span>
-</a>
-<a href="https://devglobe.app/projects/fincalc?utm_source=badge&utm_medium=embed" target="_blank" rel="noopener">
-  <img src="https://devglobe.app/badges/launched-on-devglobe-dark.svg" alt="Launched on DevGlobe" width="250" height="54" />
-</a>
-<a href="https://sellwithboost.com" target="_blank" rel="noopener noreferrer">
-  <img src="https://sellwithboost.com/badge/listing.svg" alt="Listed on Sell With boost" style="height: 40px; width: auto;" />
-</a>
+  <div id="noResults" style="display:none;padding:40px 0;font-family:var(--mono);font-size:13px;color:var(--muted);border-top:1px solid var(--line)">
+    No calculators match <span id="noResultsQuery" style="color:var(--ink);font-weight:500"></span>. Try a different search term.
+  </div>
+
+  <!-- A — Personal Finance -->
+  <div class="section">
+    <div class="sec-head">
+      <div class="sec-tab a" style="background:var(--ledger)">A</div>
+      <div class="sec-title">Personal Finance</div>
+      <div class="sec-count">33 calculators</div>
+    </div>
+    <div class="sec-rule"></div>
+    <div class="grid">
+      <a class="row" href="/loan"><span class="row-pop">Popular</span><div class="row-top"><span class="row-icon">🏦</span><span class="row-name">Loan / EMI</span><span class="row-arrow">→</span></div><span class="row-desc">Enter the amount, rate, and term to see your exact monthly payment. Useful before signing any loan, so you know the real cost — not just the headline rate.</span></a>
+      <a class="row" href="/mortgage"><span class="row-pop">Popular</span><div class="row-top"><span class="row-icon">🏠</span><span class="row-name">Mortgage</span><span class="row-arrow">→</span></div><span class="row-desc">Full monthly payment including taxes, insurance, and PMI — not just principal and interest. Gives you the true number to compare against your budget before house-hunting.</span></a>
+      <a class="row" href="/tax"><span class="row-pop">Popular</span><div class="row-top"><span class="row-icon">🧾</span><span class="row-name">Tax Estimator</span><span class="row-arrow">→</span></div><span class="row-desc">Estimate your US federal tax, effective rate, and take-home pay from your income. Helps with paycheck planning, freelance quarterly estimates, or job-offer comparisons.</span></a>
+      <a class="row" href="/salary"><div class="row-top"><span class="row-icon">💵</span><span class="row-name">Salary Calculator</span><span class="row-arrow">→</span></div><span class="row-desc">Convert pay between hourly, daily, monthly, and yearly instantly. Handy when comparing job offers quoted in different formats, or negotiating a rate.</span></a>
+      <a class="row" href="/loaneligibility"><div class="row-top"><span class="row-icon">✅</span><span class="row-name">Loan Eligibility</span><span class="row-arrow">→</span></div><span class="row-desc">See what loan amount you may qualify for based on income, debts, and credit profile. Check this before applying, so you don't waste a hard credit pull on a loan you won't get.</span></a>
+      <a class="row" href="/dti"><div class="row-top"><span class="row-icon">📊</span><span class="row-name">Debt-to-Income Ratio</span><span class="row-arrow">→</span></div><span class="row-desc">Calculates your debt-to-income ratio and checks it against typical lender thresholds. Lenders use this number to decide approval — know it before they do.</span></a>
+      <a class="row" href="/prepay"><div class="row-top"><span class="row-icon">⏩</span><span class="row-name">Loan Prepayment</span><span class="row-arrow">→</span></div><span class="row-desc">Shows the time and interest you'd save by paying extra toward your loan each month. Useful for deciding whether prepaying beats investing that extra cash instead.</span></a>
+      <a class="row" href="/refinance"><div class="row-top"><span class="row-icon">🔀</span><span class="row-name">Refinance Break-Even</span><span class="row-arrow">→</span></div><span class="row-desc">Works out how many months it takes to recoup refinancing closing costs. Answers the real question: will refinancing actually save you money before you move or sell?</span></a>
+      <a class="row" href="/loancomp"><div class="row-top"><span class="row-icon">📋</span><span class="row-name">Loan Comparison</span><span class="row-arrow">→</span></div><span class="row-desc">Compare up to three loan offers side by side on payment, total interest, and cost. Makes shopping multiple lenders simple instead of juggling separate quotes.</span></a>
+      <a class="row" href="/autoloan"><span class="row-pop">Popular</span><div class="row-top"><span class="row-icon">🚗</span><span class="row-name">Auto Loan</span><span class="row-arrow">→</span></div><span class="row-desc">Car payment calculator with trade-in value, sales tax, and new-vs-used rates. Know your monthly payment and total cost before you're at the dealership finance desk.</span></a>
+      <a class="row" href="/heloc"><div class="row-top"><span class="row-icon">🏡</span><span class="row-name">HELOC</span><span class="row-arrow">→</span></div><span class="row-desc">Estimates your borrowing power against home equity, plus draw and repayment schedules. Useful for planning a renovation or big expense funded by your home's equity.</span></a>
+      <a class="row" href="/rentvsbuy"><div class="row-top"><span class="row-icon">🏘️</span><span class="row-name">Rent vs Buy</span><span class="row-arrow">→</span></div><span class="row-desc">Projects your net worth over time under renting vs buying, and finds the break-even year. Removes the guesswork from the biggest financial decision most people make.</span></a>
+      <a class="row" href="/mortcomp"><div class="row-top"><span class="row-icon">⚖️</span><span class="row-name">Mortgage Comparison</span><span class="row-arrow">→</span></div><span class="row-desc">Compare up to three mortgage offers at once on rate, payment, and total cost. Built for when you have multiple lender quotes and need to see them side by side.</span></a>
+      <a class="row" href="/savings"><span class="row-pop">Popular</span><div class="row-top"><span class="row-icon">🏛️</span><span class="row-name">Savings Estimator</span><span class="row-arrow">→</span></div><span class="row-desc">Projects compound growth on your savings and shows how long it takes to double. Good for setting realistic expectations before you pick a savings account or CD.</span></a>
+      <a class="row" href="/inflation"><div class="row-top"><span class="row-icon">🎈</span><span class="row-name">Inflation Calculator</span><span class="row-arrow">→</span></div><span class="row-desc">Shows what a sum of money was, is, or will be worth after inflation. Useful for translating an old salary, price, or goal into today's purchasing power.</span></a>
+      <a class="row" href="/provident"><div class="row-top"><span class="row-icon">🏦</span><span class="row-name">Provident Fund</span><span class="row-arrow">→</span></div><span class="row-desc">Projects EPF/PF maturity value from your contributions, employer match, and interest rate. Helps you sanity-check what you'll actually have at retirement.</span></a>
+      <a class="row" href="/retirement"><span class="row-pop">Popular</span><div class="row-top"><span class="row-icon">👴</span><span class="row-name">Retirement Planner</span><span class="row-arrow">→</span></div><span class="row-desc">Checks whether your current savings rate puts you on track for retirement, adjusted for inflation. The core number to know before assuming you're saving "enough."</span></a>
+      <a class="row" href="/socialsecurity"><div class="row-top"><span class="row-icon">📜</span><span class="row-name">Social Security</span><span class="row-arrow">→</span></div><span class="row-desc">Shows how claiming at 62 vs full retirement age vs 70 changes your monthly benefit. A few years' difference in timing can mean tens of thousands over your lifetime.</span></a>
+      <a class="row" href="/401k"><span class="row-pop">Popular</span><div class="row-top"><span class="row-icon">🏦</span><span class="row-name">401(k) Calculator</span><span class="row-arrow">→</span></div><span class="row-desc">Projects your 401(k) balance at retirement, including employer match and contribution growth. Useful for checking if you're leaving free employer money on the table.</span></a>
+      <a class="row" href="/millionaire"><div class="row-top"><span class="row-icon">💎</span><span class="row-name">Millionaire Calculator</span><span class="row-arrow">→</span></div><span class="row-desc">Estimates the age you'll cross $1,000,000 at your current savings pace. A motivating, concrete milestone rather than a vague long-term goal.</span></a>
+      <a class="row" href="/fire"><div class="row-top"><span class="row-icon">🔥</span><span class="row-name">FIRE Calculator</span><span class="row-arrow">→</span></div><span class="row-desc">Calculates years to financial independence based on your savings rate and expenses. The core number behind any FIRE (Financial Independence, Retire Early) plan.</span></a>
+      <a class="row" href="/networth"><div class="row-top"><span class="row-icon">💼</span><span class="row-name">Net Worth</span><span class="row-arrow">→</span></div><span class="row-desc">Totals your assets and liabilities into one net worth number, with a liquidity and debt-to-asset breakdown. The single best snapshot of your overall financial position.</span></a>
+      <a class="row" href="/debtcomp"><div class="row-top"><span class="row-icon">❄️</span><span class="row-name">Snowball vs Avalanche</span><span class="row-arrow">→</span></div><span class="row-desc">Compares the snowball and avalanche payoff strategies to show which clears your debt faster and cheaper. Removes the guesswork from picking a payoff order.</span></a>
+      <a class="row" href="/debt"><span class="row-pop">Popular</span><div class="row-top"><span class="row-icon">💳</span><span class="row-name">Debt Payoff Planner</span><span class="row-arrow">→</span></div><span class="row-desc">Builds a custom payoff plan across all your debts and shows the interest it will save. Turns a pile of balances into one clear, ordered plan.</span></a>
+      <a class="row" href="/ccpayoff"><div class="row-top"><span class="row-icon">🎫</span><span class="row-name">Credit Card Payoff</span><span class="row-arrow">→</span></div><span class="row-desc">Compares paying the minimum vs a fixed payment on credit card debt, and the real cost difference. Minimum payments can take over a decade — this shows exactly how much that costs you.</span></a>
+      <a class="row" href="/rental"><div class="row-top"><span class="row-icon">🏘️</span><span class="row-name">Rental Yield</span><span class="row-arrow">→</span></div><span class="row-desc">Calculates gross and net rental yield against a property's purchase price. A quick way to screen whether a rental property is actually a good deal.</span></a>
+      <a class="row" href="/rentalprop"><div class="row-top"><span class="row-icon">🏡</span><span class="row-name">Rental Property</span><span class="row-arrow">→</span></div><span class="row-desc">Projects cash flow, returns, and a 10-year outlook for a rental property investment. Goes beyond yield to show the full financial picture before you buy.</span></a>
+      <a class="row" href="/savingsgoal"><div class="row-top"><span class="row-icon">🎯</span><span class="row-name">Savings Goal</span><span class="row-arrow">→</span></div><span class="row-desc">Works out the monthly amount needed to hit a savings target by a specific date. Turns a vague goal like "save for a wedding" into an actual monthly number.</span></a>
+      <a class="row" href="/budget"><span class="row-pop">Popular</span><div class="row-top"><span class="row-icon">🥧</span><span class="row-name">50/30/20 Budget</span><span class="row-arrow">→</span></div><span class="row-desc">Checks your actual spending against the 50/30/20 rule for needs, wants, and savings. A fast gut-check on whether your budget is balanced or overextended.</span></a>
+      <a class="row" href="/emergencyfund"><div class="row-top"><span class="row-icon">🛡️</span><span class="row-name">Emergency Fund</span><span class="row-arrow">→</span></div><span class="row-desc">Calculates how big your emergency fund should be and how long it'll take to build. Answers "how much is enough" instead of guessing at a round number.</span></a>
+      <a class="row" href="/healthscore"><div class="row-top"><span class="row-icon">💯</span><span class="row-name">Financial Health Score</span><span class="row-arrow">→</span></div><span class="row-desc">Scores your overall financial health out of 100 across savings, debt, and spending. One number to track progress instead of juggling a dozen separate metrics.</span></a>
+      <a class="row" href="/lifeinsurance"><div class="row-top"><span class="row-icon">🛡️</span><span class="row-name">Life Insurance Needs</span><span class="row-arrow">→</span></div><span class="row-desc">Estimates the life insurance coverage your family would actually need, based on income and obligations. Avoids both under-insuring and overpaying for coverage you don't need.</span></a>
+      <a class="row" href="/healthinsurance"><div class="row-top"><span class="row-icon">🏥</span><span class="row-name">Health Insurance Cost</span><span class="row-arrow">→</span></div><span class="row-desc">Compares two health plans by their true total annual cost — premiums plus expected out-of-pocket spending — not just the sticker-price premium. Shows which plan actually costs less at your expected level of care.</span></a>
+    </div>
+  </div>
+
+  <!-- B — Investing & Valuation -->
+  <div class="section">
+    <div class="sec-head">
+      <div class="sec-tab b">B</div>
+      <div class="sec-title">Investing &amp; Valuation</div>
+      <div class="sec-count">15 calculators</div>
+    </div>
+    <div class="sec-rule"></div>
+    <div class="grid">
+      <a class="row" href="/cagr"><span class="row-pop">Popular</span><div class="row-top"><span class="row-icon">📐</span><span class="row-name">CAGR Calculator</span><span class="row-arrow">→</span></div><span class="row-desc">Calculates the steady annual growth rate behind an investment's actual (bumpy) returns. The number that lets you fairly compare two very different-looking investments.</span></a>
+      <a class="row" href="/xirr"><div class="row-top"><span class="row-icon">📅</span><span class="row-name">XIRR Calculator</span><span class="row-arrow">→</span></div><span class="row-desc">Calculates the true annualized return on cash flows that happen on irregular dates. What a normal return calculator gets wrong once you've added or withdrawn money mid-way.</span></a>
+      <a class="row" href="/drip"><div class="row-top"><span class="row-icon">💧</span><span class="row-name">Dividend Reinvestment</span><span class="row-arrow">→</span></div><span class="row-desc">Projects investment growth when dividends are automatically reinvested rather than taken as cash. Shows how much reinvesting compounds your returns over time.</span></a>
+      <a class="row" href="/divgrowth"><div class="row-top"><span class="row-icon">📈</span><span class="row-name">Dividend Growth</span><span class="row-arrow">→</span></div><span class="row-desc">Projects your future dividend income growth and yield on cost for a dividend stock. Useful for anyone building toward dividend income as a goal.</span></a>
+      <a class="row" href="/etf"><div class="row-top"><span class="row-icon">🗂️</span><span class="row-name">ETF Growth</span><span class="row-arrow">→</span></div><span class="row-desc">Compares growth of popular ETFs like SPY, VTI, and QQQ side by side. A quick way to see how different index funds would have performed on the same money.</span></a>
+      <a class="row" href="/allocation"><div class="row-top"><span class="row-icon">🥧</span><span class="row-name">Asset Allocation</span><span class="row-arrow">→</span></div><span class="row-desc">Suggests a stocks/bonds/cash mix based on your age and risk tolerance. A sanity check before you set (or reset) your portfolio allocation.</span></a>
+      <a class="row" href="/dcf"><div class="row-top"><span class="row-icon">🏦</span><span class="row-name">Stock DCF Valuation</span><span class="row-arrow">→</span></div><span class="row-desc">Estimates what a stock is actually worth based on its projected future cash flows. Goes beyond the current price to ask whether a stock is over- or under-valued.</span></a>
+      <a class="row" href="/peg"><div class="row-top"><span class="row-icon">📏</span><span class="row-name">PEG Ratio</span><span class="row-arrow">→</span></div><span class="row-desc">Calculates the PEG ratio to judge if a stock's price is justified by its earnings growth, not just its P/E. Catches "expensive-looking" stocks that are actually cheap given their growth.</span></a>
+      <a class="row" href="/evebitda"><div class="row-top"><span class="row-icon">🏢</span><span class="row-name">EV/EBITDA</span><span class="row-arrow">→</span></div><span class="row-desc">Calculates enterprise value and shows what a peer company's multiple implies about a stock's worth. A valuation method that accounts for debt, unlike price-to-earnings alone.</span></a>
+      <a class="row" href="/invest"><div class="row-top"><span class="row-icon">📈</span><span class="row-name">SIP / Investment</span><span class="row-arrow">→</span></div><span class="row-desc">Projects a future lump sum from monthly SIP investing, including annual step-ups. Shows what consistent monthly investing actually adds up to over the years.</span></a>
+      <a class="row" href="/dca"><div class="row-top"><span class="row-icon">📊</span><span class="row-name">Dollar Cost Averaging</span><span class="row-arrow">→</span></div><span class="row-desc">Calculates shares bought and average cost under dollar-cost averaging vs a lump-sum investment. Helps decide whether investing gradually or all at once suits your situation.</span></a>
+      <a class="row" href="/swp"><div class="row-top"><span class="row-icon">📉</span><span class="row-name">SWP Calculator</span><span class="row-arrow">→</span></div><span class="row-desc">Shows how long a lump sum lasts under a fixed monthly withdrawal plan (SWP). Essential for anyone drawing down savings in retirement without running out early.</span></a>
+      <a class="row" href="/stock"><div class="row-top"><span class="row-icon">📉</span><span class="row-name">Stock P&amp;L</span><span class="row-arrow">→</span></div><span class="row-desc">Calculates your real profit or loss on a stock trade after brokerage fees and taxes. The number your brokerage app doesn't always show you clearly.</span></a>
+      <a class="row" href="/options"><div class="row-top"><span class="row-icon">⚡</span><span class="row-name">Options Profit &amp; Breakeven</span><span class="row-arrow">→</span></div><span class="row-desc">Calculates breakeven price, max profit, and max loss for a call or put option. Know your actual risk and reward before placing an options trade.</span></a>
+      <a class="row" href="/split"><div class="row-top"><span class="row-icon">🔀</span><span class="row-name">Stock Split</span><span class="row-arrow">→</span></div><span class="row-desc">Calculates your new share count and adjusted cost basis after a stock split. Keeps your portfolio records accurate after a split you didn't ask for.</span></a>
+    </div>
+  </div>
+
+  <!-- C — Startup & Business -->
+  <div class="section">
+    <div class="sec-head">
+      <div class="sec-tab c">C</div>
+      <div class="sec-title">Startup &amp; Business</div>
+      <div class="sec-count">8 calculators</div>
+    </div>
+    <div class="sec-rule"></div>
+    <div class="grid">
+      <a class="row" href="/burnrate"><div class="row-top"><span class="row-icon">🔥</span><span class="row-name">Burn Rate</span><span class="row-arrow">→</span></div><span class="row-desc">Calculates how many months of cash your business has left at its current spending rate. The single number every founder needs to know before it's too late.</span></a>
+      <a class="row" href="/pricing"><div class="row-top"><span class="row-icon">🏷️</span><span class="row-name">Pricing Calculator</span><span class="row-arrow">→</span></div><span class="row-desc">Works out a product price using cost-plus, value-based, or competitor-based methods. Useful when you're not sure how to price something from scratch.</span></a>
+      <a class="row" href="/equity"><div class="row-top"><span class="row-icon">📐</span><span class="row-name">Equity Dilution</span><span class="row-arrow">→</span></div><span class="row-desc">Projects your ownership percentage after future funding rounds and option pool top-ups. Know how diluted your stake will be before you sign a term sheet.</span></a>
+      <a class="row" href="/dilutionimpact"><div class="row-top"><span class="row-icon">📉</span><span class="row-name">Stock Dilution Impact</span><span class="row-arrow">→</span></div><span class="row-desc">Shows how a new share offering affects existing shareholders' EPS and ownership value. Useful for evaluating the real cost of a company raising more equity.</span></a>
+      <a class="row" href="/revenue"><div class="row-top"><span class="row-icon">📊</span><span class="row-name">Revenue Forecast</span><span class="row-arrow">→</span></div><span class="row-desc">Forecasts monthly recurring revenue under best-case, expected, and worst-case scenarios. Built for planning and investor conversations, not just a single guess.</span></a>
+      <a class="row" href="/cac"><div class="row-top"><span class="row-icon">🎯</span><span class="row-name">CAC &amp; LTV:CAC</span><span class="row-arrow">→</span></div><span class="row-desc">Calculates customer acquisition cost and your LTV:CAC ratio to judge if growth is actually profitable. The metric that separates healthy growth from growth that's quietly losing money.</span></a>
+      <a class="row" href="/breakeven"><div class="row-top"><span class="row-icon">📈</span><span class="row-name">Break-Even Analysis</span><span class="row-arrow">→</span></div><span class="row-desc">Calculates how many units you need to sell before the business turns a profit. The first number any new product or business plan should be built around.</span></a>
+      <a class="row" href="/cashflow"><div class="row-top"><span class="row-icon">💵</span><span class="row-name">Cash Flow Analyzer</span><span class="row-arrow">→</span></div><span class="row-desc">Analyzes what's coming in, what's going out, and what's left over for your business. A clearer picture than your bank balance alone gives you.</span></a>
+    </div>
+  </div>
+
+  <!-- D — Tools -->
+  <div class="section">
+    <div class="sec-head">
+      <div class="sec-tab d">D</div>
+      <div class="sec-title">Tools</div>
+      <div class="sec-count">4 calculators</div>
+    </div>
+    <div class="sec-rule"></div>
+    <div class="grid">
+      <a class="row" href="/currency"><span class="row-pop">Popular</span><div class="row-top"><span class="row-icon">💱</span><span class="row-name">Currency Converter</span><span class="row-arrow">→</span></div><span class="row-desc">Converts between 15 major currencies using live daily rates. Useful for travel budgeting, invoicing abroad, or checking if you're getting a fair exchange rate.</span></a>
+      <a class="row" href="/billsplit"><div class="row-top"><span class="row-icon">🍽️</span><span class="row-name">Itemized Bill Splitter</span><span class="row-arrow">→</span></div><span class="row-desc">Splits a shared bill fairly based on what each person actually ordered, not an even split. Ends the awkward math at the end of a group dinner.</span></a>
+      <a class="row" href="/remit"><div class="row-top"><span class="row-icon">🌍</span><span class="row-name">International Transfer Cost</span><span class="row-arrow">→</span></div><span class="row-desc">Calculates the true cost of sending money abroad, including the hidden markup on the exchange rate. Most transfer services aren't as "fee-free" as they advertise.</span></a>
+      <a class="row" href="/scientific"><div class="row-top"><span class="row-icon">🔬</span><span class="row-name">Scientific Calculator</span><span class="row-arrow">→</span></div><span class="row-desc">A full scientific calculator with trig, logarithms, powers, factorials, and memory functions. Handy for the occasional calculation none of the finance tools cover.</span></a>
+    </div>
+  </div>
+
+  <div class="trust">
+    <div class="trust-item"><div class="trust-num">60</div><div class="trust-lbl">CALCULATORS, ONE LEDGER</div></div>
+    <div class="trust-item"><div class="trust-num">$0</div><div class="trust-lbl">COST, NO ACCOUNT NEEDED</div></div>
+    <div class="trust-item"><div class="trust-num">0</div><div class="trust-lbl">CALCULATOR INPUTS SENT TO A SERVER</div></div>
+    <div class="trust-item"><div class="trust-num">100%</div><div class="trust-lbl">RUNS LOCALLY IN YOUR BROWSER</div></div>
+  </div>
+</main>
+
+<footer>
+  <div class="foot-grid">
+    <div>
+      <div class="foot-brand"><div class="logo-mark">FC</div>FinCalc</div>
+      <p class="foot-desc">Sixty financial calculators, kept in one place, built to run entirely in your browser.</p>
+    </div>
+    <div class="foot-cols">
+      <div class="foot-col">
+        <h4>Ledgers</h4>
+        <a href="/personal-finance">Personal Finance</a>
+        <a href="/investing-valuation">Investing &amp; Valuation</a>
+        <a href="/startup-business">Startup &amp; Business</a>
+        <a href="/tools">Tools</a>
+      </div>
+      <div class="foot-col">
+        <h4>Company</h4>
+        <a href="/about">About</a>
+        <a href="/blog">Journal</a>
+        <a href="/sitemap.xml">Sitemap</a>
+      </div>
+      <div class="foot-col">
+        <h4>Legal</h4>
+        <a href="/privacy">Privacy</a>
+        <a href="/terms">Terms</a>
+      </div>
+    </div>
+  </div>
+  <div class="foot-bottom">
+    <span>© 2026 FinCalc. All calculations are estimates, not financial advice.</span>
+    </div>
 </footer>
+
 <script>
 (function(){
-  const saved = localStorage.getItem('fincalc-theme') || 'dark';
-  document.documentElement.setAttribute('data-theme', saved);
+  const input = document.getElementById('homeSearch');
+  const sections = Array.from(document.querySelectorAll('.directory .section'));
+  const noResults = document.getElementById('noResults');
+  const noResultsQuery = document.getElementById('noResultsQuery');
+  const dirCount = document.getElementById('dirCount');
+  const defaultCountText = dirCount ? dirCount.textContent : '';
+
+  const rows = sections.map(sec => ({
+    section: sec,
+    items: Array.from(sec.querySelectorAll('.row')).map(row => ({
+      el: row,
+      name: (row.querySelector('.row-name')?.textContent || '').toLowerCase(),
+      desc: (row.querySelector('.row-desc')?.textContent || '').toLowerCase(),
+      href: row.getAttribute('href') || ''
+    }))
+  }));
+
+  function runSearch(q){
+    q = q.trim().toLowerCase();
+    let totalVisible = 0;
+    let firstMatchHref = null;
+
+    rows.forEach(({section, items}) => {
+      let sectionVisible = 0;
+      items.forEach(item => {
+        const match = !q || item.name.includes(q) || item.desc.includes(q);
+        item.el.style.display = match ? '' : 'none';
+        if (match) {
+          sectionVisible++;
+          totalVisible++;
+          if (firstMatchHref === null) firstMatchHref = item.href;
+        }
+      });
+      section.style.display = sectionVisible === 0 ? 'none' : '';
+    });
+
+    if (noResults) {
+      noResults.style.display = (q && totalVisible === 0) ? 'block' : 'none';
+      if (noResultsQuery) noResultsQuery.textContent = '"' + q + '"';
+    }
+    if (dirCount) {
+      dirCount.textContent = q ? (totalVisible + ' result' + (totalVisible === 1 ? '' : 's') + ' for "' + q + '"') : defaultCountText;
+    }
+    return firstMatchHref;
+  }
+
+  if (input) {
+    input.addEventListener('input', () => runSearch(input.value));
+    input.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter') {
+        const href = runSearch(input.value);
+        if (href) window.location.href = href;
+      } else if (e.key === 'Escape') {
+        input.value = '';
+        runSearch('');
+        input.blur();
+      }
+    });
+
+    // pick up ?q= from links like the 404 page's search redirect
+    const params = new URLSearchParams(window.location.search);
+    const initialQ = params.get('q');
+    if (initialQ) {
+      input.value = initialQ;
+      runSearch(initialQ);
+      document.getElementById('directory')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+  }
 })();
-function toggleTheme(){
-  const html = document.documentElement;
-  const current = html.getAttribute('data-theme') || 'dark';
-  const next = current === 'light' ? 'dark' : 'light';
-  html.setAttribute('data-theme', next);
-  localStorage.setItem('fincalc-theme', next);
-  const btn = document.getElementById('theme-toggle-btn');
-  if(btn) btn.textContent = next === 'light' ? '\ud83c\udf19 Dark' : '\u2600\ufe0f Light';
-}
-document.addEventListener('DOMContentLoaded', function(){
-  const btn = document.getElementById('theme-toggle-btn');
-  const current = document.documentElement.getAttribute('data-theme') || 'dark';
-  if(btn) btn.textContent = current === 'light' ? '\ud83c\udf19 Dark' : '\u2600\ufe0f Light';
-});
 </script>
-<script src="app.js?v=20260731f"></script>
-<script>initPage('home');</script>
+
+<script>
+function toggleMobileMenu(){
+  const menu=document.getElementById('mobile-menu');
+  const btn=document.getElementById('mobile-menu-btn');
+  if(!menu||!btn)return;
+  const open=menu.classList.toggle('open');
+  btn.setAttribute('aria-expanded', open ? 'true' : 'false');
+  btn.textContent = open ? '✕' : '☰';
+}
+</script>
 </body>
 </html>

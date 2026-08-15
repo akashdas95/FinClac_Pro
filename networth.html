@@ -3,6 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="stylesheet" href="/fonts/fonts.css">
+
 <title>Net Worth Calculator | FinCalc</title>
 <meta name="description" content="Calculate your total net worth from assets and liabilities, see your liquid vs. illiquid split, and your debt-to-asset ratio. Free net worth calculator.">
 <link rel="canonical" href="https://finclac.com/networth">
@@ -20,30 +22,30 @@
 <meta name="twitter:title" content="Net Worth Calculator | FinCalc">
 <meta name="twitter:description" content="Calculate your total net worth from assets and liabilities, see your liquid vs. illiquid split, and your debt-to-asset ratio. Free net worth calculator.">
 <style>html{scrollbar-gutter:stable;overflow-y:scroll}*{box-sizing:border-box;margin:0;padding:0}
-:root{--bg:#0B0E11;--s:#141920;--s2:#1C2430;--bd:#232D3A;--t:#E8EDF2;--m:#8393A6;--tb:#A3B2C4;--a:#F0B90B;--g:#0ECB81;--r:#F65E72;--b:#1890FF;--p:#B478D1;--fn:'DM Sans',sans-serif;--mo:'DM Mono',monospace}
-html[data-theme="light"]{--bg:#F7F9FB;--s:#FFFFFF;--s2:#EFF3F8;--bd:#DCE3EC;--t:#0F172A;--m:#5B6B7F;--tb:#475569;--a:#946200;--g:#06754A;--r:#C81E45;--b:#1155C4;--p:#7D3C9E}
+:root{--bg:#F6F4EE;--s:#FFFFFF;--s2:#EFEBE1;--bd:#DBD5C4;--t:#171B17;--m:#807965;--tb:#464C46;--a:#0F4F35;--g:#0F4F35;--r:#8C2E22;--b:#1B3A5C;--p:#6B4A7A;--fn:'IBM Plex Sans',sans-serif;--mo:'IBM Plex Mono',monospace;--disp:'Fraunces',serif}
+html[data-theme="light"]{--bg:#14170F;--s:#1B1F16;--s2:#222619;--bd:#33392C;--t:#EDE7D6;--m:#9A9480;--tb:#C9C3AF;--a:#6FBF95;--g:#6FBF95;--r:#D08877;--b:#7FA8CC;--p:#B79CC9;--disp:'Fraunces',serif}
 html[data-theme="light"] body{background:var(--bg)}
 html[data-theme="light"] .topbar,html[data-theme="light"] .nav{box-shadow:0 1px 0 rgba(15,23,42,.04)}
 html[data-theme="light"] .card,html[data-theme="light"] .dir-card{box-shadow:0 1px 3px rgba(15,23,42,.06)}
-html[data-theme="light"] .dir-card{background:linear-gradient(135deg,#FFFFFF 60%,#F1FAF6 100%);border:1px solid #0ECB81;box-shadow:0 2px 10px rgba(6,117,74,.08),0 1px 3px rgba(15,23,42,.05)}
+html[data-theme="light"] .dir-card{background:linear-gradient(135deg,#FFFFFF 60%,#F1FAF6 100%);border:1px solid #6FBF95;box-shadow:0 2px 10px rgba(111,191,149,.08),0 1px 3px rgba(15,23,42,.05)}
 html[data-theme="light"] .dir-card .dir-name{color:var(--t)}
 html[data-theme="light"] .dir-card .dir-desc{color:var(--m)}
 html[data-theme="light"] .skip-link,html[data-theme="light"] .btn,html[data-theme="light"] .sci-btn.eq,html[data-theme="light"] .calc-link-btn:hover,html[data-theme="light"] .guide-step-num{color:#fff}
 html[data-theme="light"] .logo-mark{background:#F0B90B!important;color:#000!important}
-html[data-theme="light"] .ntab.on{color:#0ECB81!important;border-bottom-color:#0ECB81!important}
-html[data-theme="light"] .nav-dd-btn.on{color:#0ECB81!important;border-bottom-color:#0ECB81!important}
-html[data-theme="light"] .hero-wrap{background:radial-gradient(ellipse 120% 100% at 15% 20%,rgba(6,117,74,.09),transparent 55%),radial-gradient(ellipse 100% 90% at 90% 80%,rgba(148,98,0,.10),transparent 55%),var(--s2)!important}
-html[data-theme="light"] .hero-badge{background:rgba(6,117,74,.10)!important;border-color:rgba(6,117,74,.25)!important}
-html[data-theme="light"] .hero-title{background:linear-gradient(100deg,#0F172A 30%,#0ECB81 70%,#F0B90B 100%);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;color:transparent!important}
-html[data-theme="light"] .hero-btn-primary{box-shadow:0 8px 20px rgba(6,117,74,.28)}
-html[data-theme="light"] .hero-btn-primary:hover{box-shadow:0 10px 26px rgba(6,117,74,.38);transform:translateY(-1px)}
-html[data-theme="light"] .stat-g,html[data-theme="light"] .stat-a,html[data-theme="light"] .stat-b{color:#06754A!important}
-html[data-theme="light"] .dir-icon{background:linear-gradient(135deg,rgba(6,117,74,.14),rgba(148,98,0,.10));border:1px solid rgba(6,117,74,.18);display:inline-flex;align-items:center;justify-content:center;width:40px;height:40px;border-radius:9px}
+html[data-theme="light"] .ntab.on{color:#6FBF95!important;border-bottom-color:#6FBF95!important}
+html[data-theme="light"] .nav-dd-btn.on{color:#6FBF95!important;border-bottom-color:#6FBF95!important}
+html[data-theme="light"] .hero-wrap{background:radial-gradient(ellipse 120% 100% at 15% 20%,rgba(111,191,149,.09),transparent 55%),radial-gradient(ellipse 100% 90% at 90% 80%,rgba(111,191,149,.10),transparent 55%),var(--s2)!important}
+html[data-theme="light"] .hero-badge{background:rgba(111,191,149,.10)!important;border-color:rgba(111,191,149,.25)!important}
+html[data-theme="light"] .hero-title{background:linear-gradient(100deg,#0F172A 30%,#6FBF95 70%,#6FBF95 100%);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;color:transparent!important}
+html[data-theme="light"] .hero-btn-primary{box-shadow:0 8px 20px rgba(111,191,149,.28)}
+html[data-theme="light"] .hero-btn-primary:hover{box-shadow:0 10px 26px rgba(111,191,149,.38);transform:translateY(-1px)}
+html[data-theme="light"] .stat-g,html[data-theme="light"] .stat-a,html[data-theme="light"] .stat-b{color:#6FBF95!important}
+html[data-theme="light"] .dir-icon{background:linear-gradient(135deg,rgba(111,191,149,.14),rgba(111,191,149,.10));border:1px solid rgba(111,191,149,.18);display:inline-flex;align-items:center;justify-content:center;width:40px;height:40px;border-radius:9px}
 html[data-theme="light"] .dir-card{transition:all .22s}
-html[data-theme="light"] .dir-card:hover{transform:translateY(-3px);border-color:#0ECB81;box-shadow:0 12px 28px rgba(14,203,129,.20),0 2px 8px rgba(15,23,42,.08)}
-html[data-theme="light"] .dir-sec-h{color:#0ECB81;font-weight:700}
-html[data-theme="light"] .dir-sec-h::after{background:linear-gradient(90deg,rgba(14,203,129,.35),var(--bd) 60%)}
-html[data-theme="light"] .searchbox{box-shadow:0 2px 10px rgba(6,117,74,.10)}
+html[data-theme="light"] .dir-card:hover{transform:translateY(-3px);border-color:#6FBF95;box-shadow:0 12px 28px rgba(111,191,149,.20),0 2px 8px rgba(15,23,42,.08)}
+html[data-theme="light"] .dir-sec-h{color:#6FBF95;font-weight:700}
+html[data-theme="light"] .dir-sec-h::after{background:linear-gradient(90deg,rgba(111,191,149,.35),var(--bd) 60%)}
+html[data-theme="light"] .searchbox{box-shadow:0 2px 10px rgba(111,191,149,.10)}
 html[data-theme="light"] .nav-dd-menu{box-shadow:0 14px 36px rgba(15,23,42,.15)}
 html[data-theme="light"] .footer-brand{color:#000!important}
 html[data-theme="light"] .footer-copy{color:#000!important}
@@ -54,8 +56,8 @@ body,.card,.dir-card,.topbar,.nav,.nav-dd-menu,.searchbox,.footer{transition:bac
 body{background:var(--bg);color:var(--t);font-family:var(--fn);font-size:14px;line-height:1.5;min-height:100vh;display:flex;flex-direction:column}
 .topbar{background:var(--s);border-bottom:1px solid var(--bd);padding:0 1.25rem;display:flex;align-items:center;justify-content:space-between;height:52px;position:sticky;top:0;z-index:200}
 .skip-link{position:absolute;left:-9999px;top:0;background:var(--a);color:#000;padding:10px 16px;border-radius:0 0 8px 0;font-weight:600;font-size:13px;z-index:9999;text-decoration:none}.skip-link:focus{left:0}
-.logo{display:flex;align-items:center;gap:8px;font-size:16px;font-weight:600;color:var(--t);text-decoration:none}
-.logo-mark{width:28px;height:28px;background:var(--a);border-radius:6px;display:flex;align-items:center;justify-content:center;color:#000;font-size:13px;font-weight:700}
+.logo{display:flex;align-items:center;gap:8px;font-size:17px;font-weight:600;font-family:var(--disp),serif;color:var(--t);text-decoration:none}
+.logo-mark{width:28px;height:28px;background:#F0B90B;border-radius:6px;display:flex;align-items:center;justify-content:center;color:#000;font-size:13px;font-weight:700;font-family:var(--disp),serif}
 .searchbox{display:flex;align-items:center;gap:10px;background:#fff;border:1.5px solid var(--g);border-radius:9px;padding:10px 16px;width:340px;transition:border-color .15s}
 .searchbox:focus-within{border-color:var(--a)}
 .searchbox input{background:none;border:none;outline:none;color:#0D1117;font-family:var(--fn);font-size:15px;font-weight:500;width:100%}
@@ -73,7 +75,7 @@ body{background:var(--bg);color:var(--t);font-family:var(--fn);font-size:14px;li
 .nav-dd.open .nav-dd-btn::after{transform:rotate(180deg)}
 .nav-dd-menu{display:none;position:fixed;background:var(--s2);border:1px solid var(--bd);border-radius:10px;padding:8px;box-shadow:0 14px 36px rgba(0,0,0,.5);z-index:300;width:560px;max-width:88vw;max-height:70vh;overflow-y:auto}
 .nav-dd.open .nav-dd-menu{display:grid;grid-template-columns:repeat(2,1fr);gap:1px}
-.nav-dd-item{display:flex;align-items:center;gap:8px;padding:7px 9px;border-radius:6px;font-size:12.5px;color:var(--tb);text-decoration:none;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.nav-dd-item{display:flex;align-items:center;gap:8px;padding:13px 10px;min-height:44px;box-sizing:border-box;border-radius:6px;font-size:12.5px;color:var(--tb);text-decoration:none;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .nav-dd-item:hover{background:var(--s);color:var(--t)}
 .nav-dd-item.on{color:var(--a);font-weight:600;background:var(--s)}
 @media(max-width:700px){
@@ -86,8 +88,8 @@ body{background:var(--bg);color:var(--t);font-family:var(--fn);font-size:14px;li
 .dir-sec-h{font-size:11px;font-weight:600;color:var(--m);letter-spacing:.8px;text-transform:uppercase;margin-bottom:.75rem;display:flex;align-items:center;gap:8px}
 .dir-sec-h::after{content:'';flex:1;height:1px;background:var(--bd)}
 .dir-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(178px,1fr));gap:10px}
-.dir-card{background:linear-gradient(135deg,#0d1117 60%,#071510 100%);border:1px solid #0ECB81;border-radius:12px;padding:1.25rem 1.1rem;cursor:pointer;transition:all .2s;box-shadow:0 2px 12px rgba(14,203,129,.1),0 1px 3px rgba(0,0,0,.4);text-decoration:none;display:block;color:inherit;position:relative}.pop-star{position:absolute;top:10px;right:12px;font-size:14px;line-height:1;filter:drop-shadow(0 1px 2px rgba(0,0,0,.35));z-index:2}.field-warn{border-color:var(--r)!important}.field-warn-msg{font-size:11px;color:var(--r);margin-top:4px;line-height:1.3}.tip-ic{position:relative;display:inline-flex;align-items:center;justify-content:center;width:14px;height:14px;border-radius:50%;background:var(--bd);color:var(--m);font-size:9.5px;font-style:normal;font-weight:700;cursor:help;flex-shrink:0;vertical-align:middle;margin-left:2px}.tip-ic:hover,.tip-ic:focus{background:var(--a);color:var(--bg);outline:none}.tip-ic:hover .tip-box,.tip-ic:focus .tip-box{opacity:1;visibility:visible;transform:translateY(0)}.tip-box{position:absolute;bottom:calc(100% + 8px);left:0;background:var(--s2);border:1px solid var(--bd);border-radius:8px;padding:9px 11px;font-size:11.5px;line-height:1.5;color:var(--tb);width:230px;max-width:min(230px,70vw);opacity:0;visibility:hidden;transform:translateY(4px);transition:opacity .15s,transform .15s;z-index:80;box-shadow:0 6px 20px rgba(0,0,0,.35);font-weight:400;pointer-events:none;white-space:normal}
-.dir-card:hover{border-color:#ffffff;transform:translateY(-2px);box-shadow:0 6px 28px rgba(255,255,255,.12),0 2px 8px rgba(0,0,0,.5)}
+.dir-card{background:linear-gradient(135deg,#0d1117 60%,#071510 100%);border:1px solid #6FBF95;border-radius:12px;padding:1.25rem 1.1rem;cursor:pointer;transition:all .2s;box-shadow:0 2px 12px rgba(111,191,149,.1),0 1px 3px rgba(0,0,0,.4);text-decoration:none;display:block;color:inherit;position:relative}.pop-star{position:absolute;top:10px;right:12px;font-size:14px;line-height:1;filter:drop-shadow(0 1px 2px rgba(0,0,0,.35));z-index:2}.field-warn{border-color:var(--r)!important}.field-warn-msg{font-size:11px;color:var(--r);margin-top:4px;line-height:1.3}.tip-ic{position:relative;display:inline-flex;align-items:center;justify-content:center;width:14px;height:14px;border-radius:50%;background:var(--bd);color:var(--m);font-size:9.5px;font-style:normal;font-weight:700;cursor:help;flex-shrink:0;vertical-align:middle;margin-left:2px}.tip-ic:hover,.tip-ic:focus{background:var(--a);color:var(--bg);outline:none}.tip-ic:hover .tip-box,.tip-ic:focus .tip-box{opacity:1;visibility:visible;transform:translateY(0)}.tip-box{position:absolute;bottom:calc(100% + 8px);left:0;background:var(--s2);border:1px solid var(--bd);border-radius:8px;padding:9px 11px;font-size:11.5px;line-height:1.5;color:var(--tb);width:230px;max-width:min(230px,70vw);opacity:0;visibility:hidden;transform:translateY(4px);transition:opacity .15s,transform .15s;z-index:80;box-shadow:0 6px 20px rgba(0,0,0,.35);font-weight:400;pointer-events:none;white-space:normal}.btn-example{display:inline-flex;align-items:center;gap:6px;background:var(--s2);border:1px solid var(--bd);color:var(--a);font-family:var(--fn);font-size:12.5px;font-weight:600;padding:8px 14px;border-radius:8px;cursor:pointer;transition:all .15s}.row-bs{display:grid;grid-template-columns:2fr 1fr 1.5fr 36px;gap:8px}.row-debt{display:grid;grid-template-columns:1.5fr 1fr 1fr 1fr 36px;gap:8px}.row-cf{display:grid;grid-template-columns:1.5fr 1fr 90px 36px;gap:8px}.row-3{display:grid;grid-template-columns:1fr 1fr 36px;gap:8px}@media(max-width:700px){.row-bs,.row-debt,.row-cf,.row-3{grid-template-columns:1fr!important}.row-bs>*:last-child,.row-debt>*:last-child,.row-cf>*:last-child,.row-3>*:last-child{justify-self:end;margin-top:-4px}}.btn-example:hover{background:var(--s);border-color:var(--a)}
+.dir-card:hover{border-color:var(--a);background:var(--s2);transform:translateY(-1px);box-shadow:none}
 .dir-icon{font-size:28px;margin-bottom:10px;line-height:1}
 .dir-name{font-size:15px;font-weight:600;margin-bottom:5px;color:var(--t)}
 .dir-desc{font-size:12px;color:var(--m);line-height:1.6}
@@ -96,38 +98,46 @@ body{background:var(--bg);color:var(--t);font-family:var(--fn);font-size:14px;li
 .three{display:grid;grid-template-columns:1fr 1fr 1fr;gap:16px}
 .g2{display:grid;grid-template-columns:1fr 1fr;gap:10px}
 .g3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px}
-.card{background:var(--s);border:1px solid var(--bd);border-radius:10px;padding:1.25rem}
+.card{background:var(--s);border:1px solid var(--bd);border-radius:3px;padding:1.25rem}
 .mb16{margin-bottom:16px}
 .card-title{font-size:11px;font-weight:600;color:var(--m);letter-spacing:.8px;text-transform:uppercase;margin-bottom:1.25rem}
-.calc-header{margin-bottom:1.75rem}.calc-page-title{margin:0 0 .4rem;font-size:26px;font-weight:700;color:var(--t);line-height:1.3;letter-spacing:-.3px}.calc-subtitle{font-size:15px;font-weight:500;color:var(--t);margin:0 0 .6rem;line-height:1.4}
+.calc-header{margin-bottom:1.75rem}.calc-page-title{margin:0 0 .4rem;font-size:28px;font-weight:600;font-family:var(--disp),serif;color:var(--t);line-height:1.15;letter-spacing:-.01em}.calc-subtitle{font-size:15px;font-weight:500;color:var(--t);margin:0 0 .6rem;line-height:1.4}
 .calc-desc{font-size:13px;color:var(--m);line-height:1.65;margin:0;max-width:680px}
 .input-hint{font-size:11.5px;color:var(--a);background:rgba(240,185,11,.08);border:1px solid rgba(240,185,11,.25);border-radius:6px;padding:6px 10px;margin:-.75rem 0 1rem;line-height:1.5}
 .chart-tooltip{position:fixed;display:none;background:#1C2430;border:1px solid #232D3A;border-radius:6px;padding:7px 11px;font-size:11.5px;color:#E8EDF2;pointer-events:none;z-index:9999;box-shadow:0 4px 14px rgba(0,0,0,.45);font-family:'DM Sans',sans-serif;line-height:1.5;max-width:200px}
-.chart-tooltip strong{color:#F0B90B}
+.chart-tooltip strong{color:#6FBF95}
 .field{margin-bottom:.9rem}
-.field label{display:block;font-size:12px;color:var(--t);margin-bottom:5px}
+.field label{display:block;font-size:14px;font-weight:500;color:var(--t);margin-bottom:6px}
 .field input,.field select{width:100%;background:var(--bg);border:1px solid var(--bd);border-radius:6px;padding:8px 11px;color:var(--t);font-family:var(--mo);font-size:13px;outline:none;transition:border .15s}
-.field input:focus,.field select:focus{border-color:var(--a)}
+.field input:focus,.field select:focus{border-color:var(--a);box-shadow:0 0 0 3px rgba(15,79,53,.14)}
+input:focus-visible,select:focus-visible,textarea:focus-visible,button:focus-visible,a:focus-visible,.row:focus-visible,.calc-link-btn:focus-visible,.related-item:focus-visible,.blog-post-card:focus-visible{outline:2px solid var(--a);outline-offset:2px;border-radius:4px}
 .field select option{background:var(--s2)}
 .ip{position:relative}
 .ip .pfx{position:absolute;left:10px;top:50%;transform:translateY(-50%);color:var(--m);font-size:13px;pointer-events:none;font-family:var(--mo)}
 .ip input{padding-left:22px}
-.sgrid{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:1rem}
-.sbox{background:var(--s2);border-radius:8px;padding:10px}
-.sbox .lbl{font-size:10px;color:var(--m);margin-bottom:3px;font-weight:500;text-transform:uppercase;letter-spacing:.4px}
+.sgrid{display:flex;flex-direction:column;background:var(--s);border:1px solid var(--bd);border-radius:10px;margin-top:1rem;overflow:hidden}
+.sbox{padding:13px 18px;border-bottom:1px solid var(--bd);background:transparent;border-radius:0}
+.sbox:last-child{border-bottom:none}
+.sbox .lbl{font-size:10px;color:var(--t);margin-bottom:3px;font-weight:600;text-transform:uppercase;letter-spacing:.4px}
 .sbox .val{font-size:15px;font-weight:600;font-family:var(--mo)}
+.sbox:first-child{background:var(--s2);padding:22px 20px 20px;display:flex;flex-direction:column;gap:5px}
+.sbox:first-child .lbl{font-size:11.5px;letter-spacing:.6px;margin-bottom:0}
+.sbox:first-child .val{font-size:32px;font-weight:700;line-height:1.15}
+.sbox:not(:first-child){display:flex;align-items:center;justify-content:space-between;gap:14px}
+.sbox:not(:first-child) .lbl{margin-bottom:0;flex-shrink:0}
+.sbox:not(:first-child) .val{text-align:right}
 .rrow{display:flex;justify-content:space-between;padding:7px 0;border-bottom:1px solid var(--bd);font-size:13px}
 .rrow:last-child{border:none}
 .rk{color:var(--m);font-size:12px}
 .rv{font-family:var(--mo);font-weight:500}
-.btn{width:100%;padding:10px;background:var(--a);color:#000;border:none;border-radius:7px;font-family:var(--fn);font-size:13px;font-weight:600;cursor:pointer;margin-top:8px;transition:opacity .15s}
+.btn{width:100%;padding:11px;background:var(--a);color:#F6F4EE;border:none;border-radius:2px;font-family:var(--fn);font-size:13px;font-weight:600;cursor:pointer;margin-top:8px;transition:opacity .15s}
 .btn:hover{opacity:.88}
 .btn-sm{padding:6px 12px;border-radius:6px;font-size:12px;font-weight:500;cursor:pointer;border:none;font-family:var(--fn)}
 .btn-add{background:var(--s2)!important;color:var(--g)!important;border:1px solid var(--g)!important}
 .btn-del{background:transparent;color:var(--r);border:1px solid var(--bd);padding:6px 10px;border-radius:6px;cursor:pointer;font-size:13px}
 .back-btn{background:var(--s2);border:1px solid var(--bd);color:var(--tb);font-size:12.5px;font-weight:500;cursor:pointer;margin-bottom:1rem;display:inline-flex;align-items:center;gap:6px;padding:7px 14px;border-radius:20px;font-family:var(--fn);transition:all .18s;text-decoration:none}
 .back-btn:hover{color:var(--t);border-color:var(--g);background:var(--s)}
-.badge-new{background:rgba(14,203,129,.15);color:var(--g);font-size:10px;font-weight:600;padding:2px 7px;border-radius:4px}
+.badge-new{background:rgba(111,191,149,.15);color:var(--g);font-size:10px;font-weight:600;padding:2px 7px;border-radius:4px}
 .pbar-bg{background:var(--bd);border-radius:3px;height:6px;overflow:hidden;margin-top:4px}
 .pbar-fill{height:100%;border-radius:3px;transition:width .4s}
 .tbl{width:100%;border-collapse:collapse;font-size:12px}
@@ -167,15 +177,23 @@ body{background:var(--bg);color:var(--t);font-family:var(--fn);font-size:14px;li
 
 
 /* Inter-calculator links */
-.calc-links{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 2.5rem;padding:10px 12px;background:var(--s2);border-radius:8px;border-left:3px solid var(--g);align-items:center;clear:both}
-.calc-links-label{font-size:10px;color:var(--t);text-transform:uppercase;letter-spacing:.6px;font-weight:600;margin-right:4px;flex-shrink:0;white-space:nowrap}
-.calc-link-btn{padding:4px 10px;background:var(--bg);border:1px solid var(--g);border-radius:20px;color:var(--g);font-size:11px;cursor:pointer;font-family:var(--fn);transition:all .18s;white-space:nowrap;text-decoration:none}
-.calc-link-btn:hover{background:var(--g);color:#000;border-color:var(--g)}
-.related-box{clear:both;margin-top:28px;background:var(--s);border:1px solid var(--bd);border-radius:10px;padding:14px 16px;box-shadow:0 1px 3px rgba(0,0,0,.25)}
-.related-box-title{font-size:11px;font-weight:700;color:var(--m);text-transform:uppercase;letter-spacing:.6px;margin-bottom:10px;display:flex;align-items:center;gap:6px}
-.related-item{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:9px 10px;border-radius:7px;text-decoration:none;color:var(--t);font-size:13px;line-height:1.5;font-weight:500;transition:background .15s,color .15s}
-.related-item:not(:last-child){margin-bottom:2px}
-.related-item:hover{background:var(--s2);color:var(--a)}
+.calc-links-label{font-size:10px;color:var(--m);text-transform:uppercase;letter-spacing:.6px;font-weight:600;white-space:nowrap;margin-bottom:10px}.calc-links{display:flex;flex-wrap:wrap;gap:12px 10px;margin:0 0 2.5rem;padding:14px 16px;background:var(--s2);border-radius:8px;border-left:3px solid var(--g);align-items:center;clear:both}@media(max-width:520px){.calc-links{gap:12px 10px;padding:16px 14px}.calc-link-btn{padding:9px 16px;font-size:13px}}
+.calc-link-btn{padding:9px 18px;background:var(--bg);border:1.5px solid var(--g);border-radius:24px;color:var(--g);font-size:13.5px;font-weight:600;cursor:pointer;font-family:var(--fn);transition:all .18s;white-space:nowrap;text-decoration:none}
+.calc-link-btn:hover{background:var(--g);color:#fff;border-color:var(--g)}
+.related-box{clear:both;margin-top:28px;background:var(--s);border:1px solid var(--bd);border-radius:10px;padding:16px 18px;box-shadow:0 1px 3px rgba(0,0,0,.25)}
+.related-box-title{font-size:11px;font-weight:700;color:var(--m);text-transform:uppercase;letter-spacing:.6px;margin-bottom:12px;display:flex;align-items:center;gap:6px}
+.related-item{display:block;text-decoration:none;color:var(--t);padding:10px;margin:-10px -10px 0;border-radius:7px;transition:background-color .15s}
+.related-item:not(:last-child){margin-bottom:8px}
+.related-item:hover{background:var(--s2)}
+.related-item-title{font-size:14.5px;font-weight:600;line-height:1.4;margin-bottom:5px;color:var(--t);transition:color .15s}
+.related-item:hover .related-item-title{color:var(--a)}
+.related-item-desc{font-size:13px;color:var(--m);line-height:1.55;margin-bottom:9px}
+.related-item-cta{display:inline-flex;align-items:center;gap:5px;font-size:12.5px;font-weight:600;color:var(--a)}
+.related-item:hover .related-arrow{transform:translateX(3px)}
+.related-arrow{color:var(--a);flex-shrink:0;font-size:14px;transition:transform .15s}
+
+
+
 .related-arrow{color:var(--a);flex-shrink:0;font-size:14px;transition:transform .15s}
 .related-item:hover .related-arrow{transform:translateX(3px)}
 
@@ -189,19 +207,20 @@ body{background:var(--bg);color:var(--t);font-family:var(--fn);font-size:14px;li
 
 /* Calculator Guide Articles */
 .calc-guide{margin-top:2.5rem;border-top:1px solid var(--bd);padding-top:1.75rem}
-.guide-toggle{display:flex;align-items:center;justify-content:space-between;padding:10px 14px;background:var(--s2);border:1px solid var(--bd);border-radius:8px;margin-bottom:0;max-width:980px}
+.guide-toggle{display:flex;align-items:center;justify-content:space-between;padding:12px 16px;background:var(--s2);border:1px solid var(--bd);border-radius:8px;margin-bottom:0;max-width:980px;cursor:pointer;transition:border-color .2s,box-shadow .2s}
+.guide-toggle:hover{border-color:var(--g);box-shadow:0 4px 14px rgba(15,79,53,.1)}
 @media(min-width:1048px){.guide-toggle{margin-left:auto;margin-right:auto}}
 .guide-toggle-title{font-size:14px;font-weight:700;color:var(--t);display:flex;align-items:center;gap:8px;letter-spacing:.1px}
 .guide-body{display:block;padding:1.5rem 0 0;max-width:980px}
 @media(min-width:1048px){.guide-body{margin:0 auto}}
 .guide-h2{font-size:22px;font-weight:700;color:var(--t);margin:1.75rem 0 .85rem;letter-spacing:-.2px;line-height:1.3}
 .guide-h2:first-child{margin-top:0}
-.guide-h3{font-size:16px;font-weight:700;color:var(--t);margin:2rem 0 .75rem;letter-spacing:-.1px;line-height:1.35;padding-top:.25rem;border-top:1px solid var(--bd)}
+.guide-h3{font-size:18px;font-weight:600;font-family:var(--disp,var(--fn)),serif;color:var(--t);margin:2rem 0 .75rem;letter-spacing:-.01em;line-height:1.35;padding-top:.25rem;border-top:1px solid var(--bd)}
 .guide-h3:first-child{margin-top:0;padding-top:0;border-top:none}
 .guide-p{font-size:14.5px;color:var(--tb);line-height:1.75;margin-bottom:1.1rem}
 .guide-p strong{color:var(--t);font-weight:600}
 .guide-formula{background:var(--s2);border-left:3px solid var(--a);border-radius:0 8px 8px 0;padding:14px 16px;font-family:var(--mo);font-size:13.5px;line-height:1.7;color:var(--a);margin:1.1rem 0;overflow-x:auto}
-.guide-tip{background:rgba(14,203,129,.08);border:1px solid rgba(14,203,129,.2);border-radius:8px;padding:13px 16px;font-size:13px;color:var(--g);margin:1.1rem 0;line-height:1.7;font-weight:500}
+.guide-tip{background:rgba(111,191,149,.08);border:1px solid rgba(111,191,149,.2);border-radius:8px;padding:13px 16px;font-size:13px;color:var(--g);margin:1.1rem 0;line-height:1.7;font-weight:500}
 .guide-warn{background:rgba(246,70,93,.08);border:1px solid rgba(246,70,93,.2);border-radius:8px;padding:13px 16px;font-size:13px;color:var(--r);margin:1.1rem 0;line-height:1.7;font-weight:500}
 .guide-table{width:100%;border-collapse:collapse;font-size:12.5px;margin:1.25rem 0}
 .guide-table th{background:var(--s2);color:var(--m);padding:9px 12px;text-align:left;font-size:10.5px;font-weight:700;text-transform:uppercase;letter-spacing:.5px;border-bottom:1px solid var(--bd)}
@@ -232,8 +251,8 @@ body{background:var(--bg);color:var(--t);font-family:var(--fn);font-size:14px;li
 .faq-section{margin-top:2.5rem;border-top:1px solid var(--bd);padding-top:1.75rem}
 .faq-section-title{font-size:13px;font-weight:700;color:var(--m);text-transform:uppercase;letter-spacing:.8px;margin-bottom:1.1rem;display:flex;align-items:center;gap:8px}
 .faq-section-title::after{content:'';flex:1;height:1px;background:var(--bd)}
-.faq-item{border:1px solid var(--bd);border-radius:8px;margin-bottom:10px;overflow:hidden;transition:border-color .2s}
-.faq-item:hover{border-color:var(--g)}
+.faq-item{border:1px solid var(--bd);border-radius:8px;margin-bottom:10px;overflow:hidden;transition:border-color .2s,box-shadow .2s,transform .2s}
+.faq-item:hover{border-color:var(--g);box-shadow:0 4px 14px rgba(15,79,53,.1);transform:translateY(-1px)}
 .faq-q{display:flex;align-items:center;justify-content:space-between;padding:14px 16px;cursor:pointer;font-size:14px;font-weight:600;color:var(--t);user-select:none;gap:12px;line-height:1.45}
 .faq-q .faq-icon{font-size:16px;color:var(--a);transition:transform .3s;flex-shrink:0}
 .faq-item.open .faq-icon{transform:rotate(45deg)}
@@ -290,7 +309,7 @@ body{background:var(--bg);color:var(--t);font-family:var(--fn);font-size:14px;li
 /* Print stylesheet: show only the active calculator's inputs/outputs, hide everything else */
 @media print{
   html,body{background:#fff!important;color:#000!important}
-  .topbar,.nav,.site-footer,#srch-results,.search-overlay{display:none!important}
+  .topbar,.nav,.site-footer,#srch-results,.search-overlay,.mobile-menu-btn,.mobile-menu,.calc-links,.related-panel{display:none!important}
   .content{padding:0!important}
   .panel{display:none!important}
   .panel.on{display:block!important}
@@ -334,6 +353,69 @@ body{background:var(--bg);color:var(--t);font-family:var(--fn);font-size:14px;li
   .insight-box,.insight-line,.insight-title{display:none!important}
   canvas{display:block!important}
 }
+
+/* ---- ledger mockup skin ---- */
+.topbar{padding:16px 40px!important;height:auto!important;background:color-mix(in srgb, var(--bg) 88%, transparent)!important;backdrop-filter:blur(6px)}
+.logo{font-size:18px!important;gap:10px!important}
+.logo-mark{border-radius:3px!important}
+.brand-tag{font-family:var(--mo);font-size:10px;color:var(--m);letter-spacing:.08em;margin-left:8px;padding-left:8px;border-left:1px solid var(--bd)}
+.nav{padding:.6rem 40px 0!important;top:0!important}
+.ntab,.nav-dd-btn{font-family:var(--mo)!important;font-size:11.5px!important;letter-spacing:.03em;text-transform:uppercase}
+.ledger-ticker{border-top:1px solid var(--bd);border-bottom:1px solid var(--bd);background:var(--t);overflow:hidden}
+.ledger-ticker-track{display:flex;white-space:nowrap;animation:ledger-scroll 42s linear infinite}
+.ledger-ticker:hover .ledger-ticker-track{animation-play-state:paused}
+@keyframes ledger-scroll{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+.tick{font-family:var(--mo);font-size:12px;color:var(--bg);padding:11px 28px;border-right:1px solid color-mix(in srgb, var(--bg) 25%, transparent);display:flex;align-items:center;gap:9px;flex-shrink:0}
+.tk-lbl{color:color-mix(in srgb, var(--bg) 55%, transparent);letter-spacing:.03em}
+.tk-val{color:var(--bg);font-weight:500}
+.tk-val.up{color:#7FBF9E}
+.tk-val.down{color:#D08877}
+@media(prefers-reduced-motion:reduce){.ledger-ticker-track{animation:none}}
+.site-footer{background:var(--t)!important;border-top:none!important;color:var(--bg)!important;padding:1.5rem 2.5rem!important}
+.site-footer .footer-brand{color:var(--bg)!important;font-family:var(--disp),serif;font-size:16px}
+.site-footer .footer-brand .logo-mark{background:#F0B90B!important;color:#000!important}
+.site-footer .footer-copy{color:color-mix(in srgb, var(--bg) 55%, transparent)!important}
+.site-footer .footer-copy a{color:color-mix(in srgb, var(--bg) 75%, transparent)!important}
+@media(max-width:700px){.topbar{padding:14px 20px!important}.nav{padding:.6rem 20px 0!important}.site-footer{padding:1.25rem 1.25rem!important}}
+
+/* ---- homepage-matching footer ---- */
+footer.site-footer{position:relative;margin-top:2.5rem;border-top:none;background:var(--t);color:#B9B39F;padding:44px 40px 30px;display:block}
+footer.site-footer .foot-grid{max-width:1180px;margin:0 auto;display:flex;justify-content:space-between;flex-wrap:wrap;gap:32px}
+footer.site-footer .foot-brand{font-family:var(--disp),serif;color:var(--bg);font-size:18px;margin-bottom:8px;display:flex;align-items:center;gap:8px}
+footer.site-footer .foot-brand .logo-mark{width:22px;height:22px;font-size:11px;background:#F0B90B;color:#000;border-radius:5px;display:flex;align-items:center;justify-content:center;font-family:var(--disp),serif}
+footer.site-footer .foot-desc{font-size:12.5px;max-width:34ch;line-height:1.6;color:#948E7B}
+footer.site-footer .foot-cols{display:flex;gap:56px;flex-wrap:wrap}
+footer.site-footer .foot-col h4{font-family:var(--mo);font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:#7F7A69;margin-bottom:14px}
+footer.site-footer .foot-col a{display:block;font-size:13px;margin-bottom:10px;color:#C9C3AF;text-decoration:none}
+footer.site-footer .foot-col a:hover{color:var(--bg)}
+footer.site-footer .foot-bottom{max-width:1180px;margin:36px auto 0;padding-top:20px;border-top:1px solid #2C3129;font-family:var(--mo);font-size:11px;color:#6F6A5A;display:flex;justify-content:space-between;flex-wrap:wrap;gap:14px;align-items:center}
+footer.site-footer .foot-badges{max-width:1180px;margin:20px auto 0;display:flex;flex-wrap:wrap;gap:12px;align-items:center}
+@media(max-width:700px){footer.site-footer{padding:32px 20px 24px}footer.site-footer .foot-grid{gap:24px}footer.site-footer .foot-cols{gap:32px}}
+
+/* ---- unified homepage-style navbar ---- */
+.brand-home{display:flex;align-items:center;gap:8px;text-decoration:none;font-family:var(--disp),serif;font-size:17px;font-weight:600;color:var(--t);flex-shrink:0}
+.top-links{display:flex;align-items:center;gap:22px;font-size:13.5px;color:var(--tb)}
+.top-links a{text-decoration:none;color:var(--tb);border-bottom:1px solid transparent;padding-bottom:2px;transition:border-color .15s,color .15s;white-space:nowrap}
+.top-links a:hover{border-color:var(--a);color:var(--t)}
+.topbar-right{display:flex;align-items:center;gap:12px;flex-shrink:0}
+.top-cta{font-family:var(--mo);font-size:11px;color:var(--bg);background:var(--a);padding:8px 14px;border-radius:3px;text-decoration:none;letter-spacing:.02em;white-space:nowrap}
+@media(max-width:860px){.top-links{display:none}}
+
+/* ---- mobile hamburger menu ---- */
+.mobile-menu-btn{display:none;background:none;border:1px solid var(--bd);border-radius:6px;width:36px;height:36px;font-size:16px;color:var(--t);cursor:pointer;align-items:center;justify-content:center}
+.mobile-menu{display:none;flex-direction:column;background:var(--s);border-bottom:1px solid var(--bd);padding:6px 20px 14px}
+.mobile-menu a{display:block;padding:12px 4px;font-size:14.5px;color:var(--t);text-decoration:none;border-bottom:1px solid var(--bd)}
+.mobile-menu a:last-child{border-bottom:none}
+.mobile-menu.open{display:flex}
+@media(max-width:860px){.mobile-menu-btn{display:flex}}
+
+/* ---- breadcrumbs ---- */
+.breadcrumb{max-width:1180px;margin:0 auto;padding:14px 20px 0;display:flex;flex-wrap:wrap;align-items:center;gap:6px;font-family:var(--mo);font-size:11.5px;color:var(--m)}
+.breadcrumb a{color:var(--m);text-decoration:none;transition:color .15s}
+.breadcrumb a:hover{color:var(--a)}
+.breadcrumb .bc-sep{color:var(--bd)}
+.breadcrumb .bc-current{color:var(--t);font-weight:600}
+@media(max-width:640px){.breadcrumb{padding:12px 16px 0;font-size:10.5px}}
 </style>
 <link rel="icon" href="/favicon.ico" sizes="any">
 <link rel="icon" type="image/svg+xml" href="/favicon.svg">
@@ -355,17 +437,28 @@ body{background:var(--bg);color:var(--t);font-family:var(--fn);font-size:14px;li
 <body>
 <a href="#main-content" class="skip-link">Skip to main content</a>
 <header class="topbar">
-  <a class="logo" href="/"><div class="logo-mark">FC</div>FinCalc</a>
-  <button class="theme-toggle" onclick="toggleTheme()" id="theme-toggle-btn">☀️ Light</button>
+  <a class="brand-home" href="/"><div class="logo-mark">FC</div><span class="brand-name">FinCalc</span></a>
+  <nav class="top-links">
+    <a href="/personal-finance">Personal Finance</a>
+    <a href="/investing-valuation">Investing</a>
+    <a href="/startup-business">Business</a>
+    <a href="/tools">Tools</a>
+    <a href="/blog">Journal</a>
+  </nav>
+  <div class="topbar-right">
+    <button class="mobile-menu-btn" onclick="toggleMobileMenu()" id="mobile-menu-btn" aria-label="Open menu" aria-expanded="false">☰</button>
+    <button class="theme-toggle" onclick="toggleTheme()" id="theme-toggle-btn">🌙 Dark</button>
+  </div>
 </header>
-<nav class="nav" aria-label="Calculator categories">
-  <a class="ntab" href="/" onclick="go('home',this);return false;">🏠 Home</a>
-  <a class="ntab" href="/blog">📝 Blog</a>
-  <div class="nav-dd" data-cat="0"><button class="nav-dd-btn" onclick="toggleNavDD(this)" aria-haspopup="true" aria-expanded="false">💰 Personal Finance</button><div class="nav-dd-menu" id="nav-dd-0"><a class="nav-dd-item" href="/loan" onclick="go('loan',this);return false;">🏦 Loan / EMI</a><a class="nav-dd-item" href="/loaneligibility" onclick="go('loaneligibility',this);return false;">✅ Loan Eligibility</a><a class="nav-dd-item" href="/dti" onclick="go('dti',this);return false;">📊 Debt-to-Income Ratio</a><a class="nav-dd-item" href="/prepay" onclick="go('prepay',this);return false;">⏩ Loan Prepayment</a><a class="nav-dd-item" href="/refinance" onclick="go('refinance',this);return false;">🔀 Refinance Break-Even</a><a class="nav-dd-item" href="/loancomp" onclick="go('loancomp',this);return false;">📋 Loan Comparison</a><a class="nav-dd-item" href="/autoloan" onclick="go('autoloan',this);return false;">🚗 Auto Loan Calculator</a><a class="nav-dd-item" href="/tax" onclick="go('tax',this);return false;">🧾 Tax Estimator</a><a class="nav-dd-item" href="/salary" onclick="go('salary',this);return false;">💵 Salary Calculator</a><a class="nav-dd-item" href="/mortgage" onclick="go('mortgage',this);return false;">🏠 Mortgage</a><a class="nav-dd-item" href="/heloc" onclick="go('heloc',this);return false;">🏡 HELOC Calculator</a><a class="nav-dd-item" href="/rentvsbuy" onclick="go('rentvsbuy',this);return false;">🏘️ Rent vs Buy Calculator</a><a class="nav-dd-item" href="/mortcomp" onclick="go('mortcomp',this);return false;">⚖️ Mortgage Comparison</a><a class="nav-dd-item" href="/savings" onclick="go('savings',this);return false;">🏛️ Savings Estimator</a><a class="nav-dd-item" href="/inflation" onclick="go('inflation',this);return false;">🎈 Inflation Calculator</a><a class="nav-dd-item" href="/provident" onclick="go('provident',this);return false;">🏦 Provident Fund Calculator</a><a class="nav-dd-item" href="/retirement" onclick="go('retirement',this);return false;">👴 Retirement Planner</a><a class="nav-dd-item" href="/socialsecurity" onclick="go('socialsecurity',this);return false;">📜 Social Security Estimator</a><a class="nav-dd-item" href="/401k" onclick="go('401k',this);return false;">🏦 401(k) Calculator</a><a class="nav-dd-item" href="/millionaire" onclick="go('millionaire',this);return false;">💎 Millionaire Calculator</a><a class="nav-dd-item" href="/fire" onclick="go('fire',this);return false;">🔥 FIRE Calculator</a><a class="nav-dd-item" href="/networth" onclick="go('networth',this);return false;">💼 Net Worth Calculator</a><a class="nav-dd-item" href="/debtcomp" onclick="go('debtcomp',this);return false;">❄️ Snowball vs Avalanche</a><a class="nav-dd-item" href="/debt" onclick="go('debt',this);return false;">💳 Debt Payoff Planner</a><a class="nav-dd-item" href="/ccpayoff" onclick="go('ccpayoff',this);return false;">🎫 Credit Card Payoff</a><a class="nav-dd-item" href="/rental" onclick="go('rental',this);return false;">🏘️ Rental Yield</a><a class="nav-dd-item" href="/rentalprop" onclick="go('rentalprop',this);return false;">🏡 Rental Property</a><a class="nav-dd-item" href="/savingsgoal" onclick="go('savingsgoal',this);return false;">🎯 Savings Goal Calculator</a><a class="nav-dd-item" href="/budget" onclick="go('budget',this);return false;">🥧 50/30/20 Budget Calculator</a><a class="nav-dd-item" href="/emergencyfund" onclick="go('emergencyfund',this);return false;">🛡️ Emergency Fund Calculator</a><a class="nav-dd-item" href="/healthscore" onclick="go('healthscore',this);return false;">💯 Financial Health Score</a><a class="nav-dd-item" href="/lifeinsurance" onclick="go('lifeinsurance',this);return false;">🛡️ Life Insurance Needs</a><a class="nav-dd-item" href="/healthinsurance" onclick="go('healthinsurance',this);return false;">🏥 Health Insurance Cost</a></div></div>
-  <div class="nav-dd" data-cat="1"><button class="nav-dd-btn" onclick="toggleNavDD(this)" aria-haspopup="true" aria-expanded="false">📈 Investing</button><div class="nav-dd-menu" id="nav-dd-1"><a class="nav-dd-item" href="/cagr" onclick="go('cagr',this);return false;">📐 CAGR Calculator</a><a class="nav-dd-item" href="/xirr" onclick="go('xirr',this);return false;">📅 XIRR Calculator</a><a class="nav-dd-item" href="/drip" onclick="go('drip',this);return false;">💧 Dividend Reinvestment</a><a class="nav-dd-item" href="/divgrowth" onclick="go('divgrowth',this);return false;">📈 Dividend Growth Calculator</a><a class="nav-dd-item" href="/etf" onclick="go('etf',this);return false;">🗂️ ETF Growth Calculator</a><a class="nav-dd-item" href="/allocation" onclick="go('allocation',this);return false;">🥧 Asset Allocation Calculator</a><a class="nav-dd-item" href="/dcf" onclick="go('dcf',this);return false;">🏦 Stock DCF Valuation</a><a class="nav-dd-item" href="/peg" onclick="go('peg',this);return false;">📏 PEG Ratio Calculator</a><a class="nav-dd-item" href="/evebitda" onclick="go('evebitda',this);return false;">🏢 EV/EBITDA Calculator</a><a class="nav-dd-item" href="/invest" onclick="go('invest',this);return false;">📈 SIP / Investment</a><a class="nav-dd-item" href="/dca" onclick="go('dca',this);return false;">📊 Dollar Cost Averaging</a><a class="nav-dd-item" href="/swp" onclick="go('swp',this);return false;">📉 SWP Calculator</a><a class="nav-dd-item" href="/stock" onclick="go('stock',this);return false;">📉 Stock P&amp;L</a><a class="nav-dd-item" href="/options" onclick="go('options',this);return false;">⚡ Options Profit &amp; Breakeven</a><a class="nav-dd-item" href="/split" onclick="go('split',this);return false;">🔀 Stock Split Calculator</a></div></div>
-  <div class="nav-dd" data-cat="2"><button class="nav-dd-btn" onclick="toggleNavDD(this)" aria-haspopup="true" aria-expanded="false">🚀 Startup &amp; Business</button><div class="nav-dd-menu" id="nav-dd-2"><a class="nav-dd-item" href="/burnrate" onclick="go('burnrate',this);return false;">🔥 Burn Rate</a><a class="nav-dd-item" href="/pricing" onclick="go('pricing',this);return false;">🏷️ Pricing Calculator</a><a class="nav-dd-item" href="/equity" onclick="go('equity',this);return false;">📐 Equity Dilution</a><a class="nav-dd-item" href="/dilutionimpact" onclick="go('dilutionimpact',this);return false;">📉 Stock Dilution Impact Calculator</a><a class="nav-dd-item" href="/revenue" onclick="go('revenue',this);return false;">📊 Revenue Forecast</a><a class="nav-dd-item" href="/cac" onclick="go('cac',this);return false;">🎯 CAC &amp; LTV:CAC Ratio</a><a class="nav-dd-item" href="/breakeven" onclick="go('breakeven',this);return false;">📈 Break-even Analysis</a><a class="nav-dd-item" href="/cashflow" onclick="go('cashflow',this);return false;">💵 Cash Flow Analyzer</a></div></div>
-  <div class="nav-dd" data-cat="3"><button class="nav-dd-btn" onclick="toggleNavDD(this)" aria-haspopup="true" aria-expanded="false">🔬 Tools</button><div class="nav-dd-menu" id="nav-dd-3"><a class="nav-dd-item" href="/currency" onclick="go('currency',this);return false;">💱 Currency Converter</a><a class="nav-dd-item" href="/billsplit" onclick="go('billsplit',this);return false;">🍽️ Itemized Bill Splitter</a><a class="nav-dd-item" href="/remit" onclick="go('remit',this);return false;">🌍 International Transfer Cost</a><a class="nav-dd-item" href="/scientific" onclick="go('scientific',this);return false;">🔬 Scientific Calculator</a></div></div>
+<nav class="mobile-menu" id="mobile-menu">
+  <a href="/">Home</a>
+  <a href="/personal-finance">Personal Finance</a>
+  <a href="/investing-valuation">Investing &amp; Valuation</a>
+  <a href="/startup-business">Startup &amp; Business</a>
+  <a href="/tools">Tools</a>
+  <a href="/blog">Journal</a>
 </nav>
+<nav class="breadcrumb" aria-label="Breadcrumb"><a href="/">Home</a><span class="bc-sep">/</span><a href="/personal-finance">Personal Finance</a><span class="bc-sep">/</span><span class="bc-current">Net Worth Calculator</span></nav>
 <main class="content" id="main-content">
 <div id="networth" class="panel on">
 <div class="calc-header">
@@ -373,6 +466,7 @@ body{background:var(--bg);color:var(--t);font-family:var(--fn);font-size:14px;li
 <h2 class="calc-subtitle">See what you actually own, minus what you actually owe</h2>
 <p class="calc-desc">This calculator totals your assets and liabilities to compute your net worth, breaks down your liquid vs. illiquid wealth, and shows your debt-to-asset ratio.</p>
 </div>
+<div style="display:flex;gap:10px;flex-wrap:wrap;margin:.75rem 0 1.5rem"><button class="btn-example" style="margin:0" onclick="fillExampleValues()">✨ Try an example</button><button class="btn-example" style="margin:0" onclick="resetCalculatorValues()">↺ Reset</button></div>
 
 <div class="two">
   <div class="card">
@@ -404,10 +498,10 @@ body{background:var(--bg);color:var(--t);font-family:var(--fn);font-size:14px;li
     <div class="card-title">Asset Breakdown</div>
     <div class="donut-wrap"><canvas id="nw-donut" width="110" height="110"></canvas>
       <div>
-        <div class="leg-i"><div class="leg-dot" style="background:#0ECB81"></div>Cash</div>
+        <div class="leg-i"><div class="leg-dot" style="background:#6FBF95"></div>Cash</div>
         <div class="leg-i"><div class="leg-dot" style="background:#1890FF"></div>Investments</div>
         <div class="leg-i"><div class="leg-dot" style="background:#9B59B6"></div>Retirement</div>
-        <div class="leg-i"><div class="leg-dot" style="background:#F0B90B"></div>Real Estate</div>
+        <div class="leg-i"><div class="leg-dot" style="background:#6FBF95"></div>Real Estate</div>
         <div class="leg-i"><div class="leg-dot" style="background:#F6465D"></div>Vehicles</div>
         <div class="leg-i"><div class="leg-dot" style="background:#8393A6"></div>Other</div>
       </div>
@@ -418,8 +512,8 @@ body{background:var(--bg);color:var(--t);font-family:var(--fn);font-size:14px;li
   </div>
 </div>
 
-<div style="margin-top:1.75rem;margin-bottom:1.75rem"><div class="calc-links"><span class="calc-links-label">🔗 Related Calculators</span><a class="calc-link-btn" href="/inflation" onclick="go('inflation',null);return false;">🎈 Inflation</a><a class="calc-link-btn" href="/millionaire" onclick="go('millionaire',null);return false;">🏆 Millionaire</a><a class="calc-link-btn" href="/healthscore" onclick="go('healthscore',null);return false;">💯 Financial Health Score</a><a class="calc-link-btn" href="/retirement" onclick="go('retirement',null);return false;">👴 Retirement</a><a class="calc-link-btn" href="/allocation" onclick="go('allocation',null);return false;">🥧 Asset Allocation</a></div></div>
-<div class="related-box"><div class="related-box-title">📖 Related Articles</div><a class="related-item" href="/blog/building-wealth-step-by-step">Building Wealth Step by Step: The Order That Actually Works<span class="related-arrow">→</span></a></div>
+<div style="margin-top:1.75rem;margin-bottom:1.75rem"><div class="calc-links-label">🔗 Related Calculators</div><div class="calc-links"><a class="calc-link-btn" href="/inflation" onclick="go('inflation',null);return false;">🎈 Inflation</a><a class="calc-link-btn" href="/millionaire" onclick="go('millionaire',null);return false;">🏆 Millionaire</a><a class="calc-link-btn" href="/healthscore" onclick="go('healthscore',null);return false;">💯 Financial Health Score</a><a class="calc-link-btn" href="/retirement" onclick="go('retirement',null);return false;">👴 Retirement</a><a class="calc-link-btn" href="/allocation" onclick="go('allocation',null);return false;">🥧 Asset Allocation</a></div></div>
+<div class="related-box"><div class="related-box-title">📖 Related Articles</div><a class="related-item" href="/blog/building-wealth-step-by-step"><div class="related-item-title">Building Wealth Step by Step: The Order That Actually Works</div><div class="related-item-desc">Wealth building isn't about doing everything at once — it follows a fairly predictable sequence that compounds over time.</div><span class="related-item-cta">Read more<span class="related-arrow">→</span></span></a></div>
 <div class="calc-guide">
   <div class="guide-toggle">
     <div class="guide-toggle-title">📖 How to Think About Net Worth</div>
@@ -475,31 +569,35 @@ body{background:var(--bg);color:var(--t);font-family:var(--fn);font-size:14px;li
 
 </main><!-- content -->
 <footer class="site-footer">
-  <div class="footer-brand">
-    <div class="logo-mark" style="width:22px;height:22px;background:var(--a);border-radius:5px;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700">FC</div>
-    FinCalc
+  <div class="foot-grid">
+    <div>
+      <div class="foot-brand"><div class="logo-mark">FC</div>FinCalc</div>
+      <p class="foot-desc">Sixty financial calculators, kept in one place, built to run entirely in your browser.</p>
+    </div>
+    <div class="foot-cols">
+      <div class="foot-col">
+        <h4>Ledgers</h4>
+        <a href="/personal-finance">Personal Finance</a>
+        <a href="/investing-valuation">Investing &amp; Valuation</a>
+        <a href="/startup-business">Startup &amp; Business</a>
+        <a href="/tools">Tools</a>
+      </div>
+      <div class="foot-col">
+        <h4>Company</h4>
+        <a href="/about">About</a>
+        <a href="/blog">Journal</a>
+        <a href="/sitemap.xml">Sitemap</a>
+      </div>
+      <div class="foot-col">
+        <h4>Legal</h4>
+        <a href="/privacy">Privacy</a>
+        <a href="/terms">Terms</a>
+      </div>
+    </div>
   </div>
-  <div class="footer-copy">© 2025 FinCalc · Free Financial Calculators · <a href="/blog" style="color:inherit">Blog</a> · <a href="/about" style="color:inherit">About</a> · <a href="/privacy" style="color:inherit">Privacy Policy</a> · <a href="/terms" style="color:inherit">Terms</a></div>
-  <!-- tinystartups · Launched on Tiny Startups -->
-<a href="https://www.tinystartups.com/startup/finclaccom" target="_blank" rel="noopener"
-   style="display:inline-flex;align-items:center;gap:10px;padding:8px 14px 8px 10px;border-radius:12px;text-decoration:none;font-family:'Inter',system-ui,sans-serif;background:linear-gradient(#fff,#fff) padding-box,linear-gradient(90deg,#3525E6,#D81FE0,#22B8F0) border-box;border:2px solid transparent;color:#0E0B1F;flex-shrink:0">
-  <svg width="34" height="34" viewBox="0 0 100 100">
-    <defs><linearGradient id="tsg" x1=".1" y1="0" x2=".9" y2="1">
-      <stop offset="0%" stop-color="#3525E6"/><stop offset="55%" stop-color="#D81FE0"/><stop offset="100%" stop-color="#22B8F0"/>
-    </linearGradient></defs>
-    <path d="M50 6C52 32 68 48 94 50C68 52 52 68 50 94C48 68 32 52 6 50C32 48 48 32 50 6Z" fill="url(#tsg)"/>
-  </svg>
-  <span style="display:flex;flex-direction:column;line-height:1.1">
-    <span style="font-family:monospace;font-size:7px;font-weight:600;letter-spacing:0.15em;text-transform:uppercase;color:#6A6585">Launched on</span>
-    <span style="font-size:14px;font-weight:800;letter-spacing:-0.02em">Tiny Startups</span>
-  </span>
-</a>
-<a href="https://devglobe.app/projects/fincalc?utm_source=badge&utm_medium=embed" target="_blank" rel="noopener">
-  <img src="https://devglobe.app/badges/launched-on-devglobe-dark.svg" alt="Launched on DevGlobe" width="250" height="54" />
-</a>
-<a href="https://sellwithboost.com" target="_blank" rel="noopener noreferrer">
-  <img src="https://sellwithboost.com/badge/listing.svg" alt="Listed on Sell With boost" style="height: 40px; width: auto;" />
-</a>
+  <div class="foot-bottom">
+    <span>© 2026 FinCalc. All calculations are estimates, not financial advice.</span>
+    </div>
 </footer>
 <script>
 (function(){
@@ -521,7 +619,18 @@ document.addEventListener('DOMContentLoaded', function(){
   if(btn) btn.textContent = current === 'light' ? '\ud83c\udf19 Dark' : '\u2600\ufe0f Light';
 });
 </script>
-<script src="app.js?v=20260731f"></script>
+<script src="app.js?v=20260731h"></script>
 <script>initPage('networth');</script>
+
+<script>
+function toggleMobileMenu(){
+  const menu=document.getElementById('mobile-menu');
+  const btn=document.getElementById('mobile-menu-btn');
+  if(!menu||!btn)return;
+  const open=menu.classList.toggle('open');
+  btn.setAttribute('aria-expanded', open ? 'true' : 'false');
+  btn.textContent = open ? '✕' : '☰';
+}
+</script>
 </body>
 </html>
