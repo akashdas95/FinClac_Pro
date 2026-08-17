@@ -250,6 +250,13 @@ input:focus-visible,select:focus-visible,textarea:focus-visible,button:focus-vis
 /* FAQ Section */
 .faq-section{margin-top:2.5rem;border-top:1px solid var(--bd);padding-top:1.75rem}
 .faq-section-title{font-size:13px;font-weight:700;color:var(--m);text-transform:uppercase;letter-spacing:.8px;margin-bottom:1.1rem;display:flex;align-items:center;gap:8px}
+.source-box{background:var(--s2);border:1px solid var(--bd);border-left:3px solid var(--g);border-radius:8px;padding:16px 18px;margin:1.75rem 0}
+.source-title{font-size:11px;font-weight:700;color:var(--m);text-transform:uppercase;letter-spacing:.6px;margin-bottom:.65rem}
+.source-list{margin:0 0 .6rem;padding-left:1.1rem;font-size:13px;color:var(--tb);line-height:1.7}
+.source-list a{color:var(--g);text-decoration:underline;text-underline-offset:2px}
+.source-list a:hover{color:var(--a)}
+.source-note{font-size:12px;color:var(--m);margin:0;line-height:1.6}
+.source-note a{color:var(--g)}
 .faq-section-title::after{content:'';flex:1;height:1px;background:var(--bd)}
 .faq-item{border:1px solid var(--bd);border-radius:8px;margin-bottom:10px;overflow:hidden;transition:border-color .2s,box-shadow .2s,transform .2s}
 .faq-item:hover{border-color:var(--g);box-shadow:0 4px 14px rgba(15,79,53,.1);transform:translateY(-1px)}
@@ -571,6 +578,14 @@ footer.site-footer .foot-badges{max-width:1180px;margin:20px auto 0;display:flex
 <div class="guide-warn">⚠ Expected returns used in this calculator (10% stocks, 4.5% bonds, 3% cash, 7% gold, 25% crypto) are illustrative long-term historical averages, not guarantees — actual future returns for any asset class can differ substantially, and crypto in particular has a very short historical track record relative to traditional asset classes, making any long-term return assumption for it considerably less reliable.</div>
 
   </div>
+</div>
+
+<div class="source-box">
+  <div class="source-title">📚 Data Sources</div>
+  <ul class="source-list">
+    <li>"110 minus age" allocation heuristic: <a href="https://www.fool.com/terms/r/rule-of-110" target="_blank" rel="noopener">The Motley Fool — Rule of 110</a>, an updated variant of the older "100 minus age" rule</li>
+  </ul>
+  <p class="source-note">Age-based rules are a simplified starting point. Your actual risk tolerance, timeline, and other assets should shape your real allocation more than age alone.</p>
 </div>
 
 <div class="faq-section">

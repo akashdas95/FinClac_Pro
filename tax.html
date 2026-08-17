@@ -250,6 +250,12 @@ input:focus-visible,select:focus-visible,textarea:focus-visible,button:focus-vis
 /* FAQ Section */
 .faq-section{margin-top:2.5rem;border-top:1px solid var(--bd);padding-top:1.75rem}
 .faq-section-title{font-size:13px;font-weight:700;color:var(--m);text-transform:uppercase;letter-spacing:.8px;margin-bottom:1.1rem;display:flex;align-items:center;gap:8px}
+.source-box{background:var(--s2);border:1px solid var(--bd);border-left:3px solid var(--g);border-radius:8px;padding:16px 18px;margin:1.75rem 0}
+.source-title{font-size:11px;font-weight:700;color:var(--m);text-transform:uppercase;letter-spacing:.6px;margin-bottom:.65rem}
+.source-list{margin:0 0 .6rem;padding-left:1.1rem;font-size:13px;color:var(--tb);line-height:1.7}
+.source-list a{color:var(--g);text-decoration:underline;text-underline-offset:2px}
+.source-list a:hover{color:var(--a)}
+.source-note{font-size:12px;color:var(--m);margin:0;line-height:1.6}
 .faq-section-title::after{content:'';flex:1;height:1px;background:var(--bd)}
 .faq-item{border:1px solid var(--bd);border-radius:8px;margin-bottom:10px;overflow:hidden;transition:border-color .2s,box-shadow .2s,transform .2s}
 .faq-item:hover{border-color:var(--g);box-shadow:0 4px 14px rgba(15,79,53,.1);transform:translateY(-1px)}
@@ -527,6 +533,15 @@ footer.site-footer .foot-badges{max-width:1180px;margin:20px auto 0;display:flex
 <div class="guide-warn">⚠ This calculator estimates US federal tax only. State income tax (which varies from 0% in states like Texas and Florida to over 13% in California) is calculated entirely separately and is not included here — always factor in your specific state's tax rules for a complete picture.</div>
 
   </div>
+</div>
+
+<div class="source-box">
+  <div class="source-title">📚 Data Sources</div>
+  <ul class="source-list">
+    <li>Federal income tax brackets and standard deduction amounts: <a href="https://www.irs.gov/filing/federal-income-tax-rates-and-brackets" target="_blank" rel="noopener">IRS.gov — Federal Income Tax Rates and Brackets</a></li>
+    <li>FICA (Social Security &amp; Medicare) tax rates: <a href="https://www.ssa.gov/oact/progdata/taxRates.html" target="_blank" rel="noopener">Social Security Administration</a></li>
+  </ul>
+  <p class="source-note">Bracket figures shown are illustrative for the current tax year. Always confirm against the official IRS source before filing, as thresholds are adjusted annually for inflation.</p>
 </div>
 
 <div class="faq-section">

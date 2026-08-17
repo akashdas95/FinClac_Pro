@@ -125,6 +125,11 @@ input:focus-visible,select:focus-visible,textarea:focus-visible,button:focus-vis
 .sbox:first-child .val{font-size:32px;font-weight:700;line-height:1.15}
 .sbox:not(:first-child){display:flex;align-items:center;justify-content:space-between;gap:14px}
 .sbox:not(:first-child) .lbl{margin-bottom:0;flex-shrink:0}
+.scn-box{background:var(--s);border:1px solid var(--bd);border-radius:8px;padding:16px 14px;text-align:center}
+.scn-lbl{font-size:10.5px;font-weight:700;color:var(--m);text-transform:uppercase;letter-spacing:.5px;margin-bottom:8px}
+.scn-val{font-size:22px;font-weight:700;font-family:var(--mo);line-height:1.15}
+.scn-sub{font-size:10.5px;color:var(--m);margin-top:6px}
+@media(max-width:520px){.scn-val{font-size:18px}}
 .sbox:not(:first-child) .val{text-align:right}
 .rrow{display:flex;justify-content:space-between;padding:7px 0;border-bottom:1px solid var(--bd);font-size:13px}
 .rrow:last-child{border:none}
@@ -487,9 +492,9 @@ footer.site-footer .foot-badges{max-width:1180px;margin:20px auto 0;display:flex
   <div class="card">
     <div class="card-title">Scenarios</div>
     <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px;margin-bottom:1rem">
-      <div class="sbox" style="border-top:3px solid var(--r)"><div class="lbl">🐻 Pessimistic</div><div class="val" style="color:var(--r)" id="rf-p">$0</div><div style="font-size:10px;color:var(--m);margin-top:3px" id="rf-pg"></div></div>
-      <div class="sbox" style="border-top:3px solid var(--b)"><div class="lbl">📊 Base Case</div><div class="val" style="color:var(--b)" id="rf-b">$0</div><div style="font-size:10px;color:var(--m);margin-top:3px" id="rf-bg"></div></div>
-      <div class="sbox" style="border-top:3px solid var(--g)"><div class="lbl">🚀 Optimistic</div><div class="val" style="color:var(--g)" id="rf-o">$0</div><div style="font-size:10px;color:var(--m);margin-top:3px" id="rf-og"></div></div>
+      <div class="scn-box" style="border-top:3px solid var(--r);background:var(--s2)"><div class="scn-lbl">🐻 Pessimistic</div><div class="scn-val" style="color:var(--r)" id="rf-p">$0</div><div class="scn-sub" id="rf-pg"></div></div>
+      <div class="scn-box" style="border-top:3px solid var(--b)"><div class="scn-lbl">📊 Base Case</div><div class="scn-val" style="color:var(--b)" id="rf-b">$0</div><div class="scn-sub" id="rf-bg"></div></div>
+      <div class="scn-box" style="border-top:3px solid var(--g)"><div class="scn-lbl">🚀 Optimistic</div><div class="scn-val" style="color:var(--g)" id="rf-o">$0</div><div class="scn-sub" id="rf-og"></div></div>
     </div>
     <canvas id="rf-chart" width="500" height="165" style="width:100%"></canvas>
   </div>
