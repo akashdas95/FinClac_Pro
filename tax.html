@@ -486,6 +486,7 @@ footer.site-footer .foot-badges{max-width:1180px;margin:20px auto 0;display:flex
     </div>
     <div class="sgrid">
       <div class="sbox"><div class="lbl">Federal Tax</div><div class="val" style="color:var(--r)" id="t-tax">$0</div></div>
+      <div class="sbox"><div class="lbl">FICA (Payroll Tax)</div><div class="val" style="color:var(--r)" id="t-fica">$0</div></div>
       <div class="sbox"><div class="lbl">Effective Rate</div><div class="val" id="t-eff">0%</div></div>
       <div class="sbox"><div class="lbl">Monthly Take-home</div><div class="val" style="color:var(--g)" id="t-home">$0</div></div>
       <div class="sbox"><div class="lbl">Taxable Income</div><div class="val" id="t-taxinc">$0</div></div>
@@ -530,7 +531,7 @@ footer.site-footer .foot-badges{max-width:1180px;margin:20px auto 0;display:flex
 <tr><td>W-2 Employee</td><td>7.65% (employer matches the other 7.65%)</td></tr>
 <tr><td>Self-Employed / 1099</td><td>15.3% (pays both halves)</td></tr>
 </tbody></table>
-<div class="guide-warn">⚠ This calculator estimates US federal tax only. State income tax (which varies from 0% in states like Texas and Florida to over 13% in California) is calculated entirely separately and is not included here — always factor in your specific state's tax rules for a complete picture.</div>
+<div class="guide-warn">⚠ This calculator estimates US federal income tax and FICA (Social Security + Medicare) together. State income tax (which varies from 0% in states like Texas and Florida to over 13% in California) is calculated entirely separately and is not included here — always factor in your specific state's tax rules for a complete picture.</div>
 
   </div>
 </div>
@@ -580,6 +581,27 @@ footer.site-footer .foot-badges{max-width:1180px;margin:20px auto 0;display:flex
     <span class="faq-icon">+</span>
   </div>
   <div class="faq-a">FICA taxes fund <strong>Social Security (6.2%)</strong> and <strong>Medicare (1.45%)</strong>, totaling 7.65% of wages up to the SS wage base. Your employer matches this. Self-employed individuals pay the full 15.3% as self-employment tax.</div>
+</div>
+<div class="faq-item">
+  <div class="faq-q" onclick="toggleFAQ(this)">
+    <span>How accurate are the results from this calculator?</span>
+    <span class="faq-icon">+</span>
+  </div>
+  <div class="faq-a">This calculator gives you a mathematically precise estimate based on the numbers you enter. Real-world results can differ due to fees, rate changes, taxes, or other factors not captured in a simplified formula — treat the output as a planning estimate, not financial, tax, or legal advice.</div>
+</div>
+<div class="faq-item">
+  <div class="faq-q" onclick="toggleFAQ(this)">
+    <span>Is this calculator free to use?</span>
+    <span class="faq-icon">+</span>
+  </div>
+  <div class="faq-a">Yes. Every calculator on FinCalc is completely free, with no signup, subscription, or paywall required.</div>
+</div>
+<div class="faq-item">
+  <div class="faq-q" onclick="toggleFAQ(this)">
+    <span>Does this calculator store or share my data?</span>
+    <span class="faq-icon">+</span>
+  </div>
+  <div class="faq-a">No. All calculations run locally in your browser — nothing you type is sent to or stored on a server.</div>
 </div>
 </div>
 

@@ -900,7 +900,7 @@ function calcRP(){
   gel('rp-mort').textContent=f$(emi);gel('rp-effrent').textContent=f$(effRent);
   gel('rp-cf').textContent=f$(cf/12);gel('rp-cf').style.color=cf>=0?'var(--g)':'var(--r)';
   gel('rp-totalinv').textContent=f$(tinv);
-  const v10=price*Math.pow(1+appr,10),r10=annRent*10,ret10=(v10-price+r10)/tinv*100;
+  const v10=price*Math.pow(1+appr,10),r10=annRent*10,ret10=(v10-price+cf*10)/tinv*100;
   gel('rp-10v').textContent=f$(v10);gel('rp-10r').textContent=f$(r10);
   gel('rp-10ret').textContent=pct(ret10);gel('rp-10ret').style.color=ret10>=0?'var(--g)':'var(--r)';
   drawLine('rp-chart',[{data:Array.from({length:11},(_,i)=>price*Math.pow(1+appr,i)),color:'#F0B90B',fill:true},{data:Array.from({length:11},(_,i)=>annRent*i),color:'#0F4F35',fill:false}],155);
@@ -1564,7 +1564,14 @@ function cTax(){
   const bks={single:[[0,12400,10],[12400,50400,12],[50400,105700,22],[105700,201775,24],[201775,256225,32],[256225,640600,35],[640600,Infinity,37]],married:[[0,24800,10],[24800,100800,12],[100800,211400,22],[211400,403550,24],[403550,512450,32],[512450,768700,35],[768700,Infinity,37]],hoh:[[0,17700,10],[17700,67450,12],[67450,105700,22],[105700,201775,24],[201775,256200,32],[256200,640600,35],[640600,Infinity,37]]};
   const slabs=bks[status]||bks.single;let tax=0,rows=[];
   slabs.forEach(s=>{if(ti<=s[0]){rows.push({f:s[0],t:s[1],r:s[2],tx:0,act:false});return;}const sl=Math.min(ti,s[1]===Infinity?ti:s[1])-s[0],tx=sl*s[2]/100;tax+=tx;rows.push({f:s[0],t:s[1],r:s[2],tx,act:true});});
-  gel('t-tax').textContent=f$(tax);gel('t-eff').textContent=ti?pct(tax/ti*100):'0%';gel('t-home').textContent=f$((gross-tax)/12);gel('t-taxinc').textContent=f$(ti);
+  // FICA (Social Security + Medicare) is withheld on gross wages, not on
+  // taxable income — it isn't reduced by the standard deduction or by
+  // pre-tax 401(k) contributions, and it excludes "Other Income" since that
+  // may be investment income (not wage income) which isn't subject to FICA.
+  const SS_WAGE_BASE=184500,ADDL_MEDICARE_THRESHOLD=status==='married'?250000:200000;
+  const ssTax=Math.min(gross,SS_WAGE_BASE)*0.062,medicareTax=gross*0.0145,addlMedicare=Math.max(0,gross-ADDL_MEDICARE_THRESHOLD)*0.009;
+  const fica=ssTax+medicareTax+addlMedicare;
+  gel('t-tax').textContent=f$(tax);gel('t-fica').textContent=f$(fica);gel('t-eff').textContent=ti?pct(tax/ti*100):'0%';gel('t-home').textContent=f$((gross-tax-fica)/12);gel('t-taxinc').textContent=f$(ti);
   gel('t-slabs').innerHTML=`<thead><tr><th>Bracket</th><th>Rate</th><th>Tax Owed</th></tr></thead><tbody>`+rows.map(r=>`<tr class="${r.act?'slab-on':''}"><td>${r.f===0?'Up to $'+Math.round(r.t).toLocaleString():r.t===Infinity?'Over $'+Math.round(r.f).toLocaleString():'$'+Math.round(r.f).toLocaleString()+' – $'+Math.round(r.t).toLocaleString()}</td><td>${r.r}%</td><td>${r.tx?'$'+Math.round(r.tx).toLocaleString():'-'}</td></tr>`).join('')+'</tbody>';
 
   const insights=[];
@@ -1578,7 +1585,7 @@ function cTax(){
     const roomLeft=marginalBracket.t-ti;
     if(roomLeft>0)insights.push({type:'neutral',text:`You have about <strong>${f$(roomLeft)}</strong> of room left in your current <strong>${marginalRate}%</strong> bracket before crossing into the next one.`});
   }
-  insights.push({type:'neutral',text:`This estimates <strong>federal tax only</strong> — state income tax (0% to 13%+ depending on where you live) is calculated separately and isn't included here.`});
+  insights.push({type:'neutral',text:`Take-home pay now includes <strong>federal income tax and FICA</strong> (Social Security + Medicare), but not <strong>state income tax</strong> (0% to 13%+ depending on where you live), which is calculated separately and isn't included here.`});
     insights.push({type:'neutral',text:`Want to see how this tax bill fits into your overall monthly budget? Check your full picture with the <a href="/cashflow" style="color:var(--a);text-decoration:underline">Cash Flow</a> calculator.`});
   renderInsights('t-insights',insights);
 }
@@ -1949,12 +1956,17 @@ function calcCCPayoff(){
 }
 function cSavings(){
   const init=+gel('sv-init').value||0,mo=+gel('sv-monthly').value||0,r=(+gel('sv-rate').value||0)/100,y=+gel('sv-years').value||1,k=+gel('sv-comp').value;
-  const rk=r/k,n=k*y,fb=init*Math.pow(1+rk,n)+mo*(Math.pow(1+rk,n)-1)/(rk||1)*(1+rk)*(12/k);
+  const rk=r/k;
+  // Contributions are monthly regardless of the selected compounding frequency,
+  // so derive the equivalent monthly rate from the chosen frequency (rk, k)
+  // instead of assuming k=12 — keeps this consistent for any compounding choice.
+  const mr=Math.pow(1+rk,k/12)-1;
+  const n=k*y,fb=init*Math.pow(1+rk,n)+(mr>0?mo*(Math.pow(1+mr,y*12)-1)/mr*(1+mr):mo*y*12);
   const contrib=init+mo*12*y,int=fb-contrib,dbl=r>0?Math.log(2)/Math.log(1+r):Infinity;
   gel('sv-final').textContent=f$(fb);gel('sv-int').textContent=f$(int);gel('sv-contrib').textContent=f$(contrib);
   gel('sv-dbl').textContent=isFinite(dbl)?dbl.toFixed(1)+' yrs':'∞';gel('sv-ratio').textContent=pct(int/contrib*100);
   const steps=10,ip=[],fp=[];
-  for(let i=1;i<=steps;i++){const yr=y*i/steps,ni=k*yr,b=init*Math.pow(1+rk,ni)+mo*(Math.pow(1+rk,ni)-1)/(rk||1)*(1+rk)*(12/k);ip.push(init+mo*12*yr);fp.push(b);}
+  for(let i=1;i<=steps;i++){const yr=y*i/steps,ni=k*yr,b=init*Math.pow(1+rk,ni)+(mr>0?mo*(Math.pow(1+mr,yr*12)-1)/mr*(1+mr):mo*yr*12);ip.push(init+mo*12*yr);fp.push(b);}
   drawLine('sv-chart',[{data:ip,color:'#0F4F35',fill:true},{data:fp,color:'#F0B90B',fill:false,w:2.5}],175);
 
   const insights=[];
@@ -3243,7 +3255,10 @@ function cSavingsGoal(){
   const fvCurrent=current*Math.pow(1+rk,periods);
   const stillNeeded=Math.max(0,goal-fvCurrent);
   // Monthly payment needed: PMT = PV * r / (1-(1+r)^-n)
-  const mr=rate/12;
+  // Derive an effective monthly rate from the *selected* compounding
+  // frequency (rk, k) rather than assuming monthly compounding regardless
+  // of what the user picked — keeps this leg consistent with fvCurrent above.
+  const mr=Math.pow(1+rk,k/12)-1;
   const monthlyNeeded=mr>0?stillNeeded*mr/(Math.pow(1+mr,months)-1):stillNeeded/months;
   const totalContrib=monthlyNeeded*months;
   const interest=goal-current-totalContrib;
