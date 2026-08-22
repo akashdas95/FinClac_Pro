@@ -1,33 +1,156 @@
 # FinCalc
 
-> FinCalc is a free collection of 60 online financial calculators covering personal finance, investing, loans, retirement, and business finance. All calculators run entirely in the browser — no signup, no data stored.
+> FinCalc is a free collection of 60 online financial calculators covering personal finance, investing, loans, retirement, and business finance, plus 64 in-depth guides on the reasoning behind the math. All calculators run entirely in the browser — no signup, no data stored server-side.
 
-## Calculators
+## Calculators — Personal Finance (33)
 
-- [Salary Calculator](https://finclac.com/salary): Convert pay between hourly, daily, monthly, and yearly
-- [401(k) Calculator](https://finclac.com/401k): Project 401(k) balance at retirement, including employer match
-- [Millionaire Calculator](https://finclac.com/millionaire): Find out what age you'll reach $1,000,000
-- [Dollar Cost Averaging Calculator](https://finclac.com/dca): Shares bought, average cost per share, DCA vs lump sum
-- [International Transfer Cost Calculator](https://finclac.com/remit): True cost of sending money abroad, including rate markup
-- [Mortgage Calculator](https://finclac.com/mortgage): Monthly payment with taxes, insurance, and PMI
-- [Loan / EMI Calculator](https://finclac.com/loan): Loan payment schedule and amortization
-- [Retirement Planner](https://finclac.com/retirement): Retirement savings projection adjusted for inflation
-- [FIRE Calculator](https://finclac.com/fire): Financial independence / early retirement timeline
-- [Tax Estimator](https://finclac.com/tax): US federal income tax and effective rate estimate
-- [CAGR Calculator](https://finclac.com/cagr): Compound annual growth rate
-- [Currency Converter](https://finclac.com/currency): Live exchange rates across 15 major currencies
-- [Net Worth Calculator](https://finclac.com/networth): Total assets and liabilities, liquid vs illiquid split
-- [Refinance Break-Even Calculator](https://finclac.com/refinance): Months to recoup mortgage refinance closing costs
-- [Social Security Benefit Estimator](https://finclac.com/socialsecurity): Benefit impact of claiming age 62-70
-- [Options Profit & Breakeven Calculator](https://finclac.com/options): Breakeven, max profit, and max loss for calls and puts
-- [Credit Card Payoff Calculator](https://finclac.com/ccpayoff): Minimum payment vs fixed payment payoff time and interest
-- [50/30/20 Budget Calculator](https://finclac.com/budget): Actual spending vs the 50/30/20 needs/wants/savings rule
-- [CAC & LTV:CAC Ratio Calculator](https://finclac.com/cac): Customer acquisition cost and lifetime value ratio for SaaS
-- [Itemized Bill Splitter](https://finclac.com/billsplit): Proportional bill splitting by what each person ordered
-- [Inflation Calculator](https://finclac.com/inflation): Purchasing power over time using a chosen inflation rate
+- [401(k) Calculator](https://finclac.com/401k): Estimate how your 401(k) balance grows to retirement, including employer match, salary growth, and IRS contribution limits
+- [Auto Loan Calculator](https://finclac.com/autoloan): Calculate your car payment including down payment, trade-in value, and sales tax
+- [50/30/20 Budget Calculator](https://finclac.com/budget): Compare your actual spending against the 50/30/20 budget rule and see exactly where you're over or under, category by category
+- [Credit Card Payoff Calculator](https://finclac.com/ccpayoff): See how long it really takes to pay off a credit card on minimum payments vs a fixed payment, and how much interest each approach costs
+- [Debt Payoff Planner](https://finclac.com/debt): Calculate how long it takes to pay off all your debts and compare snowball vs avalanche payoff strategies
+- [Debt Snowball vs Avalanche](https://finclac.com/debtcomp): Compare debt snowball vs avalanche payoff strategies side by side and see which saves more interest
+- [Debt-to-Income Ratio Calculator](https://finclac.com/dti): Calculate your debt-to-income ratio (front-end and back-end DTI) and see how it compares to what lenders typically look for
+- [Emergency Fund Calculator](https://finclac.com/emergencyfund): Calculate how much you need in your emergency fund based on your actual monthly expenses
+- [FIRE Calculator](https://finclac.com/fire): Calculate your years to financial independence and FI number, and compare Lean, Fat, Coast, and Barista FIRE
+- [Health Insurance Cost Calculator](https://finclac.com/healthinsurance): Compare two health insurance plans by estimating your true total annual cost, including premiums, deductibles, coinsurance, and out-of-pocket maximums
+- [Financial Health Score](https://finclac.com/healthscore): Get a 0-100 financial health score based on your savings rate, debt-to-income ratio, and emergency fund coverage
+- [How Much HELOC Can You Get?](https://finclac.com/heloc): Estimate your HELOC credit limit, interest-only draw period payments, and full repayment costs based on your home value and mortgage balance
+- [Inflation Calculator](https://finclac.com/inflation): Calculate how inflation erodes purchasing power over time — see what an amount then is worth now, or will be worth in the future
+- [Life Insurance Needs Calculator](https://finclac.com/lifeinsurance): Calculate how much life insurance coverage you need based on income replacement, debts, mortgage, and future expenses
+- [Loan / EMI Calculator](https://finclac.com/loan): Calculate your loan EMI instantly with a full amortization schedule showing principal vs interest
+- [Loan Comparison Calculator](https://finclac.com/loancomp): Compare up to 3 loan offers side by side on EMI, total interest, fees, and total cost to find the cheapest one
+- [Loan Eligibility Calculator](https://finclac.com/loaneligibility): Find out how much loan you may qualify for based on your income, existing debts, interest rate, and tenure, using the same DTI method lenders use
+- [Millionaire Calculator](https://finclac.com/millionaire): Find out exactly what age you'll become a millionaire based on your savings, monthly contributions, and investment return
+- [Mortgage Comparison Calculator](https://finclac.com/mortcomp): Compare multiple mortgage offers side by side, including 15-year vs 30-year terms and different rates
+- [Mortgage Calculator](https://finclac.com/mortgage): Calculate your monthly mortgage payment, total interest, and full amortization schedule, including PMI
+- [Net Worth Calculator](https://finclac.com/networth): Calculate your total net worth from assets and liabilities, see your liquid vs
+- [Loan Prepayment Calculator](https://finclac.com/prepay): See exactly how much time and interest you save by prepaying your loan with extra monthly payments or a lump sum
+- [Provident Fund Calculator](https://finclac.com/provident): Calculate your provident fund maturity value, interest earned, and year-by-year balance growth with step-up contributions
+- [Refinance Break-Even Calculator](https://finclac.com/refinance): See how many months it takes to recoup refinancing closing costs through lower payments, and whether refinancing actually saves you money
+- [Rental Yield Calculator](https://finclac.com/rental): Calculate gross and net rental yield for any property investment, with a full expense breakdown
+- [Rental Property Calculator](https://finclac.com/rentalprop): Analyze a rental property's cap rate, cash-on-cash return, and NOI before you buy
+- [Rent vs Buy Calculator](https://finclac.com/rentvsbuy): Compare your projected net worth renting vs buying a home, including opportunity cost, appreciation, and the exact breakeven year
+- [Retirement Calculator](https://finclac.com/retirement): Calculate exactly how much you need to retire using the 25x rule and 4% safe withdrawal rate
+- [Salary Calculator](https://finclac.com/salary): Convert your pay between hourly, daily, monthly, and yearly salary instantly
+- [Compound Interest Calculator](https://finclac.com/savings): Calculate compound interest growth on your savings with regular monthly contributions and APY comparison
+- [Savings Goal Calculator](https://finclac.com/savingsgoal): Calculate exactly how much to save each month to reach any financial goal by your target date
+- [Social Security Benefit Estimator](https://finclac.com/socialsecurity): See how claiming Social Security early or delaying to 70 changes your monthly benefit, based on your estimated benefit at full retirement age
+- [US Federal Income Tax Estimator](https://finclac.com/tax): Estimate your US federal income tax with both marginal and effective tax rates
 
-See [sitemap.xml](https://finclac.com/sitemap.xml) for the full list of calculators and articles.
+## Calculators — Investing & Valuation (15)
+
+- [Asset Allocation Calculator](https://finclac.com/allocation): Find your ideal stocks, bonds, cash, gold, and crypto allocation based on age and risk tolerance
+- [CAGR Calculator](https://finclac.com/cagr): Free CAGR calculator shows you how to calculate compound annual growth rate step by step, with Rule of 72 doubling time and historical benchmark comparisons
+- [Dollar Cost Averaging (DCA) Calculator](https://finclac.com/dca): Calculate shares bought, average cost per share, and ending value from regular investing vs a lump sum
+- [DCF Valuation Calculator](https://finclac.com/dcf): Calculate a stock's intrinsic value using discounted cash flow analysis
+- [Dividend Growth Calculator](https://finclac.com/divgrowth): Project your future dividend income and yield on cost, and compare dividend growth rates across stocks
+- [Dividend Reinvestment (DRIP)](https://finclac.com/drip): See how dividend reinvestment grows your portfolio over decades
+- [ETF Growth Calculator](https://finclac.com/etf): Estimate how your ETF portfolio grows with monthly contributions, expense ratio, and compounding over time
+- [EV/EBITDA Calculator](https://finclac.com/evebitda): Calculate enterprise value, the EV/EBITDA multiple, and implied share price versus a peer multiple
+- [SIP / Investment Calculator](https://finclac.com/invest): Calculate SIP returns from monthly contributions with the power of compounding
+- [Options Profit & Breakeven Calculator](https://finclac.com/options): Calculate breakeven price, max profit, max loss, and profit/loss at expiration for a call or put option — long or short
+- [PEG Ratio Calculator](https://finclac.com/peg): Calculate the PEG ratio to check if a stock's P/E is justified by its earnings growth rate
+- [How Many Shares Will You Have After a Stock Split?](https://finclac.com/split): See exactly how many new shares you'll own, your new price per share, and your adjusted cost basis after a stock split or reverse split
+- [Stock P&L Calculator](https://finclac.com/stock): Calculate stock trading profit and loss including brokerage fees and your exact break-even price
+- [SWP Calculator](https://finclac.com/swp): Calculate how long your investment corpus lasts with regular monthly withdrawals, adjusted for inflation
+- [XIRR — Irregular Cash Flows](https://finclac.com/xirr): Calculate XIRR for mutual funds, SIPs, and investments with irregular cash flows and dates
+
+## Calculators — Startup & Business (8)
+
+- [Break-even Analysis](https://finclac.com/breakeven): Calculate exactly how many units and how much revenue your business needs to break even
+- [Burn Rate Calculator](https://finclac.com/burnrate): Calculate your startup's monthly burn rate and exactly how many months of cash runway you have left
+- [CAC & LTV:CAC Ratio Calculator](https://finclac.com/cac): Calculate your customer acquisition cost, lifetime value, and LTV:CAC ratio to see if your growth engine is actually profitable
+- [Cash Flow Calculator](https://finclac.com/cashflow): Analyze personal or business cash flow with inflows, outflows, and net cash position over time
+- [Stock Dilution Impact Calculator](https://finclac.com/dilutionimpact): See how a secondary offering, option exercise, or convertible note conversion affects EPS and your share value
+- [Equity Dilution Calculator](https://finclac.com/equity): Model how startup equity dilutes across multiple funding rounds
+- [Pricing Calculator](https://finclac.com/pricing): Calculate gross margin, markup percentage, and contribution margin for your product pricing
+- [Revenue Forecast Calculator](https://finclac.com/revenue): Forecast SaaS revenue with bear, base, and bull growth scenarios, ARR, and LTV
+
+## Calculators — Tools (4)
+
+- [Itemized Bill Splitter](https://finclac.com/billsplit): Split a restaurant bill fairly by what each person actually ordered, with tax and tip divided proportionally
+- [Currency Converter](https://finclac.com/currency): Convert between major world currencies with up-to-date exchange rates
+- [International Money Transfer Cost Calculator](https://finclac.com/remit): Calculate the true cost of sending money abroad, including transfer fees and hidden exchange rate markup vs the mid-market rate
+- [Scientific Calculator](https://finclac.com/scientific): Free online scientific calculator with trigonometric, logarithmic, and exponential functions for financial math
+
+## Blog — Guides & Explainers (64)
+
+- [15-Year vs 30-Year Mortgage: The Real Trade-Off](https://finclac.com/blog/15-year-vs-30-year-mortgage): Lower total interest vs. lower monthly payment — the right choice depends on what you'd do with the difference.
+- [How to Calculate After-Tax Cash Flow (With a Worked Example)](https://finclac.com/blog/after-tax-cash-flow-explained): Cash flow tells you what moved. After-tax cash flow tells you what you actually keep. Here's the real formula and where it gets tricky.
+- [How to Run Your Own Annual Financial Review](https://finclac.com/blog/annual-financial-review): A once-a-year checklist to catch problems early, celebrate progress, and reset your goals for the year ahead.
+- [New vs Used Car Loans: The Real Cost Difference Beyond the Sticker Price](https://finclac.com/blog/auto-loan-new-vs-used): Lower interest rates on new cars don't always beat the math on a used car loan.
+- [12 Free Financial Calculators Worth Bookmarking in 2026](https://finclac.com/blog/best-free-financial-calculators): No signup, no paywall. Twelve free calculators for loans, retirement, investing, and the big life decisions, grouped by what they actually help you decide.
+- [The Best Investments for FIRE: Where Early Retirees Actually Put Their Money](https://finclac.com/blog/best-investments-for-fire): Index funds, tax-advantaged accounts, and the unglamorous asset mix behind most successful FIRE portfolios.
+- [The Beginner's Guide to Budgeting That Actually Works](https://finclac.com/blog/budgeting-guide-that-works): Most budgets fail within a month. Here's a simpler approach built around a few numbers you actually track.
+- [How to Build Financial Discipline When Motivation Isn't Enough](https://finclac.com/blog/building-financial-discipline): Willpower runs out. The financial habits that actually stick are usually the ones designed to not need it.
+- [Building Wealth Step by Step: The Order That Actually Works](https://finclac.com/blog/building-wealth-step-by-step): Wealth building isn't about doing everything at once — it follows a fairly predictable sequence that compounds over time.
+- [CAGR vs. Average Return: Why Your Investment App Is Lying to You](https://finclac.com/blog/cagr-vs-average-return): The two numbers look similar but tell very different stories — here's the actual math and why it matters.
+- [6 Common Financial Mistakes That Quietly Cost the Most](https://finclac.com/blog/common-financial-mistakes): Most financial damage doesn't come from one bad decision — it comes from a handful of ordinary mistakes repeated for years.
+- [7 Common Savings Mistakes That Quietly Cost People the Most](https://finclac.com/blog/common-savings-mistakes): Small, repeated mistakes — not one big blowup — are usually what actually derails long-term savings.
+- [DCF Valuation Explained: How to Value a Stock Like an Analyst](https://finclac.com/blog/dcf-valuation-explained): The core idea behind discounted cash flow analysis, without the spreadsheet overwhelm.
+- [Does Prepaying a Loan Affect Your Credit Score?](https://finclac.com/blog/does-prepayment-affect-credit-score): The honest, nuanced answer — it's rarely as simple as 'good' or 'bad'.
+- [EMI Mistakes First-Time Borrowers Make](https://finclac.com/blog/emi-mistakes-first-time-borrowers): Common, avoidable errors that turn a manageable loan into a financial strain.
+- [Equity Dilution 101: What Happens to Your Shares After Each Funding Round](https://finclac.com/blog/equity-dilution-101): A smaller slice of a bigger pie can still be worth more — here's the actual math.
+- [ETFs vs Individual Stocks: Building a Diversified Portfolio](https://finclac.com/blog/etf-vs-individual-stocks): The diversification math behind why most long-term investors are better served by funds than stock-picking.
+- [EV/EBITDA vs P/E: Which Valuation Multiple Should You Trust?](https://finclac.com/blog/ev-ebitda-vs-pe): Two companies with identical P/E ratios can have very different real valuations once debt is factored in.
+- [What's Your Financial Health Score? The 5 Numbers That Matter](https://finclac.com/blog/financial-health-score-explained): A single score that sums up your overall financial position — here's what actually goes into it.
+- [FIRE in Asia: Lower Costs, Different Safety Nets, and What Changes the Math](https://finclac.com/blog/fire-in-asia): From Singapore's CPF to lower costs of living across the region — how FIRE math shifts across Asia.
+- [FIRE in Europe: How Early Retirement Math Changes Across Borders](https://finclac.com/blog/fire-in-europe): There's no single 'European' FIRE system — tax treatment, account rules, and safety nets vary dramatically by country.
+- [FIRE in the US: The Tax-Advantaged Accounts That Shape Early Retirement](https://finclac.com/blog/fire-in-the-us): 401(k) limits, the age-59½ penalty problem, and how US tax rules shape early-retirement strategy.
+- [The Real Math Behind FIRE: How to Calculate Your Retirement Number](https://finclac.com/blog/fire-number-how-to-calculate): Why the 4% rule is a starting point, not your personal answer — and the actual formula for your FIRE number.
+- [First-Time Home Buyer Guide: What the Math Actually Looks Like](https://finclac.com/blog/first-time-home-buyer-guide): Beyond the down payment — the full financial picture first-time buyers often underestimate.
+- [5 Goal-Planning Mistakes That Quietly Sabotage Your Finances](https://finclac.com/blog/goal-planning-mistakes): Setting a financial goal is easy. Setting one that survives contact with an actual month is harder.
+- [Good Debt vs. Bad Debt: A Genuinely Useful Framework](https://finclac.com/blog/good-debt-vs-bad-debt): Not all debt is created equal — here's how to actually tell the difference.
+- [The Hidden Cost of Loan Processing Fees — A Side-by-Side Comparison](https://finclac.com/blog/hidden-cost-loan-processing-fees): The lowest interest rate isn't always the cheapest loan once you account for fees.
+- [How Banks Calculate Your Loan Eligibility](https://finclac.com/blog/how-banks-calculate-loan-eligibility): Understanding the actual formula lenders use can help you improve your eligibility before applying.
+- [How Big Should Your Emergency Fund Really Be?](https://finclac.com/blog/how-big-should-emergency-fund-be): The generic "3-6 months" rule needs adjusting based on your actual job stability and expenses.
+- [How Much EMI Can You Actually Afford?](https://finclac.com/blog/how-much-emi-can-you-afford): Lenders will approve more than you should comfortably take on — here's how to set your own real limit.
+- [How Much House Can You Actually Afford in 2026?](https://finclac.com/blog/how-much-house-can-you-afford): The bank's pre-approval number and your real comfortable budget are usually not the same thing.
+- [How Much Life Insurance Do You Actually Need?](https://finclac.com/blog/how-much-life-insurance-do-you-need): Income replacement, debt payoff, and future expenses — the three numbers that determine your real coverage need.
+- [How Much Money Do You Need to Retire at 40?](https://finclac.com/blog/how-much-to-retire-at-40): Retiring at 40 means your money needs to last 50+ years — the math is different from a traditional retirement.
+- [How to Forecast SaaS Revenue (Without Guessing)](https://finclac.com/blog/how-to-forecast-saas-revenue): A single-line revenue forecast is a guess in a spreadsheet. Here's how to build a real bear, base, and bull case from four inputs.
+- [How to Price Your Product: Margin, Markup, and Break-Even](https://finclac.com/blog/how-to-price-your-product): Three numbers every small business owner needs to actually understand before setting a price.
+- [How to Actually Improve Your Financial Health](https://finclac.com/blog/improving-financial-health): Financial health isn't just your income — it's savings rate, debt levels, and emergency preparedness working together.
+- [The Loan Closure Process Explained](https://finclac.com/blog/loan-closure-process-explained): What actually happens between your final payment and truly being done with a loan.
+- [Loan Foreclosure Explained: What It Means and How to Avoid It](https://finclac.com/blog/loan-foreclosure-explained): Understanding the process — and the warning signs worth acting on long before it happens.
+- [Why the Exchange Rate You See Online Isn't the Rate You Get](https://finclac.com/blog/mid-market-rate-vs-bank-rate): The mid-market rate on Google isn't what your bank or card charges you. Here's where the difference goes.
+- [Mutual Funds for Retirement: Picking the Right Type for Each Stage of Life](https://finclac.com/blog/mutual-funds-for-retirement): Index funds, target-date funds, and bond funds serve very different jobs — here's which type fits which stage of a retirement timeline.
+- [Options Trading Basics: What Breakeven Actually Means](https://finclac.com/blog/options-trading-basics-breakeven-explained): Call, put, long, short — the payoff at expiration follows fixed rules. Here's the actual math behind breakeven, max profit, and max loss.
+- [Should You Pay Off Debt or Invest First? The Actual Math](https://finclac.com/blog/pay-off-debt-or-invest): It's not about willpower or feelings — it's a comparison between your debt's interest rate and your expected investment return.
+- [PEG Ratio: The Metric That Tells You If a 'Cheap' Stock Is Actually Cheap](https://finclac.com/blog/peg-ratio-cheap-stock): A low P/E can be a value trap — PEG adjusts for growth to give a fairer picture.
+- [The Power of Reinvesting Dividends: A Long-Term Growth Case Study](https://finclac.com/blog/power-of-reinvesting-dividends): Taking dividends as cash feels good today — reinvesting them can mean a dramatically larger portfolio decades from now.
+- [The Power of Starting Early: Compound Interest Explained](https://finclac.com/blog/power-of-starting-early-compound-interest): A 25-year-old and a 35-year-old saving the same amount monthly end up in very different places — here's the math.
+- [Premium vs. Deductible: The Health Insurance Math Nobody Explains](https://finclac.com/blog/premium-vs-deductible-health-insurance): The cheapest monthly premium is often the most expensive plan. Here's how to actually compare health insurance costs.
+- [The Psychological Effects of Debt — And Why the Math Alone Rarely Helps](https://finclac.com/blog/psychological-effects-of-debt): Debt stress is a genuine, well-documented mental health factor — not just a spreadsheet problem.
+- [The Real Cost of Sending Money Abroad (It's Not the Fee)](https://finclac.com/blog/remittance-transfer-costs): The advertised transfer fee is often the smallest cost. The exchange rate markup is where providers actually make money.
+- [Rental Property Cash Flow: Cap Rate vs Cash-on-Cash Return Explained](https://finclac.com/blog/rental-property-cap-rate-vs-cash-on-cash): Two different metrics that answer two different questions about the same property.
+- [Retirement Planning by Age: What to Prioritize in Your 20s, 30s, 40s, 50s, and 60s](https://finclac.com/blog/retirement-planning-by-age): The right retirement move changes by decade — from earliest compounding in your 20s to distribution planning in your 60s.
+- [How Much Should You Save Monthly for Retirement?](https://finclac.com/blog/retirement-savings-per-month): The right monthly number depends on your target date and current savings — not a flat percentage rule.
+- [Retirement Withdrawal Rates: Is 4% Still Safe in 2026?](https://finclac.com/blog/retirement-withdrawal-rate-4-percent-rule): The famous rule was built on decades-old data — here's what's changed and what hasn't.
+- [SaaS Revenue Forecasting: Bear, Base, and Bull Scenarios Explained](https://finclac.com/blog/saas-revenue-forecasting-scenarios): A single revenue projection number is usually a red flag — here's why ranges matter more.
+- [Saving vs Investing: How to Know Which One You Need Right Now](https://finclac.com/blog/saving-vs-investing): The right answer depends on your timeline, not which one has the better return — here's how to tell the two apart.
+- [Why Self-Employed Workers Need a Bigger Emergency Fund](https://finclac.com/blog/self-employed-emergency-fund): Irregular income changes the math on how much cash buffer you actually need — usually more than the standard advice.
+- [Should You Refinance Your Mortgage? The Break-Even Math](https://finclac.com/blog/should-you-refinance-your-mortgage): A lower rate isn't automatically a win. Here's how to calculate the real break-even point on refinancing closing costs — and where it can backfire.
+- [SIP vs Lump Sum: Which Investment Strategy Actually Wins?](https://finclac.com/blog/sip-vs-lump-sum): The honest answer depends on market timing luck more than most SIP advocates admit.
+- [SMART Financial Goals: How to Set Goals You'll Actually Hit](https://finclac.com/blog/smart-financial-goals): Vague goals like 'save more' rarely work. Here's how to turn them into specific, measurable targets you can actually track.
+- [Startup Burn Rate: How Many Months of Runway Do You Actually Have?](https://finclac.com/blog/startup-burn-rate-runway): The math founders should be checking monthly, not just when a fundraise is approaching.
+- [Stock Splits Explained: Why a 4-for-1 Split Doesn't Make You Richer](https://finclac.com/blog/stock-splits-explained): A stock split changes your share count and price — not your wealth. Here's the math and why the market often reacts anyway.
+- [US Federal Tax Brackets Explained: Why Your Effective Rate Isn't Your Bracket](https://finclac.com/blog/us-federal-tax-brackets-explained): Being in the 24% bracket doesn't mean you pay 24% on all your income — here's how marginal rates actually work.
+- [When Should You Claim Social Security? 62 vs. 67 vs. 70](https://finclac.com/blog/when-to-claim-social-security): The age you claim Social Security permanently changes your benefit. Here's the real math behind early claiming, delaying, and the breakeven point.
+- [Why Your Credit Card Minimum Payment Never Seems to Go Down](https://finclac.com/blog/why-minimum-payments-never-shrink-your-balance): Minimum payments are designed to keep your account current, not pay it off. Here's the math behind why it takes so long — and the fix.
+- [Why Splitting the Bill Evenly Is Usually Unfair](https://finclac.com/blog/why-splitting-the-bill-evenly-is-usually-unfair): An even split feels simple, but it quietly overcharges whoever ordered less. Here's the case for itemized splitting instead.
+
+## Other Pages
+
+- [Homepage](https://finclac.com/): Full directory of all 60 calculators
+- [Blog Index](https://finclac.com/blog): All 64 guides, filterable by category
+- [About](https://finclac.com/about): What FinCalc is and how it works
+- [Privacy Policy](https://finclac.com/privacy)
+- [Terms of Service](https://finclac.com/terms)
+
+See [sitemap.xml](https://finclac.com/sitemap.xml) for the complete, machine-readable list of every URL.
 
 ## Notes
 
-All calculators produce estimates for general informational and educational purposes only, not financial, tax, legal, or investment advice.
+All calculators produce estimates for general informational and educational purposes only, not financial, tax, legal, or investment advice. Where a calculator or guide cites external data (tax brackets, contribution limits, historical returns), the source is linked directly on that page.
