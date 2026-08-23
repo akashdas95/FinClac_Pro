@@ -2,77 +2,118 @@
 
 > FinCalc is a free collection of 60 online financial calculators covering personal finance, investing, loans, retirement, and business finance, plus 64 in-depth guides on the reasoning behind the math. All calculators run entirely in the browser — no signup, no data stored server-side.
 
+## Scope & Context
+
+- **Region**: United States. Tax brackets, retirement account rules (401(k), IRA), Social Security claiming rules, and FDIC insurance limits are all US-specific.
+- **Currency**: USD ($) throughout.
+- **Language**: English only.
+- **Update cadence**: Bracket/limit figures (tax brackets, 401(k) contribution limits, Social Security wage base) are reviewed and updated annually as the IRS/SSA publish new figures. Individual calculator pages cite their specific data source and the underlying rule — see the "Sourced calculators" section below.
+- **Last updated**: 2026-08-23
+
+## Common Questions This Site Answers
+
+Maps natural-language questions to the specific calculator that answers them:
+
+- "How much house can I afford / what will my mortgage payment be?" → https://finclac.com/mortgage
+- "What will my monthly loan payment be?" → https://finclac.com/loan
+- "Should I refinance my mortgage?" → https://finclac.com/refinance
+- "Is it cheaper to rent or buy?" → https://finclac.com/rentvsbuy
+- "How much should I have in an emergency fund?" → https://finclac.com/emergencyfund
+- "How much do I need to retire?" → https://finclac.com/retirement
+- "When should I claim Social Security — 62, 67, or 70?" → https://finclac.com/socialsecurity
+- "What is the 4% rule / how much can I safely withdraw in retirement?" → https://finclac.com/retirement
+- "How many years until I can retire early (FIRE)?" → https://finclac.com/fire
+- "What will my 401(k) be worth at retirement?" → https://finclac.com/401k
+- "How much should I contribute to my 401(k) to hit the max?" → https://finclac.com/401k
+- "What's my debt-to-income ratio?" → https://finclac.com/dti
+- "Should I pay off debt with the snowball or avalanche method?" → https://finclac.com/debtcomp
+- "How long will it take to pay off my credit card?" → https://finclac.com/ccpayoff
+- "What's my effective federal tax rate / how much will I take home?" → https://finclac.com/tax
+- "What's the CAGR of my investment?" → https://finclac.com/cagr
+- "What is my portfolio's actual annualized return (XIRR)?" → https://finclac.com/xirr
+- "Should I invest a lump sum or dollar-cost average?" → https://finclac.com/dca
+- "What's a stock actually worth (DCF valuation)?" → https://finclac.com/dcf
+- "Is this stock cheap given its growth rate (PEG ratio)?" → https://finclac.com/peg
+- "How should I split money between stocks, bonds, and cash?" → https://finclac.com/allocation
+- "What's my company's cash runway / burn rate?" → https://finclac.com/burnrate
+- "How much will my equity be worth after future funding rounds?" → https://finclac.com/equity
+- "What's a fair customer acquisition cost (CAC) for my business?" → https://finclac.com/cac
+- "How much car can I afford / what's my auto loan payment?" → https://finclac.com/autoloan
+- "What will my net worth be over time?" → https://finclac.com/networth
+- "How do I split a restaurant bill by what everyone actually ordered?" → https://finclac.com/billsplit
+- "What's the real cost of sending money abroad?" → https://finclac.com/remit
+
 ## Calculators — Personal Finance (33)
 
-- [401(k) Calculator](https://finclac.com/401k): Estimate how your 401(k) balance grows to retirement, including employer match, salary growth, and IRS contribution limits
-- [Auto Loan Calculator](https://finclac.com/autoloan): Calculate your car payment including down payment, trade-in value, and sales tax
-- [50/30/20 Budget Calculator](https://finclac.com/budget): Compare your actual spending against the 50/30/20 budget rule and see exactly where you're over or under, category by category
-- [Credit Card Payoff Calculator](https://finclac.com/ccpayoff): See how long it really takes to pay off a credit card on minimum payments vs a fixed payment, and how much interest each approach costs
-- [Debt Payoff Planner](https://finclac.com/debt): Calculate how long it takes to pay off all your debts and compare snowball vs avalanche payoff strategies
-- [Debt Snowball vs Avalanche](https://finclac.com/debtcomp): Compare debt snowball vs avalanche payoff strategies side by side and see which saves more interest
-- [Debt-to-Income Ratio Calculator](https://finclac.com/dti): Calculate your debt-to-income ratio (front-end and back-end DTI) and see how it compares to what lenders typically look for
-- [Emergency Fund Calculator](https://finclac.com/emergencyfund): Calculate how much you need in your emergency fund based on your actual monthly expenses
-- [FIRE Calculator](https://finclac.com/fire): Calculate your years to financial independence and FI number, and compare Lean, Fat, Coast, and Barista FIRE
-- [Health Insurance Cost Calculator](https://finclac.com/healthinsurance): Compare two health insurance plans by estimating your true total annual cost, including premiums, deductibles, coinsurance, and out-of-pocket maximums
-- [Financial Health Score](https://finclac.com/healthscore): Get a 0-100 financial health score based on your savings rate, debt-to-income ratio, and emergency fund coverage
-- [How Much HELOC Can You Get?](https://finclac.com/heloc): Estimate your HELOC credit limit, interest-only draw period payments, and full repayment costs based on your home value and mortgage balance
-- [Inflation Calculator](https://finclac.com/inflation): Calculate how inflation erodes purchasing power over time — see what an amount then is worth now, or will be worth in the future
-- [Life Insurance Needs Calculator](https://finclac.com/lifeinsurance): Calculate how much life insurance coverage you need based on income replacement, debts, mortgage, and future expenses
-- [Loan / EMI Calculator](https://finclac.com/loan): Calculate your loan EMI instantly with a full amortization schedule showing principal vs interest
-- [Loan Comparison Calculator](https://finclac.com/loancomp): Compare up to 3 loan offers side by side on EMI, total interest, fees, and total cost to find the cheapest one
-- [Loan Eligibility Calculator](https://finclac.com/loaneligibility): Find out how much loan you may qualify for based on your income, existing debts, interest rate, and tenure, using the same DTI method lenders use
-- [Millionaire Calculator](https://finclac.com/millionaire): Find out exactly what age you'll become a millionaire based on your savings, monthly contributions, and investment return
-- [Mortgage Comparison Calculator](https://finclac.com/mortcomp): Compare multiple mortgage offers side by side, including 15-year vs 30-year terms and different rates
-- [Mortgage Calculator](https://finclac.com/mortgage): Calculate your monthly mortgage payment, total interest, and full amortization schedule, including PMI
-- [Net Worth Calculator](https://finclac.com/networth): Calculate your total net worth from assets and liabilities, see your liquid vs
-- [Loan Prepayment Calculator](https://finclac.com/prepay): See exactly how much time and interest you save by prepaying your loan with extra monthly payments or a lump sum
-- [Provident Fund Calculator](https://finclac.com/provident): Calculate your provident fund maturity value, interest earned, and year-by-year balance growth with step-up contributions
-- [Refinance Break-Even Calculator](https://finclac.com/refinance): See how many months it takes to recoup refinancing closing costs through lower payments, and whether refinancing actually saves you money
-- [Rental Yield Calculator](https://finclac.com/rental): Calculate gross and net rental yield for any property investment, with a full expense breakdown
-- [Rental Property Calculator](https://finclac.com/rentalprop): Analyze a rental property's cap rate, cash-on-cash return, and NOI before you buy
-- [Rent vs Buy Calculator](https://finclac.com/rentvsbuy): Compare your projected net worth renting vs buying a home, including opportunity cost, appreciation, and the exact breakeven year
-- [Retirement Calculator](https://finclac.com/retirement): Calculate exactly how much you need to retire using the 25x rule and 4% safe withdrawal rate
-- [Salary Calculator](https://finclac.com/salary): Convert your pay between hourly, daily, monthly, and yearly salary instantly
-- [Compound Interest Calculator](https://finclac.com/savings): Calculate compound interest growth on your savings with regular monthly contributions and APY comparison
-- [Savings Goal Calculator](https://finclac.com/savingsgoal): Calculate exactly how much to save each month to reach any financial goal by your target date
-- [Social Security Benefit Estimator](https://finclac.com/socialsecurity): See how claiming Social Security early or delaying to 70 changes your monthly benefit, based on your estimated benefit at full retirement age
-- [US Federal Income Tax Estimator](https://finclac.com/tax): Estimate your US federal income tax with both marginal and effective tax rates
+- [401(k) Calculator](https://finclac.com/401k): Estimate how your 401(k) balance grows to retirement, including employer match, salary growth, and IRS contribution limits.
+- [Auto Loan Calculator](https://finclac.com/autoloan): Calculate your car payment including down payment, trade-in value, and sales tax.
+- [50/30/20 Budget Calculator](https://finclac.com/budget): Compare your actual spending against the 50/30/20 budget rule and see exactly where you're over or under, category by category.
+- [Credit Card Payoff Calculator](https://finclac.com/ccpayoff): See how long it really takes to pay off a credit card on minimum payments vs a fixed payment, and how much interest each approach costs.
+- [Debt Payoff Planner](https://finclac.com/debt): Calculate how long it takes to pay off all your debts and compare snowball vs avalanche payoff strategies.
+- [Debt Snowball vs Avalanche](https://finclac.com/debtcomp): Compare debt snowball vs avalanche payoff strategies side by side and see which saves more interest.
+- [Debt-to-Income Ratio Calculator](https://finclac.com/dti): Calculate your debt-to-income ratio (front-end and back-end DTI) and see how it compares to what lenders typically look for.
+- [Emergency Fund Calculator](https://finclac.com/emergencyfund): Calculate how much you need in your emergency fund based on your actual monthly expenses.
+- [FIRE Calculator](https://finclac.com/fire): Calculate your years to financial independence and FI number, and compare Lean, Fat, Coast, and Barista FIRE.
+- [Health Insurance Cost Calculator](https://finclac.com/healthinsurance): Compare two health insurance plans by estimating your true total annual cost, including premiums, deductibles, coinsurance, and out-of-pocket maximums.
+- [Financial Health Score](https://finclac.com/healthscore): Get a 0-100 financial health score based on your savings rate, debt-to-income ratio, and emergency fund coverage.
+- [How Much HELOC Can You Get?](https://finclac.com/heloc): Estimate your HELOC credit limit, interest-only draw period payments, and full repayment costs based on your home value and mortgage balance.
+- [Inflation Calculator](https://finclac.com/inflation): Calculate how inflation erodes purchasing power over time — see what an amount then is worth now, or will be worth in the future.
+- [Life Insurance Needs Calculator](https://finclac.com/lifeinsurance): Calculate how much life insurance coverage you need based on income replacement, debts, mortgage, and future expenses.
+- [Loan / EMI Calculator](https://finclac.com/loan): Calculate your loan EMI instantly with a full amortization schedule showing principal vs interest.
+- [Loan Comparison Calculator](https://finclac.com/loancomp): Compare up to 3 loan offers side by side on EMI, total interest, fees, and total cost to find the cheapest one.
+- [Loan Eligibility Calculator](https://finclac.com/loaneligibility): Find out how much loan you may qualify for based on your income, existing debts, interest rate, and tenure, using the same DTI method lenders use.
+- [Millionaire Calculator](https://finclac.com/millionaire): Find out exactly what age you'll become a millionaire based on your savings, monthly contributions, and investment return.
+- [Mortgage Comparison Calculator](https://finclac.com/mortcomp): Compare multiple mortgage offers side by side, including 15-year vs 30-year terms and different rates.
+- [Mortgage Calculator](https://finclac.com/mortgage): Calculate your monthly mortgage payment, total interest, and full amortization schedule, including PMI.
+- [Net Worth Calculator](https://finclac.com/networth): Calculate your total net worth from assets and liabilities, see your liquid vs.
+- [Loan Prepayment Calculator](https://finclac.com/prepay): See exactly how much time and interest you save by prepaying your loan with extra monthly payments or a lump sum.
+- [Provident Fund Calculator](https://finclac.com/provident): Calculate your provident fund maturity value, interest earned, and year-by-year balance growth with step-up contributions.
+- [Refinance Break-Even Calculator](https://finclac.com/refinance): See how many months it takes to recoup refinancing closing costs through lower payments, and whether refinancing actually saves you money.
+- [Rental Yield Calculator](https://finclac.com/rental): Calculate gross and net rental yield for any property investment, with a full expense breakdown.
+- [Rental Property Calculator](https://finclac.com/rentalprop): Analyze a rental property's cap rate, cash-on-cash return, and NOI before you buy.
+- [Rent vs Buy Calculator](https://finclac.com/rentvsbuy): Compare your projected net worth renting vs buying a home, including opportunity cost, appreciation, and the exact breakeven year.
+- [Retirement Calculator](https://finclac.com/retirement): Calculate exactly how much you need to retire using the 25x rule and 4% safe withdrawal rate.
+- [Salary Calculator](https://finclac.com/salary): Convert your pay between hourly, daily, monthly, and yearly salary instantly.
+- [Compound Interest Calculator](https://finclac.com/savings): Calculate compound interest growth on your savings with regular monthly contributions and APY comparison.
+- [Savings Goal Calculator](https://finclac.com/savingsgoal): Calculate exactly how much to save each month to reach any financial goal by your target date.
+- [Social Security Benefit Estimator](https://finclac.com/socialsecurity): See how claiming Social Security early or delaying to 70 changes your monthly benefit, based on your estimated benefit at full retirement age.
+- [US Federal Income Tax Estimator](https://finclac.com/tax): Estimate your US federal income tax with both marginal and effective tax rates.
 
 ## Calculators — Investing & Valuation (15)
 
-- [Asset Allocation Calculator](https://finclac.com/allocation): Find your ideal stocks, bonds, cash, gold, and crypto allocation based on age and risk tolerance
-- [CAGR Calculator](https://finclac.com/cagr): Free CAGR calculator shows you how to calculate compound annual growth rate step by step, with Rule of 72 doubling time and historical benchmark comparisons
-- [Dollar Cost Averaging (DCA) Calculator](https://finclac.com/dca): Calculate shares bought, average cost per share, and ending value from regular investing vs a lump sum
-- [DCF Valuation Calculator](https://finclac.com/dcf): Calculate a stock's intrinsic value using discounted cash flow analysis
-- [Dividend Growth Calculator](https://finclac.com/divgrowth): Project your future dividend income and yield on cost, and compare dividend growth rates across stocks
-- [Dividend Reinvestment (DRIP)](https://finclac.com/drip): See how dividend reinvestment grows your portfolio over decades
-- [ETF Growth Calculator](https://finclac.com/etf): Estimate how your ETF portfolio grows with monthly contributions, expense ratio, and compounding over time
-- [EV/EBITDA Calculator](https://finclac.com/evebitda): Calculate enterprise value, the EV/EBITDA multiple, and implied share price versus a peer multiple
-- [SIP / Investment Calculator](https://finclac.com/invest): Calculate SIP returns from monthly contributions with the power of compounding
-- [Options Profit & Breakeven Calculator](https://finclac.com/options): Calculate breakeven price, max profit, max loss, and profit/loss at expiration for a call or put option — long or short
-- [PEG Ratio Calculator](https://finclac.com/peg): Calculate the PEG ratio to check if a stock's P/E is justified by its earnings growth rate
-- [How Many Shares Will You Have After a Stock Split?](https://finclac.com/split): See exactly how many new shares you'll own, your new price per share, and your adjusted cost basis after a stock split or reverse split
-- [Stock P&L Calculator](https://finclac.com/stock): Calculate stock trading profit and loss including brokerage fees and your exact break-even price
-- [SWP Calculator](https://finclac.com/swp): Calculate how long your investment corpus lasts with regular monthly withdrawals, adjusted for inflation
-- [XIRR — Irregular Cash Flows](https://finclac.com/xirr): Calculate XIRR for mutual funds, SIPs, and investments with irregular cash flows and dates
+- [Asset Allocation Calculator](https://finclac.com/allocation): Find your ideal stocks, bonds, cash, gold, and crypto allocation based on age and risk tolerance.
+- [CAGR Calculator](https://finclac.com/cagr): Free CAGR calculator shows you how to calculate compound annual growth rate step by step, with Rule of 72 doubling time and historical benchmark comparisons.
+- [Dollar Cost Averaging (DCA) Calculator](https://finclac.com/dca): Calculate shares bought, average cost per share, and ending value from regular investing vs a lump sum.
+- [DCF Valuation Calculator](https://finclac.com/dcf): Calculate a stock's intrinsic value using discounted cash flow analysis.
+- [Dividend Growth Calculator](https://finclac.com/divgrowth): Project your future dividend income and yield on cost, and compare dividend growth rates across stocks.
+- [Dividend Reinvestment (DRIP)](https://finclac.com/drip): See how dividend reinvestment grows your portfolio over decades.
+- [ETF Growth Calculator](https://finclac.com/etf): Estimate how your ETF portfolio grows with monthly contributions, expense ratio, and compounding over time.
+- [EV/EBITDA Calculator](https://finclac.com/evebitda): Calculate enterprise value, the EV/EBITDA multiple, and implied share price versus a peer multiple.
+- [SIP / Investment Calculator](https://finclac.com/invest): Calculate SIP returns from monthly contributions with the power of compounding.
+- [Options Profit & Breakeven Calculator](https://finclac.com/options): Calculate breakeven price, max profit, max loss, and profit/loss at expiration for a call or put option — long or short.
+- [PEG Ratio Calculator](https://finclac.com/peg): Calculate the PEG ratio to check if a stock's P/E is justified by its earnings growth rate.
+- [How Many Shares Will You Have After a Stock Split?](https://finclac.com/split): See exactly how many new shares you'll own, your new price per share, and your adjusted cost basis after a stock split or reverse split.
+- [Stock P&L Calculator](https://finclac.com/stock): Calculate stock trading profit and loss including brokerage fees and your exact break-even price.
+- [SWP Calculator](https://finclac.com/swp): Calculate how long your investment corpus lasts with regular monthly withdrawals, adjusted for inflation.
+- [XIRR — Irregular Cash Flows](https://finclac.com/xirr): Calculate XIRR for mutual funds, SIPs, and investments with irregular cash flows and dates.
 
 ## Calculators — Startup & Business (8)
 
-- [Break-even Analysis](https://finclac.com/breakeven): Calculate exactly how many units and how much revenue your business needs to break even
-- [Burn Rate Calculator](https://finclac.com/burnrate): Calculate your startup's monthly burn rate and exactly how many months of cash runway you have left
-- [CAC & LTV:CAC Ratio Calculator](https://finclac.com/cac): Calculate your customer acquisition cost, lifetime value, and LTV:CAC ratio to see if your growth engine is actually profitable
-- [Cash Flow Calculator](https://finclac.com/cashflow): Analyze personal or business cash flow with inflows, outflows, and net cash position over time
-- [Stock Dilution Impact Calculator](https://finclac.com/dilutionimpact): See how a secondary offering, option exercise, or convertible note conversion affects EPS and your share value
-- [Equity Dilution Calculator](https://finclac.com/equity): Model how startup equity dilutes across multiple funding rounds
-- [Pricing Calculator](https://finclac.com/pricing): Calculate gross margin, markup percentage, and contribution margin for your product pricing
-- [Revenue Forecast Calculator](https://finclac.com/revenue): Forecast SaaS revenue with bear, base, and bull growth scenarios, ARR, and LTV
+- [Break-even Analysis](https://finclac.com/breakeven): Calculate exactly how many units and how much revenue your business needs to break even.
+- [Burn Rate Calculator](https://finclac.com/burnrate): Calculate your startup's monthly burn rate and exactly how many months of cash runway you have left.
+- [CAC & LTV:CAC Ratio Calculator](https://finclac.com/cac): Calculate your customer acquisition cost, lifetime value, and LTV:CAC ratio to see if your growth engine is actually profitable.
+- [Cash Flow Calculator](https://finclac.com/cashflow): Analyze personal or business cash flow with inflows, outflows, and net cash position over time.
+- [Stock Dilution Impact Calculator](https://finclac.com/dilutionimpact): See how a secondary offering, option exercise, or convertible note conversion affects EPS and your share value.
+- [Equity Dilution Calculator](https://finclac.com/equity): Model how startup equity dilutes across multiple funding rounds.
+- [Pricing Calculator](https://finclac.com/pricing): Calculate gross margin, markup percentage, and contribution margin for your product pricing.
+- [Revenue Forecast Calculator](https://finclac.com/revenue): Forecast SaaS revenue with bear, base, and bull growth scenarios, ARR, and LTV.
 
 ## Calculators — Tools (4)
 
-- [Itemized Bill Splitter](https://finclac.com/billsplit): Split a restaurant bill fairly by what each person actually ordered, with tax and tip divided proportionally
-- [Currency Converter](https://finclac.com/currency): Convert between major world currencies with up-to-date exchange rates
-- [International Money Transfer Cost Calculator](https://finclac.com/remit): Calculate the true cost of sending money abroad, including transfer fees and hidden exchange rate markup vs the mid-market rate
-- [Scientific Calculator](https://finclac.com/scientific): Free online scientific calculator with trigonometric, logarithmic, and exponential functions for financial math
+- [Itemized Bill Splitter](https://finclac.com/billsplit): Split a restaurant bill fairly by what each person actually ordered, with tax and tip divided proportionally.
+- [Currency Converter](https://finclac.com/currency): Convert between major world currencies with up-to-date exchange rates.
+- [International Money Transfer Cost Calculator](https://finclac.com/remit): Calculate the true cost of sending money abroad, including transfer fees and hidden exchange rate markup vs the mid-market rate.
+- [Scientific Calculator](https://finclac.com/scientific): Free online scientific calculator with trigonometric, logarithmic, and exponential functions for financial math.
 
 ## Blog — Guides & Explainers (64)
 
@@ -141,6 +182,42 @@
 - [Why Your Credit Card Minimum Payment Never Seems to Go Down](https://finclac.com/blog/why-minimum-payments-never-shrink-your-balance): Minimum payments are designed to keep your account current, not pay it off. Here's the math behind why it takes so long — and the fix.
 - [Why Splitting the Bill Evenly Is Usually Unfair](https://finclac.com/blog/why-splitting-the-bill-evenly-is-usually-unfair): An even split feels simple, but it quietly overcharges whoever ordered less. Here's the case for itemized splitting instead.
 
+## Sourced Calculators — Data & Methodology Citations (31)
+
+These calculators cite a specific external source (IRS, SSA, CFPB, FDIC, FHFA, Wikipedia, or academic/industry research) for the rule, formula, or figure they use. Full citation with working link is on each page in its "Data Sources" section.
+
+- **401k**: 2025 employee elective deferral limit ($23,500) and combined employee+employer limit ($70,000): IRS Notice 2024-80; Catch-up contribution rules (age 50+ and the SECURE 2.0 age 60–63 enhanced catch-up): IRS.gov — Catch-Up Contributions
+- **allocation**: "110 minus age" allocation heuristic: The Motley Fool — Rule of 110, an updated variant of the older "100 minus age" rule
+- **autoloan**: Amortization formula (how each payment splits between principal and interest): Wikipedia — Amortization schedule
+- **budget**: Origin of the 50/30/20 rule: SmartAsset — How the 50/30/20 Budget Rule Works, based on Elizabeth Warren and Amelia Warren Tyagi's 2005 book All Your Worth: The Ultimate Lifetime Money Plan
+- **cagr**: CAGR formula: Wikipedia — Compound annual growth rate
+- **currency**: Live exchange rates: ExchangeRate-API
+- **dca**: Compound interest formula: Wikipedia — Compound interest
+- **dcf**: Discounted cash flow methodology: Wikipedia — Discounted cash flow
+- **dti**: 43% back-end DTI qualified mortgage threshold: Consumer Financial Protection Bureau — Qualified Mortgage Rule
+- **emergencyfund**: FDIC deposit insurance coverage ($250,000 per depositor, per bank): FDIC.gov — Deposit Insurance
+- **etf**: Lump-sum vs. dollar-cost averaging performance (Vanguard study findings): Bogleheads Wiki — Dollar-cost averaging; Index composition and methodology: Wikipedia — S&P 500, Wikipedia — Nasdaq-100
+- **evebitda**: EV/EBITDA formula and use as a valuation multiple: Wikipedia — EV/EBITDA
+- **fire**: 4% safe withdrawal rate: Wikipedia — Trinity study, based on the 1998 paper by Cooley, Hubbard & Walz, building on William Bengen's original 1994 research
+- **heloc**: Amortization formula (how each payment splits between principal and interest): Wikipedia — Amortization schedule
+- **inflation**: Official historical U.S. CPI data and inflation calculator: U.S. Bureau of Labor Statistics — CPI Inflation Calculator
+- **invest**: Compound interest formula: Wikipedia — Compound interest
+- **loan**: Amortization formula (how each payment splits between principal and interest): Wikipedia — Amortization schedule
+- **loancomp**: Amortization formula (how each payment splits between principal and interest): Wikipedia — Amortization schedule
+- **millionaire**: Historical S&P 500 annual returns: NYU Stern — Historical Returns on Stocks, Bonds and Bills
+- **mortcomp**: Amortization formula (how each payment splits between principal and interest): Wikipedia — Amortization schedule
+- **mortgage**: PMI requirement below 20% down, and automatic cancellation rules: CFPB — PMI Cancellation and Termination Guidance, under the Homeowners Protection Act of 1998; Amortization formula (how each payment splits between principal and interest): Wikipedia — Amortization schedule
+- **peg**: PEG ratio formula and origin: Wikipedia — PEG ratio
+- **prepay**: Amortization formula (how each payment splits between principal and interest): Wikipedia — Amortization schedule
+- **refinance**: Amortization formula (how each payment splits between principal and interest): Wikipedia — Amortization schedule
+- **rentalprop**: The 1% rule for screening rental properties: Rocket Mortgage — What Is the 1% Rule in Real Estate?
+- **rentvsbuy**: Long-run home price appreciation trends: FHFA House Price Index
+- **retirement**: 25x rule / 4% safe withdrawal rate: Wikipedia — Trinity study (Cooley, Hubbard & Walz, 1998)
+- **savings**: Compound interest formula: Wikipedia — Compound interest
+- **socialsecurity**: Full Retirement Age by birth year, and early/delayed claiming adjustment formulas: Social Security Administration — Retirement Benefits by Year of Birth; Delayed retirement credit rate (8%/year past FRA, up to age 70): SSA.gov — Delayed Retirement Credits
+- **tax**: Federal income tax brackets and standard deduction amounts: IRS.gov — Federal Income Tax Rates and Brackets; FICA (Social Security & Medicare) tax rates: Social Security Administration
+- **xirr**: XIRR / internal rate of return formula: Wikipedia — Internal rate of return
+
 ## Other Pages
 
 - [Homepage](https://finclac.com/): Full directory of all 60 calculators
@@ -149,8 +226,8 @@
 - [Privacy Policy](https://finclac.com/privacy)
 - [Terms of Service](https://finclac.com/terms)
 
-See [sitemap.xml](https://finclac.com/sitemap.xml) for the complete, machine-readable list of every URL.
+See [sitemap.xml](https://finclac.com/sitemap.xml) for the complete, machine-readable list of every URL, or [robots.txt](https://finclac.com/robots.txt) for crawler permissions (all major AI crawlers are explicitly allowed).
 
 ## Notes
 
-All calculators produce estimates for general informational and educational purposes only, not financial, tax, legal, or investment advice. Where a calculator or guide cites external data (tax brackets, contribution limits, historical returns), the source is linked directly on that page.
+All calculators produce estimates for general informational and educational purposes only, not financial, tax, legal, or investment advice. Every calculation runs client-side in the user's browser — no calculator input is ever sent to or stored on a server.
