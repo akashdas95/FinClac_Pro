@@ -14,6 +14,9 @@
 <meta property="og:description" content="Income replacement, debt payoff, and future expenses — the three numbers that determine your real coverage need.">
 <meta property="og:url" content="https://finclac.com/blog/how-much-life-insurance-do-you-need">
 <meta property="og:site_name" content="FinCalc">
+<meta property="og:image" content="https://finclac.com/android-chrome-512x512.png">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://finclac.com/android-chrome-512x512.png">
 <style>html{scrollbar-gutter:stable;overflow-y:scroll}*{box-sizing:border-box;margin:0;padding:0}
 :root{--bg:#F6F4EE;--s:#FFFFFF;--s2:#EFEBE1;--bd:#DBD5C4;--t:#171B17;--m:#807965;--tb:#464C46;--a:#0F4F35;--g:#0F4F35;--r:#8C2E22;--b:#1B3A5C;--p:#6B4A7A;--fn:'IBM Plex Sans',sans-serif;--mo:'IBM Plex Mono',monospace;--disp:'Fraunces',serif}
 html[data-theme="light"]{--bg:#14170F;--s:#1B1F16;--s2:#222619;--bd:#33392C;--t:#EDE7D6;--m:#9A9480;--tb:#C9C3AF;--a:#6FBF95;--g:#6FBF95;--r:#D08877;--b:#7FA8CC;--p:#B79CC9;--disp:'Fraunces',serif}
@@ -379,6 +382,28 @@ div.site-footer .foot-badges{max-width:1180px;margin:20px auto 0;display:flex;fl
 .breadcrumb .bc-sep{color:var(--bd)}
 .breadcrumb .bc-current{color:var(--t);font-weight:600}
 @media(max-width:640px){.breadcrumb{padding:12px 16px 0;font-size:10.5px}}
+
+.quiz-block{}
+.quiz-section-title{font-size:13px;font-weight:700;color:var(--m);text-transform:uppercase;letter-spacing:.8px;margin-bottom:.4rem;display:flex;align-items:center;gap:8px}
+.quiz-section-title::after{content:'';flex:1;height:1px;background:var(--bd)}
+.quiz-sub{font-size:13px;color:var(--m);margin-bottom:1.25rem;line-height:1.6}
+.quiz-card{background:var(--s2);border:1px solid var(--bd);border-radius:10px;padding:1.1rem 1.25rem;margin-bottom:14px}
+.quiz-q{font-size:14px;font-weight:600;color:var(--t);margin-bottom:.85rem;line-height:1.5}
+.quiz-opts{display:flex;flex-direction:column;gap:8px}
+.quiz-opt{text-align:left;background:var(--bg);border:1px solid var(--bd);border-radius:8px;padding:10px 13px;font-size:13.5px;color:var(--tb);font-family:var(--fn);cursor:pointer;transition:all .15s}
+.quiz-opt:hover:not(:disabled){border-color:var(--a);color:var(--t)}
+.quiz-opt:disabled{cursor:default}
+.quiz-opt.correct{background:rgba(111,191,149,.14);border-color:var(--g);color:var(--g);font-weight:600}
+.quiz-opt.incorrect{background:rgba(246,70,93,.10);border-color:var(--r);color:var(--r)}
+.quiz-fb{margin-top:.75rem;font-size:13px;line-height:1.65;color:var(--tb);display:none;padding-top:.75rem;border-top:1px solid var(--bd)}
+.quiz-fb.show{display:block}
+.quiz-fb strong{color:var(--t)}
+.quiz-score{background:var(--s);border:1px solid var(--g);border-radius:10px;padding:1.1rem 1.25rem;text-align:center;display:none}
+.quiz-score.show{display:block}
+.quiz-score-num{font-family:var(--mo);font-size:26px;font-weight:600;color:var(--g);margin-bottom:4px}
+.quiz-score-lbl{font-size:12.5px;color:var(--m)}
+.quiz-reset{margin-top:12px;background:var(--s2);border:1px solid var(--bd);color:var(--tb);font-size:12px;font-weight:500;cursor:pointer;padding:6px 14px;border-radius:20px;font-family:var(--fn)}
+.quiz-reset:hover{border-color:var(--g);color:var(--t)}
 </style>
 <link rel="icon" href="/favicon.ico" sizes="any">
 <link rel="icon" type="image/svg+xml" href="/favicon.svg">
@@ -427,7 +452,7 @@ div.site-footer .foot-badges{max-width:1180px;margin:20px auto 0;display:flex;fl
 <h1 class="blog-article-title">How Much Life Insurance Do You Actually Need?</h1>
 <div class="blog-byline" style="margin-bottom:1.75rem">
   <div class="blog-avatar">FC</div>
-  <div class="blog-byline-text"><span class="blog-byline-name">FinCalc Team</span><span class="blog-byline-dot">·</span>July 2026 · 4 min read</div>
+  <div class="blog-byline-text"><span class="blog-byline-name">FinCalc Team</span><span class="blog-byline-dot">·</span>July 2026 · 6 min read</div>
 </div>
 <div style="margin:0 0 1.75rem;border-radius:12px;overflow:hidden"><svg viewBox="0 0 760 220" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:auto;border-radius:12px;display:block" role="img" aria-hidden="true"><rect width="760" height="220" fill="var(--s2)"/><path d="M380 55 C 425 55 458 88 458 125 C 458 168 380 190 380 190 C 380 190 302 168 302 125 C 302 88 335 55 380 55 Z" fill="none" stroke="var(--m)" stroke-width="7"/><path d="M355 128 L372 145 L408 100" fill="none" stroke="var(--g)" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
 
@@ -454,7 +479,103 @@ div.site-footer .foot-badges{max-width:1180px;margin:20px auto 0;display:flex;fl
 <p class="guide-p">To calculate a coverage number specific to your income, debts, and dependents, the free <a href="/lifeinsurance" style="color:var(--a);text-decoration:underline">Life Insurance Needs Calculator</a> walks through income replacement, debt payoff, and future expenses to produce a personalized estimate rather than a generic multiple of salary.</p>
 
 
+<h2 class="guide-h3" data-depth-added="1">A concrete coverage calculation</h2>
+<p class="guide-p">A common income-replacement approach: replace 15 years of a $75,000 income (~$1,125,000), add outstanding debts like a mortgage ($250,000), add future costs like college for kids ($100,000), and subtract existing savings/investments already earmarked for these ($50,000).</p>
+<p class="guide-p">That works out to roughly <strong>$1,425,000</strong> in coverage needed — far more than a flat '10x salary' rule would suggest (which would land at $750,000 in this example, about $675,000 short). The gap shows exactly why flat multiples miss in either direction: they ignore debt load, dependents' future costs, and existing savings, all of which materially change the real number.</p>
+
+<h2 class="guide-h3" data-mistakes-added="1">Common life insurance mistakes</h2>
+<p class="guide-p">A frequent mistake is letting coverage stay flat for years despite major life changes — a policy sized correctly at the birth of a first child is likely undersized after a second child or a new mortgage, and oversized once kids are grown and the mortgage is paid off, yet many people never revisit the number after the initial purchase.</p>
+<p class="guide-p">Another common error is confusing employer-provided group life insurance (often just 1-2x salary) with adequate coverage — group policies are a helpful supplement but rarely sufficient on their own, and coverage tied to employment also typically ends when the job does, at exactly the time it might be hardest to qualify for a new individual policy.</p>
+
+<h2 class="guide-h3" data-practical-added="1">A practical calculation approach</h2>
+<p class="guide-p">Calculate your specific number using the three components described above (income replacement, debt payoff, future costs) rather than defaulting to a flat multiple of salary — the flat-multiple approach is a rough starting estimate at best, not a personalized answer.</p>
+<p class="guide-p">Set a calendar reminder to revisit your coverage amount every 2-3 years or after any major life event — a new child, a new mortgage, a paid-off debt, or kids becoming financially independent are all reasons the right number could have shifted meaningfully since it was last calculated.</p>
+
+<h2 class="guide-h3" data-deeper-added="1">Why coverage needs typically follow a curve, not a flat line</h2>
+<p class="guide-p">Life insurance needs typically peak during the years with the most dependents and debt (young children, an outstanding mortgage) and gradually decrease as debts are paid down and children become financially independent — a flat coverage amount purchased once in your 30s and never adjusted doesn't track this natural curve.</p>
+<p class="guide-p">Term life insurance, priced for a specific period, is often well-suited to this curve specifically because it doesn't require paying for permanent coverage during years when the actual need is declining — matching the term length and coverage amount to the expected need curve, rather than defaulting to a single flat number, tends to be more cost-effective.</p>
+
 </div>
+
+<div class="card quiz-block" style="max-width:760px;margin:1.5rem auto 0">
+<div class="quiz-section-title">🧠 Quick Check</div>
+<p class="quiz-sub">A few questions to see if the key ideas above actually stuck.</p>
+<div class="quiz-card" data-quiz-q="1">
+  <div class="quiz-q">1. What does the article say a real coverage number should be built from?</div>
+  <div class="quiz-opts">
+    <button class="quiz-opt" data-correct="false">A single flat multiple of salary</button>
+    <button class="quiz-opt" data-correct="true">Three components specific to your situation</button>
+    <button class="quiz-opt" data-correct="false">Your age alone</button>
+  </div>
+  <div class="quiz-fb">A meaningful number comes from combining multiple personal factors, not a single generic multiplier.</div>
+</div>
+<div class="quiz-card" data-quiz-q="2">
+  <div class="quiz-q">2. What's wrong with '10x salary' rules, per the article?</div>
+  <div class="quiz-opts">
+    <button class="quiz-opt" data-correct="false">They're always exactly right</button>
+    <button class="quiz-opt" data-correct="true">They can be too high or too low depending on your situation</button>
+    <button class="quiz-opt" data-correct="false">They only apply to term life insurance</button>
+  </div>
+  <div class="quiz-fb">A flat multiple ignores your actual debts, dependents, and existing savings — so it can miss in either direction.</div>
+</div>
+<div class="quiz-card" data-quiz-q="3">
+  <div class="quiz-q">3. What's the key difference between term and permanent life insurance the article highlights?</div>
+  <div class="quiz-opts">
+    <button class="quiz-opt" data-correct="false">Term is always more expensive</button>
+    <button class="quiz-opt" data-correct="true">They differ in cost and purpose</button>
+    <button class="quiz-opt" data-correct="false">Permanent coverage never expires and has no cost difference</button>
+  </div>
+  <div class="quiz-fb">Term and permanent policies serve different purposes and come with meaningfully different cost structures.</div>
+</div>
+<div class="quiz-score">
+  <div class="quiz-score-num">0 / 3</div>
+  <div class="quiz-score-lbl"></div>
+  <button class="quiz-reset">Try again</button>
+</div>
+</div>
+
+<script>
+(function(){
+  var scope = document.currentScript.previousElementSibling;
+  var total = scope.querySelectorAll('[data-quiz-q]').length;
+  var answered = 0, correct = 0;
+  scope.querySelectorAll('[data-quiz-q] .quiz-opt').forEach(function(btn){
+    btn.addEventListener('click', function(){
+      var card = btn.closest('[data-quiz-q]');
+      if (card.dataset.done) return;
+      card.dataset.done = '1';
+      var opts = card.querySelectorAll('.quiz-opt');
+      var isCorrect = btn.dataset.correct === 'true';
+      opts.forEach(function(o){
+        o.disabled = true;
+        if (o.dataset.correct === 'true') o.classList.add('correct');
+        else if (o === btn) o.classList.add('incorrect');
+      });
+      card.querySelector('.quiz-fb').classList.add('show');
+      answered++;
+      if (isCorrect) correct++;
+      if (answered === total) {
+        var box = scope.querySelector('.quiz-score');
+        box.querySelector('.quiz-score-num').textContent = correct + ' / ' + total;
+        var lbl = box.querySelector('.quiz-score-lbl');
+        lbl.textContent = correct === total ? "Perfect \u2014 you've got this one down cold." : (correct >= total/2 ? "Solid \u2014 worth a re-read on the ones you missed." : "Worth another pass through the sections above.");
+        box.classList.add('show');
+      }
+    });
+  });
+  scope.querySelector('.quiz-reset').addEventListener('click', function(){
+    scope.querySelectorAll('[data-quiz-q]').forEach(function(card){
+      delete card.dataset.done;
+      card.querySelectorAll('.quiz-opt').forEach(function(o){
+        o.disabled = false;
+        o.classList.remove('correct','incorrect');
+      });
+      card.querySelector('.quiz-fb').classList.remove('show');
+    });
+    scope.querySelector('.quiz-score').classList.remove('show');
+  });
+})();
+</script>
 </div>
 </div><!-- content -->
 <div class="site-footer">

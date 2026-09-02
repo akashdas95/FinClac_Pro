@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <link rel="stylesheet" href="/fonts/fonts.css">
 
-<title>The Real Cost of Sending Money Abroad (It's Not the Fee) | FinCalc Blog</title>
+<title>The Real Cost of Sending Money Abroad | FinCalc</title>
 <meta name="description" content="The advertised transfer fee is often the smallest cost. The exchange rate markup is where providers actually make money.">
 <link rel="canonical" href="https://finclac.com/blog/remittance-transfer-costs">
 <meta name="robots" content="index, follow">
@@ -14,6 +14,9 @@
 <meta property="og:description" content="The advertised transfer fee is often the smallest cost. The exchange rate markup is where providers actually make money.">
 <meta property="og:url" content="https://finclac.com/blog/remittance-transfer-costs">
 <meta property="og:site_name" content="FinCalc">
+<meta property="og:image" content="https://finclac.com/android-chrome-512x512.png">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://finclac.com/android-chrome-512x512.png">
 <style>html{scrollbar-gutter:stable;overflow-y:scroll}*{box-sizing:border-box;margin:0;padding:0}
 :root{--bg:#F6F4EE;--s:#FFFFFF;--s2:#EFEBE1;--bd:#DBD5C4;--t:#171B17;--m:#807965;--tb:#464C46;--a:#0F4F35;--g:#0F4F35;--r:#8C2E22;--b:#1B3A5C;--p:#6B4A7A;--fn:'IBM Plex Sans',sans-serif;--mo:'IBM Plex Mono',monospace;--disp:'Fraunces',serif}
 html[data-theme="light"]{--bg:#14170F;--s:#1B1F16;--s2:#222619;--bd:#33392C;--t:#EDE7D6;--m:#9A9480;--tb:#C9C3AF;--a:#6FBF95;--g:#6FBF95;--r:#D08877;--b:#7FA8CC;--p:#B79CC9;--disp:'Fraunces',serif}
@@ -379,6 +382,28 @@ div.site-footer .foot-badges{max-width:1180px;margin:20px auto 0;display:flex;fl
 .breadcrumb .bc-sep{color:var(--bd)}
 .breadcrumb .bc-current{color:var(--t);font-weight:600}
 @media(max-width:640px){.breadcrumb{padding:12px 16px 0;font-size:10.5px}}
+
+.quiz-block{}
+.quiz-section-title{font-size:13px;font-weight:700;color:var(--m);text-transform:uppercase;letter-spacing:.8px;margin-bottom:.4rem;display:flex;align-items:center;gap:8px}
+.quiz-section-title::after{content:'';flex:1;height:1px;background:var(--bd)}
+.quiz-sub{font-size:13px;color:var(--m);margin-bottom:1.25rem;line-height:1.6}
+.quiz-card{background:var(--s2);border:1px solid var(--bd);border-radius:10px;padding:1.1rem 1.25rem;margin-bottom:14px}
+.quiz-q{font-size:14px;font-weight:600;color:var(--t);margin-bottom:.85rem;line-height:1.5}
+.quiz-opts{display:flex;flex-direction:column;gap:8px}
+.quiz-opt{text-align:left;background:var(--bg);border:1px solid var(--bd);border-radius:8px;padding:10px 13px;font-size:13.5px;color:var(--tb);font-family:var(--fn);cursor:pointer;transition:all .15s}
+.quiz-opt:hover:not(:disabled){border-color:var(--a);color:var(--t)}
+.quiz-opt:disabled{cursor:default}
+.quiz-opt.correct{background:rgba(111,191,149,.14);border-color:var(--g);color:var(--g);font-weight:600}
+.quiz-opt.incorrect{background:rgba(246,70,93,.10);border-color:var(--r);color:var(--r)}
+.quiz-fb{margin-top:.75rem;font-size:13px;line-height:1.65;color:var(--tb);display:none;padding-top:.75rem;border-top:1px solid var(--bd)}
+.quiz-fb.show{display:block}
+.quiz-fb strong{color:var(--t)}
+.quiz-score{background:var(--s);border:1px solid var(--g);border-radius:10px;padding:1.1rem 1.25rem;text-align:center;display:none}
+.quiz-score.show{display:block}
+.quiz-score-num{font-family:var(--mo);font-size:26px;font-weight:600;color:var(--g);margin-bottom:4px}
+.quiz-score-lbl{font-size:12.5px;color:var(--m)}
+.quiz-reset{margin-top:12px;background:var(--s2);border:1px solid var(--bd);color:var(--tb);font-size:12px;font-weight:500;cursor:pointer;padding:6px 14px;border-radius:20px;font-family:var(--fn)}
+.quiz-reset:hover{border-color:var(--g);color:var(--t)}
 </style>
 <link rel="icon" href="/favicon.ico" sizes="any">
 <link rel="icon" type="image/svg+xml" href="/favicon.svg">
@@ -427,7 +452,7 @@ div.site-footer .foot-badges{max-width:1180px;margin:20px auto 0;display:flex;fl
 <h1 class="blog-article-title">The Real Cost of Sending Money Abroad (It's Not the Fee)</h1>
 <div class="blog-byline" style="margin-bottom:1.75rem">
   <div class="blog-avatar">FC</div>
-  <div class="blog-byline-text"><span class="blog-byline-name">FinCalc Team</span><span class="blog-byline-dot">·</span>July 2026 · 4 min read</div>
+  <div class="blog-byline-text"><span class="blog-byline-name">FinCalc Team</span><span class="blog-byline-dot">·</span>July 2026 · 6 min read</div>
 </div>
 <div style="margin:0 0 1.75rem;border-radius:12px;overflow:hidden"><svg viewBox="0 0 760 220" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:auto;border-radius:12px;display:block" role="img" aria-hidden="true"><rect width="760" height="220" fill="var(--s2)"/><circle cx="230" cy="120" r="55" fill="var(--m)" opacity="0.2"/><text x="230" y="128" font-size="26" text-anchor="middle" fill="var(--m)" font-family="Arial,sans-serif" font-weight="700">$</text><line x1="310" y1="120" x2="440" y2="120" stroke="var(--t)" stroke-width="3" stroke-dasharray="6,5"/><polygon points="430,110 448,120 430,130" fill="var(--t)"/><text x="375" y="95" font-size="11" fill="var(--r)" font-family="Arial,sans-serif" text-anchor="middle">fee + markup</text><circle cx="530" cy="120" r="55" fill="var(--a)" opacity="0.25"/><text x="530" y="128" font-size="26" text-anchor="middle" fill="var(--a)" font-family="Arial,sans-serif" font-weight="700">€</text></svg></div>
 
@@ -454,7 +479,104 @@ div.site-footer .foot-badges{max-width:1180px;margin:20px auto 0;display:flex;fl
 <p class="guide-p">To run this comparison for your own transfer amount, the free <a href="/remit" style="color:var(--a);text-decoration:underline">International Money Transfer Cost Calculator</a> calculates the true total cost — fee plus exchange rate markup — against the mid-market rate. If you're converting currency for a purpose other than sending it abroad, see our companion piece on <a href="/blog/mid-market-rate-vs-bank-rate" style="color:var(--a);text-decoration:underline">why the exchange rate you see online isn't the rate you get</a>.</p>
 
 
+<h2 class="guide-h3" data-depth-added="1">A worked comparison: $1,000 sent abroad, two ways</h2>
+<p class="guide-p"><strong>Provider A</strong> (a typical bank wire): advertises 'no transfer fee' but applies roughly a 3% exchange rate markup on a $1,000 transfer — a real cost of about <strong>$30</strong>, none of which appears as a visible line-item fee.</p>
+<p class="guide-p"><strong>Provider B</strong> (a low-cost specialist transfer service): charges a visible $5 flat fee plus a much smaller 0.3% markup — a real cost of about <strong>$8</strong> total, nearly <strong>$22 cheaper</strong> despite advertising a fee the bank doesn't.</p>
+<p class="guide-p">This is the exact trap the article describes: the provider charging a visible fee can end up cheaper overall than the one advertising 'no fee,' because the true cost is hidden in the exchange rate spread rather than a line item most people know to check.</p>
+
+<h2 class="guide-h3" data-mistakes-added="1">Common transfer mistakes</h2>
+<p class="guide-p">A frequent mistake is defaulting to whichever provider is most convenient (often a bank already used for other purposes) without comparing the actual total cost against dedicated transfer services, which frequently offer meaningfully better rates for the same transfer.</p>
+<p class="guide-p">Another common error is not accounting for how the recipient's bank might also charge a receiving fee — some transfers that look competitive on the sending end can still lose value to fees on the receiving end that aren't visible until after the transfer completes.</p>
+
+<h2 class="guide-h3" data-practical-added="1">A practical provider-comparison checklist</h2>
+<p class="guide-p">Compare the total cost (fee plus markup, calculated against the mid-market rate) across at least two providers for every significant transfer, rather than assuming your usual choice remains competitive — provider rates and fees shift over time and aren't guaranteed to stay the best option indefinitely.</p>
+<p class="guide-p">Ask specifically about receiving-end fees before sending, not after — a transfer that looks fully accounted for on the sending side can still lose value if the recipient's bank deducts an additional fee that wasn't part of the original comparison.</p>
+
+<h2 class="guide-h3" data-deeper-added="1">Why the 'best' provider can change over time</h2>
+<p class="guide-p">Exchange rate markups and fees aren't fixed — they shift based on provider competition, currency pair, and even promotional periods, meaning a provider that was clearly the cheapest option a year ago may not still be today.</p>
+<p class="guide-p">For anyone making regular transfers, periodically re-checking rather than assuming past research still holds is worth the small time investment, particularly given how much providers compete on this specific dimension and how frequently pricing structures shift in response.</p>
+
 </div>
+
+<div class="card quiz-block" style="max-width:760px;margin:1.5rem auto 0">
+<div class="quiz-section-title">🧠 Quick Check</div>
+<p class="quiz-sub">A few questions to see if the key ideas above actually stuck.</p>
+<div class="quiz-card" data-quiz-q="1">
+  <div class="quiz-q">1. What are the two costs of every international transfer, per the article?</div>
+  <div class="quiz-opts">
+    <button class="quiz-opt" data-correct="false">Only the flat fee</button>
+    <button class="quiz-opt" data-correct="true">The flat fee and the exchange rate markup</button>
+    <button class="quiz-opt" data-correct="false">Only taxes</button>
+  </div>
+  <div class="quiz-fb">Both an explicit fee and a hidden exchange rate markup contribute to the real cost of sending money.</div>
+</div>
+<div class="quiz-card" data-quiz-q="2">
+  <div class="quiz-q">2. Why are 'no fee' transfers rarely actually free?</div>
+  <div class="quiz-opts">
+    <button class="quiz-opt" data-correct="false">They always are genuinely free</button>
+    <button class="quiz-opt" data-correct="true">The cost is often hidden in a worse exchange rate instead of a visible fee</button>
+    <button class="quiz-opt" data-correct="false">Because banks always disclose everything clearly</button>
+  </div>
+  <div class="quiz-fb">A 'no fee' provider often makes up the difference through a less favorable exchange rate.</div>
+</div>
+<div class="quiz-card" data-quiz-q="3">
+  <div class="quiz-q">3. What trade-off does the article highlight between speed and cost?</div>
+  <div class="quiz-opts">
+    <button class="quiz-opt" data-correct="false">Faster transfers are always cheaper</button>
+    <button class="quiz-opt" data-correct="true">Faster transfers can come at a higher cost</button>
+    <button class="quiz-opt" data-correct="false">Speed and cost are unrelated</button>
+  </div>
+  <div class="quiz-fb">Instant transfers often carry a premium compared to slower, standard transfer options.</div>
+</div>
+<div class="quiz-score">
+  <div class="quiz-score-num">0 / 3</div>
+  <div class="quiz-score-lbl"></div>
+  <button class="quiz-reset">Try again</button>
+</div>
+</div>
+
+<script>
+(function(){
+  var scope = document.currentScript.previousElementSibling;
+  var total = scope.querySelectorAll('[data-quiz-q]').length;
+  var answered = 0, correct = 0;
+  scope.querySelectorAll('[data-quiz-q] .quiz-opt').forEach(function(btn){
+    btn.addEventListener('click', function(){
+      var card = btn.closest('[data-quiz-q]');
+      if (card.dataset.done) return;
+      card.dataset.done = '1';
+      var opts = card.querySelectorAll('.quiz-opt');
+      var isCorrect = btn.dataset.correct === 'true';
+      opts.forEach(function(o){
+        o.disabled = true;
+        if (o.dataset.correct === 'true') o.classList.add('correct');
+        else if (o === btn) o.classList.add('incorrect');
+      });
+      card.querySelector('.quiz-fb').classList.add('show');
+      answered++;
+      if (isCorrect) correct++;
+      if (answered === total) {
+        var box = scope.querySelector('.quiz-score');
+        box.querySelector('.quiz-score-num').textContent = correct + ' / ' + total;
+        var lbl = box.querySelector('.quiz-score-lbl');
+        lbl.textContent = correct === total ? "Perfect \u2014 you've got this one down cold." : (correct >= total/2 ? "Solid \u2014 worth a re-read on the ones you missed." : "Worth another pass through the sections above.");
+        box.classList.add('show');
+      }
+    });
+  });
+  scope.querySelector('.quiz-reset').addEventListener('click', function(){
+    scope.querySelectorAll('[data-quiz-q]').forEach(function(card){
+      delete card.dataset.done;
+      card.querySelectorAll('.quiz-opt').forEach(function(o){
+        o.disabled = false;
+        o.classList.remove('correct','incorrect');
+      });
+      card.querySelector('.quiz-fb').classList.remove('show');
+    });
+    scope.querySelector('.quiz-score').classList.remove('show');
+  });
+})();
+</script>
 </div>
 </div><!-- content -->
 <div class="site-footer">

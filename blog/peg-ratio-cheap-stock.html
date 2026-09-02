@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <link rel="stylesheet" href="/fonts/fonts.css">
 
-<title>PEG Ratio: The Metric That Tells You If a 'Cheap' Stock Is Actually Cheap | FinCalc Blog</title>
+<title>PEG Ratio: Is That 'Cheap' Stock Cheap? | FinCalc</title>
 <meta name="description" content="A low P/E can be a value trap — PEG adjusts for growth to give a fairer picture.">
 <link rel="canonical" href="https://finclac.com/blog/peg-ratio-cheap-stock">
 <meta name="robots" content="index, follow">
@@ -14,6 +14,9 @@
 <meta property="og:description" content="A low P/E can be a value trap — PEG adjusts for growth to give a fairer picture.">
 <meta property="og:url" content="https://finclac.com/blog/peg-ratio-cheap-stock">
 <meta property="og:site_name" content="FinCalc">
+<meta property="og:image" content="https://finclac.com/android-chrome-512x512.png">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://finclac.com/android-chrome-512x512.png">
 <style>html{scrollbar-gutter:stable;overflow-y:scroll}*{box-sizing:border-box;margin:0;padding:0}
 :root{--bg:#F6F4EE;--s:#FFFFFF;--s2:#EFEBE1;--bd:#DBD5C4;--t:#171B17;--m:#807965;--tb:#464C46;--a:#0F4F35;--g:#0F4F35;--r:#8C2E22;--b:#1B3A5C;--p:#6B4A7A;--fn:'IBM Plex Sans',sans-serif;--mo:'IBM Plex Mono',monospace;--disp:'Fraunces',serif}
 html[data-theme="light"]{--bg:#14170F;--s:#1B1F16;--s2:#222619;--bd:#33392C;--t:#EDE7D6;--m:#9A9480;--tb:#C9C3AF;--a:#6FBF95;--g:#6FBF95;--r:#D08877;--b:#7FA8CC;--p:#B79CC9;--disp:'Fraunces',serif}
@@ -379,6 +382,28 @@ div.site-footer .foot-badges{max-width:1180px;margin:20px auto 0;display:flex;fl
 .breadcrumb .bc-sep{color:var(--bd)}
 .breadcrumb .bc-current{color:var(--t);font-weight:600}
 @media(max-width:640px){.breadcrumb{padding:12px 16px 0;font-size:10.5px}}
+
+.quiz-block{}
+.quiz-section-title{font-size:13px;font-weight:700;color:var(--m);text-transform:uppercase;letter-spacing:.8px;margin-bottom:.4rem;display:flex;align-items:center;gap:8px}
+.quiz-section-title::after{content:'';flex:1;height:1px;background:var(--bd)}
+.quiz-sub{font-size:13px;color:var(--m);margin-bottom:1.25rem;line-height:1.6}
+.quiz-card{background:var(--s2);border:1px solid var(--bd);border-radius:10px;padding:1.1rem 1.25rem;margin-bottom:14px}
+.quiz-q{font-size:14px;font-weight:600;color:var(--t);margin-bottom:.85rem;line-height:1.5}
+.quiz-opts{display:flex;flex-direction:column;gap:8px}
+.quiz-opt{text-align:left;background:var(--bg);border:1px solid var(--bd);border-radius:8px;padding:10px 13px;font-size:13.5px;color:var(--tb);font-family:var(--fn);cursor:pointer;transition:all .15s}
+.quiz-opt:hover:not(:disabled){border-color:var(--a);color:var(--t)}
+.quiz-opt:disabled{cursor:default}
+.quiz-opt.correct{background:rgba(111,191,149,.14);border-color:var(--g);color:var(--g);font-weight:600}
+.quiz-opt.incorrect{background:rgba(246,70,93,.10);border-color:var(--r);color:var(--r)}
+.quiz-fb{margin-top:.75rem;font-size:13px;line-height:1.65;color:var(--tb);display:none;padding-top:.75rem;border-top:1px solid var(--bd)}
+.quiz-fb.show{display:block}
+.quiz-fb strong{color:var(--t)}
+.quiz-score{background:var(--s);border:1px solid var(--g);border-radius:10px;padding:1.1rem 1.25rem;text-align:center;display:none}
+.quiz-score.show{display:block}
+.quiz-score-num{font-family:var(--mo);font-size:26px;font-weight:600;color:var(--g);margin-bottom:4px}
+.quiz-score-lbl{font-size:12.5px;color:var(--m)}
+.quiz-reset{margin-top:12px;background:var(--s2);border:1px solid var(--bd);color:var(--tb);font-size:12px;font-weight:500;cursor:pointer;padding:6px 14px;border-radius:20px;font-family:var(--fn)}
+.quiz-reset:hover{border-color:var(--g);color:var(--t)}
 </style>
 <link rel="icon" href="/favicon.ico" sizes="any">
 <link rel="icon" type="image/svg+xml" href="/favicon.svg">
@@ -427,7 +452,7 @@ div.site-footer .foot-badges{max-width:1180px;margin:20px auto 0;display:flex;fl
 <h1 class="blog-article-title">PEG Ratio: The Metric That Tells You If a 'Cheap' Stock Is Actually Cheap</h1>
 <div class="blog-byline" style="margin-bottom:1.75rem">
   <div class="blog-avatar">FC</div>
-  <div class="blog-byline-text"><span class="blog-byline-name">FinCalc Team</span><span class="blog-byline-dot">·</span>July 2026 · 3 min read</div>
+  <div class="blog-byline-text"><span class="blog-byline-name">FinCalc Team</span><span class="blog-byline-dot">·</span>July 2026 · 5 min read</div>
 </div>
 <div style="margin:0 0 1.75rem;border-radius:12px;overflow:hidden"><svg viewBox="0 0 760 220" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:auto;border-radius:12px;display:block" role="img" aria-hidden="true">
 <rect width="760" height="220" fill="var(--s2)"/>
@@ -465,7 +490,104 @@ div.site-footer .foot-badges{max-width:1180px;margin:20px auto 0;display:flex;fl
 <h2 class="guide-h3">Calculate it for any stock</h2>
 <p class="guide-p">The free <a href="/peg" style="color:var(--a);text-decoration:underline">PEG Ratio Calculator</a> shows exactly where a stock falls on the valuation scale relative to its growth rate. For a deeper valuation, the <a href="/dcf" style="color:var(--a);text-decoration:underline">DCF Valuation Calculator</a> estimates intrinsic value directly from projected cash flows.</p>
 
+<h2 class="guide-h3" data-depth-added="1">A worked comparison: two stocks, same P/E</h2>
+<p class="guide-p">Stock A trades at a P/E of 20 with 25% expected annual earnings growth. Stock B also trades at a P/E of 20, but with only 5% expected growth.</p>
+<p class="guide-p">On P/E alone, they look identically valued. But PEG (P/E divided by growth rate) tells a very different story: Stock A's PEG comes out to <strong>0.8</strong> (20 ÷ 25), while Stock B's comes out to <strong>4.0</strong> (20 ÷ 5). A PEG under 1 is often read as a signal of being undervalued relative to growth; well above 1 suggests the opposite.</p>
+<p class="guide-p">Same headline P/E, radically different PEG — which is exactly the value-trap scenario PEG exists to catch. Stock B isn't necessarily a bad investment, but paying 20x earnings for only 5% growth is a materially different bet than paying 20x earnings for 25% growth, and P/E alone can't tell you which one you're actually making.</p>
+
+<h2 class="guide-h3" data-mistakes-added="1">Common PEG ratio mistakes</h2>
+<p class="guide-p">A frequent mistake is using analyst growth estimates without checking their track record — growth projections, especially for smaller or newer companies, are frequently overly optimistic, and a PEG ratio built on an inflated growth estimate will understate how expensive a stock actually is.</p>
+<p class="guide-p">Another common error is applying PEG to companies with cyclical or highly volatile earnings, where a single unusually strong or weak year can distort the growth rate used in the calculation and produce a misleading ratio that doesn't reflect the company's normal trajectory.</p>
+
+<h2 class="guide-h3" data-practical-added="1">A practical way to use PEG responsibly</h2>
+<p class="guide-p">Cross-check the growth estimate used in any PEG calculation against the company's actual historical growth rate — an analyst projection meaningfully higher than the company has ever actually achieved is a reason for extra skepticism before trusting the resulting PEG ratio.</p>
+<p class="guide-p">Use PEG as one input among several, not a standalone buy or sell signal — combining it with a look at debt levels, competitive position, and overall market conditions gives a much fuller picture than any single ratio can provide on its own.</p>
+
+<h2 class="guide-h3" data-deeper-added="1">Why PEG works better for some sectors than others</h2>
+<p class="guide-p">PEG tends to be more reliable for companies with relatively steady, predictable growth (many established consumer or industrial companies) than for early-stage or highly cyclical companies, where growth estimates are inherently less certain and a single year's unusual performance can distort the ratio significantly.</p>
+<p class="guide-p">This is worth keeping in mind before applying PEG uniformly across very different types of companies — the ratio's usefulness depends partly on how reliable the underlying growth estimate actually is for that specific type of business.</p>
+
 </div>
+
+<div class="card quiz-block" style="max-width:760px;margin:1.5rem auto 0">
+<div class="quiz-section-title">🧠 Quick Check</div>
+<p class="quiz-sub">A few questions to see if the key ideas above actually stuck.</p>
+<div class="quiz-card" data-quiz-q="1">
+  <div class="quiz-q">1. Why can a low P/E ratio be misleading on its own?</div>
+  <div class="quiz-opts">
+    <button class="quiz-opt" data-correct="false">P/E is never misleading</button>
+    <button class="quiz-opt" data-correct="true">It can be a 'value trap' — cheap for a reason, like slow growth</button>
+    <button class="quiz-opt" data-correct="false">Low P/E always means a great buy</button>
+  </div>
+  <div class="quiz-fb">A low P/E sometimes reflects weak growth prospects rather than genuine undervaluation.</div>
+</div>
+<div class="quiz-card" data-quiz-q="2">
+  <div class="quiz-q">2. What does PEG adjust P/E for?</div>
+  <div class="quiz-opts">
+    <button class="quiz-opt" data-correct="false">Dividend yield</button>
+    <button class="quiz-opt" data-correct="true">Expected earnings growth</button>
+    <button class="quiz-opt" data-correct="false">Market capitalization</button>
+  </div>
+  <div class="quiz-fb">PEG divides P/E by growth rate, giving a fairer read on whether a stock is cheap relative to its growth.</div>
+</div>
+<div class="quiz-card" data-quiz-q="3">
+  <div class="quiz-q">3. What's a limitation of the PEG ratio, per the article?</div>
+  <div class="quiz-opts">
+    <button class="quiz-opt" data-correct="false">It has no limitations</button>
+    <button class="quiz-opt" data-correct="true">It relies on growth estimates, which can be wrong or overly optimistic</button>
+    <button class="quiz-opt" data-correct="false">It only works for tech stocks</button>
+  </div>
+  <div class="quiz-fb">PEG is only as reliable as the growth forecast feeding into it — a flawed estimate skews the whole ratio.</div>
+</div>
+<div class="quiz-score">
+  <div class="quiz-score-num">0 / 3</div>
+  <div class="quiz-score-lbl"></div>
+  <button class="quiz-reset">Try again</button>
+</div>
+</div>
+
+<script>
+(function(){
+  var scope = document.currentScript.previousElementSibling;
+  var total = scope.querySelectorAll('[data-quiz-q]').length;
+  var answered = 0, correct = 0;
+  scope.querySelectorAll('[data-quiz-q] .quiz-opt').forEach(function(btn){
+    btn.addEventListener('click', function(){
+      var card = btn.closest('[data-quiz-q]');
+      if (card.dataset.done) return;
+      card.dataset.done = '1';
+      var opts = card.querySelectorAll('.quiz-opt');
+      var isCorrect = btn.dataset.correct === 'true';
+      opts.forEach(function(o){
+        o.disabled = true;
+        if (o.dataset.correct === 'true') o.classList.add('correct');
+        else if (o === btn) o.classList.add('incorrect');
+      });
+      card.querySelector('.quiz-fb').classList.add('show');
+      answered++;
+      if (isCorrect) correct++;
+      if (answered === total) {
+        var box = scope.querySelector('.quiz-score');
+        box.querySelector('.quiz-score-num').textContent = correct + ' / ' + total;
+        var lbl = box.querySelector('.quiz-score-lbl');
+        lbl.textContent = correct === total ? "Perfect \u2014 you've got this one down cold." : (correct >= total/2 ? "Solid \u2014 worth a re-read on the ones you missed." : "Worth another pass through the sections above.");
+        box.classList.add('show');
+      }
+    });
+  });
+  scope.querySelector('.quiz-reset').addEventListener('click', function(){
+    scope.querySelectorAll('[data-quiz-q]').forEach(function(card){
+      delete card.dataset.done;
+      card.querySelectorAll('.quiz-opt').forEach(function(o){
+        o.disabled = false;
+        o.classList.remove('correct','incorrect');
+      });
+      card.querySelector('.quiz-fb').classList.remove('show');
+    });
+    scope.querySelector('.quiz-score').classList.remove('show');
+  });
+})();
+</script>
 </div>
 </div><!-- content -->
 <div class="site-footer">

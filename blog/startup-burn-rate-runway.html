@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <link rel="stylesheet" href="/fonts/fonts.css">
 
-<title>Startup Burn Rate: How Many Months of Runway Do You Actually Have? | FinCalc Blog</title>
+<title>Startup Burn Rate & Runway | FinCalc</title>
 <meta name="description" content="The math founders should be checking monthly, not just when a fundraise is approaching.">
 <link rel="canonical" href="https://finclac.com/blog/startup-burn-rate-runway">
 <meta name="robots" content="index, follow">
@@ -14,6 +14,9 @@
 <meta property="og:description" content="The math founders should be checking monthly, not just when a fundraise is approaching.">
 <meta property="og:url" content="https://finclac.com/blog/startup-burn-rate-runway">
 <meta property="og:site_name" content="FinCalc">
+<meta property="og:image" content="https://finclac.com/android-chrome-512x512.png">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://finclac.com/android-chrome-512x512.png">
 <style>html{scrollbar-gutter:stable;overflow-y:scroll}*{box-sizing:border-box;margin:0;padding:0}
 :root{--bg:#F6F4EE;--s:#FFFFFF;--s2:#EFEBE1;--bd:#DBD5C4;--t:#171B17;--m:#807965;--tb:#464C46;--a:#0F4F35;--g:#0F4F35;--r:#8C2E22;--b:#1B3A5C;--p:#6B4A7A;--fn:'IBM Plex Sans',sans-serif;--mo:'IBM Plex Mono',monospace;--disp:'Fraunces',serif}
 html[data-theme="light"]{--bg:#14170F;--s:#1B1F16;--s2:#222619;--bd:#33392C;--t:#EDE7D6;--m:#9A9480;--tb:#C9C3AF;--a:#6FBF95;--g:#6FBF95;--r:#D08877;--b:#7FA8CC;--p:#B79CC9;--disp:'Fraunces',serif}
@@ -379,6 +382,28 @@ div.site-footer .foot-badges{max-width:1180px;margin:20px auto 0;display:flex;fl
 .breadcrumb .bc-sep{color:var(--bd)}
 .breadcrumb .bc-current{color:var(--t);font-weight:600}
 @media(max-width:640px){.breadcrumb{padding:12px 16px 0;font-size:10.5px}}
+
+.quiz-block{}
+.quiz-section-title{font-size:13px;font-weight:700;color:var(--m);text-transform:uppercase;letter-spacing:.8px;margin-bottom:.4rem;display:flex;align-items:center;gap:8px}
+.quiz-section-title::after{content:'';flex:1;height:1px;background:var(--bd)}
+.quiz-sub{font-size:13px;color:var(--m);margin-bottom:1.25rem;line-height:1.6}
+.quiz-card{background:var(--s2);border:1px solid var(--bd);border-radius:10px;padding:1.1rem 1.25rem;margin-bottom:14px}
+.quiz-q{font-size:14px;font-weight:600;color:var(--t);margin-bottom:.85rem;line-height:1.5}
+.quiz-opts{display:flex;flex-direction:column;gap:8px}
+.quiz-opt{text-align:left;background:var(--bg);border:1px solid var(--bd);border-radius:8px;padding:10px 13px;font-size:13.5px;color:var(--tb);font-family:var(--fn);cursor:pointer;transition:all .15s}
+.quiz-opt:hover:not(:disabled){border-color:var(--a);color:var(--t)}
+.quiz-opt:disabled{cursor:default}
+.quiz-opt.correct{background:rgba(111,191,149,.14);border-color:var(--g);color:var(--g);font-weight:600}
+.quiz-opt.incorrect{background:rgba(246,70,93,.10);border-color:var(--r);color:var(--r)}
+.quiz-fb{margin-top:.75rem;font-size:13px;line-height:1.65;color:var(--tb);display:none;padding-top:.75rem;border-top:1px solid var(--bd)}
+.quiz-fb.show{display:block}
+.quiz-fb strong{color:var(--t)}
+.quiz-score{background:var(--s);border:1px solid var(--g);border-radius:10px;padding:1.1rem 1.25rem;text-align:center;display:none}
+.quiz-score.show{display:block}
+.quiz-score-num{font-family:var(--mo);font-size:26px;font-weight:600;color:var(--g);margin-bottom:4px}
+.quiz-score-lbl{font-size:12.5px;color:var(--m)}
+.quiz-reset{margin-top:12px;background:var(--s2);border:1px solid var(--bd);color:var(--tb);font-size:12px;font-weight:500;cursor:pointer;padding:6px 14px;border-radius:20px;font-family:var(--fn)}
+.quiz-reset:hover{border-color:var(--g);color:var(--t)}
 </style>
 <link rel="icon" href="/favicon.ico" sizes="any">
 <link rel="icon" type="image/svg+xml" href="/favicon.svg">
@@ -460,7 +485,103 @@ div.site-footer .foot-badges{max-width:1180px;margin:20px auto 0;display:flex;fl
 <h2 class="guide-h3">Track your own runway</h2>
 <p class="guide-p">Use the free <a href="/burnrate" style="color:var(--a);text-decoration:underline">Burn Rate & Runway Calculator</a> to see exactly how many months of cash you have left based on your current balance and burn. Pair it with the <a href="/breakeven" style="color:var(--a);text-decoration:underline">Break-Even Point Calculator</a> to see how much revenue growth would extend your runway indefinitely.</p>
 
+<h2 class="guide-h3" data-mistakes-added="1">Common burn rate and runway mistakes</h2>
+<p class="guide-p">A frequent mistake is calculating runway using average monthly burn when spending is actually front-loaded or lumpy — a company that just made a large annual software or insurance payment will show artificially high burn that month, and a straight average across recent months can distort the real runway figure.</p>
+<p class="guide-p">Another common error is not updating the runway calculation after a major spending or hiring decision — a new hire changes monthly burn immediately, and a runway figure calculated before that decision is stale the moment the new hire's first paycheck goes out.</p>
+
+<h2 class="guide-h3" data-depth-added="1">A concrete runway calculation</h2>
+<p class="guide-p">A startup with $1.2 million in the bank and $100,000 in net monthly burn has exactly <strong>12 months of runway</strong> at the current spending rate — a number that sounds precise but is only as reliable as the burn rate holding steady.</p>
+<p class="guide-p">If that same company plans to add two new hires costing $15,000/month combined, net burn rises to $115,000/month, and runway drops to $1.2M ÷ $115,000 ≈ <strong>10.4 months</strong> — over a month and a half shorter from a single hiring decision. This is exactly why the article emphasizes recalculating runway after any material spending change rather than treating it as a fixed number that only needs checking occasionally.</p>
+
+<h2 class="guide-h3" data-practical-added="1">A practical monitoring approach</h2>
+<p class="guide-p">Recalculate net burn and runway monthly, not quarterly — spending and revenue can shift meaningfully in a single month for an early-stage company, and a stale runway number is one of the more dangerous blind spots a founder can have.</p>
+<p class="guide-p">Model runway under at least two scenarios — current spending continuing as-is, and a specific planned change (a new hire, a marketing push) — so decisions about spending are made with a clear view of how they shift the timeline, not just a vague sense that 'there's still runway left.'</p>
+
+<h2 class="guide-h3" data-deeper-added="1">Why runway and fundraising timeline need to be planned together, not sequentially</h2>
+<p class="guide-p">A common founder mistake is waiting until runway gets uncomfortably short before starting to fundraise — but fundraising itself typically takes 3-6 months from first conversations to closed funding, meaning a founder who starts raising with only 4 months of runway left is functionally starting the process too late to comfortably close before running out of cash.</p>
+<p class="guide-p">The practical implication is that fundraising should generally begin when runway is still comfortably long (often 9-12 months out), treating the fundraising timeline as something that needs to be planned alongside runway from the start, not reactively once runway starts to feel tight.</p>
+
 </div>
+
+<div class="card quiz-block" style="max-width:760px;margin:1.5rem auto 0">
+<div class="quiz-section-title">🧠 Quick Check</div>
+<p class="quiz-sub">A few questions to see if the key ideas above actually stuck.</p>
+<div class="quiz-card" data-quiz-q="1">
+  <div class="quiz-q">1. What's the difference between gross burn and net burn?</div>
+  <div class="quiz-opts">
+    <button class="quiz-opt" data-correct="false">They're the same metric with different names</button>
+    <button class="quiz-opt" data-correct="true">Net burn subtracts revenue from gross burn's total spend</button>
+    <button class="quiz-opt" data-correct="false">Gross burn only counts payroll</button>
+  </div>
+  <div class="quiz-fb">Net burn accounts for incoming revenue, giving a more accurate picture of actual cash decline.</div>
+</div>
+<div class="quiz-card" data-quiz-q="2">
+  <div class="quiz-q">2. What common mistake does the article flag with runway calculations?</div>
+  <div class="quiz-opts">
+    <button class="quiz-opt" data-correct="false">Recalculating too frequently</button>
+    <button class="quiz-opt" data-correct="true">Treating runway as a static, one-time calculation instead of updating it</button>
+    <button class="quiz-opt" data-correct="false">Sharing runway numbers with investors</button>
+  </div>
+  <div class="quiz-fb">Burn rate changes as a company grows or cuts costs — a stale one-time calculation can be dangerously misleading.</div>
+</div>
+<div class="quiz-card" data-quiz-q="3">
+  <div class="quiz-q">3. What does the article say about fundraising timeline math?</div>
+  <div class="quiz-opts">
+    <button class="quiz-opt" data-correct="false">It's irrelevant to runway planning</button>
+    <button class="quiz-opt" data-correct="true">Founders often underestimate how it interacts with when runway actually runs out</button>
+    <button class="quiz-opt" data-correct="false">Fundraising always takes exactly 3 months</button>
+  </div>
+  <div class="quiz-fb">Fundraising typically takes longer than founders expect, which needs to be factored into runway planning.</div>
+</div>
+<div class="quiz-score">
+  <div class="quiz-score-num">0 / 3</div>
+  <div class="quiz-score-lbl"></div>
+  <button class="quiz-reset">Try again</button>
+</div>
+</div>
+
+<script>
+(function(){
+  var scope = document.currentScript.previousElementSibling;
+  var total = scope.querySelectorAll('[data-quiz-q]').length;
+  var answered = 0, correct = 0;
+  scope.querySelectorAll('[data-quiz-q] .quiz-opt').forEach(function(btn){
+    btn.addEventListener('click', function(){
+      var card = btn.closest('[data-quiz-q]');
+      if (card.dataset.done) return;
+      card.dataset.done = '1';
+      var opts = card.querySelectorAll('.quiz-opt');
+      var isCorrect = btn.dataset.correct === 'true';
+      opts.forEach(function(o){
+        o.disabled = true;
+        if (o.dataset.correct === 'true') o.classList.add('correct');
+        else if (o === btn) o.classList.add('incorrect');
+      });
+      card.querySelector('.quiz-fb').classList.add('show');
+      answered++;
+      if (isCorrect) correct++;
+      if (answered === total) {
+        var box = scope.querySelector('.quiz-score');
+        box.querySelector('.quiz-score-num').textContent = correct + ' / ' + total;
+        var lbl = box.querySelector('.quiz-score-lbl');
+        lbl.textContent = correct === total ? "Perfect \u2014 you've got this one down cold." : (correct >= total/2 ? "Solid \u2014 worth a re-read on the ones you missed." : "Worth another pass through the sections above.");
+        box.classList.add('show');
+      }
+    });
+  });
+  scope.querySelector('.quiz-reset').addEventListener('click', function(){
+    scope.querySelectorAll('[data-quiz-q]').forEach(function(card){
+      delete card.dataset.done;
+      card.querySelectorAll('.quiz-opt').forEach(function(o){
+        o.disabled = false;
+        o.classList.remove('correct','incorrect');
+      });
+      card.querySelector('.quiz-fb').classList.remove('show');
+    });
+    scope.querySelector('.quiz-score').classList.remove('show');
+  });
+})();
+</script>
 </div>
 </div><!-- content -->
 <div class="site-footer">

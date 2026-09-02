@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <link rel="stylesheet" href="/fonts/fonts.css">
 
-<title>How to Calculate After-Tax Cash Flow (With a Worked Example) | FinCalc Blog</title>
+<title>How to Calculate After-Tax Cash Flow | FinCalc</title>
 <meta name="description" content="Cash flow tells you what moved. After-tax cash flow tells you what you actually keep. Here's the real formula and where it gets tricky.">
 <link rel="canonical" href="https://finclac.com/blog/after-tax-cash-flow-explained">
 <meta name="robots" content="index, follow">
@@ -14,6 +14,9 @@
 <meta property="og:description" content="Cash flow tells you what moved. After-tax cash flow tells you what you actually keep. Here's the real formula and where it gets tricky.">
 <meta property="og:url" content="https://finclac.com/blog/after-tax-cash-flow-explained">
 <meta property="og:site_name" content="FinCalc">
+<meta property="og:image" content="https://finclac.com/android-chrome-512x512.png">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://finclac.com/android-chrome-512x512.png">
 <style>html{scrollbar-gutter:stable;overflow-y:scroll}*{box-sizing:border-box;margin:0;padding:0}
 :root{--bg:#F6F4EE;--s:#FFFFFF;--s2:#EFEBE1;--bd:#DBD5C4;--t:#171B17;--m:#807965;--tb:#464C46;--a:#0F4F35;--g:#0F4F35;--r:#8C2E22;--b:#1B3A5C;--p:#6B4A7A;--fn:'IBM Plex Sans',sans-serif;--mo:'IBM Plex Mono',monospace;--disp:'Fraunces',serif}
 html[data-theme="light"]{--bg:#14170F;--s:#1B1F16;--s2:#222619;--bd:#33392C;--t:#EDE7D6;--m:#9A9480;--tb:#C9C3AF;--a:#6FBF95;--g:#6FBF95;--r:#D08877;--b:#7FA8CC;--p:#B79CC9;--disp:'Fraunces',serif}
@@ -379,6 +382,28 @@ div.site-footer .foot-badges{max-width:1180px;margin:20px auto 0;display:flex;fl
 .breadcrumb .bc-sep{color:var(--bd)}
 .breadcrumb .bc-current{color:var(--t);font-weight:600}
 @media(max-width:640px){.breadcrumb{padding:12px 16px 0;font-size:10.5px}}
+
+.quiz-block{}
+.quiz-section-title{font-size:13px;font-weight:700;color:var(--m);text-transform:uppercase;letter-spacing:.8px;margin-bottom:.4rem;display:flex;align-items:center;gap:8px}
+.quiz-section-title::after{content:'';flex:1;height:1px;background:var(--bd)}
+.quiz-sub{font-size:13px;color:var(--m);margin-bottom:1.25rem;line-height:1.6}
+.quiz-card{background:var(--s2);border:1px solid var(--bd);border-radius:10px;padding:1.1rem 1.25rem;margin-bottom:14px}
+.quiz-q{font-size:14px;font-weight:600;color:var(--t);margin-bottom:.85rem;line-height:1.5}
+.quiz-opts{display:flex;flex-direction:column;gap:8px}
+.quiz-opt{text-align:left;background:var(--bg);border:1px solid var(--bd);border-radius:8px;padding:10px 13px;font-size:13.5px;color:var(--tb);font-family:var(--fn);cursor:pointer;transition:all .15s}
+.quiz-opt:hover:not(:disabled){border-color:var(--a);color:var(--t)}
+.quiz-opt:disabled{cursor:default}
+.quiz-opt.correct{background:rgba(111,191,149,.14);border-color:var(--g);color:var(--g);font-weight:600}
+.quiz-opt.incorrect{background:rgba(246,70,93,.10);border-color:var(--r);color:var(--r)}
+.quiz-fb{margin-top:.75rem;font-size:13px;line-height:1.65;color:var(--tb);display:none;padding-top:.75rem;border-top:1px solid var(--bd)}
+.quiz-fb.show{display:block}
+.quiz-fb strong{color:var(--t)}
+.quiz-score{background:var(--s);border:1px solid var(--g);border-radius:10px;padding:1.1rem 1.25rem;text-align:center;display:none}
+.quiz-score.show{display:block}
+.quiz-score-num{font-family:var(--mo);font-size:26px;font-weight:600;color:var(--g);margin-bottom:4px}
+.quiz-score-lbl{font-size:12.5px;color:var(--m)}
+.quiz-reset{margin-top:12px;background:var(--s2);border:1px solid var(--bd);color:var(--tb);font-size:12px;font-weight:500;cursor:pointer;padding:6px 14px;border-radius:20px;font-family:var(--fn)}
+.quiz-reset:hover{border-color:var(--g);color:var(--t)}
 </style>
 <link rel="icon" href="/favicon.ico" sizes="any">
 <link rel="icon" type="image/svg+xml" href="/favicon.svg">
@@ -455,7 +480,103 @@ div.site-footer .foot-badges{max-width:1180px;margin:20px auto 0;display:flex;fl
 <p class="guide-p">To model your own numbers, start with the free <a href="/cashflow" style="color:var(--a);text-decoration:underline">Cash Flow Calculator</a> for your pre-tax inflows and outflows, then use the <a href="/tax" style="color:var(--a);text-decoration:underline">US Federal Tax Calculator</a> to find your accurate marginal rate to apply against it.</p>
 
 
+<h2 class="guide-h3" data-mistakes-added="1">Common mistakes in after-tax cash flow calculations</h2>
+<p class="guide-p">A frequent error is using a flat, average tax rate across all income when your actual marginal rate on the specific investment income might be different — rental income, capital gains, and ordinary income are often taxed at different rates, and blending them into one number can meaningfully misstate the real after-tax result.</p>
+<p class="guide-p">Another common mistake is ignoring depreciation recapture on the eventual sale of a rental property — the depreciation that reduced your taxable income each year while you owned the property often gets taxed back at sale, a real future tax bill that pure annual cash flow calculations tend to leave out entirely.</p>
+
+<h2 class="guide-h3" data-depth-added="1">A worked example</h2>
+<p class="guide-p">A rental property generates $30,000/year in pre-tax cash flow. At a 24% marginal tax rate applied to taxable rental income (which is often lower than cash flow due to depreciation deductions) of, say, $18,000, the tax owed is roughly $4,320 — leaving after-tax cash flow of about <strong>$25,680</strong>, not the full $30,000.</p>
+<p class="guide-p">The gap between $30,000 pre-tax and $25,680 after-tax — about 14% — comes entirely from the fact that taxable income and actual cash received aren't the same number once depreciation is factored in. Two properties with identical pre-tax cash flow but different depreciation schedules can have meaningfully different after-tax results, which is exactly the distinction pre-tax comparisons miss.</p>
+
+<h2 class="guide-h3" data-practical-added="1">A practical calculation approach</h2>
+<p class="guide-p">Build your after-tax projection using your actual marginal tax rate on that specific income type, not a rough blended estimate — rental income, capital gains, and ordinary income can all be taxed differently, and a quick check with a tax professional or a detailed calculator pays for itself on any significant investment decision.</p>
+<p class="guide-p">Revisit the calculation whenever your tax situation changes materially — a new tax bracket, a change in filing status, or a shift in how a property is held can all change the after-tax result even if the pre-tax cash flow stays exactly the same.</p>
+
+<h2 class="guide-h3" data-deeper-added="1">Why this matters more the longer you hold the investment</h2>
+<p class="guide-p">The gap between pre-tax and after-tax cash flow tends to compound in relevance the longer an investment is held — depreciation deductions shrink or phase out over time for real estate, meaning the after-tax picture of a property often changes meaningfully between year 3 and year 15 of ownership, even if pre-tax cash flow stays roughly flat.</p>
+<p class="guide-p">This is a reason to recalculate after-tax cash flow periodically over a long hold, not just once at purchase — the tax picture is not static even when the property's operating performance is.</p>
+
 </div>
+
+<div class="card quiz-block" style="max-width:760px;margin:1.5rem auto 0">
+<div class="quiz-section-title">🧠 Quick Check</div>
+<p class="quiz-sub">A few questions to see if the key ideas above actually stuck.</p>
+<div class="quiz-card" data-quiz-q="1">
+  <div class="quiz-q">1. What does after-tax cash flow measure that a pre-tax number doesn't?</div>
+  <div class="quiz-opts">
+    <button class="quiz-opt" data-correct="false">Total revenue before any costs</button>
+    <button class="quiz-opt" data-correct="true">The actual money you keep after taxes are paid</button>
+    <button class="quiz-opt" data-correct="false">The property's resale value</button>
+  </div>
+  <div class="quiz-fb">Pre-tax numbers look identical across very different tax situations — after-tax is what actually lands in your pocket.</div>
+</div>
+<div class="quiz-card" data-quiz-q="2">
+  <div class="quiz-q">2. Why can two investments with the same pre-tax cash flow perform very differently after tax?</div>
+  <div class="quiz-opts">
+    <button class="quiz-opt" data-correct="false">They always perform the same after tax</button>
+    <button class="quiz-opt" data-correct="true">Depreciation, deductions, and tax bracket can change the after-tax result significantly</button>
+    <button class="quiz-opt" data-correct="false">Only the purchase price matters</button>
+  </div>
+  <div class="quiz-fb">Tax treatment varies enough between situations that pre-tax comparisons alone can be misleading.</div>
+</div>
+<div class="quiz-card" data-quiz-q="3">
+  <div class="quiz-q">3. Where does the calculation get genuinely tricky, according to the article?</div>
+  <div class="quiz-opts">
+    <button class="quiz-opt" data-correct="false">Adding up the purchase price</button>
+    <button class="quiz-opt" data-correct="true">Accounting for depreciation and financing details correctly</button>
+    <button class="quiz-opt" data-correct="false">Calculating the down payment</button>
+  </div>
+  <div class="quiz-fb">Depreciation and loan structure are where after-tax cash flow math actually gets complicated.</div>
+</div>
+<div class="quiz-score">
+  <div class="quiz-score-num">0 / 3</div>
+  <div class="quiz-score-lbl"></div>
+  <button class="quiz-reset">Try again</button>
+</div>
+</div>
+
+<script>
+(function(){
+  var scope = document.currentScript.previousElementSibling;
+  var total = scope.querySelectorAll('[data-quiz-q]').length;
+  var answered = 0, correct = 0;
+  scope.querySelectorAll('[data-quiz-q] .quiz-opt').forEach(function(btn){
+    btn.addEventListener('click', function(){
+      var card = btn.closest('[data-quiz-q]');
+      if (card.dataset.done) return;
+      card.dataset.done = '1';
+      var opts = card.querySelectorAll('.quiz-opt');
+      var isCorrect = btn.dataset.correct === 'true';
+      opts.forEach(function(o){
+        o.disabled = true;
+        if (o.dataset.correct === 'true') o.classList.add('correct');
+        else if (o === btn) o.classList.add('incorrect');
+      });
+      card.querySelector('.quiz-fb').classList.add('show');
+      answered++;
+      if (isCorrect) correct++;
+      if (answered === total) {
+        var box = scope.querySelector('.quiz-score');
+        box.querySelector('.quiz-score-num').textContent = correct + ' / ' + total;
+        var lbl = box.querySelector('.quiz-score-lbl');
+        lbl.textContent = correct === total ? "Perfect \u2014 you've got this one down cold." : (correct >= total/2 ? "Solid \u2014 worth a re-read on the ones you missed." : "Worth another pass through the sections above.");
+        box.classList.add('show');
+      }
+    });
+  });
+  scope.querySelector('.quiz-reset').addEventListener('click', function(){
+    scope.querySelectorAll('[data-quiz-q]').forEach(function(card){
+      delete card.dataset.done;
+      card.querySelectorAll('.quiz-opt').forEach(function(o){
+        o.disabled = false;
+        o.classList.remove('correct','incorrect');
+      });
+      card.querySelector('.quiz-fb').classList.remove('show');
+    });
+    scope.querySelector('.quiz-score').classList.remove('show');
+  });
+})();
+</script>
 </div>
 </div><!-- content -->
 <div class="site-footer">

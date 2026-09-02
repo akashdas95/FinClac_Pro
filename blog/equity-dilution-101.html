@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <link rel="stylesheet" href="/fonts/fonts.css">
 
-<title>Equity Dilution 101: What Happens to Your Shares After Each Funding Round | FinCalc Blog</title>
+<title>Equity Dilution 101 | FinCalc</title>
 <meta name="description" content="A smaller slice of a bigger pie can still be worth more — here's the actual math.">
 <link rel="canonical" href="https://finclac.com/blog/equity-dilution-101">
 <meta name="robots" content="index, follow">
@@ -14,6 +14,9 @@
 <meta property="og:description" content="A smaller slice of a bigger pie can still be worth more — here's the actual math.">
 <meta property="og:url" content="https://finclac.com/blog/equity-dilution-101">
 <meta property="og:site_name" content="FinCalc">
+<meta property="og:image" content="https://finclac.com/android-chrome-512x512.png">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://finclac.com/android-chrome-512x512.png">
 <style>html{scrollbar-gutter:stable;overflow-y:scroll}*{box-sizing:border-box;margin:0;padding:0}
 :root{--bg:#F6F4EE;--s:#FFFFFF;--s2:#EFEBE1;--bd:#DBD5C4;--t:#171B17;--m:#807965;--tb:#464C46;--a:#0F4F35;--g:#0F4F35;--r:#8C2E22;--b:#1B3A5C;--p:#6B4A7A;--fn:'IBM Plex Sans',sans-serif;--mo:'IBM Plex Mono',monospace;--disp:'Fraunces',serif}
 html[data-theme="light"]{--bg:#14170F;--s:#1B1F16;--s2:#222619;--bd:#33392C;--t:#EDE7D6;--m:#9A9480;--tb:#C9C3AF;--a:#6FBF95;--g:#6FBF95;--r:#D08877;--b:#7FA8CC;--p:#B79CC9;--disp:'Fraunces',serif}
@@ -379,6 +382,28 @@ div.site-footer .foot-badges{max-width:1180px;margin:20px auto 0;display:flex;fl
 .breadcrumb .bc-sep{color:var(--bd)}
 .breadcrumb .bc-current{color:var(--t);font-weight:600}
 @media(max-width:640px){.breadcrumb{padding:12px 16px 0;font-size:10.5px}}
+
+.quiz-block{}
+.quiz-section-title{font-size:13px;font-weight:700;color:var(--m);text-transform:uppercase;letter-spacing:.8px;margin-bottom:.4rem;display:flex;align-items:center;gap:8px}
+.quiz-section-title::after{content:'';flex:1;height:1px;background:var(--bd)}
+.quiz-sub{font-size:13px;color:var(--m);margin-bottom:1.25rem;line-height:1.6}
+.quiz-card{background:var(--s2);border:1px solid var(--bd);border-radius:10px;padding:1.1rem 1.25rem;margin-bottom:14px}
+.quiz-q{font-size:14px;font-weight:600;color:var(--t);margin-bottom:.85rem;line-height:1.5}
+.quiz-opts{display:flex;flex-direction:column;gap:8px}
+.quiz-opt{text-align:left;background:var(--bg);border:1px solid var(--bd);border-radius:8px;padding:10px 13px;font-size:13.5px;color:var(--tb);font-family:var(--fn);cursor:pointer;transition:all .15s}
+.quiz-opt:hover:not(:disabled){border-color:var(--a);color:var(--t)}
+.quiz-opt:disabled{cursor:default}
+.quiz-opt.correct{background:rgba(111,191,149,.14);border-color:var(--g);color:var(--g);font-weight:600}
+.quiz-opt.incorrect{background:rgba(246,70,93,.10);border-color:var(--r);color:var(--r)}
+.quiz-fb{margin-top:.75rem;font-size:13px;line-height:1.65;color:var(--tb);display:none;padding-top:.75rem;border-top:1px solid var(--bd)}
+.quiz-fb.show{display:block}
+.quiz-fb strong{color:var(--t)}
+.quiz-score{background:var(--s);border:1px solid var(--g);border-radius:10px;padding:1.1rem 1.25rem;text-align:center;display:none}
+.quiz-score.show{display:block}
+.quiz-score-num{font-family:var(--mo);font-size:26px;font-weight:600;color:var(--g);margin-bottom:4px}
+.quiz-score-lbl{font-size:12.5px;color:var(--m)}
+.quiz-reset{margin-top:12px;background:var(--s2);border:1px solid var(--bd);color:var(--tb);font-size:12px;font-weight:500;cursor:pointer;padding:6px 14px;border-radius:20px;font-family:var(--fn)}
+.quiz-reset:hover{border-color:var(--g);color:var(--t)}
 </style>
 <link rel="icon" href="/favicon.ico" sizes="any">
 <link rel="icon" type="image/svg+xml" href="/favicon.svg">
@@ -459,7 +484,103 @@ div.site-footer .foot-badges{max-width:1180px;margin:20px auto 0;display:flex;fl
 <h2 class="guide-h3">Model your own cap table</h2>
 <p class="guide-p">Use the free <a href="/equity" style="color:var(--a);text-decoration:underline">Equity Dilution Calculator</a> to model ownership percentages across multiple funding rounds. To see how a specific event — a secondary offering, option exercise, or convertible note conversion — affects your share value, the <a href="/dilutionimpact" style="color:var(--a);text-decoration:underline">Stock Dilution Impact Calculator</a> breaks down the EPS and value effect directly.</p>
 
+<h2 class="guide-h3" data-mistakes-added="1">Common misunderstandings about dilution</h2>
+<p class="guide-p">A frequent misunderstanding is treating percentage ownership as the only number that matters — a founder holding 60% of a company worth $2 million and 20% of a company worth $20 million has a very different actual outcome ($1.2M vs. $4M) despite the lower percentage in the second case being the objectively better result.</p>
+<p class="guide-p">Another common mistake founders make is negotiating hard against dilution in early rounds without factoring in that the right investor can increase the company's total value enough to make even a smaller percentage worth more — treating every funding round purely as a fight to minimize dilution, rather than weighing dilution against what that capital and partnership actually enables.</p>
+
+<h2 class="guide-h3" data-depth-added="1">A concrete example</h2>
+<p class="guide-p">Say a company is valued at $8 million pre-money and raises $2 million in a new round, making the post-money valuation $10 million. The new investors own $2M ÷ $10M = <strong>20%</strong> of the company going forward.</p>
+<p class="guide-p">A founder who owned 70% before the round now owns 70% × ($8M ÷ $10M) = <strong>56%</strong> after the round — their percentage dropped by 14 points, but the dollar value of their stake actually stayed the same: 70% of $8M ($5.6M) equals 56% of $10M ($5.6M). The round only becomes genuinely dilutive in the meaningful sense if the money raised doesn't grow the company's value by at least as much as the percentage given up — which is the real test worth applying to any funding round, not the percentage drop in isolation.</p>
+
+<h2 class="guide-h3" data-practical-added="1">A practical approach to evaluating a round</h2>
+<p class="guide-p">Before agreeing to a funding round, calculate both your resulting ownership percentage and the resulting dollar value of your stake — evaluating dilution by percentage alone, without checking whether the round's valuation increase offsets it, is an incomplete picture.</p>
+<p class="guide-p">Understand the specific anti-dilution and other investor protection terms in any term sheet before signing — these clauses can affect how future dilution is distributed among shareholders in ways that aren't obvious from the headline valuation and investment amount alone.</p>
+
+<h2 class="guide-h3" data-deeper-added="1">Why later-stage dilution often feels different than early-stage</h2>
+<p class="guide-p">Dilution in a seed round, when the company has little proven value yet, tends to feel more acceptable than dilution in a later round after significant value has already been built — even though the underlying mechanic (new shares issued, ownership percentage reduced) is identical, the psychological weight of giving up percentage ownership generally increases as the stakes and proven value grow.</p>
+<p class="guide-p">Understanding this pattern in advance helps founders negotiate each round with a clearer head rather than reacting more emotionally to dilution in later, higher-stakes rounds than the math alone would justify.</p>
+
 </div>
+
+<div class="card quiz-block" style="max-width:760px;margin:1.5rem auto 0">
+<div class="quiz-section-title">🧠 Quick Check</div>
+<p class="quiz-sub">A few questions to see if the key ideas above actually stuck.</p>
+<div class="quiz-card" data-quiz-q="1">
+  <div class="quiz-q">1. What's the basic mechanic of equity dilution?</div>
+  <div class="quiz-opts">
+    <button class="quiz-opt" data-correct="false">Your share count changes but ownership percentage doesn't</button>
+    <button class="quiz-opt" data-correct="true">Your ownership percentage decreases as new shares are issued</button>
+    <button class="quiz-opt" data-correct="false">Dilution only happens during an IPO</button>
+  </div>
+  <div class="quiz-fb">New shares issued to new investors reduce every existing shareholder's ownership percentage.</div>
+</div>
+<div class="quiz-card" data-quiz-q="2">
+  <div class="quiz-q">2. Why isn't dilution automatically bad for existing shareholders?</div>
+  <div class="quiz-opts">
+    <button class="quiz-opt" data-correct="false">It never is bad</button>
+    <button class="quiz-opt" data-correct="true">A smaller slice of a much bigger, more valuable company can still be worth more</button>
+    <button class="quiz-opt" data-correct="false">Dilution always increases share price</button>
+  </div>
+  <div class="quiz-fb">If the funding round grows the company's value enough, a smaller percentage can still mean a bigger dollar value.</div>
+</div>
+<div class="quiz-card" data-quiz-q="3">
+  <div class="quiz-q">3. What are anti-dilution protections designed to do?</div>
+  <div class="quiz-opts">
+    <button class="quiz-opt" data-correct="false">Prevent any future funding rounds</button>
+    <button class="quiz-opt" data-correct="true">Protect certain investors' ownership percentage or price in future rounds</button>
+    <button class="quiz-opt" data-correct="false">Eliminate dilution entirely for everyone</button>
+  </div>
+  <div class="quiz-fb">These are contractual terms that shield specific investors, typically not all shareholders equally.</div>
+</div>
+<div class="quiz-score">
+  <div class="quiz-score-num">0 / 3</div>
+  <div class="quiz-score-lbl"></div>
+  <button class="quiz-reset">Try again</button>
+</div>
+</div>
+
+<script>
+(function(){
+  var scope = document.currentScript.previousElementSibling;
+  var total = scope.querySelectorAll('[data-quiz-q]').length;
+  var answered = 0, correct = 0;
+  scope.querySelectorAll('[data-quiz-q] .quiz-opt').forEach(function(btn){
+    btn.addEventListener('click', function(){
+      var card = btn.closest('[data-quiz-q]');
+      if (card.dataset.done) return;
+      card.dataset.done = '1';
+      var opts = card.querySelectorAll('.quiz-opt');
+      var isCorrect = btn.dataset.correct === 'true';
+      opts.forEach(function(o){
+        o.disabled = true;
+        if (o.dataset.correct === 'true') o.classList.add('correct');
+        else if (o === btn) o.classList.add('incorrect');
+      });
+      card.querySelector('.quiz-fb').classList.add('show');
+      answered++;
+      if (isCorrect) correct++;
+      if (answered === total) {
+        var box = scope.querySelector('.quiz-score');
+        box.querySelector('.quiz-score-num').textContent = correct + ' / ' + total;
+        var lbl = box.querySelector('.quiz-score-lbl');
+        lbl.textContent = correct === total ? "Perfect \u2014 you've got this one down cold." : (correct >= total/2 ? "Solid \u2014 worth a re-read on the ones you missed." : "Worth another pass through the sections above.");
+        box.classList.add('show');
+      }
+    });
+  });
+  scope.querySelector('.quiz-reset').addEventListener('click', function(){
+    scope.querySelectorAll('[data-quiz-q]').forEach(function(card){
+      delete card.dataset.done;
+      card.querySelectorAll('.quiz-opt').forEach(function(o){
+        o.disabled = false;
+        o.classList.remove('correct','incorrect');
+      });
+      card.querySelector('.quiz-fb').classList.remove('show');
+    });
+    scope.querySelector('.quiz-score').classList.remove('show');
+  });
+})();
+</script>
 </div>
 </div><!-- content -->
 <div class="site-footer">

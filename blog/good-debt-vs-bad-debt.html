@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <link rel="stylesheet" href="/fonts/fonts.css">
 
-<title>Good Debt vs. Bad Debt: A Genuinely Useful Framework | FinCalc Blog</title>
+<title>Good Debt vs Bad Debt | FinCalc</title>
 <meta name="description" content="Not all debt is created equal — here's how to actually tell the difference.">
 <link rel="canonical" href="https://finclac.com/blog/good-debt-vs-bad-debt">
 <meta name="robots" content="index, follow">
@@ -14,6 +14,9 @@
 <meta property="og:description" content="Not all debt is created equal — here's how to actually tell the difference.">
 <meta property="og:url" content="https://finclac.com/blog/good-debt-vs-bad-debt">
 <meta property="og:site_name" content="FinCalc">
+<meta property="og:image" content="https://finclac.com/android-chrome-512x512.png">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://finclac.com/android-chrome-512x512.png">
 <style>html{scrollbar-gutter:stable;overflow-y:scroll}*{box-sizing:border-box;margin:0;padding:0}
 :root{--bg:#F6F4EE;--s:#FFFFFF;--s2:#EFEBE1;--bd:#DBD5C4;--t:#171B17;--m:#807965;--tb:#464C46;--a:#0F4F35;--g:#0F4F35;--r:#8C2E22;--b:#1B3A5C;--p:#6B4A7A;--fn:'IBM Plex Sans',sans-serif;--mo:'IBM Plex Mono',monospace;--disp:'Fraunces',serif}
 html[data-theme="light"]{--bg:#14170F;--s:#1B1F16;--s2:#222619;--bd:#33392C;--t:#EDE7D6;--m:#9A9480;--tb:#C9C3AF;--a:#6FBF95;--g:#6FBF95;--r:#D08877;--b:#7FA8CC;--p:#B79CC9;--disp:'Fraunces',serif}
@@ -379,6 +382,28 @@ div.site-footer .foot-badges{max-width:1180px;margin:20px auto 0;display:flex;fl
 .breadcrumb .bc-sep{color:var(--bd)}
 .breadcrumb .bc-current{color:var(--t);font-weight:600}
 @media(max-width:640px){.breadcrumb{padding:12px 16px 0;font-size:10.5px}}
+
+.quiz-block{}
+.quiz-section-title{font-size:13px;font-weight:700;color:var(--m);text-transform:uppercase;letter-spacing:.8px;margin-bottom:.4rem;display:flex;align-items:center;gap:8px}
+.quiz-section-title::after{content:'';flex:1;height:1px;background:var(--bd)}
+.quiz-sub{font-size:13px;color:var(--m);margin-bottom:1.25rem;line-height:1.6}
+.quiz-card{background:var(--s2);border:1px solid var(--bd);border-radius:10px;padding:1.1rem 1.25rem;margin-bottom:14px}
+.quiz-q{font-size:14px;font-weight:600;color:var(--t);margin-bottom:.85rem;line-height:1.5}
+.quiz-opts{display:flex;flex-direction:column;gap:8px}
+.quiz-opt{text-align:left;background:var(--bg);border:1px solid var(--bd);border-radius:8px;padding:10px 13px;font-size:13.5px;color:var(--tb);font-family:var(--fn);cursor:pointer;transition:all .15s}
+.quiz-opt:hover:not(:disabled){border-color:var(--a);color:var(--t)}
+.quiz-opt:disabled{cursor:default}
+.quiz-opt.correct{background:rgba(111,191,149,.14);border-color:var(--g);color:var(--g);font-weight:600}
+.quiz-opt.incorrect{background:rgba(246,70,93,.10);border-color:var(--r);color:var(--r)}
+.quiz-fb{margin-top:.75rem;font-size:13px;line-height:1.65;color:var(--tb);display:none;padding-top:.75rem;border-top:1px solid var(--bd)}
+.quiz-fb.show{display:block}
+.quiz-fb strong{color:var(--t)}
+.quiz-score{background:var(--s);border:1px solid var(--g);border-radius:10px;padding:1.1rem 1.25rem;text-align:center;display:none}
+.quiz-score.show{display:block}
+.quiz-score-num{font-family:var(--mo);font-size:26px;font-weight:600;color:var(--g);margin-bottom:4px}
+.quiz-score-lbl{font-size:12.5px;color:var(--m)}
+.quiz-reset{margin-top:12px;background:var(--s2);border:1px solid var(--bd);color:var(--tb);font-size:12px;font-weight:500;cursor:pointer;padding:6px 14px;border-radius:20px;font-family:var(--fn)}
+.quiz-reset:hover{border-color:var(--g);color:var(--t)}
 </style>
 <link rel="icon" href="/favicon.ico" sizes="any">
 <link rel="icon" type="image/svg+xml" href="/favicon.svg">
@@ -427,7 +452,7 @@ div.site-footer .foot-badges{max-width:1180px;margin:20px auto 0;display:flex;fl
 <h1 class="blog-article-title">Good Debt vs. Bad Debt: A Genuinely Useful Framework</h1>
 <div class="blog-byline" style="margin-bottom:1.75rem">
   <div class="blog-avatar">FC</div>
-  <div class="blog-byline-text"><span class="blog-byline-name">FinCalc Team</span><span class="blog-byline-dot">·</span>July 2026 · 3 min read</div>
+  <div class="blog-byline-text"><span class="blog-byline-name">FinCalc Team</span><span class="blog-byline-dot">·</span>July 2026 · 5 min read</div>
 </div>
 <div style="margin:0 0 1.75rem;border-radius:12px;overflow:hidden"><svg viewBox="0 0 760 220" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:auto;border-radius:12px;display:block" role="img" aria-hidden="true">
 <rect width="760" height="220" fill="var(--s2)"/>
@@ -458,7 +483,103 @@ div.site-footer .foot-badges{max-width:1180px;margin:20px auto 0;display:flex;fl
 <h2 class="guide-h3">Apply the framework to your own debts</h2>
 <p class="guide-p">The free <a href="/debt" style="color:var(--a);text-decoration:underline">Debt Payoff Calculator</a> helps prioritize which debts to tackle first based on their real cost. If you're weighing whether to pay down debt or invest instead, our <a href="/blog/pay-off-debt-or-invest" style="color:var(--a);text-decoration:underline">deep dive on that exact question</a> walks through the full decision framework.</p>
 
+<h2 class="guide-h3" data-depth-added="1">Where the interest rate threshold actually falls</h2>
+<p class="guide-p">A rough but useful threshold: debt at rates below what a diversified investment portfolio might reasonably be expected to return over time (historically averaging somewhere in the 7-10% range for stocks) is arguably worth carrying rather than aggressively paying off early — a mortgage at 4-6%, for instance, or a subsidized student loan at 3-5%.</p>
+<p class="guide-p">Debt above that threshold — most credit cards at 20%+, many personal loans, some private student loans — has essentially no realistic investment counter-argument, since almost nothing reliably outperforms a guaranteed 20%+ 'return' from eliminating that interest cost. This threshold is also where the good-debt/bad-debt framework gets genuinely nuanced: a loan at 8-12% sits in a gray zone where the right call depends more on your risk tolerance and cash flow than on a clean rule.</p>
+
+<h2 class="guide-h3" data-mistakes-added="1">Common mistakes applying this framework</h2>
+<p class="guide-p">A frequent mistake is treating an entire category of debt as uniformly 'good' or 'bad' regardless of the specific terms — student loan debt is often filed as automatically 'good,' but a private student loan at 11% for a degree with poor job market prospects can function much more like 'bad' debt than the framework's general reputation suggests.</p>
+<p class="guide-p">Another common error is ignoring how debt interacts with cash flow, not just interest rate — a 'good debt' mortgage payment that consumes 45% of take-home income creates real financial fragility regardless of how favorable the interest rate looks on paper, since a low rate doesn't protect against a job loss the way a lower payment would.</p>
+
+<h2 class="guide-h3" data-practical-added="1">A practical application of this framework</h2>
+<p class="guide-p">List your current debts with their actual interest rates next to them, then sort by rate rather than by loan type — this often reveals that the framework's typical 'good debt, bad debt' categories don't perfectly match your specific situation, since a specific loan's actual terms matter more than its general category.</p>
+<p class="guide-p">For any debt sitting in the ambiguous middle zone, weigh it against your specific cash flow and risk tolerance rather than searching for a universal rule — the right call for a given rate can differ meaningfully between someone with substantial savings and someone living closer to paycheck to paycheck.</p>
+
+<h2 class="guide-h3" data-deeper-added="1">Why context changes the classification more than the debt type itself</h2>
+<p class="guide-p">The same mortgage that's 'good debt' for someone buying a home they can comfortably afford in a stable job can function much more like 'bad debt' for someone who stretched into a home that consumes an uncomfortable share of income during an unstable employment situation — the debt instrument is identical, but the risk profile it creates is very different.</p>
+<p class="guide-p">This is the deeper point behind the good-debt/bad-debt framework: it's less about the category of debt and more about whether the specific debt, at its specific terms, fits the specific person's actual financial stability and goals.</p>
+
 </div>
+
+<div class="card quiz-block" style="max-width:760px;margin:1.5rem auto 0">
+<div class="quiz-section-title">🧠 Quick Check</div>
+<p class="quiz-sub">A few questions to see if the key ideas above actually stuck.</p>
+<div class="quiz-card" data-quiz-q="1">
+  <div class="quiz-q">1. What's the article's working definition of 'good' debt?</div>
+  <div class="quiz-opts">
+    <button class="quiz-opt" data-correct="false">Any debt with a low balance</button>
+    <button class="quiz-opt" data-correct="true">Debt that typically builds value or future earning potential</button>
+    <button class="quiz-opt" data-correct="false">Debt with no interest at all</button>
+  </div>
+  <div class="quiz-fb">Good debt is generally framed around building an asset or capability that pays off over time.</div>
+</div>
+<div class="quiz-card" data-quiz-q="2">
+  <div class="quiz-q">2. What interest rate factor does the article highlight as most important?</div>
+  <div class="quiz-opts">
+    <button class="quiz-opt" data-correct="false">Whether the rate is fixed or variable</button>
+    <button class="quiz-opt" data-correct="true">A specific rate threshold that shifts debt from 'manageable' to 'costly'</button>
+    <button class="quiz-opt" data-correct="false">The lender's name</button>
+  </div>
+  <div class="quiz-fb">The article points to a rate threshold as the practical line where debt starts to genuinely work against you.</div>
+</div>
+<div class="quiz-card" data-quiz-q="3">
+  <div class="quiz-q">3. Where does the good-debt/bad-debt framework get nuanced, per the article?</div>
+  <div class="quiz-opts">
+    <button class="quiz-opt" data-correct="false">It never gets nuanced — it's always clear-cut</button>
+    <button class="quiz-opt" data-correct="true">Some debts don't fit cleanly into either category depending on context</button>
+    <button class="quiz-opt" data-correct="false">Only credit cards are ever 'bad' debt</button>
+  </div>
+  <div class="quiz-fb">Real debts often blur the line — the same loan type can be 'good' or 'bad' depending on the situation.</div>
+</div>
+<div class="quiz-score">
+  <div class="quiz-score-num">0 / 3</div>
+  <div class="quiz-score-lbl"></div>
+  <button class="quiz-reset">Try again</button>
+</div>
+</div>
+
+<script>
+(function(){
+  var scope = document.currentScript.previousElementSibling;
+  var total = scope.querySelectorAll('[data-quiz-q]').length;
+  var answered = 0, correct = 0;
+  scope.querySelectorAll('[data-quiz-q] .quiz-opt').forEach(function(btn){
+    btn.addEventListener('click', function(){
+      var card = btn.closest('[data-quiz-q]');
+      if (card.dataset.done) return;
+      card.dataset.done = '1';
+      var opts = card.querySelectorAll('.quiz-opt');
+      var isCorrect = btn.dataset.correct === 'true';
+      opts.forEach(function(o){
+        o.disabled = true;
+        if (o.dataset.correct === 'true') o.classList.add('correct');
+        else if (o === btn) o.classList.add('incorrect');
+      });
+      card.querySelector('.quiz-fb').classList.add('show');
+      answered++;
+      if (isCorrect) correct++;
+      if (answered === total) {
+        var box = scope.querySelector('.quiz-score');
+        box.querySelector('.quiz-score-num').textContent = correct + ' / ' + total;
+        var lbl = box.querySelector('.quiz-score-lbl');
+        lbl.textContent = correct === total ? "Perfect \u2014 you've got this one down cold." : (correct >= total/2 ? "Solid \u2014 worth a re-read on the ones you missed." : "Worth another pass through the sections above.");
+        box.classList.add('show');
+      }
+    });
+  });
+  scope.querySelector('.quiz-reset').addEventListener('click', function(){
+    scope.querySelectorAll('[data-quiz-q]').forEach(function(card){
+      delete card.dataset.done;
+      card.querySelectorAll('.quiz-opt').forEach(function(o){
+        o.disabled = false;
+        o.classList.remove('correct','incorrect');
+      });
+      card.querySelector('.quiz-fb').classList.remove('show');
+    });
+    scope.querySelector('.quiz-score').classList.remove('show');
+  });
+})();
+</script>
 </div>
 </div><!-- content -->
 <div class="site-footer">

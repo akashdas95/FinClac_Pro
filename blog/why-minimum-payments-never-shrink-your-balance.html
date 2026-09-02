@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <link rel="stylesheet" href="/fonts/fonts.css">
 
-<title>Why Your Credit Card Minimum Payment Never Seems to Go Down | FinCalc Blog</title>
+<title>Why Minimum Payments Never Shrink Debt | FinCalc</title>
 <meta name="description" content="Minimum payments are designed to keep your account current, not pay it off. Here's the math behind why it takes so long — and the fix.">
 <link rel="canonical" href="https://finclac.com/blog/why-minimum-payments-never-shrink-your-balance">
 <meta name="robots" content="index, follow">
@@ -14,6 +14,9 @@
 <meta property="og:description" content="Minimum payments are designed to keep your account current, not pay it off. Here's the math behind why it takes so long — and the fix.">
 <meta property="og:url" content="https://finclac.com/blog/why-minimum-payments-never-shrink-your-balance">
 <meta property="og:site_name" content="FinCalc">
+<meta property="og:image" content="https://finclac.com/android-chrome-512x512.png">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://finclac.com/android-chrome-512x512.png">
 <style>html{scrollbar-gutter:stable;overflow-y:scroll}*{box-sizing:border-box;margin:0;padding:0}
 :root{--bg:#F6F4EE;--s:#FFFFFF;--s2:#EFEBE1;--bd:#DBD5C4;--t:#171B17;--m:#807965;--tb:#464C46;--a:#0F4F35;--g:#0F4F35;--r:#8C2E22;--b:#1B3A5C;--p:#6B4A7A;--fn:'IBM Plex Sans',sans-serif;--mo:'IBM Plex Mono',monospace;--disp:'Fraunces',serif}
 html[data-theme="light"]{--bg:#14170F;--s:#1B1F16;--s2:#222619;--bd:#33392C;--t:#EDE7D6;--m:#9A9480;--tb:#C9C3AF;--a:#6FBF95;--g:#6FBF95;--r:#D08877;--b:#7FA8CC;--p:#B79CC9;--disp:'Fraunces',serif}
@@ -379,6 +382,28 @@ div.site-footer .foot-badges{max-width:1180px;margin:20px auto 0;display:flex;fl
 .breadcrumb .bc-sep{color:var(--bd)}
 .breadcrumb .bc-current{color:var(--t);font-weight:600}
 @media(max-width:640px){.breadcrumb{padding:12px 16px 0;font-size:10.5px}}
+
+.quiz-block{}
+.quiz-section-title{font-size:13px;font-weight:700;color:var(--m);text-transform:uppercase;letter-spacing:.8px;margin-bottom:.4rem;display:flex;align-items:center;gap:8px}
+.quiz-section-title::after{content:'';flex:1;height:1px;background:var(--bd)}
+.quiz-sub{font-size:13px;color:var(--m);margin-bottom:1.25rem;line-height:1.6}
+.quiz-card{background:var(--s2);border:1px solid var(--bd);border-radius:10px;padding:1.1rem 1.25rem;margin-bottom:14px}
+.quiz-q{font-size:14px;font-weight:600;color:var(--t);margin-bottom:.85rem;line-height:1.5}
+.quiz-opts{display:flex;flex-direction:column;gap:8px}
+.quiz-opt{text-align:left;background:var(--bg);border:1px solid var(--bd);border-radius:8px;padding:10px 13px;font-size:13.5px;color:var(--tb);font-family:var(--fn);cursor:pointer;transition:all .15s}
+.quiz-opt:hover:not(:disabled){border-color:var(--a);color:var(--t)}
+.quiz-opt:disabled{cursor:default}
+.quiz-opt.correct{background:rgba(111,191,149,.14);border-color:var(--g);color:var(--g);font-weight:600}
+.quiz-opt.incorrect{background:rgba(246,70,93,.10);border-color:var(--r);color:var(--r)}
+.quiz-fb{margin-top:.75rem;font-size:13px;line-height:1.65;color:var(--tb);display:none;padding-top:.75rem;border-top:1px solid var(--bd)}
+.quiz-fb.show{display:block}
+.quiz-fb strong{color:var(--t)}
+.quiz-score{background:var(--s);border:1px solid var(--g);border-radius:10px;padding:1.1rem 1.25rem;text-align:center;display:none}
+.quiz-score.show{display:block}
+.quiz-score-num{font-family:var(--mo);font-size:26px;font-weight:600;color:var(--g);margin-bottom:4px}
+.quiz-score-lbl{font-size:12.5px;color:var(--m)}
+.quiz-reset{margin-top:12px;background:var(--s2);border:1px solid var(--bd);color:var(--tb);font-size:12px;font-weight:500;cursor:pointer;padding:6px 14px;border-radius:20px;font-family:var(--fn)}
+.quiz-reset:hover{border-color:var(--g);color:var(--t)}
 </style>
 <link rel="icon" href="/favicon.ico" sizes="any">
 <link rel="icon" type="image/svg+xml" href="/favicon.svg">
@@ -427,7 +452,7 @@ div.site-footer .foot-badges{max-width:1180px;margin:20px auto 0;display:flex;fl
 <h1 class="blog-article-title">Why Your Credit Card Minimum Payment Never Seems to Go Down</h1>
 <div class="blog-byline" style="margin-bottom:1.75rem">
   <div class="blog-avatar">FC</div>
-  <div class="blog-byline-text"><span class="blog-byline-name">FinCalc Team</span><span class="blog-byline-dot">·</span>July 2026 · 4 min read</div>
+  <div class="blog-byline-text"><span class="blog-byline-name">FinCalc Team</span><span class="blog-byline-dot">·</span>July 2026 · 6 min read</div>
 </div>
 <div style="margin:0 0 1.75rem;border-radius:12px;overflow:hidden"><svg viewBox="0 0 760 220" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:auto;border-radius:12px;display:block" role="img" aria-hidden="true"><rect width="760" height="220" fill="var(--s2)"/><rect x="120" y="60" width="60" height="120" fill="var(--r)" opacity="0.9"/><rect x="220" y="80" width="60" height="100" fill="var(--r)" opacity="0.75"/><rect x="320" y="100" width="60" height="80" fill="var(--r)" opacity="0.6"/><rect x="420" y="118" width="60" height="62" fill="var(--r)" opacity="0.45"/><rect x="520" y="132" width="60" height="48" fill="var(--r)" opacity="0.3"/><path d="M120 55 Q 350 20 610 130" fill="none" stroke="var(--a)" stroke-width="2.5" stroke-dasharray="5,4"/><text x="610" y="120" font-size="10" fill="var(--a)" font-family="Arial,sans-serif">shrinking minimum</text></svg></div>
 
@@ -451,7 +476,103 @@ div.site-footer .foot-badges{max-width:1180px;margin:20px auto 0;display:flex;fl
 <p class="guide-p">To see exactly how much time and interest a fixed payment saves versus your current minimum, the free <a href="/ccpayoff" style="color:var(--a);text-decoration:underline">Credit Card Payoff Calculator</a> models both scenarios side by side using your actual balance, APR, and minimum payment structure.</p>
 
 
+<h2 class="guide-h3" data-depth-added="1">How the shrinking minimum actually plays out</h2>
+<p class="guide-p">On a $5,000 balance at 22% APR with a minimum payment set at 2% of the balance: the first minimum payment is $100. As the balance slowly drops, the 2% minimum drops right along with it — to $95, then $90, then lower — while a large chunk of each payment is still going to interest rather than principal early on.</p>
+<p class="guide-p">At that pace, paying only the ever-shrinking minimum can take well over 20 years to clear a $5,000 balance and cost more in total interest than the original balance itself. A <strong>fixed</strong> payment of even the original $100/month, held constant rather than allowed to shrink as the balance drops, clears the same balance in a small fraction of that time — which is the entire fix the article points to.</p>
+
+<h2 class="guide-h3" data-mistakes-added="1">Common minimum-payment mistakes</h2>
+<p class="guide-p">A frequent mistake is increasing spending on a card specifically because the minimum payment 'feels manageable,' without realizing that manageability is exactly what makes minimum-payment debt so persistent — the low minimum isn't a sign the debt is under control, it's a sign it's structured to take a very long time to pay off.</p>
+<p class="guide-p">Another common error is not checking how much of each minimum payment actually goes to principal versus interest — on a high-rate card, a large share of an early minimum payment can go entirely to interest, meaning the balance barely moves even though a payment was dutifully made.</p>
+
+<h2 class="guide-h3" data-practical-added="1">A practical fix</h2>
+<p class="guide-p">Pick a fixed dollar payment (even just your current minimum) and commit to paying that same amount every month regardless of how the calculated minimum changes as the balance drops — this single change is usually enough to meaningfully accelerate payoff without requiring any dramatic increase in what you're already paying.</p>
+<p class="guide-p">If possible, automate that fixed payment rather than relying on remembering to override the auto-pay minimum each month — the whole point of the fix depends on consistency, and automation removes the risk of quietly reverting to the shrinking minimum once you stop paying close attention.</p>
+
+<h2 class="guide-h3" data-deeper-added="1">The credit card issuer's perspective, briefly</h2>
+<p class="guide-p">From the card issuer's side, a minimum payment structured as a shrinking percentage of the balance is a deliberate design, not an oversight — it maximizes the amount of time a balance stays outstanding (and therefore the total interest collected) while remaining just barely large enough to avoid triggering default in most cases.</p>
+<p class="guide-p">Understanding this as a deliberate structure, not simply how debt happens to work, makes it easier to see why deviating from the minimum — even by a small fixed amount — meaningfully shifts the math back in the borrower's favor.</p>
+
 </div>
+
+<div class="card quiz-block" style="max-width:760px;margin:1.5rem auto 0">
+<div class="quiz-section-title">🧠 Quick Check</div>
+<p class="quiz-sub">A few questions to see if the key ideas above actually stuck.</p>
+<div class="quiz-card" data-quiz-q="1">
+  <div class="quiz-q">1. What is the minimum payment actually designed to do, per the article?</div>
+  <div class="quiz-opts">
+    <button class="quiz-opt" data-correct="false">Pay off your balance quickly</button>
+    <button class="quiz-opt" data-correct="true">Keep the account in good standing while minimizing what you pay each month — not eliminate the debt fast</button>
+    <button class="quiz-opt" data-correct="false">Reduce your interest rate over time</button>
+  </div>
+  <div class="quiz-fb">Minimum payments are structured around keeping accounts current, not around efficiently paying down the balance.</div>
+</div>
+<div class="quiz-card" data-quiz-q="2">
+  <div class="quiz-q">2. Why does the minimum payment amount often shrink over time?</div>
+  <div class="quiz-opts">
+    <button class="quiz-opt" data-correct="true">It's usually calculated as a percentage of the remaining balance, which falls as the balance falls</button>
+    <button class="quiz-opt" data-correct="false">Credit card companies lower it as a reward</button>
+    <button class="quiz-opt" data-correct="false">It's a fixed dollar amount that never changes</button>
+  </div>
+  <div class="quiz-fb">Since minimums are often balance-based percentages, a shrinking balance produces an even smaller minimum — stretching payoff time further.</div>
+</div>
+<div class="quiz-card" data-quiz-q="3">
+  <div class="quiz-q">3. What does the article recommend as the actual fix?</div>
+  <div class="quiz-opts">
+    <button class="quiz-opt" data-correct="true">Paying a fixed amount above the minimum, rather than the shrinking minimum itself</button>
+    <button class="quiz-opt" data-correct="false">Only ever paying the exact minimum</button>
+    <button class="quiz-opt" data-correct="false">Closing the account immediately</button>
+  </div>
+  <div class="quiz-fb">A consistent fixed payment (not the ever-shrinking minimum) is what actually accelerates payoff.</div>
+</div>
+<div class="quiz-score">
+  <div class="quiz-score-num">0 / 3</div>
+  <div class="quiz-score-lbl"></div>
+  <button class="quiz-reset">Try again</button>
+</div>
+</div>
+
+<script>
+(function(){
+  var scope = document.currentScript.previousElementSibling;
+  var total = scope.querySelectorAll('[data-quiz-q]').length;
+  var answered = 0, correct = 0;
+  scope.querySelectorAll('[data-quiz-q] .quiz-opt').forEach(function(btn){
+    btn.addEventListener('click', function(){
+      var card = btn.closest('[data-quiz-q]');
+      if (card.dataset.done) return;
+      card.dataset.done = '1';
+      var opts = card.querySelectorAll('.quiz-opt');
+      var isCorrect = btn.dataset.correct === 'true';
+      opts.forEach(function(o){
+        o.disabled = true;
+        if (o.dataset.correct === 'true') o.classList.add('correct');
+        else if (o === btn) o.classList.add('incorrect');
+      });
+      card.querySelector('.quiz-fb').classList.add('show');
+      answered++;
+      if (isCorrect) correct++;
+      if (answered === total) {
+        var box = scope.querySelector('.quiz-score');
+        box.querySelector('.quiz-score-num').textContent = correct + ' / ' + total;
+        var lbl = box.querySelector('.quiz-score-lbl');
+        lbl.textContent = correct === total ? "Perfect \u2014 you've got this one down cold." : (correct >= total/2 ? "Solid \u2014 worth a re-read on the ones you missed." : "Worth another pass through the sections above.");
+        box.classList.add('show');
+      }
+    });
+  });
+  scope.querySelector('.quiz-reset').addEventListener('click', function(){
+    scope.querySelectorAll('[data-quiz-q]').forEach(function(card){
+      delete card.dataset.done;
+      card.querySelectorAll('.quiz-opt').forEach(function(o){
+        o.disabled = false;
+        o.classList.remove('correct','incorrect');
+      });
+      card.querySelector('.quiz-fb').classList.remove('show');
+    });
+    scope.querySelector('.quiz-score').classList.remove('show');
+  });
+})();
+</script>
 </div>
 </div><!-- content -->
 <div class="site-footer">

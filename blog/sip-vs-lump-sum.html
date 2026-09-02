@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <link rel="stylesheet" href="/fonts/fonts.css">
 
-<title>SIP vs Lump Sum: Which Investment Strategy Actually Wins? | FinCalc Blog</title>
+<title>SIP vs Lump Sum | FinCalc</title>
 <meta name="description" content="The honest answer depends on market timing luck more than most SIP advocates admit.">
 <link rel="canonical" href="https://finclac.com/blog/sip-vs-lump-sum">
 <meta name="robots" content="index, follow">
@@ -14,6 +14,9 @@
 <meta property="og:description" content="The honest answer depends on market timing luck more than most SIP advocates admit.">
 <meta property="og:url" content="https://finclac.com/blog/sip-vs-lump-sum">
 <meta property="og:site_name" content="FinCalc">
+<meta property="og:image" content="https://finclac.com/android-chrome-512x512.png">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://finclac.com/android-chrome-512x512.png">
 <style>html{scrollbar-gutter:stable;overflow-y:scroll}*{box-sizing:border-box;margin:0;padding:0}
 :root{--bg:#F6F4EE;--s:#FFFFFF;--s2:#EFEBE1;--bd:#DBD5C4;--t:#171B17;--m:#807965;--tb:#464C46;--a:#0F4F35;--g:#0F4F35;--r:#8C2E22;--b:#1B3A5C;--p:#6B4A7A;--fn:'IBM Plex Sans',sans-serif;--mo:'IBM Plex Mono',monospace;--disp:'Fraunces',serif}
 html[data-theme="light"]{--bg:#14170F;--s:#1B1F16;--s2:#222619;--bd:#33392C;--t:#EDE7D6;--m:#9A9480;--tb:#C9C3AF;--a:#6FBF95;--g:#6FBF95;--r:#D08877;--b:#7FA8CC;--p:#B79CC9;--disp:'Fraunces',serif}
@@ -379,6 +382,28 @@ div.site-footer .foot-badges{max-width:1180px;margin:20px auto 0;display:flex;fl
 .breadcrumb .bc-sep{color:var(--bd)}
 .breadcrumb .bc-current{color:var(--t);font-weight:600}
 @media(max-width:640px){.breadcrumb{padding:12px 16px 0;font-size:10.5px}}
+
+.quiz-block{}
+.quiz-section-title{font-size:13px;font-weight:700;color:var(--m);text-transform:uppercase;letter-spacing:.8px;margin-bottom:.4rem;display:flex;align-items:center;gap:8px}
+.quiz-section-title::after{content:'';flex:1;height:1px;background:var(--bd)}
+.quiz-sub{font-size:13px;color:var(--m);margin-bottom:1.25rem;line-height:1.6}
+.quiz-card{background:var(--s2);border:1px solid var(--bd);border-radius:10px;padding:1.1rem 1.25rem;margin-bottom:14px}
+.quiz-q{font-size:14px;font-weight:600;color:var(--t);margin-bottom:.85rem;line-height:1.5}
+.quiz-opts{display:flex;flex-direction:column;gap:8px}
+.quiz-opt{text-align:left;background:var(--bg);border:1px solid var(--bd);border-radius:8px;padding:10px 13px;font-size:13.5px;color:var(--tb);font-family:var(--fn);cursor:pointer;transition:all .15s}
+.quiz-opt:hover:not(:disabled){border-color:var(--a);color:var(--t)}
+.quiz-opt:disabled{cursor:default}
+.quiz-opt.correct{background:rgba(111,191,149,.14);border-color:var(--g);color:var(--g);font-weight:600}
+.quiz-opt.incorrect{background:rgba(246,70,93,.10);border-color:var(--r);color:var(--r)}
+.quiz-fb{margin-top:.75rem;font-size:13px;line-height:1.65;color:var(--tb);display:none;padding-top:.75rem;border-top:1px solid var(--bd)}
+.quiz-fb.show{display:block}
+.quiz-fb strong{color:var(--t)}
+.quiz-score{background:var(--s);border:1px solid var(--g);border-radius:10px;padding:1.1rem 1.25rem;text-align:center;display:none}
+.quiz-score.show{display:block}
+.quiz-score-num{font-family:var(--mo);font-size:26px;font-weight:600;color:var(--g);margin-bottom:4px}
+.quiz-score-lbl{font-size:12.5px;color:var(--m)}
+.quiz-reset{margin-top:12px;background:var(--s2);border:1px solid var(--bd);color:var(--tb);font-size:12px;font-weight:500;cursor:pointer;padding:6px 14px;border-radius:20px;font-family:var(--fn)}
+.quiz-reset:hover{border-color:var(--g);color:var(--t)}
 </style>
 <link rel="icon" href="/favicon.ico" sizes="any">
 <link rel="icon" type="image/svg+xml" href="/favicon.svg">
@@ -427,7 +452,7 @@ div.site-footer .foot-badges{max-width:1180px;margin:20px auto 0;display:flex;fl
 <h1 class="blog-article-title">SIP vs Lump Sum: Which Investment Strategy Actually Wins?</h1>
 <div class="blog-byline" style="margin-bottom:1.75rem">
   <div class="blog-avatar">FC</div>
-  <div class="blog-byline-text"><span class="blog-byline-name">FinCalc Team</span><span class="blog-byline-dot">·</span>July 2026 · 3 min read</div>
+  <div class="blog-byline-text"><span class="blog-byline-name">FinCalc Team</span><span class="blog-byline-dot">·</span>July 2026 · 5 min read</div>
 </div>
 <div style="margin:0 0 1.75rem;border-radius:12px;overflow:hidden"><svg viewBox="0 0 760 220" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:auto;border-radius:12px;display:block" role="img" aria-hidden="true">
 <rect width="760" height="220" fill="var(--s2)"/>
@@ -464,7 +489,104 @@ div.site-footer .foot-badges{max-width:1180px;margin:20px auto 0;display:flex;fl
 <h2 class="guide-h3">Project either scenario</h2>
 <p class="guide-p">Use the free <a href="/invest" style="color:var(--a);text-decoration:underline">SIP Calculator</a> to project how monthly contributions compound over time, or the <a href="/cagr" style="color:var(--a);text-decoration:underline">CAGR Calculator</a> to compare a lump-sum investment's growth rate against alternative scenarios.</p>
 
+<h2 class="guide-h3" data-depth-added="1">A worked numbers comparison</h2>
+<p class="guide-p">Suppose you have $120,000 available to invest and are deciding between investing it all today (lump sum) or spreading it as $1,000/month over 10 years (SIP), assuming an 8% average annual return in both cases.</p>
+<p class="guide-p"><strong>Lump sum</strong>, fully invested for the entire 10 years: grows to roughly <strong>$259,000</strong>.<br><strong>SIP</strong>, drip-fed in over the same 10 years: grows to roughly <strong>$183,000</strong> — about <strong>$76,000 less</strong>, since a large portion of the money spends less time invested and misses out on years of compounding while it's still sitting on the sidelines waiting to be deployed.</p>
+<p class="guide-p">That gap is the statistical cost of SIP versus lump sum in a market that trends upward over most multi-year periods — which is the honest, uncomfortable data point SIP advocates don't always lead with. It doesn't mean SIP is a bad strategy; it means SIP's real advantage is behavioral and risk-management, not a higher expected return.</p>
+
+<h2 class="guide-h3" data-mistakes-added="1">Common SIP vs. lump sum mistakes</h2>
+<p class="guide-p">A frequent mistake is waiting for a 'better time' to invest a lump sum, effectively turning a lump-sum decision into an ad-hoc, poorly-timed version of SIP without its actual discipline — market timing attempts routinely underperform simply investing when the money becomes available.</p>
+<p class="guide-p">Another common error is assuming SIP eliminates risk rather than just spreading timing risk — SIP investors can still end up investing entirely during an overvalued period if that happens to coincide with their SIP schedule; it reduces the risk of one specific bad entry point, not market risk generally.</p>
+
+<h2 class="guide-h3" data-practical-added="1">A practical way to decide</h2>
+<p class="guide-p">If you have a genuine lump sum available, the historical evidence favors investing it promptly rather than artificially spreading it out — but if the psychological discomfort of potential short-term losses would likely cause you to abandon the investment entirely, a modified approach (investing over 3-6 months rather than all at once) can be a reasonable compromise.</p>
+<p class="guide-p">If you don't have a lump sum and are building wealth through regular income, SIP isn't really a choice against lump sum at all — it's simply the mechanism available, and the more useful question becomes how to make the automatic contributions as consistent as possible.</p>
+
+<h2 class="guide-h3" data-deeper-added="1">Why the psychological factor isn't a lesser consideration</h2>
+<p class="guide-p">An investor who goes all-in with a lump sum right before a downturn and panics, selling near the bottom, achieves a worse actual outcome than a statistically 'suboptimal' SIP approach that they were able to stick with through the same downturn — meaning the psychologically sustainable strategy sometimes produces a better real-world result than the mathematically optimal one, precisely because it's more likely to actually be followed through.</p>
+<p class="guide-p">This is why the 'right' choice genuinely depends on self-knowledge about your own likely behavior under stress, not just the historical return data comparing the two approaches in the abstract.</p>
+
 </div>
+
+<div class="card quiz-block" style="max-width:760px;margin:1.5rem auto 0">
+<div class="quiz-section-title">🧠 Quick Check</div>
+<p class="quiz-sub">A few questions to see if the key ideas above actually stuck.</p>
+<div class="quiz-card" data-quiz-q="1">
+  <div class="quiz-q">1. What does historical data generally show about lump sum vs. SIP investing?</div>
+  <div class="quiz-opts">
+    <button class="quiz-opt" data-correct="false">SIP always outperforms lump sum</button>
+    <button class="quiz-opt" data-correct="true">Lump sum has historically outperformed SIP more often than not</button>
+    <button class="quiz-opt" data-correct="false">They always produce identical results</button>
+  </div>
+  <div class="quiz-fb">Markets trend upward over time more often than not, which tends to favor investing available cash sooner.</div>
+</div>
+<div class="quiz-card" data-quiz-q="2">
+  <div class="quiz-q">2. Why does SIP still make sense for most people, per the article?</div>
+  <div class="quiz-opts">
+    <button class="quiz-opt" data-correct="false">It guarantees higher returns</button>
+    <button class="quiz-opt" data-correct="true">Most people don't have a lump sum available and SIP reduces timing risk and regret</button>
+    <button class="quiz-opt" data-correct="false">It's required by law</button>
+  </div>
+  <div class="quiz-fb">Beyond the pure math, SIP fits how most people actually save and helps manage the psychological risk of bad timing.</div>
+</div>
+<div class="quiz-card" data-quiz-q="3">
+  <div class="quiz-q">3. What's the real trade-off the article describes?</div>
+  <div class="quiz-opts">
+    <button class="quiz-opt" data-correct="false">There is no trade-off</button>
+    <button class="quiz-opt" data-correct="true">Lump sum's higher average return versus SIP's reduced timing risk</button>
+    <button class="quiz-opt" data-correct="false">SIP versus not investing at all</button>
+  </div>
+  <div class="quiz-fb">It's a genuine trade between statistically higher expected returns and lower emotional/timing risk.</div>
+</div>
+<div class="quiz-score">
+  <div class="quiz-score-num">0 / 3</div>
+  <div class="quiz-score-lbl"></div>
+  <button class="quiz-reset">Try again</button>
+</div>
+</div>
+
+<script>
+(function(){
+  var scope = document.currentScript.previousElementSibling;
+  var total = scope.querySelectorAll('[data-quiz-q]').length;
+  var answered = 0, correct = 0;
+  scope.querySelectorAll('[data-quiz-q] .quiz-opt').forEach(function(btn){
+    btn.addEventListener('click', function(){
+      var card = btn.closest('[data-quiz-q]');
+      if (card.dataset.done) return;
+      card.dataset.done = '1';
+      var opts = card.querySelectorAll('.quiz-opt');
+      var isCorrect = btn.dataset.correct === 'true';
+      opts.forEach(function(o){
+        o.disabled = true;
+        if (o.dataset.correct === 'true') o.classList.add('correct');
+        else if (o === btn) o.classList.add('incorrect');
+      });
+      card.querySelector('.quiz-fb').classList.add('show');
+      answered++;
+      if (isCorrect) correct++;
+      if (answered === total) {
+        var box = scope.querySelector('.quiz-score');
+        box.querySelector('.quiz-score-num').textContent = correct + ' / ' + total;
+        var lbl = box.querySelector('.quiz-score-lbl');
+        lbl.textContent = correct === total ? "Perfect \u2014 you've got this one down cold." : (correct >= total/2 ? "Solid \u2014 worth a re-read on the ones you missed." : "Worth another pass through the sections above.");
+        box.classList.add('show');
+      }
+    });
+  });
+  scope.querySelector('.quiz-reset').addEventListener('click', function(){
+    scope.querySelectorAll('[data-quiz-q]').forEach(function(card){
+      delete card.dataset.done;
+      card.querySelectorAll('.quiz-opt').forEach(function(o){
+        o.disabled = false;
+        o.classList.remove('correct','incorrect');
+      });
+      card.querySelector('.quiz-fb').classList.remove('show');
+    });
+    scope.querySelector('.quiz-score').classList.remove('show');
+  });
+})();
+</script>
 </div>
 </div><!-- content -->
 <div class="site-footer">

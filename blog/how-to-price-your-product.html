@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <link rel="stylesheet" href="/fonts/fonts.css">
 
-<title>How to Price Your Product: Margin, Markup, and Break-Even | FinCalc Blog</title>
+<title>How to Price Your Product | FinCalc</title>
 <meta name="description" content="Three numbers every small business owner needs to actually understand before setting a price.">
 <link rel="canonical" href="https://finclac.com/blog/how-to-price-your-product">
 <meta name="robots" content="index, follow">
@@ -14,6 +14,9 @@
 <meta property="og:description" content="Three numbers every small business owner needs to actually understand before setting a price.">
 <meta property="og:url" content="https://finclac.com/blog/how-to-price-your-product">
 <meta property="og:site_name" content="FinCalc">
+<meta property="og:image" content="https://finclac.com/android-chrome-512x512.png">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://finclac.com/android-chrome-512x512.png">
 <style>html{scrollbar-gutter:stable;overflow-y:scroll}*{box-sizing:border-box;margin:0;padding:0}
 :root{--bg:#F6F4EE;--s:#FFFFFF;--s2:#EFEBE1;--bd:#DBD5C4;--t:#171B17;--m:#807965;--tb:#464C46;--a:#0F4F35;--g:#0F4F35;--r:#8C2E22;--b:#1B3A5C;--p:#6B4A7A;--fn:'IBM Plex Sans',sans-serif;--mo:'IBM Plex Mono',monospace;--disp:'Fraunces',serif}
 html[data-theme="light"]{--bg:#14170F;--s:#1B1F16;--s2:#222619;--bd:#33392C;--t:#EDE7D6;--m:#9A9480;--tb:#C9C3AF;--a:#6FBF95;--g:#6FBF95;--r:#D08877;--b:#7FA8CC;--p:#B79CC9;--disp:'Fraunces',serif}
@@ -379,6 +382,28 @@ div.site-footer .foot-badges{max-width:1180px;margin:20px auto 0;display:flex;fl
 .breadcrumb .bc-sep{color:var(--bd)}
 .breadcrumb .bc-current{color:var(--t);font-weight:600}
 @media(max-width:640px){.breadcrumb{padding:12px 16px 0;font-size:10.5px}}
+
+.quiz-block{}
+.quiz-section-title{font-size:13px;font-weight:700;color:var(--m);text-transform:uppercase;letter-spacing:.8px;margin-bottom:.4rem;display:flex;align-items:center;gap:8px}
+.quiz-section-title::after{content:'';flex:1;height:1px;background:var(--bd)}
+.quiz-sub{font-size:13px;color:var(--m);margin-bottom:1.25rem;line-height:1.6}
+.quiz-card{background:var(--s2);border:1px solid var(--bd);border-radius:10px;padding:1.1rem 1.25rem;margin-bottom:14px}
+.quiz-q{font-size:14px;font-weight:600;color:var(--t);margin-bottom:.85rem;line-height:1.5}
+.quiz-opts{display:flex;flex-direction:column;gap:8px}
+.quiz-opt{text-align:left;background:var(--bg);border:1px solid var(--bd);border-radius:8px;padding:10px 13px;font-size:13.5px;color:var(--tb);font-family:var(--fn);cursor:pointer;transition:all .15s}
+.quiz-opt:hover:not(:disabled){border-color:var(--a);color:var(--t)}
+.quiz-opt:disabled{cursor:default}
+.quiz-opt.correct{background:rgba(111,191,149,.14);border-color:var(--g);color:var(--g);font-weight:600}
+.quiz-opt.incorrect{background:rgba(246,70,93,.10);border-color:var(--r);color:var(--r)}
+.quiz-fb{margin-top:.75rem;font-size:13px;line-height:1.65;color:var(--tb);display:none;padding-top:.75rem;border-top:1px solid var(--bd)}
+.quiz-fb.show{display:block}
+.quiz-fb strong{color:var(--t)}
+.quiz-score{background:var(--s);border:1px solid var(--g);border-radius:10px;padding:1.1rem 1.25rem;text-align:center;display:none}
+.quiz-score.show{display:block}
+.quiz-score-num{font-family:var(--mo);font-size:26px;font-weight:600;color:var(--g);margin-bottom:4px}
+.quiz-score-lbl{font-size:12.5px;color:var(--m)}
+.quiz-reset{margin-top:12px;background:var(--s2);border:1px solid var(--bd);color:var(--tb);font-size:12px;font-weight:500;cursor:pointer;padding:6px 14px;border-radius:20px;font-family:var(--fn)}
+.quiz-reset:hover{border-color:var(--g);color:var(--t)}
 </style>
 <link rel="icon" href="/favicon.ico" sizes="any">
 <link rel="icon" type="image/svg+xml" href="/favicon.svg">
@@ -460,7 +485,103 @@ div.site-footer .foot-badges{max-width:1180px;margin:20px auto 0;display:flex;fl
 <h2 class="guide-h3">Model your own pricing</h2>
 <p class="guide-p">The free <a href="/pricing" style="color:var(--a);text-decoration:underline">Pricing & Margin Calculator</a> calculates gross margin, markup, and contribution margin together so you can see all three at once. The <a href="/breakeven" style="color:var(--a);text-decoration:underline">Break-Even Point Calculator</a> then shows exactly how many units and how much revenue you need at your chosen price.</p>
 
+<h2 class="guide-h3" data-mistakes-added="1">Common pricing mistakes</h2>
+<p class="guide-p">A frequent mistake is pricing based purely on competitor prices without confirming your own cost structure supports it — matching a competitor's price who has significantly better economies of scale or lower supplier costs can mean unknowingly pricing below your own break-even point.</p>
+<p class="guide-p">Another common error is treating price as fixed once set — margins, costs, and market conditions all shift over time, and businesses that never revisit pricing after the initial launch often find themselves absorbing rising costs into shrinking margins rather than passing any of that increase through to price.</p>
+
+<h2 class="guide-h3" data-depth-added="1">A concrete break-even example</h2>
+<p class="guide-p">A product with $50,000 in monthly fixed costs, sold at $40 with $15 in variable cost per unit, has a contribution margin of $40 - $15 = $25 per unit. Break-even requires $50,000 ÷ $25 = <strong>2,000 units sold per month</strong>.</p>
+<p class="guide-p">Dropping the price to $35 to be more competitive cuts the contribution margin to $20 per unit, raising the break-even point to $50,000 ÷ $20 = <strong>2,500 units</strong> — a 25% increase in required sales volume from what looks like a modest $5 price cut. This is the concrete cost of underpricing that a percentage discount alone doesn't make obvious.</p>
+
+<h2 class="guide-h3" data-practical-added="1">A practical pricing review process</h2>
+<p class="guide-p">Recalculate your break-even point whenever a meaningful cost changes — a supplier price increase, a new fixed cost, or a shift in your own overhead should trigger a pricing review rather than being silently absorbed into a shrinking margin.</p>
+<p class="guide-p">Test price changes on a small segment before rolling them out broadly, when your business model allows it — this gives real data on how demand responds to a specific price point rather than relying entirely on the break-even math in isolation.</p>
+
+<h2 class="guide-h3" data-deeper-added="1">Why value-based pricing is worth exploring beyond cost-plus</h2>
+<p class="guide-p">Cost-plus pricing (adding a fixed markup to cost) is straightforward to calculate but ignores what customers are actually willing to pay based on the value they perceive — value-based pricing, which starts from customer willingness-to-pay rather than internal cost, can sometimes support meaningfully higher prices for the exact same product, particularly when the product solves a high-value problem.</p>
+<p class="guide-p">The break-even math covered above still applies under either pricing approach — it's the price itself, not the underlying calculation method, that value-based pricing aims to improve.</p>
+
 </div>
+
+<div class="card quiz-block" style="max-width:760px;margin:1.5rem auto 0">
+<div class="quiz-section-title">🧠 Quick Check</div>
+<p class="quiz-sub">A few questions to see if the key ideas above actually stuck.</p>
+<div class="quiz-card" data-quiz-q="1">
+  <div class="quiz-q">1. What's the difference between markup and margin, per the article?</div>
+  <div class="quiz-opts">
+    <button class="quiz-opt" data-correct="false">They're exactly the same thing</button>
+    <button class="quiz-opt" data-correct="true">They're calculated from different bases and are easy to confuse</button>
+    <button class="quiz-opt" data-correct="false">Markup only applies to services</button>
+  </div>
+  <div class="quiz-fb">Markup is based on cost, margin is based on price — confusing the two can lead to real pricing mistakes.</div>
+</div>
+<div class="quiz-card" data-quiz-q="2">
+  <div class="quiz-q">2. What does contribution margin drive?</div>
+  <div class="quiz-opts">
+    <button class="quiz-opt" data-correct="false">Your total revenue</button>
+    <button class="quiz-opt" data-correct="true">Your break-even point</button>
+    <button class="quiz-opt" data-correct="false">Your tax bill</button>
+  </div>
+  <div class="quiz-fb">Contribution margin is the key input to calculating how many units you need to sell to break even.</div>
+</div>
+<div class="quiz-card" data-quiz-q="3">
+  <div class="quiz-q">3. What does the article warn not to forget when calculating costs?</div>
+  <div class="quiz-opts">
+    <button class="quiz-opt" data-correct="false">Fixed costs only</button>
+    <button class="quiz-opt" data-correct="true">All variable costs, not just materials</button>
+    <button class="quiz-opt" data-correct="false">Marketing costs</button>
+  </div>
+  <div class="quiz-fb">Overlooking variable costs beyond raw materials can make a break-even calculation dangerously optimistic.</div>
+</div>
+<div class="quiz-score">
+  <div class="quiz-score-num">0 / 3</div>
+  <div class="quiz-score-lbl"></div>
+  <button class="quiz-reset">Try again</button>
+</div>
+</div>
+
+<script>
+(function(){
+  var scope = document.currentScript.previousElementSibling;
+  var total = scope.querySelectorAll('[data-quiz-q]').length;
+  var answered = 0, correct = 0;
+  scope.querySelectorAll('[data-quiz-q] .quiz-opt').forEach(function(btn){
+    btn.addEventListener('click', function(){
+      var card = btn.closest('[data-quiz-q]');
+      if (card.dataset.done) return;
+      card.dataset.done = '1';
+      var opts = card.querySelectorAll('.quiz-opt');
+      var isCorrect = btn.dataset.correct === 'true';
+      opts.forEach(function(o){
+        o.disabled = true;
+        if (o.dataset.correct === 'true') o.classList.add('correct');
+        else if (o === btn) o.classList.add('incorrect');
+      });
+      card.querySelector('.quiz-fb').classList.add('show');
+      answered++;
+      if (isCorrect) correct++;
+      if (answered === total) {
+        var box = scope.querySelector('.quiz-score');
+        box.querySelector('.quiz-score-num').textContent = correct + ' / ' + total;
+        var lbl = box.querySelector('.quiz-score-lbl');
+        lbl.textContent = correct === total ? "Perfect \u2014 you've got this one down cold." : (correct >= total/2 ? "Solid \u2014 worth a re-read on the ones you missed." : "Worth another pass through the sections above.");
+        box.classList.add('show');
+      }
+    });
+  });
+  scope.querySelector('.quiz-reset').addEventListener('click', function(){
+    scope.querySelectorAll('[data-quiz-q]').forEach(function(card){
+      delete card.dataset.done;
+      card.querySelectorAll('.quiz-opt').forEach(function(o){
+        o.disabled = false;
+        o.classList.remove('correct','incorrect');
+      });
+      card.querySelector('.quiz-fb').classList.remove('show');
+    });
+    scope.querySelector('.quiz-score').classList.remove('show');
+  });
+})();
+</script>
 </div>
 </div><!-- content -->
 <div class="site-footer">

@@ -14,6 +14,9 @@
 <meta property="og:description" content="Lenders will approve more than you should comfortably take on — here's how to set your own real limit.">
 <meta property="og:url" content="https://finclac.com/blog/how-much-emi-can-you-afford">
 <meta property="og:site_name" content="FinCalc">
+<meta property="og:image" content="https://finclac.com/android-chrome-512x512.png">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://finclac.com/android-chrome-512x512.png">
 <style>html{scrollbar-gutter:stable;overflow-y:scroll}*{box-sizing:border-box;margin:0;padding:0}
 :root{--bg:#F6F4EE;--s:#FFFFFF;--s2:#EFEBE1;--bd:#DBD5C4;--t:#171B17;--m:#807965;--tb:#464C46;--a:#0F4F35;--g:#0F4F35;--r:#8C2E22;--b:#1B3A5C;--p:#6B4A7A;--fn:'IBM Plex Sans',sans-serif;--mo:'IBM Plex Mono',monospace;--disp:'Fraunces',serif}
 html[data-theme="light"]{--bg:#14170F;--s:#1B1F16;--s2:#222619;--bd:#33392C;--t:#EDE7D6;--m:#9A9480;--tb:#C9C3AF;--a:#6FBF95;--g:#6FBF95;--r:#D08877;--b:#7FA8CC;--p:#B79CC9;--disp:'Fraunces',serif}
@@ -379,6 +382,28 @@ div.site-footer .foot-badges{max-width:1180px;margin:20px auto 0;display:flex;fl
 .breadcrumb .bc-sep{color:var(--bd)}
 .breadcrumb .bc-current{color:var(--t);font-weight:600}
 @media(max-width:640px){.breadcrumb{padding:12px 16px 0;font-size:10.5px}}
+
+.quiz-block{}
+.quiz-section-title{font-size:13px;font-weight:700;color:var(--m);text-transform:uppercase;letter-spacing:.8px;margin-bottom:.4rem;display:flex;align-items:center;gap:8px}
+.quiz-section-title::after{content:'';flex:1;height:1px;background:var(--bd)}
+.quiz-sub{font-size:13px;color:var(--m);margin-bottom:1.25rem;line-height:1.6}
+.quiz-card{background:var(--s2);border:1px solid var(--bd);border-radius:10px;padding:1.1rem 1.25rem;margin-bottom:14px}
+.quiz-q{font-size:14px;font-weight:600;color:var(--t);margin-bottom:.85rem;line-height:1.5}
+.quiz-opts{display:flex;flex-direction:column;gap:8px}
+.quiz-opt{text-align:left;background:var(--bg);border:1px solid var(--bd);border-radius:8px;padding:10px 13px;font-size:13.5px;color:var(--tb);font-family:var(--fn);cursor:pointer;transition:all .15s}
+.quiz-opt:hover:not(:disabled){border-color:var(--a);color:var(--t)}
+.quiz-opt:disabled{cursor:default}
+.quiz-opt.correct{background:rgba(111,191,149,.14);border-color:var(--g);color:var(--g);font-weight:600}
+.quiz-opt.incorrect{background:rgba(246,70,93,.10);border-color:var(--r);color:var(--r)}
+.quiz-fb{margin-top:.75rem;font-size:13px;line-height:1.65;color:var(--tb);display:none;padding-top:.75rem;border-top:1px solid var(--bd)}
+.quiz-fb.show{display:block}
+.quiz-fb strong{color:var(--t)}
+.quiz-score{background:var(--s);border:1px solid var(--g);border-radius:10px;padding:1.1rem 1.25rem;text-align:center;display:none}
+.quiz-score.show{display:block}
+.quiz-score-num{font-family:var(--mo);font-size:26px;font-weight:600;color:var(--g);margin-bottom:4px}
+.quiz-score-lbl{font-size:12.5px;color:var(--m)}
+.quiz-reset{margin-top:12px;background:var(--s2);border:1px solid var(--bd);color:var(--tb);font-size:12px;font-weight:500;cursor:pointer;padding:6px 14px;border-radius:20px;font-family:var(--fn)}
+.quiz-reset:hover{border-color:var(--g);color:var(--t)}
 </style>
 <link rel="icon" href="/favicon.ico" sizes="any">
 <link rel="icon" type="image/svg+xml" href="/favicon.svg">
@@ -427,7 +452,7 @@ div.site-footer .foot-badges{max-width:1180px;margin:20px auto 0;display:flex;fl
 <h1 class="blog-article-title">How Much EMI Can You Actually Afford?</h1>
 <div class="blog-byline" style="margin-bottom:1.75rem">
   <div class="blog-avatar">FC</div>
-  <div class="blog-byline-text"><span class="blog-byline-name">FinCalc Team</span><span class="blog-byline-dot">·</span>July 2026 · 3 min read</div>
+  <div class="blog-byline-text"><span class="blog-byline-name">FinCalc Team</span><span class="blog-byline-dot">·</span>July 2026 · 5 min read</div>
 </div>
 <div style="margin:0 0 1.75rem;border-radius:12px;overflow:hidden"><svg viewBox="0 0 760 220" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:auto;border-radius:12px;display:block" role="img" aria-hidden="true">
 <rect width="760" height="220" fill="var(--s2)"/>
@@ -462,7 +487,103 @@ div.site-footer .foot-badges{max-width:1180px;margin:20px auto 0;display:flex;fl
 <h2 class="guide-h3">Calculate your real numbers</h2>
 <p class="guide-p">The free <a href="/loan" style="color:var(--a);text-decoration:underline">Loan / EMI Calculator</a> shows your exact monthly payment and full amortization schedule for any loan amount, rate, and tenure. If you're specifically evaluating a mortgage, the <a href="/mortgage" style="color:var(--a);text-decoration:underline">Mortgage Calculator</a> factors in property tax, insurance, and PMI on top of the base payment.</p>
 
+<h2 class="guide-h3" data-depth-added="1">What the lender's number vs. your real budget looks like</h2>
+<p class="guide-p">On a $6,667/month gross income (roughly $80,000/year), a lender using a common 50% DTI ceiling might approve EMIs up to roughly <strong>$3,333/month</strong> across all your obligations combined. A more conservative guideline — closer to 35% of gross income — puts the comfortable ceiling closer to <strong>$2,333/month</strong>, a difference of exactly $1,000/month.</p>
+<p class="guide-p">That $1,000/month gap is the space between what a lender is willing to risk and what actually leaves room for savings, emergencies, and normal life expenses. Approval isn't the same as affordability — the lender's number reflects their risk tolerance on your default, not your comfort with the payment.</p>
+
+<h2 class="guide-h3" data-mistakes-added="1">Where EMI affordability estimates go wrong</h2>
+<p class="guide-p">A frequent mistake is calculating affordability against current income without stress-testing for a plausible income disruption — a comfortable EMI at full income can become genuinely difficult during even a temporary reduction in hours, a job change, or a period of reduced commission income for variable earners.</p>
+<p class="guide-p">Another common error is forgetting that EMI affordability isn't static — a car loan taken on today interacts with a home loan taken on next year, and each new EMI needs to be evaluated against total existing obligations, not in isolation as if no other debt exists.</p>
+
+<h2 class="guide-h3" data-practical-added="1">A practical framework for setting your limit</h2>
+<p class="guide-p">Calculate your number using the conservative 35% guideline first, then separately check what the lender is willing to approve — if there's a large gap between the two, that gap is exactly the risk margin the lender isn't accounting for on your behalf.</p>
+<p class="guide-p">Before committing, run a simple stress test: could you still make this EMI comfortably if your income dropped by 20% for three months? If the honest answer is no, the EMI is sized too aggressively regardless of what any calculator or lender says is 'affordable.'</p>
+
+<h2 class="guide-h3" data-deeper-added="1">How this interacts with other financial goals</h2>
+<p class="guide-p">An EMI set at the very top of what's technically affordable leaves little room for simultaneously building emergency savings or investing — the affordability question isn't just 'can I make this payment,' it's 'can I make this payment while still making progress on everything else that matters.'</p>
+<p class="guide-p">This is why a genuinely conservative EMI often looks smaller than what feels achievable in isolation — it needs to coexist with ongoing savings and other financial priorities, not consume the entire discretionary portion of the budget on its own.</p>
+
 </div>
+
+<div class="card quiz-block" style="max-width:760px;margin:1.5rem auto 0">
+<div class="quiz-section-title">🧠 Quick Check</div>
+<p class="quiz-sub">A few questions to see if the key ideas above actually stuck.</p>
+<div class="quiz-card" data-quiz-q="1">
+  <div class="quiz-q">1. How does the lender's approved EMI typically compare to a comfortable budget?</div>
+  <div class="quiz-opts">
+    <button class="quiz-opt" data-correct="false">It's usually lower than what's comfortable</button>
+    <button class="quiz-opt" data-correct="true">Lenders often approve more than is comfortable to actually pay</button>
+    <button class="quiz-opt" data-correct="false">They're always identical</button>
+  </div>
+  <div class="quiz-fb">Approval limits reflect what a lender is willing to risk, not necessarily what's comfortable for you.</div>
+</div>
+<div class="quiz-card" data-quiz-q="2">
+  <div class="quiz-q">2. What should you account for beyond the EMI you're currently considering?</div>
+  <div class="quiz-opts">
+    <button class="quiz-opt" data-correct="false">Only your current EMI</button>
+    <button class="quiz-opt" data-correct="true">Future EMIs you might take on later</button>
+    <button class="quiz-opt" data-correct="false">Your favorite restaurant's prices</button>
+  </div>
+  <div class="quiz-fb">Stacking future obligations on top of a current EMI is a common source of financial strain.</div>
+</div>
+<div class="quiz-card" data-quiz-q="3">
+  <div class="quiz-q">3. What does 'stress-testing' your EMI mean in this context?</div>
+  <div class="quiz-opts">
+    <button class="quiz-opt" data-correct="false">Ignoring the possibility of income disruption</button>
+    <button class="quiz-opt" data-correct="true">Checking whether you could still afford it if income dropped</button>
+    <button class="quiz-opt" data-correct="false">Applying for the maximum loan amount</button>
+  </div>
+  <div class="quiz-fb">Stress-testing means confirming the EMI still works even in a worse-case income scenario.</div>
+</div>
+<div class="quiz-score">
+  <div class="quiz-score-num">0 / 3</div>
+  <div class="quiz-score-lbl"></div>
+  <button class="quiz-reset">Try again</button>
+</div>
+</div>
+
+<script>
+(function(){
+  var scope = document.currentScript.previousElementSibling;
+  var total = scope.querySelectorAll('[data-quiz-q]').length;
+  var answered = 0, correct = 0;
+  scope.querySelectorAll('[data-quiz-q] .quiz-opt').forEach(function(btn){
+    btn.addEventListener('click', function(){
+      var card = btn.closest('[data-quiz-q]');
+      if (card.dataset.done) return;
+      card.dataset.done = '1';
+      var opts = card.querySelectorAll('.quiz-opt');
+      var isCorrect = btn.dataset.correct === 'true';
+      opts.forEach(function(o){
+        o.disabled = true;
+        if (o.dataset.correct === 'true') o.classList.add('correct');
+        else if (o === btn) o.classList.add('incorrect');
+      });
+      card.querySelector('.quiz-fb').classList.add('show');
+      answered++;
+      if (isCorrect) correct++;
+      if (answered === total) {
+        var box = scope.querySelector('.quiz-score');
+        box.querySelector('.quiz-score-num').textContent = correct + ' / ' + total;
+        var lbl = box.querySelector('.quiz-score-lbl');
+        lbl.textContent = correct === total ? "Perfect \u2014 you've got this one down cold." : (correct >= total/2 ? "Solid \u2014 worth a re-read on the ones you missed." : "Worth another pass through the sections above.");
+        box.classList.add('show');
+      }
+    });
+  });
+  scope.querySelector('.quiz-reset').addEventListener('click', function(){
+    scope.querySelectorAll('[data-quiz-q]').forEach(function(card){
+      delete card.dataset.done;
+      card.querySelectorAll('.quiz-opt').forEach(function(o){
+        o.disabled = false;
+        o.classList.remove('correct','incorrect');
+      });
+      card.querySelector('.quiz-fb').classList.remove('show');
+    });
+    scope.querySelector('.quiz-score').classList.remove('show');
+  });
+})();
+</script>
 </div>
 </div><!-- content -->
 <div class="site-footer">

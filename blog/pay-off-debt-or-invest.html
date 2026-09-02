@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <link rel="stylesheet" href="/fonts/fonts.css">
 
-<title>Should You Pay Off Debt or Invest First? The Actual Math | FinCalc Blog</title>
+<title>Pay Off Debt or Invest First? | FinCalc</title>
 <meta name="description" content="It's not about willpower or feelings — it's a comparison between your debt's interest rate and your expected investment return.">
 <link rel="canonical" href="https://finclac.com/blog/pay-off-debt-or-invest">
 <meta name="robots" content="index, follow">
@@ -14,6 +14,9 @@
 <meta property="og:description" content="It's not about willpower or feelings — it's a comparison between your debt's interest rate and your expected investment return.">
 <meta property="og:url" content="https://finclac.com/blog/pay-off-debt-or-invest">
 <meta property="og:site_name" content="FinCalc">
+<meta property="og:image" content="https://finclac.com/android-chrome-512x512.png">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://finclac.com/android-chrome-512x512.png">
 <style>html{scrollbar-gutter:stable;overflow-y:scroll}*{box-sizing:border-box;margin:0;padding:0}
 :root{--bg:#F6F4EE;--s:#FFFFFF;--s2:#EFEBE1;--bd:#DBD5C4;--t:#171B17;--m:#807965;--tb:#464C46;--a:#0F4F35;--g:#0F4F35;--r:#8C2E22;--b:#1B3A5C;--p:#6B4A7A;--fn:'IBM Plex Sans',sans-serif;--mo:'IBM Plex Mono',monospace;--disp:'Fraunces',serif}
 html[data-theme="light"]{--bg:#14170F;--s:#1B1F16;--s2:#222619;--bd:#33392C;--t:#EDE7D6;--m:#9A9480;--tb:#C9C3AF;--a:#6FBF95;--g:#6FBF95;--r:#D08877;--b:#7FA8CC;--p:#B79CC9;--disp:'Fraunces',serif}
@@ -379,6 +382,28 @@ div.site-footer .foot-badges{max-width:1180px;margin:20px auto 0;display:flex;fl
 .breadcrumb .bc-sep{color:var(--bd)}
 .breadcrumb .bc-current{color:var(--t);font-weight:600}
 @media(max-width:640px){.breadcrumb{padding:12px 16px 0;font-size:10.5px}}
+
+.quiz-block{}
+.quiz-section-title{font-size:13px;font-weight:700;color:var(--m);text-transform:uppercase;letter-spacing:.8px;margin-bottom:.4rem;display:flex;align-items:center;gap:8px}
+.quiz-section-title::after{content:'';flex:1;height:1px;background:var(--bd)}
+.quiz-sub{font-size:13px;color:var(--m);margin-bottom:1.25rem;line-height:1.6}
+.quiz-card{background:var(--s2);border:1px solid var(--bd);border-radius:10px;padding:1.1rem 1.25rem;margin-bottom:14px}
+.quiz-q{font-size:14px;font-weight:600;color:var(--t);margin-bottom:.85rem;line-height:1.5}
+.quiz-opts{display:flex;flex-direction:column;gap:8px}
+.quiz-opt{text-align:left;background:var(--bg);border:1px solid var(--bd);border-radius:8px;padding:10px 13px;font-size:13.5px;color:var(--tb);font-family:var(--fn);cursor:pointer;transition:all .15s}
+.quiz-opt:hover:not(:disabled){border-color:var(--a);color:var(--t)}
+.quiz-opt:disabled{cursor:default}
+.quiz-opt.correct{background:rgba(111,191,149,.14);border-color:var(--g);color:var(--g);font-weight:600}
+.quiz-opt.incorrect{background:rgba(246,70,93,.10);border-color:var(--r);color:var(--r)}
+.quiz-fb{margin-top:.75rem;font-size:13px;line-height:1.65;color:var(--tb);display:none;padding-top:.75rem;border-top:1px solid var(--bd)}
+.quiz-fb.show{display:block}
+.quiz-fb strong{color:var(--t)}
+.quiz-score{background:var(--s);border:1px solid var(--g);border-radius:10px;padding:1.1rem 1.25rem;text-align:center;display:none}
+.quiz-score.show{display:block}
+.quiz-score-num{font-family:var(--mo);font-size:26px;font-weight:600;color:var(--g);margin-bottom:4px}
+.quiz-score-lbl{font-size:12.5px;color:var(--m)}
+.quiz-reset{margin-top:12px;background:var(--s2);border:1px solid var(--bd);color:var(--tb);font-size:12px;font-weight:500;cursor:pointer;padding:6px 14px;border-radius:20px;font-family:var(--fn)}
+.quiz-reset:hover{border-color:var(--g);color:var(--t)}
 </style>
 <link rel="icon" href="/favicon.ico" sizes="any">
 <link rel="icon" type="image/svg+xml" href="/favicon.svg">
@@ -427,7 +452,7 @@ div.site-footer .foot-badges{max-width:1180px;margin:20px auto 0;display:flex;fl
 <h1 class="blog-article-title">Should You Pay Off Debt or Invest First? The Actual Math</h1>
 <div class="blog-byline" style="margin-bottom:1.75rem">
   <div class="blog-avatar">FC</div>
-  <div class="blog-byline-text"><span class="blog-byline-name">FinCalc Team</span><span class="blog-byline-dot">·</span>July 2026 · 3 min read</div>
+  <div class="blog-byline-text"><span class="blog-byline-name">FinCalc Team</span><span class="blog-byline-dot">·</span>July 2026 · 5 min read</div>
 </div>
 <div style="margin:0 0 1.75rem;border-radius:12px;overflow:hidden"><svg viewBox="0 0 760 220" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:auto;border-radius:12px;display:block" role="img" aria-hidden="true">
 <rect width="760" height="220" fill="var(--s2)"/>
@@ -465,7 +490,103 @@ div.site-footer .foot-badges{max-width:1180px;margin:20px auto 0;display:flex;fl
 <h2 class="guide-h3">Run your own numbers</h2>
 <p class="guide-p">Compare your specific debts' interest costs against payoff timelines with the free <a href="/debt" style="color:var(--a);text-decoration:underline">Debt Payoff Calculator</a>, or see the snowball vs. avalanche trade-off directly with the <a href="/debtcomp" style="color:var(--a);text-decoration:underline">Snowball vs Avalanche Calculator</a>. If you're leaning toward investing instead, the <a href="/invest" style="color:var(--a);text-decoration:underline">SIP Calculator</a> shows how consistent contributions compound over time.</p>
 
+<h2 class="guide-h3" data-depth-added="1">Where the line actually falls, with real numbers</h2>
+<p class="guide-p">If a credit card charges 22% interest, no reasonably diversified investment reliably beats that — paying it off is mathematically equivalent to a guaranteed 22% return, which is a bar almost nothing in a normal portfolio clears consistently. Paying off that debt wins clearly.</p>
+<p class="guide-p">But a mortgage at 6% is a genuinely closer call: long-run stock market averages (historically around 7-10% before inflation) have often outpaced that rate over long periods, though with real volatility risk a guaranteed debt payoff doesn't carry. This is why the article treats the comparison as 'debt rate vs. expected return' rather than a blanket rule — the answer flips depending on which specific debt and which specific expected return you're actually comparing.</p>
+
+<h2 class="guide-h3" data-mistakes-added="1">Common mistakes in this decision</h2>
+<p class="guide-p">A frequent mistake is comparing a debt's interest rate to the stock market's long-term historical average without adjusting for risk — that average includes years of significant losses, and a guaranteed debt payoff doesn't carry the same downside risk an equity investment does, which the raw rate comparison alone doesn't capture.</p>
+<p class="guide-p">Another common error is treating this as strictly financial when psychological factors are legitimately relevant too — someone who loses sleep over carrying any debt at all may rationally prioritize payoff even when the pure math slightly favors investing, since the value of reduced stress is real even if it doesn't show up in a spreadsheet.</p>
+
+<h2 class="guide-h3" data-practical-added="1">A practical decision process</h2>
+<p class="guide-p">List each debt's actual interest rate next to a conservative estimate of expected investment returns (not an optimistic one), and prioritize payoff for anything where the debt rate clearly exceeds that conservative estimate — leave genuinely close calls for a judgment decision based on your personal risk tolerance.</p>
+<p class="guide-p">Always capture the full employer 401(k) match first, regardless of what the rate comparison suggests — this step isn't part of the debt-vs-invest math at all, since forfeiting free matching money is essentially never the right call independent of any other consideration.</p>
+
+<h2 class="guide-h3" data-deeper-added="1">The risk-adjustment nuance most comparisons skip</h2>
+<p class="guide-p">Comparing a guaranteed debt interest rate to an expected (not guaranteed) investment return is comparing a certain outcome to an uncertain one — a more rigorous comparison would apply some risk discount to the expected investment return before comparing it directly to the debt rate, which narrows the gap in favor of debt payoff more than a raw rate comparison suggests.</p>
+<p class="guide-p">This is part of why many financial planners lean toward paying off even moderate-rate debt before aggressively investing beyond an employer match — the risk-adjusted comparison, not just the raw rate comparison, tends to favor payoff more often than the simple version of this debate implies.</p>
+
 </div>
+
+<div class="card quiz-block" style="max-width:760px;margin:1.5rem auto 0">
+<div class="quiz-section-title">🧠 Quick Check</div>
+<p class="quiz-sub">A few questions to see if the key ideas above actually stuck.</p>
+<div class="quiz-card" data-quiz-q="1">
+  <div class="quiz-q">1. What's the core comparison the article says this decision comes down to?</div>
+  <div class="quiz-opts">
+    <button class="quiz-opt" data-correct="false">Your mood versus your budget</button>
+    <button class="quiz-opt" data-correct="true">Your debt's interest rate versus your expected investment return</button>
+    <button class="quiz-opt" data-correct="false">Your age versus your income</button>
+  </div>
+  <div class="quiz-fb">It's fundamentally a math comparison between what debt costs you and what investing might earn you.</div>
+</div>
+<div class="quiz-card" data-quiz-q="2">
+  <div class="quiz-q">2. What does the article say should come first regardless of the math?</div>
+  <div class="quiz-opts">
+    <button class="quiz-opt" data-correct="true">Capturing your full employer 401(k) match</button>
+    <button class="quiz-opt" data-correct="false">Paying off every debt completely</button>
+    <button class="quiz-opt" data-correct="false">Investing the maximum allowed</button>
+  </div>
+  <div class="quiz-fb">Employer match is essentially free money, so it's typically prioritized before the debt-vs-invest decision.</div>
+</div>
+<div class="quiz-card" data-quiz-q="3">
+  <div class="quiz-q">3. What should you do if you have multiple debts?</div>
+  <div class="quiz-opts">
+    <button class="quiz-opt" data-correct="false">Ignore the smaller ones entirely</button>
+    <button class="quiz-opt" data-correct="true">Apply the interest-rate-vs-return comparison to each debt individually</button>
+    <button class="quiz-opt" data-correct="false">Only consider the largest debt</button>
+  </div>
+  <div class="quiz-fb">Each debt's rate should be weighed against expected returns on its own, not lumped together.</div>
+</div>
+<div class="quiz-score">
+  <div class="quiz-score-num">0 / 3</div>
+  <div class="quiz-score-lbl"></div>
+  <button class="quiz-reset">Try again</button>
+</div>
+</div>
+
+<script>
+(function(){
+  var scope = document.currentScript.previousElementSibling;
+  var total = scope.querySelectorAll('[data-quiz-q]').length;
+  var answered = 0, correct = 0;
+  scope.querySelectorAll('[data-quiz-q] .quiz-opt').forEach(function(btn){
+    btn.addEventListener('click', function(){
+      var card = btn.closest('[data-quiz-q]');
+      if (card.dataset.done) return;
+      card.dataset.done = '1';
+      var opts = card.querySelectorAll('.quiz-opt');
+      var isCorrect = btn.dataset.correct === 'true';
+      opts.forEach(function(o){
+        o.disabled = true;
+        if (o.dataset.correct === 'true') o.classList.add('correct');
+        else if (o === btn) o.classList.add('incorrect');
+      });
+      card.querySelector('.quiz-fb').classList.add('show');
+      answered++;
+      if (isCorrect) correct++;
+      if (answered === total) {
+        var box = scope.querySelector('.quiz-score');
+        box.querySelector('.quiz-score-num').textContent = correct + ' / ' + total;
+        var lbl = box.querySelector('.quiz-score-lbl');
+        lbl.textContent = correct === total ? "Perfect \u2014 you've got this one down cold." : (correct >= total/2 ? "Solid \u2014 worth a re-read on the ones you missed." : "Worth another pass through the sections above.");
+        box.classList.add('show');
+      }
+    });
+  });
+  scope.querySelector('.quiz-reset').addEventListener('click', function(){
+    scope.querySelectorAll('[data-quiz-q]').forEach(function(card){
+      delete card.dataset.done;
+      card.querySelectorAll('.quiz-opt').forEach(function(o){
+        o.disabled = false;
+        o.classList.remove('correct','incorrect');
+      });
+      card.querySelector('.quiz-fb').classList.remove('show');
+    });
+    scope.querySelector('.quiz-score').classList.remove('show');
+  });
+})();
+</script>
 </div>
 </div><!-- content -->
 <div class="site-footer">
